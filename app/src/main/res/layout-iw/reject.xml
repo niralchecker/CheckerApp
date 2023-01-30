@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="250dp"
+    android:layoutDirection="ltr"
+    android:layout_centerInParent="true" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/background" >
+
+        <TextView
+            android:id="@+id/jobfilter_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/reject_job_popup_title"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TableLayout
+            android:id="@+id/jobfilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_below="@+id/jobfilter_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp" >
+
+            <TableRow android:layout_margin="10dip" >
+
+                <EditText
+                    android:id="@+id/edittext"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textbg"
+                    android:gravity="top"
+                    android:hint="@string/reject_job_popup_reason_lbl"
+                    android:lines="5"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/reject_job_popup_reason_lbl"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+            </TableRow>
+
+            <TableRow android:layout_margin="10dip" >
+
+                <Button
+                    android:id="@+id/ok_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_span="2"
+                    android:background="@color/accept_btn_selector"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/questionnaire_btn_text"
+                    android:textColor="#000000"
+                    android:textSize="18dip"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

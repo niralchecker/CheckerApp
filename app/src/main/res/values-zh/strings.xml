@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    
+<!-- words translated but no showing in app-->
+
+
+
+
+
+    <string name="hhmmss" translatable="false">小时：分：秒</string>
+    <string name="hhmm" translatable="false">小时：分钟</string>
+    <string name="mmss" translatable="false">分：秒</string>
+    <string name="ss" translatable="false">第二</string>
+    <string name="button_cancel" translatable="false">取消</string>
+    <string name="button_set" translatable="false">组</string>
+
+  <string translatable="false" name="smalimgWarn">此选项可能会影响图像的质量，您确定要选择此选项吗？</string>
+    <string translatable="false" name="changeDate">改变日期</string>
+    <string translatable="false" name="smallimgTitle">小（会影响画面质量）</string>
+    <string translatable="false" name="savingImage">正在保存图片</string>
+    <string translatable="false" name="ufinsheddwnloding">正在下载未完成的作业...</string>
+    <string translatable="false" name="noJobmsg">目前工作面板没有公开任务。 请稍后再试。 谢谢！</string>
+    <string translatable="false" name="close">关</string>
+    
+    
+    <string translatable="false" name="nocertMsg">错误或未找到证书.</string>
+    <string translatable="false" name="qoutafullMsg">上传文件时出错，系统存储配额已满，请联系管理员上传挂起的附件</string>
+    <string translatable="false" name="alreadyExistingJob">工作业已经存在应用程序上</string>
+    <string translatable="false" name="selectDate">选择日期</string>
+    <string translatable="false" name="errorParsingOrder">API 出错</string>
+    <string translatable="false" name="serverfilesMsg">已经在服务器上附加文件</string>
+    <string translatable="false" name="serverfilesTitle">服务器附加文件</string>
+    <string translatable="false" name="removingMsg">正在删除....</string>
+    <string translatable="false" name="removed">删除成功</string>
+    <string translatable="false" name="errorRemoving">删除错误或没有互联网连接！</string>
+    
+
+    <string translatable="false" name="start_checkertificates">Checkertificate证书</string>
+    <string translatable="false" name="attached_certificate_msg">你想完成附加的证书吗？</string>
+    <string translatable="false" name="checkertificatesmsg">加载Checkertificate证书</string>
+    <string translatable="false" name="strtcheckertificatesmsg">你想开始这份Checkertificate证书吗？</string>
+    <string translatable="false" name="downloadingCheckrtificate">下载Checkertificate证书数据</string>
+    <string translatable="false" name="retakecheckertificatesmsg">你想重新测试这份Checkertificate证书吗？</string>
+    <string translatable="false" name="alreadyPassed">证书已通过。</string>
+    <string translatable="false" name="reachedMaxTries">您已经完全使用CheckerTificate 证书允许的重新测试次数</string>
+    <string translatable="false" name="alreadyBlocked">证书处于阻止状态。</string>
+	<string translatable="false" name="replace_inprog_job">你确定要替换工作吗？</string>
+	<string translatable="false" name="remainin_msg">)你确定你想替换工作：从在线版本，因为在线工作开始时间是最新的？ 重要提示：此操作将仅替换正在进行作业的填充数据。"</string>
+	<string translatable="false" name="setName">问卷名称 </string>
+	<string translatable="false" name="setStatus">状态 </string>
+	<string translatable="false" name="grade">年级: </string>
+	<string translatable="false" name="reqGrade">需要等级 </string>
+	<string translatable="false" name="lastDateTaken">上次拍摄日期 </string>
+	<string translatable="false" name="Attemts">所用的时间 </string>
+
+    <string translatable="false" name="new_surveyor_sign_up">New registrar Register</string>
+    <string translatable="false" name="user_name">用户名</string>
+    <string translatable="false" name="password">密码</string>
+    <string translatable="false" name="email">Email</string>
+    <string translatable="false" name="phone_number">Phone number</string>
+    <string translatable="false" name="address">地址</string>
+    <string translatable="false" name="tell_us_about_yourself">Tell us about you</string>
+    <string translatable="false" name="setting">设置</string>
+    <string translatable="false" name="do_you_want_to_be_a_be_there_surveyor">Do you want to be a Checker Surveyor?</string>
+    <string translatable="false" name="filter_jobs">过滤作业</string>
+    <string translatable="false" name="see_jobs_in_map">过滤作业</string>
+    <string translatable="false" name="save_download">保存并下载</string>
+    <string translatable="false" name="these_files_are_currently_attached_to_the_job">这些文件目前已附加到作业中：</string>
+    <string translatable="false" name="image_resizing">图像大小调整</string>
+    <string translatable="false" name="image_resizing_original">原版的</string>
+    <string translatable="false" name="image_resizing_medium">中</string>
+    <string translatable="false" name="image_resizing_small">小</string>
+    <string translatable="false" name="branch_sorting">分店分拣.</string>
+    <string translatable="false" name="distance">距离.</string>
+    <string translatable="false" name="alphabetical">按英文字母顺序.</string>
+    <string translatable="false" name="geo_tracker_settings">地理跟踪器设置</string>
+    <string translatable="false" name="find_jobs_near_me">搜索我附近的工作</string>
+    <string translatable="false" name="image_cropping">图像裁剪</string>
+    <string translatable="false" name="on">打开.</string>
+    <string translatable="false" name="off">关掉.</string>
+    <string translatable="false" name="job_settings">调查工作设置</string>
+    <string translatable="false" name="alternate_jobs">备选工作：</string>
+    <string translatable="false" name="enable_branch_full_name">启用分店全名</string>
+    <string translatable="false" name="filter_by_date">按日期过滤</string>
+    <string translatable="false" name="login_signup_text">Sign up</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_190">新的工作机会！</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_190">新的工作机会！</string>
+    <string translatable="false" name="s_item_column_0_line_206_file_190">正在搜索在你附近的工作！</string>
+    <string translatable="false" name="s_item_column_0_line_18291_file_88">已经在同一个问题上</string>
+    <string translatable="false" name="s_item_column_0_line_804_file_88">申请成功</string>
+    <string translatable="false" name="s_item_column_0_line_838_file_88">自分配</string>
+    <string translatable="false" name="s_item_column_0_line_839_file_88">感谢您申请此订单。 请点击下载作业，将其分配到您分配的作业列表中</string>
+    <string translatable="false" name="s_item_column_0_line_859_file_88">工作申请错误或没有互联网连接！</string>
+    <string translatable="false" name="s_item_column_0_line_893_file_88">现在下载</string>
+    <string translatable="false" name="s_item_column_0_line_923_file_88">D晚些再下载</string>
+    <string translatable="false" name="s_item_column_0_line_994_file_88">申请评论</string>
+    <string translatable="false" name="s_item_column_0_line_1441_file_88">Already Applied</string>
+    <string translatable="false" name="s_item_column_0_line_1549_file_88">正在提取备用日期...</string>
+    <string translatable="false" name="s_item_column_0_line_1579_file_88">计数</string>
+    <string translatable="false" name="s_item_column_0_line_1594_file_88">无法使用</string>
+    <string translatable="false" name="s_item_column_0_line_1597_file_88">选择一个日期</string>
+    <string translatable="false" name="s_item_column_0_line_174_file_210"> 有待 </string>
+    <string translatable="false" name="s_item_column_0_line_184_file_210"> 已批准 </string>
+    <string translatable="false" name="s_item_column_0_line_194_file_210"> 已付款 </string>
+    <string translatable="false" name="s_item_column_0_line_199_file_210"> 查看更多详情 </string>
+    <string translatable="false" name="s_item_column_0_line_202_file_210">评论编号 </string>
+    <string translatable="false" name="s_item_column_0_line_344_file_210">是</string>
+    <string translatable="false" name="s_item_column_0_line_346_file_210">没有</string>
+    <string translatable="false" name="s_item_column_0_line_145_file_223">删除申请</string>
+    <string translatable="false" name="s_item_column_0_line_647_file_27">调查工作设置</string>
+    <string translatable="false" name="s_item_column_0_line_774_file_27">保存</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_37">客户名称</string>
+    <string translatable="false" name="s_item_column_0_line_94_file_37">流量类型:</string>
+    <string translatable="false" name="s_item_column_0_line_120_file_37">添加于：: </string>
+    <string translatable="false" name="s_item_column_0_line_149_file_37">总金额：: </string>
+    <string translatable="false" name="s_item_column_0_line_176_file_37">发票号码：</string>
+    <string translatable="false" name="s_item_column_0_line_205_file_37">已批准:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_37">已付款:</string>
+    <string translatable="false" name="s_item_column_0_line_263_file_37">分店代码：:</string>
+    <string translatable="false" name="s_item_column_0_line_292_file_37">分店名称</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_37">城市名:</string>
+    <string translatable="false" name="s_item_column_0_line_350_file_37">地区名称</string>
+    <string translatable="false" name="s_item_column_0_line_379_file_37">地址:</string>
+    <string translatable="false" name="s_item_column_0_line_408_file_37">项目名:</string>
+    <string translatable="false" name="s_item_column_0_line_436_file_37">描述:</string>
+    <string translatable="false" name="s_item_column_0_line_465_file_37">订单编号:</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_44">货架分享</string>
+    <string translatable="false" name="s_item_column_0_line_581_file_44">拍照</string>
+    <string translatable="false" name="s_item_column_0_line_852_file_44">拍摄</string>
+    <string translatable="false" name="s_item_column_0_line_59_file_52">地图</string>
+    <string translatable="false" name="s_item_column_0_line_71_file_52">清单</string>
+    <string translatable="false" name="s_item_column_0_line_183_file_52">应用所选</string>
+    <string translatable="false" name="s_item_column_0_line_214_file_52">日期：:</string>
+    <string translatable="false" name="s_item_column_0_line_246_file_52">今天</string>
+    <string translatable="false" name="s_item_column_0_line_270_file_52">未来30天</string>
+    <string translatable="false" name="s_item_column_0_line_295_file_52">自定义</string>
+    <string translatable="false" name="s_item_column_0_line_337_file_52">客户</string>
+    <string translatable="false" name="s_item_column_0_line_361_file_52">地区</string>
+    <string translatable="false" name="s_item_column_0_line_415_file_52">明确</string>
+    <string translatable="false" name="s_item_column_0_line_429_file_52">显示</string>
+    <string translatable="false" name="s_item_column_0_line_25_file_77">请选择图像调整大小选项：:</string>
+    <string translatable="false" name="s_item_column_0_line_15_file_108">备选工作：:</string>
+    
+    <string translatable="false" name="s_item_column_0_line_676_file_98">错过的文件：</string>
+    <string translatable="false" name="s_item_column_0_line_75_file_102">没有找到数据</string>
+    <string translatable="false" name="s_item_column_0_line_100_file_102">选择月份和年份</string>
+    <string translatable="false" name="s_item_column_0_line_147_file_102">已付款:</string>
+    <string translatable="false" name="s_item_column_0_line_194_file_102">已批准:</string>
+    <string translatable="false" name="s_item_column_0_line_241_file_102">流量类型:</string>
+    <string translatable="false" name="s_item_column_0_line_288_file_102">报告类型:</string>
+    <string translatable="false" name="s_item_column_0_line_336_file_102">显示</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_102">明确</string>
+    <string translatable="false" name="s_item_column_0_line_66_file_113">客户名称:</string>
+    <string translatable="false" name="s_item_column_0_line_93_file_113">流量类型:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_113">添加于：: </string>
+    <string translatable="false" name="s_item_column_0_line_148_file_113">总金额：: </string>
+    <string translatable="false" name="s_item_column_0_line_175_file_113">发票号码：</string>
+    <string translatable="false" name="s_item_column_0_line_204_file_113">已批准:</string>
+    <string translatable="false" name="s_item_column_0_line_233_file_113">已付款:</string>
+    <string translatable="false" name="s_item_column_0_line_262_file_113">分店代码：:</string>
+    <string translatable="false" name="s_item_column_0_line_291_file_113">分店名称:</string>
+    <string translatable="false" name="s_item_column_0_line_320_file_113">城市名:</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_113">地区名称</string>
+    <string translatable="false" name="s_item_column_0_line_378_file_113">地址:</string>
+    <string translatable="false" name="s_item_column_0_line_407_file_113">项目名:</string>
+    <string translatable="false" name="s_item_column_0_line_435_file_113">描述:</string>
+    <string translatable="false" name="s_item_column_0_line_464_file_113">订单编号:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_119">完成</string>
+    <string translatable="false" name="s_item_column_0_line_489_file_121">相机设置</string>
+    <string translatable="false" name="s_item_column_0_line_546_file_121">允许照片备份</string>
+    <string translatable="false" name="s_item_column_0_line_580_file_121">允许多张照片</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_122">工作细节</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_122">客户名称</string>
+    <string translatable="false" name="s_item_column_0_line_96_file_122">分店名称:</string>
+    <string translatable="false" name="s_item_column_0_line_125_file_122">市:</string>
+    <string translatable="false" name="s_item_column_0_line_154_file_122">地址:</string>
+    <string translatable="false" name="s_item_column_0_line_182_file_122">工作描述:</string>
+    <string translatable="false" name="s_item_column_0_line_209_file_122">调查问卷:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_122">分店简称:</string>
+    <string translatable="false" name="s_item_column_0_line_260_file_122">日期:</string>
+    <string translatable="false" name="s_item_column_0_line_289_file_122">开始和结束时间</string>
+    <string translatable="false" name="s_item_column_0_line_315_file_122">分店开放时间</string>
+    <string translatable="false" name="s_item_column_0_line_344_file_122">电话:</string>
+    <string translatable="false" name="s_item_column_0_line_373_file_122">调查付款:</string>
+    <string translatable="false" name="s_item_column_0_line_402_file_122">奖金付款:</string>
+    <string translatable="false" name="s_item_column_0_line_431_file_122">运输付款:</string>
+    <string translatable="false" name="s_item_column_0_line_467_file_122">替代日期:</string>
+    <string translatable="false" name="s_item_column_0_line_523_file_122">应用</string>
+    <string translatable="false" name="s_item_column_0_line_81_file_137">客户名称:</string>
+    <string translatable="false" name="s_item_column_0_line_110_file_137">分支细节</string>
+    <string translatable="false" name="s_item_column_0_line_139_file_137">市:</string>
+    <string translatable="false" name="s_item_column_0_line_168_file_137">日期:</string>
+    <string translatable="false" name="s_item_column_0_line_196_file_137">总订单:</string>
+    <string translatable="false" name="s_item_column_0_line_223_file_137">距离:</string>
+    <string translatable="false" name="s_item_column_0_line_254_file_137">应用</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_125">你想拍另一张照片吗？?</string>
+    <string translatable="false" name="s_item_column_0_line_13_file_124">错过的文件：:</string>
+    <string translatable="false" name="s_item_column_0_line_57_file_124">上传</string>
+    <string translatable="false" name="s_switch_filter_date">按日期过滤</string>
+    <string translatable="false" name="s_switch_branch_name">启用分店全名</string>
+    <string translatable="false" name="take_another_photo">你想拍另一张照片吗？</string>
+    
+    <string translatable="false" name="uploading_jobs_of">正在上传作业 #NUMBER# of #TOTAL#</string>
+    <string translatable="false" name="uploading_images_of">上传图片 #NUMBER# of #TOTAL#</string>
+    <string translatable="false" name="upload">上传</string>
+    <string translatable="false" name="s_switch_time_stamp">添加时间戳</string>
+    <string translatable="false" name="s_switch_alternate_jobs">备选工作：</string>
+    <string translatable="false" name="settings_image_resizing">图像大小调整</string>
+    <string translatable="false" name="settings_image_original">原版的</string>
+    <string translatable="false" name="settings_image_medium">中</string>
+    <string translatable="false" name="settings_image_small">小</string>
+    <string translatable="false" name="settings_image_ask">问</string>
+    <string translatable="false" name="alert_issue_in_loop">循环结构似乎有错误，请联系管理员！</string>
+    <string translatable="false" name="default_theme">默认主题</string>
+    <string translatable="false" name="memory_info">记忆信息</string>
+    <string translatable="false" name="not_enough_space_ram">Checker没有足够的空间（RAM）继续进行！</string>
+    <string translatable="false" name="not_enough_space_internal_memory">没有足够的空间（内存）进行，请清除一些空间继续。</string>
+    <string translatable="false" name="please_enter_comment_for_bug">Please enter comment for this bug:</string>
+    <string translatable="false" name="android_closed_app_forcefully">Please enter comment for this bug</string>
+    <string translatable="false" name="upload_following_attached_files">上传下列附件</string>
+    <string translatable="false" name="file_saved_properly_at">文件正确保存在：:</string>
+    <string translatable="false" name="unable_to_save_file_at">无法在此保存文件：:</string>
+    <string translatable="false" name="crashing_app_ourself">Crashing app ourself</string>
+    <string translatable="false" name="unable_to_find_loop_data">无法找到任何循环数据</string>
+    <string translatable="false" name="amp_16">&amp; $[16,</string>
+    <string translatable="false" name="it_is_mandatory_to_attach_a_file">附加文件是强制性的</string>
+    <string translatable="false" name="no_answer_chosen">未选答案！</string>
+    <string translatable="false" name="save_and_download">保存并下载</string>
+    <string translatable="false" name="out_of_bound"> is out of bounds.</string>
+    <string translatable="false" name="preffered_questionnaire_language">请注意，您可以选择适合您的问卷调查语言</string>
+    <string translatable="false" name="google_services_not_avaliable">Google Play服务不可用</string>
+    <string translatable="false" name="downloading_system_languages">下载系统语言</string>
+    <string translatable="false" name="no_alternative_or_server_side">服务器端没有替代语言</string>
+    <string translatable="false" name="update_system_languages">更新系统语言</string>
+    <string translatable="false" name="synch_is_already_in_progress">同步已经在进行中！</string>
+    <string translatable="false" name="downloading_alternative_jobs">下载备用工作</string>
+    <string translatable="false" name="assigning_alternate_job">分配备用工作</string>
+    <string translatable="false" name="order_assigned_refreshing_job_list">订单已分配。 刷新工作列表！</string>
+    <string translatable="false" name="unable_to_assign_this_order">无法分配此订单，请联系管理员</string>
+    <string translatable="false" name="unable_to_find_alternative_job"> 无法找到任何替代作业.</string>
+    <string translatable="false" name="do_you_Want_relace_order">您是否想要将订单替换为选定的分店？</string>
+    <string translatable="false" name="could_not_retrieve">无法检索调查信息...</string>
+    <string translatable="false" name="questionnaire_mock_gps_alert">您的MOCK GPS模块已启用。 要继续，请禁用它。 您可以在此处禁用MOCK GPS：设置>应用程序>开发>允许模拟位置（确保未选中）。 你想打开设置屏幕吗？</string>
+    <string translatable="false" name="questionnaire_min_zero_max">剩余 #MAX# 个字符。</string>
+    <string translatable="false" name="questionnaire_min_max">最小 #MIN# 个字符。</string>
+    <string translatable="false" name="questionnaire_min_max_zero">剩余 #MAX# 个字符。 最小 #MIN#  个字符。.</string>
+    <string translatable="false" name="questionnaire_error_retrieving">无法检索保存的数据！</string>
+    <string translatable="false" name="questionnaire_sign">请在这里签字</string>
+    <string translatable="false" name="error_order_not_assigned">该订单未分配给您</string>
+    <string translatable="false" name="error_opening_android_gallery">无法使用Android图库，请使用我们的自定义图库，抱歉给您带来不便！!</string>
+   <string translatable="false" name="sortByDate">按日期排序</string>
+    <string translatable="false" name="sortByName">按名称排序</string>
+    <string translatable="false" name="button_show_file">显示文件</string>
+    <string translatable="false" name="questionnaire_select_file_alert">你想选择文件吗？</string>
+    <string translatable="false" name="s_branch_sorting">店分店排序</string>
+    <string translatable="false" name="s_tracker_setting">搜索我附近的工作</string>
+    <string translatable="false" name="s_tracker_heading">地理跟踪器设置</string>
+    <string translatable="false" name="s_alphabetical">按英文字母顺序</string>
+    <string translatable="false" name="s_distance">距离</string>
+    <string translatable="false" name="s_image_cropping">图像裁剪</string>
+    <string translatable="false" name="s_off">关掉</string>
+    <string translatable="false" name="s_on">打开</string>
+    <string translatable="false" name="attach_err_job_list">附件正在等待上传。 点击查看。.</string>
+    <string translatable="false" name="file_not_found">无法找到文件！</string>
+    <string translatable="false" name="file_delete_alert">你想删除这个文件吗？</string>
+    <string translatable="false" name="questionnaire_date_valid_error">无效的日期时间格式！!</string>
+    <string translatable="false" name="sNonRefundableServicePayment">不可退还的服务费用</string>
+    <string translatable="false" name="sCriticismPayment">批评付款</string>
+    <string translatable="false" name="sBonusPayment">奖金付款</string>
+    <string translatable="false" name="purchase_details">购买详情</string>
+    <string translatable="false" name="purchase_invoice_number">购买发票号码</string>
+    <string translatable="false" name="purchase_payment">购买付款</string>
+    <string translatable="false" name="purchase_description">购买说明</string>
+    <string translatable="false" name="service_details">服务细节</string>
+    <string translatable="false" name="service_invoice_number">服务发票号码</string>
+    <string translatable="false" name="service_payment">服务付款</string>
+    <string translatable="false" name="service_description">服务说明</string>
+    <string translatable="false" name="transportation_details">运输细节</string>
+    <string translatable="false" name="transportation_description">运输说明</string>
+    <string translatable="false" name="transportation_payment">运输付款</string>
+    <string translatable="false" name="jd_purchasedesc">购买说明</string>
+    <string translatable="false" name="jd_can_purchase">进行购买</string>
+    <string translatable="false" name="purchase_numeric_error">需要数字值d</string>
+    <string translatable="false" name="purchase_simple_error">需要甲型数字值</string>
+    <string translatable="false" name="purchase_exceeds_error">已超出限制</string>
+    <string translatable="false" name="action_settings">设置</string>
+    <string translatable="false" name="time_set">设置时间</string>
+    <string translatable="false" name="cancel">取消</string>
+    <string translatable="false" name="time">时间 ： : </string>
+    <string translatable="false" name="job_list_tab_syncing">正在同步</string>
+    <string translatable="false" name="start_download_alt">以替代语言下载作业</string>
+    <string translatable="false" name="start_download_inprogress">下载正在进行的作业</string>
+    <string translatable="false" name="start_upload_inprogress">上传正在进行的作业</string>
+   
+    <string translatable="false" name="start_download">下载作业</string>
+    <string translatable="false" name="start_upload">上传作业</string>
+    <string translatable="false" name="start_recording">你想开始录音吗？</string>
+    <string translatable="false" name="stop_recording">你想停止录音吗？</string>
+    <string translatable="false" name="calculator_heading">CHECKER计算器 </string>
+    <string translatable="false" name="job_list_err_dialog">错误提示：</string>
+    <string translatable="false" name="job_list_err_dialog_branch">错误提示：: 手机不支持“101”显示条件。.</string>
+    <string translatable="false" name="_error_display_condition">“显示条件似乎有错误，请联系管理员”!</string>
+    <string translatable="false" name="err_missing_images">上面的图片是错过的。 请刷新工作列表</string>
+    <string translatable="false" name="press_back_again">再次按返回按钮关闭。.</string>
+    <string translatable="false" name="aaparsing_complete">数据分析完成。 初始化dbase ...</string>
+    <string translatable="false" name="aasaving_assigned_jobs_surveys_job">在数据库中保存分配的作业和调查</string>
+    <string translatable="false" name="aauploading_job">上传工作- ##</string>
+    <string translatable="false" name="aauploading_file">上传文件： ##</string>
+    <string translatable="false" name="aadownloading_Assigned_jobs">下载分配的作业.</string>
+    <string translatable="false" name="aadownloading_Assigned_surveys">下载分配的调查作业.</string>
+    <string translatable="false" name="aaparsing_surveys">解析调查: ##</string>
+    <string translatable="false" name="aaparsing_questionnaire">分析问卷：: ##</string>
+    <string translatable="false" name="aasaving_db_questionnaire">保存问卷: ##</string>
+    <string translatable="false" name="aaquestionnaires_downloading_saving">问卷下载和保存正在进行中.</string>
+    <string translatable="false" name="aaparsing_assigned_surveys">解析指定的调查。.</string>
+    <string translatable="false" name="aaparsing_assigned_jobs">分析分配的作业。.</string>
+    <string translatable="false" name="aaupdating_job">上传工作 </string>
+    <string translatable="false" name="ptr_pull_to_refresh">拉来刷新</string>
+    <string translatable="false" name="ptr_release_to_refresh">释放以刷新</string>
+    <string translatable="false" name="ptr_refreshing">刷新...…</string>
+    <string translatable="false" name="ptr_last_updated">更新： %1$s</string>
+    <string translatable="false" name="prepare_screen_dialogue">收集此调查问卷的信息...</string>
+    <string translatable="false" name="job_list_menu_update_list">在地图中查看工作</string>
+    <string translatable="false" name="job_list_menu_upload_complete_job">过滤作业</string>
+    <string translatable="false" name="job_list_tab_sync">同步</string>
+    <string translatable="false" name="job_list_tab_assigned">分配</string>
+    <string translatable="false" name="job_list_tab_scheduled">排期</string>
+    <string translatable="false" name="job_list_tab_in_progress">进行中s</string>
+    <string translatable="false" name="job_list_tab_completed">已完成</string>
+    <string translatable="false" name="job_list_tab_sync_u"><b><u>同步</u></b></string>
+    <string translatable="false" name="job_list_tab_assigned_u"><b><u>分配</u></b></string>
+    <string translatable="false" name="job_list_tab_scheduled_u"><b><u>排期</u></b></string>
+    <string translatable="false" name="job_list_tab_in_progress_u"><b><u>进行中s</u></b></string>
+    <string translatable="false" name="job_list_tab_completed_u"><b><u>已完成</u></b></string>
+    <string translatable="false" name="survey_quota_delete_message">配额[[[NAME OF QUOTA]] 达到了。
+你已经完成了所有＃。
+删除调查访谈.</string>
+    <string translatable="false" name="survey_quota_upload_message">配额[[QUOTA的名字]]达到了。
+你已经完成了所有＃。</string>
+    <string translatable="false" name="alert_working">正在工作</string>
+    <string translatable="false" name="alert_switching">切换标签</string>
+    <string translatable="false" name="alert_saving">保存...</string>
+    <string translatable="false" name="alert_working_msg">系统似乎很忙，请稍后再试！</string>
+    <string translatable="false" name="survey_quota_alert_message">配额完成！!</string>
+    <string translatable="false" name="disable_proxy">重启</string>
+    <string translatable="false" name="pos_product">产品</string>
+    <string translatable="false" name="pos_count">计数</string>
+    <string translatable="false" name="pos_location">位置</string>
+    <string translatable="false" name="pos_price">价钱</string>
+    <string translatable="false" name="pos_expiration">呼气</string>
+    <string translatable="false" name="pos_note">注意</string>
+    <string translatable="false" name="pos_picture">图片</string>
+    <string translatable="false" name="pos_enter_count">输入计数</string>
+    <string translatable="false" name="pos_subtract">减去</string>
+    <string translatable="false" name="pos_add"> 加 </string>
+    <string translatable="false" name="pos_value">值</string>
+    <string translatable="false" name="pos_x"> X </string>
+    <string translatable="false" name="pos_equal"> = </string>
+    <string translatable="false" name="pos_total"> 总计: </string>
+    <string translatable="false" name="pos_enter_price">输入价格 </string>
+    <string translatable="false" name="pos_average">平均: </string>
+    <string translatable="false" name="pos_error_product">无法找到产品！!</string>
+    <string translatable="false" name="pos_intall_manager">请安装文件管理器。.</string>
+    <string translatable="false" name="pos_not_attach">无法附加文件！</string>
+    <string translatable="false" name="pos_error_enter">请输入数据！</string>
+    <string translatable="false" name="pos_error_enter_product_location">请选择产品和位置！</string>
+    <string translatable="false" name="pos_preview">销售点预览</string>
+    <string translatable="false" name="pos_enter_note">输入注释</string>
+    <string translatable="false" name="pos_selected_date">选定日期:</string>
+    <string translatable="false" name="pos_no_tabs">没有可见的标签！</string>
+    <string translatable="false" name="pos_select_product">选择产品</string>
+    <string translatable="false" name="pos_select_location">选择位置</string>
+    <string translatable="false" name="pos_error_report">输入有效的计数 = #Value# </string>
+    <string translatable="false" name="pos_error_report2"></string>
+    <string translatable="false" name="pos_backk">返回</string>
+    <string translatable="false" name="button_back">回到作业列表</string>
+    <string translatable="false" name="bookmark_picker_name">Bookmarks</string>
+    <string translatable="false" name="button_add_calendar">添加到日历</string>
+    <string translatable="false" name="button_add_contact">Add contact</string>
+    <string translatable="false" name="button_book_search">Book Search</string>
+    <string translatable="false" name="button_clipboard_empty">Clipboard empty</string>
+    <string translatable="false" name="button_custom_product_search">Custom search</string>
+    <string translatable="false" name="button_dial">Dial number</string>
+    <string translatable="false" name="button_done">完成日期</string>
+    <string translatable="false" name="button_email">Send email</string>
+    <string translatable="false" name="button_get_directions">Get directions</string>
+    <string translatable="false" name="button_google_shopper">Google Shopper</string>
+    <string translatable="false" name="button_mms">发送彩信</string>
+    <string translatable="false" name="button_ok">好</string>
+    <string translatable="false" name="button_open_browser">Open browser</string>
+    <string translatable="false" name="button_product_search">产品搜索</string>
+    <string translatable="false" name="button_search_book_contents">Search contents</string>
+    <string translatable="false" name="button_share_app">应用</string>
+    <string translatable="false" name="button_share_bookmark">Bookmark</string>
+    <string translatable="false" name="button_share_by_email">Share via email</string>
+    <string translatable="false" name="button_share_by_sms">Share via SMS</string>
+    <string translatable="false" name="button_share_clipboard">Clipboard</string>
+    <string translatable="false" name="button_share_contact">Contact</string>
+    <string translatable="false" name="button_show_map">Show map</string>
+    <string translatable="false" name="button_sms">Send SMS</string>
+    <string translatable="false" name="button_web_search">Web search</string>
+    <string translatable="false" name="button_wifi">Connect to Network</string>
+    <string translatable="false" name="contents_contact">Contact info</string>
+    <string translatable="false" name="contents_email">Email address</string>
+    <string translatable="false" name="contents_location">Geographic coordinates</string>
+    <string translatable="false" name="contents_phone">Phone number</string>
+    <string translatable="false" name="contents_sms">SMS address</string>
+    <string translatable="false" name="contents_text">Plain text</string>
+    <string translatable="false" name="history_clear_text">Clear history</string>
+    <string translatable="false" name="history_clear_one_history_text">明确</string>
+    <string translatable="false" name="history_email_title">Barcode Scanner history</string>
+    <string translatable="false" name="history_empty">Empty</string>
+    <string translatable="false" name="history_empty_detail">No barcode scans have been recorded</string>
+    <string translatable="false" name="history_send">Send history</string>
+    <string translatable="false" name="history_title">History</string>
+    <string translatable="false" name="menu_about">About</string>
+    <string translatable="false" name="menu_encode_mecard">Use MECARD</string>
+    <string translatable="false" name="menu_encode_vcard">Use vCard</string>
+    <string translatable="false" name="menu_help">Help</string>
+    <string translatable="false" name="menu_history">History</string>
+    <string translatable="false" name="menu_settings">Settings</string>
+    <string translatable="false" name="menu_share">Share</string>
+    <string translatable="false" name="msg_about">The official Android app of the open source ZXing barcode project.</string>
+    <string translatable="false" name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved</string>
+    <string translatable="false" name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
+    <string translatable="false" name="msg_default_format">Format</string>
+    <string translatable="false" name="msg_default_meta">Metadata</string>
+    <string translatable="false" name="msg_default_mms_subject">Hi</string>
+    <string translatable="false" name="msg_default_status">Place a barcode inside the viewfinder rectangle to scan it.</string>
+    <string translatable="false" name="msg_default_time">時間：</string>
+    <string translatable="false" name="msg_default_type">Type</string>
+    <string translatable="false" name="msg_encode_contents_failed">Could not encode a barcode from the data provided.</string>
+    <string translatable="false" name="msg_google_books">Google Books</string>
+    <string translatable="false" name="msg_google_product">Google Product Search</string>
+    <string translatable="false" name="msg_google_shopper_missing">Google Shopper is not installed</string>
+    <string translatable="false" name="msg_install_google_shopper">Google Shopper combines barcode scanning with online and local prices, reviews and more without opening the browser. Would you like to try it?</string>
+    <string translatable="false" name="msg_intent_failed">Sorry, the requested application could not be launched. The barcode contents may be invalid.</string>
+    <string translatable="false" name="msg_redirect">Redirect</string>
+    <string translatable="false" name="msg_sbc_book_not_searchable">Sorry, this book is not searchable.</string>
+    <string translatable="false" name="msg_sbc_failed">Sorry, the search encountered a problem.</string>
+    <string translatable="false" name="msg_sbc_no_page_returned">No page returned</string>
+    <string translatable="false" name="msg_sbc_page">Page</string>
+    <string translatable="false" name="msg_sbc_searching_book">Searching book\u2026</string>
+    <string translatable="false" name="msg_sbc_snippet_unavailable">Snippet not available</string>
+    <string translatable="false" name="msg_sbc_unknown_page">Unknown page</string>
+    <string translatable="false" name="msg_share_explanation">You can share data by displaying a barcode on your screen and scanning it with another phone.</string>
+    <string translatable="false" name="msg_share_subject_line">Here are the contents of a barcode I scanned</string>
+    <string translatable="false" name="msg_share_text">Or type some text and press Enter</string>
+    <string translatable="false" name="msg_sure">Are you sure?</string>
+    <string translatable="false" name="msg_unmount_usb">Sorry, the SD card is not accessible.</string>
+    <string translatable="false" name="preferences_actions_title">When a barcode is found\u2026</string>
+    <string translatable="false" name="preferences_auto_focus_title">Use auto focus</string>
+    <string translatable="false" name="preferences_bulk_mode_summary">Scan and save many barcodes continuously</string>
+    <string translatable="false" name="preferences_bulk_mode_title">Bulk scan mode</string>
+    <string translatable="false" name="preferences_copy_to_clipboard_title">Copy to clipboard</string>
+    <string translatable="false" name="preferences_custom_product_search_summary" formatted="false">Substitutions: %s = contents, %f = format, %t = type</string>
+    <string translatable="false" name="preferences_custom_product_search_title">Custom search URL</string>
+    <string translatable="false" name="preferences_decode_1D_title">1D barcodes</string>
+    <string translatable="false" name="preferences_decode_Data_Matrix_title">Data Matrix</string>
+    <string translatable="false" name="preferences_decode_QR_title">QR Codes</string>
+    <string translatable="false" name="preferences_front_light_summary">Improves scanning in low light on some phones, but may cause glare. Does not work on all phones.</string>
+    <string translatable="false" name="preferences_front_light_title">Use front light</string>
+    <string translatable="false" name="preferences_general_title">General settings</string>
+    <string translatable="false" name="preferences_name">设置</string>
+    <string translatable="false" name="preferences_play_beep_title">Beep</string>
+    <string translatable="false" name="preferences_remember_duplicates_summary">Store multiple scans of the same barcode in History</string>
+    <string translatable="false" name="preferences_remember_duplicates_title">Remember duplicates</string>
+    <string translatable="false" name="preferences_result_title">Result settings</string>
+    <string translatable="false" name="preferences_scanning_title">When scanning for barcodes, decode\u2026</string>
+    <string translatable="false" name="preferences_search_country">Search country</string>
+    <string translatable="false" name="preferences_supplemental_summary">Try to retrieve more information about the barcode contents</string>
+    <string translatable="false" name="preferences_supplemental_title">Retrieve more info</string>
+    <string translatable="false" name="preferences_vibrate_title">Vibrate</string>
+    <string translatable="false" name="result_address_book">Found contact info</string>
+    <string translatable="false" name="result_calendar">Found calendar event</string>
+    <string translatable="false" name="result_email_address">Found email address</string>
+    <string translatable="false" name="result_geo">Found geographic coordinates</string>
+    <string translatable="false" name="result_isbn">Found book</string>
+    <string translatable="false" name="result_product">Found product</string>
+    <string translatable="false" name="result_sms">Found SMS address</string>
+    <string translatable="false" name="result_tel">Found phone number</string>
+    <string translatable="false" name="result_text">Found plain text</string>
+    <string translatable="false" name="result_uri">Found URL</string>
+    <string translatable="false" name="result_wifi">Found WLAN Configuration</string>
+    <string translatable="false" name="sbc_name">Google Book Search</string>
+    <string translatable="false" name="share_name">Share via barcode</string>
+    <string translatable="false" name="title_about">Barcode Scanner v</string>
+    <string translatable="false" name="wifi_changing_network">Requesting connection to network\u2026</string>
+    <string translatable="false" name="wifi_ssid_label">Network Name</string>
+    <string translatable="false" name="wifi_type_label">设置</string>
+    <string translatable="false" name="zxing_url">http://code.google.com/p/zxing</string>
+    <string translatable="false" name="pos_product_hint">Open navigation drawer</string>
+    <string translatable="false" name="pos_location_hint">Open navigation drawer</string>
+    <string translatable="false" name="pos_tgl_count">计数</string>
+    <string translatable="false" name="pos_tgl_price">价钱</string>
+    <string translatable="false" name="pos_tgl_expiration">呼气</string>
+    <string translatable="false" name="pos_tgl_note">注意</string>
+    <string translatable="false" name="pos_tgl_picture">图片</string>
+    <string translatable="false" name="app_name">Login with us!</string>
+
+    <string-array name="slide_menu_array">
+        <item>@string/job_list_menu_upload_complete_job</item>
+        <item>@string/job_list_menu_update_list</item>
+        <item>@string/job_list_exit</item>
+        <item>@string/settings_page_title</item>
+    </string-array>
+
+    <string translatable="false" name="drawer_open">Open navigation drawer</string>
+    <string translatable="false" name="drawer_close">Close navigation drawer</string>
+    <string translatable="false" name="action_websearch">Web search</string>
+    <string translatable="false" name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string translatable="false" name="app_title">Checker Survey Application</string>
+
+    <color name="darkness_value">#99000000</color>
+
+    <!-- login Screen -->
+
+    <string translatable="false" name="Questionaire_submitting">调查提交正在进行中.....</string>
+    <string translatable="false" name="questionnaire_gps_off_alert">您的GPS服务目前处于活动状态。 你想关闭它吗？?</string>
+    <string translatable="false" name="list_enable_calendar">将作业添加到日历？</string>
+    <string translatable="false" name="questionnaire_open_survey_alert">Your Survey Allocation count is reached...</string>
+    <string translatable="false" name="questionnaire_gps_alert">您的GPS模块被禁用。 你想启用它吗？ ?</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert">您确定要退出并删除所有回复吗？?</string>
+    <string translatable="false" name="questionnaire_refresh_alert">Please download questionnaire first from job list page before accept any job.</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_yes">是</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_no">没有</string>
+    <string translatable="false" name="questionnaire_alert_text_betweeeen_first">数值应该在##START##到##END##的范围内</string>
+    <string translatable="false" name="login_page_title">欢迎</string>
+    <string translatable="false" name="login_btn">登录</string>
+    <string translatable="false" name="login_heder">欢迎</string>
+    <string translatable="false" name="login_username_hint">用户名</string>
+    <string translatable="false" name="login_reset_btn">明确</string>
+    <string translatable="false" name="error_alert_title">问题</string>
+    <string translatable="false" name="alert_btn_lbl_ok">好</string>
+    <string translatable="false" name="login_username_alert">用户名或密码有错误</string>
+    <string translatable="false" name="login_clientside_username_alert">用户名有错误</string>
+    <string translatable="false" name="login_invalid_systemurl_alert">系统网址有错误，请使用完整的系统网址（例如：http：//www.checker.net）)</string>
+    <string translatable="false" name="invalid_server_response_alert">收到来自服务器的无效响应。 
+请联系负责人。</string>
+    <string translatable="false" name="timeout_response_alert">连接超时。 请联系负责人。r</string>
+    <string translatable="false" name="crash_toast_text">噢！ 我崩溃了，但一份报告已发送给我的开发人员以帮助解决问题！!</string>
+    <string translatable="false" name="crash_dialog_title">App has crashed</string>
+    <string translatable="false" name="crash_dialog_text">发生意外错误迫使应用程序停止。请帮助我们通过向我们发送错误数据来解决此问题。 您只需单击确定。 对不起，谢谢！.</string>
+    <string translatable="false" name="crash_dialog_comment_prompt">发生意外错误迫使应用程序停止。请帮助我们通过向我们发送错误数据来解决此问题。 您只需单击确定。 对不起，谢谢！:</string>
+    <string translatable="false" name="crash_dialog_ok_toast"></string>
+
+    <!-- Setting Screen -->
+    <string translatable="false" name="settings_proxy_host_lbl">地址</string>
+    <string translatable="false" name="settings_proxy_port_lbl">Port</string>
+    <string translatable="false" name="settings_proxy_host_usrname">用户名</string>
+    <string translatable="false" name="settings_proxy_host_pswrd">密码</string>
+    <string translatable="false" name="settings_txt_proxy">代理</string>
+    <string translatable="false" name="settings_page_title">设置</string>
+    <string translatable="false" name="settings_job_board">工作面板</string>
+    <string translatable="false" name="settings_refund_report">个人退款报告</string>
+    <string translatable="false" name="settings_page_proxy">代理</string>
+    <string translatable="false" name="settings_system_url_lbl">代理</string>
+    <string translatable="false" name="settings_language_lbl">语言</string>
+    <string translatable="false" name="settings_themes_lbl">主题</string>
+    <string translatable="false" name="settings_save_btn">保存</string>
+    <string translatable="false" name="settings_http_label">http://</string>
+    <string translatable="false" name="url_hint">系统网址</string>
+    <string translatable="false" name="_alert_title">信息</string>
+    <string translatable="false" name="settings_url_alert">请输入有效网址</string>
+    <string translatable="false" name="settings_system_url_hint">系统网址</string>
+
+    <!-- Job List Screen -->
+    <string translatable="false" name="joblist_title">调查工作列表</string>
+    <string translatable="false" name="joblist_filter_btn">Filter</string>
+    <string translatable="false" name="joblist_map_btn">地图</string>
+    <string translatable="false" name="joblist_all_jobs">显示所有工作</string>
+
+    <!-- Job Filter Screen -->
+    <string translatable="false" name="job_filter_title">搜索</string>
+    <string translatable="false" name="job_filter_choose_job_type_lbl">选择客户端</string>
+    <string translatable="false" name="job_filter_choose_city_lbl">选择城市</string>
+    <string translatable="false" name="job_filter_date_range_lbl">日期范围</string>
+    <string translatable="false" name="job_filter_start_date_lbl"><b>开始日期</b></string>
+    <string translatable="false" name="job_filter_end_date_lbl"><b>结束日期</b></string>
+    <string translatable="false" name="job_filter_save_btn">搜索</string>
+    <string translatable="false" name="job_filter_default_dd_option">选择</string>
+    <string translatable="false" name="job_filter_select_date"><u>选择日期</u></string>
+
+    <string-array name="job_filter_job_list">
+        <item> 全选</item>
+        <item> 零售</item>
+        <item> 开始和结束</item>
+    </string-array>
+    <string-array name="job_filter_region_list">
+        <item>全选</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <!-- SurveyDetail Screen -->
+    <string translatable="false" name="jd_survey_name">调查名称</string>
+    <string translatable="false" name="jd_survey_allocations">分配</string>
+    <string translatable="false" name="jd_survey_quotas">配额</string>
+    <!-- JobDetail Screen -->
+    <string translatable="false" name="jd_heder_text">工作细节l</string>
+    <string translatable="false" name="job_detail_map_btn">地图</string>
+    <string translatable="false" name="jd_begin_btn_text">开始调查访谈</string>
+    <string translatable="false" name="jd_accept_btn_text">接受分配</string>
+    <string translatable="false" name="jd_continue_review_btn_text">继续调查</string>
+    <string translatable="false" name="jd_begin_review_btn_text">开始调查</string>
+    <string translatable="false" name="jd_reject_btn_text">拒绝</string>
+    <string translatable="false" name="jd_logout_btn_text">登出</string>
+    <string translatable="false" name="jd_date">日期</string>
+    <string translatable="false" name="jd_status">状态</string>
+    <string translatable="false" name="jd_description">描述</string>
+    <string translatable="false" name="jd_setname">调查问卷</string>
+    <string translatable="false" name="jd_clientname">客户</string>
+    <string translatable="false" name="jd_branchname">店铺分店</string>
+    <string translatable="false" name="jd_branchfname">店铺全称</string>
+    <string translatable="false" name="jd_cityname">市</string>
+    <string translatable="false" name="jd_address">地址</string>
+    <string translatable="false" name="jd_branchpno">店分店电话</string>
+    <string translatable="false" name="jd_openinghours">营业时间</string>
+    <string translatable="false" name="jd_stime">开始时间</string>
+    <string translatable="false" name="jd_etime">时间结束</string>
+    <string translatable="false" name="jd_parsing_alert_title">信息</string>
+    <string translatable="false" name="jd_parsing_alert_msg">请稍候。 调查问卷正在编制中</string>
+    <string translatable="false" name="jd_please_alert_msg">请稍候...</string>
+
+    <!-- Reject Job Screen -->
+    <string translatable="false" name="reject_job_popup_title">拒绝原因</string>
+    <string translatable="false" name="reject_job_popup_reason_lbl">原因</string>
+    <string translatable="false" name="reject_job_popup_btn_txt">好</string>
+
+    <!-- Questionnaire Screen -->
+    <string translatable="false" name="questionnaire_title">调查问卷</string>
+    <string translatable="false" name="questionnaire_next_btn">下一个</string>
+    <string translatable="false" name="questionnaire_record_btn">记录</string>
+    <string translatable="false" name="questionnaire_record_stop_btn">停止</string>
+    <string translatable="false" name="questionnaire_menu_btn">完成日期</string>
+    <string translatable="false" name="attach_disclaimer">这些文件目前已附加到作业中：:</string>
+    <string translatable="false" name="questionnaire_prev_btn">上一页</string>
+    <string translatable="false" name="questionnaire_exitandsave_menu">保存并退出</string>
+    <string translatable="false" name="questionnaire_preview_menu">预习</string>
+    <string translatable="false" name="questionnaire_finishandsend_menu">完成并发送</string>
+    <string translatable="false" name="questionnaire_alert">答案无效</string>
+    <string translatable="false" name="questionnaire_alert_free_text">价值不在允许的范围内</string>
+    <string translatable="false" name="questionnaire_btn_text">好</string>
+    <string translatable="false" name="questionnaire_alert_title">信息</string>
+    <string translatable="false" name="questionnaire_submit_survey_alert">调查已成功提交。</string>
+    <string translatable="false" name="questionnaire_select_files">选择文件</string>
+    <string translatable="false" name="questionnaire_upload_files">将文件上传到调查中: </string>
+    <string translatable="false" name="questionnaire_finish">完成</string>
+
+    <string-array name="language_val">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list">
+        <item>晚</item>
+        <item>天</item>
+    </string-array>
+
+    <!-- NEW ADDED -->
+    <string translatable="false" name="jd_begin_button_status_inprogress">进行中</string>
+    <string translatable="false" name="no_internet_connection_alret_message">请检查网络连接并尝试使用有效的登录信息</string>
+    <string translatable="false" name="jd_begin_button_status_completed">已完成</string>
+    <string translatable="false" name="jd_synch_button_text">同步</string>
+    <string translatable="false" name="job_search_no_records_alert">没有找到记录</string>
+    <string translatable="false" name="reject_job_sucess_alert">工作成功拒绝</string>
+    <string translatable="false" name="alert_sync_jobs_again">App needs to synch the system sent #LOCAL# number of jobs and server accpeted #SERVER# number of jobs!</string>
+    <string translatable="false" name="reject_job_fail_alert">离线时无法拒绝工作</string>
+    <string translatable="false" name="accept_job_fail_alert">离线时无法接受工作</string>
+    <string translatable="false" name="offline_alert">离线时无法工作</string>
+    <string translatable="false" name="submit_review_fail_alert">无法在离线状态下提交调查。</string>
+    <string translatable="false" name="save_questionnaire_records_for_offline">调查问卷没有保存，请连接到互联网并重新下载问卷</string>
+    <string translatable="false" name="save_questionnaire_records_for_database">无法打开数据库</string>
+    <string translatable="false" name="questionnaire_multiple_max_ans_alert">答案选择超出限制</string>
+    <string translatable="false" name="jd_begin_button_status_scheduled">排期</string>
+    <string translatable="false" name="job_list_exit">退出工作列表中</string>
+    <string translatable="false" name="reject_job_resusal_text_alert">请输入拒绝原因</string>
+    <string translatable="false" name="job_download_alert">更新的作业下载正在进行中...</string>
+    <string translatable="false" name="questionnaire_downlaod_alert">问卷下载和保存正在进行中</string>
+    <string translatable="false" name="questionnaire_saving_alert">问卷调查正在进行中...</string>
+    <string translatable="false" name="image_downloading_alert">调查问卷正在准备中.......</string>
+    <string translatable="false" name="before_accept_alert">Please download questionnaire first from job list page before accept any job</string>
+    <string translatable="false" name="answer_save_alert">保存问卷答案正在进行中....</string>
+    <string translatable="false" name="exit_and_delete_btn_text">退出并删除</string>
+    <string translatable="false" name="non_answered_conf_alert_title">确认</string>
+    <string translatable="false" name="non_answered_conf_alert_msg">未提供答案，请按取消以继续填写</string>
+    <string translatable="false" name="non_answered_conf_alert_cancel_btn">取消</string>
+    <string translatable="false" name="non_answered_conf_alert_continue_btn">继续</string>
+    <string translatable="false" name="Questionnaire_finish_time_lbl">实际调查时间</string>
+    <string translatable="false" name="Questionnaire_finish_Date_lbl">实际调查日期</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_time_lbl">实际调查时间</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_Date_lbl">实际调查日期</string>
+    <string translatable="false" name="questionnaire_free_text_lbl">自由文本</string>
+    <string translatable="false" name="questionnaire_send_bug">报告软件缺陷</string>
+    <string translatable="false" name="questionnaire_done_btn_text">继续</string>
+    <string translatable="false" name="questionnaire_file_attached_text">附上文件</string>
+    <string translatable="false" name="questionnaire_alert_additional">需要其他信息！!</string>
+    <string translatable="false" name="questionnaire_alert_text_between_first">文本长度应该在#START#到#END#之间 </string>
+    <string translatable="false" name="questionnaire_alert_text_to"> to </string>
+    <string translatable="false" name="questionnaire_alert_no_answer">未选答案！!</string>
+    <string translatable="false" name="already_submit_review_alert">调查已经提交</string>
+    <string translatable="false" name="camera_menu_text">相机</string>
+    <string translatable="false" name="video_menu_text">视频</string>
+    <string translatable="false" name="voice_menu_text">正在进行录音</string>
+    <string translatable="false" name="gallery_menu_text">画廊</string>
+    <string translatable="false" name="file_size_text">文件大小超过限制，请用较小的文件再试一次</string>
+    <string translatable="false" name="txt_briefing">简报</string>
+	
+	
+	
+	<!-- Attached files feature -->
+
+	
+	
+   
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Romanian</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Japanese</item>
+    </string-array>
+
+    <string translatable="false" name="settings">优先</string>
+    <string translatable="false" name="bookmarks">Bookmarks</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+</resources>

@@ -1,0 +1,788 @@
+<resources>
+    <string-array name="lang_list" translatable="false">
+        <item>English</item>
+        <item>Español</item>
+        <item>Română</item>
+        <item>עברית</item>
+        <item>日本語</item>
+        <item>Português</item>
+        <item>français</item>
+        <item>ру́сский</item>
+        <item>Svenska</item>
+        <item>Türk</item>
+        <item>italian</item>
+        <item>Czech</item>
+        <item>हिंदी</item>
+        <item>български</item>
+        <item>简体中文</item>
+        <item>KHMER</item>
+    </string-array>
+
+
+    <string name="s_switch_wifi_uploading" translatable="false">Carica tramite WIFI:</string>
+    <string name="wifi_not_enabled" translatable="false">Wi-Fi non è abilitato.</string>
+
+
+    <string name="countries" translatable="false">Paesi</string>
+    <string name="use_default_camera" translatable="false">usa la fotocamera predefinita</string>
+    <string name="s_owncamera_nn" translatable="false">usa la fotocamera predefinita</string>
+    <string name="preview_err" translatable="false">Non sei autorizzato a vedere l\'anteprima di questo questionario</string>
+    <string name="hhmmss" translatable="false">ore:minuto:secondo</string>
+    <string name="hhmm" translatable="false">ore:minuto</string>
+    <string name="mmss" translatable="false">minuto:secondo</string>
+    <string name="ss" translatable="false">secondo</string>
+    <string name="button_cancel" translatable="false">Cancella</string>
+    <string name="button_set" translatable="false">Imposta</string>
+    <string name="job_list_archiveorder" translatable="false">Archivia ordini</string>
+    <string name="file_details" translatable="false">"Dettagli file:"</string>
+    <string name="open_file" translatable="false">Apri il file</string>
+    <string name="open_file_location" translatable="false">Apri il file</string>
+    <string name="file_size" translatable="false">Dimensione del file</string>
+    <string name="file_name" translatable="false">Nome del file</string>
+    <string name="local_path" translatable="false">percorso locale</string>
+    <string name="server_path" translatable="false">Percorso del server:</string>
+    <string name="s_switch_auto_uploading" translatable="false">Caricamento immediato:</string>
+    <string name="uplaod_pending_job" translatable="false">Ci sono lavori in sospeso nella scheda completati, caricali.</string>
+    <string name="email_validation_text" translatable="false">Si prega di inserire un indirizzo email valido.</string>
+    <string name="smalimgWarn" translatable="false">L\'opzione può influenzare la qualità delle immagini. Sei sicuro di voler applicare questa opzione?</string>
+    <string name="changeDate" translatable="false">Cambia data</string>
+    <string name="smallimgTitle" translatable="false">Piccolo (può influire sulla qualità dell\'immagine)</string>
+    <string name="savingImage" translatable="false">Salvataggio dell\'immagine ...</string>
+    <string name="ufinsheddwnloding" translatable="false">Download incarichi incompleti...</string>
+    <string name="noJobmsg" translatable="false">Nessun incarico aperto è disponibile al momento. Per favore riprova più tardi, grazie!"</string>
+    <string name="list_attached_files" translatable="false">Elenco dei file allegati</string>
+    <string name="already_uploaded" translatable="false">Già caricato</string>
+    <string name="pending_upload" translatable="false">In attesa di caricamento</string>
+
+    <string name="already_upload" translatable="false">Già caricato:</string>
+    <string name="close" translatable="false">Chiudi</string>
+    <string name="nocertMsg" translatable="false">Errore o nessun certificato trovato</string>
+    <string name="qoutafullMsg" translatable="false">ERRORE durante il caricamento dei file, la quota di archiviazione del sistema è piena. Contatta l\'amministratore per caricare gli allegati in sospeso</string>
+    <string name="alreadyExistingJob" translatable="false">L\'incarico esiste già sull\'app</string>
+    <string name="selectDate" translatable="false">Si prega di selezionare una data</string>
+    <string name="plsselect" translatable="false">Seleziona...</string>
+    <string name="errorParsingOrder" translatable="false">Errore analisi ordine API</string>
+    <string name="serverfilesMsg" translatable="false">Elenco dei file allegati:</string>
+    <string name="serverfilesTitle" translatable="false">Files sul server</string>
+    <string name="removingMsg" translatable="false">Rimozione....</string>
+    <string name="removed" translatable="false">Rimosso</string>
+    <string name="errorRemoving" translatable="false">Errore durante la rimozione o nessuna connessione a Internet!</string>
+    <string name="start_checkertificates" translatable="false">CheckerTificates</string>
+    <string name="attached_certificate_msg" translatable="false">Vuoi completare i certificati allegati?</string>
+    <string name="checkertificatesmsg" translatable="false">Caricamento dei Checkertificates</string>
+    <string name="strtcheckertificatesmsg" translatable="false">Vuoi iniziare questo Checkertificate?</string>
+    <string name="downloadingCheckrtificate" translatable="false">Download dei dati Checkertificate</string>
+    <string name="retakecheckertificatesmsg" translatable="false">Vuoi rifare questo Checkertificate?</string>
+    <string name="alreadyPassed" translatable="false">Il certificato è già conseguito..</string>
+    <string name="reachedMaxTries" translatable="false">Hai raggiunto il numero massimo di tentativi per il CheckerTificate</string>
+    <string name="alreadyBlocked" translatable="false">Il certificato è bloccato.</string>
+    <string name="replace_inprog_job" translatable="false">Sei sicuro di voler sostituire il lavoro:</string>
+    <string name="remainin_msg" translatable="false">)dalla versione online perché l\'orario di inizio del lavoro online è l\'ultimo? IMPORTANTE: questa azione sostituirà i dati compilati solo per il lavoro in corso."</string>
+    <string name="setName" translatable="false">Nome del questionario:</string>
+    <string name="setStatus" translatable="false">Stato:</string>
+    <string name="grade" translatable="false">Grado:</string>
+    <string name="reqGrade" translatable="false">Grado necessario:</string>
+    <string name="lastDateTaken" translatable="false">Ultima data presa:</string>
+    <string name="Attemts" translatable="false">Tempo impiegato:</string>
+    <string name="new_surveyor_sign_up" translatable="false">New registrar Register</string>
+    <string name="user_name" translatable="false">Username</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="phone_number" translatable="false">Phone number</string>
+    <string name="address" translatable="false">Indirizzo</string>
+    <string name="tell_us_about_yourself" translatable="false">Tell us about you</string>
+    <string name="setting" translatable="false">Impostazioni</string>
+    <string name="do_you_want_to_be_a_be_there_surveyor" translatable="false">Do you want to be a Checker Surveyor?</string>
+    <string name="filter_jobs" translatable="false">Filtra incarichi</string>
+    <string name="see_jobs_in_map" translatable="false">Vedi incarichi sulla mappa</string>
+    <string name="save_download" translatable="false">salva e scarica</string>
+    <string name="these_files_are_currently_attached_to_the_job" translatable="false">Questi file sono attualmente allegati all\'incarico:</string>
+    <string name="image_resizing" translatable="false">Ridimensionamento dell\'immagine</string>
+    <string name="image_resizing_original" translatable="false">Originale</string>
+    <string name="image_resizing_medium" translatable="false">medio</string>
+    <string name="image_resizing_small" translatable="false">Piccolo</string>
+    <string name="branch_sorting" translatable="false">Ordine delle filiali</string>
+    <string name="distance" translatable="false">Distanza.</string>
+    <string name="alphabetical" translatable="false">Alfabetico.</string>
+    <string name="geo_tracker_settings" translatable="false">Impostazioni geolocalizzazione</string>
+    <string name="find_jobs_near_me" translatable="false">Trova incarichi vicino a me</string>
+    <string name="image_cropping" translatable="false">Ritaglio dell\'immagine</string>
+    <string name="default_camera" translatable="false">usa la fotocamera predefinita</string>
+    <string name="on" translatable="false">On.</string>
+    <string name="off" translatable="false">OFf.</string>
+    <string name="job_settings" translatable="false">Impostazione incarico</string>
+    <string name="alternate_jobs" translatable="false">Incarichi alternativi:</string>
+    <string name="enable_branch_full_name" translatable="false">Abilita nome completo filiale</string>
+    <string name="filter_by_date" translatable="false">Filtra per data</string>
+    <string name="login_signup_text" translatable="false">Iscriviti</string>
+    <string name="s_item_column_0_line_321_file_190" translatable="false">nuove opportunità di incarichi!</string>
+    <string name="s_item_column_0_line_323_file_190" translatable="false">nuova opportunità di incarico!</string>
+    <string name="s_item_column_0_line_206_file_190" translatable="false">Ricerca incarichi vicino a te!</string>
+    <string name="s_item_column_0_line_18291_file_88" translatable="false">Già sulla stessa domanda!</string>
+    <string name="s_item_column_0_line_804_file_88" translatable="false">Già candidato/a</string>
+    <string name="s_item_column_0_line_838_file_88" translatable="false">Auto assegnato</string>
+    <string name="s_item_column_0_line_839_file_88" translatable="false">Grazie per la tua candidatura. Fare clic su Scarica incarichi per averlo nell\'elenco dei lavori assegnati</string>
+    <string name="s_item_column_0_line_859_file_88" translatable="false">Errore durante la candidatura o nessuna connessione a Internet!</string>
+    <string name="s_item_column_0_line_893_file_88" translatable="false">Scarica ora</string>
+    <string name="s_item_column_0_line_923_file_88" translatable="false">Scarica più tardi</string>
+    <string name="s_item_column_0_line_994_file_88" translatable="false">ApplicationComment</string>
+    <string name="s_item_column_0_line_1441_file_88" translatable="false">Già applicato</string>
+    <string name="s_item_column_0_line_1549_file_88" translatable="false">Recupero date alternative...</string>
+    <string name="s_item_column_0_line_1579_file_88" translatable="false">contare</string>
+    <string name="s_item_column_0_line_1594_file_88" translatable="false">Non disponibile</string>
+    <string name="s_item_column_0_line_1597_file_88" translatable="false">Seleziona una data</string>
+    <string name="s_item_column_0_line_174_file_210" translatable="false"> IN ATTESA </string>
+    <string name="s_item_column_0_line_184_file_210" translatable="false"> Approvato </string>
+    <string name="s_item_column_0_line_194_file_210" translatable="false"> Pagato </string>
+    <string name="s_item_column_0_line_199_file_210" translatable="false"> Visualizza più dettagli </string>
+    <string name="s_item_column_0_line_202_file_210" translatable="false">Review n: </string>
+    <string name="s_item_column_0_line_344_file_210" translatable="false">Sì</string>
+    <string name="s_item_column_0_line_346_file_210" translatable="false">Essere approvato</string>
+    <string name="s_item_column_0_line_145_file_223" translatable="false">Rimuovi applicazione</string>
+    <string name="s_item_column_0_line_647_file_27" translatable="false">Impostazione incarico</string>
+    <string name="s_item_column_0_line_774_file_27" translatable="false">Salva</string>
+    <string name="s_item_column_0_line_67_file_37" translatable="false">nome del cliente:</string>
+    <string name="s_item_column_0_line_94_file_37" translatable="false">Tipo di flusso:</string>
+    <string name="s_item_column_0_line_120_file_37" translatable="false">Aggiunto a:</string>
+    <string name="s_item_column_0_line_149_file_37" translatable="false">Importo:</string>
+    <string name="s_item_column_0_line_176_file_37" translatable="false">Numero di fattura:</string>
+    <string name="s_item_column_0_line_205_file_37" translatable="false">Approvato:</string>
+    <string name="s_item_column_0_line_234_file_37" translatable="false">Pagato:</string>
+    <string name="s_item_column_0_line_263_file_37" translatable="false">Codice della filiale:</string>
+    <string name="s_item_column_0_line_292_file_37" translatable="false">Nome della filiale:</string>
+    <string name="s_item_column_0_line_321_file_37" translatable="false">nome della città</string>
+    <string name="s_item_column_0_line_350_file_37" translatable="false">Nome della regione</string>
+    <string name="s_item_column_0_line_379_file_37" translatable="false">Indirizzo:</string>
+    <string name="s_item_column_0_line_408_file_37" translatable="false">Nome del progetto</string>
+    <string name="s_item_column_0_line_436_file_37" translatable="false">Descrizione:</string>
+    <string name="s_item_column_0_line_465_file_37" translatable="false">ID ordine</string>
+    <string name="s_item_column_0_line_323_file_44" translatable="false">Shelf Share</string>
+    <string name="s_item_column_0_line_581_file_44" translatable="false">Fai una foto</string>
+    <string name="s_item_column_0_line_852_file_44" translatable="false">Cattura</string>
+    <string name="s_item_column_0_line_59_file_52" translatable="false">Mappa</string>
+    <string name="s_item_column_0_line_71_file_52" translatable="false">ELENCO</string>
+    <string name="s_item_column_0_line_183_file_52" translatable="false">Applica selezione</string>
+    <string name="s_item_column_0_line_214_file_52" translatable="false">Data:</string>
+    <string name="s_item_column_0_line_246_file_52" translatable="false">Oggi</string>
+    <string name="s_item_column_0_line_270_file_52" translatable="false">Prossimi 30 giorni</string>
+    <string name="s_item_column_0_line_295_file_52" translatable="false">Personalizzato</string>
+    <string name="s_item_column_0_line_337_file_52" translatable="false">Cliente</string>
+    <string name="s_item_column_0_line_361_file_52" translatable="false">Città</string>
+    <string name="s_item_column_0_line_362_file_52" translatable="false">Filiale</string>
+    <string name="s_item_column_0_line_363_file_52" translatable="false">proprietà</string>
+    <string name="s_item_column_0_line_415_file_52" translatable="false">Cancella</string>
+    <string name="s_item_column_0_line_429_file_52" translatable="false">Mostra</string>
+    <string name="s_item_column_0_line_25_file_77" translatable="false">Si prega di selezionare l\'opzione di ridimensionamento dell\'immagine:</string>
+    <string name="s_item_column_0_line_65_file_94" translatable="false">Seleziona tutto</string>
+    <string name="s_item_column_0_line_107_file_94" translatable="false">Nessun contenuto.</string>
+    <string name="s_item_column_0_line_15_file_108" translatable="false">Incarichi alternativi:</string>
+    <string name="s_item_column_0_line_15_file_109" translatable="false">date disponibili:</string>
+    <string name="s_item_column_0_line_676_file_98" translatable="false">File persi:</string>
+    <string name="s_item_column_0_line_75_file_102" translatable="false">Nessun dato trovato</string>
+    <string name="s_item_column_0_line_100_file_102" translatable="false">Seleziona mese e anno</string>
+    <string name="s_item_column_0_line_147_file_102" translatable="false">Pagato:</string>
+    <string name="s_item_column_0_line_194_file_102" translatable="false">Approvato:</string>
+    <string name="s_item_column_0_line_241_file_102" translatable="false">Tipo di flusso:</string>
+    <string name="s_item_column_0_line_288_file_102" translatable="false">Tipo di rapporto:</string>
+    <string name="s_item_column_0_line_336_file_102" translatable="false">Mostra</string>
+    <string name="s_item_column_0_line_349_file_102" translatable="false">Cancella</string>
+    <string name="s_item_column_0_line_66_file_113" translatable="false">nome del cliente:</string>
+    <string name="s_item_column_0_line_93_file_113" translatable="false">Tipo di flusso:</string>
+    <string name="s_item_column_0_line_119_file_113" translatable="false">Aggiunto a:</string>
+    <string name="s_item_column_0_line_148_file_113" translatable="false">Importo:</string>
+    <string name="s_item_column_0_line_175_file_113" translatable="false">Numero di fattura:</string>
+    <string name="s_item_column_0_line_204_file_113" translatable="false">Approvato:</string>
+    <string name="s_item_column_0_line_233_file_113" translatable="false">Pagato:</string>
+    <string name="s_item_column_0_line_262_file_113" translatable="false">Codice della filiale:</string>
+    <string name="s_item_column_0_line_291_file_113" translatable="false">Nome della filiale:</string>
+    <string name="s_item_column_0_line_320_file_113" translatable="false">nome della città</string>
+    <string name="s_item_column_0_line_349_file_113" translatable="false">Nome della regione</string>
+    <string name="s_item_column_0_line_378_file_113" translatable="false">Indirizzo:</string>
+    <string name="s_item_column_0_line_407_file_113" translatable="false">Nome del progetto</string>
+    <string name="s_item_column_0_line_435_file_113" translatable="false">Descrizione:</string>
+    <string name="s_item_column_0_line_464_file_113" translatable="false">ID ordine</string>
+
+    <string name="s_item_column_0_line_489_file_121" translatable="false">Impostazione della fotocamera</string>
+    <string name="s_item_column_0_line_546_file_121" translatable="false">Consenti backup di foto</string>
+    <string name="s_item_column_0_line_580_file_121" translatable="false">Consenti più foto</string>
+    <string name="s_item_column_0_line_36_file_122" translatable="false">Dettagli incarico</string>
+    <string name="s_item_column_0_line_67_file_122" translatable="false">nome del cliente:</string>
+    <string name="s_item_column_0_line_96_file_122" translatable="false">Nome della filiale:</string>
+    <string name="s_item_column_0_line_125_file_122" translatable="false">Città:</string>
+    <string name="s_item_column_0_line_154_file_122" translatable="false">Indirizzo:</string>
+    <string name="s_item_column_0_line_182_file_122" translatable="false">Descrizione dell\'incarico:</string>
+    <string name="s_item_column_0_line_209_file_122" translatable="false">Questionario:</string>
+    <string name="s_item_column_0_line_234_file_122" translatable="false">Nome abbreviato della filiale:</string>
+    <string name="s_item_column_0_line_260_file_122" translatable="false">Data:</string>
+    <string name="s_item_column_0_line_289_file_122" translatable="false">Ora di inizio e di fine:</string>
+    <string name="s_item_column_0_line_315_file_122" translatable="false">Orari di apertura della filiale</string>
+    <string name="s_item_column_0_line_344_file_122" translatable="false">Telefono:</string>
+    <string name="s_item_column_0_line_373_file_122" translatable="false">Pagamento del questionario</string>
+    <string name="s_item_column_0_line_402_file_122" translatable="false">Pagamento bonus</string>
+    <string name="s_item_column_0_line_431_file_122" translatable="false">Transportation Payment:</string>
+    <string name="s_item_column_0_line_467_file_122" translatable="false">Date alternative:</string>
+    <string name="s_item_column_0_line_523_file_122" translatable="false">Candidati</string>
+    <string name="s_item_column_0_line_81_file_137" translatable="false">nome del cliente:</string>
+    <string name="s_item_column_0_line_110_file_137" translatable="false">Dettagli filiale</string>
+    <string name="s_item_column_0_line_139_file_137" translatable="false">Città:</string>
+    <string name="s_item_column_0_line_168_file_137" translatable="false">Data:</string>
+    <string name="s_item_column_0_line_196_file_137" translatable="false">Ordini totali:</string>
+    <string name="s_item_column_0_line_223_file_137" translatable="false">Distanza:</string>
+    <string name="s_item_column_0_line_254_file_137" translatable="false">Candidati</string>
+    <string name="s_item_column_0_line_36_file_125" translatable="false">Vuoi fare un\'altra foto?</string>
+    <string name="s_item_column_0_line_13_file_124" translatable="false">File persi:</string>
+    <string name="s_item_column_0_line_57_file_124" translatable="false">Upload</string>
+    <string name="s_switch_filter_date" translatable="false">raggruppa per data</string>
+    <string name="s_switch_branch_name" translatable="false">Abilita nome completo filiale</string>
+    <string name="take_another_photo" translatable="false">Vuoi fare un\'altra foto?</string>
+    <string name="uploading_jobs_of" translatable="false">Uploading incarichi #NUMBER# di #TOTAL#</string>
+    <string name="uploading_images_of" translatable="false">Caricamento immagini #NUMBER# di #TOTAL#</string>
+    <string name="upload" translatable="false">Upload</string>
+    <string name="s_switch_time_stamp" translatable="false">Aggiungi Time Stamp</string>
+    <string name="s_switch_alternate_jobs" translatable="false">Incarichi alternativi:</string>
+    <string name="settings_image_resizing" translatable="false">Ridimensionamento dell\'immagine</string>
+    <string name="settings_image_original" translatable="false">Originale</string>
+    <string name="settings_image_medium" translatable="false">medio</string>
+    <string name="settings_image_small" translatable="false">Piccolo</string>
+    <string name="settings_image_ask" translatable="false">Chiedi</string>
+    <string name="alert_issue_in_loop" translatable="false">La struttura del loop sembra avere un errore, contatta l\'amministratore!</string>
+    <string name="default_theme" translatable="false">Tema predefinito</string>
+    <string name="memory_info" translatable="false">Informazioni sulla memoria</string>
+    <string name="not_enough_space_ram" translatable="false">Non c\'è abbastanza spazio (RAM) per consentire a Checker di procedere!</string>
+    <string name="not_enough_space_internal_memory" translatable="false">Non c\'è abbastanza spazio (RAM) per consentire a Checker di procedere!</string>
+    <string name="please_enter_comment_for_bug" translatable="false">Please enter comment for this bug:</string>
+    <string name="android_closed_app_forcefully" translatable="false">Android closed your app forcefully shall we start getting your data back?</string>
+    <string name="android_restoring_needed" translatable="false">Vuoi riprendere da dove avevi interrotto, il ripristino all\'ultimo stato può richiedere del tempo. Vuoi continuare?</string>
+<string name="upload_following_attached_files" translatable="false">Carica i seguenti file allegati</string>
+<string name="file_saved_properly_at" translatable="false">File salvato correttamente in:</string>
+<string name="unable_to_save_file_at" translatable="false">Impossibile salvare il file in:</string>
+<string name="crashing_app_ourself" translatable="false">Crashing app ourself</string>
+<string name="unable_to_find_loop_data" translatable="false">Impossibile trovare dati di loop</string>
+<string name="amp_16" translatable="false">&amp; $[16,</string>
+<string name="it_is_mandatory_to_attach_a_file" translatable="false">È obbligatorio allegare un file</string>
+<string name="no_answer_chosen" translatable="false">Nessuna risposta scelta!</string>
+<string name="save_and_download" translatable="false">salva e scarica</string>
+<string name="out_of_bound" translatable="false"> is out of bounds.</string>
+<string name="preffered_questionnaire_language" translatable="false">Si prega di notare che è possibile selezionare la lingua preferita per il questionario</string>
+<string name="google_services_not_avaliable" translatable="false">I servizi di Google Play non sono disponibili</string>
+<string name="whatsapp_not_available" translatable="false">Whatsapp is not installed on this device.</string>
+<string name="downloading_system_languages" translatable="false">Download delle lingue di sistema</string>
+<string name="no_alternative_or_server_side" translatable="false">Nessun linguaggio alternativo sul server</string>
+<string name="update_system_languages" translatable="false">Aggiornamento delle lingue di sistema</string>
+    <string name="synch_is_already_in_progress" translatable="false">È già in corso una sincronizzazione!</string>
+    <string name="downloading_alternative_jobs" translatable="false">Download di incarichi alternativi</string>
+    <string name="assigning_alternate_job" translatable="false">Assegnazione di un incarico alternativo</string>
+    <string name="order_assigned_refreshing_job_list" translatable="false">Ordine assegnato. Caricamento elenco incarichi!</string>
+    <string name="unable_to_assign_this_order" translatable="false">Impossibile assegnare questo ordine, contatta l\'amministratore</string>
+    <string name="unable_to_find_alternative_job" translatable="false"> Impossibile trovare un incarico alternativo</string>
+    <string name="do_you_Want_relace_order" translatable="false">Vuoi sostituire questo ordine alla filiale selezionata?</string>
+    <string name="could_not_retrieve" translatable="false">Impossibile recuperare le informazioni sul sondaggio...</string>
+    <string name="questionnaire_mock_gps_alert" translatable="false">Il tuo modulo GPS MOCK è abilitato. Disabilitalo per procedere ulteriormente, puoi disabilitare il MOCK GPS qui su: Impostazioni-> Applicazione-> Sviluppo-> Consenti posizioni fittizie assicurati che sia deselezionato. Vuoi aprire la schermata Impostazioni?</string>
+    <string name="questionnaire_min_zero_max" translatable="false">#MAX# caratteri rimasti nel limite massimo.</string>
+    <string name="questionnaire_min_max" translatable="false">#MIN# caratteri rimasti nel limite minimo.</string>
+    <string name="questionnaire_min_max_zero" translatable="false">#MAX# caratteri rimasti nel limite massimo e #MIN# caratteri rimasti nel limite minimo</string>
+    <string name="questionnaire_error_retrieving" translatable="false">Errore durante il recupero dei dati salvati!</string>
+    <string name="questionnaire_sign" translatable="false">Firma qui</string>
+    <string name="error_order_not_assigned" translatable="false">L\'ordine non ti è stato assegnato!</string>
+    <string name="error_opening_android_gallery" translatable="false">Errore durante l\'utilizzo della galleria Android, utilizza la nostra galleria personalizzata, ci scusiamo per l\'inconveniente!</string>
+    <string name="sortByDate" translatable="false">Ordinato per data</string>
+    <string name="sortByName" translatable="false">Ordinato per nome</string>
+    <string name="button_show_file" translatable="false">Mostra file</string>
+    <string name="questionnaire_select_file_alert" translatable="false">Vuoi selezionare il file?</string>
+    <string name="s_branch_sorting" translatable="false">Smistamento delle filiali</string>
+    <string name="s_tracker_setting" translatable="false">Trova incarichi vicino a me</string>
+    <string name="s_tracker_heading" translatable="false">Impostazioni geolocalizzazione</string>
+    <string name="s_alphabetical" translatable="false">Alfabetico</string>
+    <string name="s_distance" translatable="false">Distanza</string>
+    <string name="s_image_cropping" translatable="false">Ritaglio dell\'immagine</string>
+    <string name="s_resolution_selector" translatable="false">mostra le risoluzioni della fotocamera:</string>
+    <string name="s_off" translatable="false">Off</string>
+    <string name="s_on" translatable="false">On</string>
+    <string name="attach_err_job_list" translatable="false">Gli allegati sono ancora in attesa di caricamento. Tocca per vedere.</string>
+    <string name="file_not_found" translatable="false">Impossibile trovare il file!</string>
+    <string name="file_delete_alert" translatable="false">Vuoi eliminare questo file?</string>
+    <string name="questionnaire_date_valid_error" translatable="false">Formato DateTime non valido!</string>
+    <string name="sNonRefundableServicePayment" translatable="false">Pagamento del servizio non rimborsabile</string>
+    <string name="sCriticismPayment" translatable="false">Pagamento delle critiche</string>
+    <string name="sBonusPayment" translatable="false">Pagamento bonus</string>
+    <string name="purchase_details" translatable="false">Dettagli d\'acquisto</string>
+    <string name="purchase_invoice_number" translatable="false">Numero fattura di acquisto</string>
+    <string name="purchase_payment" translatable="false">Pagamento acquisto</string>
+    <string name="purchase_description" translatable="false">Descrizione dell\'acquisto</string>
+    <string name="service_details" translatable="false">Dettagli del servizio</string>
+    <string name="service_invoice_number" translatable="false">Numero fattura di servizio</string>
+    <string name="service_payment" translatable="false">Pagamento del servizio</string>
+    <string name="service_description" translatable="false">Descrizione del servizio</string>
+    <string name="transportation_details" translatable="false">Dettagli di trasporto</string>
+    <string name="transportation_description" translatable="false">Descrizione del trasporto</string>
+    <string name="transportation_payment" translatable="false">Pagamento del trasporto</string>
+    <string name="jd_purchasedesc" translatable="false">Descrizione dell\'acquisto</string>
+    <string name="jd_can_purchase" translatable="false">Fai l\'acquisto</string>
+    <string name="purchase_numeric_error" translatable="false">Valore numerico richiesto</string>
+    <string name="purchase_simple_error" translatable="false">Valore alfanumerico richiesto</string>
+    <string name="purchase_exceeds_error" translatable="false">Il valore supera il limite</string>
+    <string name="action_settings" translatable="false">Impostazioni</string>
+    <string name="time_set" translatable="false">Tempo impostato</string>
+    <string name="cancel" translatable="false">Cancella</string>
+    <string name="time" translatable="false">Tempo:</string>
+    <string name="job_list_tab_syncing" translatable="false">Sincronizzazione</string>
+    <string name="start_download_alt" translatable="false">Scarica i lavori in una lingua alternativa</string>
+    <string name="start_download_inprogress" translatable="false">Scarica incarichi in corso</string>
+    <string name="start_upload_inprogress" translatable="false">Carica incarichi in corso</string>
+    <string name="start_download" translatable="false">Scarica incarichi</string>
+    <string name="start_upload" translatable="false">Scarica incarichi</string>
+    <string name="start_recording" translatable="false">Vuoi iniziare a registrare?</string>
+    <string name="stop_recording" translatable="false">Vuoi interrompere la registrazione?</string>
+    <string name="calculator_heading" translatable="false">Calcolatrice CHECKER</string>
+    <string name="job_list_err_dialog" translatable="false">Note di errore:</string>
+    <string name="job_list_err_dialog_branch" translatable="false">Note di errore: Il telefono non supporta la condizione di visualizzazione "101".</string>
+    <string name="_error_display_condition" translatable="false">La condizione di visualizzazione sembra avere un errore, contatta l\'amministratore</string>
+    <string name="err_missing_images" translatable="false">Le immagini sopra sono state perse. Per favore, aggiorna l\'elenco degli incarichi.</string>
+    <string name="press_back_again" translatable="false">Premere di nuovo il pulsante Indietro per chiudere.</string>
+    <string name="aaparsing_complete" translatable="false">L\'analisi dei dati è completata. Inizializzazione database in corso ...</string>
+    <string name="aasaving_assigned_jobs_surveys_job" translatable="false">Salvataggio incarichi e questionari assegnati ...</string>
+    <string name="aauploading_job" translatable="false">Caricamento incarico ##</string>
+    <string name="aauploading_file" translatable="false">Upload del file:##</string>
+    <string name="aadownloading_Assigned_jobs" translatable="false">Download degli assegnati.</string>
+    <string name="aadownloading_Assigned_surveys" translatable="false">Download dei questionari assegnati.</string>
+    <string name="aaparsing_surveys" translatable="false">Analisi sondaggio: -----------##</string>
+    <string name="aaparsing_questionnaire" translatable="false">Questionario di analisi:##</string>
+    <string name="aasaving_db_questionnaire" translatable="false">Analisi questionario: ----------##</string>
+    <string name="aaquestionnaires_downloading_saving" translatable="false">Download e salvataggio dei questionari in corso.</string>
+    <string name="aaparsing_assigned_surveys" translatable="false">Analisi dei sondaggi assegnati.</string>
+    <string name="aaparsing_assigned_jobs" translatable="false">Analisi dei lavori assegnati.</string>
+    <string name="aaupdating_job" translatable="false">Caricamento incarico</string>
+    <string name="ptr_pull_to_refresh" translatable="false">Pull to refresh</string>
+    <string name="ptr_release_to_refresh" translatable="false">Release to refresh</string>
+    <string name="ptr_refreshing" translatable="false">Refreshing…</string>
+    <string name="ptr_last_updated" translatable="false">Aggiornato: %1$s</string>
+    <string name="prepare_screen_dialogue" translatable="false">Raccolta di informazioni per questo questionario ...</string>
+    <string name="job_list_menu_update_list" translatable="false">Vedi incarichi sulla mappa</string>
+    <string name="job_list_menu_upload_complete_job" translatable="false">Filtra incarichi</string>
+    <string name="job_list_tab_sync" translatable="false">Sincronizza</string>
+    <string name="job_list_tab_assigned" translatable="false">Assegnato</string>
+    <string name="job_list_tab_scheduled" translatable="false">Programmato</string>
+    <string name="job_list_tab_in_progress" translatable="false">In corso</string>
+    <string name="job_list_tab_completed" translatable="false">Completato</string>
+    <string name="job_list_tab_sync_u" translatable="false"><b><u>Sincronizza</u></b></string>
+    <string name="job_list_tab_assigned_u" translatable="false"><b><u>Assegnato</u></b></string>
+    <string name="job_list_tab_scheduled_u" translatable="false"><b><u>Programmato</u></b></string>
+    <string name="job_list_tab_in_progress_u" translatable="false"><b><u>In corsou</u></b></string>
+    <string name="job_list_tab_completed_u" translatable="false"><b><u>Completato</u></b></string>
+    <string name="survey_quota_delete_message" translatable="false">#break#Quota[QNAME] raggiunta..#break# Hai fatto tutto  ## #break# Eliminazione dell\'intervista .</string>
+    <string name="survey_quota_upload_message" translatable="false">#break#Quota[QNAME] raggiunta..#break#Hai fatto tutto ##</string>
+    <string name="alert_working" translatable="false">Lavorando</string>
+    <string name="alert_switching" translatable="false">Cambio di scheda</string>
+    <string name="alert_saving" translatable="false">Salvataggio...</string>
+    <string name="alert_working_msg" translatable="false">Il sistema sembra occupato, riprova più tardi!</string>
+    <string name="survey_quota_alert_message" translatable="false">Quota terminata!</string>
+    <string name="disable_proxy" translatable="false">Reset</string>
+    <string name="pos_product" translatable="false">prodotto</string>
+    <string name="pos_count" translatable="false">Contare</string>
+    <string name="pos_location" translatable="false">Posizione</string>
+    <string name="pos_price" translatable="false">Prezzo</string>
+    <string name="pos_expiration" translatable="false">Scadenza</string>
+    <string name="pos_note" translatable="false">Nota</string>
+    <string name="pos_picture" translatable="false">Immagine</string>
+    <string name="pos_enter_count" translatable="false">Inserisci Conte</string>
+    <string name="pos_subtract" translatable="false">Sottrarre</string>
+    <string name="pos_add" translatable="false"> Inserisci </string>
+    <string name="pos_value" translatable="false">Valore</string>
+    <string name="pos_x" translatable="false"> X </string>
+    <string name="pos_equal" translatable="false"> = </string>
+    <string name="pos_total" translatable="false">Totale</string>
+    <string name="pos_enter_price" translatable="false">Impresa</string>
+    <string name="pos_average" translatable="false">Media:</string>
+    <string name="pos_error_product" translatable="false">Impossibile trovare il prodotto!</string>
+    <string name="pos_intall_manager" translatable="false">Si prega di installare un File Manager.</string>
+    <string name="pos_not_attach" translatable="false">Non è stato possibile caricare il file!</string>
+    <string name="pos_error_enter" translatable="false">Si prega di inserire i dati!</string>
+    <string name="pos_error_enter_product_location" translatable="false">Seleziona prodotto e posizione!</string>
+    <string name="pos_preview" translatable="false">Anteprima POS</string>
+    <string name="pos_enter_note" translatable="false">Inserisci Nota</string>
+    <string name="pos_selected_date" translatable="false">Data selezionata:</string>
+    <string name="pos_no_tabs" translatable="false">No Tabs Visible</string>
+    <string name="pos_select_product" translatable="false">Seleziona prodotto</string>
+    <string name="pos_select_location" translatable="false">Seleziona la posizione</string>
+    <string name="pos_error_report" translatable="false">Inserisci conteggio valido valid&lt;= </string>
+    <string name="pos_error_report2" translatable="false"></string>
+    <string name="pos_backk" translatable="false">Indietro</string>
+    <string name="button_back" translatable="false">Torna alla lista degli incarichi</string>
+    <string name="button_back_archive" translatable="false">torna all\'archivio</string>
+    <string name="bookmark_picker_name" translatable="false">segnalibri</string>
+    <string name="button_add_calendar" translatable="false">Aggiungi al calendario</string>
+    <string name="button_add_contact" translatable="false">Aggiungi contatto</string>
+    <string name="button_book_search" translatable="false">Ricerca libri</string>
+    <string name="button_clipboard_empty" translatable="false">Appunti vuoti</string>
+    <string name="button_custom_product_search" translatable="false">Custom search</string>
+    <string name="button_dial" translatable="false">Dial number</string>
+    <string name="button_done" translatable="false">Fatto</string>
+    <string name="s_item_column_0_line_119_file_119" translatable="false">Fatto</string>
+    <string name="questionnaire_menu_btn" translatable="false">Fatto</string>
+    <string name="button_email" translatable="false">Send email</string>
+    <string name="button_get_directions" translatable="false">Get directions</string>
+    <string name="button_google_shopper" translatable="false">Google Shopper</string>
+    <string name="button_mms" translatable="false">Invia MMS</string>
+    <string name="button_ok" translatable="false">OK</string>
+    <string name="button_open_browser" translatable="false">Open browser</string>
+    <string name="button_product_search" translatable="false">Ricerca prodotto</string>
+    <string name="button_search_book_contents" translatable="false">Search contents</string>
+    <string name="button_share_app" translatable="false">Application</string>
+    <string name="button_share_bookmark" translatable="false">Bookmark</string>
+    <string name="button_share_by_email" translatable="false">Share via email</string>
+    <string name="button_share_by_sms" translatable="false">Share via SMS</string>
+    <string name="button_share_clipboard" translatable="false">Clipboard</string>
+    <string name="button_share_contact" translatable="false">Contact</string>
+    <string name="button_show_map" translatable="false">Mostra la mappa</string>
+    <string name="button_sms" translatable="false">Send SMS</string>
+    <string name="button_web_search" translatable="false">Web search</string>
+    <string name="button_wifi" translatable="false">Connect to Network</string>
+    <string name="contents_contact" translatable="false">Contact info</string>
+    <string name="contents_email" translatable="false">Email address</string>
+    <string name="contents_location" translatable="false">Geographic coordinates</string>
+    <string name="contents_phone" translatable="false">Phone number</string>
+    <string name="contents_sms" translatable="false">SMS address</string>
+    <string name="contents_text" translatable="false">Plain text</string>
+    <string name="history_clear_text" translatable="false">Clear history</string>
+    <string name="history_clear_one_history_text" translatable="false">Clear</string>
+    <string name="history_email_title" translatable="false">Barcode Scanner history</string>
+    <string name="history_empty" translatable="false">Empty</string>
+    <string name="history_empty_detail" translatable="false">No barcode scans have been recorded</string>
+    <string name="history_send" translatable="false">Send history</string>
+    <string name="history_title" translatable="false">History</string>
+    <string name="menu_about" translatable="false">Di</string>
+    <string name="menu_encode_mecard" translatable="false">Use MECARD</string>
+    <string name="menu_encode_vcard" translatable="false">Use vCard</string>
+    <string name="menu_help" translatable="false">Aiuto</string>
+    <string name="menu_history" translatable="false">History</string>
+    <string name="menu_settings" translatable="false">Impostazioni</string>
+    <string name="menu_share" translatable="false">Share</string>
+    <string name="msg_about" translatable="false">The official Android app of the open source ZXing barcode project.</string>
+    <string name="msg_bulk_mode_scanned" translatable="false">Bulk mode: barcode scanned and saved</string>
+    <string name="msg_camera_framework_bug" translatable="false">Spiacenti, la fotocamera Android ha riscontrato un problema. Potrebbe essere necessario riavviare il dispositivo.</string>
+    <string name="msg_default_format" translatable="false">Format</string>
+    <string name="msg_default_meta" translatable="false">Metadata</string>
+    <string name="msg_default_mms_subject" translatable="false">Hi</string>
+    <string name="msg_default_status" translatable="false">Posiziona un codice a barre all\'interno del rettangolo per scansionarlo.</string>
+    <string name="msg_default_time" translatable="false">Tempo :</string>
+    <string name="msg_default_type" translatable="false">tipo</string>
+    <string name="msg_encode_contents_failed" translatable="false">Impossibile decodificare il codice a barre dai dati forniti.</string>
+    <string name="msg_google_books" translatable="false">Google Books</string>
+    <string name="msg_google_product" translatable="false">Google Product Search</string>
+    <string name="msg_google_shopper_missing" translatable="false">Google Shopper is not installed</string>
+    <string name="msg_install_google_shopper" translatable="false">Google Shopper combines barcode scanning with online and local prices, reviews and more without opening the browser. Would you like to try it?</string>
+    <string name="msg_intent_failed" translatable="false">Sorry, the requested application could not be launched. The barcode contents may be invalid.</string>
+    <string name="msg_redirect" translatable="false">Redirect</string>
+    <string name="msg_sbc_book_not_searchable" translatable="false">Sorry, this book is not searchable.</string>
+    <string name="msg_sbc_failed" translatable="false">Sorry, the search encountered a problem.</string>
+    <string name="msg_sbc_no_page_returned" translatable="false">No page returned</string>
+    <string name="msg_sbc_page" translatable="false">Page</string>
+    <string name="msg_sbc_searching_book" translatable="false">Searching book\u2026</string>
+    <string name="msg_sbc_snippet_unavailable" translatable="false">Snippet not available</string>
+    <string name="msg_sbc_unknown_page" translatable="false">Unknown page</string>
+    <string name="msg_share_explanation" translatable="false">You can share data by displaying a barcode on your screen and scanning it with another phone.</string>
+    <string name="msg_share_subject_line" translatable="false">Here are the contents of a barcode I scanned</string>
+    <string name="msg_share_text" translatable="false">Or type some text and press Enter</string>
+    <string name="msg_sure" translatable="false">Sei sicuro?</string>
+    <string name="msg_unmount_usb" translatable="false">Sorry, the SD card is not accessible.</string>
+    <string name="preferences_actions_title" translatable="false">When a barcode is found\u2026</string>
+    <string name="preferences_auto_focus_title" translatable="false">Use auto focus</string>
+    <string name="preferences_bulk_mode_summary" translatable="false">Scan and save many barcodes continuously</string>
+    <string name="preferences_bulk_mode_title" translatable="false">Bulk scan mode</string>
+    <string name="preferences_copy_to_clipboard_title" translatable="false">Copy to clipboard</string>
+    <string name="preferences_custom_product_search_summary" formatted="false" translatable="false">Substitutions: %s = contents, %f = format, %t = type</string>
+    <string name="preferences_custom_product_search_title" translatable="false">Custom search URL</string>
+    <string name="preferences_decode_1D_title" translatable="false">1D barcodes</string>
+    <string name="preferences_decode_Data_Matrix_title" translatable="false">Data Matrix</string>
+    <string name="preferences_decode_QR_title" translatable="false">QR Codes</string>
+    <string name="preferences_front_light_summary" translatable="false">Improves scanning in low light on some phones, but may cause glare. Does not work on all phones.</string>
+    <string name="preferences_front_light_title" translatable="false">Use front light</string>
+    <string name="preferences_general_title" translatable="false">General settings</string>
+    <string name="preferences_name" translatable="false">Impostazioni</string>
+    <string name="preferences_play_beep_title" translatable="false">Beep</string>
+    <string name="preferences_remember_duplicates_summary" translatable="false">Store multiple scans of the same barcode in History</string>
+    <string name="preferences_remember_duplicates_title" translatable="false">Remember duplicates</string>
+    <string name="preferences_result_title" translatable="false">Result settings</string>
+    <string name="preferences_scanning_title" translatable="false">When scanning for barcodes, decode\u2026</string>
+    <string name="preferences_search_country" translatable="false">Cerca paese</string>
+    <string name="preferences_supplemental_summary" translatable="false">Try to retrieve more information about the barcode contents</string>
+    <string name="preferences_supplemental_title" translatable="false">Retrieve more info</string>
+    <string name="preferences_vibrate_title" translatable="false">Vibrate</string>
+    <string name="result_address_book" translatable="false">Found contact info</string>
+    <string name="result_calendar" translatable="false">Found calendar event</string>
+    <string name="result_email_address" translatable="false">Found email address</string>
+    <string name="result_geo" translatable="false">Found geographic coordinates</string>
+    <string name="result_isbn" translatable="false">Found book</string>
+    <string name="result_product" translatable="false">Found product</string>
+    <string name="result_sms" translatable="false">Found SMS address</string>
+    <string name="result_tel" translatable="false">Found phone number</string>
+    <string name="result_text" translatable="false">Found plain text</string>
+    <string name="result_uri" translatable="false">Found URL</string>
+    <string name="result_wifi" translatable="false">Found WLAN Configuration</string>
+    <string name="sbc_name" translatable="false">Google Book Search</string>
+    <string name="share_name" translatable="false">Share via barcode</string>
+    <string name="title_about" translatable="false">Barcode Scanner v</string>
+    <string name="wifi_changing_network" translatable="false">Requesting connection to network\u2026</string>
+    <string name="wifi_ssid_label" translatable="false">Network Name</string>
+    <string name="wifi_type_label" translatable="false">Type</string>
+    <string name="zxing_url" translatable="false">http://code.google.com/p/zxing</string>
+    <string name="pos_product_hint" translatable="false">Open navigation drawer</string>
+    <string name="pos_location_hint" translatable="false">Open navigation drawer</string>
+    <string name="pos_tgl_count" translatable="false">Contare</string>
+    <string name="pos_tgl_price" translatable="false">Prezzo</string>
+    <string name="pos_tgl_expiration" translatable="false">Scadenza</string>
+    <string name="pos_tgl_note" translatable="false">Nota</string>
+    <string name="pos_tgl_picture" translatable="false">Immagine</string>
+    <string name="app_name" translatable="false">Accedi con noi!</string>
+
+    <string-array name="slide_menu_array" translatable="false">
+        <item>@string/job_list_menu_upload_complete_job</item>
+        <item>@string/job_list_menu_update_list</item>
+        <item>@string/job_list_exit</item>
+        <item>@string/settings_page_title</item>
+    </string-array>
+
+    <string name="drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="action_websearch" translatable="false">Web search</string>
+    <string name="app_not_available" translatable="false">Sorry, there\'s no web browser available</string>
+    <string name="app_title" translatable="false">Checker Field Surveyor</string>
+
+    <color name="darkness_value" translatable="false">#99000000</color>
+
+<!-- login Screen -->
+
+<string name="Questionaire_submitting" translatable="false">Invio questionario in corso...</string>
+    <string name="questionnaire_gps_off_alert" translatable="false">Il tuo GPS è attualmente attivo. Vuoi disattivarlo?</string>
+    <string name="list_enable_calendar" translatable="false">Aggiungi incarico al calendario?</string>
+    <string name="questionnaire_open_survey_alert" translatable="false">Il conteggio dell\'allocazione del sondaggio è stato raggiunto...</string>
+    <string name="questionnaire_gps_alert" translatable="false">Il tuo modulo GPS è disattivato. Desideri attivarlo?</string>
+    <string name="questionnaire_exit_delete_alert" translatable="false">Vuoi davvero uscire e cancellare tutte le risposte?</string>
+    <string name="questionnaire_refresh_alert" translatable="false">Please download questionnaire first from job list page before accept any job.</string>
+    <string name="questionnaire_exit_delete_alert_yes" translatable="false">Sì</string>
+    <string name="questionnaire_exit_delete_alert_no" translatable="false">No</string>
+    <string name="questionnaire_alert_text_betweeeen_first" translatable="false">Il valore numerico deve essere compreso tra START e END</string>
+    <string name="login_page_title" translatable="false">Ciao!</string>
+    <string name="login_btn" translatable="false">accedi</string>
+    <string name="login_heder" translatable="false">Ciao!</string>
+    <string name="login_username_hint" translatable="false">Username</string>
+    <string name="login_password_hint" translatable="false">Password</string>
+    <string name="login_reset_btn" translatable="false">Cancella</string>
+    <string name="error_alert_title" translatable="false">Problema</string>
+    <string name="alert_btn_lbl_ok" translatable="false">OK</string>
+    <string name="login_username_alert" translatable="false">Username o password errati</string>
+    <string name="login_clientside_username_alert" translatable="false">Username errato</string>
+    <string name="login_invalid_systemurl_alert" translatable="false">URL di sistema errato, per favore, utilizza l\'url di sistema completo (Es: http://www.checker-soft.com/demo)</string>
+    <string name="invalid_server_response_alert" translatable="false">Risposta invalida dal server. Contattare l\'operatore</string>
+    <string name="timeout_response_alert" translatable="false">Connessione non riuscita. Per favore contatta il tuo operatore.</string>
+    <string name="crash_toast_text" translatable="false">Ooooops! Ho crashato, ma un report è stato inviato al mio sviluppatore per risolvere il problema!</string>
+    <string name="crash_dialog_title" translatable="false">Checker ha crashato</string>
+    <string name="crash_dialog_text" translatable="false">Un errore inatteso ha bloccato l\'applicazione. Per favore aiutaci ad aggiustare la nostra APP inviandoci i dati di errore. Per farlo, devi solo cliccare "OK". Ci scusiamo e grazie!.</string>
+    <string name="crash_dialog_comment_prompt" translatable="false">Un errore inatteso ha bloccato l\'applicazione. Per favore aiutaci ad aggiustare la nostra APP inviandoci i dati di errore. Per farlo, devi solo cliccare "OK". Ci scusiamo e grazie!</string>
+    <string name="crash_dialog_ok_toast" translatable="false"></string>
+
+<!-- Setting Screen -->
+<string name="settings_proxy_host_lbl" translatable="false">Indirizzo</string>
+    <string name="settings_proxy_port_lbl" translatable="false">Port</string>
+    <string name="settings_proxy_host_usrname" translatable="false">Username</string>
+    <string name="settings_proxy_host_pswrd" translatable="false">Password</string>
+    <string name="settings_txt_proxy" translatable="false">Proxy</string>
+    <string name="settings_page_title" translatable="false">Impostazioni</string>
+    <string name="settings_job_board" translatable="false">Bacheca degli incarichi</string>
+    <string name="settings_refund_report" translatable="false">Rapporto sui rimborsi personali</string>
+    <string name="settings_page_proxy" translatable="false">Proxy</string>
+    <string name="settings_system_url_lbl" translatable="false">URL sistema</string>
+    <string name="settings_language_lbl" translatable="false">Lingua</string>
+    <string name="settings_themes_lbl" translatable="false">Tema</string>
+    <string name="settings_save_btn" translatable="false">Salva</string>
+    <string name="settings_http_label" translatable="false">http://</string>
+    <string name="url_hint" translatable="false">URL sistema</string>
+    <string name="_alert_title" translatable="false">Informazioni</string>
+    <string name="settings_url_alert" translatable="false">Per favore, inserisci un URL valido</string>
+    <string name="settings_system_url_hint" translatable="false">URL sistema</string>
+
+<!-- Job List Screen -->
+<string name="joblist_title" translatable="false">Elenco incarichi</string>
+    <string name="joblist_filter_btn" translatable="false">Filtro</string>
+    <string name="joblist_map_btn" translatable="false">Mappa</string>
+    <string name="joblist_all_jobs" translatable="false">Mostra tutti gli incarichi</string>
+
+<!-- Job Filter Screen -->
+<string name="job_filter_title" translatable="false">Trova</string>
+    <string name="job_filter_choose_job_type_lbl" translatable="false">Scegli cliente</string>
+    <string name="job_filter_choose_city_lbl" translatable="false">Scegli città</string>
+    <string name="job_filter_date_range_lbl" translatable="false">Periodo</string>
+    <string name="job_filter_start_date_lbl" translatable="false"><b>Data di inizio</b></string>
+    <string name="job_filter_end_date_lbl" translatable="false"><b>Data di fine</b></string>
+    <string name="job_filter_save_btn" translatable="false">Trova</string>
+    <string name="job_filter_default_dd_option" translatable="false">Seleziona</string>
+    <string name="job_filter_select_date" translatable="false"><u>Seleziona data</u></string>
+
+    <string-array name="job_filter_job_list" translatable="false">
+        <item> Seleziona tutto</item>
+        <item> retail</item>
+        <item> Inizia e concludi</item>
+    </string-array>
+    <string-array name="job_filter_region_list" translatable="false">
+        <item>Select All</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+<!-- SurveyDetail Screen -->
+<string name="jd_survey_name" translatable="false">nome del sondaggio</string>
+    <string name="jd_survey_allocations" translatable="false">Allocations</string>
+    <string name="jd_survey_quotas" translatable="false">Quotas</string>
+<!-- JobDetail Screen -->
+<string name="jd_heder_text" translatable="false">Dettagli incarico</string>
+    <string name="job_detail_map_btn" translatable="false">Mappa</string>
+    <string name="jd_begin_btn_text" translatable="false">Inizia l\'intervista</string>
+    <string name="jd_accept_btn_text" translatable="false">Accetta incarico</string>
+    <string name="jd_continue_review_btn_text" translatable="false">Continua questionario</string>
+    <string name="jd_begin_review_btn_text" translatable="false">Inizia questionario</string>
+    <string name="jd_reject_btn_text" translatable="false">Declina</string>
+    <string name="jd_logout_btn_text" translatable="false">Logout</string>declince
+    <string name="jd_date" translatable="false">Data</string>
+    <string name="jd_status" translatable="false">Status</string>
+    <string name="jd_description" translatable="false">Descrizione</string>
+    <string name="jd_setname" translatable="false">Questionario</string>
+    <string name="jd_clientname" translatable="false">Cliente</string>
+    <string name="jd_branchname" translatable="false">Filiale</string>
+    <string name="jd_projects" translatable="false">progetti</string>
+    <string name="jd_regions" translatable="false">Regione</string>
+    <string name="jd_branchprops" translatable="false">Proprietà del ramo</string>
+    <string name="jd_branchfname" translatable="false">Nome completo filiale</string>
+    <string name="jd_cityname" translatable="false">Città</string>
+    <string name="jd_address" translatable="false">Indirizzo</string>
+    <string name="jd_branchpno" translatable="false">Telefono filiale</string>
+    <string name="jd_openinghours" translatable="false">Orari di apertura</string>
+    <string name="jd_stime" translatable="false">Ora di inizio</string>
+    <string name="jd_etime" translatable="false">Ora di fine</string>
+    <string name="jd_parsing_alert_title" translatable="false">Informazione</string>
+    <string name="jd_parsing_alert_msg" translatable="false">Per favore attendi. Il questionario si sta caricando</string>
+    <string name="jd_please_alert_msg" translatable="false">Attendi...</string>
+
+<!-- Reject Job Screen -->
+<string name="reject_job_popup_title" translatable="false">Motivo per il rifiuto</string>
+    <string name="reject_job_popup_reason_lbl" translatable="false">Motivo</string>
+    <string name="reject_job_popup_btn_txt" translatable="false">OK</string>
+
+<!-- Questionnaire Screen -->
+<string name="questionnaire_title" translatable="false">Questionario</string>
+    <string name="questionnaire_next_btn" translatable="false">Avanti</string>
+    <string name="questionnaire_record_btn" translatable="false">Registra</string>
+    <string name="questionnaire_record_stop_btn" translatable="false">Stop</string>
+
+    <string name="attach_disclaimer" translatable="false">Questi file sono attualmente allegati al lavoro:</string>
+    <string name="questionnaire_prev_btn" translatable="false">Indietro</string>
+    <string name="questionnaire_exitmenu" translatable="false">Esci</string>
+    <string name="questionnaire_exitandsave_menu" translatable="false">Salva ed esci</string>
+    <string name="questionnaire_preview_menu" translatable="false">Anteprima</string>
+    <string name="questionnaire_finishandsend_menu" translatable="false">Concludi ed invia</string>
+    <string name="questionnaire_alert" translatable="false">Risposta invalida</string>
+    <string name="questionnaire_alert_free_text" translatable="false">Il valore non è nel range consentito</string>
+    <string name="questionnaire_btn_text" translatable="false">OK</string>
+    <string name="questionnaire_alert_title" translatable="false">Information</string>
+    <string name="questionnaire_submit_survey_alert" translatable="false">Questionario inviato correttamente</string>
+    <string name="questionnaire_select_files" translatable="false">Seleziona file</string>
+    <string name="questionnaire_upload_files" translatable="false">Aggiungi files al questionario</string>
+    <string name="questionnaire_finish" translatable="false">Finisci</string>
+
+    <string-array name="language_val" translatable="false">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list" translatable="false">
+        <item>Night</item>
+        <item>Day</item>
+    </string-array>
+
+<!-- NEW ADDED -->
+<string name="jd_begin_button_status_inprogress" translatable="false">In corso</string>
+    <string name="no_internet_connection_alret_message" translatable="false">Per favore, controlla la connessione a internet e prova con delle credenziali valide</string>
+    <string name="jd_begin_button_status_completed" translatable="false">Completato</string>
+    <string name="jd_synch_button_text" translatable="false">Sincronizza</string>
+    <string name="job_search_no_records_alert" translatable="false">Nessun record trovato</string>
+    <string name="reject_job_sucess_alert" translatable="false">Incarico respinto con successo</string>
+    <string name="alert_sync_jobs_again" translatable="false">App needs to synch the system sent #LOCAL# number of jobs and server accpeted #SERVER# number of jobs!</string>
+    <string name="reject_job_fail_alert" translatable="false">Non puoi respingere gli incarichi se sei offline</string>
+    <string name="accept_job_fail_alert" translatable="false">Non puoi accettare gli incarichi se sei offline</string>
+    <string name="accept_job_fail_alert_SERVER" translatable="false">Non puoi accettare gli incarichi se sei offline</string>
+    <string name="offline_alert" translatable="false">Non puoi lavorare offline</string>
+    <string name="submit_review_fail_alert" translatable="false">Non puoi inviare in questionario se sei offline</string>
+    <string name="save_questionnaire_records_for_offline" translatable="false">Il questionario non è stato salvato per questo incarico, per favore connetti ad internet e scarica di nuovo il questionario</string>
+    <string name="save_questionnaire_records_for_database" translatable="false">Impossibile aprire il database</string>
+    <string name="questionnaire_multiple_max_ans_alert" translatable="false">Selezione risposte sopra il limitet</string>
+    <string name="jd_begin_button_status_scheduled" translatable="false">Programmato</string>
+    <string name="job_list_exit" translatable="false">Esci dall\'elenco incarichi</string>
+    <string name="job_list_archive" translatable="false">Incarichi archiviati</string>
+    <string name="reject_job_resusal_text_alert" translatable="false">Si prega di inserire il motivo del rifiuto</string>
+    <string name="job_download_alert" translatable="false">Download degli incarichi in corso...</string>
+    <string name="questionnaire_downlaod_alert" translatable="false">Download e salvataggio del questionario in corso...</string>
+    <string name="questionnaire_saving_alert" translatable="false">Salvataggio questionari in corso ...</string>
+    <string name="image_downloading_alert" translatable="false">Preparazione dei questionari in corso ...</string>
+    <string name="before_accept_alert" translatable="false">Please download questionnaire first from job list page before accept any job</string>
+    <string name="answer_save_alert" translatable="false">Salvataggio risposta al questionario in corso ...</string>
+    <string name="exit_and_delete_btn_text" translatable="false">Esci e cancella</string>
+    <string name="menu_condition" translatable="false">Condition Checker</string>
+    <string name="menu_preview" translatable="false">Anteprima</string>
+    <string name="non_answered_conf_alert_title" translatable="false">Conferma</string>
+    <string name="non_answered_conf_alert_msg" translatable="false">Nessuna risposta fornita, premere Annulla per completare</string>
+    <string name="non_answered_conf_alert_cancel_btn" translatable="false">Cancella</string>
+    <string name="non_answered_conf_alert_continue_btn" translatable="false">Continua</string>
+    <string name="Questionnaire_finish_time_lbl" translatable="false">Tempo effettivo sondaggio</string>
+    <string name="Questionnaire_finish_Date_lbl" translatable="false">Data effettiva del questionario</string>
+    <string name="Questionnaire_survey_implementation_time_lbl" translatable="false">Tempo effettivo sondaggio</string>
+    <string name="Questionnaire_survey_implementation_Date_lbl" translatable="false">Data effettiva del questionario</string>
+    <string name="questionnaire_free_text_lbl" translatable="false">Testo libero</string>
+    <string name="questionnaire_reply_to_company" translatable="false">Invia un messaggio interno all\'azienda:</string>
+    <string name="questionnaire_send_bug" translatable="false">Segnala un errore</string>
+    <string name="questionnaire_done_btn_text" translatable="false">Continua</string>
+    <string name="questionnaire_file_attached_text" translatable="false">File allegato</string>
+    <string name="questionnaire_alert_additional" translatable="false">Imnformazioni aggiuntive richieste!</string>
+    <string name="questionnaire_alert_text_between_first" translatable="false">La lunghezza del testo deve essere compresa tra START e END</string>
+    <string name="questionnaire_alert_text_to" translatable="false"> to </string>
+    <string name="questionnaire_alert_no_answer" translatable="false">Nessuna risposta scelta!</string>
+    <string name="already_submit_review_alert" translatable="false">Questionario già inviato</string>
+    <string name="camera_menu_text" translatable="false">Camera</string>
+    <string name="video_menu_text" translatable="false">Video</string>
+    <string name="voice_menu_text" translatable="false">Registrazione audio in corso</string>
+    <string name="gallery_menu_text" translatable="false">Galleria</string>
+    <string name="file_size_text" translatable="false">La dimensione del file è maggiore del limite assegnato, riprova con una dimensione inferiore.</string>
+    <string name="txt_briefing" translatable="false">Istruzioni</string>
+    <string name="saving_object" translatable="false">Salvataggio di oggetti </string>
+    <string name="settings" translatable="false">Preferenze</string>
+    <string name="bookmarks" translatable="false">Bookmarks</string>
+    <string name="menu_shopper_info" translatable="false">Your personal information</string>
+    <string name="menu_edit_shopper_info" translatable="false">modificare le informazioni personali</string>
+    <string name="menu_review_history" translatable="false">storia delle reviews</string>
+    <string name="menu_contact" translatable="false">Contact us</string>
+    <string name="menu_forgot_password" translatable="false">Dimenticato la password!</string>
+    <string name="menu_signup" translatable="false">Iscriviti</string>
+    <string name="deleted_review" translatable="false">[QUESTIONNAIRE] for [BRANCH], [DATE] è già stato inviato da un altro dispositivo. lo stesso incarico non può essere caricato di nuovo dall\'app. se desideri caricarlo di nuovo, contatta la tua agenzia e se sei sicuro di non volerlo caricare di nuovo, puoi eliminare questo incarico dall\'elenco di incarichi nell\'app.</string>
+    <string name="task_completed" translatable="false">incarico completato</string>
+    <string name="upload_pending" translatable="false">carica i lavori in sospeso nella scheda completati.</string>
+    <string name="uploading_image" translatable="false">Caricamento immagine:</string>
+    <string name="unable_to_find_dates" translatable="false">Impossibile trovare date.</string>
+    <string name="title_activity_job_tabbed">jobTabbedActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="returned_review" translatable="false">questa recensione potrebbe essere una recensione restituita lato server</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+</resources>

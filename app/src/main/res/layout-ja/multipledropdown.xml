@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="80dp"
+    android:background="@drawable/back_black"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    android:padding="10dp" >
+<ScrollView
+    android:layout_alignParentTop="true"
+    android:layout_above="@+id/btnOk"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/checkboxgrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="#cdcdcd"
+        android:dividerHeight="3px" />
+</ScrollView>
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/accept_btn_selector"
+        android:paddingBottom="8dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="8dp"
+        android:text="@string/button_ok"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="15dp" />
+
+</RelativeLayout>

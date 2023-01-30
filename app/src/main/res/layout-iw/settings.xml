@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/idBackGround"
+    android:layout_width="fill_parent"
+    android:layoutDirection="ltr"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <TextView
+        android:id="@+id/settingheder"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/navigation_bar"
+        android:gravity="center"
+        android:text="@string/settings_page_title"
+        android:textColor="#505050"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TableLayout
+        android:id="@+id/settingtl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settingheder"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dip" >
+
+        <TableRow
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/s_url"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textbg"
+                android:focusable="true"
+                android:hint="@string/settings_system_url_hint"
+                android:maxLength="50"
+                android:padding="10dp"
+                android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/s_urltext"
+                style="bold"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/settings_system_url_lbl"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <!--
+     	  	<TableRow android:gravity="center">
+     	 	<TextView 
+                 android:id="@+id/s_urltext"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textSize="20dip"
+                 android:textColor="#000000"
+                 android:layout_span="2"  
+                 android:text="@string/settings_system_url_lbl"
+                 style="bold"/>  
+	  	</TableRow>         
+        
+	  	<TableRow android:gravity="center">
+			  <TextView android:id="@+id/tvhttp" 
+			  	android:text="@string/settings_http_label"  
+		   		android:textColor="#000000"  		   		
+		   		android:textSize="20dip"
+		   		android:textStyle="normal"
+		   		android:layout_gravity="center_vertical|right"
+		  		android:layout_width="wrap_content" 
+		  		android:layout_height="wrap_content" 
+		  		style="bold"
+		  		android:typeface="normal"/>
+		  
+		 	<EditText android:id="@+id/s_url" 
+		 		android:layout_width="200dp" 
+		 		android:layout_height="wrap_content" 
+		  		android:singleLine="true"
+		  		android:background="@drawable/textbg"  
+		  		android:paddingLeft="5dp" 
+		  		android:textSize="14sp"
+		  		android:padding="10dp" 
+		  		android:inputType="textUri"
+		    	android:textStyle="normal"      
+		    	android:hint="Enter System URL"
+		    	android:typeface="normal"
+		    	android:maxLength="50"/>
+	  	</TableRow>
+        -->
+
+        <TableRow
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:gravity="center" >
+
+            <Spinner
+                android:id="@+id/languagelist"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/lang_list"
+                android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/s_languagetext"
+                style="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_language_lbl"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dip"
+            android:layout_marginTop="10dip"
+            android:gravity="center" >
+
+            <Spinner
+                android:id="@+id/themeslist"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/themes_list"
+                android:paddingLeft="5dp" />
+
+            <TextView
+                android:id="@+id/s_themetext"
+                style="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_themes_lbl"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/savebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/settingtl"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/btn_selector"
+        android:text="@string/settings_save_btn" />
+
+    <ImageView
+        android:id="@+id/navBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/navigation_bar" />
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

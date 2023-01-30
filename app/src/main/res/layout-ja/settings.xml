@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/idBackGround"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layoutDirection="ltr"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        android:id="@+id/rvinjobscreen"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/navigation_bar" >
+
+        <TextView
+            android:id="@+id/settingheder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dip"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/settings_page_title"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnproxy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/accept_btn_selector"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="@string/settings_txt_proxy" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/settingScroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/navBottom"
+        android:layout_below="@+id/rvinjobscreen" >
+
+        <TableLayout
+            android:id="@+id/settingtl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dip" >
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_urltext"
+                    style="bold"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_system_url_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/s_url"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/textbg"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/settings_system_url_hint"
+                    android:maxLength="50"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:typeface="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_languagetext"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_language_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/languagelist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawSelectorOnTop="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_themetext"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_themes_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/themeslist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawSelectorOnTop="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="right" >
+
+                <Button
+                    android:id="@+id/savebtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/accept_btn_selector"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/settings_save_btn" >
+
+                    <requestFocus />
+                </Button>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/navBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/navigation_bar" />
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="s_item_column_0_line_804_file_88">Applied</string>
+    <string name="s_item_column_0_line_838_file_88">Self Assigned</string>
+    <string name="s_item_column_0_line_839_file_88">Thank you for applying for this order. Please click Download jobs to get this in your assigned job list</string>
+    <string name="s_item_column_0_line_859_file_88">Error Applying or No internet connection!</string>
+    <string name="s_item_column_0_line_893_file_88">Download Now</string>
+    <string name="s_item_column_0_line_923_file_88">Download Later</string>
+    <string name="s_item_column_0_line_994_file_88">Application Comment</string>
+    <string name="s_item_column_0_line_1441_file_88">Already Applied</string>
+    <string name="s_item_column_0_line_1549_file_88">Fetching Alternate Dates...</string>
+    <string name="s_item_column_0_line_1579_file_88">Počet</string>
+    <string name="s_item_column_0_line_1594_file_88">Not Available</string>
+    <string name="s_item_column_0_line_1597_file_88">Select a date</string>
+    <string name="s_item_column_0_line_174_file_210"> PENDING </string>
+    <string name="s_item_column_0_line_184_file_210"> Schváleno </string>
+    <string name="s_item_column_0_line_194_file_210"> Zaplaceno </string>
+    <string name="s_item_column_0_line_199_file_210"> View More Details </string>
+    <string name="s_item_column_0_line_202_file_210">Review No: </string>
+    <string name="s_item_column_0_line_344_file_210">Ano</string>
+    <string name="s_item_column_0_line_346_file_210">Ne</string>
+    <string name="s_item_column_0_line_145_file_223">Remove Application</string>
+    <string name="s_item_column_0_line_647_file_27">Job Settings</string>
+    <string name="s_item_column_0_line_774_file_27">Save</string>
+    <string name="s_item_column_0_line_67_file_37">Název klienta:</string>
+    <string name="s_item_column_0_line_94_file_37">Typ platebního oběhu:</string>
+    <string name="s_item_column_0_line_120_file_37">Added at: </string>
+    <string name="s_item_column_0_line_149_file_37">Amount: </string>
+    <string name="s_item_column_0_line_176_file_37">Invoice Number:</string>
+    <string name="s_item_column_0_line_205_file_37">Schváleno:</string>
+    <string name="s_item_column_0_line_234_file_37">Zaplaceno:</string>
+    <string name="s_item_column_0_line_263_file_37">Branch Code:</string>
+    <string name="s_item_column_0_line_292_file_37">Název pobočky:</string>
+    <string name="s_item_column_0_line_321_file_37">City Name:</string>
+    <string name="s_item_column_0_line_350_file_37">Region Name:</string>
+    <string name="s_item_column_0_line_379_file_37">Adresa:</string>
+    <string name="s_item_column_0_line_408_file_37">Project Name:</string>
+    <string name="s_item_column_0_line_436_file_37">Popis:</string>
+    <string name="s_item_column_0_line_465_file_37">Order Id:</string>
+    <string name="s_item_column_0_line_323_file_44">Shelf Share</string>
+    <string name="s_item_column_0_line_581_file_44">Take Photo</string>
+    <string name="s_item_column_0_line_852_file_44">Capture</string>
+    <string name="s_item_column_0_line_59_file_52">Mapa</string>
+    <string name="s_item_column_0_line_71_file_52">LIST</string>
+    <string name="s_item_column_0_line_183_file_52">Apply Selected</string>
+    <string name="s_item_column_0_line_214_file_52">Dates:</string>
+    <string name="s_item_column_0_line_246_file_52">Dnes</string>
+    <string name="s_item_column_0_line_270_file_52">Next 30 days</string>
+    <string name="s_item_column_0_line_295_file_52">Volitelný</string>
+    <string name="s_item_column_0_line_337_file_52">Klient</string>
+    <string name="s_item_column_0_line_361_file_52">Region</string>
+    <string name="s_item_column_0_line_415_file_52">Smazat</string>
+    <string name="s_item_column_0_line_429_file_52">Show</string>
+    <string name="s_item_column_0_line_25_file_77">Please select image resize option:</string>
+    <string name="s_item_column_0_line_15_file_108">Náhradní zakázky:</string>
+    <string name="s_item_column_0_line_676_file_98">Chybějící soubory:</string>
+    <string name="s_item_column_0_line_65_file_94">Vyber vše</string>
+    <string name="s_item_column_0_line_107_file_94">Žádný obsah.</string>
+    <string name="s_item_column_0_line_75_file_102">No Data found</string>
+    <string name="s_item_column_0_line_100_file_102">Select Month and Year</string>
+    <string name="s_item_column_0_line_147_file_102">Zaplaceno:</string>
+    <string name="s_item_column_0_line_194_file_102">Schváleno:</string>
+    <string name="s_item_column_0_line_241_file_102">Typ platebního oběhu:</string>
+    <string name="s_item_column_0_line_288_file_102">Typ reportu:</string>
+    <string name="s_item_column_0_line_336_file_102">Show</string>
+    <string name="s_item_column_0_line_349_file_102">Smazat</string>
+    <string name="s_item_column_0_line_66_file_113">Název klienta:</string>
+    <string name="s_item_column_0_line_93_file_113">Typ platebního oběhu:</string>
+    <string name="s_item_column_0_line_119_file_113">Added at: </string>
+    <string name="s_item_column_0_line_148_file_113">Amount: </string>
+    <string name="s_item_column_0_line_175_file_113">Invoice Number:</string>
+    <string name="s_item_column_0_line_204_file_113">Schváleno:</string>
+    <string name="s_item_column_0_line_233_file_113">Zaplaceno:</string>
+    <string name="s_item_column_0_line_262_file_113">Branch Code:</string>
+    <string name="s_item_column_0_line_291_file_113">Název pobočky:</string>
+    <string name="s_item_column_0_line_320_file_113">City Name:</string>
+    <string name="s_item_column_0_line_349_file_113">Region Name:</string>
+    <string name="s_item_column_0_line_378_file_113">Adresa:</string>
+    <string name="s_item_column_0_line_407_file_113">Project Name:</string>
+    <string name="s_item_column_0_line_435_file_113">Popis:</string>
+    <string name="s_item_column_0_line_464_file_113">Order Id:</string>
+    <string name="s_item_column_0_line_119_file_119">Hotovo</string>
+    <string name="s_item_column_0_line_489_file_121">Nastvení fotoaparátus</string>
+    <string name="s_item_column_0_line_546_file_121">Allow Photo Backups</string>
+    <string name="s_item_column_0_line_580_file_121">Povolit více fotek</string>
+    <string name="s_item_column_0_line_36_file_122">Detaily zakázky</string>
+    <string name="s_item_column_0_line_67_file_122">Název klienta:</string>
+    <string name="s_item_column_0_line_96_file_122">Název pobočky:</string>
+    <string name="s_item_column_0_line_125_file_122">Město:</string>
+    <string name="s_item_column_0_line_154_file_122">Adresa:</string>
+    <string name="s_item_column_0_line_182_file_122">Popis zakázky:</string>
+    <string name="s_item_column_0_line_209_file_122">Dotazník:</string>
+    <string name="s_item_column_0_line_234_file_122">Krátký název pobočky:</string>
+    <string name="s_item_column_0_line_260_file_122">Datum:</string>
+    <string name="s_item_column_0_line_289_file_122">Start and End Time:</string>
+    <string name="s_item_column_0_line_315_file_122">Branch Opening Hours:</string>
+    <string name="s_item_column_0_line_344_file_122">Phone:</string>
+    <string name="s_item_column_0_line_373_file_122">Survey Payment:</string>
+    <string name="s_item_column_0_line_402_file_122">Bonusová platba:</string>
+    <string name="s_item_column_0_line_431_file_122">Platba za cestu:</string>
+    <string name="s_item_column_0_line_467_file_122">Alternate Date(s):</string>
+    <string name="s_item_column_0_line_523_file_122">Požádat</string>
+    <string name="s_item_column_0_line_81_file_137">Název klienta:</string>
+    <string name="s_item_column_0_line_110_file_137">Branch Details:</string>
+    <string name="s_item_column_0_line_139_file_137">Město:</string>
+    <string name="s_item_column_0_line_168_file_137">Datum:</string>
+    <string name="s_item_column_0_line_196_file_137">Total Orders:</string>
+    <string name="s_item_column_0_line_223_file_137">Vzdálenost:</string>
+    <string name="s_item_column_0_line_254_file_137">Požádat</string>
+    <string name="s_item_column_0_line_36_file_125">Chcete vyfotit další fotku?</string>
+    <string name="s_item_column_0_line_13_file_124">Chybějící soubory:</string>
+    <string name="s_item_column_0_line_57_file_124">Nahrát</string>
+    <string name="submit_review_fail_alert">Nemohu odeslat průzkum během offline stavu</string>
+    <string name="save_questionnaire_records_for_offline">Dotazník pro tuto zakázku nebyl stažen. Prosím připojte se k internetu a stáhněte dotazník znova.</string>
+    <string name="save_questionnaire_records_for_database">Není možné otevřít databázi</string>
+    <string name="questionnaire_multiple_max_ans_alert">Výběr je mimo limit</string>
+    <string name="jd_begin_button_status_scheduled">Plánovaný</string>
+    <string name="job_list_exit">Odejít ze seznamu zakázek</string>
+    <string name="reject_job_resusal_text_alert">Prosím uveďte důvod odmítnutí</string>
+    <string name="job_download_alert">Stahuji aktualizované zakázky</string>
+    <string name="questionnaire_downlaod_alert">Probíhá stahování a ukládání dotazníků.</string>
+    <string name="questionnaire_saving_alert">Probíhá ukládání dotazníků…</string>
+    <string name="image_downloading_alert">Probíhá příprava dotazníků…</string>
+    <string name="before_accept_alert">Please download questionnaire first from job list page before accept any job</string>
+    <string name="answer_save_alert">Probíhá ukládání odpovědi v dotazníku…</string>
+    <string name="exit_and_delete_btn_text">Odejít a smazat</string>
+    <string name="non_answered_conf_alert_title">Potvrzení</string>
+    <string name="non_answered_conf_alert_msg">Odpověď není k dispozici, stiskněte zrušit pro uložení</string>
+    <string name="non_answered_conf_alert_cancel_btn">Zrušit</string>
+    <string name="non_answered_conf_alert_continue_btn">Pokračovat</string>
+    <string name="Questionnaire_finish_time_lbl">Skutečné datum průzkumu</string>
+    <string name="Questionnaire_finish_Date_lbl">Skutečné datum průzkumu</string>
+    <string name="Questionnaire_survey_implementation_time_lbl">Skutečné datum průzkumu</string>
+    <string name="Questionnaire_survey_implementation_Date_lbl">Skutečné datum průzkumu</string>
+    <string name="questionnaire_free_text_lbl">Text</string>
+    <string name="questionnaire_send_bug">Nahlásit chybu</string>
+    <string name="questionnaire_done_btn_text">Pokračovat</string>
+    <string name="questionnaire_file_attached_text">Soubor připojen</string>
+    <string name="questionnaire_alert_additional">Je vyžadována dodatečná informace</string>
+    <string name="questionnaire_alert_text_between_first">Délka textu musí být od START do END</string>
+    <string name="questionnaire_alert_text_to"> to </string>
+    <string name="questionnaire_alert_no_answer">Nevybrána žádná odpověď!</string>
+    <string name="already_submit_review_alert">Průzkum byl již odeslán</string>
+    <string name="camera_menu_text">Fotoaparát</string>
+    <string name="video_menu_text">Video</string>
+    <string name="voice_menu_text">Probíhá nahrávání</string>
+    <string name="gallery_menu_text">Galerie</string>
+    <string name="file_size_text">Velikost souboru je větší než stanovený limit, zkuste to znovu s menší velikostí</string>
+    <string name="txt_briefing">Pokyny</string>
+
+    <string name="pos_error_report">Vložit platný počet &lt;= </string>
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Romanian</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Japanese</item>
+    </string-array>
+
+    <string name="settings">Preference</string>
+    <string name="bookmarks">Bookmarks</string>
+        <!-- Reject Job Screen -->
+    <string name="reject_job_popup_title">Důvod odmítnutí</string>
+    <string name="reject_job_popup_reason_lbl">Důvod</string>
+    <string name="reject_job_popup_btn_txt">OK</string>
+
+    <!-- Questionnaire Screen -->
+    <string name="questionnaire_title">Dotazník</string>
+    <string name="questionnaire_next_btn">Další</string>
+    <string name="questionnaire_record_btn">Záznam</string>
+    <string name="questionnaire_record_stop_btn">Zastavit</string>
+    <string name="questionnaire_menu_btn">Hotovo</string>
+    <string name="attach_disclaimer">Tyto soubory jsou aktuálně přiřazeny k zakázce:</string>
+    <string name="questionnaire_prev_btn">Zpět</string>
+    <string name="questionnaire_exitandsave_menu">Uložit a odejít</string>
+    <string name="questionnaire_preview_menu">Náhled</string>
+    <string name="questionnaire_finishandsend_menu">Dokončit a poslat</string>
+    <string name="questionnaire_alert">Neplatná odpověď</string>
+    <string name="questionnaire_alert_free_text">Hodnota neodpovídá povolenému rozpětí</string>
+    <string name="questionnaire_btn_text">OK</string>
+    <string name="questionnaire_alert_title">Informace</string>
+    <string name="questionnaire_submit_survey_alert">Průzkum úspěšně odeslán</string>
+    <string name="questionnaire_select_files">Vybrat soubory</string>
+    <string name="questionnaire_upload_files">Nahrát soubory k průzkumu </string>
+    <string name="questionnaire_finish">Ukončit</string>
+
+    <string-array name="language_val">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list">
+        <item>Noc</item>
+        <item>Den</item>
+    </string-array>
+
+    <!-- NEW ADDED -->
+    <string name="jd_begin_button_status_inprogress">Probíhá</string>
+    <string name="no_internet_connection_alret_message">Prosím zkontroluj připojení k internetu a zkus znovu s platným přihlášením</string>
+    <string name="jd_begin_button_status_completed">Hotovo</string>
+    <string name="jd_synch_button_text">Synchronizovat</string>
+    <string name="job_search_no_records_alert">Nenalezeny žádné záznamy</string>
+    <string name="reject_job_sucess_alert">Zakázka úspěšně zamítnuta</string>
+    <string name="alert_sync_jobs_again">App needs to synch the system sent #LOCAL# number of jobs and server accpeted #SERVER# number of jobs!</string>
+    <string name="reject_job_fail_alert">Nelze zamítnout zakázku během offline stavu</string>
+    <string name="accept_job_fail_alert">Nelze přijmout zakázku během offline stavu</string>
+    <string name="offline_alert">Nelze pokračovat v offline režimu</string>
+    
+    
+    
+    
+    <!-- Setting Screen -->
+    <string name="settings_proxy_host_lbl">Adresa</string>
+    <string name="settings_proxy_port_lbl">Port</string>
+    <string name="settings_proxy_host_usrname">Uživatel</string>
+    <string name="settings_proxy_host_pswrd">Heslo</string>
+    <string name="settings_txt_proxy">Proxy</string>
+    <string name="settings_page_title">Nastavení</string>
+    <string name="settings_job_board">Job Board</string>
+    <string name="settings_refund_report">Personal Refund Report</string>
+    <string name="settings_page_proxy">Proxy</string>
+    <string name="settings_system_url_lbl">Systémová URL</string>
+    <string name="settings_language_lbl">Jazyk</string>
+    <string name="settings_themes_lbl">Vzhled</string>
+    <string name="settings_save_btn">Uložit</string>
+    <string name="settings_http_label">http://</string>
+    <string name="url_hint">Systémová URL</string>
+    <string name="_alert_title">Informace</string>
+    <string name="settings_url_alert">Prosím zadejte platnou URL</string>
+    <string name="settings_system_url_hint">Systémová URL</string>
+
+    <!-- Job List Screen -->
+    <string name="joblist_title">Seznam zakázek</string>
+    <string name="joblist_filter_btn">Filter</string>
+    <string name="joblist_map_btn">Mapa</string>
+    <string name="joblist_all_jobs">Ukaž všechny zakázky</string>
+
+    <!-- Job Filter Screen -->
+    <string name="job_filter_title">Vyhledávání</string>
+    <string name="job_filter_choose_job_type_lbl">Vzberte klienta</string>
+    <string name="job_filter_choose_city_lbl">Vyber město</string>
+    <string name="job_filter_date_range_lbl">Rozpětí - datum</string>
+    <string name="job_filter_start_date_lbl"><b>Datum začátku</b></string>
+    <string name="job_filter_end_date_lbl"><b>Datum konce</b></string>
+    <string name="job_filter_save_btn">Vyhledávání</string>
+    <string name="job_filter_default_dd_option">Vybrat</string>
+    <string name="job_filter_select_date"><u>Vyber datum</u></string>
+
+    <string-array name="job_filter_job_list">
+        <item> Vyber vše</item>
+        <item> maloobchod</item>
+        <item> začátek a konec</item>
+    </string-array>
+    <string-array name="job_filter_region_list">
+        <item>Vyber vše</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <!-- SurveyDetail Screen -->
+    <string name="jd_survey_name">Název průzkumu</string>
+    <string name="jd_survey_allocations">Přidělení</string>
+    <string name="jd_survey_quotas">Kvóty</string>
+    <!-- JobDetail Screen -->
+    <string name="jd_heder_text">Detaily zakázky</string>
+    <string name="job_detail_map_btn">Mapa</string>
+    <string name="jd_begin_btn_text">Začít rozhovor</string>
+    <string name="jd_accept_btn_text">Přijmout zakázku</string>
+    <string name="jd_continue_review_btn_text">Pokračovat v průzkumu</string>
+    <string name="jd_begin_review_btn_text">Začít průzkum</string>
+    <string name="jd_reject_btn_text">Odmítnout</string>
+    <string name="jd_logout_btn_text">Odhlášení</string>
+    <string name="jd_date">Date</string>
+    <string name="jd_status">Stav</string>
+    <string name="jd_description">Popis</string>
+    <string name="jd_setname">Dotazník</string>
+    <string name="jd_clientname">Klient</string>
+    <string name="jd_branchname">Pobočka</string>
+    <string name="jd_branchfname">Pobočka - celý název</string>
+    <string name="jd_cityname">Město</string>
+    <string name="jd_address">Adresa</string>
+    <string name="jd_branchpno">Telefon na pobočku</string>
+    <string name="jd_openinghours">Otevírací doba</string>
+    <string name="jd_stime">Datum začátku</string>
+    <string name="jd_etime">Datum konce</string>
+    <string name="jd_parsing_alert_title">Informace</string>
+    <string name="jd_parsing_alert_msg">Prosím čekejte. Připravuji dotazník</string>
+    <string name="jd_please_alert_msg">Prosím čekejte…</string>
+
+        <string name="preferences_actions_title">When a barcode is found\u2026</string>
+    <string name="preferences_auto_focus_title">Use auto focus</string>
+    <string name="preferences_bulk_mode_summary">Scan and save many barcodes continuously</string>
+    <string name="preferences_bulk_mode_title">Bulk scan mode</string>
+    <string name="preferences_copy_to_clipboard_title">Copy to clipboard</string>
+    <string name="preferences_custom_product_search_summary" formatted="false">Substitutions: %s = contents, %f = format, %t = type</string>
+    <string name="preferences_custom_product_search_title">Custom search URL</string>
+    <string name="preferences_decode_1D_title">1D barcodes</string>
+    <string name="preferences_decode_Data_Matrix_title">Data Matrix</string>
+    <string name="preferences_decode_QR_title">QR Codes</string>
+    <string name="preferences_front_light_summary">Improves scanning in low light on some phones, but may cause glare. Does not work on all phones.</string>
+    <string name="preferences_front_light_title">Use front light</string>
+    <string name="preferences_general_title">General settings</string>
+    <string name="preferences_name">Nastavení</string>
+    <string name="preferences_play_beep_title">Beep</string>
+    <string name="preferences_remember_duplicates_summary">Store multiple scans of the same barcode in History</string>
+    <string name="preferences_remember_duplicates_title">Remember duplicates</string>
+    <string name="preferences_result_title">Result settings</string>
+    <string name="preferences_scanning_title">When scanning for barcodes, decode\u2026</string>
+    <string name="preferences_search_country">Search country</string>
+    <string name="preferences_supplemental_summary">Try to retrieve more information about the barcode contents</string>
+    <string name="preferences_supplemental_title">Retrieve more info</string>
+    <string name="preferences_vibrate_title">Vibrate</string>
+    <string name="result_address_book">Found contact info</string>
+    <string name="result_calendar">Found calendar event</string>
+    <string name="result_email_address">Found email address</string>
+    <string name="result_geo">Found geographic coordinates</string>
+    <string name="result_isbn">Found book</string>
+    <string name="result_product">Found product</string>
+    <string name="result_sms">Found SMS address</string>
+    <string name="result_tel">Found phone number</string>
+    <string name="result_text">Found plain text</string>
+    <string name="result_uri">Found URL</string>
+    <string name="result_wifi">Found WLAN Configuration</string>
+    <string name="sbc_name">Google Book Search</string>
+    <string name="share_name">Share via barcode</string>
+    <string name="title_about">Barcode Scanner v</string>
+    <string name="wifi_changing_network">Requesting connection to network\u2026</string>
+    <string name="wifi_ssid_label">Network Name</string>
+    <string name="wifi_type_label">Typ</string>
+    <string name="zxing_url">http://code.google.com/p/zxing</string>
+    <string name="pos_product_hint">Open navigation drawer</string>
+    <string name="pos_location_hint">Open navigation drawer</string>
+    <string name="pos_tgl_count">Počet</string>
+    <string name="pos_tgl_price">Cena</string>
+    <string name="pos_tgl_expiration">Expirace</string>
+    <string name="pos_tgl_note">Poznámka</string>
+    <string name="pos_tgl_picture">Obrázek</string>
+    <string name="app_name">Login with Checker!</string>
+
+    <string-array name="slide_menu_array">
+        <item>@string/job_list_menu_upload_complete_job</item>
+        <item>@string/job_list_menu_update_list</item>
+        <item>@string/job_list_exit</item>
+        <item>@string/settings_page_title</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+
+    <color name="darkness_value">#99000000</color>
+
+    <!-- login Screen -->
+
+    <string name="Questionaire_submitting">Probíhá odesílání průzkumu…</string>
+    <string name="questionnaire_gps_off_alert">Máte spuštěnou GPS, chcete ji vypnout?</string>
+    <string name="list_enable_calendar">Přidat zakázku do kalendáře</string>
+    <string name="questionnaire_open_survey_alert">Your Survey Allocation count is reached...</string>
+    <string name="questionnaire_gps_alert">Vaše GPS je vypnuta, chcete ji zapnout?</string>
+    <string name="questionnaire_exit_delete_alert">Jste si jistí, že chcete odejít a smazat všechny odpovědi?</string>
+    <string name="questionnaire_refresh_alert">Please download questionnaire first from job list page before accept any job.</string>
+    <string name="questionnaire_exit_delete_alert_yes">Ano</string>
+    <string name="questionnaire_exit_delete_alert_no">Ne</string>
+    <string name="questionnaire_alert_text_betweeeen_first">Číselná hodnota musí být mezi START a END</string>
+    <string name="login_page_title">Vítejte</string>
+    <string name="login_btn">Sign in</string>
+    <string name="login_heder">Vítejte</string>
+    <string name="login_username_hint">Uživatel</string>
+    <string name="login_password_hint">Heslo</string>
+    <string name="login_reset_btn">Smazat</string>
+    <string name="error_alert_title">Problém</string>
+    <string name="alert_btn_lbl_ok">OK</string>
+    <string name="login_username_alert">Špatné uživatelské jméno nebo heslo</string>
+    <string name="login_clientside_username_alert">Špatné uživatelské jméno</string>
+    <string name="login_invalid_systemurl_alert">Špatná systémová URL, prosím použijte celou systémovou URL (Např.: http://www.Checker-soft.com/demo)</string>
+    <string name="invalid_server_response_alert">Nedostupný server, prosím, kontaktujte operátora</string>
+    <string name="timeout_response_alert">Přerušení připojení, kontaktujte prosím operátora</string>
+    <string name="crash_toast_text">Ouha! Spadl jsem, ale programátorovi byla zaslána zpráva, aby mohl být problém opraven!</string>
+    <string name="crash_dialog_title">Checker spadl</string>
+    <string name="crash_dialog_text">Vyskytla se systémová chyba. Prosím pomoze nám ji opravit zasláním chybového hlášení. Vše co pro to musíte udělat je kliknout na "OK". Děkujeme.</string>
+    <string name="crash_dialog_comment_prompt">Vyskytla se systémová chyba. Prosím pomoze nám ji opravit zasláním chybového hlášení. Vše co pro to musíte udělat je kliknout na "OK" Můžete přidat Váš komentář k problému:</string>
+    <string name="crash_dialog_ok_toast"></string>
+        <string name="pos_product">Výrobek</string>
+    <string name="pos_count">Počet</string>
+    <string name="pos_location">Místo</string>
+    <string name="pos_price">Cena</string>
+    <string name="pos_expiration">Expirace</string>
+    <string name="pos_note">Poznámka</string>
+    <string name="pos_picture">Obrázek</string>
+    <string name="pos_enter_count">Vložit počet</string>
+    <string name="pos_subtract">Odečíst</string>
+    <string name="pos_add"> Přičíst </string>
+    <string name="pos_value">Hodnota</string>
+    <string name="pos_x"> X </string>
+    <string name="pos_equal"> = </string>
+    <string name="pos_total"> Celkem: </string>
+    <string name="pos_enter_price">Vložit cenu</string>
+    <string name="pos_average">Průměr: </string>
+    <string name="pos_error_product">Nemůžu najít výrobek!</string>
+    <string name="pos_intall_manager">Prosím, nainstalujte správce souborů.</string>
+    <string name="pos_not_attach">Nemohu přiložit soubor!</string>
+    <string name="pos_error_enter">Prosím vložte data!</string>
+    <string name="pos_error_enter_product_location">Prosím vzberte výrobek a místo!</string>
+    <string name="pos_preview">Náhled pokladního místa</string>
+    <string name="pos_enter_note">Vložit poznámku</string>
+    <string name="pos_selected_date">Vybrat datum</string>
+    <string name="pos_no_tabs">Záložky nejsou vidtelné!</string>
+    <string name="pos_select_product">Vybrat výrobek</string>
+    <string name="pos_select_location">Vybrat místo</string>
+    <string name="pos_error_report2"></string>
+    <string name="pos_backk">ZPĚT</string>
+    <string name="button_back">Back to joblist</string>
+    <string name="bookmark_picker_name">Bookmarks</string>
+    <string name="button_add_calendar">Přidat do kalendáře</string>
+    <string name="button_add_contact">Add contact</string>
+    <string name="button_book_search">Book Search</string>
+    <string name="button_cancel">Zrušit</string>
+    <string name="button_clipboard_empty">Clipboard empty</string>
+    <string name="button_custom_product_search">Custom search</string>
+    <string name="button_dial">Dial number</string>
+    <string name="button_done">Hotovo</string>
+    <string name="button_email">Send email</string>
+    <string name="button_get_directions">Get directions</string>
+    <string name="button_google_shopper">Google Shopper</string>
+    <string name="button_mms">Send MMS</string>
+    <string name="button_ok">OK</string>
+    <string name="button_open_browser">Open browser</string>
+    <string name="button_product_search">Product Search</string>
+    <string name="button_search_book_contents">Search contents</string>
+    <string name="button_share_app">Aplikace</string>
+    <string name="button_share_bookmark">Bookmark</string>
+    <string name="button_share_by_email">Share via email</string>
+    <string name="button_share_by_sms">Share via SMS</string>
+    <string name="button_share_clipboard">Clipboard</string>
+    <string name="button_share_contact">Contact</string>
+    <string name="button_show_map">Show map</string>
+    <string name="button_sms">Send SMS</string>
+    <string name="button_web_search">Web search</string>
+    <string name="button_wifi">Connect to Network</string>
+    <string name="contents_contact">Contact info</string>
+    <string name="contents_email">Email address</string>
+    <string name="contents_location">Geographic coordinates</string>
+    <string name="contents_phone">Phone number</string>
+    <string name="contents_sms">SMS address</string>
+    <string name="contents_text">Plain text</string>
+    <string name="history_clear_text">Clear history</string>
+    <string name="history_clear_one_history_text">Smazat</string>
+    <string name="history_email_title">Barcode Scanner history</string>
+    <string name="history_empty">Empty</string>
+    <string name="history_empty_detail">No barcode scans have been recorded</string>
+    <string name="history_send">Send history</string>
+    <string name="history_title">History</string>
+    <string name="menu_about">About</string>
+    <string name="menu_encode_mecard">Use MECARD</string>
+    <string name="menu_encode_vcard">Use vCard</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_history">History</string>
+    <string name="menu_settings">Nastavení</string>
+    <string name="menu_share">Share</string>
+    <string name="msg_about">The official Android app of the open source ZXing barcode project.</string>
+    <string name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved</string>
+    <string name="msg_camera_framework_bug">Omlouváme se, fotoapát Androidu má problém. Zkuste ho restartovat.</string>
+    <string name="msg_default_format">Format</string>
+    <string name="msg_default_meta">Metadata</string>
+    <string name="msg_default_mms_subject">Hi</string>
+    <string name="msg_default_status">Umístěte čárový kód do obdélníkového hledáčku pro jeho naskenování</string>
+    <string name="msg_default_time">Hodin:</string>
+    <string name="msg_default_type">Typ</string>
+    <string name="msg_encode_contents_failed">Nemohu dekódovat čárový kód z poskytnutých dat</string>
+    <string name="msg_google_books">Google Books</string>
+    <string name="msg_google_product">Google Product Search</string>
+    <string name="msg_google_shopper_missing">Google Shopper is not installed</string>
+    <string name="msg_install_google_shopper">Google Shopper combines barcode scanning with online and local prices, reviews and more without opening the browser. Would you like to try it?</string>
+    <string name="msg_intent_failed">Sorry, the requested application could not be launched. The barcode contents may be invalid.</string>
+    <string name="msg_redirect">Redirect</string>
+    <string name="msg_sbc_book_not_searchable">Sorry, this book is not searchable.</string>
+    <string name="msg_sbc_failed">Sorry, the search encountered a problem.</string>
+    <string name="msg_sbc_no_page_returned">No page returned</string>
+    <string name="msg_sbc_page">Page</string>
+    <string name="msg_sbc_searching_book">Searching book\u2026</string>
+    <string name="msg_sbc_snippet_unavailable">Snippet not available</string>
+    <string name="msg_sbc_unknown_page">Unknown page</string>
+    <string name="msg_share_explanation">You can share data by displaying a barcode on your screen and scanning it with another phone.</string>
+    <string name="msg_share_subject_line">Here are the contents of a barcode I scanned</string>
+    <string name="msg_share_text">Or type some text and press Enter</string>
+    <string name="msg_sure">Are you sure?</string>
+    <string name="msg_unmount_usb">Sorry, the SD card is not accessible.</string>
+        <string name="could_not_retrieve">Nemohu přijmout informace o průzkumu…</string>
+    <string name="questionnaire_mock_gps_alert">Máte zapnutý MOCK GPS modul. Abyste mohli pokračovat, prosím vzpněte ho: Settings->Application->Development->Allow mock locations ujistěte se, že tato volba není zaškrtlá. Chcete otevřít obrazovku nastavení?</string>
+    <string name="questionnaire_min_zero_max">Zbývá #MAX# znaků</string>
+    <string name="questionnaire_min_max">Minimálně #MIN# znaků</string>
+    <string name="questionnaire_min_max_zero">Zbývá #MAX# znaků. Minimálně #MIN# znaků.</string>
+    <string name="questionnaire_error_retrieving">Chyba při načítání uložených dat</string>
+    <string name="questionnaire_sign">Přihlašte se zde</string>
+    <string name="error_order_not_assigned">Poptávka vám není přidělena!</string>
+    <string name="error_opening_android_gallery">Chyba při použití Android galerie, použijte prosím běžnou galerii, omlouváme se za nepříjemnost!</string>
+    <string name="sortByDate">Tříděno dle data</string>
+    <string name="sortByName">Tříděno dle jména</string>
+    <string name="button_show_file">Ukaž soubor</string>
+    <string name="questionnaire_select_file_alert">Přejete si vybrat soubor?</string>
+    <string name="s_branch_sorting">Třídění poboček</string>
+    <string name="s_alphabetical">Abecedně</string>
+    <string name="s_distance">Vzdálenost</string>
+    <string name="s_image_cropping">Oříznutí obrázku</string>
+    <string name="s_off">Vypnout</string>
+    <string name="s_on">Zapnout</string>
+    <string name="attach_err_job_list">Přílohy stále nebyly odeslány. Ťukněte pro detaily.</string>
+    <string name="file_not_found">Soubor nenalezen!</string>
+    <string name="file_delete_alert">Přejete si smazat tento soubor?</string>
+    <string name="questionnaire_date_valid_error">Neplatný formát data a času!</string>
+    <string name="sNonRefundableServicePayment">Nevratná platba za službu</string>
+    <string name="sCriticismPayment">Srážková platba</string>
+    <string name="sBonusPayment">Bonusová platba</string>
+    <string name="purchase_details">Detaily nákupu</string>
+    <string name="purchase_invoice_number">Číslo faktury nákupu</string>
+    <string name="purchase_payment">Platba za nákup</string>
+    <string name="purchase_description">Popis nákupu</string>
+    <string name="service_details">Detaily služby</string>
+    <string name="service_invoice_number">Číslo faktury služby</string>
+    <string name="service_payment">Platba za službu</string>
+    <string name="service_description">Popis služby</string>
+    <string name="transportation_details">Detaily cesty</string>
+    <string name="transportation_description">Popis cesty</string>
+    <string name="transportation_payment">Platba za cestu</string>
+    <string name="jd_purchasedesc">Popis nákupu</string>
+    <string name="jd_can_purchase">Provést nákup</string>
+    <string name="purchase_numeric_error">Je vyžadováno číslo</string>
+    <string name="purchase_simple_error">Vyžadována jsou písmena a čísla</string>
+    <string name="purchase_exceeds_error">Hodnota přesahuje hranici</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="time_set">Nastavit čas</string>
+    <string name="cancel">Zrušit</string>
+    <string name="time">Setați ora </string>
+    <string name="job_list_tab_syncing">Synchronizuji</string>
+    <string name="start_download_alt">Stáhnout zakázky v alternativních jazycích</string>
+    <string name="start_download_inprogress">Download In-progress jobs</string>
+    <string name="start_upload_inprogress">Upload In-progress jobs</string>
+    <string name="start_download">Stáhnout zakázku</string>
+    <string name="start_upload">Odeslat zakázku</string>
+    <string name="start_recording">Chcete začít nahrávat?</string>
+    <string name="stop_recording">Chcete ukončit nahrávání?</string>
+    <string name="calculator_heading">Checker kalkulačka</string>
+    <string name="job_list_err_dialog">Chybové hlášení:</string>
+    <string name="job_list_err_dialog_branch">Chybové hlášení: Telefon nepodporuje \"101\" podmínku zobrazení</string>
+    <string name="_error_display_condition">Zobrazená podmínka je chybná, kontaktujte admina</string>
+    <string name="err_missing_images">Obrázky výše chybí. Obnovte seznam zakázek.</string>
+    <string name="press_back_again">Stiskněte dvakrát zpět pro ukončení</string>
+    <string name="aaparsing_complete">Dosažen limit [[NAME OF QUOTA]]! Udělali jste všechny #.</string>
+    <string name="aasaving_assigned_jobs_surveys_job">Ukládám přidělené zakázky a průzkumy do databáze…</string>
+    <string name="aauploading_job">Nahrávám zakázku --------, 1/1</string>
+    <string name="aauploading_file">Odesílám soubor:</string>
+    <string name="aadownloading_Assigned_jobs">Stahuji přidělené zakázky</string>
+    <string name="aadownloading_Assigned_surveys">Stahuji přidělené průzkumy</string>
+    <string name="aaparsing_surveys">Kontroluji průzkum</string>
+    <string name="aaparsing_questionnaire">Analyuji dotazník</string>
+    <string name="aasaving_db_questionnaire">Ukládám dotazník.</string>
+    <string name="aaquestionnaires_downloading_saving">Probíhá stahování a ukládání dotazníků.</string>
+    <string name="aaparsing_assigned_surveys">Kontroluji přidělené průzkumy</string>
+    <string name="aaparsing_assigned_jobs">Kontroluji přidělené zakázky.</string>
+    <string name="aaupdating_job">Nahrávám zakázku </string>
+    <string name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string name="ptr_release_to_refresh">Release to refresh</string>
+    <string name="ptr_refreshing">Refreshing…</string>
+    <string name="ptr_last_updated">Aktualizováno:</string>
+    <string name="prepare_screen_dialogue">Shromažďuji informace pro tento dotazník</string>
+    <string name="job_list_menu_update_list">Zobrazit zakázky na mapě</string>
+    <string name="job_list_menu_upload_complete_job">Filtrovat zakázky</string>
+    <string name="job_list_tab_sync">Synchronizuji</string>
+    <string name="job_list_tab_assigned">Přidělený</string>
+    <string name="job_list_tab_scheduled">Plánovaný</string>
+    <string name="job_list_tab_in_progress">Rozpracovaný</string>
+    <string name="job_list_tab_completed">Dokončený</string>
+    <string name="job_list_tab_sync_u"><b><u>Synchronizovat</u></b></string>
+    <string name="job_list_tab_assigned_u"><b><u>Přidělený</u></b></string>
+    <string name="job_list_tab_scheduled_u"><b><u>Plánovaný</u></b></string>
+    <string name="job_list_tab_in_progress_u"><b><u>Rozpracovaný</u></b></string>
+    <string name="job_list_tab_completed_u"><b><u>Dokončený</u></b></string>
+    <string name="survey_quota_delete_message">Dosažen limit #break#Quota[QNAME]! Udělali jste všechny ##. Mažu rozhovor.</string>
+    <string name="survey_quota_upload_message">Dosažen limit #break#Quota[QNAME]! Udělali jste všechny ##.</string>
+    <string name="alert_working">Pracuji</string>
+    <string name="alert_switching">Přepínací panely</string>
+    <string name="alert_saving">Ukládám…</string>
+    <string name="alert_working_msg">Systém je přetížen, prosím, zkuste to později</string>
+    <string name="survey_quota_alert_message">Dosažen limit!</string>
+    <string name="disable_proxy">Smazat</string>
+        <string name="amp_16">&amp; $[16,</string>
+    <string name="it_is_mandatory_to_attach_a_file">Přiložení souboru je povinné</string>
+    <string name="no_answer_chosen">Nevybrána žádná odpověď!</string>
+    <string name="save_and_download">Uložit a stáhnout</string>
+    <string name="out_of_bound"> is out of bounds.</string>
+    <string name="preffered_questionnaire_language">Můžete si vybrat vámi preferovaný jazyk dotazníku</string>
+    <string name="google_services_not_avaliable">Google Play Services nejsou k dispozici</string>
+    <string name="downloading_system_languages">Stahuji systémové jazyky</string>
+    <string name="no_alternative_or_server_side">Žádný alternativní jazyk na straně serveru!</string>
+    <string name="update_system_languages">Aktualizuji systémové jazyky</string>
+    <string name="synch_is_already_in_progress">A synch is already in progress!</string>
+    <string name="downloading_alternative_jobs">Stahují alternativní zakázky</string>
+    <string name="assigning_alternate_job">Přidělení náhradních zakázek</string>
+    <string name="order_assigned_refreshing_job_list">Order Assigned refreshing job list!</string>
+    <string name="unable_to_assign_this_order">Nelze přidělit tuto objednávku, prosím kontaktujte administrátora</string>
+    <string name="unable_to_find_alternative_job"> Nenelazena žádná náhradní zakázka</string>
+    <string name="do_you_Want_relace_order">Chcete přemístit objednávku do zvolené pobočky?</string>
+    <string name="s_switch_filter_date">Filtrovat podle data</string>
+    <string name="s_switch_branch_name">Enable Branch Full Name</string>
+    <string name="take_another_photo">Chcete vyfotit další fotku?</string>
+    <string name="uploading_jobs_of">Nahrávám #NUMBER# zakázek z #TOTAL#</string>
+    <string name="uploading_images_of">Nahrávám #NUMBER# obrázků z #TOTAL#</string>
+    <string name="upload">Nahrát</string>
+    <string name="s_switch_time_stamp">Přidat časovou značku</string>
+    <string name="s_switch_alternate_jobs">Náhradní zakázky:</string>
+    <string name="settings_image_resizing">Změna velikosti obrázku</string>
+    <string name="settings_image_original">Originální velikost</string>
+    <string name="settings_image_medium">Střední velikost</string>
+    <string name="settings_image_small">Malá velikost</string>
+    <string name="settings_image_ask">Zeptat se</string>
+    <string name="alert_issue_in_loop">Loop structure seems to have error, please contact Admin!</string>
+    
+    <string name="memory_info">Informace o paměti</string>
+    <string name="not_enough_space_ram">Málo paměti (RAM) pro běh Checkeru!</string>
+    <string name="not_enough_space_internal_memory">Málo paměti (RAM) pro běh Checker!.</string>
+    <string name="please_enter_comment_for_bug">Please enter comment for this bug:</string>
+    <string name="android_closed_app_forcefully">Android closed your app forcefully shall we start getting your data back?</string>
+    <string name="upload_following_attached_files">Upload following attached files</string>
+    <string name="file_saved_properly_at">Soubor byl v pořádku uložen do:</string>
+    <string name="unable_to_save_file_at">Soubor nemohl být uložen do:</string>
+    <string name="crashing_app_ourself">Crashing app ourself</string>
+    <string name="unable_to_find_loop_data">Data ve smyčce nenalezena</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+</resources>

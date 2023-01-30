@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <!-- words translated but no showing in app -->
+
+    <string translatable="false" name="bookmarks">Bookmarks</string>
+    <string translatable="false" name="close">Затваряне</string>
+    <string translatable="false" name="alreadyPassed">Сертификатът вече е взет.</string>
+    <string translatable="false" name="alreadyBlocked">Сертификатът е блокиран.</string>
+    <string translatable="false" name="remainin_msg">с онлайн версии, поскольку задание в онлайн стартует с более позднего времени. Важно: Данное действие заменит введенные данные только для текущих заданий. </string>
+    <string translatable="false" name="setName">Въпросник </string>
+    <string translatable="false" name="setStatus">Статус </string>
+    <string translatable="false" name="Attemts">Брой взимания: </string>
+    <string translatable="false" name="new_surveyor_sign_up">New registrar Register</string>
+    <string translatable="false" name="email">Email</string>
+    <string translatable="false" name="phone_number">Phone number</string>
+    <string translatable="false" name="tell_us_about_yourself">Tell us about you</string>
+    <string translatable="false" name="do_you_want_to_be_a_be_there_surveyor">Do you want to be a Checker Surveyor?</string>
+    <string translatable="false" name="s_item_column_0_line_1441_file_88">Already Applied</string>
+    <string translatable="false" name="s_item_column_0_line_1579_file_88">Брой</string>
+    <string translatable="false" name="login_signup_text">Sign up</string>
+    <string translatable="false" name="s_switch_time_stamp">Add Time Stamp</string>
+    <string translatable="false" name="not_enough_space_internal_memory">Няма достатъчно място за продължаване (вътрешна памет), моля освободете място, за да можете да продължите.</string>
+    <string translatable="false" name="please_enter_comment_for_bug">Please enter comment for this bug:</string>
+    <string translatable="false" name="android_closed_app_forcefully">Android closed your app forcefully shall we start getting your data back?</string>
+    <string translatable="false" name="upload_following_attached_files">Качване на следните прикачени файлове</string>
+    <string translatable="false" name="crashing_app_ourself">Crashing app ourself</string>
+    <string translatable="false" name="out_of_bound"> is out of bounds.</string>
+    <string translatable="false" name="google_services_not_avaliable">Google Play Services недостъпен</string>
+    <string translatable="false" name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string translatable="false" name="ptr_release_to_refresh">Release to refresh</string>
+    <string translatable="false" name="ptr_refreshing">Refreshing…</string>
+    <string translatable="false" name="disable_proxy">Reset</string>
+    <string translatable="false" name="pos_product">Продукт</string>
+    <string translatable="false" name="pos_count">Брой</string>
+    <string translatable="false" name="pos_location">Локация</string>
+    <string translatable="false" name="pos_price">Цена</string>
+    <string translatable="false" name="pos_expiration">Сро на годност</string>
+    <string translatable="false" name="pos_note">Бележка</string>
+    <string translatable="false" name="pos_picture">Снимка</string>
+    <string translatable="false" name="pos_enter_count">Въвеждане на брой</string>
+    <string translatable="false" name="pos_subtract">Изваждане</string>
+    <string translatable="false" name="pos_add"> Събиране </string>
+    <string translatable="false" name="pos_value">Стойност</string>
+    <string translatable="false" name="pos_x"> X </string>
+    <string translatable="false" name="pos_equal"> = </string>
+    <string translatable="false" name="pos_total"> Общо: </string>
+    <string translatable="false" name="pos_enter_price">Въвеждане цена </string>
+    <string translatable="false" name="pos_average">Средна стойност: </string>
+    <string translatable="false" name="pos_error_product">Продуктът не е намерен</string>
+    <string translatable="false" name="pos_intall_manager">Моля инсталирайте File Manager.</string>
+    <string translatable="false" name="pos_not_attach">Файлът не можа да се прикачи</string>
+    <string translatable="false" name="pos_error_enter">Моля въведете данни!</string>
+    <string translatable="false" name="pos_error_enter_product_location">Моля изберете Продукт и Локация!</string>
+    <string translatable="false" name="pos_preview">Преглед ПОС</string>
+    <string translatable="false" name="pos_enter_note">Въвеждане Бележка</string>
+    <string translatable="false" name="pos_selected_date">Избиране Дата</string>
+    <string translatable="false" name="pos_no_tabs">Няма видни табове!</string>
+    <string translatable="false" name="pos_select_product">Избиране Продукт</string>
+    <string translatable="false" name="pos_select_location">Избиране Локация</string>
+    <string translatable="false" name="pos_error_report">Въведете валиден брой &lt; </string>
+    <string translatable="false" name="pos_error_report2"></string>
+    <string translatable="false" name="pos_backk">Обратно</string>
+    <string translatable="false" name="button_add_contact">Add contact</string>
+    <string translatable="false" name="button_book_search">Book Search</string>
+    <string translatable="false" name="button_clipboard_empty">Clipboard empty</string>
+    <string translatable="false" name="button_custom_product_search">Custom search</string>
+    <string translatable="false" name="button_dial">Dial number</string>
+    <string translatable="false" name="button_email">Send email</string>
+    <string translatable="false" name="button_get_directions">Get directions</string>
+    <string translatable="false" name="button_google_shopper">Google Shopper</string>
+    <string translatable="false" name="button_mms">Send MMS</string>
+    <string translatable="false" name="button_open_browser">Open browser</string>
+    <string translatable="false" name="button_search_book_contents">Search contents</string>
+    <string translatable="false" name="button_share_app">Application</string>
+    <string translatable="false" name="button_share_bookmark">Bookmark</string>
+    <string translatable="false" name="button_share_by_email">Share via email</string>
+    <string translatable="false" name="button_share_by_sms">Share via SMS</string>
+    <string translatable="false" name="button_share_clipboard">Clipboard</string>
+    <string translatable="false" name="button_share_contact">Contact</string>
+    <string translatable="false" name="button_show_map">Show map</string>
+    <string translatable="false" name="button_sms">Send SMS</string>
+    <string translatable="false" name="button_web_search">Web search</string>
+    <string translatable="false" name="button_wifi">Connect to Network</string>
+    <string translatable="false" name="contents_contact">Contact info</string>
+    <string translatable="false" name="contents_email">Email address</string>
+    <string translatable="false" name="contents_location">Geographic coordinates</string>
+    <string translatable="false" name="contents_phone">Phone number</string>
+    <string translatable="false" name="contents_sms">SMS address</string>
+    <string translatable="false" name="contents_text">Plain text</string>
+    <string translatable="false" name="history_clear_text">Clear history</string>
+    <string translatable="false" name="history_email_title">Barcode Scanner history</string>
+    <string translatable="false" name="history_empty">Empty</string>
+    <string translatable="false" name="history_empty_detail">No barcode scans have been recorded</string>
+    <string translatable="false" name="history_send">Send history</string>
+    <string translatable="false" name="history_title">History</string>
+    <string translatable="false" name="menu_about">About</string>
+    <string translatable="false" name="menu_encode_mecard">Use MECARD</string>
+    <string translatable="false" name="menu_encode_vcard">Use vCard</string>
+    <string translatable="false" name="menu_help">Help</string>
+    <string translatable="false" name="menu_history">History</string>
+    <string translatable="false" name="menu_share">Share</string>
+    <string translatable="false" name="msg_about">The official Android app of the open source ZXing barcode project.</string>
+    <string translatable="false" name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved</string>
+    <string translatable="false" name="msg_default_format">Format</string>
+    <string translatable="false" name="msg_default_meta">Metadata</string>
+    <string translatable="false" name="msg_default_mms_subject">Hi</string>
+    <string translatable="false" name="msg_google_books">Google Books</string>
+    <string translatable="false" name="msg_google_product">Google Product Search</string>
+    <string translatable="false" name="msg_google_shopper_missing">Google Shopper is not installed</string>
+    <string translatable="false" name="msg_install_google_shopper">Google Shopper combines barcode scanning with online and local prices, reviews and more without opening the browser. Would you like to try it?</string>
+    <string translatable="false" name="msg_intent_failed">Sorry, the requested application could not be launched. The barcode contents may be invalid.</string>
+    <string translatable="false" name="msg_redirect">Redirect</string>
+    <string translatable="false" name="msg_sbc_book_not_searchable">Sorry, this book is not searchable.</string>
+    <string translatable="false" name="msg_sbc_failed">Sorry, the search encountered a problem.</string>
+    <string translatable="false" name="msg_sbc_no_page_returned">No page returned</string>
+    <string translatable="false" name="msg_sbc_page">Page</string>
+    <string translatable="false" name="msg_sbc_searching_book">Searching book\u2026</string>
+    <string translatable="false" name="msg_sbc_snippet_unavailable">Snippet not available</string>
+    <string translatable="false" name="msg_sbc_unknown_page">Unknown page</string>
+    <string translatable="false" name="msg_share_explanation">You can share data by displaying a barcode on your screen and scanning it with another phone.</string>
+    <string translatable="false" name="msg_share_subject_line">Here are the contents of a barcode I scanned</string>
+    <string translatable="false" name="msg_share_text">Or type some text and press Enter</string>
+    <string translatable="false" name="msg_sure">Are you sure?</string>
+    <string translatable="false" name="msg_unmount_usb">Sorry, the SD card is not accessible.</string>
+    <string translatable="false" name="preferences_actions_title">When a barcode is found\u2026</string>
+    <string translatable="false" name="preferences_auto_focus_title">Use auto focus</string>
+    <string translatable="false" name="preferences_bulk_mode_summary">Scan and save many barcodes continuously</string>
+    <string translatable="false" name="preferences_bulk_mode_title">Bulk scan mode</string>
+    <string translatable="false" name="preferences_copy_to_clipboard_title">Copy to clipboard</string>
+    <string translatable="false" name="preferences_custom_product_search_summary" formatted="false">Substitutions: %s = contents, %f = format, %t = type</string>
+    <string translatable="false" name="preferences_custom_product_search_title">Custom search URL</string>
+    <string translatable="false" name="preferences_decode_1D_title">1D barcodes</string>
+    <string translatable="false" name="preferences_decode_Data_Matrix_title">Data Matrix</string>
+    <string translatable="false" name="preferences_decode_QR_title">QR Codes</string>
+    <string translatable="false" name="preferences_front_light_summary">Improves scanning in low light on some phones, but may cause glare. Does not work on all phones.</string>
+    <string translatable="false" name="preferences_front_light_title">Use front light</string>
+    <string translatable="false" name="preferences_general_title">General settings</string>
+    <string translatable="false" name="preferences_play_beep_title">Beep</string>
+    <string translatable="false" name="preferences_remember_duplicates_summary">Store multiple scans of the same barcode in History</string>
+    <string translatable="false" name="preferences_remember_duplicates_title">Remember duplicates</string>
+    <string translatable="false" name="preferences_result_title">Result settings</string>
+    <string translatable="false" name="preferences_scanning_title">When scanning for barcodes, decode\u2026</string>
+    <string translatable="false" name="preferences_search_country">Search country</string>
+    <string translatable="false" name="preferences_supplemental_summary">Try to retrieve more information about the barcode contents</string>
+    <string translatable="false" name="preferences_supplemental_title">Retrieve more info</string>
+    <string translatable="false" name="preferences_vibrate_title">Vibrate</string>
+    <string translatable="false" name="result_address_book">Found contact info</string>
+    <string translatable="false" name="result_calendar">Found calendar event</string>
+    <string translatable="false" name="result_email_address">Found email address</string>
+    <string translatable="false" name="result_geo">Found geographic coordinates</string>
+    <string translatable="false" name="result_isbn">Found book</string>
+    <string translatable="false" name="result_product">Found product</string>
+    <string translatable="false" name="result_sms">Found SMS address</string>
+    <string translatable="false" name="result_tel">Found phone number</string>
+    <string translatable="false" name="result_text">Found plain text</string>
+    <string translatable="false" name="result_uri">Found URL</string>
+    <string translatable="false" name="result_wifi">Found WLAN Configuration</string>
+    <string translatable="false" name="sbc_name">Google Book Search</string>
+    <string translatable="false" name="share_name">Share via barcode</string>
+    <string translatable="false" name="title_about">Barcode Scanner v</string>
+    <string translatable="false" name="wifi_changing_network">Requesting connection to network\u2026</string>
+    <string translatable="false" name="wifi_ssid_label">Network Name</string>
+    <string translatable="false" name="pos_product_hint">Open navigation drawer</string>
+    <string translatable="false" name="pos_location_hint">Open navigation drawer</string>
+    <string translatable="false" name="pos_tgl_count">Брой</string>
+    <string translatable="false" name="pos_tgl_price">Цена</string>
+    <string translatable="false" name="pos_tgl_expiration">Сро на годност</string>
+    <string translatable="false" name="pos_tgl_note">Бележка</string>
+    <string translatable="false" name="pos_tgl_picture">Снимка</string>
+    <string translatable="false" name="app_name">Login with us!</string>
+    <string translatable="false" name="drawer_open">Open navigation drawer</string>
+    <string translatable="false" name="drawer_close">Close navigation drawer</string>
+    <string translatable="false" name="action_websearch">Web search</string>
+    <string translatable="false" name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string translatable="false" name="app_title">VOC</string>
+    <string translatable="false" name="questionnaire_open_survey_alert">Your Survey Allocation count is reached...</string>
+    <string translatable="false" name="questionnaire_refresh_alert">Please download questionnaire first from job list page before accept any job.</string>
+    <!-- SurveyDetail Screen -->
+    <string translatable="false" name="jd_survey_name">Име на въпросник</string>
+    <string translatable="false" name="jd_survey_allocations">Разпределения</string>
+    <string translatable="false" name="jd_survey_quotas">Квоти</string>
+    <string translatable="false" name="alert_sync_jobs_again">App needs to synch the system sent #LOCAL# number of jobs and server accpeted #SERVER# number of jobs!</string>
+    <string translatable="false" name="before_accept_alert">Please download questionnaire first from job list page before accept any job</string>
+    <string translatable="false" name="smalimgWarn">Тази опция може да промени качеството на снимките. Сигурни ли сте, че искате да избере тази опция?</string>
+    <string translatable="false" name="changeDate">Смяна дата</string>
+    <string translatable="false" name="smallimgTitle">Малък размер (може да промени качестовото на снимката)</string>
+    <string translatable="false" name="savingImage">Запазване снимка...</string>
+    <string translatable="false" name="ufinsheddwnloding">В ход сваляне на неприключени задачи...</string>
+    <string translatable="false" name="noJobmsg">Няма свободна задача в момента. Моля опитайте отново по-късно. Благодарим!</string>
+    <string translatable="false" name="nocertMsg">Грешка или ненамерен сертификат</string>
+    <string translatable="false" name="qoutafullMsg">Грешка при качване на файлове, запълнено пространство за съхранение. Моля свържете се с администратор за качване на приложения</string>
+    <string translatable="false" name="alreadyExistingJob">Задачата вече съществува в приложението</string>
+    <string translatable="false" name="selectDate">Моля изберете дата</string>
+    <string translatable="false" name="errorParsingOrder">Грешка при анализ на поръчка</string>
+    <string translatable="false" name="serverfilesMsg">Файлове вече качени на сървъра</string>
+    <string translatable="false" name="serverfilesTitle">Качени файлове на сървъра</string>
+    <string translatable="false" name="removingMsg">Премахване...</string>
+    <string translatable="false" name="removed">Премахнато</string>
+    <string translatable="false" name="errorRemoving">Грешка при премахване или няма интернет връзка!</string>
+    <string translatable="false" name="start_checkertificates">Сертификати</string>
+    <string translatable="false" name="attached_certificate_msg">Изпълнение на приложените сертификати?</string>
+    <string translatable="false" name="checkertificatesmsg">Зареждане Сертификати</string>
+    <string translatable="false" name="strtcheckertificatesmsg">Започване на сертификат?</string>
+    <string translatable="false" name="downloadingCheckrtificate">Сваляне данни за сертификат</string>
+    <string translatable="false" name="retakecheckertificatesmsg">Взимане на сертификата отново?</string>
+    <string translatable="false" name="replace_inprog_job">Сигурни ли сте</string>
+    <string translatable="false" name="grade">Оценка: </string>
+    <string translatable="false" name="reqGrade">Необходима оценка: </string>
+    <string translatable="false" name="lastDateTaken">Последна взета дата: </string>
+    <string translatable="false" name="user_name">Потребителско име</string>
+    <string translatable="false" name="password">Парола</string>
+    <string translatable="false" name="address">Адрес</string>
+    <string translatable="false" name="setting">Излизане от списък със задачи</string>
+    <string translatable="false" name="filter_jobs">Филтър задачи</string>
+    <string translatable="false" name="see_jobs_in_map">Преглед на задачите на карта</string>
+    <string translatable="false" name="save_download">Запазване и сваляне</string>
+    <string translatable="false" name="these_files_are_currently_attached_to_the_job">Тези файлове в момента са прикачени към задачата:</string>
+    <string translatable="false" name="image_resizing">Промяне размери снимка</string>
+    <string translatable="false" name="image_resizing_original">Първоначален</string>
+    <string translatable="false" name="image_resizing_medium">Среден размер</string>
+    <string translatable="false" name="image_resizing_small">Малък размер</string>
+    <string translatable="false" name="branch_sorting">Сортиране на локации</string>
+    <string translatable="false" name="distance">Разстояние.</string>
+    <string translatable="false" name="alphabetical">По азбучен ред.</string>
+    <string translatable="false" name="geo_tracker_settings">Настройки Гео локация</string>
+    <string translatable="false" name="find_jobs_near_me">Намиране на задачи близо до мен</string>
+    <string translatable="false" name="image_cropping">Рязане на снимка</string>
+    <string translatable="false" name="on">Включено.</string>
+    <string translatable="false" name="off">Изключено.</string>
+    <string translatable="false" name="job_settings">Настройки задачи</string>
+    <string translatable="false" name="alternate_jobs">Други задачи:</string>
+    <string translatable="false" name="enable_branch_full_name">Разрешаване пълно име локация</string>
+    <string translatable="false" name="filter_by_date">Филтър по дата</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_190">Нови възможности за задачи!</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_190">Нова възможност за задача!</string>
+    <string translatable="false" name="s_item_column_0_line_206_file_190">В ход търсене на задачи в близост до теб!</string>
+    <string translatable="false" name="s_item_column_0_line_18291_file_88">Вече сте на този въпрос</string>
+    <string translatable="false" name="s_item_column_0_line_804_file_88">Приложено</string>
+    <string translatable="false" name="s_item_column_0_line_838_file_88">Самовъзложено</string>
+    <string translatable="false" name="s_item_column_0_line_839_file_88">Благодарим Ви за интереса към тази поръчка. Моля натиснете Сваляне на задачи, за да прибавите тази в списъка с възложени задачи.</string>
+    <string translatable="false" name="s_item_column_0_line_859_file_88">Грешка при кандидатстване или липса на интернет връзка!</string>
+    <string translatable="false" name="s_item_column_0_line_893_file_88">Сваляне сега</string>
+    <string translatable="false" name="s_item_column_0_line_923_file_88">Сваляне по-късно</string>
+    <string translatable="false" name="s_item_column_0_line_994_file_88">Коментар апликация</string>
+    <string translatable="false" name="s_item_column_0_line_1549_file_88">Зареждане други дати...</string>
+    <string translatable="false" name="s_item_column_0_line_1594_file_88">Не е достъпно</string>
+    <string translatable="false" name="s_item_column_0_line_1597_file_88">Моля изберете дата</string>
+    <string translatable="false" name="s_item_column_0_line_174_file_210"> В ОЧАКВАНЕ </string>
+    <string translatable="false" name="s_item_column_0_line_184_file_210"> Одобрено </string>
+    <string translatable="false" name="s_item_column_0_line_194_file_210"> Изплатено </string>
+    <string translatable="false" name="s_item_column_0_line_199_file_210"> Показване повече детайли</string>
+    <string translatable="false" name="s_item_column_0_line_202_file_210">Въпросник No </string>
+    <string translatable="false" name="s_item_column_0_line_344_file_210">Да</string>
+    <string translatable="false" name="s_item_column_0_line_346_file_210">Не</string>
+    <string translatable="false" name="s_item_column_0_line_145_file_223">Изтриване апликация</string>
+    <string translatable="false" name="s_item_column_0_line_647_file_27">Настройки задачи</string>
+    <string translatable="false" name="s_item_column_0_line_774_file_27">Запазване</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_37">Име клиент</string>
+    <string translatable="false" name="s_item_column_0_line_94_file_37">Тип плащане</string>
+    <string translatable="false" name="s_item_column_0_line_120_file_37">Прибавяне: </string>
+    <string translatable="false" name="s_item_column_0_line_149_file_37">Стойност: </string>
+    <string translatable="false" name="s_item_column_0_line_176_file_37">Номер фискален бон:</string>
+    <string translatable="false" name="s_item_column_0_line_205_file_37">Одобрено:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_37">Изплатено:</string>
+    <string translatable="false" name="s_item_column_0_line_263_file_37">Код локация:</string>
+    <string translatable="false" name="s_item_column_0_line_292_file_37">Име локация</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_37">Град</string>
+    <string translatable="false" name="s_item_column_0_line_350_file_37">Регион</string>
+    <string translatable="false" name="s_item_column_0_line_379_file_37">Адрес:</string>
+    <string translatable="false" name="s_item_column_0_line_408_file_37">Проект:</string>
+    <string translatable="false" name="s_item_column_0_line_436_file_37">Описание:</string>
+    <string translatable="false" name="s_item_column_0_line_465_file_37">ID поръчка:</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_44">Дял от стелажа</string>
+    <string translatable="false" name="s_item_column_0_line_581_file_44">Снимане</string>
+    <string translatable="false" name="s_item_column_0_line_852_file_44">Заснемане</string>
+    <string translatable="false" name="s_item_column_0_line_59_file_52">Карта</string>
+    <string translatable="false" name="s_item_column_0_line_71_file_52">Списък</string>
+    <string translatable="false" name="s_item_column_0_line_183_file_52">Прилагане на избраното</string>
+    <string translatable="false" name="s_item_column_0_line_214_file_52">Дати:</string>
+    <string translatable="false" name="s_item_column_0_line_246_file_52">Днес</string>
+    <string translatable="false" name="s_item_column_0_line_270_file_52">Следващи 30 дни</string>
+    <string translatable="false" name="s_item_column_0_line_295_file_52">По задание</string>
+    <string translatable="false" name="s_item_column_0_line_337_file_52">Клиент</string>
+    <string translatable="false" name="s_item_column_0_line_361_file_52">Регион</string>
+    <string translatable="false" name="s_item_column_0_line_415_file_52">Изчистване</string>
+    <string translatable="false" name="s_item_column_0_line_429_file_52">Показване</string>
+    <string translatable="false" name="s_item_column_0_line_25_file_77">Моля изберете опция за калибриране снимка:</string>
+    <string translatable="false" name="s_item_column_0_line_15_file_108">Други задачи:</string>
+    <string translatable="false" name="s_item_column_0_line_676_file_98">Липсващи файлове:</string>
+    <string translatable="false" name="s_item_column_0_line_65_file_94">Избиране всички</string>
+    <string translatable="false" name="s_item_column_0_line_107_file_94">Няма съдържание</string>
+    <string translatable="false" name="s_item_column_0_line_75_file_102">Не са намерени данни</string>
+    <string translatable="false" name="s_item_column_0_line_100_file_102">Избор месец и година</string>
+    <string translatable="false" name="s_item_column_0_line_147_file_102">Изплатено:</string>
+    <string translatable="false" name="s_item_column_0_line_194_file_102">Одобрено:</string>
+    <string translatable="false" name="s_item_column_0_line_241_file_102">Тип плащане:</string>
+    <string translatable="false" name="s_item_column_0_line_288_file_102">Тип доклад:</string>
+    <string translatable="false" name="s_item_column_0_line_336_file_102">Показване</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_102">Изчистване</string>
+    <string translatable="false" name="s_item_column_0_line_66_file_113">Име клиент</string>
+    <string translatable="false" name="s_item_column_0_line_93_file_113">Тип плащане:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_113">Прибавяне: </string>
+    <string translatable="false" name="s_item_column_0_line_148_file_113">Стойност: </string>
+    <string translatable="false" name="s_item_column_0_line_175_file_113">Номер фискален бон:</string>
+    <string translatable="false" name="s_item_column_0_line_204_file_113">Одобрено:</string>
+    <string translatable="false" name="s_item_column_0_line_233_file_113">Изплатено:</string>
+    <string translatable="false" name="s_item_column_0_line_262_file_113">Код локация::</string>
+    <string translatable="false" name="s_item_column_0_line_291_file_113">Име локация</string>
+    <string translatable="false" name="s_item_column_0_line_320_file_113">Град:</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_113">Регион:</string>
+    <string translatable="false" name="s_item_column_0_line_378_file_113">Адрес:</string>
+    <string translatable="false" name="s_item_column_0_line_407_file_113">Проект:</string>
+    <string translatable="false" name="s_item_column_0_line_435_file_113">Описание:</string>
+    <string translatable="false" name="s_item_column_0_line_464_file_113">ID поръчка:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_119">Готово</string>
+    <string translatable="false" name="s_item_column_0_line_489_file_121">Настройки камера</string>
+    <string translatable="false" name="s_item_column_0_line_546_file_121">Позволяване копие на снимки</string>
+    <string translatable="false" name="s_item_column_0_line_580_file_121">Позволяване много снимки</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_122">Информация за задача</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_122">Име клиент</string>
+    <string translatable="false" name="s_item_column_0_line_96_file_122">Име локация</string>
+    <string translatable="false" name="s_item_column_0_line_125_file_122">Град:</string>
+    <string translatable="false" name="s_item_column_0_line_154_file_122">Адрес:</string>
+    <string translatable="false" name="s_item_column_0_line_182_file_122">Описание задача:</string>
+    <string translatable="false" name="s_item_column_0_line_209_file_122">Въпросник:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_122">Кратко име локация:</string>
+    <string translatable="false" name="s_item_column_0_line_260_file_122">Дата:</string>
+    <string translatable="false" name="s_item_column_0_line_289_file_122">Начален и краен час:</string>
+    <string translatable="false" name="s_item_column_0_line_315_file_122">Работно време локация:</string>
+    <string translatable="false" name="s_item_column_0_line_344_file_122">Телефон:</string>
+    <string translatable="false" name="s_item_column_0_line_373_file_122">Хонорар:</string>
+    <string translatable="false" name="s_item_column_0_line_402_file_122">Плащане на бонус:</string>
+    <string translatable="false" name="s_item_column_0_line_431_file_122">Стойност транспорт:</string>
+    <string translatable="false" name="s_item_column_0_line_467_file_122">Друга дата(и):</string>
+    <string translatable="false" name="s_item_column_0_line_523_file_122">Прилагане</string>
+    <string translatable="false" name="s_item_column_0_line_81_file_137">Име клиент:</string>
+    <string translatable="false" name="s_item_column_0_line_110_file_137">Информация локации:</string>
+    <string translatable="false" name="s_item_column_0_line_139_file_137">Град:</string>
+    <string translatable="false" name="s_item_column_0_line_168_file_137">Дата:</string>
+    <string translatable="false" name="s_item_column_0_line_196_file_137">Общо поръчки:</string>
+    <string translatable="false" name="s_item_column_0_line_223_file_137">Разстояние:</string>
+    <string translatable="false" name="s_item_column_0_line_254_file_137">Прилагане</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_125">Нова снимка?</string>
+    <string translatable="false" name="s_item_column_0_line_13_file_124">Липсващи файлове:</string>
+    <string translatable="false" name="s_item_column_0_line_57_file_124">Качване</string>
+    <string translatable="false" name="s_switch_filter_date">Филтър по дата</string>
+    <string translatable="false" name="s_switch_branch_name">Разрешаване пълно име локация</string>
+    <string translatable="false" name="take_another_photo">Нова снимка?</string>
+    <string translatable="false" name="uploading_jobs_of">Качване на задачи # NUMBER # от # TOTAL #</string>
+    <string translatable="false" name="uploading_images_of">В ход качване на изображения #NUMBER# от #TOTAL#</string>
+    <string translatable="false" name="upload">Качване</string>
+    <string translatable="false" name="s_switch_alternate_jobs">Други задачи:</string>
+    <string translatable="false" name="settings_image_resizing">Промяне размери снимка</string>
+    <string translatable="false" name="settings_image_original">Първоначален</string>
+    <string translatable="false" name="settings_image_medium">Среден размер</string>
+    <string translatable="false" name="settings_image_small">Малък размер</string>
+    <string translatable="false" name="settings_image_ask">Въпрос за размер изображение</string>
+    <string translatable="false" name="alert_issue_in_loop">Грешка в настройките на въпросника, моля свържете се с администратор!</string>
+    <string translatable="false" name="default_theme">Default тема</string>
+    <string translatable="false" name="memory_info">Информация за паметта</string>
+    <string translatable="false" name="not_enough_space_ram">Недостатъчно (РАМ) памет!</string>
+    <string translatable="false" name="file_saved_properly_at">Файлове запазени тук:</string>
+    <string translatable="false" name="unable_to_save_file_at">Грешка при запазване на файл тук:</string>
+    <string translatable="false" name="unable_to_find_loop_data">Не са намерени данни от въпросника</string>
+    <string translatable="false" name="amp_16">&amp; $[16,</string>
+    <string translatable="false" name="it_is_mandatory_to_attach_a_file">Прикачване на файл задължително</string>
+    <string translatable="false" name="no_answer_chosen">Няма избран отговор!</string>
+    <string translatable="false" name="save_and_download">Запазване и сваляне</string>
+    <string translatable="false" name="preffered_questionnaire_language">Можете да изберете предпочитан език на въпросника</string>
+    <string translatable="false" name="downloading_system_languages">В ход сваляне на системни езици</string>
+    <string translatable="false" name="no_alternative_or_server_side">Няма други езици на сървъра</string>
+    <string translatable="false" name="update_system_languages">В ход обновяване на системни езици</string>
+    <string translatable="false" name="synch_is_already_in_progress">Синхронизация в ход!</string>
+    <string translatable="false" name="downloading_alternative_jobs">В ход сваляне на други задачи</string>
+    <string translatable="false" name="assigning_alternate_job">В ход възлагане на други задачи</string>
+    <string translatable="false" name="order_assigned_refreshing_job_list">Задача възложена, обновяване на списък със задачи</string>
+    <string translatable="false" name="unable_to_assign_this_order">Възлагането на тази поръчка не е осъществено, моля свържете се с администратора</string>
+    <string translatable="false" name="unable_to_find_alternative_job"> Не е намерена друга задача</string>
+    <string translatable="false" name="do_you_Want_relace_order">Подмяна на поръчка към избраната локация?</string>
+    <string translatable="false" name="could_not_retrieve">Не е намерена информация за проверката</string>
+    <string translatable="false" name="questionnaire_mock_gps_alert">Включен MOCK GPS модул. Моля изключете го, за да продължите. Можете да го изключите тук: Настройки->Application->Development->Allow mock locations - уверете се, че тази опция не е избрана. Искате ли да отворите екран Настройки?</string>
+    <string translatable="false" name="questionnaire_min_zero_max"># MAX # оставащи символи.</string>
+    <string translatable="false" name="questionnaire_min_max">Минимум  # MIN # символи.</string>
+    <string translatable="false" name="questionnaire_min_max_zero"># MAX # оставащи символи. Минимум # MIN # символи.</string>
+    <string translatable="false" name="questionnaire_error_retrieving">Грешка при откриване на запазените данни!</string>
+    <string translatable="false" name="questionnaire_sign">Подпишете тук</string>
+    <string translatable="false" name="error_order_not_assigned">Поръчката не Ви е възложена!</string>
+    <string translatable="false" name="error_opening_android_gallery">Грешка при ползване на Андроид галерия, моля използвайте друга галерия, извиняваме се за неудобството!</string>
+    <string translatable="false" name="sortByDate">Сортирани по дата</string>
+    <string translatable="false" name="sortByName">Сортирани по име</string>
+    <string translatable="false" name="button_show_file">Показване файл</string>
+    <string translatable="false" name="questionnaire_select_file_alert">Избиране на файл?</string>
+    <string translatable="false" name="s_branch_sorting">Сортиране на локации</string>
+    <string translatable="false" name="s_tracker_setting">Намиране на задачи близо до мен</string>
+    <string translatable="false" name="s_tracker_heading">Настройки Гео локация</string>
+    <string translatable="false" name="s_alphabetical">По азбучен ред</string>
+    <string translatable="false" name="s_distance">Разстояние</string>
+    <string translatable="false" name="s_image_cropping">Рязане на снимка</string>
+    <string translatable="false" name="s_off">Изключено</string>
+    <string translatable="false" name="s_on">Включено</string>
+    <string translatable="false" name="attach_err_job_list">Файловете за прикачване още не са качени. Натиснете за преглед.</string>
+    <string translatable="false" name="file_not_found">Не е намерен файл!</string>
+    <string translatable="false" name="file_delete_alert">Изтриване на файл?</string>
+    <string translatable="false" name="questionnaire_date_valid_error">Невалиден формат ден-час!</string>
+    <string translatable="false" name="sNonRefundableServicePayment">Невъзстановяемо плащане услуга</string>
+    <string translatable="false" name="sCriticismPayment">Хонорар</string>
+    <string translatable="false" name="sBonusPayment">Плащане на бонус</string>
+    <string translatable="false" name="purchase_details">Информация за покупка</string>
+    <string translatable="false" name="purchase_invoice_number">Номер фискален бон покупка</string>
+    <string translatable="false" name="purchase_payment">Стойност покупка</string>
+    <string translatable="false" name="purchase_description">Описание покупка</string>
+    <string translatable="false" name="service_details">Информация за услуга</string>
+    <string translatable="false" name="service_invoice_number">Номер фискален бон услуга</string>
+    <string translatable="false" name="service_payment">Стойност услуга</string>
+    <string translatable="false" name="service_description">Описание услуга</string>
+    <string translatable="false" name="transportation_details">Информация за транспорт</string>
+    <string translatable="false" name="transportation_description">Описание транспорт</string>
+    <string translatable="false" name="transportation_payment">Стойност транспорт</string>
+    <string translatable="false" name="jd_purchasedesc">Описание покупка</string>
+    <string translatable="false" name="jd_can_purchase">Покупка при проверка</string>
+    <string translatable="false" name="purchase_numeric_error">Необходима числена стойност</string>
+    <string translatable="false" name="purchase_simple_error">Позволена стойност само в цифри и букви</string>
+    <string translatable="false" name="purchase_exceeds_error">Стойност над лимита</string>
+    <string translatable="false" name="action_settings">Излизане от списък със задачи</string>
+    <string translatable="false" name="time_set">Настройване час</string>
+    <string translatable="false" name="cancel">Отмяна</string>
+    <string translatable="false" name="time">Час:</string>
+    <string translatable="false" name="job_list_tab_syncing">В ход синхронизация</string>
+    <string translatable="false" name="start_download_alt">Сваляне на задачи на други езици</string>
+    <string translatable="false" name="start_download_inprogress">Сваляне на задачи в ход</string>
+    <string translatable="false" name="start_upload_inprogress">Качване на задачи в ход</string>
+    <string translatable="false" name="start_download">Сваляне на задачи</string>
+    <string translatable="false" name="start_upload">Качване на задачи</string>
+    <string translatable="false" name="start_recording">Начало запис?</string>
+    <string translatable="false" name="stop_recording">Спиране запис?</string>
+    <string translatable="false" name="calculator_heading">Checker калкулатор</string>
+    <string translatable="false" name="job_list_err_dialog">Записи за грешки:</string>
+    <string translatable="false" name="job_list_err_dialog_branch">Записи за грешки: Телефонът не поддържа условие "101"</string>
+    <string translatable="false" name="_error_display_condition">Възникна грешка, моля свържете се с администратор</string>
+    <string translatable="false" name="err_missing_images">Липсващи изображения. Моля обновете списъка със задачи.</string>
+    <string translatable="false" name="press_back_again">Натиснете бутон Назад отново за затваряне.</string>
+    <string translatable="false" name="aaparsing_complete">Анализ на данните завършен. Стартиране база данни...</string>
+    <string translatable="false" name="aasaving_assigned_jobs_surveys_job">В ход запазване на възложени задачи и проверки в базата данни...</string>
+    <string translatable="false" name="aauploading_job">Качване на задача --------, 1/1</string>
+    <string translatable="false" name="aauploading_file">В ход качване на файл:</string>
+    <string translatable="false" name="aadownloading_Assigned_jobs">В ход сваляне на възложени задачи.</string>
+    <string translatable="false" name="aadownloading_Assigned_surveys">В ход сваляне на възложени проверки.</string>
+    <string translatable="false" name="aaparsing_surveys">В ход търсене/анализ на проверка --------</string>
+    <string translatable="false" name="aaparsing_questionnaire">В ход анализ въпросник:</string>
+    <string translatable="false" name="aasaving_db_questionnaire">В ход запазване на въпросник: -------------</string>
+    <string translatable="false" name="aaquestionnaires_downloading_saving">В ход сваляне и запазване на въпросници.</string>
+    <string translatable="false" name="aaparsing_assigned_surveys">В ход търсене/анализ на възложени проверки.</string>
+    <string translatable="false" name="aaparsing_assigned_jobs">В ход търсене/анализ на възложени задачи.</string>
+    <string translatable="false" name="aaupdating_job">Качване на задача --------, 1/1 </string>
+    <string translatable="false" name="ptr_last_updated">Обновен:</string>
+    <string translatable="false" name="prepare_screen_dialogue">Събиране на информация за този въпросник…</string>
+    <string translatable="false" name="job_list_menu_update_list">Преглед на задачите на карта</string>
+    <string translatable="false" name="job_list_menu_upload_complete_job">Филтър задачи</string>
+    <string translatable="false" name="job_list_tab_sync">Синх</string>
+    <string translatable="false" name="job_list_tab_assigned">Възложено</string>
+    <string translatable="false" name="job_list_tab_scheduled">Вписано в график</string>
+    <string translatable="false" name="job_list_tab_in_progress">В ход</string>
+    <string translatable="false" name="job_list_tab_completed">Завършено</string>
+    <string translatable="false" name="job_list_tab_sync_u"><b><u>Синх</u></b></string>
+    <string translatable="false" name="job_list_tab_assigned_u"><b><u>Възложено</u></b></string>
+    <string translatable="false" name="job_list_tab_scheduled_u"><b><u>Вписано в график</u></b></string>
+    <string translatable="false" name="job_list_tab_in_progress_u"><b><u>В ход</u></b></string>
+    <string translatable="false" name="job_list_tab_completed_u"><b><u>Завършено</u></b></string>
+    <string translatable="false" name="survey_quota_delete_message">Квота [[NAME OF QUOTA]] достигната. Направили сте всичко #.
+ Изтриване на интервю</string>
+    <string translatable="false" name="survey_quota_upload_message">Квота [[NAME OF QUOTA]] достигната. Направили сте всичко #.</string>
+    <string translatable="false" name="alert_working">В ход</string>
+    <string translatable="false" name="alert_switching">Табове за смяна</string>
+    <string translatable="false" name="alert_saving">Запазване в ход...</string>
+    <string translatable="false" name="alert_working_msg">Системата е натоварена, моля опитайте по-късно!</string>
+    <string translatable="false" name="survey_quota_alert_message">Квота изчерпана!</string>
+    <string translatable="false" name="button_back">Обратно към списък със задачи</string>
+    <string translatable="false" name="bookmark_picker_name">Bookmarks</string>
+    <string translatable="false" name="button_add_calendar">Прибавяне към календар</string>
+    <string translatable="false" name="button_cancel">Отмяна</string>
+    <string translatable="false" name="button_done">Готово</string>
+    <string translatable="false" name="button_ok">Ок</string>
+    <string translatable="false" name="button_product_search">Търсене на продукт</string>
+    <string translatable="false" name="history_clear_one_history_text">Изчистване</string>
+    <string translatable="false" name="menu_settings">Излизане от списък със задачи</string>
+    <string translatable="false" name="msg_camera_framework_bug">Съжаляваме, проблем с Андроид камерата. Може да трябва да рестартирате устройството.</string>
+    <string translatable="false" name="msg_default_status">Поставете баркод в квадратчето, за да сканирате.</string>
+    <string translatable="false" name="msg_default_time">Час:</string>
+    <string translatable="false" name="msg_default_type">Набиране на текст</string>
+    <string translatable="false" name="msg_encode_contents_failed">Не може да кодира баркод от получените данни.</string>
+    <string translatable="false" name="preferences_name">Излизане от списък със задачи</string>
+    <string translatable="false" name="wifi_type_label">Набиране на текст</string>
+    <string translatable="false" name="zxing_url">http://code.google.com/p/zxing</string>
+
+    <string-array name="slide_menu_array">
+        <item>@string/job_list_menu_upload_complete_job</item>
+        <item>@string/job_list_menu_update_list</item>
+        <item>@string/job_list_exit</item>
+        <item>@string/settings_page_title</item>
+    </string-array>
+
+    <color name="darkness_value">#99000000</color>
+
+    <!-- login Screen -->
+
+    <string translatable="false" name="Questionaire_submitting">Предаване на въпросник в ход...</string>
+    <string translatable="false" name="questionnaire_gps_off_alert">GPS услугата Ви в момента е активна. Искате ли да я изключите?</string>
+    <string translatable="false" name="list_enable_calendar">Прибавяне на задача към календара?</string>
+    <string translatable="false" name="questionnaire_gps_alert">GPS модулът Ви в момента е неактивен. Искате ли да го активирате?</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert">Сигурни ли сте, че искате да излезете и изтриете всички отговори?</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_yes">Да</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_no">Не</string>
+    <string translatable="false" name="questionnaire_alert_text_betweeeen_first">Численаta стойност трябва да е в диапазон между START и END</string>
+    <string translatable="false" name="login_page_title">Добре дошли</string>
+    <string translatable="false" name="login_btn">Вписване</string>
+    <string translatable="false" name="login_heder">Добре дошли</string>
+    <string translatable="false" name="login_username_hint">Потребителско име</string>
+    <string translatable="false" name="login_password_hint">Парола</string>
+    <string translatable="false" name="login_reset_btn">Изчистване</string>
+    <string translatable="false" name="error_alert_title">Проблем</string>
+    <string translatable="false" name="alert_btn_lbl_ok">Ок</string>
+    <string translatable="false" name="login_username_alert">Грешно потребителско име или парола</string>
+    <string translatable="false" name="login_clientside_username_alert">Грешно потребителско име</string>
+    <string translatable="false" name="login_invalid_systemurl_alert">Грешно системно URL, моля използвайте пълно URL (http://www.checker-soft.com/semanibg)</string>
+    <string translatable="false" name="invalid_server_response_alert">В процес на сваляне и запазване на въпросник...</string>
+    <string translatable="false" name="timeout_response_alert">Изтекло време на връзка. Моля свържете се с оператор.</string>
+    <string translatable="false" name="crash_toast_text">Упс! Има проблем, но до моя разработчик е изпратен доклад, за да поправи нещата.</string>
+    <string translatable="false" name="crash_dialog_title">App has crashed</string>
+    <string translatable="false" name="crash_dialog_text">Неочаквана грешка накара системата да спре. Моля помогнете за оправянето й, като изпратите данни за грешката. Само трябва да натиснете ОК. Извиняваме се и благодарим!</string>
+    <string translatable="false" name="crash_dialog_comment_prompt">Неочаквана грешка накара системата да спре. Моля помогнете за оправянето й, като изпратите данни за грешката. Само трябва да натиснете ОК. Извиняваме се и благодарим! Може да прибавите коментари за проблема по-долу:</string>
+    <string translatable="false" name="crash_dialog_ok_toast"></string>
+
+    <!-- Setting Screen -->
+    <string translatable="false" name="settings_proxy_host_lbl">Адрес</string>
+    <string translatable="false" name="settings_proxy_port_lbl">Port</string>
+    <string translatable="false" name="settings_proxy_host_usrname">Потребителско име</string>
+    <string translatable="false" name="settings_proxy_host_pswrd">Парола</string>
+    <string translatable="false" name="settings_txt_proxy">Прокси</string>
+    <string translatable="false" name="settings_page_title">Излизане от списък със задачи</string>
+    <string translatable="false" name="settings_job_board">Списък задачи</string>
+    <string translatable="false" name="settings_refund_report">Доклад за плащания</string>
+    <string translatable="false" name="settings_page_proxy">Прокси</string>
+    <string translatable="false" name="settings_system_url_lbl">Системно URL</string>
+    <string translatable="false" name="settings_language_lbl">Език</string>
+    <string translatable="false" name="settings_themes_lbl">Тема</string>
+    <string translatable="false" name="settings_save_btn">Запазване</string>
+    <string translatable="false" name="settings_http_label">http://</string>
+    <string translatable="false" name="url_hint">Системно URL</string>
+    <string translatable="false" name="_alert_title">Информация</string>
+    <string translatable="false" name="settings_url_alert">Моля въведете валидно URL</string>
+    <string translatable="false" name="settings_system_url_hint">Системно URL</string>
+
+    <!-- Job List Screen -->
+    <string translatable="false" name="joblist_title">Списък със задачи</string>
+    <string translatable="false" name="joblist_filter_btn">Filter</string>
+    <string translatable="false" name="joblist_map_btn">Карта</string>
+    <string translatable="false" name="joblist_all_jobs">Показване всички задачи</string>
+
+    <!-- Job Filter Screen -->
+    <string translatable="false" name="job_filter_title">Търсене</string>
+    <string translatable="false" name="job_filter_choose_job_type_lbl">Избор клиент</string>
+    <string translatable="false" name="job_filter_choose_city_lbl">Избиране град</string>
+    <string translatable="false" name="job_filter_date_range_lbl">Обхват дати</string>
+    <string translatable="false" name="job_filter_start_date_lbl"><b>Начална дата</b></string>
+    <string translatable="false" name="job_filter_end_date_lbl"><b>Крайна дата</b></string>
+    <string translatable="false" name="job_filter_save_btn">Търсене</string>
+    <string translatable="false" name="job_filter_default_dd_option">Избиране</string>
+    <string translatable="false" name="job_filter_select_date"><u>Избиране дата</u></string>
+
+    <string-array name="job_filter_job_list">
+        <item> Избиране всички</item>
+        <item> търговия на дребно</item>
+        <item> начало и край</item>
+    </string-array>
+    <string-array name="job_filter_region_list">
+        <item>Избиране всички</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <!-- JobDetail Screen -->
+    <string translatable="false" name="jd_heder_text">Информация за задача</string>
+    <string translatable="false" name="job_detail_map_btn">Карта</string>
+    <string translatable="false" name="jd_begin_btn_text">Начало на попълване</string>
+    <string translatable="false" name="jd_accept_btn_text">Приемане задача</string>
+    <string translatable="false" name="jd_continue_review_btn_text">Продължаване попълване</string>
+    <string translatable="false" name="jd_begin_review_btn_text">Начало на попълване</string>
+    <string translatable="false" name="jd_reject_btn_text">Отказ</string>
+    <string translatable="false" name="jd_logout_btn_text">Изход</string>
+    <string translatable="false" name="jd_date">Дата</string>
+    <string translatable="false" name="jd_status">Статус</string>
+    <string translatable="false" name="jd_description">Описание</string>
+    <string translatable="false" name="jd_setname">Въпросник</string>
+    <string translatable="false" name="jd_clientname">Клиент</string>
+    <string translatable="false" name="jd_branchname">Локация</string>
+    <string translatable="false" name="jd_branchfname">Пълно име локация</string>
+    <string translatable="false" name="jd_cityname">Град</string>
+    <string translatable="false" name="jd_address">Адрес</string>
+    <string translatable="false" name="jd_branchpno">Телефон локация</string>
+    <string translatable="false" name="jd_openinghours">Работно време</string>
+    <string translatable="false" name="jd_stime">Начален час</string>
+    <string translatable="false" name="jd_etime">Краен час</string>
+    <string translatable="false" name="jd_parsing_alert_title">Информация</string>
+    <string translatable="false" name="jd_parsing_alert_msg">Моля изчакайте. Подготовка на въпросник в ход.</string>
+    <string translatable="false" name="jd_please_alert_msg">Качване завършени проверки</string>
+
+    <!-- Reject Job Screen -->
+    <string translatable="false" name="reject_job_popup_title">Причина за отказ</string>
+    <string translatable="false" name="reject_job_popup_reason_lbl">Причина</string>
+    <string translatable="false" name="reject_job_popup_btn_txt">Ок</string>
+
+    <!-- Questionnaire Screen -->
+    <string translatable="false" name="questionnaire_title">Въпросник</string>
+    <string translatable="false" name="questionnaire_next_btn">Напред</string>
+    <string translatable="false" name="questionnaire_record_btn">Записване</string>
+    <string translatable="false" name="questionnaire_record_stop_btn">Спиране</string>
+    <string translatable="false" name="questionnaire_menu_btn">DoГотовоne</string>
+    <string translatable="false" name="attach_disclaimer">Тези файлове в момента са прикачени към задачата:</string>
+    <string translatable="false" name="questionnaire_prev_btn">Връщане</string>
+    <string translatable="false" name="questionnaire_exitandsave_menu">Запазване и изход</string>
+    <string translatable="false" name="questionnaire_preview_menu">Преглед</string>
+    <string translatable="false" name="questionnaire_finishandsend_menu">Завършване и предаване</string>
+    <string translatable="false" name="questionnaire_alert">Невалиден отговор</string>
+    <string translatable="false" name="questionnaire_alert_free_text">Непозволена стойност</string>
+    <string translatable="false" name="questionnaire_btn_text">Ок</string>
+    <string translatable="false" name="questionnaire_alert_title">Информация</string>
+    <string translatable="false" name="questionnaire_submit_survey_alert">Въпросник успешно предаден.</string>
+    <string translatable="false" name="questionnaire_select_files">Избор на файлове</string>
+    <string translatable="false" name="questionnaire_upload_files">Качване файлове към въпросника: </string>
+    <string translatable="false" name="questionnaire_finish">Край</string>
+
+    <string-array name="language_val">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list">
+        <item>Нощ</item>
+        <item>DaДенy</item>
+    </string-array>
+
+    <!-- NEW ADDED -->
+    <string translatable="false" name="jd_begin_button_status_inprogress">В ход</string>
+    <string translatable="false" name="no_internet_connection_alret_message">Моля проверете интернет връзката и опитайте с валидни потребителско име и парола</string>
+    <string translatable="false" name="jd_begin_button_status_completed">Завършено</string>
+    <string translatable="false" name="jd_synch_button_text">Синх</string>
+    <string translatable="false" name="job_search_no_records_alert">Няма намерени данни</string>
+    <string translatable="false" name="reject_job_sucess_alert">Успешен отказ от задача</string>
+    <string translatable="false" name="reject_job_fail_alert">Отказ невъзможен без интернет връзка</string>
+    <string translatable="false" name="accept_job_fail_alert">Приемане невъзможно без интернет връзка</string>
+    <string translatable="false" name="offline_alert">Работа невъзможна без интернет връзка</string>
+    <string translatable="false" name="submit_review_fail_alert">Невъзможно предаване без интернет връзка.</string>
+    <string translatable="false" name="save_questionnaire_records_for_offline">Въпросникът не е запазен, моля свържете се с Интернет и свалете отново въпросника</string>
+    <string translatable="false" name="save_questionnaire_records_for_database">Неуспешно отваряне база данни</string>
+    <string translatable="false" name="questionnaire_multiple_max_ans_alert">Избран отговор извън лимит</string>
+    <string translatable="false" name="jd_begin_button_status_scheduled">Насрочено</string>
+    <string translatable="false" name="job_list_exit">Получен невалиден отговор от сървъра. Моля свържете се с оператор.</string>
+    <string translatable="false" name="reject_job_resusal_text_alert">Моля въведете причина за отказа</string>
+    <string translatable="false" name="job_download_alert">Сваляне обновен списък със задачи и въпросници</string>
+    <string translatable="false" name="questionnaire_downlaod_alert">В ход сваляне и запазване на въпросници.</string>
+    <string translatable="false" name="questionnaire_saving_alert">В ход запазване на въпросник…</string>
+    <string translatable="false" name="image_downloading_alert">В ход подготовка на въпросник…</string>
+    <string translatable="false" name="answer_save_alert">В ход запазване на отговор…</string>
+    <string translatable="false" name="exit_and_delete_btn_text">Изтриване и изход</string>
+    <string translatable="false" name="non_answered_conf_alert_title">Потвърждение</string>
+    <string translatable="false" name="non_answered_conf_alert_msg">Не е даден отговор, моля натиснете Отмяна за завършване</string>
+    <string translatable="false" name="non_answered_conf_alert_cancel_btn">Отмяна</string>
+    <string translatable="false" name="non_answered_conf_alert_continue_btn">Продължаване</string>
+    <string translatable="false" name="Questionnaire_finish_time_lbl">Дата и час на проверката</string>
+    <string translatable="false" name="Questionnaire_finish_Date_lbl">Дата на проверката</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_time_lbl">Дата и час на проверката</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_Date_lbl">Дата на проверката</string>
+    <string translatable="false" name="questionnaire_free_text_lbl">Свободен текст</string>
+    <string translatable="false" name="questionnaire_send_bug">Грешка доклад</string>
+    <string translatable="false" name="questionnaire_done_btn_text">Продължаване</string>
+    <string translatable="false" name="questionnaire_file_attached_text">Файл прикачен</string>
+    <string translatable="false" name="questionnaire_alert_additional">Необходима допълнителна информация!</string>
+    <string translatable="false" name="questionnaire_alert_text_between_first">Общата дължина трябва да е между #START# и #END# </string>
+    <string translatable="false" name="questionnaire_alert_text_to"> to </string>
+    <string translatable="false" name="questionnaire_alert_no_answer">Няма избран отговор!</string>
+    <string translatable="false" name="already_submit_review_alert">Проверката вече е предадена</string>
+    <string translatable="false" name="camera_menu_text">Камера</string>
+    <string translatable="false" name="video_menu_text">Видео</string>
+    <string translatable="false" name="voice_menu_text">В ход аудио запис</string>
+    <string translatable="false" name="gallery_menu_text">Галерия</string>
+    <string translatable="false" name="file_size_text">Размер на файла над лимита, опитайте отново с по-малък файлов размер.</string>
+    <string translatable="false" name="txt_briefing">Инструкция</string>
+
+    <!-- Attached files feature -->
+
+    <string translatable="false" name="list_attached_files">List of attached files</string>
+    <string translatable="false" name="already_uploaded">Already uploaded</string>
+    <string translatable="false" name="pending_upload">Pending upload</string>
+    <string translatable="false" name="file_details">File details</string>
+    <string translatable="false" name="file_name">File name</string>
+    <string translatable="false" name="file_size">File size</string>
+    <string translatable="false" name="open_file">Open file</string>
+    <string translatable="false" name="not_allowed_reject">You are not allowd to reject this job</string>
+
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Romanian</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Japanese</item>
+    </string-array>
+
+    <string translatable="false" name="settings">Предпочитания</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="20dp"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layoutDirection="ltr" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#121212"
+        android:padding="3dp"
+        android:text="@string/s_item_column_0_line_15_file_108"
+        android:textColor="#94ba09"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/lvjobs"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnOk"
+        android:layout_below="@+id/textView1"
+        android:divider="#9DC40F"
+        android:dividerHeight="0px" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/accept_btn_selector"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp"
+        android:text="@string/non_answered_conf_alert_cancel_btn"
+        android:textColor="#121212"
+        android:textSize="16dp" />
+
+</RelativeLayout>

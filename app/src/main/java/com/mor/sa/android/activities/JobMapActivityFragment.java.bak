@@ -1,0 +1,261 @@
+package com.mor.sa.android.activities;
+
+import java.util.HashMap;
+import java.util.List;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.checker.sa.android.data.orderListItem;
+import com.checker.sa.android.dialog.JobFilterDialog;
+import com.checker.sa.android.helper.Constants;
+import com.checker.sa.android.helper.DateTVListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.mor.sa.android.activities.R;
+
+public class JobMapActivityFragment extends FragmentActivity {
+
+	private static final int JOB_DETAIL_ACTIVITY_CODE = 321;
+	private GoogleMap googleMap;
+	private HashMap<Marker, orderListItem> markersHash;
+	private String orderid;
+	private ImageView imgFilter;
+	
+
+	public void FilterJobList(String region,String project,String bprop, String bcode, String jobtype,
+			String city, String date1, String date3) {
+		
+		String filter = ((JobListActivity) comunicator.JobList).FilterJobList(region,project,bprop, bcode,
+				jobtype, city, date1, date3);
+		updateFiler(filter);
+		setMarkers(JobListActivity.joborders, 0);
+
+	}
+	
+
+	private void updateFiler(String object) {
+		final View v = findViewById(R.id.layout_filter);
+
+		TextView tx = (TextView) findViewById(R.id.txtfilter);
+		tx.setText(object);
+		ImageView btnCross = (ImageView) findViewById(R.id.crossbtn);
+		btnCross.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				v.setVisibility(RelativeLayout.GONE);
+//				ShowDBJobs();
+//				if (!bprop.equals(getString(R.string.job_filter_default_dd_option))) {
+//					if (filterString.equals("")) {
+//					} else
+//						filterString += ", " + bprop;
+//				}
+//				if (!date1.equals("1/1/1900") && !date3.equals("1/1/1900")) {
+//					if (filterString.equals("")) {
+//					} else
+//						filterString += ", " + date1 + "-" + date3;
+//				}
+				
+				String nulll = getString(R.string.job_filter_default_dd_option);
+				String dateNull = "1/1/1900";
+//				public void FilterJobList(String region,String project,String bprop, String bcode, String jobtype,
+//						String city, String date1, String date3)
+				FilterJobList(nulll, nulll,nulll,nulll,nulll,nulll, dateNull, dateNull);
+				v.setVisibility(RelativeLayout.GONE);
+			}
+		});
+		if (object == null) {
+			v.setVisibility(RelativeLayout.GONE);
+		} else {
+			tx.setText(object);
+			v.setVisibility(RelativeLayout.VISIBLE);
+		}
+
+	}
+
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.mapfragmentview);
+
+		imgFilter = (ImageView) findViewById(R.id.filterBtn);
+		imgFilter.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (comunicator.JobList != null) {
+					JobFilterDialog dialog = new JobFilterDialog(
+							JobMapActivityFragment.this);
+					dialog.show();
+				}
+			}
+		});
+		SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.map);
+
+		// Getting a reference to the map
+		//googleMap = supportMapFragment.getMap();
+		orderid = getIntent().getExtras().getString("orderid");
+
+		setMarkers(JobListActivity.joborders, 0);
+
+	}
+
+	public void setMarkers(List<orderListItem> orders, int index) {
+		if (orders == null)
+			return;
+		setMapView(orders, index);
+
+	}
+
+	private void setMapView(List<orderListItem> orders, int index) {
+		// Clears the previously touched position
+		googleMap.clear();
+		for (int i = 0; i < orders.size(); i++) {
+			try {
+				MarkerOptions markerOptions = new MarkerOptions();
+
+				double latitude = Double.valueOf(orders.get(i).orderItem
+						.getBranchLat());
+				double longitude = Double.valueOf(orders.get(i).orderItem
+						.getBranchLong());
+				LatLng latlng = new LatLng(latitude, longitude);
+				// Setting the position for the marker
+				markerOptions.position(latlng);
+				// Setting the title for the marker.
+				// This will be displayed on taping the marker
+				markerOptions.title(latlng.latitude + " : " + latlng.longitude);
+
+				if (markersHash == null)
+					markersHash = new HashMap<Marker, orderListItem>();
+				if ((orderid == null || orderid.equals("-1"))
+						|| orders.get(i).orderItem.getOrderID().equals(orderid)) {
+					// Animating to the touched position
+					googleMap.animateCamera(CameraUpdateFactory
+							.newLatLng(latlng));
+
+					// Placing a marker on the touched position
+					Marker thismarker = googleMap.addMarker(markerOptions);
+					markersHash.put(thismarker, orders.get(i));
+
+					// Setting a custom info window adapter for the google map
+					googleMap.setInfoWindowAdapter(new InfoWindowAdapter() {
+
+						@Override
+						public View getInfoContents(Marker arg0) {
+							// Getting view from the layout file
+							// info_window_layout
+							View v = getLayoutInflater().inflate(
+									R.layout.custom_marker, null);
+
+							TextView tvBranch = (TextView) v
+									.findViewById(R.id.txtbranch);
+
+							ImageView imgNext = (ImageView) v
+									.findViewById(R.id.btnopen);
+
+							final orderListItem thiItem = markersHash.get(arg0);
+
+							if (thiItem != null) {
+								tvBranch.setText(thiItem.orderItem
+										.getBranchFullname());
+							}
+
+							return v;
+						}
+
+						@Override
+						public View getInfoWindow(Marker arg0) {
+							// TODO Auto-generated method stub
+							return null;
+						}
+
+					});
+
+					googleMap
+							.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+								@Override
+								public void onInfoWindowClick(Marker marker) {
+
+									orderListItem thiItem = markersHash
+											.get(marker);
+
+									Intent intent = new Intent(
+											JobMapActivityFragment.this,
+											JobDetailActivity.class);
+
+									intent.putExtra("OrderID",
+											thiItem.orderItem.getOrderID());
+									startActivityForResult(intent,
+											JOB_DETAIL_ACTIVITY_CODE);
+								}
+							});
+				}
+			} catch (Exception ex) {
+
+			}
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case (JOB_DETAIL_ACTIVITY_CODE): {
+			// if (resultCode == Activity.RESULT_OK) {
+			if (data != null) {
+				Bundle b = data.getExtras();
+				Intent intent = new Intent();
+				intent.putExtra(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY,
+						b.getBoolean(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY));
+				intent.putExtra(
+						Constants.JOB_DETAIL_IS_INVALID_LOGIN_FIELD_KEY,
+						b.getBoolean(Constants.JOB_DETAIL_IS_INVALID_LOGIN_FIELD_KEY));
+				intent.putExtra(Constants.DB_TABLE_QUESTIONNAIRE_ORDERID, b
+						.get(Constants.DB_TABLE_QUESTIONNAIRE_ORDERID)
+						.toString());
+				intent.putExtra(Constants.QUESTIONNAIRE_STAUS,
+						b.getInt(Constants.QUESTIONNAIRE_STAUS));
+
+				setResult(RESULT_OK, intent);
+				finish();
+			} else
+				finish();
+		}
+		}
+
+	}
+
+	public boolean IsInternetConnectted() {
+		ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo i = conMgr.getActiveNetworkInfo();
+		conMgr = null;
+		if (i == null)
+			return false;
+		if (!i.isConnected())
+			return false;
+		if (!i.isAvailable())
+			return false;
+		return true;
+	}
+
+}

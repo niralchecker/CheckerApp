@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:layoutDirection="ltr" >
+
+    <LinearLayout
+        android:id="@+id/toplayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff0000" >
+
+            <ImageView
+                android:id="@+id/jobImage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="5dp"
+                android:src="@drawable/job" />
+
+            <TextView
+                android:id="@+id/critlink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jobImage"
+                android:layout_centerInParent="true"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/changeDate"
+                android:textColor="#FFFFFF"
+                android:textSize="16dp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:id="@+id/xbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/xbtn" />
+        </RelativeLayout>
+
+        
+        <RelativeLayout
+            android:id="@+id/bottombar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_marginTop="5px" >
+
+            <RelativeLayout
+                android:id="@+id/altlayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
+
+                <TextView
+                    android:id="@+id/s_alternatedate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/CityNameT"
+                    android:layout_gravity="left"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/s_item_column_0_line_467_file_122"
+                    android:textColor="#000000"
+                    android:textSize="13dp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/s_alternatedate"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <Spinner
+                        android:id="@+id/altdates"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/transparent"
+                        android:drawSelectorOnTop="true" />
+
+                    <ImageView
+                        android:id="@+id/lang_dividing_line_kink"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignBottom="@+id/altdates"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/kink" />
+
+                    <View
+                        android:id="@+id/lang_dividing_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/lang_dividing_line_kink"
+                        android:background="@drawable/grey_separator" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnApply"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_below="@+id/altlayout"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
+                android:background="#9DC40F"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/s_item_column_0_line_523_file_122"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

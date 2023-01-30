@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layoutDirection="ltr"
+    android:layout_centerInParent="true" >
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:id="@+id/backgroundTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background" >
+
+            <TextView
+                android:id="@+id/Label_jobfilter_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/job_filter_title"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:id="@+id/jobfilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_below="@+id/jobfilter_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp" >
+
+                <TableRow
+                    android:layout_margin="10dip"
+                    android:gravity="center" >
+
+                    <Spinner
+                        android:id="@+id/jobtypelist"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:drawSelectorOnTop="true"
+                        android:entries="@array/job_filter_job_list"
+                        android:paddingLeft="5dp" />
+
+                    <TextView
+                        android:id="@+id/Label_jobtypelist"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:text="@string/job_filter_choose_job_type_lbl"
+                        android:textColor="#000000"
+                        android:textSize="16dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="10dip"
+                    android:gravity="center" >
+
+                    <Spinner
+                        android:id="@+id/regionlist"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:drawSelectorOnTop="true"
+                        android:entries="@array/job_filter_region_list" />
+
+                    <TextView
+                        android:id="@+id/Label_regionlist"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:text="@string/job_filter_choose_city_lbl"
+                        android:textColor="#000000"
+                        android:textSize="16dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="10dip"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/calandertitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_span="2"
+                        android:text="@string/job_filter_date_range_lbl"
+                        android:textColor="#000000"
+                        android:textSize="18dip"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="10dip"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/startdate"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="31/07/2012"
+                        android:textColor="#000000"
+                        android:textSize="16dip" />
+
+                    <TextView
+                        android:id="@+id/Label_sdate"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:text="@string/job_filter_start_date_lbl"
+                        android:textColor="#000000"
+                        android:textSize="16dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="10dip"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/enddate"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="31/07/2012"
+                        android:textColor="#000000"
+                        android:textSize="16dip" />
+
+                    <TextView
+                        android:id="@+id/Label_enddate"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:text="@string/job_filter_end_date_lbl"
+                        android:textColor="#000000"
+                        android:textSize="16dip" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_margin="10dip"
+                    android:gravity="left" >
+
+                    <ImageView
+                        android:id="@+id/dialog_save"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/search" />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

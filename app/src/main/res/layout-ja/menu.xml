@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu001">
+  <group android:id="@+id/group_popupmenu">
+      <item android:id="@+id/menu1"
+          android:title="Today's Date"/>
+      <item android:id="@+id/menu2"
+          android:title="Custom Date"/>
+  </group>
+</menu>

@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.mor.sa.android.activities'
+    compileSdk 33
+
+    useLibrary 'org.apache.http.legacy'
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+
+    defaultConfig {
+        applicationId "com.mor.sa.android.activities"
+        minSdkVersion 24
+        targetSdkVersion 33
+        multiDexEnabled true
+        versionCode 804
+        versionName "14.4"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+            storePassword 'mormor'
+            keyAlias 'checker'
+            keyPassword 'mormor'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    buildFeatures { dataBinding = true }
+
+    compileOptions.encoding = 'windows-1251'
+}
+
+dependencies {
+    // implementation 'ch.acra:acra:4.5.0'
+    implementation 'com.obsez.android.lib.filechooser:filechooser:1.1.19'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'cat.ereza:customactivityoncrash:2.2.0'
+    implementation 'com.mikhaellopez:circularprogressbar:1.0.0'
+    implementation 'com.elconfidencial.bubbleshowcase:bubbleshowcase:1.3.1'
+//    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.google.android.gms:play-services:12.0.1'
+    //implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'org.apache.httpcomponents:httpclient:4.5'
+    implementation 'com.google.android.material:material:1.4.+'
+
+//    //circleImageview
+//    implementation 'de.hdodenhof:circleimageview:3.1.0'
+//
+//    implementation 'com.etebarian:meow-bottom-navigation:1.3.1'
+}

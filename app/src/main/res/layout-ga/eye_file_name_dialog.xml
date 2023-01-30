@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_toast_border_green"
+    android:orientation="vertical"
+    android:layoutDirection="ltr" >
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="#121212"
+        android:text="@string/file_details"
+        android:textColor="#94ba09"
+        android:textSize="15sp"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp" >
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/delete_attach"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btnClose"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <View
+            android:id="@+id/qnamelabel"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/nameText"
+            android:layout_marginBottom="5px"
+            android:layout_marginTop="5px"
+            android:background="#cdcdcd"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/valueText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/qnamelabel"
+            android:layout_marginBottom="5px"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/sizeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/valueText"
+            android:textColor="#343434"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnOpenFolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btnClose"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/custom_toast_border"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
+            android:text="Open file location"
+            android:textColor="#cc0000"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnOpenFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sizeText"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:background="#94ba09"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
+            android:text="@string/open_file"
+            android:textColor="#121212"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+</LinearLayout>

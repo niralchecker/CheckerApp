@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layoutDirection="ltr" >
+
+    <RelativeLayout
+        android:id="@+id/AbsoluteLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <com.checker.sa.android.mapview.MapLocationViewer
+            android:id="@+id/map_location_viewer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

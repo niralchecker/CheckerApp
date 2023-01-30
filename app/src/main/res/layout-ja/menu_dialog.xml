@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="80dp"
+    android:background="@drawable/back_black"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    android:padding="10dp" >
+
+    <ListView
+        android:id="@+id/lvjobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnOk"
+        android:layout_below="@+id/textView1"
+        android:divider="#cdcdcd"
+        android:dividerHeight="3px" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/accept_btn_selector"
+        android:paddingBottom="8dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="8dp"
+        android:text="@string/non_answered_conf_alert_cancel_btn"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="15dp" />
+
+</LinearLayout>

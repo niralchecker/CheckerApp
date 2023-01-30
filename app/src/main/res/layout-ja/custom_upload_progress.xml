@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_progress_bars"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/custom_progress_border_grey"
+    android:orientation="vertical"
+    android:layoutDirection="ltr" >
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="30dp" >
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/loader_gif"
+            />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_progress_jobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="2dp" >
+
+        <ProgressBar
+            android:id="@+id/progress_bar_jobs"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:progress="80"
+            android:progressDrawable="@drawable/progress_bar_green" />
+
+        <RelativeLayout
+            android:id="@+id/bar_overlay"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp" >
+
+            <TextView
+                android:id="@+id/txt_progress_jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/uploading_jobs_of"
+                android:textColor="#ffffff"
+                android:textSize="12dp" />
+        </RelativeLayout>
+    </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/middle"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"  >
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/loader_gif_blue"
+            />
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/layout_progress_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="2dp" >
+
+        <ProgressBar
+            android:id="@+id/progress_bar_images"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:progress="90"
+            android:progressDrawable="@drawable/progress_bar" />
+
+        <RelativeLayout
+            android:id="@+id/bar_overlay"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp" >
+
+            <TextView
+                android:id="@+id/txt_progress_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/uploading_images_of"
+                android:textColor="#ffffff"
+                android:textSize="12dp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</LinearLayout>

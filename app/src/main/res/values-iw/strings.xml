@@ -1,0 +1,591 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="plsselect">בבקשה תבחר</string>
+    <string translatable="false" name="s_switch_auto_uploading">אפשר העלאה אוטומטית:</string>
+    <!-- words translated but no showing in app -->
+    <string translatable="false" name="s_switch_branch_name">אפשר שם סניף מלא</string>
+    <string translatable="false" name="job_settings">הגדרות עבודה</string>
+    <string translatable="false" name="s_tracker_heading">הגדרות מיקום</string>
+    <string translatable="false" name="s_tracker_setting">מצא עבודות בקרבתי</string>
+    <string translatable="false" name="alert_saving">שומר......</string>
+    <string translatable="false" name="changeDate">שנה תאריך</string>
+    <string translatable="false" name="settings_job_board">לוח העבודות הפנויות</string>
+    <string translatable="false" name="settings_refund_report">דוח תשלומים אישי</string>
+    <string translatable="false" name="close">סגור</string>
+    <string translatable="false" name="ufinsheddwnloding">מוריד עבודות בביצוע...</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_190">הזדמנות לעבודות חדשות!</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_190">השדמנות לעבודה חדשה!</string>
+    <string translatable="false" name="s_item_column_0_line_206_file_190">מוצא עבודות לידך</string>
+    <string translatable="false" name="s_item_column_0_line_804_file_88">יושם</string>
+    <string translatable="false" name="s_item_column_0_line_838_file_88">שיבוץ עצמי</string>
+    <string translatable="false" name="s_item_column_0_line_839_file_88">תודה על הגשת המועמדות להזמנה זו. אנא לחץ על הורדת עבודות כדי לראות את ההזמנה ברשימת העבודות המשובצות לך.</string>
+    <string translatable="false" name="s_item_column_0_line_859_file_88">שגיאת התחברות או חוסר יכולת להתובר לאינטרנט!</string>
+    <string translatable="false" name="s_item_column_0_line_893_file_88">הורד עכשיו</string>
+    <string translatable="false" name="s_item_column_0_line_923_file_88">הורד בזמן אחר</string>
+    <string translatable="false" name="s_item_column_0_line_994_file_88">Application Comment</string>
+    <string translatable="false" name="s_item_column_0_line_1441_file_88">יושם</string>
+    <string translatable="false" name="s_item_column_0_line_1549_file_88">מתאים תאריכים אלטרנטיביים</string>
+    <string translatable="false" name="s_item_column_0_line_1579_file_88">כמות</string>
+    <string translatable="false" name="s_item_column_0_line_1594_file_88">Not Available</string>
+    <string translatable="false" name="s_item_column_0_line_1597_file_88">בחר תאריך</string>
+    <string translatable="false" name="s_item_column_0_line_174_file_210"> PENDING </string>
+    <string translatable="false" name="s_item_column_0_line_184_file_210"> אושר </string>
+    <string translatable="false" name="s_item_column_0_line_194_file_210"> שולם </string>
+    <string translatable="false" name="s_item_column_0_line_199_file_210"> View More Details </string>
+    <string translatable="false" name="s_item_column_0_line_202_file_210">Review No: </string>
+    <string translatable="false" name="s_item_column_0_line_344_file_210">כן</string>
+    <string translatable="false" name="s_item_column_0_line_346_file_210">לא</string>
+    <string translatable="false" name="s_item_column_0_line_145_file_223">Remove Application</string>
+    <string translatable="false" name="s_item_column_0_line_647_file_27">הגדרות עבודה</string>
+    <string translatable="false" name="s_item_column_0_line_774_file_27">שמירה</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_37">שם לקוח:</string>
+    <string translatable="false" name="s_item_column_0_line_94_file_37">סוג רצף:</string>
+    <string translatable="false" name="s_item_column_0_line_120_file_37">התווסף בתאריך: </string>
+    <string translatable="false" name="s_item_column_0_line_149_file_37">סכום: </string>
+    <string translatable="false" name="s_item_column_0_line_176_file_37">מספר קבלה:</string>
+    <string translatable="false" name="s_item_column_0_line_205_file_37">אושר:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_37">שולם:</string>
+    <string translatable="false" name="s_item_column_0_line_263_file_37">קוד סניף:</string>
+    <string translatable="false" name="s_item_column_0_line_292_file_37">שם סניף</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_37">שם עיר</string>
+    <string translatable="false" name="s_item_column_0_line_350_file_37">שם אזור</string>
+    <string translatable="false" name="s_item_column_0_line_379_file_37">כתובת:</string>
+    <string translatable="false" name="s_item_column_0_line_408_file_37">שם פרוייקט:</string>
+    <string translatable="false" name="s_item_column_0_line_436_file_37">תיאור:</string>
+    <string translatable="false" name="s_item_column_0_line_465_file_37">מזהה ההזמנה:</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_44">Shelf Share</string>
+    <string translatable="false" name="s_item_column_0_line_581_file_44">צלם תמונה</string>
+    <string translatable="false" name="s_item_column_0_line_852_file_44">נלכד</string>
+    <string translatable="false" name="s_item_column_0_line_59_file_52">מפה</string>
+    <string translatable="false" name="s_item_column_0_line_71_file_52">LIST</string>
+    <string translatable="false" name="s_item_column_0_line_183_file_52">החל  בחירה</string>
+    <string translatable="false" name="s_item_column_0_line_214_file_52">תאריכים:</string>
+    <string translatable="false" name="s_item_column_0_line_246_file_52">היום</string>
+    <string translatable="false" name="s_item_column_0_line_270_file_52">30 הימים הבאים</string>
+    <string translatable="false" name="s_item_column_0_line_295_file_52">מותאם אישית</string>
+    <string translatable="false" name="s_item_column_0_line_337_file_52">לקוח</string>
+    <string translatable="false" name="s_item_column_0_line_361_file_52">אזור</string>
+    <string translatable="false" name="s_item_column_0_line_415_file_52">איפוס</string>
+    <string translatable="false" name="s_item_column_0_line_429_file_52">הצג</string>
+    <string translatable="false" name="s_item_column_0_line_25_file_77">Please select image resize option:</string>
+    <string translatable="false" name="s_item_column_0_line_15_file_108">עבודות חלופיות:</string>
+    <string translatable="false" name="s_item_column_0_line_676_file_98">קבצים חסרים:</string>
+    <string translatable="false" name="s_item_column_0_line_65_file_94">בחירת הכל</string>
+    <string translatable="false" name="s_item_column_0_line_107_file_94">אין תוכן</string>
+    <string translatable="false" name="s_item_column_0_line_75_file_102">לא נמצא מידע</string>
+    <string translatable="false" name="s_item_column_0_line_100_file_102">בחר חודש ושנה</string>
+    <string translatable="false" name="s_item_column_0_line_147_file_102">שולם:</string>
+    <string translatable="false" name="s_item_column_0_line_194_file_102">אושר:</string>
+    <string translatable="false" name="s_item_column_0_line_241_file_102">סוג רצף:</string>
+    <string translatable="false" name="s_item_column_0_line_288_file_102">סוג דוח:</string>
+    <string translatable="false" name="s_item_column_0_line_336_file_102">הצג</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_102">איפוס</string>
+    <string translatable="false" name="s_item_column_0_line_66_file_113">שם לקוח:</string>
+    <string translatable="false" name="s_item_column_0_line_93_file_113">סוג רצף:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_113">התווסף בתאריך: </string>
+    <string translatable="false" name="s_item_column_0_line_148_file_113">סכום: </string>
+    <string translatable="false" name="s_item_column_0_line_175_file_113">מספר קבלה:</string>
+    <string translatable="false" name="s_item_column_0_line_204_file_113">אושר:</string>
+    <string translatable="false" name="s_item_column_0_line_233_file_113">שולם:</string>
+    <string translatable="false" name="s_item_column_0_line_262_file_113">קוד סניף:</string>
+    <string translatable="false" name="s_item_column_0_line_291_file_113">שם סניף:</string>
+    <string translatable="false" name="s_item_column_0_line_320_file_113">שם עיר:</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_113">שם אזור:</string>
+    <string translatable="false" name="s_item_column_0_line_378_file_113">כתובת:</string>
+    <string translatable="false" name="s_item_column_0_line_407_file_113">שם פרוייקט:</string>
+    <string translatable="false" name="s_item_column_0_line_435_file_113">תיאור:</string>
+    <string translatable="false" name="s_item_column_0_line_464_file_113">מזהה ההזמנה:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_119">סיים</string>
+    <string translatable="false" name="s_item_column_0_line_489_file_121">הגדרות מצלמה</string>
+    <string translatable="false" name="s_item_column_0_line_546_file_121">אפשר גיבוי תמונות</string>
+    <string translatable="false" name="s_item_column_0_line_580_file_121">אפשר כמה תמונות</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_122">פרטי עבודה</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_122">שם לקוח:</string>
+    <string translatable="false" name="s_item_column_0_line_96_file_122">שם סניף:</string>
+    <string translatable="false" name="s_item_column_0_line_125_file_122">שם עיר:</string>
+    <string translatable="false" name="s_item_column_0_line_154_file_122">כתובת:</string>
+    <string translatable="false" name="s_item_column_0_line_182_file_122">תיאור הזמנה:</string>
+    <string translatable="false" name="s_item_column_0_line_209_file_122">שאלון:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_122">שם סניף מקוצר:</string>
+    <string translatable="false" name="s_item_column_0_line_260_file_122">תאריך:</string>
+    <string translatable="false" name="s_item_column_0_line_289_file_122">זמן התחלה וסיום:</string>
+    <string translatable="false" name="s_item_column_0_line_315_file_122">שעות פתיחת הסניף:</string>
+    <string translatable="false" name="s_item_column_0_line_344_file_122">טלפון:</string>
+    <string translatable="false" name="s_item_column_0_line_373_file_122">תשלום עבור סקר:</string>
+    <string translatable="false" name="s_item_column_0_line_402_file_122">תשלום בונוס:</string>
+    <string translatable="false" name="s_item_column_0_line_431_file_122">תשלום עבור תחבורה:</string>
+    <string translatable="false" name="s_item_column_0_line_467_file_122">תאריכים חלופיים:</string>
+    <string translatable="false" name="s_item_column_0_line_523_file_122">הגד מועמדות</string>
+    <string translatable="false" name="s_item_column_0_line_81_file_137">שם לקוח</string>
+    <string translatable="false" name="s_item_column_0_line_110_file_137">פרטי הסניף:</string>
+    <string translatable="false" name="s_item_column_0_line_139_file_137">עיר:</string>
+    <string translatable="false" name="s_item_column_0_line_168_file_137">תאריך:</string>
+    <string translatable="false" name="s_item_column_0_line_196_file_137">סך הכל הזמנות:</string>
+    <string translatable="false" name="s_item_column_0_line_223_file_137">מרחק:</string>
+    <string translatable="false" name="s_item_column_0_line_254_file_137">הגד מועמדות</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_125">האם ברצונך להוסיף תמונה נוספת?</string>
+    <string translatable="false" name="s_item_column_0_line_13_file_124">קבצים חסרים:</string>
+    <string translatable="false" name="s_item_column_0_line_57_file_124">העלה</string>
+    <string translatable="false" name="history_clear_one_history_text">איפוס</string>
+    <string translatable="false" name="start_download_alt">הורד עבודות בשפות אלטרנטיביות</string>
+    <string translatable="false" name="aauploading_file">מעלה קובץ: ##</string>
+    <string translatable="false" name="uploading_jobs_of">מעלה עבודות #NUMBER# מתוך #TOTAL#</string>
+    <string translatable="false" name="uploading_images_of">מעלה תמונות#NUMBER#מ#סה"כ</string>
+    <string translatable="false" name="upload">העלה</string>
+    <string translatable="false" name="take_another_photo">האם ברצונך להוסיף תמונה נוספת?</string>
+    <string translatable="false" name="start_recording">האם להתחיל הקלטה?</string>
+    <string translatable="false" name="stop_recording">האם להפסיק הקלטה?</string>
+    <string translatable="false" name="s_switch_time_stamp">להוסיף חותמת</string>
+    <string translatable="false" name="s_switch_alternate_jobs">עבודות חלופיות:</string>
+    <string translatable="false" name="settings_image_resizing">שינוי גודל התמונה</string>
+    <string translatable="false" name="settings_image_original">מקורי</string>
+    <string translatable="false" name="settings_image_medium">בינוני</string>
+    <string translatable="false" name="settings_image_small">קטן</string>
+    <string translatable="false" name="settings_image_ask">שאל</string>
+    <string translatable="false" name="alert_issue_in_loop">נראה כי יש שגיאה בהגדרת הלולאה. אנא פנה לאדמין</string>
+    <string translatable="false" name="memory_info">מידע זכרון</string>
+    <string translatable="false" name="not_enough_space_ram">אין מספיק זכרון (RAM) בכדי להמשיך עבודה עם צקר</string>
+    <string translatable="false" name="not_enough_space_internal_memory">There is not enough space (internal memory) for Checker to proceed, please clear out some space to proceed.</string>
+    <string translatable="false" name="please_enter_comment_for_bug">בבקשה כתוב הערות כאן</string>
+    <string translatable="false" name="android_closed_app_forcefully">Android closed your app forcefully shall we start getting your data back?</string>
+    <string translatable="false" name="upload_following_attached_files">Upload following attached files</string>
+    <string translatable="false" name="file_saved_properly_at">קובץ נשמר בצורה תקינה ב:</string>
+    <string translatable="false" name="unable_to_save_file_at">לא ניתן לשמור קובץ ב:</string>
+    <string translatable="false" name="crashing_app_ourself">Crashing app ourself</string>
+    <string translatable="false" name="unable_to_find_loop_data">לא נמצא מידע ללולאה</string>
+    <string translatable="false" name="amp_16">&amp; $[16,</string>
+    <string translatable="false" name="it_is_mandatory_to_attach_a_file">חובה לצרף קובץ</string>
+    <string translatable="false" name="no_answer_chosen">לא נבחרה תשובה!</string>
+    <string translatable="false" name="save_and_download">שמור והורד</string>
+    <string translatable="false" name="out_of_bound"> is out of bounds.</string>
+    <string translatable="false" name="preffered_questionnaire_language">לידיעתך, תוכל לבחור את שפת השאלון המועדפת עליך</string>
+    <string translatable="false" name="google_services_not_avaliable">שירותי גוגל play אינם זמינים</string>
+    <string translatable="false" name="downloading_system_languages">מוריד שפות מערכת</string>
+    <string translatable="false" name="no_alternative_or_server_side">לא נמצאה שפה אלטרנטיבית בשרת</string>
+    <string translatable="false" name="update_system_languages">מעדכן שפות מערכת</string>
+    <string translatable="false" name="synch_is_already_in_progress">הסינכרון כבר בתהליך!</string>
+    <string translatable="false" name="downloading_alternative_jobs">מוריד עבודות חלופיות</string>
+    <string translatable="false" name="assigning_alternate_job">משבץ עבודה חלופית</string>
+    <string translatable="false" name="order_assigned_refreshing_job_list">עבודה שובצה, מרענן רשימת עבודות!</string>
+    <string translatable="false" name="unable_to_assign_this_order">לא ניתן לשבץ עבודה זו, אנא צור קשר עם מנהל המערכת</string>
+    <string translatable="false" name="unable_to_find_alternative_job"> לא נמצאה שפה אלטרנטיבית</string>
+    <string translatable="false" name="do_you_Want_relace_order">האם ברצונך להחליף את ההזמנה לסניף הנבחר?</string>
+    <string translatable="false" name="could_not_retrieve">לא ניתן לשחזר מידע הסקר...</string>
+    <string translatable="false" name="questionnaire_mock_gps_alert">GPS מוסווה מופעל אצלך במכשיר. בבקשה כבה תכונה זו על מנת להמשיך. כיבוי מתבצע ב: הגדרות > יישומים > כלי פיתוח > אפשר מיקומים מוסווים. האם ברצונך לפתוח עמוד הגדרה זו?</string>
+    <string translatable="false" name="questionnaire_min_zero_max">#MAX# מקסימום</string>
+    <string translatable="false" name="questionnaire_min_max">מינימום #MIN# תווים</string>
+    <string translatable="false" name="questionnaire_min_max_zero">#MAX# תווים נותרו. מינימום #MIN# תווים</string>
+    <string translatable="false" name="questionnaire_error_retrieving">שגיאה במציאת מידע שמור</string>
+    <string translatable="false" name="questionnaire_sign">חתום כאן</string>
+    <string translatable="false" name="error_order_not_assigned">ההזמנה אינה משובצת אליך</string>
+    <string translatable="false" name="error_opening_android_gallery">שגיאה בשימוש הגלריה של אנדרואיד, אנא השתמש בגלריה המתואמת שלנו, מצטערים על אי הנוחות</string>
+    <string translatable="false" name="sortByDate">מיון לפי תאריך</string>
+    <string translatable="false" name="sortByName">מיון לפי שם</string>
+    <string translatable="false" name="button_show_file">הצג קובץ</string>
+    <string translatable="false" name="questionnaire_select_file_alert">האם ברצונך לבחור קובץ?</string>
+    <string translatable="false" name="s_branch_sorting">מיון סניפים</string>
+    <string translatable="false" name="s_alphabetical">לפי סדר א-ב</string>
+    <string translatable="false" name="s_distance">מרחק</string>
+    <string translatable="false" name="s_image_cropping">חיתוך תמונה</string>
+    <string translatable="false" name="s_on">מופעל</string>
+    <string translatable="false" name="s_off">כבוי</string>
+    <string translatable="false" name="attach_err_job_list">ישנם קבצים מצורפים שממתינים להעלאה. לחץ כדי לראות.</string>
+    <string translatable="false" name="file_delete_alert">האם למחוק קובץ זה?</string>
+    <string translatable="false" name="questionnaire_date_valid_error">פורמט זמן שגוי!</string>
+    <string translatable="false" name="purchase_numeric_error">נדרש ערך מספרי</string>
+    <string translatable="false" name="purchase_simple_error">יש להשתמש במספרים שלמים או באותיות בלבד</string>
+    <string translatable="false" name="purchase_exceeds_error">ערך חורג ממגבלה</string>
+    <string translatable="false" name="sNonRefundableServicePayment">תשלום עבור שירותים</string>
+    <string translatable="false" name="sCriticismPayment">תשלום עבור סקר</string>
+    <string translatable="false" name="sBonusPayment">תשלום בונוס</string>
+    <string translatable="false" name="purchase_details">פרטי רכישה</string>
+    <string translatable="false" name="purchase_invoice_number">מספר חשבונית רכישה</string>
+    <string translatable="false" name="purchase_payment">תשלום עבור רכישה</string>
+    <string translatable="false" name="purchase_description">תיאור רכישה</string>
+    <string translatable="false" name="service_details">פרטי שירות</string>
+    <string translatable="false" name="service_invoice_number">מספר חשבונית שירות</string>
+    <string translatable="false" name="service_payment">תשלום עבור שירות</string>
+    <string translatable="false" name="service_description">תיאור שירות</string>
+    <string translatable="false" name="transportation_details">פרטי תחבורה</string>
+    <string translatable="false" name="transportation_description">תיאור תחבורה</string>
+    <string translatable="false" name="transportation_payment">תשלום עבור תחבורה</string>
+    <string translatable="false" name="jd_purchasedesc">תיאור רכישה</string>
+    <string translatable="false" name="jd_can_purchase">ביצוע רכישה</string>
+    <string translatable="false" name="start_download">הורדת רשימת עבודות</string>
+    <string translatable="false" name="start_upload"> העלה עבודות שהסתיימו</string>
+    <string translatable="false" name="alert_working">עבודה</string>
+    <string translatable="false" name="alert_switching">מיתוג כרטיסיות</string>
+    <string translatable="false" name="prepare_screen_dialogue">אוסף מידע עבור שאלון זה...</string>
+    <string translatable="false" name="aaparsing_complete">מכין את מסד הנתונים...</string>
+    <string translatable="false" name="aasaving_assigned_jobs_surveys_job">שומר עבודות וסקרים משובצים במסד הנתונים...</string>
+    <string translatable="false" name="aauploading_job">מעלה עבודה ##</string>
+    <string translatable="false" name="aadownloading_Assigned_jobs">מוריד עבודות משובצות</string>
+    <string translatable="false" name="aadownloading_Assigned_surveys">מוריד סקרים משובצים</string>
+    <string translatable="false" name="aaparsing_surveys">מעבד סקר: ##</string>
+    <string translatable="false" name="aaparsing_questionnaire">מעבד שאלון, ##</string>
+    <string translatable="false" name="aasaving_db_questionnaire">שומר במסד הנתונים. שאלון: ##</string>
+    <string translatable="false" name="aaquestionnaires_downloading_saving">בתהליך הורדת ושמירת שאלונים</string>
+    <string translatable="false" name="aaparsing_assigned_surveys">מעבד סקרים משובצים</string>
+    <string translatable="false" name="aaparsing_assigned_jobs">מעבד עבודות משובצות</string>
+    <string translatable="false" name="aaupdating_job">מעלה עבודה </string>
+    <string translatable="false" name="_error_display_condition">ישנה שגיאה בתנאי התצוגה לשאלה. אנא פנה למנהל הסקר</string>
+    <string translatable="false" name="job_list_err_dialog">הערות שגיאה:</string>
+    <string translatable="false" name="job_list_err_dialog_branch">הטלפון אינו תומך בתנאי התצוגה 101.</string>
+    <string translatable="false" name="err_missing_images">התמונות למעלה חסרות. נא לרענן את רשימת העבודות.</string>
+    <string translatable="false" name="press_back_again">לחץ על כפתור אחורה כדי לסגור</string>
+    <string translatable="false" name="job_list_tab_sync">סנכרון</string>
+    <string translatable="false" name="job_list_tab_assigned">משובץ</string>
+    <string translatable="false" name="job_list_tab_scheduled">נקבע תאריך</string>
+    <string translatable="false" name="job_list_tab_in_progress">בביצוע</string>
+    <string translatable="false" name="job_list_tab_completed">הושלם</string>
+    <string translatable="false" name="job_list_tab_sync_u"><b><u>סנכרון</u></b></string>
+    <string translatable="false" name="job_list_tab_assigned_u"><b><u>משובץ</u></b></string>
+    <string translatable="false" name="job_list_tab_scheduled_u"><b><u>נקבע תאריך</u></b></string>
+    <string translatable="false" name="job_list_tab_in_progress_u"><b><u>בביצוע</u></b></string>
+    <string translatable="false" name="job_list_tab_completed_u"><b><u>הושלם</u></b></string>
+    <string translatable="false" name="job_list_menu_update_list">הצגת עבודות על מפה</string>
+    <string translatable="false" name="job_list_menu_upload_complete_job">סינון עבודות</string>
+    <string translatable="false" name="survey_quota_delete_message">המכסה [QNAME] הסתיימה.ביצעת את כל ה ##הראיון נמחק</string>
+    <string translatable="false" name="survey_quota_upload_message">"המכסה [QNAME] הסתיימה.ביצעת את כל ה ##</string>
+    <string translatable="false" name="txt_briefing">תדריך</string>
+    <string translatable="false" name="voice_menu_text">הקלטת קול</string>
+    <string translatable="false" name="attach_disclaimer">קבצים אלה כעת מצורפים לעבודה:</string>
+    <string translatable="false" name="jd_survey_name">שם הסקר</string>
+    <string translatable="false" name="jd_survey_quotas">מכסות</string>
+    <string translatable="false" name="jd_survey_allocations">הקצאות</string>
+    <string translatable="false" name="button_back">בחזרה</string>
+    <string translatable="false" name="jd_begin_btn_text">התחלת ראיון</string>
+    <string translatable="false" name="questionnaire_finish">סיום</string>
+    <string translatable="false" name="settings_txt_proxy">פרוקסי</string>
+    <string translatable="false" name="settings_page_proxy">פרוקסי</string>
+    <string translatable="false" name="disable_proxy">איפוס</string>
+    <string translatable="false" name="survey_quota_alert_message">מכסת סיימה!</string>
+    <string translatable="false" name="pos_no_tabs">לא כרטיסייה גלויה!</string>
+    <string translatable="false" name="pos_error_report2"></string>
+    <string translatable="false" name="pos_error_report">הזן רוזן חוקי &lt;=</string>
+    <string translatable="false" name="pos_backk">בחזרה</string>
+    <string translatable="false" name="pos_product">מוצר</string>
+    <string translatable="false" name="pos_count">כמות</string>
+    <string translatable="false" name="pos_location">מיקום</string>
+    <string translatable="false" name="pos_price">מחיר</string>
+    <string translatable="false" name="pos_expiration">תאריך תפוגה</string>
+    <string translatable="false" name="pos_note">הערה</string>
+    <string translatable="false" name="pos_picture">תמונה</string>
+    <string translatable="false" name="pos_enter_count">הזן כמות</string>
+    <string translatable="false" name="pos_subtract">חיסור</string>
+    <string translatable="false" name="pos_add">חיבור</string>
+    <string translatable="false" name="pos_value">ערך</string>
+    <string translatable="false" name="pos_x">X</string>
+    <string translatable="false" name="pos_equal"> = </string>
+    <string translatable="false" name="pos_total">: סה</string>
+    <string translatable="false" name="pos_enter_price">הזן מחיר</string>
+    <string translatable="false" name="pos_average">:ממוצע</string>
+    <string translatable="false" name="pos_error_product">! מוצר לא נמצא</string>
+    <string translatable="false" name="pos_intall_manager">. בבקשה התקן מנהל קבצים</string>
+    <string translatable="false" name="pos_not_attach">! לא ניתן לצרף קוב</string>
+    <string translatable="false" name="pos_error_enter">! בבקשה הזן נתון</string>
+    <string translatable="false" name="pos_error_enter_product_location">! אנא בחר מוצר ומיקום</string>
+    <string translatable="false" name="pos_preview">מקדימה POS תצוגת</string>
+    <string translatable="false" name="pos_enter_note">הזן הערה</string>
+    <string translatable="false" name="pos_selected_date">תאריך נבחר</string>
+    <string translatable="false" name="pos_select_product">בחר מוצר</string>
+    <string translatable="false" name="pos_select_location">בחר מיקום</string>
+
+    <!-- login Screen -->
+    <string translatable="false" name="video_menu_text">וידאו</string>
+    <string translatable="false" name="questionnaire_menu_btn">סיים</string>
+    <string translatable="false" name="list_enable_calendar">הוסף ללוח השנה של עבודה?</string>
+    <string translatable="false" name="questionnaire_gps_alert">המידע אודות המיקום שלך אינו מופעל. האם להפעיל אותו?</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert">האם אתה בטוח שברצונך לצאת ולמחוק את כל התשובות?</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_yes">כן</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_no">לא</string>
+    <string translatable="false" name="Questionaire_submitting">הגשת סקר בהתקדמות ...</string>
+    <string translatable="false" name="exit_and_delete_btn_text">מחיקה ויציאה</string>
+    <string translatable="false" name="login_page_title">שלום</string>
+    <string translatable="false" name="login_btn">התחל</string>
+    <string translatable="false" name="login_heder">שלום</string>
+    <string translatable="false" name="login_username_hint">שם משתמש</string>
+    <string translatable="false" name="login_password_hint">ססמא</string>
+    <string translatable="false" name="login_reset_btn">איפוס</string>
+    <string translatable="false" name="error_alert_title">שים לב</string>
+    <string translatable="false" name="alert_btn_lbl_ok">המשך</string>
+    <string translatable="false" name="login_username_alert">שם משתמש או ססמא שגויים</string>
+    <string translatable="false" name="login_clientside_username_alert">שם משתמש שגוי</string>
+    <string translatable="false" name="login_invalid_systemurl_alert">כתובת מערכת שגויה אנא השתמש בכתובת מלאה (דוגמה: http://www.Checker-soft.com/demo)</string>
+    <string translatable="false" name="invalid_server_response_alert">תגובת שרת לא תקינה אנא צור קשר עם המפעיל</string>
+    <string translatable="false" name="questionnaire_alert_additional">נדרש מידע נוסף!</string>
+    <string translatable="false" name="questionnaire_alert_text_between_first">אורך המלל צריך להיות בין START ל END </string>
+    <string translatable="false" name="questionnaire_alert_text_to"> ל </string>
+    <string translatable="false" name="questionnaire_alert_no_answer">לא נבחרה תשובה!</string>
+    <string translatable="false" name="questionnaire_alert_text_betweeeen_first">הערך המספרי צריך להיות בטווח שבין START ל END </string>
+    <string translatable="false" name="jd_please_alert_msg">נא להמתין...</string>
+
+    <!-- Setting Screen -->
+    <string translatable="false" name="settings_page_title">הגדרות</string>
+    <string translatable="false" name="settings_system_url_lbl">כתובת מערכת URL</string>
+    <string translatable="false" name="settings_language_lbl">שפה</string>
+    <string translatable="false" name="settings_themes_lbl">תצוגה</string>
+    <string translatable="false" name="settings_save_btn">שמור</string>
+    <string translatable="false" name="settings_http_label">http://</string>
+    <string translatable="false" name="url_hint">כתובת מערכת URL</string>
+    <string translatable="false" name="_alert_title">הודעה</string>
+    <string translatable="false" name="settings_url_alert">אנא הכנס כתובת מערכת חוקית URL</string>
+    <string translatable="false" name="settings_system_url_hint">כתובת מערכת URL</string>
+
+    <!-- Job List Screen -->
+    <string translatable="false" name="joblist_title">רשימת עבודות</string>
+    <string translatable="false" name="joblist_filter_btn">סנן</string>
+    <string translatable="false" name="joblist_map_btn">מפה</string>
+    <string translatable="false" name="joblist_all_jobs">הצג את כל העבודות</string>
+
+    <!-- Job Filter Screen -->
+    <string translatable="false" name="job_filter_title">חפש</string>
+    <string translatable="false" name="job_filter_choose_job_type_lbl">סוג עבודה</string>
+    <string translatable="false" name="job_filter_choose_city_lbl">עיר</string>
+    <string translatable="false" name="job_filter_date_range_lbl">תחום תאריכים</string>
+    <string translatable="false" name="job_filter_start_date_lbl">תאריך התחלה</string>
+    <string translatable="false" name="job_filter_end_date_lbl">תאריך סיום</string>
+    <string translatable="false" name="job_filter_save_btn">חפש</string>
+    <string translatable="false" name="job_filter_default_dd_option">בחר</string>
+    <string translatable="false" name="job_filter_select_date">בחר תאריך</string>
+    <string translatable="false" name="enable_branch_full_name">אפשר שם סניף מלא</string>
+    <string translatable="false" name="filter_by_date">סנן לפי תאריך</string>
+    <string translatable="false" name="default_theme">נושא ברירת מחדל</string>
+    <string translatable="false" name="s_resolution_selector">הצג רזולוציות מצלמה:</string>
+
+    <string-array name="job_filter_job_list">
+        <item> הכל</item>
+        <item> קמעונאי</item>
+        <item> התחלה וסוף</item>
+    </string-array>
+    <string-array name="job_filter_region_list">
+        <item>הכל</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <!-- JobDetail Screen -->
+    <string translatable="false" name="jd_heder_text">פרטי עבודה</string>
+    <string translatable="false" name="job_detail_map_btn">מפה</string>
+    <string translatable="false" name="jd_accept_btn_text">אשר שיבוץ</string>
+    <string translatable="false" name="jd_continue_review_btn_text">המשך שאלון</string>
+    <string translatable="false" name="jd_begin_review_btn_text">התחל שאלון</string>
+    <string translatable="false" name="jd_reject_btn_text">דחה שיבוץ</string>
+    <string translatable="false" name="jd_logout_btn_text">יציאה</string>
+    <string translatable="false" name="jd_date">תאריך</string>
+    <string translatable="false" name="jd_status">מצב</string>
+    <string translatable="false" name="jd_description">תיאור</string>
+    <string translatable="false" name="jd_setname">שאלון</string>
+    <string translatable="false" name="jd_clientname">לקוח</string>
+    <string translatable="false" name="jd_branchname">סניף</string>
+    <string translatable="false" name="jd_branchfname">שם סניף מלא</string>
+    <string translatable="false" name="jd_cityname">עיר</string>
+    <string translatable="false" name="jd_address">כתובת</string>
+    <string translatable="false" name="jd_branchpno">טלפון</string>
+    <string translatable="false" name="jd_openinghours">שעות פתיחה</string>
+    <string translatable="false" name="jd_stime">שעת התחלה</string>
+    <string translatable="false" name="jd_etime">שעת סיום</string>
+    <string translatable="false" name="jd_parsing_alert_title">מידע</string>
+    <string translatable="false" name="jd_parsing_alert_msg">אנא המתן שאלונים בבנייה</string>
+
+    <!-- Reject Job Screen -->
+    <string translatable="false" name="reject_job_popup_title">סיבת דחייה</string>
+    <string translatable="false" name="reject_job_popup_reason_lbl">סיבה</string>
+    <string translatable="false" name="reject_job_popup_btn_txt">המשך</string>
+
+    <!-- Questionnaire Screen -->
+    <string translatable="false" name="questionnaire_title">שאלון</string>
+    <string translatable="false" name="questionnaire_next_btn">המשך</string>
+    <string translatable="false" name="questionnaire_prev_btn">חזור</string>
+    <string translatable="false" name="questionnaire_exitandsave_menu">שמור וצא</string>
+    <string translatable="false" name="questionnaire_preview_menu">תצוגה מקדימה</string>
+    <string translatable="false" name="questionnaire_finishandsend_menu">סיים ושלח</string>
+    <string translatable="false" name="questionnaire_alert">תשובה שגויה</string>
+    <string translatable="false" name="questionnaire_btn_text">המשך</string>
+    <string translatable="false" name="questionnaire_alert_title">מידע</string>
+    <string translatable="false" name="questionnaire_submit_survey_alert">הטופס נשלח בהצלחה</string>
+    <string translatable="false" name="questionnaire_select_files">בחר קבצים</string>
+    <string translatable="false" name="questionnaire_upload_files">להעלות קבצים לסקירה: </string>
+    <string translatable="false" name="Questionnaire_finish_time_lbl">זמן סיום</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_time_lbl">זמן ביצוע סקר</string>
+    <string translatable="false" name="noJobmsg">"לא נמצאו הזמנות להגדת מועמדות בלוח העבודות הפנויות כרגע. אנא נסה שוב במועד מאוחר יותר. תודה!"</string>
+    <string translatable="false" name="checkertificatesmsg">טוען הסמכות</string>
+    <string translatable="false" name="strtcheckertificatesmsg">האם להתחיל הסמכה זו?</string>
+    <string translatable="false" name="downloadingCheckrtificate">מוריד הסמכות</string>
+    <string translatable="false" name="retakecheckertificatesmsg">האם אתה רוצה לבצע הסמכה זו שוב?</string>
+    <string translatable="false" name="alreadyPassed">עברת הסמכה כבר.</string>
+    <string translatable="false" name="reachedMaxTries">"הגעת למספר ההחזר המרבי של ה- CheckerTificate"</string>
+    <string translatable="false" name="alreadyBlocked">הסמכה חסומה.</string>
+
+    <!-- others -->
+    <!--
+         <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+		<item>Romanian</item>
+		<item>Hebrew</item>
+		<item>Hindi</item>
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -->
+
+    <string-array name="language_val">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list">
+        <item>לילה</item>
+        <item>יום</item>
+    </string-array>
+
+    <!-- NEW ADDED -->
+    <!--
+         <string translatable="false" name="jd_begin_button_status_inprogress">בביצוע</string>    
+    <string translatable="false" name="no_internet_connection_alret_message">אנא וודא שהנך מחובר לאינטרנט ושהנך משתמש בפרטי כניסה תקינים</string>       
+	<string translatable="false" name="jd_begin_button_status_completed">הושלם</string>
+	<string translatable="false" name="jd_synch_button_text">סנכן</string>
+	<string translatable="false" name="job_search_no_records_alert">לא נמצאו עבודות</string>
+	<string translatable="false" name="reject_job_sucess_alert">דחייתך נשלחה בהצלחה</string> 
+	<string translatable="false" name="reject_job_fail_alert">לא ניתן לדחות שיבוצים ללא קישור אינטרנט</string>
+	<string translatable="false" name="accept_job_fail_alert">לא ניתן לאשר שיבוצים ללא קישור אינטרנט</string>
+	<string translatable="false" name="offline_alert">לא ניתן לבצע את הפעולה ללא קישור אינטרנט</string>   
+	<string translatable="false" name="submit_review_fail_alert">לא ניתן לשלוח עבודות ללא קישור אינטרנט העבודה נשמה אנא נשה לשלוח בעת זמינות אינטרנט</string>               
+    <string translatable="false" name="job_list_menu_update_list">הורד שיבוצים ושאלונים מעודכנים</string>
+    <string translatable="false" name="job_list_menu_upload_complete_job">שלח את כל העבודות שהושלמו</string>
+    <string translatable="false" name="save_questionnaire_records_for_offline">לא ניתן למצוא את השאלון במערכת, אנא התחבר לאינטרנט והורד רשימת עבודות מחדש</string> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -->
+
+    <string translatable="false" name="jd_begin_button_status_inprogress">בביצוע</string>
+    <string translatable="false" name="no_internet_connection_alret_message">אנא וודא כי הנך מחובר לאינטרנט ונסה עם פרטי זיהוי פעילים</string>
+    <string translatable="false" name="jd_begin_button_status_completed">הושלמה</string>
+    <string translatable="false" name="jd_synch_button_text">סנכרן</string>
+    <string translatable="false" name="job_search_no_records_alert">לא נמצאו עבודות</string>
+    <string translatable="false" name="reject_job_sucess_alert">ההזמנה נדחתה בהצלחה</string>
+    <string translatable="false" name="reject_job_fail_alert">לא ניתן לדחות הזמנה ללא חיבור לאינטרנט</string>
+    <string translatable="false" name="accept_job_fail_alert">לא ניתן לאשר הזמנה ללא חיבור לאינטרנט</string>
+    <string translatable="false" name="offline_alert">אינן מחובר לאינטרנט אנא נסה שנית עם חיבור לאינטרנט</string>
+    <string translatable="false" name="submit_review_fail_alert">השאלון נשמר. היות ואינך מחובר לאינטרנט כעת העבודה תשלח במועד מאוחר יותר.</string>
+    <string translatable="false" name="save_questionnaire_records_for_offline">השאלון של עבודה זו לא נשמר לעבודה ללא קישור אינטרנט. אנא התחבר לאינטרנט ולחץ על "עדכן רשימת עבודות"</string>
+    <string translatable="false" name="questionnaire_multiple_max_ans_alert">נבחרו יותר תשובות מהמותר</string>
+    <string translatable="false" name="jd_begin_button_status_scheduled">שובצה</string>
+    <string translatable="false" name="job_list_exit">יציאה</string>
+    <string translatable="false" name="reject_job_resusal_text_alert">מדוע הנך דוחה את ההזמנה</string>
+    <string translatable="false" name="job_download_alert">טוען רשימת עבודות...</string>
+    <string translatable="false" name="questionnaire_downlaod_alert">טוען שאלונים...</string>
+    <string translatable="false" name="questionnaire_saving_alert">טעינת שאלונים...</string>
+    <string translatable="false" name="image_downloading_alert">מכין שאלונים...</string>
+    <string translatable="false" name="before_accept_alert">השאלון של עבודה זו לא נשמר לעבודה ללא קישור אינטרנט. אנא התחבר לאינטרנט ולחץ על "עדכן רשימת עבודות"</string>
+
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Romanian</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Japanese</item>
+    </string-array>
+
+    <color name="darkness_value">#99000000</color>
+
+    <!-- login Screen -->
+    <string translatable="false" name="timeout_response_alert">החיבור נפסק באמצע. נא ליצור קשר עם האחראי</string>
+    <string translatable="false" name="crash_toast_text">אופס! קרסתי  אבל הודעה נשלחה אל המפתחים שלי כדי לטפל בנושא!</string>
+    <string translatable="false" name="crash_dialog_title">צקר קרס</string>
+    <string translatable="false" name="crash_dialog_text">שגיאה לא צפוייה גרמה לסגירת האפליקציה. אנא עזרו לנו על ידי משלוח מידע השגיאה אל המפתחים לצורך ניתוח. כל שצריך לעשות זה ללחוץ על אישור. סליחה ותודה!</string>
+    <string translatable="false" name="crash_dialog_comment_prompt">ניתן להוסיף הערות בנוגע לבעיה:</string>
+    <string translatable="false" name="crash_dialog_ok_toast">אישור</string>
+
+    <!-- Job Filter Screen -->
+
+    <string translatable="false" name="questionnaire_alert_free_text">הערך אינו בתוך הטווח המותר</string>
+    <string translatable="false" name="save_questionnaire_records_for_database">לא ניתן לפתוח את מסד הנתונים.</string>
+    <string translatable="false" name="non_answered_conf_alert_title">אישור</string>
+    <string translatable="false" name="non_answered_conf_alert_msg">נא לשים לב שהתשובה לא מולאה. יש לבחור בביטול כדי למלא</string>
+    <string translatable="false" name="non_answered_conf_alert_cancel_btn">ביטול</string>
+    <string translatable="false" name="non_answered_conf_alert_continue_btn">המשך</string>
+    <string translatable="false" name="Questionnaire_finish_Date_lbl">תאריך סיום</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_Date_lbl">זמן ביצוע סקר</string>
+    <string translatable="false" name="questionnaire_free_text_lbl">טקסט חופשי</string>
+    <string translatable="false" name="questionnaire_done_btn_text">המשך</string>
+    <string translatable="false" name="questionnaire_file_attached_text">קובץ צורף</string>
+    <string translatable="false" name="already_submit_review_alert">הסקר כבר נשלח</string>
+    <string translatable="false" name="camera_menu_text">מצלמה</string>
+    <string translatable="false" name="gallery_menu_text">גלריה</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+    <!-- added by umer -->
+
+</resources>

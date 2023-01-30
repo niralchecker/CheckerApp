@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/previewLayout"
+
+    android:layoutDirection="ltr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <android.view.SurfaceView
+        android:id="@+id/preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </android.view.SurfaceView>
+
+    <TextView
+        android:id="@+id/focus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:layout_toLeftOf="@+id/btnCapture"
+        android:visibility="gone"
+        android:background="#88000000"
+        android:padding="5dp"
+        android:text="Touch to Focus"
+        android:textColor="#ffffff"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/resolutions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/focus"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:background="#88000000"
+        android:padding="5dp"
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
+
+    <ListView
+        android:id="@+id/resolutionsList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/resolutions"
+        android:layout_marginLeft="25dp"
+        android:background="#88000000"
+        android:cacheColorHint="#00000000"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/btnCapture"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/capture" />
+
+    <ImageView
+        android:id="@+id/btnSwap"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/flash_day" />
+
+    <RelativeLayout
+        android:id="@+id/imgdialog"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/btnCross"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/pic_cross" />
+        <ImageView
+            android:id="@+id/btnCrop"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:visibility="invisible"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/btn_crop" />
+
+        <ImageView
+            android:id="@+id/btnTick"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/pic_tick" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,1160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backGroundDrawable"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:layoutDirection="ltr" >
+
+    <RelativeLayout
+        android:id="@+id/rvjobdetailscreen"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/languagelist"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/jdmapbtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="10px"
+            android:src="@drawable/map_button"
+            android:tag="map_button" />
+
+        <ImageView
+            android:id="@+id/jdcalendarbtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="10px"
+            android:layout_toRightOf="@+id/jdmapbtn"
+            android:src="@drawable/calendar_btn"
+            android:tag="calendar_btn"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/jd_heder"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/jd_heder_text"
+            android:textColor="#373435"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/jd_alt_btn"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="10px"
+            android:background="@color/hover_txtbtn"
+            android:src="@drawable/alt_lang"
+            android:tag="alt_lang" />
+
+        <View
+            android:id="@+id/dividing_line_3"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv2"
+            android:background="#B3B3B3" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/jdbottomrv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/languagelist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <RelativeLayout
+                android:id="@+id/reject_layout"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="#ffffff" >
+
+                <ImageView
+                    android:id="@+id/rejectbtn"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/btn_decline"
+                    android:tag="btn_decline" />
+
+                <TextView
+                    android:id="@+id/rejecttxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/rejectbtn"
+                    android:text="@string/jd_reject_btn_text"
+                    android:textColor="#94BA09" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/accept_layout"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:background="#ffffff" >
+
+                <TextView
+                    android:id="@+id/accepttxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/acceptbtn"
+                    android:text="@string/jd_accept_btn_text"
+                    android:textColor="#94BA09" />
+
+                <ImageView
+                    android:id="@+id/acceptbtn"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="4dp"
+                    android:src="@drawable/btn_begin"
+                    android:tag="btn_begin" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/jdmiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#ffffff"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" >
+
+            <TextView
+                android:id="@+id/jdsurvey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_name"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jdsurvey_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdsurvey"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/jdbranch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdsurvey_name"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_branchfname"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jdbranchv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdbranch"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/jdsurvey_quotas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdbranchv"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_quotas"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_quotas_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotas"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp" />
+
+            <TextView
+                android:id="@+id/jdsurvey_allocations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotas_list"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_allocations"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_allocations_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_allocations"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/jdmiddle_night"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" >
+
+            <TextView
+                android:id="@+id/jdsurveynight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_name"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jdsurvey_name_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdsurveynight"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/jdbranch_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdsurvey_name_night"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_branchfname"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jdbranchv_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdbranch_night"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/jdsurvey_quotasnight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdbranchv_night"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_quotas"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_quotas_list_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotasnight"
+                android:cacheColorHint="#00000000"
+                android:divider="#FFFFFF"
+                android:dividerHeight="1px"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/jdsurvey_allocationsnight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotas_list_night"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_allocations"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_allocations_list_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_allocationsnight"
+                android:cacheColorHint="#00000000"
+                android:divider="#FFFFFF"
+                android:dividerHeight="1px"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/dataView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" >
+
+            <TableLayout
+                android:id="@+id/tblView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@+id/jdbottomrv"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="25dp"
+                android:stretchColumns="0" >
+
+                <TableRow>
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jddatet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_date"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator1"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jddatev"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdstaust"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_status"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator2"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdstausv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jddescriptiont"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_description"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator3"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jddescriptionv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdsetnamet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_setname"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator4"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdsetnamev"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdclientt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_clientname"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator5"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdclientv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdbranchname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_branchname"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator6"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdbranch_name_val"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdbranchfnamet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_branchfname"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator7"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdbranchfnamev"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdcitynt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_cityname"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator8"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdcitynv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdaddt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_address"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator9"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdaddv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdbranchpt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_branchpno"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator10"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdbranchpv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdopeninght"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_openinghours"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator11"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdopeninghv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdtimest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_stime"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator12"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdtimesv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdtimeet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_etime"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator13"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdtimeev"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdpurchasedes_t"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_purchasedesc"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator14"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdpurchasedes_v"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/jdcanpurchase_t"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:paddingRight="5dp"
+                            android:text="@string/jd_can_purchase"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator15"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/jdcanpurchase_v"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/sNonRefundableServicePayment_t"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/sNonRefundableServicePayment"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator16"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/sNonRefundableServicePayment_v"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/sTransportationPayment_t"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/transportation_payment"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator17"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/sTransportationPayment_v"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/sCriticismPayment_t"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/sCriticismPayment"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator18"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/sCriticismPayment_v"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/sBonusPayment_t"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:text="@string/sBonusPayment"
+                            android:textColor="#9DC40F"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                        <View
+                            android:id="@+id/separator19"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@drawable/green_separator" />
+
+                        <TextView
+                            android:id="@+id/sBonusPayment_v"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow android:layout_marginBottom="5dp" >
+
+                    <LinearLayout
+                        android:id="@+id/tblView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <WebView
+        android:id="@+id/briefingView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

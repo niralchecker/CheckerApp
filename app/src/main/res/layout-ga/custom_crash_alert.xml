@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="5px"
+    android:background="@drawable/custom_toast_border"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layoutDirection="ltr" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/cross_red" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="3dp"
+            android:text="@string/crash_dialog_comment_prompt"
+            android:textColor="#cc0000"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editcrash"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@drawable/custom_toast_border"
+        android:hint="Please Comment here..."
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp"
+        android:textColor="#cc0000"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_toast_border"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp"
+        android:text="@string/button_ok"
+        android:textColor="#cc0000"
+        android:textSize="16dp" />
+
+</LinearLayout>

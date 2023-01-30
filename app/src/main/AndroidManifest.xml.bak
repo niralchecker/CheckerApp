@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mor.sa.android.activities"
+    android:versionCode="679"
+    android:versionName="12.79">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <application
+        android:name=".CheckerApp"
+        android:icon="@drawable/icon"
+        android:label="@string/app_title"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:screenOrientation="portrait"
+        android:theme="@android:style/Theme.NoTitleBar"
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
+        android:windowSoftInputMode="stateHidden">
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.wearable.beta.app"
+            android:resource="@xml/wearable_app_desc" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDdHcVa8tD8omU0h-_45n8OQ48Yula2WNU" />
+
+        <service android:name=".comunicator">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+
+                <data
+                    android:host="*"
+                    android:pathPrefix="/request-network"
+                    android:scheme="wear" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".audioMediaRecorderService"
+            android:enabled="true"
+            android:icon="@drawable/icon"
+            android:label="@string/app_title" />
+        <service
+            android:name=".comService"
+            android:enabled="true"
+            android:icon="@drawable/icon"
+            android:label="@string/app_title" />
+        <service
+            android:name=".comService"
+            android:enabled="true"
+            android:icon="@drawable/icon"
+            android:label="@string/app_title" />
+
+        <activity
+            android:name=".FileExplore"
+            android:label="@string/app_title" />
+        <activity
+            android:name="org.acra.CrashReportDialog"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".SplashScreen"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="locale|orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="orientation|keyboardHidden"
+            android:stateNotNeeded="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".AcraActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name="com.google.maps.android.JobBoardActivityFragment"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".LoginActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".Signup"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".CritHistoryReportActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".ShopperRefundReportActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".ArchiveActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".TouchImageViewActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".JobListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".ProxyActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".JobDetailActivity"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".JobMapActivityFragment"
+            android:configChanges="locale|orientation" />
+        <activity
+            android:name=".QuestionnaireActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".PreviewDemo"
+            android:configChanges="locale|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.google.maps.android.MapActivity"
+            android:configChanges="locale|orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".webPreview" />
+    </application>
+
+</manifest>

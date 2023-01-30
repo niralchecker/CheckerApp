@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backGroundDrawable"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layoutDirection="ltr"
+    android:background="#ffffff" >
+
+    <RelativeLayout
+        android:id="@+id/rvjobdetailscreen"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <View
+            android:id="@+id/dividing_line_3"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv2"
+            android:background="#B3B3B3"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/btnhelp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="#ffffff"
+            android:src="@drawable/btn_help"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/jd_heder"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/settings_page_title"
+            android:textColor="#373435"
+            android:textSize="22sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/jdbottomrv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/jdmiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" >
+
+            <TextView
+                android:id="@+id/jdsurvey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_name"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jdsurvey_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdsurvey"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/jdsurvey_quotas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_name"
+                android:layout_marginLeft="15dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_quotas"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_quotas_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotas"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp" />
+
+            <TextView
+                android:id="@+id/jdsurvey_allocations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotas_list"
+                android:layout_marginLeft="15dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_allocations"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_allocations_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_allocations"
+                android:layout_marginLeft="15dp"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/dataView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+
+        <LinearLayout
+            android:id="@+id/settingtl"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
+
+                <TextView
+                    android:id="@+id/s_urltext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/settings_system_url_lbl"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_urltext_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_urltext"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <EditText
+                    android:id="@+id/s_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/s_urltext_dividing_line"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/transparent"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/settings_system_url_hint"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:typeface="normal" />
+
+                <View
+                    android:id="@+id/lang_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_url"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/grey_separator" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
+
+                <TextView
+                    android:id="@+id/s_languagetext"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/settings_language_lbl"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_languagetext_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_languagetext"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/s_languagetext_dividing_line"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <Spinner
+                        android:id="@+id/languagelist"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/transparent"
+                        android:drawSelectorOnTop="true" />
+
+                    <ImageView
+                        android:id="@+id/lang_dividing_line_kink"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignBottom="@+id/languagelist"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/kink" />
+
+                    <View
+                        android:id="@+id/lang_dividing_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/lang_dividing_line_kink"
+                        android:background="@drawable/grey_separator" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
+
+                <TextView
+                    android:id="@+id/s_themetext"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/settings_themes_lbl"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_themetexttext_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_themetext"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/s_themetexttext_dividing_line"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <Spinner
+                        android:id="@+id/themeslist"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/transparent"
+                        android:drawSelectorOnTop="true" />
+
+                    <ImageView
+                        android:id="@+id/theme_dividing_line_kink"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignBottom="@+id/themeslist"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/kink" />
+
+                    <View
+                        android:id="@+id/theme_dividing_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/theme_dividing_line_kink"
+                        android:background="@drawable/grey_separator" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:visibility="visible" >
+
+                <TextView
+                    android:id="@+id/s_image_resizing"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/settings_image_resizing"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_image_resizingtexttext_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_image_resizing"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/s_image_resizingtexttext_dividing_line"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <Spinner
+                        android:id="@+id/resizing_list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/transparent"
+                        android:drawSelectorOnTop="true" />
+
+                    <ImageView
+                        android:id="@+id/resize_dividing_line_kink"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignBottom="@+id/resizing_list"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/kink" />
+
+                    <View
+                        android:id="@+id/resize_dividing_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/resize_dividing_line_kink"
+                        android:background="@drawable/grey_separator" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:visibility="visible" >
+
+                <TextView
+                    android:id="@+id/s_branchwisesorting"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_branch_sorting"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_branchwisesorting_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_branchwisesorting"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/s_branchwisesorting_dividing_line"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" >
+
+                    <Spinner
+                        android:id="@+id/branch_sorting_list"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/transparent"
+                        android:drawSelectorOnTop="true" />
+
+                    <ImageView
+                        android:id="@+id/bresize_dividing_line_kink"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignBottom="@+id/branch_sorting_list"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/kink" />
+
+                    <View
+                        android:id="@+id/bresize_dividing_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_below="@+id/bresize_dividing_line_kink"
+                        android:background="@drawable/grey_separator" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
+
+                <TextView
+                    android:id="@+id/s_tracker_setting"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_tracker_heading"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_tracker_setting_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_tracker_setting"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <TextView
+                    android:id="@+id/s_trackerText"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/s_tracker_setting"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toLeftOf="@+id/switchtracking"
+                    android:text="@string/s_tracker_setting"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switchtracking"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_trackerText"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
+
+                <TextView
+                    android:id="@+id/s_camra_setting"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_489_file_121"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_camra_setting_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_camra_setting"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <TextView
+                    android:id="@+id/s_croppingText"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/s_camra_setting"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/s_image_cropping"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switchCropping"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_croppingText"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/s_switchDeviceCameraText"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/switchCropping"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/s_owncamera_nn"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switchDeviceCamera"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_switchDeviceCameraText"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/s_resolutionSelector"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/switchDeviceCamera"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/s_resolution_selector"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switchResolution"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_resolutionSelector"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/s_backupText"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_546_file_121"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switchBackup"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_backupText"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
+
+                <TextView
+                    android:id="@+id/s_anotherText"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_580_file_121"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switchAnother"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_anotherText"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:visibility="gone" >
+
+                <TextView
+                    android:id="@+id/s_switch_time_stamp"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_switch_time_stamp"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switch_time_stamp"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_switch_time_stamp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:visibility="visible" >
+
+                <TextView
+                    android:id="@+id/s_job_setting"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_647_file_27"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/s_job_setting_dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/s_job_setting"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_separator" />
+
+                <TextView
+                    android:id="@+id/s_switch_alternate_jobs"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/s_job_setting_dividing_line"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/s_switch_auto_uploading"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switch_alternate_jobs"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_switch_alternate_jobs"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:id="@+id/s_wifi_only"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/switch_alternate_jobs"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/s_switch_wifi_uploading"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switch_wifi_only"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_wifi_only"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:visibility="visible" >
+
+                <TextView
+                    android:id="@+id/s_switch_branch_name"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toLeftOf="@+id/switch_branch_name"
+                    android:text="@string/s_switch_branch_name"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switch_branch_name"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_switch_branch_name"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:visibility="visible" >
+
+                <TextView
+                    android:id="@+id/s_switch_filter_date"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_switch_filter_date"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ToggleButton
+                    android:id="@+id/switch_filter_date"
+                    android:layout_width="80dp"
+                    android:layout_height="28dp"
+                    android:layout_alignBottom="@+id/s_switch_filter_date"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/ic_toggle_bg"
+                    android:textColor="#ffffff"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/savebtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:background="@drawable/login_green_bg"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/s_item_column_0_line_774_file_27"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@android:color/transparent" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <WebView
+        android:id="@+id/briefingView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

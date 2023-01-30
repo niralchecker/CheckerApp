@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/idBackGround"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layoutDirection="ltr"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        android:id="@+id/rvinjobscreen"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/navigation_bar"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/settingheder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dip"
+            android:layout_toLeftOf="@+id/mapbtn"
+            android:layout_toRightOf="@+id/filterbtn"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/settings_txt_proxy"
+            android:textColor="#000000"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/settingScroll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/navBottom"
+        android:layout_below="@+id/rvinjobscreen" >
+
+        <TableLayout
+            android:id="@+id/settingtl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dip" >
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_urltext1"
+                    style="bold"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_proxy_host_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/edit_host"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/textbg"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/settings_proxy_host_lbl"
+                    android:maxLength="50"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:typeface="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_urltext2"
+                    style="bold"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_proxy_port_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/edit_port"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/textbg"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/settings_proxy_port_lbl"
+                    android:maxLength="50"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:typeface="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_urltext3"
+                    style="bold"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_proxy_host_usrname"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/edit_username"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/textbg"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/settings_proxy_host_usrname"
+                    android:maxLength="50"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:typeface="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_urltext4"
+                    style="bold"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_proxy_host_pswrd"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/edit_password"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/textbg"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/settings_proxy_host_pswrd"
+                    android:inputType="textPassword"
+                    android:maxLength="50"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:typeface="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:weightSum="2" >
+
+                <Button
+                    android:id="@+id/resetbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.9"
+                    android:background="@color/accept_btn_selector"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/disable_proxy" >
+
+                    <requestFocus />
+                </Button>
+
+                <Button
+                    android:id="@+id/savebtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.9"
+                    android:background="@color/accept_btn_selector"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/settings_save_btn" >
+
+                    <requestFocus />
+                </Button>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/navBottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/navigation_bar" />
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,8 @@
+<resources>
+
+    <string-array name="spinner_sort_item_list">
+        <item>@string/sortByName</item>
+        <item>@string/sortByDate</item>
+    </string-array>
+
+</resources>

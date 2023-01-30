@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/custom_toast_border"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layoutDirection="ltr" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="3dp"
+        android:text="Check your condition here:"
+        android:textColor="#232323"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/btnCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_above="@+id/txtResult"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:text="check" />
+
+    <EditText
+        android:id="@+id/editCondition"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/txtResult"
+        android:layout_below="@+id/textView1"
+        android:layout_toLeftOf="@+id/btnCheck"
+        android:gravity="top" />
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnClose"
+        android:text="Result:"
+        android:textColor="#232323"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/login_green_bg"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/alert_btn_lbl_ok" />
+
+</RelativeLayout>

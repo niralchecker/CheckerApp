@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backGroundDrawable"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layoutDirection="ltr"
+    android:background="@drawable/background" >
+
+    <RelativeLayout
+        android:id="@+id/rvjobdetailscreen"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <View
+            android:id="@+id/dividing_line_3"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv2"
+            android:background="#B3B3B3" />
+
+        <ImageButton
+            android:id="@+id/jdmapbtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@color/hover_txtbtn"
+            android:src="@drawable/map_button"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/jd_heder"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/settings_page_title"
+            android:textColor="#373435"
+            android:textSize="22sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/jd_heder"
+            android:visibility="invisible" >
+
+            <Button
+                android:id="@+id/btnproxy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/accept_btn_selector"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:text="@string/settings_page_proxy" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/jdbottomrv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/jdmiddle"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" >
+
+            <TextView
+                android:id="@+id/jdsurvey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_name"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/jdsurvey_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jdsurvey"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/jdsurvey_quotas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_name"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_quotas"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_quotas_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotas"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp" />
+
+            <TextView
+                android:id="@+id/jdsurvey_allocations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_quotas_list"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/jd_survey_allocations"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/jdsurvey_allocations_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/jdsurvey_allocations"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/dataView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+
+        <TableLayout
+            android:id="@+id/settingtl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dip" >
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_urltext"
+                    style="bold"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_system_url_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/s_url"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/textbg"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/settings_system_url_hint"
+                    android:maxLength="50"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:typeface="normal" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_languagetext"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_language_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/languagelist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawSelectorOnTop="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_themetext"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/settings_themes_lbl"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/themeslist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawSelectorOnTop="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_branchwisesorting"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/s_branch_sorting"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <ToggleButton
+                    android:id="@+id/switchSorting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOff="@string/s_alphabetical"
+                    android:textOn="@string/s_distance"
+                    android:textSize="14sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_croppingText"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/s_image_cropping"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <ToggleButton
+                    android:id="@+id/switchCropping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/s_resolutionSelector"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="@string/s_resolution_selector"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <ToggleButton
+                    android:id="@+id/switchResolution"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOff="@string/s_off"
+                    android:textOn="@string/s_on"
+                    android:textSize="14sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:gravity="right" >
+
+                <ImageView
+                    android:id="@+id/savebtn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/save" >
+
+                    <requestFocus />
+                </ImageView>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <WebView
+        android:id="@+id/briefingView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/jdbottomrv"
+        android:layout_below="@+id/rvjobdetailscreen"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,268 @@
+package com.checker.sa.android.adapter;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import com.checker.sa.android.data.Order;
+import com.checker.sa.android.data.Set;
+import com.checker.sa.android.data.Sets;
+import com.checker.sa.android.data.Survey;
+import com.checker.sa.android.data.Surveys;
+import com.checker.sa.android.data.parser.Parser;
+import com.checker.sa.android.db.DBHelper;
+import com.checker.sa.android.helper.Constants;
+import com.checker.sa.android.helper.Helper;
+import com.checker.sa.android.helper.UIHelper;
+import com.mor.sa.android.activities.JobListActivity;
+import com.mor.sa.android.activities.R;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.text.Html;
+import android.text.Spanned;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.TextView.BufferType;
+
+public class jobInnerItemAdapter extends BaseAdapter {
+
+	Context ct;
+	Activity act;
+	ArrayList<Order> joblistarray;
+	Parser thisParser;
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+	public jobInnerItemAdapter(Context ct, ArrayList<Order> listarray,
+			Parser parser) {
+		this.thisParser = parser;
+		this.ct = ct;
+		act = ((JobListActivity) ct);
+		this.joblistarray = listarray;
+
+	}
+
+	public jobInnerItemAdapter(Activity ct, ArrayList<Order> listarray) {
+		this.act = ct;
+		this.ct = act;
+		this.joblistarray = listarray;
+	}
+
+	@Override
+	public int getCount() {
+		return joblistarray.size();
+	}
+
+	@Override
+	public String getItem(int arg0) {
+		return null;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return 0;
+	}
+
+	public int getResource(String type) {
+		if (type.equals("Assigned"))
+			return R.drawable.assigned;
+		else if (type.equals("Scheduled"))
+			return R.drawable.assigned;
+		else if (type.equals("wrong"))
+			return R.drawable.cross_red;
+		else if (type.equals("In progress"))// ct.getString(R.string.jd_begin_button_status_inprogress)))
+			return R.drawable.assigned;
+		else if (type.equals("survey"))// ct.getString(R.string.jd_begin_button_status_inprogress)))
+			return R.drawable.assigned;
+		else
+			return R.drawable.assigned;
+	}
+
+	String getDate(String date) {
+		Date d = null;
+		try {
+			d = sdf.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DateFormat dateFormat = android.text.format.DateFormat
+				.getDateFormat(ct);
+		String str = dateFormat.format(d);
+		return str;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		LayoutInflater inflator = act.getLayoutInflater();
+		Order order = joblistarray.get(position);
+		View row = inflator.inflate(R.layout.job_inner_row, parent, false);
+		ImageView returnedReview = (ImageView) row.findViewById(R.id.vreturned);
+		if (order != null
+				&& order.getIsJobInProgressOnServer() != null
+				&& order.getIsJobInProgressOnServer().contains("true")) {
+			returnedReview.setVisibility(RelativeLayout.VISIBLE);
+			returnedReview.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View arg0) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(ct);
+					builder.setMessage(act.getString(R.string.returned_review))
+							.setCancelable(false)
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+											// do things
+										}
+									});
+					AlertDialog alert = builder.create();
+					alert.show();
+				}
+			});
+		}
+
+		TextView tv = (TextView) row.findViewById(R.id.tv1);
+		tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
+		TextView datetv = (TextView) row.findViewById(R.id.tv2);
+		tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
+		ImageView iv = (ImageView) row.findViewById(R.id.leftiv);
+		iv.setVisibility(RelativeLayout.GONE);
+
+		if (Helper.getTheme(ct) == 0) {
+			tv.setTextColor(ct.getResources().getColor(android.R.color.white));
+			datetv.setTextColor(ct.getResources().getColor(
+					android.R.color.white));
+		}
+
+		if (order.getOrderID().contains("-")) {
+			Survey s = Surveys.getCurrentSurve(order.getOrderID().replace("-",
+					""));
+			if (s.getSurveyName() == null)
+				s.setSurveyName("");
+
+			Spanned sp = Html.fromHtml(s.getSurveyName());
+			if (order.getOrderID().contains("_")) {
+				tv.setText("Interview "
+						+ order.getOrderID().substring(
+								order.getOrderID().indexOf("_") + 1));
+				try {
+					int i = Integer.parseInt(order.getOrderID().substring(
+							order.getOrderID().indexOf("_") + 1));
+					i++;
+					String str = "Interview " + i;
+					str = setBranchIfNeeded(str, (order != null), order);
+
+					tv.setText(str);
+
+				} catch (Exception ex) {
+
+				}
+			}
+		} else if (order.getOrderID().contains("-")) {
+			Survey s = Surveys.getCurrentSurve(order.getOrderID().replace("-",
+					""));
+			if (s.getSurveyName() == null)
+				s.setSurveyName("");
+
+			Spanned sp = Html.fromHtml(s.getSurveyName());
+			tv.setText(sp.toString());
+			if (order.getOrderID().contains("_")) {
+				tv.setText("Interview "
+						+ order.getOrderID().substring(
+								order.getOrderID().indexOf("_") + 1));
+				try {
+					int i = Integer.parseInt(order.getOrderID().substring(
+							order.getOrderID().indexOf("_") + 1));
+					i++;
+					String str = "Interview " + i;
+					str = setBranchIfNeeded(str, (order != null), order);
+
+					tv.setText(str);
+
+				} catch (Exception ex) {
+
+				}
+				// tv.setText(sp);
+			}
+		} else if (!order.getSetName().equals("")) {
+			if (order.getClientName() == null)
+				order.setClientName("");
+			if (order.getSetName() == null)
+				order.setSetName("");
+			Spanned sp = Html.fromHtml(order.getClientName() + ", "
+					+ order.getSetName());
+			tv.setText(sp.toString());
+		} else {
+			if (order.getClientName() == null)
+				order.setClientName("");
+			Spanned sp = Html.fromHtml(order.getClientName());
+			tv.setText(sp.toString());
+		}
+		if (order.getOrderID().contains("-")) {
+			Survey s = Surveys.getCurrentSurve(order.getOrderID().replace("-",
+					""));
+			if (s.getTargetQuota() == null)
+				s.setTargetQuota("");
+
+			if (s.getListAllocations() != null
+					&& s.getListAllocations().size() > 0) {
+				Spanned sp = Html.fromHtml(s.getListAllocations().get(0)
+						.getSurveyCount()
+						+ "/" + s.getListAllocations().get(0).getAllocation());
+				datetv.setText(sp);
+				datetv.setText("Started: " + order.getTimeStart());
+			} else {
+				Spanned sp = Html.fromHtml(s.getSurveyCount() + "/"
+						+ s.getTargetQuota());
+				datetv.setText("Started: " + order.getTimeStart());
+				// datetv.setText(sp);
+			}
+
+		} else if (Constants.getFullBranchName()
+				&& order.getBranchFullname() != null
+				&& order.getBranchFullname().length() > 0) {
+			Spanned sp = Html.fromHtml(getDate(order.getDate()) + ", "
+					+ order.getBranchFullname() + " " + order.getAddress());
+			datetv.setText(sp.toString());
+		} else if (!order.getBranchName().equals("")) {
+			Spanned sp = Html.fromHtml(getDate(order.getDate()) + ", "
+					+ order.getBranchName());
+			datetv.setText(sp.toString());
+		} else {
+			Spanned sp = Html.fromHtml(getDate(order.getDate()));
+			datetv.setText(sp.toString());
+		}
+		// datetv.setText(order.getOrderID());
+		iv.setBackgroundResource(getResource(order.getStatusName()));
+
+		if (order.getOrderID().contains("-"))
+			iv.setBackgroundResource(getResource("survey"));
+
+		return row;
+
+	}
+
+	private String setBranchIfNeeded(String str, boolean showisTrue, Order order) {
+		if (showisTrue && order.getBranchLat() != null
+				&& !order.getBranchLat().equals("")) {
+			str += " - " + order.getBranchLat();
+		} else if (order.getBranchPhone() != null
+				&& !order.getBranchPhone().equals("")) {
+			str += " - " + order.getBranchPhone();
+		}
+
+		return str;
+	}
+
+}

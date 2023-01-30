@@ -1,0 +1,5 @@
+<wearableApp package="com.mor.sa.android.activities">
+  <versionCode>320</versionCode>
+  <versionName>10.20</versionName>
+  <rawPathResId>checker_wear</rawPathResId> 
+</wearableApp>

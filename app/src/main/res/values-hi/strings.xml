@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <!-- words translated but no showing in app -->
+
+    <string translatable="false" name="login_clientside_username_alert">गलत उपयोगकर्ता नाम या पासवर्ड</string>
+    <string translatable="false" name="login_heder">स्वागत !</string>
+    <string translatable="false" name="s_resolution_selector">कैमरा संकल्प दिखाओ:</string>
+    <string translatable="false" name="smalimgWarn">यह विकल्प छवियों की गुणवत्ता को प्रभावित कर सकता है, क्या आप वाकई इस विकल्प का चयन करना चाहते हैं?</string>
+    <string translatable="false" name="changeDate">तारीख बदलें</string>
+    <string translatable="false" name="smallimgTitle">छोटा (चित्र की गुणवत्ता को प्रभावित कर सकते हैं)</string>
+    <string translatable="false" name="savingImage">छवि सहेजा जा रहा है ...</string>
+    <string translatable="false" name="ufinsheddwnloding">अनपेक्षित जॉब डाउनलोड हो रही है ...</string>
+    <string translatable="false" name="noJobmsg">जॉब बोर्ड पर कोई खुला कार्य उपलब्ध नहीं है। कृपया बाद में फिर से प्रयास करें। धन्यवाद!</string>
+    <string translatable="false" name="nocertMsg">त्रुटि या कोई प्रमाणपत्र नहीं मिला</string>
+    <string translatable="false" name="qoutafullMsg">त्रुटि अपलोड करने वाली फाइलें, सिस्टम संग्रहण कोटा पूर्ण है कृपया लंबित संलग्नक अपलोड करने के लिए व्यवस्थापक से संपर्क करें।</string>
+    <string translatable="false" name="alreadyExistingJob">एप पर नौकरी पहले से मौजूद है</string>
+    <string translatable="false" name="selectDate">कृपया एक तिथि चुनें</string>
+    <string translatable="false" name="errorParsingOrder">त्रुटि पार्सिंग ऑर्डर एपीआई</string>
+    <string translatable="false" name="serverfilesMsg">पहले से ही सर्वर पर संलग्न फाइलें</string>
+    <string translatable="false" name="serverfilesTitle">सर्वर संलग्न मक्खियों</string>
+    <string translatable="false" name="removingMsg">निकाला जा रहा है ....</string>
+    <string translatable="false" name="removed">हटा दिया</string>
+    <string translatable="false" name="errorRemoving">हटाने या न्यूर्तनेटर कनेक्शन में त्रुटि!</string>
+    <string translatable="false" name="attached_certificate_msg">क्या आप संलग्न प्रमाण पत्र पूर्ण करना चाहते हैं?</string>
+    <string translatable="false" name="checkertificatesmsg">प्रमाणन लोड हो रहा है</string>
+    <string translatable="false" name="strtcheckertificatesmsg">क्या आप इस प्रमाणपत्र को प्रारंभ करना चाहते हैं?</string>
+    <string translatable="false" name="downloadingCheckrtificate">प्रमाणीकरण डाटा डाउनलोड कर रहा है</string>
+    <string translatable="false" name="retakecheckertificatesmsg">क्या आप इस प्रमाणपत्र को पुनः प्राप्त करना चाहते हैं?</string>
+    <string translatable="false" name="alreadyPassed">प्रमाण पत्र पहले से ही पारित हो गया है</string>
+    <string translatable="false" name="alreadyBlocked">प्रमाणपत्र अवरुद्ध स्थिति में है।.</string>
+    <string translatable="false" name="replace_inprog_job">क्या आप वाकई ऑनलाइन संस्करण से नौकरी बदलना चाहते हैं</string>
+    <string translatable="false" name="remainin_msg">क्योंकि ऑनलाइन नौकरी शुरू होने का समय नवीनतम है? महत्वपूर्ण: यह कार्य केवल इन-प्रगति की नौकरी के लिए भरा डेटा बदल देगा। "</string>
+    <string translatable="false" name="setName">नाम भरें: </string>
+    <string translatable="false" name="setStatus">स्थिति सेट करें: </string>
+    <string translatable="false" name="grade">ग्रेड: </string>
+    <string translatable="false" name="reqGrade">ग्रेड की आवश्यकता: </string>
+    <string translatable="false" name="lastDateTaken">अंतिम तिथि </string>
+    <string translatable="false" name="Attemts">प्रयास: </string>
+    <string translatable="false" name="new_surveyor_sign_up">New registrar Register</string>
+    <string translatable="false" name="user_name">उपयोगकर्ता का नाम</string>
+    <string translatable="false" name="password">कूटशब्द</string>
+    <string translatable="false" name="email">Email</string>
+    <string translatable="false" name="phone_number">Phone number</string>
+    <string translatable="false" name="address">पता</string>
+    <string translatable="false" name="tell_us_about_yourself">Tell us about you</string>
+    <string translatable="false" name="setting">रूपरेखाएँ</string>
+    <string translatable="false" name="do_you_want_to_be_a_be_there_surveyor">Do you want to be a Checker Surveyor?</string>
+    <string translatable="false" name="filter_jobs">कार्य खोजें</string>
+    <string translatable="false" name="see_jobs_in_map">कार्य मानचित्र में देखें</string>
+    <string translatable="false" name="save_download">सहेजे और डाउनलोड करें</string>
+    <string translatable="false" name="these_files_are_currently_attached_to_the_job">ये फाइलें वर्तमान काम से जुड़ी हैं:</string>
+    <string translatable="false" name="image_resizing">छवि आकार बदलें</string>
+    <string translatable="false" name="image_resizing_original">मूल</string>
+    <string translatable="false" name="image_resizing_medium">मध्यम</string>
+    <string translatable="false" name="image_resizing_small">छोटा</string>
+    <string translatable="false" name="branch_sorting">शाखाओं की छँटाई.</string>
+    <string translatable="false" name="distance">दूरी.</string>
+    <string translatable="false" name="alphabetical">वर्णमाला.</string>
+    <string translatable="false" name="geo_tracker_settings">भू ट्रैकर सेटिंग्स</string>
+    <string translatable="false" name="find_jobs_near_me">मेरे पास ऑडिट का पता लगाएं</string>
+    <string translatable="false" name="image_cropping">छवि को काटना</string>
+    <string translatable="false" name="on">शुरू.</string>
+    <string translatable="false" name="off">बंद.</string>
+    <string translatable="false" name="job_settings">जॉब्स सेटिंग्स</string>
+    <string translatable="false" name="alternate_jobs">वैकल्पिक जॉब के अवसर:</string>
+    <string translatable="false" name="enable_branch_full_name">शाखा पूर्ण नाम सक्षम करें</string>
+    <string translatable="false" name="filter_by_date"> दिनांक के अनुसार फ़िल्टर करें</string>
+    <string translatable="false" name="login_signup_text">Sign up</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_190">नए जॉब के अवसर!</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_190">नए जॉब के अवसर!</string>
+    <string translatable="false" name="s_item_column_0_line_206_file_190">आप के पास जॉब खोज रहे हैं</string>
+    <string translatable="false" name="s_item_column_0_line_18291_file_88">एक ही सवाल पर</string>
+    <string translatable="false" name="s_item_column_0_line_804_file_88">आवेदन भेज दिया है</string>
+    <string translatable="false" name="s_item_column_0_line_838_file_88">स्वनिर्धारित</string>
+    <string translatable="false" name="s_item_column_0_line_839_file_88">इस आदेश के लिए आवेदन करने के लिए धन्यवाद कृपया अपनी नियत कार्य सूची में इसे प्राप्त करने के लिए रोजगार जॉब डाउनलोड पर क्लिक करें</string>
+    <string translatable="false" name="s_item_column_0_line_859_file_88">आवेदन करने में त्रुटि या कोई इंटरनेट कनेक्शन नहीं है</string>
+    <string translatable="false" name="s_item_column_0_line_893_file_88">अभी डाउनलोड करो</string>
+    <string translatable="false" name="s_item_column_0_line_923_file_88">बाद में डाउनलोड करें</string>
+    <string translatable="false" name="s_item_column_0_line_994_file_88">एप्लिकेशन टिप्पणी</string>
+    <string translatable="false" name="s_item_column_0_line_1441_file_88">आवेदन भेज दिया है</string>
+    <string translatable="false" name="s_item_column_0_line_1549_file_88">वैकल्पिक तिथियां प्राप्त कर रहें हैं ...</string>
+    <string translatable="false" name="s_item_column_0_line_1579_file_88">गणना</string>
+    <string translatable="false" name="s_item_column_0_line_1594_file_88">उपलब्ध नहीं है</string>
+    <string translatable="false" name="s_item_column_0_line_1597_file_88">एक तिथि चुनें</string>
+    <string translatable="false" name="s_item_column_0_line_174_file_210"> लंबित </string>
+    <string translatable="false" name="s_item_column_0_line_184_file_210"> मंजूर </string>
+    <string translatable="false" name="s_item_column_0_line_194_file_210"> किया गया भुगतान </string>
+    <string translatable="false" name="s_item_column_0_line_199_file_210">अधिक विवरण देखें </string>
+    <string translatable="false" name="s_item_column_0_line_202_file_210">समीक्षा संख्या: </string>
+    <string translatable="false" name="s_item_column_0_line_344_file_210">हाँ</string>
+    <string translatable="false" name="s_item_column_0_line_346_file_210">नहीं</string>
+    <string translatable="false" name="s_item_column_0_line_145_file_223">एप्लिकेशन को निकालें</string>
+    <string translatable="false" name="s_item_column_0_line_647_file_27">जॉब्स सेटिंग्स</string>
+    <string translatable="false" name="s_item_column_0_line_774_file_27">संचय</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_37">क्लाइंट का नाम:</string>
+    <string translatable="false" name="s_item_column_0_line_94_file_37">प्रवाह प्रकार:</string>
+    <string translatable="false" name="s_item_column_0_line_120_file_37">जोड़ा गया: </string>
+    <string translatable="false" name="s_item_column_0_line_149_file_37">रकम: </string>
+    <string translatable="false" name="s_item_column_0_line_176_file_37">चालान संख्या:</string>
+    <string translatable="false" name="s_item_column_0_line_205_file_37">मंजूर:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_37">किया गया भुगतान:</string>
+    <string translatable="false" name="s_item_column_0_line_263_file_37">शाखा क्र्मांक:</string>
+    <string translatable="false" name="s_item_column_0_line_292_file_37">शाखा का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_37">शहर का नाम:</string>
+    <string translatable="false" name="s_item_column_0_line_350_file_37">क्षेत्र का नाम:</string>
+    <string translatable="false" name="s_item_column_0_line_379_file_37">पता:</string>
+    <string translatable="false" name="s_item_column_0_line_408_file_37">परियोजना का नाम:</string>
+    <string translatable="false" name="s_item_column_0_line_436_file_37">विवरण:</string>
+    <string translatable="false" name="s_item_column_0_line_465_file_37">आदेश आईडी:</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_44">शेल्फ शेयर</string>
+    <string translatable="false" name="s_item_column_0_line_581_file_44">फोटो लें</string>
+    <string translatable="false" name="s_item_column_0_line_852_file_44">कैप्चर</string>
+    <string translatable="false" name="s_item_column_0_line_59_file_52">नक्शा</string>
+    <string translatable="false" name="s_item_column_0_line_71_file_52">सूची</string>
+    <string translatable="false" name="s_item_column_0_line_183_file_52">चयनित करें</string>
+    <string translatable="false" name="s_item_column_0_line_214_file_52">तिथियाँ:</string>
+    <string translatable="false" name="s_item_column_0_line_246_file_52">आज</string>
+    <string translatable="false" name="s_item_column_0_line_270_file_52">अगले 30 दिन</string>
+    <string translatable="false" name="s_item_column_0_line_295_file_52">अनुकूलित</string>
+    <string translatable="false" name="s_item_column_0_line_337_file_52">मुवक्किल</string>
+    <string translatable="false" name="s_item_column_0_line_361_file_52">क्षेत्र</string>
+    <string translatable="false" name="s_item_column_0_line_415_file_52">साफ़ करें</string>
+    <string translatable="false" name="s_item_column_0_line_429_file_52">दिखाएँ</string>
+    <string translatable="false" name="s_item_column_0_line_25_file_77">कृपया छवि आकार विकल्प का चयन करें:</string>
+    <string translatable="false" name="s_item_column_0_line_65_file_94">सभी का चयन करें</string>
+    <string translatable="false" name="s_item_column_0_line_107_file_94">कोई सामग्री नहीं है।</string>
+    <string translatable="false" name="s_item_column_0_line_15_file_108">वैकल्पिक जॉब के अवसर:</string>
+    <string translatable="false" name="s_item_column_0_line_676_file_98">मिस्ड फ़ाइलें:</string>
+    <string translatable="false" name="s_item_column_0_line_75_file_102">कोई डेटा नहीं मिला</string>
+    <string translatable="false" name="s_item_column_0_line_100_file_102">महीने और वर्ष का चयन करें</string>
+    <string translatable="false" name="s_item_column_0_line_147_file_102">किया गया भुगतान:</string>
+    <string translatable="false" name="s_item_column_0_line_194_file_102">मंजूर:</string>
+    <string translatable="false" name="s_item_column_0_line_241_file_102">प्रवाह प्रकार:</string>
+    <string translatable="false" name="s_item_column_0_line_288_file_102">रिपोर्ट का प्रकार:</string>
+    <string translatable="false" name="s_item_column_0_line_336_file_102">दिखाएँ</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_102">साफ़ करें</string>
+    <string translatable="false" name="s_item_column_0_line_66_file_113">क्लाइंट का नाम:</string>
+    <string translatable="false" name="s_item_column_0_line_93_file_113">प्रवाह प्रकार:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_113">जोड़ा गया: </string>
+    <string translatable="false" name="s_item_column_0_line_148_file_113">रकम: </string>
+    <string translatable="false" name="s_item_column_0_line_175_file_113">चालान संख्या:</string>
+    <string translatable="false" name="s_item_column_0_line_204_file_113">मंजूर:</string>
+    <string translatable="false" name="s_item_column_0_line_233_file_113">किया गया भुगतान:</string>
+    <string translatable="false" name="s_item_column_0_line_262_file_113">शाखा क्र्मांक:</string>
+    <string translatable="false" name="s_item_column_0_line_291_file_113">शाखा का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_320_file_113">शहर का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_113">क्षेत्र का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_378_file_113">पता:</string>
+    <string translatable="false" name="s_item_column_0_line_407_file_113">परियोजना का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_435_file_113">विवरण:</string>
+    <string translatable="false" name="s_item_column_0_line_464_file_113">आदेश आईडी:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_119">समाप्त</string>
+    <string translatable="false" name="s_item_column_0_line_489_file_121">कैमरा सेटिंग</string>
+    <string translatable="false" name="s_item_column_0_line_546_file_121">फोटो बैकअप की अनुमति दें</string>
+    <string translatable="false" name="s_item_column_0_line_580_file_121">एकाधिक फ़ोटो को अनुमति दें</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_122">काम का विस्तार</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_122">क्लाइंट का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_96_file_122">शाखा का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_125_file_122">शहर:</string>
+    <string translatable="false" name="s_item_column_0_line_154_file_122">पता:</string>
+    <string translatable="false" name="s_item_column_0_line_182_file_122">काम का विवरण:</string>
+    <string translatable="false" name="s_item_column_0_line_209_file_122">प्रश्नावली:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_122">शाखा का संक्षिप्त नाम:</string>
+    <string translatable="false" name="s_item_column_0_line_260_file_122">तिथि:</string>
+    <string translatable="false" name="s_item_column_0_line_289_file_122">प्रारंभ और समाप्ति समय:</string>
+    <string translatable="false" name="s_item_column_0_line_315_file_122">शाखा खोलने का समय</string>
+    <string translatable="false" name="s_item_column_0_line_344_file_122">फ़ोन:</string>
+    <string translatable="false" name="s_item_column_0_line_373_file_122">सर्वेक्षण भुगतान:</string>
+    <string translatable="false" name="s_item_column_0_line_402_file_122">बोनस भुगतान:</string>
+    <string translatable="false" name="s_item_column_0_line_431_file_122">परिवहन भुगतान:</string>
+    <string translatable="false" name="s_item_column_0_line_467_file_122">वैकल्पिक तिथियाँ:</string>
+    <string translatable="false" name="s_item_column_0_line_523_file_122">लागू करें</string>
+    <string translatable="false" name="s_item_column_0_line_81_file_137">क्लाइंट का नाम</string>
+    <string translatable="false" name="s_item_column_0_line_110_file_137">शाखा का विवरण:</string>
+    <string translatable="false" name="s_item_column_0_line_139_file_137">नगर चुनें:</string>
+    <string translatable="false" name="s_item_column_0_line_168_file_137">तिथि:</string>
+    <string translatable="false" name="s_item_column_0_line_196_file_137">कुल जॉब्स:</string>
+    <string translatable="false" name="s_item_column_0_line_223_file_137">दूरी:</string>
+    <string translatable="false" name="s_item_column_0_line_254_file_137">लागू करें</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_125">यदि आप अन्य तस्वीर चाहते हैं?</string>
+    <string translatable="false" name="s_item_column_0_line_13_file_124">मिस्ड फ़ाइलें:</string>
+    <string translatable="false" name="s_item_column_0_line_57_file_124">अपलोड</string>
+    <string translatable="false" name="s_switch_filter_date">दिनांक के अनुसार फ़िल्टर करें</string>
+    <string translatable="false" name="s_switch_branch_name">शाखा पूर्ण नाम सक्षम करें</string>
+    <string translatable="false" name="take_another_photo">यदि आप अन्य तस्वीर चाहते हैं?</string>
+    <string translatable="false" name="uploading_jobs_of">जॉब अपलोड # Number # में से # </string>
+    <string translatable="false" name="uploading_images_of">अपलोडिंग #Number# का
+ #Total#</string>
+    <string translatable="false" name="upload">अपलोड</string>
+    <string translatable="false" name="s_switch_time_stamp">टाइमस्टैम्प जोड़े</string>
+    <string translatable="false" name="s_switch_alternate_jobs">वैकल्पिक जॉब के अवसर:</string>
+    <string translatable="false" name="settings_image_resizing">छवि आकार बदलें</string>
+    <string translatable="false" name="settings_image_original">मूल</string>
+    <string translatable="false" name="settings_image_medium">मध्यम</string>
+    <string translatable="false" name="settings_image_small">छोटा</string>
+    <string translatable="false" name="settings_image_ask">पूछो</string>
+    <string translatable="false" name="alert_issue_in_loop">लूप संरचना में त्रुटि होती है, कृपया व्यवस्थापक से संपर्क करें!</string>
+    <string translatable="false" name="default_theme">पूर्व निर्धारित विषय</string>
+    <string translatable="false" name="memory_info">स्मृति की जानकारी</string>
+    <string translatable="false" name="not_enough_space_ram">आगे बढ़ने के लिए पर्याप्त जगह (रैम) नहीं है!</string>
+    <string translatable="false" name="not_enough_space_internal_memory">यहां एप्लीकेशन को चलाने के लिए पर्याप्त स्थान नहीं है, पहले कुछ स्पेस को खाली करे है।.</string>
+    <string translatable="false" name="please_enter_comment_for_bug">Please enter comment for this bug:</string>
+    <string translatable="false" name="android_closed_app_forcefully">Android closed your app forcefully shall we start getting your data back?</string>
+    <string translatable="false" name="upload_following_attached_files">अनुलग्न फाइलों को अपलोड करें</string>
+    <string translatable="false" name="file_saved_properly_at">फ़ाइल को ठीक से सहेजा :</string>
+    <string translatable="false" name="unable_to_save_file_at">फाइल को सहेजने में असमर्थ:</string>
+    <string translatable="false" name="crashing_app_ourself">Crashing app ourself</string>
+    <string translatable="false" name="unable_to_find_loop_data">लूप डेटा को खोजने में असमर्थ</string>
+    <string translatable="false" name="amp_16">&amp; $[16,</string>
+    <string translatable="false" name="it_is_mandatory_to_attach_a_file">फ़ाइल संलग्न अनिवार्य है</string>
+    <string translatable="false" name="no_answer_chosen">कोई जवाब नहीं चुना!</string>
+    <string translatable="false" name="save_and_download">सहेजे और डाउनलोड करें</string>
+    <string translatable="false" name="out_of_bound"> is out of bounds.</string>
+    <string translatable="false" name="preffered_questionnaire_language">कृपया ध्यान दें, आप अपना पसंदीदा प्रश्नावली भाषा का चयन कर सकते हैं</string>
+    <string translatable="false" name="google_services_not_avaliable">गूगल प्ले सेवा उपलब्ध नहीं हैं</string>
+    <string translatable="false" name="downloading_system_languages">प्रणाली भाषाओं को डाउनलोड कर रहा है</string>
+    <string translatable="false" name="no_alternative_or_server_side">सर्वर साइड पर कोई वैकल्पिक भाषा नहीं है!</string>
+    <string translatable="false" name="update_system_languages">अद्यतन प्रणाली</string>
+    <string translatable="false" name="synch_is_already_in_progress">एक समन्वय प्रगति में पहले से ही है!</string>
+    <string translatable="false" name="downloading_alternative_jobs">वैकल्पिक जॉब के अवसर डाउनलोड कर रहा है</string>
+    <string translatable="false" name="assigning_alternate_job">वैकल्पिक जॉब असाइन हो रही है ।</string>
+    <string translatable="false" name="order_assigned_refreshing_job_list">जॉब असाइन हो गयी है, जॉब लिस्ट को रीलोड कर रहे है। </string>
+    <string translatable="false" name="unable_to_assign_this_order">असाइन करने में असमर्थ, व्यवस्थापक से संपर्क करें </string>
+    <string translatable="false" name="unable_to_find_alternative_job"> वैकल्पिक जॉब खोजने में असमर्थ.</string>
+    <string translatable="false" name="do_you_Want_relace_order">आप चयनित शाखा आदेश चाहते हैं?</string>
+    <string translatable="false" name="could_not_retrieve">सर्वेक्षण जानकारी प्राप्त नहीं कर सकता है ...</string>
+    <string translatable="false" name="questionnaire_mock_gps_alert">नकली जीपीएस मॉड्यूल सक्षम है। कृपया इसे आगे बढ़ने के लिए अक्षम करें, आप पर यहां नकली जीपीएस निष्क्रिय कर सकते हैं: सेटिंग्स> अनुप्रयोग> विकास> आप सेटिंग स्क्रीन खोलना चाहते हैं?</string>
+    <string translatable="false" name="questionnaire_min_zero_max">#  # अक्षर रहते है </string>
+    <string translatable="false" name="questionnaire_min_max">न्यूनतम # min # अक्षर रहते है ।</string>
+    <string translatable="false" name="questionnaire_min_max_zero"># MAX # वर्ण शेष न्यूनतम # मिनट # वर्ण</string>
+    <string translatable="false" name="questionnaire_error_retrieving">सहेजे गए डेटा को पुन: प्राप्त करने में त्रुटि!</string>
+    <string translatable="false" name="questionnaire_sign">हस्ताक्षर करे</string>
+    <string translatable="false" name="error_order_not_assigned">इस आदेश को आप को नहीं सौंपा है।</string>
+    <string translatable="false" name="error_opening_android_gallery">एंड्रॉयड गैलरी का उपयोग करके त्रुटि, हमारे कस्टम गैलरी का उपयोग करें, असुविधा के लिए खेद है!</string>
+    <string translatable="false" name="sortByDate">तिथि से छँटाई</string>
+    <string translatable="false" name="sortByName">नाम से छँटाई</string>
+    <string translatable="false" name="button_show_file">फ़ाइल</string>
+    <string translatable="false" name="questionnaire_select_file_alert">आप फ़ाइल का चयन करना चाहते हैं?</string>
+    <string translatable="false" name="s_branch_sorting">शाखा छँटाई</string>
+    <string translatable="false" name="s_tracker_setting">मेरे पास ऑडिट का पता लगाएं</string>
+    <string translatable="false" name="s_tracker_heading">भू ट्रैकर सेटिंग्स</string>
+    <string translatable="false" name="s_alphabetical">वर्णमाला</string>
+    <string translatable="false" name="s_distance">दूरी</string>
+    <string translatable="false" name="s_image_cropping">छवि को काटना</string>
+    <string translatable="false" name="s_off">बंद</string>
+    <string translatable="false" name="s_on">शुरू</string>
+    <string translatable="false" name="attach_err_job_list">अनुलग्नक अभी भी अपलोड करने के लिए लंबित हैं। देखने के लिए टैप करें।.</string>
+    <string translatable="false" name="file_not_found">फ़ाइल को खोजने में असमर्थ!</string>
+    <string translatable="false" name="file_delete_alert">क्या आप इस फाइल को नष्ट करना चाहते हैं?</string>
+    <string translatable="false" name="questionnaire_date_valid_error">अवैध समय दिनाँक प्रारूप!</string>
+    <string translatable="false" name="sNonRefundableServicePayment">गैरवापसी योग्य सेवा भुगतान</string>
+    <string translatable="false" name="sCriticismPayment">आलोचना भुगतान</string>
+    <string translatable="false" name="sBonusPayment">बोनस भुगतान</string>
+    <string translatable="false" name="purchase_details">खरीद की जानकारी</string>
+    <string translatable="false" name="purchase_invoice_number">खरीद चालान संख्या</string>
+    <string translatable="false" name="purchase_payment">खरीद भुगतान</string>
+    <string translatable="false" name="purchase_description">खरीद का विवरण</string>
+    <string translatable="false" name="service_details">सेवा का विवरण</string>
+    <string translatable="false" name="service_invoice_number">सेवा चालान संख्या</string>
+    <string translatable="false" name="service_payment">सेवा का भुगतान</string>
+    <string translatable="false" name="service_description">सेवा का विवरण</string>
+    <string translatable="false" name="transportation_details">परिवहन जानकारी</string>
+    <string translatable="false" name="transportation_description">परिवहन का विवरण</string>
+    <string translatable="false" name="transportation_payment">परिवहन भुगतान</string>
+    <string translatable="false" name="jd_purchasedesc">खरीद का विवरण</string>
+    <string translatable="false" name="jd_can_purchase">खरीद करो</string>
+    <string translatable="false" name="purchase_numeric_error">सांख्यिक मान आवश्यक है। </string>
+    <string translatable="false" name="purchase_simple_error">अल्फान्यूमेरिक मूल्य की आवश्यकता</string>
+    <string translatable="false" name="purchase_exceeds_error">मूल्य सीमा से अधिक। </string>
+    <string translatable="false" name="action_settings">रूपरेखाएँ</string>
+    <string translatable="false" name="time_set">समय निर्धारित करें</string>
+    <string translatable="false" name="cancel">कैंसिल</string>
+    <string translatable="false" name="time">समय : </string>
+    <string translatable="false" name="job_list_tab_syncing">सिंक्रनाइज़ किए जा रहे हैं</string>
+    <string translatable="false" name="start_download_alt">वैकल्पिक भाषाओं में जॉब डाउनलोड करें। </string>
+    <string translatable="false" name="start_download_inprogress">चालू काम डाउनलोड करें</string>
+    <string translatable="false" name="start_upload_inprogress">चालू काम अपलोड करें</string>
+    <string translatable="false" name="start_checkertificates">अंतिम तिथि</string>
+    <string translatable="false" name="start_download">जॉब डाउनलोड करें। </string>
+    <string translatable="false" name="start_upload">जॉब अपलोड करें। </string>
+    <string translatable="false" name="start_recording">आप रिकॉर्डिंग शुरू करना चाहते हैं?</string>
+    <string translatable="false" name="stop_recording">आप रिकॉर्डिंग बंद करना चाहते हैं?</string>
+    <string translatable="false" name="calculator_heading">चेकर कैलक्यूलेटर</string>
+    <string translatable="false" name="job_list_err_dialog">त्रुटि नोट्स: :</string>
+    <string translatable="false" name="job_list_err_dialog_branch">त्रुटि नोट्स:  फोन "101" डिस्प्ले शर्त का समर्थन नहीं करता। .</string>
+    <string translatable="false" name="_error_display_condition">डिस्प्ले शर्त में त्रुटि है, व्यवस्थापक से संपर्क करें । </string>
+    <string translatable="false" name="err_missing_images">ऊपर दिए चित्र मौजूद नहीं हैं। सूची को sync करें.</string>
+    <string translatable="false" name="press_back_again">बंद करने के लिए बटन को फिर से दबाएँ। .</string>
+    <string translatable="false" name="aaparsing_complete">पदच्छेद पूरा हो गया है।  डेटाबेस को शुरू किया जा रहा है ...</string>
+    <string translatable="false" name="aasaving_assigned_jobs_surveys_job">डेटाबेस में निरुपित जॉब्स एंड सर्वेक्षण को सहेजा जा रहा है। </string>
+    <string translatable="false" name="aauploading_job">जॉब अपलोड # Number # में से # </string>
+    <string translatable="false" name="aauploading_file">फ़ाइल अपलोड हो रहे हैं</string>
+    <string translatable="false" name="aadownloading_Assigned_jobs">निरुपित कार्य डाउनलोड किये जा रहे हैं। </string>
+    <string translatable="false" name="aadownloading_Assigned_surveys">निरुपित सर्वेक्षण डाउनलोड किये जा रहे हैं। </string>
+    <string translatable="false" name="aaparsing_surveys">सर्वेक्षण को पदच्छेद किया जा रहा है। </string>
+    <string translatable="false" name="aaparsing_questionnaire">प्रश्नावली का विश्लेषण हो  रहा है।</string>
+    <string translatable="false" name="aasaving_db_questionnaire">प्रश्नावली: ---------- , डेटाबेस में सहेजा जा रहा है.</string>
+    <string translatable="false" name="aaquestionnaires_downloading_saving">प्रश्नावली को डाउनलोड और सहेजा जा रहा है। </string>
+    <string translatable="false" name="aaparsing_assigned_surveys">निरुपित सर्वेक्षण को पदच्छेद किया जा रहा है। </string>
+    <string translatable="false" name="aaparsing_assigned_jobs">निरुपित कार्य को पदच्छेद किया जा रहा है।</string>
+    <string translatable="false" name="aaupdating_job">-------- कार्य को अपलोड किया जा रहा है। 1/1 </string>
+    <string translatable="false" name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string translatable="false" name="ptr_release_to_refresh">Release to refresh</string>
+    <string translatable="false" name="ptr_refreshing">Refreshing…</string>
+    <string translatable="false" name="ptr_last_updated">अद्यतन।: %1$s</string>
+    <string translatable="false" name="prepare_screen_dialogue">इस प्रश्नावली के लिए जानकारी एकत्रित की जा रही है ..</string>
+    <string translatable="false" name="job_list_menu_update_list">कार्य मानचित्र में देखें</string>
+    <string translatable="false" name="job_list_menu_upload_complete_job">कार्य खोजें</string>
+    <string translatable="false" name="job_list_tab_sync">समन्वयित</string>
+    <string translatable="false" name="job_list_tab_assigned">नियत की गईं</string>
+    <string translatable="false" name="job_list_tab_scheduled">अनुसूची में</string>
+    <string translatable="false" name="job_list_tab_in_progress">प्रगति में</string>
+    <string translatable="false" name="job_list_tab_completed">पूरी की गईं</string>
+    <string translatable="false" name="job_list_tab_sync_u"><b><u>समन्वयित</u></b></string>
+    <string translatable="false" name="job_list_tab_assigned_u"><b><u>नियत की गईं</u></b></string>
+    <string translatable="false" name="job_list_tab_scheduled_u"><b><u>अनुसूची में</u></b></string>
+    <string translatable="false" name="job_list_tab_in_progress_u"><b><u>प्रगति में</u></b></string>
+    <string translatable="false" name="job_list_tab_completed_u"><b><u>पूरी की गईं</u></b></string>
+    <string translatable="false" name="survey_quota_delete_message">कोटा [[NAME OF QUOTA]] ख़त्म हो गया है। 
+आपने # पुरे कर दिए है। 
+साक्षात्कार का विलोपन हो रहा है।</string>
+    <string translatable="false" name="survey_quota_upload_message">कोटा [[NAME OF QUOTA]] ख़त्म हो गया है। 
+आपने # पुरे कर दिए है।</string>
+    <string translatable="false" name="alert_working">कार्य चल रहा है। </string>
+    <string translatable="false" name="alert_switching">टैब स्विचिंग !</string>
+    <string translatable="false" name="alert_saving">सहेजा जा रहा है ...</string>
+    <string translatable="false" name="alert_working_msg">सिस्टम व्यस्त है बाद में प्रयास करें!</string>
+    <string translatable="false" name="survey_quota_alert_message">कोटा समाप्त हो गया!</string>
+    <string translatable="false" name="disable_proxy">रीसेट करें</string>
+    <string translatable="false" name="pos_product">उत्पाद</string>
+    <string translatable="false" name="pos_count">गणना</string>
+    <string translatable="false" name="pos_location">स्थान</string>
+    <string translatable="false" name="pos_price">कीमत</string>
+    <string translatable="false" name="pos_expiration">निश्वासन</string>
+    <string translatable="false" name="pos_note">नोट</string>
+    <string translatable="false" name="pos_picture">तस्वीर</string>
+    <string translatable="false" name="pos_enter_count">गणना दर्ज करें</string>
+    <string translatable="false" name="pos_subtract">घटाए </string>
+    <string translatable="false" name="pos_add"> जोड़ </string>
+    <string translatable="false" name="pos_value">रकम</string>
+    <string translatable="false" name="pos_x"> X </string>
+    <string translatable="false" name="pos_equal"> = </string>
+    <string translatable="false" name="pos_total"> कुल: </string>
+    <string translatable="false" name="pos_enter_price">मूल्य दर्ज करें  </string>
+    <string translatable="false" name="pos_average">औसत: </string>
+    <string translatable="false" name="pos_error_product">उत्पाद नहीं मिला </string>
+    <string translatable="false" name="pos_intall_manager">फ़ाइल प्रबंधक स्थापित करें.</string>
+    <string translatable="false" name="pos_not_attach">फ़ाइल संलग्न नहीं कर सका!</string>
+    <string translatable="false" name="pos_error_enter">डेटा दर्ज करें!</string>
+    <string translatable="false" name="pos_error_enter_product_location">उत्पाद और स्थान का चयन करें!</string>
+    <string translatable="false" name="pos_preview">POS पूर्वावलोकन</string>
+    <string translatable="false" name="pos_enter_note">नोट दर्ज करें</string>
+    <string translatable="false" name="pos_selected_date">चयनित तिथि:</string>
+    <string translatable="false" name="pos_no_tabs">कोई टैब नहीं है !</string>
+    <string translatable="false" name="pos_select_product">उत्पाद चुने</string>
+    <string translatable="false" name="pos_select_location">स्थान चुने</string>
+    <string translatable="false" name="pos_error_report">वैध गणना  = [Value] दर्ज करें </string>
+    <string translatable="false" name="pos_error_report2"></string>
+    <string translatable="false" name="pos_backk">वापस</string>
+    <string translatable="false" name="button_back">काम की सूची पर वापस जाएं</string>
+    <string translatable="false" name="bookmark_picker_name">Bookmarks</string>
+    <string translatable="false" name="button_add_calendar">कैलेंडर में जोड़ें</string>
+    <string translatable="false" name="button_add_contact">Add contact</string>
+    <string translatable="false" name="button_book_search">Book Search</string>
+    <string translatable="false" name="button_cancel">रद्द करें</string>
+    <string translatable="false" name="button_clipboard_empty">Clipboard empty</string>
+    <string translatable="false" name="button_custom_product_search">Custom search</string>
+    <string translatable="false" name="button_dial">Dial number</string>
+    <string translatable="false" name="button_done">समाप्त</string>
+    <string translatable="false" name="button_email">Send email</string>
+    <string translatable="false" name="button_get_directions">Get directions</string>
+    <string translatable="false" name="button_google_shopper">Google Shopper</string>
+    <string translatable="false" name="button_mms">एमएमएस भेजें</string>
+    <string translatable="false" name="button_ok">ठीक</string>
+    <string translatable="false" name="button_open_browser">Open browser</string>
+    <string translatable="false" name="button_product_search">उत्पाद खोजh</string>
+    <string translatable="false" name="button_search_book_contents">Search contents</string>
+    <string translatable="false" name="button_share_app">अनुप्रयोग</string>
+    <string translatable="false" name="button_share_bookmark">Bookmark</string>
+    <string translatable="false" name="button_share_by_email">Share via email</string>
+    <string translatable="false" name="button_share_by_sms">Share via SMS</string>
+    <string translatable="false" name="button_share_clipboard">Clipboard</string>
+    <string translatable="false" name="button_share_contact">Contact</string>
+    <string translatable="false" name="button_show_map">Show map</string>
+    <string translatable="false" name="button_sms">Send SMS</string>
+    <string translatable="false" name="button_web_search">Web search</string>
+    <string translatable="false" name="button_wifi">Connect to Network</string>
+    <string translatable="false" name="contents_contact">Contact info</string>
+    <string translatable="false" name="contents_email">Email address</string>
+    <string translatable="false" name="contents_location">Geographic coordinates</string>
+    <string translatable="false" name="contents_phone">Phone number</string>
+    <string translatable="false" name="contents_sms">SMS address</string>
+    <string translatable="false" name="contents_text">Plain text</string>
+    <string translatable="false" name="history_clear_text">Clear history</string>
+    <string translatable="false" name="history_clear_one_history_text">साफ़ करें</string>
+    <string translatable="false" name="history_email_title">Barcode Scanner history</string>
+    <string translatable="false" name="history_empty">Empty</string>
+    <string translatable="false" name="history_empty_detail">No barcode scans have been recorded</string>
+    <string translatable="false" name="history_send">Send history</string>
+    <string translatable="false" name="history_title">History</string>
+    <string translatable="false" name="menu_about">About</string>
+    <string translatable="false" name="menu_encode_mecard">Use MECARD</string>
+    <string translatable="false" name="menu_encode_vcard">Use vCard</string>
+    <string translatable="false" name="menu_help">Help</string>
+    <string translatable="false" name="menu_history">History</string>
+    <string translatable="false" name="menu_settings">रूपरेखाएँ</string>
+    <string translatable="false" name="menu_share">Share</string>
+    <string translatable="false" name="msg_about">The official Android app of the open source ZXing barcode project.</string>
+    <string translatable="false" name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved</string>
+    <string translatable="false" name="msg_camera_framework_bug">क्षमा करें, एंड्रॉयड कैमरा को एक समस्या का सामना करना पड़ा। आप डिवाइस को पुनः आरंभ करें।</string>
+    <string translatable="false" name="msg_default_format">Format</string>
+    <string translatable="false" name="msg_default_meta">Metadata</string>
+    <string translatable="false" name="msg_default_mms_subject">Hi</string>
+    <string translatable="false" name="msg_default_status">बारकोड दृश्यदर्शी आयत के अंदर की जगह रखें इसे, स्कैन करने के लिए।</string>
+    <string translatable="false" name="msg_default_time">समय  :</string>
+    <string translatable="false" name="msg_default_type">प्रकार</string>
+    <string translatable="false" name="msg_encode_contents_failed">उपलब्ध कराए गए आंकड़ों से एक बारकोड सांकेतिक शब्दों में नहीं किया जा सका।</string>
+    <string translatable="false" name="msg_google_books">Google Books</string>
+    <string translatable="false" name="msg_google_product">Google Product Search</string>
+    <string translatable="false" name="msg_google_shopper_missing">Google Shopper is not installed</string>
+    <string translatable="false" name="msg_install_google_shopper">Google Shopper combines barcode scanning with online and local prices, reviews and more without opening the browser. Would you like to try it?</string>
+    <string translatable="false" name="msg_intent_failed">Sorry, the requested application could not be launched. The barcode contents may be invalid.</string>
+    <string translatable="false" name="msg_redirect">Redirect</string>
+    <string translatable="false" name="msg_sbc_book_not_searchable">Sorry, this book is not searchable.</string>
+    <string translatable="false" name="msg_sbc_failed">Sorry, the search encountered a problem.</string>
+    <string translatable="false" name="msg_sbc_no_page_returned">No page returned</string>
+    <string translatable="false" name="msg_sbc_page">Page</string>
+    <string translatable="false" name="msg_sbc_searching_book">Searching book\u2026</string>
+    <string translatable="false" name="msg_sbc_snippet_unavailable">Snippet not available</string>
+    <string translatable="false" name="msg_sbc_unknown_page">Unknown page</string>
+    <string translatable="false" name="msg_share_explanation">You can share data by displaying a barcode on your screen and scanning it with another phone.</string>
+    <string translatable="false" name="msg_share_subject_line">Here are the contents of a barcode I scanned</string>
+    <string translatable="false" name="msg_share_text">Or type some text and press Enter</string>
+    <string translatable="false" name="msg_sure">Are you sure?</string>
+    <string translatable="false" name="msg_unmount_usb">Sorry, the SD card is not accessible.</string>
+    <string translatable="false" name="preferences_actions_title">When a barcode is found\u2026</string>
+    <string translatable="false" name="preferences_auto_focus_title">Use auto focus</string>
+    <string translatable="false" name="preferences_bulk_mode_summary">Scan and save many barcodes continuously</string>
+    <string translatable="false" name="preferences_bulk_mode_title">Bulk scan mode</string>
+    <string translatable="false" name="preferences_copy_to_clipboard_title">Copy to clipboard</string>
+    <string translatable="false" name="preferences_custom_product_search_summary" formatted="false">Substitutions: %s = contents, %f = format, %t = type</string>
+    <string translatable="false" name="preferences_custom_product_search_title">Custom search URL</string>
+    <string translatable="false" name="preferences_decode_1D_title">1D barcodes</string>
+    <string translatable="false" name="preferences_decode_Data_Matrix_title">Data Matrix</string>
+    <string translatable="false" name="preferences_decode_QR_title">QR Codes</string>
+    <string translatable="false" name="preferences_front_light_summary">Improves scanning in low light on some phones, but may cause glare. Does not work on all phones.</string>
+    <string translatable="false" name="preferences_front_light_title">Use front light</string>
+    <string translatable="false" name="preferences_general_title">General settings</string>
+    <string translatable="false" name="preferences_name">रूपरेखाएँ</string>
+    <string translatable="false" name="preferences_play_beep_title">Beep</string>
+    <string translatable="false" name="preferences_remember_duplicates_summary">Store multiple scans of the same barcode in History</string>
+    <string translatable="false" name="preferences_remember_duplicates_title">Remember duplicates</string>
+    <string translatable="false" name="preferences_result_title">Result settings</string>
+    <string translatable="false" name="preferences_scanning_title">When scanning for barcodes, decode\u2026</string>
+    <string translatable="false" name="preferences_search_country">Search country</string>
+    <string translatable="false" name="preferences_supplemental_summary">Try to retrieve more information about the barcode contents</string>
+    <string translatable="false" name="preferences_supplemental_title">Retrieve more info</string>
+    <string translatable="false" name="preferences_vibrate_title">Vibrate</string>
+    <string translatable="false" name="result_address_book">Found contact info</string>
+    <string translatable="false" name="result_calendar">Found calendar event</string>
+    <string translatable="false" name="result_email_address">Found email address</string>
+    <string translatable="false" name="result_geo">Found geographic coordinates</string>
+    <string translatable="false" name="result_isbn">Found book</string>
+    <string translatable="false" name="result_product">Found product</string>
+    <string translatable="false" name="result_sms">Found SMS address</string>
+    <string translatable="false" name="result_tel">Found phone number</string>
+    <string translatable="false" name="result_text">Found plain text</string>
+    <string translatable="false" name="result_uri">Found URL</string>
+    <string translatable="false" name="result_wifi">Found WLAN Configuration</string>
+    <string translatable="false" name="sbc_name">Google Book Search</string>
+    <string translatable="false" name="share_name">Share via barcode</string>
+    <string translatable="false" name="title_about">Barcode Scanner v</string>
+    <string translatable="false" name="wifi_changing_network">Requesting connection to network\u2026</string>
+    <string translatable="false" name="wifi_ssid_label">Network Name</string>
+    <string translatable="false" name="wifi_type_label">प्रकार</string>
+    <string translatable="false" name="zxing_url">http://code.google.com/p/zxing</string>
+    <string translatable="false" name="pos_product_hint">Open navigation drawer</string>
+    <string translatable="false" name="pos_location_hint">Open navigation drawer</string>
+    <string translatable="false" name="pos_tgl_count">गणना</string>
+    <string translatable="false" name="pos_tgl_price">कीमत</string>
+    <string translatable="false" name="pos_tgl_expiration">निश्वासन</string>
+    <string translatable="false" name="pos_tgl_note">नोट</string>
+    <string translatable="false" name="pos_tgl_picture">तस्वीर</string>
+    <string translatable="false" name="app_name">Login with us!</string>
+
+    <string-array name="slide_menu_array">
+        <item>@string/job_list_menu_upload_complete_job</item>
+        <item>@string/job_list_menu_update_list</item>
+        <item>@string/job_list_exit</item>
+        <item>@string/settings_page_title</item>
+    </string-array>
+
+    <string translatable="false" name="drawer_open">Open navigation drawer</string>
+    <string translatable="false" name="drawer_close">Close navigation drawer</string>
+    <string translatable="false" name="action_websearch">Web search</string>
+    <string translatable="false" name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string translatable="false" name="app_title">Checker Survey Application</string>
+
+    <color name="darkness_value">#99000000</color>
+
+    <!-- login Screen -->
+
+    <string translatable="false" name="Questionaire_submitting">सर्वेक्षण प्रस्तुत किया जा रहा है...</string>
+    <string translatable="false" name="questionnaire_gps_off_alert">जीपीएस सेवा सक्रिय है. आप इसे बंद करना चाहते हैं?</string>
+    <string translatable="false" name="list_enable_calendar">कार्य को कैलेंडर मे डालना चाहते हो?</string>
+    <string translatable="false" name="questionnaire_open_survey_alert">Your Survey Allocation count is reached...</string>
+    <string translatable="false" name="questionnaire_gps_alert">आपका जीपीएस मॉड्यूल अक्षम है. क्या आप इसे सक्षम करना चाहेंगे?</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert">क्या आप सुनिश्चित करते हैं सभी प्रतिक्रियाओं को हटाने और बाहर निकलने के लिए?</string>
+    <string translatable="false" name="questionnaire_refresh_alert">Please download questionnaire first from job list page before accept any job.</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_yes">हाँ</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_no">नहीं</string>
+    <string translatable="false" name="questionnaire_alert_text_betweeeen_first">संख्यात्मक मान सीमा में होना चाहिए ( #Start# से #END#) </string>
+    <string translatable="false" name="login_page_title">स्वागत !</string>
+    <string translatable="false" name="login_btn">साइन इन करें</string>
+    <string translatable="false" name="login_username_hint">उपयोगकर्ता का नाम</string>
+    <string translatable="false" name="login_password_hint">कूटशब्द</string>
+    <string translatable="false" name="login_reset_btn">साफ़ करें</string>
+    <string translatable="false" name="error_alert_title">समस्या</string>
+    <string translatable="false" name="alert_btn_lbl_ok">ठीक</string>
+    <string translatable="false" name="login_username_alert">गलत उपयोगकर्ता नाम या पासवर्ड</string>
+    <string translatable="false" name="login_invalid_systemurl_alert">गलत सिस्टम यूआरएल,  कृपया पूरी प्रणाली यूआरएल का उपयोग करें. (उदाहरण: http://www.checker-soft.com/demo )</string>
+    <string translatable="false" name="invalid_server_response_alert">सर्वर से अमान्य प्रतिक्रिया. ऑपरेटर से संपर्क करें.</string>
+    <string translatable="false" name="timeout_response_alert">कनेक्शन नहीं लगा. ऑपरेटर से संपर्क करें</string>
+    <string translatable="false" name="crash_toast_text">Ooooops! एप्लीकेशन दुर्घटनाग्रस्त हो गई, लेकिन एक रिपोर्ट इस मुद्दे को ठीक करने के लिए डेवलपर को भेज दी है!(NEEDS DISCUSSION)</string>
+    <string translatable="false" name="crash_dialog_title">App has crashed</string>
+    <string translatable="false" name="crash_dialog_text">एक अनपेक्षित त्रुटि ने एप्लीकेशन को बंद कर दिया है. हमें त्रुटि डेटा भेज कर इसे ठीक करने में मदद करें.(NEED DISCUSSION)</string>
+    <string translatable="false" name="crash_dialog_comment_prompt">एक अनपेक्षित त्रुटि ने एप्लीकेशन को बंद कर दिया है. हमें त्रुटि डेटा भेज कर इसे ठीक करने में मदद करें.आप नीचे समस्या के बारे में अपनी टिप्पणी भेज सकते हैं:</string>
+    <string translatable="false" name="crash_dialog_ok_toast"></string>
+
+    <!-- Setting Screen -->
+    <string translatable="false" name="settings_proxy_host_lbl">पता</string>
+    <string translatable="false" name="settings_proxy_port_lbl">Port</string>
+    <string translatable="false" name="settings_proxy_host_usrname">उपयोगकर्ता का नाम</string>
+    <string translatable="false" name="settings_proxy_host_pswrd">कूटशब्द</string>
+    <string translatable="false" name="settings_txt_proxy">प्रॉक्सी</string>
+    <string translatable="false" name="settings_page_title">रूपरेखाएँ</string>
+    <string translatable="false" name="settings_job_board">जॉब बोर्ड</string>
+    <string translatable="false" name="settings_refund_report">व्यक्तिगत धनवापसी रिपोर्ट</string>
+    <string translatable="false" name="settings_page_proxy">प्रॉक्सी</string>
+    <string translatable="false" name="settings_system_url_lbl">सिस्टम यू आर एल</string>
+    <string translatable="false" name="settings_language_lbl">भाषा</string>
+    <string translatable="false" name="settings_themes_lbl">थीम</string>
+    <string translatable="false" name="settings_save_btn">संचय</string>
+    <string translatable="false" name="settings_http_label">http://</string>
+    <string translatable="false" name="url_hint">सिस्टम यू आर एल</string>
+    <string translatable="false" name="_alert_title">सूचना</string>
+    <string translatable="false" name="settings_url_alert">एक मान्य यूआरएल दर्ज करें</string>
+    <string translatable="false" name="settings_system_url_hint">सिस्टम यू आर एल</string>
+
+    <!-- Job List Screen -->
+    <string translatable="false" name="joblist_title">कार्य - सूची</string>
+    <string translatable="false" name="joblist_filter_btn">Filter</string>
+    <string translatable="false" name="joblist_map_btn">नक्शा</string>
+    <string translatable="false" name="joblist_all_jobs">सभी काम दिखाएँ</string>
+
+    <!-- Job Filter Screen -->
+    <string translatable="false" name="job_filter_title">खोज</string>
+    <string translatable="false" name="job_filter_choose_job_type_lbl">क्लाइंट चुनें</string>
+    <string translatable="false" name="job_filter_choose_city_lbl">नगर चुनें</string>
+    <string translatable="false" name="job_filter_date_range_lbl">तिथि सीमा</string>
+    <string translatable="false" name="job_filter_start_date_lbl"><b>प्रारंभ तिथि</b></string>
+    <string translatable="false" name="job_filter_end_date_lbl"><b>अंतिम तिथि</b></string>
+    <string translatable="false" name="job_filter_save_btn">खोज</string>
+    <string translatable="false" name="job_filter_default_dd_option">चयन करें</string>
+    <string translatable="false" name="job_filter_select_date"><u>तिथि का चयन करें</u></string>
+
+    <string-array name="job_filter_job_list">
+        <item> सभी का चयन करें</item>
+        <item> खुदरा</item>
+        <item> शुरू और खत्म</item>
+    </string-array>
+    <string-array name="job_filter_region_list">
+        <item>सभी का चयन करें</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <!-- SurveyDetail Screen -->
+    <string translatable="false" name="jd_survey_name">सर्वेक्षण का नाम</string>
+    <string translatable="false" name="jd_survey_allocations">आवंटन</string>
+    <string translatable="false" name="jd_survey_quotas">नियतांश</string>
+    <!-- JobDetail Screen -->
+    <string translatable="false" name="jd_heder_text">काम का विस्तार</string>
+    <string translatable="false" name="job_detail_map_btn">नक्शा</string>
+    <string translatable="false" name="jd_begin_btn_text">साक्षात्कार शुरू करें </string>
+    <string translatable="false" name="jd_accept_btn_text">स्वीकार करें</string>
+    <string translatable="false" name="jd_continue_review_btn_text">सर्वेक्षण जारी रखें</string>
+    <string translatable="false" name="jd_begin_review_btn_text">सर्वेक्षण शुरू करें</string>
+    <string translatable="false" name="jd_reject_btn_text">पतन</string>
+    <string translatable="false" name="jd_logout_btn_text">लॉगआउट</string>
+    <string translatable="false" name="jd_date">तिथि</string>
+    <string translatable="false" name="jd_status">स्थिति</string>
+    <string translatable="false" name="jd_description">विवरण</string>
+    <string translatable="false" name="jd_setname">प्रश्नावली</string>
+    <string translatable="false" name="jd_clientname">मुवक्किल</string>
+    <string translatable="false" name="jd_branchname">शाखा</string>
+    <string translatable="false" name="jd_branchfname">शाखा का पूरा नाम</string>
+    <string translatable="false" name="jd_cityname">शहर</string>
+    <string translatable="false" name="jd_address">पता</string>
+    <string translatable="false" name="jd_branchpno">शाखा फोन</string>
+    <string translatable="false" name="jd_openinghours">खुलने का समय</string>
+    <string translatable="false" name="jd_stime">प्रारंभ समय</string>
+    <string translatable="false" name="jd_etime">अंत समय</string>
+    <string translatable="false" name="jd_parsing_alert_title">सूचना</string>
+    <string translatable="false" name="jd_parsing_alert_msg">कृपया प्रतीक्षा करें. प्रश्नावली प्रगति में है.</string>
+    <string translatable="false" name="jd_please_alert_msg">कृपया प्रतीक्षा करें ...</string>
+
+    <!-- Reject Job Screen -->
+    <string translatable="false" name="reject_job_popup_title">इनकार करने का कारण बताएं</string>
+    <string translatable="false" name="reject_job_popup_reason_lbl">कारण</string>
+    <string translatable="false" name="reject_job_popup_btn_txt">ठीक</string>
+
+    <!-- Questionnaire Screen -->
+    <string translatable="false" name="questionnaire_title">प्रश्नावली</string>
+    <string translatable="false" name="questionnaire_next_btn">आगे</string>
+    <string translatable="false" name="questionnaire_record_btn">अभिलेख</string>
+    <string translatable="false" name="questionnaire_record_stop_btn">रुकें</string>
+    <string translatable="false" name="questionnaire_menu_btn">समाप्त</string>
+    <string translatable="false" name="attach_disclaimer">ये फाइलें वर्तमान काम से जुड़ी हैं:</string>
+    <string translatable="false" name="questionnaire_prev_btn">पीछे</string>
+    <string translatable="false" name="questionnaire_exitandsave_menu">संचय करें और बाहर निकलें</string>
+    <string translatable="false" name="questionnaire_preview_menu">पूर्वावलोकन</string>
+    <string translatable="false" name="questionnaire_finishandsend_menu">समाप्त करें और भेजें</string>
+    <string translatable="false" name="questionnaire_alert">अवैध जवाब</string>
+    <string translatable="false" name="questionnaire_alert_free_text">मान अनुमत श्रेणी में नहीं है</string>
+    <string translatable="false" name="questionnaire_btn_text">ठीक</string>
+    <string translatable="false" name="questionnaire_alert_title">सूचना</string>
+    <string translatable="false" name="questionnaire_submit_survey_alert">सर्वेक्षण सफलतापूर्वक प्रस्तुत हो गया है</string>
+    <string translatable="false" name="questionnaire_select_files">फ़ाइलों का चयन करें</string>
+    <string translatable="false" name="questionnaire_upload_files">सर्वेक्षण के साथ फ़ाइलों को अपलोड करें: </string>
+    <string translatable="false" name="questionnaire_finish">समाप्त</string>
+
+    <string-array name="language_val">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list">
+        <item>Night</item>
+        <item>Day</item>
+    </string-array>
+
+    <!-- NEW ADDED -->
+    <string translatable="false" name="jd_begin_button_status_inprogress">प्रगति में</string>
+    <string translatable="false" name="no_internet_connection_alret_message">इंटरनेट कनेक्शन की जांच और मान्य पहचान के साथ प्रयास करें</string>
+    <string translatable="false" name="jd_begin_button_status_completed">पूरा हो गया</string>
+    <string translatable="false" name="jd_synch_button_text">समकालीन बनायें</string>
+    <string translatable="false" name="job_search_no_records_alert">कोई रिकॉर्ड नहीं मिला</string>
+    <string translatable="false" name="reject_job_sucess_alert">काम सफलतापूर्वक अस्वीकार कर दिया </string>
+    <string translatable="false" name="alert_sync_jobs_again">App needs to synch the system sent #LOCAL# number of jobs and server accpeted #SERVER# number of jobs!</string>
+    <string translatable="false" name="reject_job_fail_alert">ऑफ़लाइन होने पर काम को अस्वीकार नहीं कर सकते </string>
+    <string translatable="false" name="accept_job_fail_alert">ऑफ़लाइन होने पर काम को स्वीकार नहीं कर सकते</string>
+    <string translatable="false" name="offline_alert">ऑफ़लाइन होने पर काम नहीं कर सकते</string>
+    <string translatable="false" name="submit_review_fail_alert">जब ऑफ़लाइन हों सर्वेक्षण प्रस्तुत नहीं कर सकते</string>
+    <string translatable="false" name="save_questionnaire_records_for_offline">प्रश्नावली को इस काम के लिए सहेजा नहीं गया था, इंटरनेट से कनेक्ट करें और फिर प्रश्नावली डाउनलोड करें</string>
+    <string translatable="false" name="save_questionnaire_records_for_database">डेटाबेस को खोलने में असमर्थ.</string>
+    <string translatable="false" name="questionnaire_multiple_max_ans_alert">सीमा से परे जवाब चयन किये</string>
+    <string translatable="false" name="jd_begin_button_status_scheduled">योजना बांधी</string>
+    <string translatable="false" name="job_list_exit">कार्य सूची से बाहर निकलें</string>
+    <string translatable="false" name="reject_job_resusal_text_alert">इनकार कारण दर्ज करें</string>
+    <string translatable="false" name="job_download_alert">अपडेट किये कार्य का डाउनलोड प्रगति में है ...</string>
+    <string translatable="false" name="questionnaire_downlaod_alert">प्रश्नावली को डाउनलोड और सहेजा जा रहा है। </string>
+    <string translatable="false" name="questionnaire_saving_alert">प्रश्नावलियों को सहेजा जा रहा है। </string>
+    <string translatable="false" name="image_downloading_alert">Qप्रश्नावलियों को तैयार किया जा रहा है। </string>
+    <string translatable="false" name="before_accept_alert">Please download questionnaire first from job list page before accept any job</string>
+    <string translatable="false" name="answer_save_alert">प्रश्नावलियों के उत्तर सहेजे जा रहे है। </string>
+    <string translatable="false" name="exit_and_delete_btn_text">बाहर निकलें और नष्ट करें</string>
+    <string translatable="false" name="non_answered_conf_alert_title">पुष्टि हो गई है.</string>
+    <string translatable="false" name="non_answered_conf_alert_msg">कोई उतर नहीं दिया, कैंसिल बटन दबाए। </string>
+    <string translatable="false" name="non_answered_conf_alert_cancel_btn">रद्द करें</string>
+    <string translatable="false" name="non_answered_conf_alert_continue_btn">जारी रहे</string>
+    <string translatable="false" name="Questionnaire_finish_time_lbl">वास्तविक सर्वेक्षण समय</string>
+    <string translatable="false" name="Questionnaire_finish_Date_lbl">वास्तविक सर्वेक्षण दिनांक</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_time_lbl">वास्तविक सर्वेक्षण समय</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_Date_lbl">वास्तविक सर्वेक्षण दिनांक</string>
+    <string translatable="false" name="questionnaire_free_text_lbl">मुक्त पाठ</string>
+    <string translatable="false" name="questionnaire_send_bug">रिपोर्ट बग</string>
+    <string translatable="false" name="questionnaire_done_btn_text">जारी रहे</string>
+    <string translatable="false" name="questionnaire_file_attached_text">फ़ाइल संलग्न हो गई</string>
+    <string translatable="false" name="questionnaire_alert_additional">अतिरिक्त जानकारी की आवश्यकता है!!</string>
+    <string translatable="false" name="questionnaire_alert_text_between_first">टेक्स्ट की लंबाई नियमित होनी चाहिए ( #Start# से #END#) </string>
+    <string translatable="false" name="questionnaire_alert_text_to"> to </string>
+    <string translatable="false" name="questionnaire_alert_no_answer">कोई जवाब नहीं चुना!</string>
+    <string translatable="false" name="already_submit_review_alert">सर्वेक्षण पहले से ही प्रस्तुत किया जा चुका है. </string>
+    <string translatable="false" name="camera_menu_text">कैमरा</string>
+    <string translatable="false" name="video_menu_text">वीडियो</string>
+    <string translatable="false" name="voice_menu_text">ऑडियो रिकॉर्डिंग</string>
+    <string translatable="false" name="gallery_menu_text">गैलरी</string>
+    <string translatable="false" name="file_size_text">फ़ाइल का आकार सीमा से अधिक , छोटे आकार के साथ फिर से प्रयास है।</string>
+    <string translatable="false" name="txt_briefing">संक्षिप्त</string>
+
+    <!-- Attached files feature -->
+
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Romanian</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Japanese</item>
+    </string-array>
+
+    <string translatable="false" name="settings">पसंद</string>
+    <string translatable="false" name="bookmarks">Bookmarks</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+</resources>

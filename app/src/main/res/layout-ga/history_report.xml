@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backGroundDrawable"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:layoutDirection="ltr" >
+
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="28dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10px"
+            android:src="@drawable/back_green" />
+
+        <View
+            android:id="@+id/dividing_line_3"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv2"
+            android:background="#B3B3B3" />
+
+        <TextView
+            android:id="@+id/jd_heder"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#9dc40f"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:id="@+id/update_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10px"
+            android:src="@drawable/refresh"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/filterbtn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10px"
+            android:layout_toLeftOf="@+id/update_button"
+            android:src="@drawable/filter_grey"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/refundLoader"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/topbar"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/refundLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/s_item_column_0_line_75_file_102"
+            android:textColor="#000000"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scroller"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/topbar"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:id="@+id/filterLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/topbar"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topbar"
+                android:layout_centerHorizontal="true"
+                android:text="@string/s_item_column_0_line_100_file_102"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:id="@+id/montyearpicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Label"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal" >
+
+                <DateTimePicker.MonthYearPicker
+                    android:id="@+id/DateTimePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" />
+
+                <NumberPicker
+                    android:id="@+id/numberPickerMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone" />
+
+                <NumberPicker
+                    android:id="@+id/numberPickerYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/PaidSp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/montyearpicker"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp" >
+
+                <TextView
+                    android:id="@+id/PaidT"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_234_file_37"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/paidFilter"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/PaidT"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/transparent"
+                    android:drawSelectorOnTop="true" />
+
+                <ImageView
+                    android:id="@+id/dividing_line_kink"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignBottom="@+id/paidFilter"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/kink" />
+
+                <View
+                    android:id="@+id/dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/dividing_line_kink"
+                    android:background="@drawable/grey_separator" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ApprovedSp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PaidSp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp" >
+
+                <TextView
+                    android:id="@+id/ApprovedT"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_194_file_102"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/ApprovedFilter"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ApprovedT"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/transparent"
+                    android:drawSelectorOnTop="true" />
+
+                <ImageView
+                    android:id="@+id/dividing_line_kink"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignBottom="@+id/ApprovedFilter"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/kink" />
+
+                <View
+                    android:id="@+id/dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="4px"
+                    android:layout_below="@+id/dividing_line_kink"
+                    android:background="@drawable/grey_separator" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/flowTypeSp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ApprovedSp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp" >
+
+                <TextView
+                    android:id="@+id/flowTypeT"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_241_file_102"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/Flow_Type_Filter"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/flowTypeT"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/transparent"
+                    android:drawSelectorOnTop="true" />
+
+                <ImageView
+                    android:id="@+id/dividing_line_kink"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignBottom="@+id/Flow_Type_Filter"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/kink" />
+
+                <View
+                    android:id="@+id/dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/dividing_line_kink"
+                    android:background="@drawable/grey_separator" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ReportTypeSp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/flowTypeSp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp" >
+
+                <TextView
+                    android:id="@+id/ReportTypeT"
+                    style="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/s_item_column_0_line_288_file_102"
+                    android:textColor="#9DC40F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/Report_Type_Filter"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ReportTypeT"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/transparent"
+                    android:drawSelectorOnTop="true" />
+
+                <ImageView
+                    android:id="@+id/dividing_line_kink"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignBottom="@+id/Report_Type_Filter"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/kink" />
+
+                <View
+                    android:id="@+id/dividing_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/dividing_line_kink"
+                    android:background="@drawable/grey_separator" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/btns"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/ReportTypeSp"
+                android:orientation="horizontal"
+                android:weightSum="2" >
+
+                <Button
+                    android:id="@+id/btnRefund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/ReportTypeSp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_green_bg"
+                    android:text="@string/s_item_column_0_line_336_file_102"
+                    android:textColor="@color/white"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/ReportTypeSp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_green_bg"
+                    android:text="@string/s_item_column_0_line_349_file_102"
+                    android:textColor="@color/white"
+                    android:visibility="visible" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/update_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/scroller"
+        android:text=""
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/refundList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/update_time"
+        android:layout_marginLeft="15px"
+        android:layout_marginRight="15px"
+        android:cacheColorHint="#00000000"
+        android:divider="#9dc40f"
+        android:dividerHeight="4px"
+        android:visibility="visible" />
+
+</RelativeLayout>

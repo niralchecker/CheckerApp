@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1091240420784",
+    "firebase_url": "https://checker-field-surveyor-65e81.firebaseio.com",
+    "project_id": "checker-field-surveyor-65e81",
+    "storage_bucket": "checker-field-surveyor-65e81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091240420784:android:b0d24c2a57b2ce3da8e275",
+        "android_client_info": {
+          "package_name": "com.mor.sa.android.activities"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091240420784-62k5faf5d2kkmq9mgieje4h1rbhtj35q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtzGNGM-hLkuyUVhUjcj4UlNOIyt6g86s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091240420784-62k5faf5d2kkmq9mgieje4h1rbhtj35q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

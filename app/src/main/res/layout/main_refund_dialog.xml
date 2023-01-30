@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toplayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:layoutDirection="ltr"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/critlink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/status_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/xbutton"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="2dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            android:textStyle="normal" />
+
+        <ImageView
+            android:id="@+id/xbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="2dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/xbtn" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/ClientNameT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PaidT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_66_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/ClientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Paid"
+            android:layout_toRightOf="@+id/ClientNameT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/FlowTypeT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_93_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/FlowType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/AddedAtT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_119_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/AddedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/AddedAtT"
+            android:paddingLeft="6dp"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/ValueT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/FlowTypeT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_148_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/InvoiceNumberT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ValueT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_175_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/InvoiceNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Value"
+            android:layout_toRightOf="@+id/InvoiceNumberT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/ApprovedT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/InvoiceNumberT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_204_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/Approved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Value"
+            android:layout_toRightOf="@+id/ApprovedT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/PaidT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ApprovedT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_233_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/Paid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Approved"
+            android:layout_toRightOf="@+id/PaidT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/BranchCodeT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ClientNameT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_262_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/BranchCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ClientName"
+            android:layout_toRightOf="@+id/BranchCodeT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/BranchNameT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/BranchCodeT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_291_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/BranchName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/FlowTypeT"
+            android:layout_toRightOf="@+id/BranchCode"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/CityNameT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/BranchNameT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_320_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/CityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/FlowTypeT"
+            android:layout_toRightOf="@+id/CityNameT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/RegionNameT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CityNameT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_349_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/RegionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CityName"
+            android:layout_toRightOf="@+id/RegionNameT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/AddressT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RegionNameT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_378_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/Address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RegionName"
+            android:layout_toRightOf="@+id/AddressT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/ProjectNameT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/AddressT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_407_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/ProjectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Address"
+            android:layout_toRightOf="@+id/ProjectNameT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/DescriptionT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ProjectNameT"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_435_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ProjectName"
+            android:layout_toRightOf="@+id/DescriptionT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/OrderIDT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/DescriptionT"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/s_item_column_0_line_464_file_113"
+            android:textColor="#000000"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/OrderID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Description"
+            android:layout_toRightOf="@+id/OrderIDT"
+            android:textColor="#cdcdcd"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottombar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5px"
+        android:layout_marginTop="5px" >
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="left"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/s_item_column_0_line_119_file_113"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+</LinearLayout>

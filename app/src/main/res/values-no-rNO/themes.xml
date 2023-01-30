@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.FileExplorer.Light" parent="android:Theme.Holo.Light"></style>
+
+    <style name="Theme.FileExplorer" parent="android:Theme.Holo"></style>
+
+    <style name="Theme.FileExplorer.Light.BrownActionBar" parent="android:Theme.Holo.Light.DarkActionBar"></style>
+
+</resources>

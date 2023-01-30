@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <string translatable="false" name="action_settings">Setări</string>
+    <string name="setting" translatable="false">Setări</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_190">Noi oportunități de lucru!</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_190">O nouă oportunitate de lucru!</string>
+    <string translatable="false" name="s_item_column_0_line_206_file_190">Căutând joburi în apropierea ta!</string>
+    <string translatable="false" name="s_item_column_0_line_804_file_88">Aplicat</string>
+    <string translatable="false" name="s_item_column_0_line_838_file_88">Auto-atribuit</string>
+    <string translatable="false" name="s_item_column_0_line_839_file_88">Vă mulțumim pentru solicitarea acestei comenzi. Faceți clic pe "Descărcați joburi" pentru a obține acest job în lista atribuită Dvs. </string>
+    <string translatable="false" name="s_item_column_0_line_859_file_88">Eroare în procesul de aplicare sau Nu există conexiune la internet!</string>
+    <string translatable="false" name="s_item_column_0_line_893_file_88">Descărcați acum</string>
+    <string name="smalimgWarn" translatable="false">Această opțiune va avea efect asupra calității imaginilor. Sigur doriți să o activați?</string>
+    <string name="s_owncamera_nn" translatable="false">Utilizați camera presetată</string>
+    <string translatable="false" name="s_item_column_0_line_994_file_88">Application Comment</string>
+    <string translatable="false" name="s_item_column_0_line_1441_file_88">Aplicat deja</string>
+    <string name="file_details" translatable="false">Informații despre fișier:</string>
+    <string name="open_file" translatable="false">Deschide fișier:</string>
+    <string name="open_file_location" translatable="false">Deschide locația fișierului</string>
+    <string name="file_size" translatable="false">Mărimea fișierului:</string>
+    <string name="file_name" translatable="false">Numele fișierului:</string>
+    <string name="local_path" translatable="false">Adresa locală:</string>
+    <string name="server_path" translatable="false">Calea serverului:</string>
+    <string translatable="false" name="s_item_column_0_line_1549_file_88">Preluarea datelor alternative ...</string>
+    <string translatable="false" name="s_item_column_0_line_1579_file_88">Număr</string>
+    <string translatable="false" name="s_item_column_0_line_1594_file_88">Nu e disponibil</string>
+    <string translatable="false" name="s_item_column_0_line_1597_file_88">Selectați o dată</string>
+    <string translatable="false" name="s_item_column_0_line_174_file_210"> ÎN AȘTEPTARE </string>
+    <string translatable="false" name="s_item_column_0_line_184_file_210"> Aprobat </string>
+    <string name="replace_inprog_job" translatable="false">Sigur doriți să înlocuiți vizita cu cea din interfața:</string>
+    <string name="alreadyBlocked" translatable="false">Programul de Certificare este blocat</string>
+    <string name="remainin_msg" translatable="false">din versiunea online deoarece ora de începere a activității online este cea mai recentă? IMPORTANT: Această acțiune va înlocui datele completate numai pentru activitățile în proces de completare."</string>
+    <string translatable="false" name="s_item_column_0_line_199_file_210"> View More Details </string>
+    <string translatable="false" name="s_item_column_0_line_202_file_210">Review No: </string>
+    <string name="list_attached_files" translatable="false">Lista fisierelor atașate</string>
+    <string translatable="false" name="s_item_column_0_line_344_file_210">Da</string>
+    <string translatable="false" name="s_item_column_0_line_346_file_210">Nu</string>
+    <string translatable="false" name="s_item_column_0_line_145_file_223">Eliminați aplicația</string>
+    <string name="reachedMaxTries" translatable="false">Ați atins numărul maxim de tentative de trecere a Certificării</string>
+    <string translatable="false" name="s_item_column_0_line_647_file_27">Setări de lucru</string>
+    <string name="already_uploaded" translatable="false">Fișierul este deja încărcat</string>
+    <string name="pending_upload" translatable="false">În așteptarea încărcării…</string>
+    <string name="s_tracker_heading" translatable="false">Definire Geo Locație</string>
+    <string name="s_tracker_setting" translatable="false">Găsește activitățile din zona mea</string>
+    <string translatable="false" name="s_item_column_0_line_774_file_27">Salvați</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_37">Numele clientului</string>
+    <string translatable="false" name="s_item_column_0_line_94_file_37">Tip de flux:</string>
+    <string translatable="false" name="s_item_column_0_line_120_file_37">Adăugat la: </string>
+    <string translatable="false" name="s_item_column_0_line_149_file_37">Cantitate: </string>
+    <string translatable="false" name="s_item_column_0_line_176_file_37">Număr de factură:</string>
+    <string translatable="false" name="s_item_column_0_line_205_file_37">Aprobat:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_37">Plătit:</string>
+    <string translatable="false" name="s_item_column_0_line_263_file_37">Codul filialei:</string>
+    <string translatable="false" name="s_item_column_0_line_292_file_37">Numele filialei:</string>
+    <string name="s_item_column_0_line_15_file_109" translatable="false">Date disponibile</string>
+    <string name="s_switch_wifi_uploading" translatable="false">Încăcați utilizând Wi-Fi:</string>
+    <string translatable="false" name="s_item_column_0_line_321_file_37">Numele orașului:</string>
+    <string translatable="false" name="s_item_column_0_line_350_file_37">Numele regiunii</string>
+    <string translatable="false" name="s_item_column_0_line_379_file_37">Adresă:</string>
+    <string translatable="false" name="s_item_column_0_line_408_file_37">Denumirea proiectului:</string>
+    <string translatable="false" name="s_item_column_0_line_436_file_37">Descriere:</string>
+    <string translatable="false" name="s_item_column_0_line_465_file_37">Id-ul comenzii:</string>
+    <string translatable="false" name="s_item_column_0_line_323_file_44">Shelf Share</string>
+    <string translatable="false" name="s_item_column_0_line_581_file_44">Fa o poză</string>
+    <string translatable="false" name="s_item_column_0_line_852_file_44">Capturează </string>
+    <string translatable="false" name="s_item_column_0_line_59_file_52">Hartă</string>
+    <string translatable="false" name="s_item_column_0_line_71_file_52">LISTĂ</string>
+    <string translatable="false" name="s_item_column_0_line_183_file_52">Aplicați selecțiile</string>
+    <string translatable="false" name="s_item_column_0_line_214_file_52">Datele:</string>
+    <string translatable="false" name="s_item_column_0_line_246_file_52">Astăzi</string>
+    <string translatable="false" name="s_item_column_0_line_270_file_52">Next 30 days</string>
+    <string translatable="false" name="s_item_column_0_line_295_file_52">Personalizat</string>
+    <string translatable="false" name="s_item_column_0_line_337_file_52">Numele clientului</string>
+    <string name="enable_branch_full_name" translatable="false">Activați numele complet al sucursalei</string>
+    <string translatable="false" name="s_item_column_0_line_361_file_52">Regiune</string>
+    <string name="strtcheckertificatesmsg" translatable="false">Doriți să începeți completarea fișierului privind Certificarea?</string>
+
+    <string translatable="false" name="s_item_column_0_line_415_file_52">Șterge</string>
+    <string translatable="false" name="s_item_column_0_line_429_file_52">Arată</string>
+    <string translatable="false" name="s_item_column_0_line_25_file_77">Please select image resize option:</string>
+    <string translatable="false" name="s_item_column_0_line_15_file_108">Joburi alternative:</string>
+    <string translatable="false" name="s_item_column_0_line_676_file_98">Fișiere omise:</string>
+    <string name="login_signup_text" translatable="false">Înscrie-te</string>
+    <string translatable="false" name="s_item_column_0_line_65_file_94">Selectați tot</string>
+    <string translatable="false" name="s_item_column_0_line_107_file_94">Niciun conținut.</string>
+    <string translatable="false" name="s_item_column_0_line_75_file_102">Nu s-au gasit date</string>
+    <string name="s_switch_filter_date" translatable="false">Grupează după dată</string>
+    <string translatable="false" name="s_item_column_0_line_100_file_102">Selectați luna și anul</string>
+    <string translatable="false" name="s_item_column_0_line_147_file_102">Plătit:</string>
+    <string translatable="false" name="s_item_column_0_line_194_file_102">Aprobat:</string>
+    <string translatable="false" name="s_item_column_0_line_241_file_102">Tip de flux:</string>
+    <string translatable="false" name="s_item_column_0_line_288_file_102">Tip de raport:</string>
+    <string translatable="false" name="s_item_column_0_line_336_file_102">Arată</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_102">Șterge</string>
+    <string translatable="false" name="s_item_column_0_line_66_file_113">Numele clientului</string>
+    <string translatable="false" name="s_item_column_0_line_93_file_113">Tip de flux:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_113">Adăugat la: </string>
+    <string translatable="false" name="s_item_column_0_line_148_file_113">Cantitate: </string>
+    <string translatable="false" name="s_item_column_0_line_175_file_113">Număr de factură::</string>
+    <string translatable="false" name="s_item_column_0_line_204_file_113">Aprobat:</string>
+    <string translatable="false" name="s_item_column_0_line_233_file_113">Plătit:</string>
+    <string translatable="false" name="s_item_column_0_line_262_file_113">Codul filialei::</string>
+    <string translatable="false" name="s_item_column_0_line_291_file_113">Numele filialei:</string>
+    <string translatable="false" name="s_item_column_0_line_320_file_113">Numele orașului:</string>
+    <string translatable="false" name="s_item_column_0_line_349_file_113">Numele regiunii:</string>
+    <string translatable="false" name="s_item_column_0_line_378_file_113">Adresă:</string>
+    <string translatable="false" name="s_item_column_0_line_407_file_113">Denumirea proiectului:</string>
+    <string translatable="false" name="s_item_column_0_line_435_file_113">Descriere:</string>
+    <string translatable="false" name="s_item_column_0_line_464_file_113">Id-ul comenzii:</string>
+    <string translatable="false" name="s_item_column_0_line_119_file_119">Terminat</string>
+    <string translatable="false" name="s_item_column_0_line_489_file_121">Setarea camerei</string>
+    <string translatable="false" name="s_item_column_0_line_546_file_121">Permite copiile de rezervă ale fotografiilor</string>
+    <string translatable="false" name="s_item_column_0_line_580_file_121">Permiteți mai multe fotografii</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_122">Detalii Vizită</string>
+    <string translatable="false" name="s_item_column_0_line_67_file_122">Numele clientului:</string>
+    <string name="default_camera" translatable="false">utilizați camera presetată</string>
+    <string name="s_resolution_selector" translatable="false">Arată rezoluția camerei:</string>
+
+    <string name="s_switch_auto_uploading" translatable="false">Activați încărcarea imediată</string>
+    <string translatable="false" name="s_item_column_0_line_96_file_122">Numele filialei:</string>
+    <string translatable="false" name="s_item_column_0_line_125_file_122">Oraș:</string>
+    <string translatable="false" name="s_item_column_0_line_154_file_122">Adresă:</string>
+    <string translatable="false" name="s_item_column_0_line_182_file_122">Descrierea jobului:</string>
+    <string translatable="false" name="s_item_column_0_line_209_file_122">Chestionar:</string>
+    <string translatable="false" name="s_item_column_0_line_234_file_122">Numele scurt al filialei:</string>
+    <string translatable="false" name="s_item_column_0_line_260_file_122">Dată:</string>
+    <string translatable="false" name="s_item_column_0_line_289_file_122">Ora de începere și încheiere:</string>
+    <string translatable="false" name="s_item_column_0_line_315_file_122">Timpul de deschidere a filialeor</string>
+    <string translatable="false" name="s_item_column_0_line_344_file_122">Telefon:</string>
+    <string translatable="false" name="s_item_column_0_line_373_file_122">Achitarea scor-cardului:</string>
+    <string translatable="false" name="s_item_column_0_line_402_file_122">Bonus:</string>
+    <string translatable="false" name="s_item_column_0_line_431_file_122">Plata aferentă transportului:</string>
+    <string translatable="false" name="s_item_column_0_line_467_file_122">Data (datele) alternativă</string>
+    <string translatable="false" name="s_item_column_0_line_523_file_122">Aplica</string>
+    <string translatable="false" name="s_item_column_0_line_81_file_137">Numele clientului:</string>
+    <string translatable="false" name="s_item_column_0_line_110_file_137">Detaliile filialelor:</string>
+    <string translatable="false" name="s_item_column_0_line_139_file_137">Oraș:</string>
+    <string translatable="false" name="s_item_column_0_line_168_file_137">Dată</string>
+    <string translatable="false" name="s_item_column_0_line_196_file_137">Nr. total de comenzi:</string>
+    <string translatable="false" name="s_item_column_0_line_223_file_137">Distanță:</string>
+    <string translatable="false" name="s_item_column_0_line_254_file_137">Aplica</string>
+    <string translatable="false" name="s_item_column_0_line_36_file_125">Vreți să faceți o altă fotografie?</string>
+    <string translatable="false" name="s_item_column_0_line_13_file_124">Fișiere omise::</string>
+    <string translatable="false" name="s_item_column_0_line_57_file_124">Încărcare</string>
+    <string translatable="false" name="uploading_jobs_of">Încărcare job #NUMBER# din #TOTAL#</string>
+    <string translatable="false" name="uploading_images_of">Se încarcă imagini # NUMĂR # din # TOTAL #</string>
+    <string translatable="false" name="upload">Încărcare</string>
+    <string translatable="false" name="take_another_photo">Vreți să faceți o altă fotografie?</string>
+    <string translatable="false" name="s_switch_time_stamp">Adaugă amprentă de timp</string>
+    <string translatable="false" name="s_switch_alternate_jobs">Joburi alternative:</string>
+    <string translatable="false" name="settings_image_resizing">Redimensionarea imaginii</string>
+    <string translatable="false" name="settings_image_original">Original</string>
+    <string translatable="false" name="settings_image_medium">Mediu</string>
+    <string translatable="false" name="settings_image_small">Mic</string>
+    <string translatable="false" name="settings_image_ask">Întreabă</string>
+    <string name="close" translatable="false">Închide</string>
+    <string translatable="false" name="alert_issue_in_loop">Structura buclei pare să aibă erori, vă rugăm să contactați Administratorul!</string>
+    <string translatable="false" name="memory_info">Informații memorie</string>
+    <string translatable="false" name="not_enough_space_ram">Dispozitivul nu are destule resurse (RAM) pentru ca Checker să continue!</string>
+    <string translatable="false" name="not_enough_space_internal_memory">There is not enough space (internal memory) for Checker to proceed, please clear out some space to proceed.</string>
+    <string translatable="false" name="please_enter_comment_for_bug">Please enter comment for this bug:</string>
+    <string translatable="false" name="android_closed_app_forcefully">Android closed your app forcefully shall we start getting your data back?</string>
+    <string translatable="false" name="upload_following_attached_files">Încărcați următoarele fișiere atașate</string>
+    <string translatable="false" name="file_saved_properly_at">Fișierul a fost salvat cu succes la:</string>
+    <string translatable="false" name="unable_to_save_file_at">Nu se poate salva fișierul la:</string>
+    <string translatable="false" name="crashing_app_ourself">Crashing app ourself</string>
+    <string translatable="false" name="unable_to_find_loop_data">Nu s-a putut găsi nicio informație legată de bucla logică</string>
+    <string translatable="false" name="amp_16">&amp; $[16,</string>
+    <string translatable="false" name="it_is_mandatory_to_attach_a_file">Este obligatoriu să încărcați un fișier</string>
+    <string translatable="false" name="no_answer_chosen">Niciun răspuns selectat! !</string>
+    <string translatable="false" name="save_and_download">Salvare și descărcare</string>
+    <string translatable="false" name="out_of_bound"> is out of bounds.</string>
+    <string translatable="false" name="preffered_questionnaire_language">Vă rugăm să aveți in vedere faptul că puteți să vă selectați limba preferată pentru chestionar</string>
+    <string translatable="false" name="google_services_not_avaliable">Serviciile Google Play nu sunt disponibile</string>
+    <string translatable="false" name="downloading_system_languages">Se descarcă limbile alternative pentru sistem</string>
+    <string translatable="false" name="no_alternative_or_server_side">Nu există limbi alternative la nivel de server</string>
+    <string translatable="false" name="update_system_languages">Se actualizează limbile alternative pentru sistem</string>
+    <string translatable="false" name="synch_is_already_in_progress">Sincronizarea este deja în proces!</string>
+    <string translatable="false" name="downloading_alternative_jobs">Joburile alternative se descarcă</string>
+    <string translatable="false" name="assigning_alternate_job">Se face atribuirea jobului alternativ</string>
+    <string translatable="false" name="order_assigned_refreshing_job_list">Jobul a fost atribuit. Lista cu joburi se actualizează!</string>
+    <string translatable="false" name="unable_to_assign_this_order">Jobul nu poate fi atribuit. Vă rugăm să contactați administratorul.</string>
+    <string translatable="false" name="unable_to_find_alternative_job"> Nu s-a putut găsi niciun job alternativ</string>
+    <string translatable="false" name="do_you_Want_relace_order">Sunteți sigur că vreți să înlocuiți jobul din locția selectată?</string>
+    <string translatable="false" name="could_not_retrieve">Informția pentru acest studiu nu a putut fi localizată...</string>
+    <string translatable="false" name="questionnaire_mock_gps_alert">Modulul pentru simularea locației GPS este activat. Pentru a putea continua trebuie să îl dezactivați. Ca să îl dezactivați vă rugăm să mergeți  în Settings->Application->Development->Allow mock location și să verificați că opțiunea nu este bifată. Vreți să deschideți ecranul de Setări?</string>
+    <string translatable="false" name="questionnaire_min_zero_max">#MAX# caractere rămase.</string>
+    <string translatable="false" name="questionnaire_min_max">Minimum #MIN# caractere.</string>
+    <string translatable="false" name="questionnaire_min_max_zero">#MAX# caractere rămase. Minimum #MIN# caractere.</string>
+    <string translatable="false" name="questionnaire_error_retrieving">A apărut o eroare în procesul de preluare a datelor salvate! </string>
+    <string translatable="false" name="questionnaire_sign">Semnați aici</string>
+    <string translatable="false" name="error_order_not_assigned">Această atribuire nu este pentru dumneavoastră!</string>
+    <string translatable="false" name="error_opening_android_gallery">A apărut o eroare în încercarea de a utiliza galeria Android. Vă rugăm să folosiți galeria personalizată. Ne pare rău pentru neplăcerea cauzată!</string>
+    <string translatable="false" name="sortByDate">Aranjat în funcție de dată</string>
+    <string translatable="false" name="sortByName">Aranjat în funcție de nume</string>
+    <string translatable="false" name="button_show_file">Arată fișier</string>
+    <string translatable="false" name="questionnaire_select_file_alert">Vreți să selectați un fișier?</string>
+    <string translatable="false" name="s_branch_sorting">Sortarea locațiilor</string>
+    <string translatable="false" name="s_alphabetical">Alfabetic</string>
+    <string translatable="false" name="s_distance">Distanță</string>
+    <string translatable="false" name="s_image_cropping">Redimensionarea imaginii</string>
+    <string translatable="false" name="s_off">Oprit</string>
+    <string translatable="false" name="s_on">Pornit</string>
+    <string name="setName" translatable="false">Denumire chestionar:</string>
+    <string name="setStatus" translatable="false">Statut:</string>
+    <string name="grade" translatable="false">Punctaj:</string>
+    <string name="reqGrade" translatable="false">Scorul necesar:</string>
+    <string name="lastDateTaken" translatable="false">Ultima dată selectată:</string>
+    <string name="Attemts" translatable="false">Timpul selectat:</string>
+    <string translatable="false" name="attach_err_job_list">Atașamentul este în curs de încărcare. Atingeți pentru a vedea progresul</string>
+    <string translatable="false" name="file_delete_alert">Vreți să ștergeți acest fișier?</string>
+    <string translatable="false" name="purchase_numeric_error">Valoarea numerică necesară</string>
+    <string translatable="false" name="purchase_simple_error">AlphaNumeric value required</string>
+    <string name="start_checkertificates" translatable="false">Certificări</string>
+    <string translatable="false" name="purchase_exceeds_error">Valoare depășește limita</string>
+    <string translatable="false" name="time_set">Setează ora</string>
+    <string translatable="false" name="cancel">Anulare</string>
+    <string translatable="false" name="time">Timp:</string>
+    <string translatable="false" name="job_list_tab_syncing">Syncing</string>
+    <string translatable="false" name="start_recording">Doriți să începeți înregistrarea?</string>
+    <string translatable="false" name="stop_recording">Doriți să opriți înregistrarea?</string>
+    <string translatable="false" name="calculator_heading">Calculator Checker</string>
+    <string translatable="false" name="questionnaire_date_valid_error">Formatul de dată/timp este invalid</string>
+    <string translatable="false" name="sNonRefundableServicePayment">Plată nerambusarbilă aferentă serviciilor</string>
+    <string translatable="false" name="sCriticismPayment">Plată pentru chestionar</string>
+    <string translatable="false" name="sBonusPayment">Bonus</string>
+    <string translatable="false" name="purchase_details">Detaliile Achizitiei</string>
+    <string name="job_list_archiveorder" translatable="false">Arhivă ordere</string>
+    <string translatable="false" name="purchase_invoice_number">Numarul Facturii</string>
+    <string name="attached_certificate_msg" translatable="false">Doriți să completați fișierul atașat privind Certificarea?</string>
+    <string translatable="false" name="purchase_payment">Plata Achizitiei</string>
+    <string translatable="false" name="purchase_description">Descrierea Achiziției</string>
+    <string translatable="false" name="service_details">Detalii despre Serviciu</string>
+    <string translatable="false" name="service_invoice_number">Numarul Facturii</string>
+    <string translatable="false" name="service_payment">Plata Serviciului</string>
+    <string translatable="false" name="service_description">Descrierea Serviciului</string>
+    <string translatable="false" name="transportation_details">Detalii legate de Transport</string>
+    <string translatable="false" name="transportation_description">Transportation Description</string>
+    <string translatable="false" name="transportation_payment">Plata Transportului</string>
+    <string translatable="false" name="jd_purchasedesc">Descrierea Achiziției</string>
+    <string translatable="false" name="jd_can_purchase">Efectuare achiziție</string>
+    <string translatable="false" name="start_download">Descărcați activități</string>
+    <string translatable="false" name="start_upload">Încărcați activități</string>
+    <string translatable="false" name="alert_working">de lucru</string>
+    <string translatable="false" name="alert_switching">comutarea file</string>
+    <string translatable="false" name="jd_please_alert_msg">Vă rugăm să așteptați...</string>
+    <string translatable="false" name="aaparsing_complete">Analiza completă. Se inițializeaza baza de date...</string>
+    <string translatable="false" name="aasaving_assigned_jobs_surveys_job">Joburile și chestionarele atribuite sunt salvate în baza de date...</string>
+    <string translatable="false" name="aauploading_job">Jobul este încărcat, ##</string>
+    <string translatable="false" name="aadownloading_Assigned_jobs">Se descarcă joburile atribuite.</string>
+    <string translatable="false" name="aadownloading_Assigned_surveys">Se descarcă chestionarele atribuite.</string>
+    <string translatable="false" name="aaparsing_surveys">Analiza studiului: ##</string>
+    <string translatable="false" name="aaparsing_questionnaire">Analiza chestionarului: ##</string>
+    <string translatable="false" name="aasaving_db_questionnaire">Salvare a chestionarului în baza de date: ##</string>
+    <string translatable="false" name="aaquestionnaires_downloading_saving">Questionnaires downloading and saving in-progress.</string>
+    <string translatable="false" name="aaparsing_assigned_surveys">Se analizează chestionarele atribuite.</string>
+    <string translatable="false" name="aaparsing_assigned_jobs">Se analizează joburile atribuite.</string>
+    <string translatable="false" name="aaupdating_job">Jobul este încărcat </string>
+    <string translatable="false" name="prepare_screen_dialogue">Se strânge informația pentru acest chestionar...</string>
+    <string translatable="false" name="job_list_err_dialog">Detalii cu privire la eroare:</string>
+    <string translatable="false" name="job_list_err_dialog_branch">Telefonul nu suportă condiția \"101\"</string>
+    <string translatable="false" name="_error_display_condition">Condițiile de afișare par să aibă probleme. Vă rugăm să contactați administratorul sistemului</string>
+    <string translatable="false" name="err_missing_images">Imaginele de mai sus lipsesc. Vă rugăm reîmprospătați lista de joburi.</string>
+    <string translatable="false" name="press_back_again">Apăsați butonul Înapoi încă o dată pentru a închide</string>
+    <string translatable="false" name="job_list_tab_sync">Sincronizare</string>
+    <string translatable="false" name="job_list_tab_assigned">Atribuit</string>
+    <string translatable="false" name="job_list_tab_scheduled">Programat</string>
+    <string translatable="false" name="job_list_tab_in_progress">În curs</string>
+    <string translatable="false" name="job_list_tab_completed">Terminat</string>
+    <string translatable="false" name="job_list_tab_sync_u"><b><u>Sincronizare</u></b></string>
+    <string translatable="false" name="job_list_tab_assigned_u"><b><u>Atribuit</u></b></string>
+    <string translatable="false" name="job_list_tab_scheduled_u"><b><u>Programat</u></b></string>
+    <string translatable="false" name="job_list_tab_in_progress_u"><b><u>În curs</u></b></string>
+    <string translatable="false" name="job_list_tab_completed_u"><b><u>Terminat</u></b></string>
+    <string translatable="false" name="job_list_menu_update_list">Vizualizare activități pe hartă</string>
+    <string translatable="false" name="job_list_menu_upload_complete_job">Filtrare activități</string>
+    <string translatable="false" name="survey_quota_delete_message">#break#Quota[QNAME] reached.#break# You have done all ## #break# Deleting interview.</string>
+    <string translatable="false" name="survey_quota_upload_message">#break#Quota[QNAME] reached.#break# You have done all ##</string>
+    <string translatable="false" name="crash_dialog_text">O eroare neașteptată a avut loc și a forțat aplicația să se oprească. Vă rugăm să ne ajutați în remedierea problemei prin trimiterea datelor cu privire la eroare. Tot ce trebuie să faceți este să apăsați butonul OK. Ne pare rău pentru orice inconveniență și vă mulțumim pentru ajutor!</string>
+    <string translatable="false" name="jd_survey_name">Nume studiu</string>
+    <string translatable="false" name="jd_survey_quotas">Cote</string>
+    <string translatable="false" name="jd_survey_allocations">Alocări</string>
+    <string translatable="false" name="button_back">Înapoi</string>
+    <string translatable="false" name="jd_begin_btn_text">Începere interviu</string>
+    <string translatable="false" name="questionnaire_finish">Finalizare</string>
+    <string name="s_switch_branch_name" translatable="false">Activați numele complet al sucursalei</string>
+    <string translatable="false" name="settings_txt_proxy">proxy</string>
+    <string translatable="false" name="settings_page_proxy">proxy</string>
+    <string translatable="false" name="disable_proxy">reseta</string>
+    <string translatable="false" name="survey_quota_alert_message">cota terminat!</string>
+    <string translatable="false" name="pos_no_tabs">Nu tab vizibile!</string>
+    <string translatable="false" name="voice_menu_text">Înregistrare voce</string>
+    <string translatable="false" name="txt_briefing">Tipuri de Certificări</string>
+    <string translatable="false" name="attach_disclaimer">Aceste fișiere sunt în prezent atașate la job:</string>
+    <string translatable="false" name="video_menu_text">Video</string>
+    <string translatable="false" name="pos_error_report">Introduceți Contele valabil  &lt;=</string>
+    <string translatable="false" name="pos_error_report2"></string>
+    <string translatable="false" name="pos_backk">Înapoi</string>
+    <string translatable="false" name="pos_product">Produs</string>
+    <string translatable="false" name="pos_count">Număr</string>
+    <string translatable="false" name="pos_location">Locație</string>
+    <string translatable="false" name="pos_price">Preț</string>
+    <string translatable="false" name="pos_expiration">Dată expirare</string>
+    <string translatable="false" name="pos_note">Notă</string>
+    <string translatable="false" name="pos_picture">Fotografie</string>
+    <string translatable="false" name="pos_enter_count">Introduceți numărul</string>
+    <string translatable="false" name="pos_subtract">Scădere</string>
+    <string translatable="false" name="pos_add">Adunare</string>
+    <string translatable="false" name="pos_value">Valoare</string>
+    <string translatable="false" name="pos_x">X</string>
+    <string translatable="false" name="pos_equal"> = </string>
+    <string translatable="false" name="pos_total">Total:</string>
+    <string translatable="false" name="pos_enter_price">Introduceți prețul </string>
+    <string translatable="false" name="pos_average">Media: </string>
+    <string translatable="false" name="pos_error_product">Produsul nu poate fi găsit!</string>
+    <string translatable="false" name="pos_intall_manager">Vă rugăm să instalați un program pentru managementul fișierelor.</string>
+    <string translatable="false" name="pos_not_attach">Fișierul nu a putut fi atașat!</string>
+    <string translatable="false" name="pos_error_enter">Vă rugăm să introduceți datele!</string>
+    <string translatable="false" name="pos_error_enter_product_location">Vă rugăm să selectați Produsul și Locația!</string>
+    <string translatable="false" name="pos_preview">Previzualizare POS</string>
+    <string translatable="false" name="pos_enter_note">Introduceți nota</string>
+    <string translatable="false" name="pos_selected_date">Selectați Data</string>
+    <string translatable="false" name="pos_select_product">Selectați Produsul</string>
+    <string translatable="false" name="pos_select_location">Selectați Locația</string>
+    <string translatable="false" name="questionnaire_menu_btn">Terminat</string>
+    <!-- login Screen -->
+    <string translatable="false" name="list_enable_calendar">Adauga loc de muncă în calendar?</string>
+    <string translatable="false" name="questionnaire_gps_alert">Serviciile de locație sunt dezactivate. Doriți să îl activați?</string>
+    <string translatable="false" name="Questionaire_submitting">Prezentarea studiului în curs ...</string>
+    <string translatable="false" name="login_page_title">Bun venit!</string>
+    <string translatable="false" name="login_btn">Înainte</string>
+    <string translatable="false" name="login_heder">Bine ai venit</string>
+    <string translatable="false" name="login_username_hint">Utilizator</string>
+    <string translatable="false" name="login_password_hint">Parolã</string>
+    <!-- <string translatable="false" name="login_reset_btn">tergei</string> -->
+    <string translatable="false" name="login_reset_btn">Șterge</string>
+    <string translatable="false" name="error_alert_title">Problemã</string>
+    <string translatable="false" name="alert_btn_lbl_ok">OK</string>
+    <string translatable="false" name="login_username_alert">Nume utilizator sau parolã greitã</string>
+    <string translatable="false" name="login_clientside_username_alert">Nume utilizator greit</string>
+    <string translatable="false" name="login_invalid_systemurl_alert">Link-ul este greit, vã rugãm sã utilizai link-ul complet (Exemplu: http://www.Checker-soft.com/demo)</string>
+    <string translatable="false" name="invalid_server_response_alert">A fost primit un răspuns invalid de la server. Vă rugăm să contactați operatorul de servicii.</string>
+
+    <!-- Setting Screen -->
+    <string translatable="false" name="settings_page_title">Setări</string>
+    <string translatable="false" name="settings_system_url_lbl">Link-ul către sistem</string>
+    <string translatable="false" name="settings_language_lbl">Limba</string>
+    <string translatable="false" name="settings_themes_lbl">Interfața Checker</string>
+    <string translatable="false" name="settings_save_btn">Salveazã</string>
+    <string translatable="false" name="settings_http_label">http://</string>
+    <string translatable="false" name="url_hint">Link-ul cãtre sistem</string>
+    <string translatable="false" name="_alert_title">Notă:</string>
+    <string translatable="false" name="settings_url_alert">Vã rugãm introducei un link valid</string>
+    <string translatable="false" name="settings_system_url_hint">Link-ul cãtre sistem</string>
+
+    <!-- Job List Screen -->
+    <string translatable="false" name="joblist_title">Lista joburi</string>
+    <string translatable="false" name="joblist_filter_btn">Filtru</string>
+    <string translatable="false" name="joblist_map_btn">Hartã</string>
+    <string translatable="false" name="joblist_all_jobs">Aratã toate joburile</string>
+
+    <!-- Job Filter Screen -->
+    <string translatable="false" name="job_filter_title">Caută</string>
+    <string translatable="false" name="job_filter_choose_job_type_lbl">Selectează tipul de activitate</string>
+    <string translatable="false" name="job_filter_choose_city_lbl">Selectează orarul</string>
+    <string translatable="false" name="job_filter_date_range_lbl">Interval de date</string>
+    <string translatable="false" name="job_filter_start_date_lbl">Data de început</string>
+    <string translatable="false" name="job_filter_end_date_lbl">Data de sfârșit</string>
+    <string translatable="false" name="job_filter_save_btn">Caută</string>
+    <string translatable="false" name="job_filter_default_dd_option">Selectează </string>
+    <string translatable="false" name="job_filter_select_date">Selectează data</string>
+
+    <string-array name="job_filter_job_list">
+        <item>Selectează toate</item>
+        <item> Retail</item>
+        <item> Început i Sfârit</item>
+    </string-array>
+    <string-array name="job_filter_region_list">
+        <item>Selectează toate</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <!-- JobDetail Screen -->
+    <string translatable="false" name="jd_heder_text">Detalii Job</string>
+    <string translatable="false" name="job_detail_map_btn">Hartã</string>
+    <string translatable="false" name="jd_accept_btn_text">Acceptã atribuirea</string>
+    <string translatable="false" name="jd_continue_review_btn_text">Continuă Certificarea</string>
+    <string translatable="false" name="jd_begin_review_btn_text">Începe Review</string>
+    <string translatable="false" name="jd_reject_btn_text">Refuză atribuirea</string>
+    <string translatable="false" name="jd_logout_btn_text">Deconectare</string>
+    <string translatable="false" name="jd_date">Dată</string>
+    <string translatable="false" name="jd_status">Status</string>
+    <string translatable="false" name="jd_description">Descriere</string>
+    <string translatable="false" name="jd_setname">Chestionar</string>
+    <string translatable="false" name="jd_clientname">Client</string>
+    <string translatable="false" name="jd_branchname">Filială</string>
+    <string translatable="false" name="jd_branchfname">Nume complet filială</string>
+    <string translatable="false" name="jd_cityname">Ora</string>
+    <string translatable="false" name="jd_address">Adresă</string>
+    <string translatable="false" name="jd_branchpno">Număr telefon filială</string>
+    <string translatable="false" name="jd_openinghours">Programul de lucru</string>
+    <string translatable="false" name="jd_stime">Ora de începere</string>
+    <string translatable="false" name="jd_etime">Ora de terminare</string>
+    <string translatable="false" name="jd_parsing_alert_title">Informaii</string>
+    <string translatable="false" name="jd_parsing_alert_msg">Vã rugãm ateptai. Chestionarul este în curs de pregãtire</string>
+
+    <!-- Reject Job Screen -->
+    <string translatable="false" name="reject_job_popup_title">Motivul refuzului</string>
+    <string translatable="false" name="reject_job_popup_reason_lbl">Motiv</string>
+    <string translatable="false" name="reject_job_popup_btn_txt">OK</string>
+
+    <!-- Questionnaire Screen -->
+    <string translatable="false" name="questionnaire_title">Chestionar</string>
+    <string translatable="false" name="questionnaire_next_btn">Următorul</string>
+    <string name="questionnaire_exitmenu" translatable="false">Ieșire</string>
+    <string translatable="false" name="questionnaire_prev_btn">Precedentul</string>
+    <string translatable="false" name="questionnaire_exitandsave_menu">Salvare și ieșire</string>
+    <string translatable="false" name="questionnaire_preview_menu">Previzualizare</string>
+    <string translatable="false" name="questionnaire_finishandsend_menu">Finalizează și expediază</string>
+    <string translatable="false" name="questionnaire_alert">Rãspuns invalid</string>
+    <string translatable="false" name="questionnaire_btn_text">OK</string>
+    <string translatable="false" name="questionnaire_alert_title">Informaii</string>
+    <string translatable="false" name="questionnaire_submit_survey_alert">Review-ul a fost trimis cu succes</string>
+
+    <!-- NEW ADDED -->
+    <string translatable="false" name="jd_begin_button_status_inprogress">În progres</string>
+    <string translatable="false" name="no_internet_connection_alret_message">Vã rugãm sã verificai conexiunea la internet i cã utilizai date de conectare valide</string>
+    <string translatable="false" name="jd_begin_button_status_completed">Completat</string>
+    <string translatable="false" name="jd_synch_button_text">Sincronizare</string>
+    <string translatable="false" name="job_search_no_records_alert">Nu existã înregistrãri</string>
+    <string translatable="false" name="reject_job_sucess_alert">Job-ul a fost refuzat cu success</string>
+    <string translatable="false" name="reject_job_fail_alert">Nu se poate refuza job-ul deoarece nu suntei conectat la internet</string>
+    <string translatable="false" name="accept_job_fail_alert">Nu se poate accepta job-ul deoarece nu suntei conectat la internet</string>
+    <string translatable="false" name="offline_alert">Nu putei lucra deoarece nu suntei conectat la internet</string>
+    <string translatable="false" name="submit_review_fail_alert">Nu putei încãrca chestionarul deoarece nu suntei conectat la internet</string>
+    <string translatable="false" name="save_questionnaire_records_for_offline">Chestionarul nu a fost salvat pentru acest job. Vă rugăm să vă conectați la internet si să descărcați chestionarul încă o dată</string>
+    <string translatable="false" name="questionnaire_multiple_max_ans_alert">Seleci rãspunsurilor dincolo de limitã</string>
+    <string translatable="false" name="jd_begin_button_status_scheduled">Programate</string>
+    <string translatable="false" name="job_list_exit">Ieșire din lista de activități</string>
+    <string name="jd_branchprops" translatable="false">Proprietăți regiuni</string>
+    <string translatable="false" name="reject_job_resusal_text_alert">Vã rugãm sã introducei motivul refuzului</string>
+    <string translatable="false" name="job_download_alert">Actualizarea listei de job-uri este în curs...</string>
+    <string translatable="false" name="questionnaire_downlaod_alert">Chestionarele sunt în curs de descãrcare...</string>
+    <string translatable="false" name="questionnaire_saving_alert">Salvarea chestionarului este în curs...</string>
+    <string translatable="false" name="image_downloading_alert">Pregãtirea chestionarului este în curs...</string>
+    <string translatable="false" name="before_accept_alert">Vã rugãm ca mai întâi sã descãrcai chestionarul din lista de job-uri înainte de a accepta orice job</string>
+    <string name="settings_job_board" translatable="false">Panou activități</string>
+    <string name="jd_regions" translatable="false">Regiuni</string>
+    <string name="jd_projects" translatable="false">Proiecte</string>
+    <string name="settings_refund_report" translatable="false">Raport individual de Rambursare</string>
+    <string name="start_download_alt" translatable="false">Descărcați activități bilingve</string>
+    <!-- others -->
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Românã</item>
+        <item>Ebraicã</item>
+        <item>Hindi</item>
+        <item>Japanese</item>
+    </string-array>
+    <string-array name="language_val">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list">
+        <item>Noapte</item>
+        <item>Zi</item>
+    </string-array>
+
+    <color name="darkness_value">#99000000</color>
+
+    <!-- login Screen -->
+    <string translatable="false" name="questionnaire_exit_delete_alert">Sunteți sigur că doriți să ieșiți și să ștergeți toate răspunsurile</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_yes">Da</string>
+    <string translatable="false" name="questionnaire_exit_delete_alert_no">Nu</string>
+    <string translatable="false" name="questionnaire_alert_text_betweeeen_first">Valoarea Numerică trebuie să fie în intervalul cuprins între START și END </string>
+    <string translatable="false" name="timeout_response_alert">A expirat timpul de așteptare pentru realizarea conexiunii. Vă rugăm să contactați operatorul de servicii</string>
+    <string translatable="false" name="crash_toast_text">Hopa! S-a ivit o problemă, dar am trimis o notificare către programatorul meu pentru a rezolva situația! </string>
+    <string translatable="false" name="crash_dialog_title">Checker s-a oprit în mod neașteptat.</string>
+    <string translatable="false" name="crash_dialog_comment_prompt">Puteți să adăugați comentariile cu privire la problemă în câmpul de mai jos:</string>
+    <string translatable="false" name="crash_dialog_ok_toast"></string>
+
+    <!-- Questionnaire Screen -->
+    <string translatable="false" name="questionnaire_alert_free_text">Valorea nu este din intervalul permis</string>
+    <string translatable="false" name="questionnaire_select_files">Selectați fișierul</string>
+    <string translatable="false" name="questionnaire_upload_files">Încărcați fișiere pentru acest chestionar: </string>
+    <string name="task_completed" translatable="false">Sarcină finalizată</string>
+
+    <!-- others -->
+    <!--
+         <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+		<item>Romanian</item>
+		<item>Hebrew</item>
+		<item>Hindi</item>
+    </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -->
+    <string name="menu_edit_shopper_info" translatable="false">Editați informațiile personale</string>
+    <string name="upload_pending" translatable="false">vă rugăm să încărcați activitățile în așteptare în fila completată.</string>
+    <string name="menu_review_history" translatable="false">Istoria vizitelor</string>
+    <string name="menu_preview" translatable="false">Previzualizare</string>
+    <string translatable="false" name="exit_and_delete_btn_text">Ștergere și ieșire</string>
+    <string translatable="false" name="non_answered_conf_alert_title">Confirmat</string>
+    <string translatable="false" name="non_answered_conf_alert_msg">Vă rugăm să aveți în vedere faptul că nu ați ales niciun răspuns. Apăsați ”Anulare” pentru a reveni</string>
+    <string translatable="false" name="non_answered_conf_alert_cancel_btn">Anulare</string>
+    <string translatable="false" name="non_answered_conf_alert_continue_btn">Continuare</string>
+    <string translatable="false" name="Questionnaire_finish_time_lbl">Timp finalizare</string>
+    <string translatable="false" name="Questionnaire_finish_Date_lbl">Data de terminare</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_time_lbl">Timpul de implementare al chestionarului</string>
+    <string translatable="false" name="Questionnaire_survey_implementation_Date_lbl">Timpul de implementare al chestionarului</string>
+    <string translatable="false" name="questionnaire_free_text_lbl">Text liber</string>
+    <string translatable="false" name="questionnaire_done_btn_text">Continuare</string>
+    <string translatable="false" name="questionnaire_file_attached_text">Fișier atașat</string>
+    <string translatable="false" name="questionnaire_alert_additional">Informații suplimentare necesare! </string>
+    <string translatable="false" name="questionnaire_alert_text_between_first">Lungimea Textului trebuie să fie între START și END</string>
+    <string translatable="false" name="questionnaire_alert_text_to"> și </string>
+    <string translatable="false" name="questionnaire_alert_no_answer">Niciun răspuns selectat!</string>
+    <string translatable="false" name="already_submit_review_alert">Chestionarul a fost încărcat deja</string>
+    <string translatable="false" name="camera_menu_text">Cameră</string>
+    <string translatable="false" name="gallery_menu_text">Galerie</string>
+    <string name="job_list_archive" translatable="false">Arhivare activități</string>
+    <string name="menu_forgot_password" translatable="false">Ati uitat parola?</string>
+    <string name="menu_signup" translatable="false">Logează-te</string>
+    <string name="returned_review" translatable="false">Acest formular poate fi returnat de către server</string>
+    <string name="deleted_review" translatable="false">[QUESTIONNAIRE] for [BRANCH], [DATE] A fost deja trimis de pe un alt dispozitiv. Aceeași activitate nu poate fi încărcată repetat prin aplicație. Dacă doriți să o încărcați din nou, vă rugăm să contactați compania Dvs. și dacă sunteți sigur că nu doriți să o încărcați din nou, atunci puteți șterge această activitate din lista de activități din aplicație.</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+
+</resources>

@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="memory_info">Bellek Bilgisi</string>
+    <string name="not_enough_space_ram">Checker devam etmek için yeterli alan (RAM) yoktur!</string>
+    <string name="file_saved_properly_at">Dosya düzgün kaydedildi:</string>
+    <string name="unable_to_save_file_at">Dosyayı kaydedilemiyor:</string>
+    <string name="crashing_app_ourself">Checker bozuldu</string>
+    <string name="unable_to_find_loop_data">Herhangi bir veri döngüsü bulamadı, Soruları kaldırıyor</string>
+    <string name="amp_16">&amp; $[16,</string>
+    <string name="it_is_mandatory_to_attach_a_file">Ek yapmak zorunludur</string>
+    <string name="no_answer_chosen">Cevap secilmemis</string>
+    <string name="save_and_download">kaydet ve indir</string>
+    <string name="preffered_questionnaire_language">Not: Tercih edilen anket dilini seçebilirsiniz</string>
+    <string name="google_services_not_avaliable">Google Play Hizmetleri bulunmamaktadır</string>
+    <string name="downloading_system_languages">Sistem Diller indiriliyor</string>
+    <string name="no_alternative_or_server_side">Sunucuda farklı dil mevcut değil, son görevleri yükleme devam ediyor</string>
+    <string name="update_system_languages">Sistem Diller güncelleniyor</string>
+    <string name="downloading_alternative_jobs">Alternatif görevleri yükle</string>
+    <string name="assigning_alternate_job">Alternatif bir iş atama</string>
+    <string name="order_assigned_refreshing_job_list">Sipariş Atanan ferahlatıcı iş listesi!</string>
+    <string name="unable_to_assign_this_order">Bu emri assignt açılamıyor, lütfen yönetici</string>
+    <string name="unable_to_find_alternative_job"> Alternatif görevler bulunamadı</string>
+    <string name="do_you_Want_relace_order">Seçilen şubesine sipariş değiştirmek istiyor musunuz?</string>
+    <string name="could_not_retrieve">Anket bilgileri alınamadı...</string>
+    <string name="questionnaire_error_retrieving">Kaydedilmiş datayı geri almada hata</string>
+    <string name="questionnaire_sign">Burayı onaylayınız</string>
+    <string name="error_order_not_assigned">Görev tarafınıza atanmamıştır</string>
+    <string name="error_opening_android_gallery">Android galeriyi kullanma hatası! Lütfen seçme galeriyi kullanınız. Hata için özür dileriz.</string>
+   <string name="sortByDate">Tarihe göre sıralandı</string>
+    <string name="sortByName">İsme göre sıralandı</string>
+    <string name="button_show_file">Dosyayı gster</string>
+    <string name="questionnaire_select_file_alert">Dosyayı seçmek ister misiniz?</string>
+    <string name="s_branch_sorting">Şube sıralama</string>
+    <string name="s_alphabetical">Alfabetik</string>
+    <string name="s_distance">Mesafe</string>
+    <string name="s_image_cropping">Fotoğraf kırpma</string>
+    <string name="s_off">Kapali</string>
+    <string name="s_on">Acik</string>
+    <string name="attach_err_job_list">Ekler halen yüklenmeyi bekliyor.</string>
+    <string name="file_not_found">Dosyayı bulamadı</string>
+    <string name="file_delete_alert">Bu dosyayı silmek istiyor musun?</string>
+    <string name="questionnaire_date_valid_error">Geçersiz tarih/zaman formatı</string>
+    <string name="sNonRefundableServicePayment">İade edilemes servis ödemeleri</string>
+    <string name="sCriticismPayment">Eleştiri ödemesi</string>
+    <string name="sBonusPayment">Bonus ödemeler</string>
+    <string name="purchase_details">Satınalma Detayları</string>
+    <string name="purchase_invoice_number">Fatura numarası satınalma</string>
+    <string name="purchase_payment">Satınalma ödemesi</string>
+    <string name="purchase_description">Satınalma tanımı</string>
+    <string name="service_details">Servis detayı</string>
+    <string name="service_invoice_number">Servis fatura no</string>
+    <string name="service_payment">Servis ödemesi</string>
+    <string name="service_description">Servis tanımı</string>
+    <string name="transportation_details">Ulaşım detayları</string>
+    <string name="transportation_description">Ulaşım tanımı</string>
+    <string name="transportation_payment">Ulaşım ödemesi</string>
+    <string name="jd_purchasedesc">Satınalma tanımı</string>
+    <string name="jd_can_purchase">Satın al</string>
+    <string name="purchase_numeric_error">Sayısal değer gerekli</string>
+    <string name="purchase_simple_error">Alfa sayısal değer gerekli</string>
+    <string name="purchase_exceeds_error">Değer limitlerin üzerinde</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="time_set">Zamanı ayarla</string>
+    <string name="cancel">İptal Et!</string>
+    <string name="time">Zaman: </string>
+    <string name="job_list_tab_syncing">Senkronize ediyor</string>
+    <string name="start_download_alt">Farklı dillerde görevleri yükle</string>
+    <string name="start_download">Görevleri indir</string>
+    <string name="start_upload">Görevleri yükle</string>
+    <string name="start_recording">Kaydı başlatmak ister misiniz?</string>
+    <string name="stop_recording">Kaydı durdurmak ister misiniz?</string>
+    <string name="calculator_heading">Checker hesap makinası</string>
+    <string name="job_list_err_dialog">Hata notları:</string>
+    <string name="job_list_err_dialog_branch">Hata notları: Telefon desteklemiyor 101 görüntü şartları</string>
+    <string name="_error_display_condition">Ekran kosulu hatasi var gibi gorunuyor. Yonetici ile irtibata geciniz.</string>
+    <string name="err_missing_images">Yukarıdaki fotoğraflar eksik. Lütfen görev listesini yenileyin..</string>
+    <string name="press_back_again">Kapatmak icin geri tuşuna tekrar basin</string>
+    <string name="aaparsing_complete">Veri analizi tamamlandı. DBASE başlatılıyor...</string>
+    <string name="aasaving_assigned_jobs_surveys_job">Atanmış görevleri kaydediyor ve anketler......</string>
+    <string name="aauploading_job">Görevi yüklüyor ##</string>
+    <string name="aauploading_file">Dosyayı yüklüyor ##</string>
+    <string name="aadownloading_Assigned_jobs">Atanmış görevleri indiriyor</string>
+    <string name="aadownloading_Assigned_surveys">Atanmış anketleri indiriyor</string>
+    <string name="aaparsing_surveys">Anketi çözümlüyor..... ##</string>
+    <string name="aaparsing_questionnaire">Anketi analiz ediyor ##</string>
+    <string name="aasaving_db_questionnaire">Anketi kaydediyor.... ##</string>
+    <string name="aaquestionnaires_downloading_saving">Anket indirme ve kayıt işlemi sürmekte.</string>
+    <string name="aaparsing_assigned_surveys">Atanmış anketleri çözümlüyor.</string>
+    <string name="aaparsing_assigned_jobs">Atanmış görevleri çözümlüyor.</string>
+    <string name="aaupdating_job">Görevi yüklüyor</string>
+    <string name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string name="ptr_release_to_refresh">Release to refresh</string>
+    <string name="ptr_refreshing">Refreshing…</string>
+    <string name="ptr_last_updated">Güncellendi %1$s</string>
+    <string name="prepare_screen_dialogue">Bu anket icin bilgiler toplaniyor...</string>
+    <string name="job_list_menu_update_list">Görevleri haritada gör</string>
+    <string name="job_list_menu_upload_complete_job">Görevleri filtrele</string>
+    <string name="job_list_tab_sync">Senkronize </string>
+    <string name="job_list_tab_assigned">Atandı</string>
+    <string name="job_list_tab_scheduled">Planlandı</string>
+    <string name="job_list_tab_in_progress">Devam etmekte</string>
+    <string name="job_list_tab_completed">Tamamlandi</string>
+    <string name="job_list_tab_sync_u"><b><u>Senkronize Et</u></b></string>
+    <string name="job_list_tab_assigned_u"><b><u>Atandı</u></b></string>
+    <string name="job_list_tab_scheduled_u"><b><u>Planlandı</u></b></string>
+    <string name="job_list_tab_in_progress_u"><b><u>Devam etmekte</u></b></string>
+    <string name="job_list_tab_completed_u"><b><u>Tamamlandi</u></b></string>
+    <string name="survey_quota_delete_message">#break#Quota[QNAME] reached.#break# You have done all ## #break# Deleting interview.</string>
+    <string name="survey_quota_upload_message">#break#Quota[QNAME] reached.#break# You have done all ##</string>
+    <string name="alert_working">Çalışıyor</string>
+    <string name="alert_switching">Sekmeleri değiştir</string>
+    <string name="alert_saving">Kaydediyor...</string>
+    <string name="alert_working_msg">Sistem meşgul görünüyor, lütfen tekrar deneyiniz</string>
+    <string name="survey_quota_alert_message">Kota bitmis!</string>
+    <string name="disable_proxy">Sıfırla</string>
+    <string name="pos_product">Ürün</string>
+    <string name="pos_count">Sayı</string>
+    <string name="pos_location">Lokasyon</string>
+    <string name="pos_price">Fiyat</string>
+    <string name="pos_expiration">Sona erme tarihi</string>
+    <string name="pos_note">Not</string>
+    <string name="pos_picture">Fotoğraf</string>
+    <string name="pos_enter_count">Sayı giriniz</string>
+    <string name="pos_subtract">Çıkar</string>
+    <string name="pos_add"> Ekle </string>
+    <string name="pos_value">Değer</string>
+    <string name="pos_x"> X </string>
+    <string name="pos_equal"> = </string>
+    <string name="pos_total"> Toplam: </string>
+    <string name="pos_enter_price">Fiyat giriniz </string>
+    <string name="pos_average">Ortalama: </string>
+    <string name="pos_error_product">Ürün bulunamadı!</string>
+    <string name="pos_intall_manager">Lütfen bir dosya yönetici yükleyiniz.</string>
+    <string name="pos_not_attach">Dosyayı yükleyemedi!</string>
+    <string name="pos_error_enter">Lütfen veri giriniz!</string>
+    <string name="pos_error_enter_product_location">Lütfen ürün ve lokasyon seçiniz!</string>
+    <string name="pos_preview">POS Önizleme</string>
+    <string name="pos_enter_note">Not giriniz</string>
+    <string name="pos_selected_date">Seçilen tarih</string>
+    <string name="pos_no_tabs">Görüntülenebilen sekme yok!</string>
+    <string name="pos_select_product">Ürün seçiniz</string>
+    <string name="pos_select_location">Lokasyon seçiniz</string>
+    <string name="pos_error_report">Geçerli bir sayı giriniz &lt;= </string>
+    <string name="pos_error_report2"></string>
+    <string name="pos_backk">Geri</string>
+    <string name="button_back">Geri</string>
+    <string name="bookmark_picker_name">Bookmarks</string>
+    <string name="button_add_calendar">Takvime ekle</string>
+    <string name="button_add_contact">Add contact</string>
+    <string name="button_book_search">Book Search</string>
+    <string name="button_cancel">İptal Et!</string>
+    <string name="button_clipboard_empty">Clipboard empty</string>
+    <string name="button_custom_product_search">Custom search</string>
+    <string name="button_dial">Dial number</string>
+    <string name="button_done">Bitti</string>
+    <string name="button_email">Send email</string>
+    <string name="button_get_directions">Get directions</string>
+    <string name="button_google_shopper">Google Shopper</string>
+    <string name="button_mms">Send MMS</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_open_browser">Open browser</string>
+    <string name="button_product_search">Product Search</string>
+    <string name="button_search_book_contents">Search contents</string>
+    <string name="button_share_app">Uygulamalar</string>
+    <string name="button_share_bookmark">Bookmark</string>
+    <string name="button_share_by_email">Share via email</string>
+    <string name="button_share_by_sms">Share via SMS</string>
+    <string name="button_share_clipboard">Clipboard</string>
+    <string name="button_share_contact">Contact</string>
+    <string name="button_show_map">Show map</string>
+    <string name="button_sms">Send SMS</string>
+    <string name="button_web_search">Web search</string>
+    <string name="button_wifi">Connect to Network</string>
+    <string name="contents_contact">Contact info</string>
+    <string name="contents_email">Email address</string>
+    <string name="contents_location">Geographic coordinates</string>
+    <string name="contents_phone">Phone number</string>
+    <string name="contents_sms">SMS address</string>
+    <string name="contents_text">Plain text</string>
+    <string name="history_clear_text">Clear history</string>
+    <string name="history_clear_one_history_text">Temizle</string>
+    <string name="history_email_title">Barcode Scanner history</string>
+    <string name="history_empty">Empty</string>
+    <string name="history_empty_detail">No barcode scans have been recorded</string>
+    <string name="history_send">Send history</string>
+    <string name="history_title">History</string>
+    <string name="menu_about">About</string>
+    <string name="menu_encode_mecard">Use MECARD</string>
+    <string name="menu_encode_vcard">Use vCard</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_history">History</string>
+    <string name="menu_settings">Ayarlar</string>
+    <string name="menu_share">Share</string>
+    <string name="msg_about">The official Android app of the open source ZXing barcode project.</string>
+    <string name="msg_bulk_mode_scanned">Bulk mode: barcode scanned and saved</string>
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
+    <string name="msg_default_format">Format</string>
+    <string name="msg_default_meta">Metadata</string>
+    <string name="msg_default_mms_subject">Hi</string>
+    <string name="msg_default_status">Place a barcode inside the viewfinder rectangle to scan it.</string>
+    <string name="msg_default_time">Zaman</string>
+    <string name="msg_default_type">Yazınız</string>
+    <string name="msg_encode_contents_failed">Sağlanan veriden barkodu kodlayamadı</string>
+    <string name="msg_google_books">Google Books</string>
+    <string name="msg_google_product">Google Product Search</string>
+    <string name="msg_google_shopper_missing">Google Shopper is not installed</string>
+    <string name="msg_install_google_shopper">Google Shopper combines barcode scanning with online and local prices, reviews and more without opening the browser. Would you like to try it?</string>
+    <string name="msg_intent_failed">Sorry, the requested application could not be launched. The barcode contents may be invalid.</string>
+    <string name="msg_redirect">Redirect</string>
+    <string name="msg_sbc_book_not_searchable">Sorry, this book is not searchable.</string>
+    <string name="msg_sbc_failed">Sorry, the search encountered a problem.</string>
+    <string name="msg_sbc_no_page_returned">No page returned</string>
+    <string name="msg_sbc_page">Page</string>
+    <string name="msg_sbc_searching_book">Searching book\u2026</string>
+    <string name="msg_sbc_snippet_unavailable">Snippet not available</string>
+    <string name="msg_sbc_unknown_page">Unknown page</string>
+    <string name="msg_share_explanation">You can share data by displaying a barcode on your screen and scanning it with another phone.</string>
+    <string name="msg_share_subject_line">Here are the contents of a barcode I scanned</string>
+    <string name="msg_share_text">Or type some text and press Enter</string>
+    <string name="msg_sure">Are you sure?</string>
+    <string name="msg_unmount_usb">Sorry, the SD card is not accessible.</string>
+    <string name="preferences_actions_title">When a barcode is found\u2026</string>
+    <string name="preferences_auto_focus_title">Use auto focus</string>
+    <string name="preferences_bulk_mode_summary">Scan and save many barcodes continuously</string>
+    <string name="preferences_bulk_mode_title">Bulk scan mode</string>
+    <string name="preferences_copy_to_clipboard_title">Copy to clipboard</string>
+    <string name="preferences_custom_product_search_summary" formatted="false">Substitutions: %s = contents, %f = format, %t = type</string>
+    <string name="preferences_custom_product_search_title">Custom search URL</string>
+    <string name="preferences_decode_1D_title">1D barcodes</string>
+    <string name="preferences_decode_Data_Matrix_title">Data Matrix</string>
+    <string name="preferences_decode_QR_title">QR Codes</string>
+    <string name="preferences_front_light_summary">Improves scanning in low light on some phones, but may cause glare. Does not work on all phones.</string>
+    <string name="preferences_front_light_title">Use front light</string>
+    <string name="preferences_general_title">General settings</string>
+    <string name="preferences_name">Ayarlar</string>
+    <string name="preferences_play_beep_title">Beep</string>
+    <string name="preferences_remember_duplicates_summary">Store multiple scans of the same barcode in History</string>
+    <string name="preferences_remember_duplicates_title">Remember duplicates</string>
+    <string name="preferences_result_title">Result settings</string>
+    <string name="preferences_scanning_title">When scanning for barcodes, decode\u2026</string>
+    <string name="preferences_search_country">Search country</string>
+    <string name="preferences_supplemental_summary">Try to retrieve more information about the barcode contents</string>
+    <string name="preferences_supplemental_title">Retrieve more info</string>
+    <string name="preferences_vibrate_title">Vibrate</string>
+    <string name="result_address_book">Found contact info</string>
+    <string name="result_calendar">Found calendar event</string>
+    <string name="result_email_address">Found email address</string>
+    <string name="result_geo">Found geographic coordinates</string>
+    <string name="result_isbn">Found book</string>
+    <string name="result_product">Found product</string>
+    <string name="result_sms">Found SMS address</string>
+    <string name="result_tel">Found phone number</string>
+    <string name="result_text">Found plain text</string>
+    <string name="result_uri">Found URL</string>
+    <string name="result_wifi">Found WLAN Configuration</string>
+    <string name="sbc_name">Google Book Search</string>
+    <string name="share_name">Share via barcode</string>
+    <string name="title_about">Barcode Scanner v</string>
+    <string name="wifi_changing_network">Requesting connection to network\u2026</string>
+    <string name="wifi_ssid_label">Network Name</string>
+    <string name="wifi_type_label">Yazınız</string>
+    <string name="zxing_url">http://code.google.com/p/zxing</string>
+    <string name="pos_product_hint">Open navigation drawer</string>
+    <string name="pos_location_hint">Open navigation drawer</string>
+    <string name="pos_tgl_count">Sayı</string>
+    <string name="pos_tgl_price">Fiyat</string>
+    <string name="pos_tgl_expiration">Sona erme tarihi</string>
+    <string name="pos_tgl_note">Not</string>
+    <string name="pos_tgl_picture">Fotoğraf</string>
+    <string name="app_name">Login with Checker!</string>
+
+    <string-array name="slide_menu_array">
+        <item>@string/job_list_menu_upload_complete_job</item>
+        <item>@string/job_list_menu_update_list</item>
+        <item>@string/job_list_exit</item>
+        <item>@string/settings_page_title</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+
+    <color name="darkness_value">#99000000</color>
+
+    <!-- login Screen -->
+
+    <string name="Questionaire_submitting">Anket teslimi devam ediyor</string>
+    <string name="questionnaire_gps_off_alert">GPS hizmeti su anda aktiftir. Bunu kapatmak istiyor musunuz?</string>
+    <string name="list_enable_calendar">Görevi takvime ekle</string>
+    <string name="questionnaire_open_survey_alert">Your Survey Allocation count is reached...</string>
+    <string name="questionnaire_gps_alert">GPS modulu devre disi. Bunu etkinlestirmek ister misiniz?
+</string>
+    <string name="questionnaire_exit_delete_alert">Çıkış yapıp, tüm yanıtları silmek istediğinize emin misiniz?</string>
+    <string name="questionnaire_refresh_alert">Please download questionnaire first from job list page before accept any job.</string>
+    <string name="questionnaire_exit_delete_alert_yes">Evet</string>
+    <string name="questionnaire_exit_delete_alert_no">Hayir</string>
+    <string name="questionnaire_alert_text_betweeeen_first">Sayısal değer, başlangıç ve bitiş aralığında olmalı</string>
+    <string name="login_page_title">Hoşgeldiniz</string>
+    <string name="login_btn">Git</string>
+    <string name="login_heder">Hoşgeldiniz</string>
+    <string name="login_username_hint">Kullanıcı adı</string>
+    <string name="login_password_hint">Şifre</string>
+    <string name="login_reset_btn">Temizle</string>
+    <string name="error_alert_title">Problem</string>
+    <string name="alert_btn_lbl_ok">Ok</string>
+    <string name="login_username_alert">Hatalı kullanıcı adı veya şifre</string>
+    <string name="login_clientside_username_alert">Hatalı kullanıcı adı</string>
+    <string name="login_invalid_systemurl_alert">Hatalı kısayol, lütfen doğru kısayolu giriniz. (Örnek: http://www.Checker-soft.com/demo)</string>
+    <string name="invalid_server_response_alert">Sunucudan geçersiz bir cevap alındı. Lütfen operatörle bağlantı kurunuz.</string>
+    <string name="timeout_response_alert">Bağlantı zaman aşımına uğradı, lütfen operatörle iletişime geçiniz</string>
+    <string name="crash_toast_text">Ooops! Hata oluştu, hatayı çözmek için operatöre rapor gönderildi</string>
+    <string name="crash_dialog_title">Checker bozuldu</string>
+    <string name="crash_dialog_text">Uygulamayı durmaya zorlarken bir hata oluştu. Hata raporu göndererek lütfen bize yardımcı olun. Tek yapmanız gereken OK tuşuna basmak. Üzgünüz ve Teşekkürler</string>
+    <string name="crash_dialog_comment_prompt">Uygulamayı durmaya zorlarken bir hata oluştu. Hata raporu göndererek lütfen bize yardımcı olun. Tek yapmanız gereken OK tuşuna basmak. Üzgünüz ve Teşekkürler</string>
+    <string name="crash_dialog_ok_toast"></string>
+
+    <!-- Setting Screen -->
+    <string name="settings_proxy_host_lbl">Adres</string>
+    <string name="settings_proxy_port_lbl">Port</string>
+    <string name="settings_proxy_host_usrname">Kullanıcı adı</string>
+    <string name="settings_proxy_host_pswrd">Şifre</string>
+    <string name="settings_txt_proxy">Vekil</string>
+    <string name="settings_page_title">Ayarlar</string>
+    <string name="settings_page_proxy">Vekil</string>
+    <string name="settings_system_url_lbl">Sistem kısayolu</string>
+    <string name="settings_language_lbl">Dil</string>
+    <string name="settings_themes_lbl">Tema</string>
+    <string name="settings_save_btn">Kaydet</string>
+    <string name="settings_http_label">http://</string>
+    <string name="url_hint">Sistem kısayolu</string>
+    <string name="_alert_title">Bilgi</string>
+    <string name="settings_url_alert">Lütfen geçerli bir kısayol giriniz!</string>
+    <string name="settings_system_url_hint">Sistem kısayolu</string>
+
+    <!-- Job List Screen -->
+    <string name="joblist_title">Görev listesi</string>
+    <string name="joblist_filter_btn">Filter</string>
+    <string name="joblist_map_btn">Harita</string>
+    <string name="joblist_all_jobs">Tüm görevleri göster</string>
+
+    <!-- Job Filter Screen -->
+    <string name="job_filter_title">Ara</string>
+    <string name="job_filter_choose_job_type_lbl">Müşteriyi seçiniz</string>
+    <string name="job_filter_choose_city_lbl">Şehri seçiniz</string>
+    <string name="job_filter_date_range_lbl">Tarih aralığı</string>
+    <string name="job_filter_start_date_lbl"><b>Başlangıç tarihi</b></string>
+    <string name="job_filter_end_date_lbl"><b>Bitiş tarihi</b></string>
+    <string name="job_filter_save_btn">Ara</string>
+    <string name="job_filter_default_dd_option">Seçin</string>
+    <string name="job_filter_select_date"><u>Tarihi seçiniz</u></string>
+
+    <string-array name="job_filter_job_list">
+        <item> Hepsini seç</item>
+        <item> Tekrar anlat</item>
+        <item> Başla ve Bitir</item>
+    </string-array>
+    <string-array name="job_filter_region_list">
+        <item>Hepsini seç</item>
+        <item>--------</item>
+        <item>Argentina</item>
+    </string-array>
+
+    <!-- SurveyDetail Screen -->
+    <string name="jd_survey_name">Anket adı</string>
+    <string name="jd_survey_allocations">Ödenek</string>
+    <string name="jd_survey_quotas">Kota</string>
+    <!-- JobDetail Screen -->
+    <string name="jd_heder_text">Görev Detayları</string>
+    <string name="job_detail_map_btn">Harita</string>
+    <string name="jd_begin_btn_text">Görüşmeye başla</string>
+    <string name="jd_accept_btn_text">Görevi kabul et</string>
+    <string name="jd_continue_review_btn_text">Ankete devam et</string>
+    <string name="jd_begin_review_btn_text">Ankete başla</string>
+    <string name="jd_reject_btn_text">Ret et!</string>
+    <string name="jd_logout_btn_text">Çıkış yap</string>
+    <string name="jd_date">Tarih</string>
+    <string name="jd_status">Durum</string>
+    <string name="jd_description">Tanım</string>
+    <string name="jd_setname">Anket</string>
+    <string name="jd_clientname">Müşteri</string>
+    <string name="jd_branchname">Şube</string>
+    <string name="jd_branchfname">Şube tam adı</string>
+    <string name="jd_cityname">Şehir</string>
+    <string name="jd_address">Adres</string>
+    <string name="jd_branchpno">Şube telefonu</string>
+    <string name="jd_openinghours">Açılış saatleri</string>
+    <string name="jd_stime">Başlangıç saati</string>
+    <string name="jd_etime">Bitiş saati</string>
+    <string name="jd_parsing_alert_title">Bilgi</string>
+    <string name="jd_parsing_alert_msg">Lütfen bekleyiniz. Anket hazırlanıyor</string>
+    <string name="jd_please_alert_msg">Lütfen bekleyiniz..</string>
+
+    <!-- Reject Job Screen -->
+    <string name="reject_job_popup_title">Ret Nedeni</string>
+    <string name="reject_job_popup_reason_lbl">Sebep</string>
+    <string name="reject_job_popup_btn_txt">Ok</string>
+
+    <!-- Questionnaire Screen -->
+    <string name="questionnaire_title">Anket</string>
+    <string name="questionnaire_next_btn">Sonraki</string>
+    <string name="questionnaire_record_btn">Kaydet</string>
+    <string name="questionnaire_record_stop_btn">Dur</string>
+    <string name="questionnaire_menu_btn">Bitti</string>
+    <string name="attach_disclaimer">Bu dosya suanda göreve eklendi</string>
+    <string name="questionnaire_prev_btn">Önceki</string>
+    <string name="questionnaire_exitandsave_menu">Kaydet ve Çık</string>
+    <string name="questionnaire_preview_menu">Önizleme</string>
+    <string name="questionnaire_finishandsend_menu">Bitir ve Gönder</string>
+    <string name="questionnaire_alert">Geçersiz cevap</string>
+    <string name="questionnaire_alert_free_text">Değer izin verilen aralıkta değil</string>
+    <string name="questionnaire_btn_text">Ok</string>
+    <string name="questionnaire_alert_title">Bilgi</string>
+    <string name="questionnaire_submit_survey_alert">Anket başarıyla kaydedildi</string>
+    <string name="questionnaire_select_files">Dosyalari sec</string>
+    <string name="questionnaire_upload_files">Ankete dosyları yükle </string>
+    <string name="questionnaire_finish">Bitir</string>
+
+    <string-array name="language_val">
+        <item>en</item>
+        <item>sp</item>
+        <item>ro</item>
+        <item>he</item>
+        <item>hi</item>
+        <item>ja</item>
+    </string-array>
+    <string-array name="themes_list">
+        <item>Gece</item>
+        <item>Gün</item>
+    </string-array>
+
+    <!-- NEW ADDED -->
+    <string name="jd_begin_button_status_inprogress">İslem suruyor</string>
+    <string name="no_internet_connection_alret_message">Lutfen internet baglantinizi kontrol ediniz ve tekrar deneyiniz</string>
+    <string name="jd_begin_button_status_completed">Tamamlandi</string>
+    <string name="jd_synch_button_text">Senkronize Et</string>
+    <string name="job_search_no_records_alert">Kayıt bulunamadı</string>
+    <string name="reject_job_sucess_alert">Gorev basariyla ret edildi</string>
+    <string name="alert_sync_jobs_again">App needs to synch the system sent #LOCAL# number of jobs and server accpeted #SERVER# number of jobs!</string>
+    <string name="reject_job_fail_alert">İnternet baglantisiz gorev ret edilemez</string>
+    <string name="accept_job_fail_alert">İnternet baglantisiz gorev kabul edilemez</string>
+    <string name="offline_alert">İnternet baglantisiz sistem calismaz</string>
+    <string name="submit_review_fail_alert">Anketi internet bağlantısız kaydedemezsiniz</string>
+    <string name="save_questionnaire_records_for_offline">Anket bu görev için kaydedilemedi. Lütfen internete bağlanın ve anketi tekrar indirin!</string>
+    <string name="save_questionnaire_records_for_database">Veriyi acamiyor.</string>
+    <string name="questionnaire_multiple_max_ans_alert">Secimi limitler dahilinde cevaplayiniz</string>
+    <string name="jd_begin_button_status_scheduled">Zamanlandi</string>
+    <string name="job_list_exit">Göreve listesinden çıkış</string>
+    <string name="reject_job_resusal_text_alert">Lütfen ret nedenini giriniz</string>
+    <string name="job_download_alert">Yenilenmiş görev yüklemesi sürüyor</string>
+    <string name="questionnaire_downlaod_alert">Anket indirme ve kayıt işlemi sürmekte</string>
+    <string name="questionnaire_saving_alert">Anket kaydetme sürüyor</string>
+    <string name="image_downloading_alert">Anket hazırlığı devam ediyor</string>
+    <string name="before_accept_alert">Please download questionnaire first from job list page before accept any job</string>
+    <string name="answer_save_alert">Anket cevaplama kaydı devam ediyor</string>
+    <string name="exit_and_delete_btn_text">Sil ve Çık</string>
+    <string name="non_answered_conf_alert_title">Onay</string>
+    <string name="non_answered_conf_alert_msg">Cevap sağlanmadı, lütfen tamamlamak için iptal edin</string>
+    <string name="non_answered_conf_alert_cancel_btn">İptal Et!</string>
+    <string name="non_answered_conf_alert_continue_btn">Devam et</string>
+    <string name="Questionnaire_finish_time_lbl">Actual Survey Time</string>
+    <string name="Questionnaire_finish_Date_lbl">Anket tarihi</string>
+    <string name="Questionnaire_survey_implementation_time_lbl">Actual survey time</string>
+    <string name="Questionnaire_survey_implementation_Date_lbl">Anket tarihi</string>
+    <string name="questionnaire_free_text_lbl">Metin</string>
+    <string name="questionnaire_send_bug">Hatayı rapor et</string>
+    <string name="questionnaire_done_btn_text">Devam et</string>
+    <string name="questionnaire_file_attached_text">Dosya eklendi</string>
+    <string name="questionnaire_alert_additional">Ek bilgi gerekli</string>
+    <string name="questionnaire_alert_text_between_first">Metin uzunlugu, baslangic ve bitiş aralığında olmalı</string>
+    <string name="questionnaire_alert_text_to"> to </string>
+    <string name="questionnaire_alert_no_answer">Cevap secilmemis</string>
+    <string name="already_submit_review_alert">Anket kaydedildi</string>
+    <string name="camera_menu_text">Kamera</string>
+    <string name="video_menu_text">Video</string>
+    <string name="voice_menu_text">Devam eden ses kayidi</string>
+    <string name="gallery_menu_text">Galeri</string>
+    <string name="file_size_text">File size is greater then 10Mb, Try again with smaller size.</string>
+    <string name="txt_briefing">Bilgilendirme</string>
+
+    <string-array name="language_list">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>Romanian</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Japanese</item>
+    </string-array>
+
+    <string name="settings">Tercihler</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="field_surveyor_login">Field Surveyor Login</string>
+    <string name="find_horses_near_me">Find Horses near me</string>
+    <string name="microsoft">Microsoft</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="full_name">Full Name</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="login">Login</string>
+     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >Retype Password</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+</resources>

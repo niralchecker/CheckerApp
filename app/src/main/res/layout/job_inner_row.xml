@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- row.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@android:color/transparent"
+    android:layoutDirection="ltr">
+
+
+
+
+    <ImageView
+        android:id="@+id/leftiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5dp" />
+
+    <RelativeLayout
+        android:id="@+id/side_menu_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" >
+
+        <ImageView
+            android:id="@+id/ivbrief"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/line_menu"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/side_menu_layout"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="#373435"
+            android:textSize="14sp"
+            tools:text="abcasddf"
+            android:textStyle="normal"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv1"
+            android:singleLine="true"
+            android:textColor="#373435"
+            tools:text="abcasddf"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:typeface="normal" />
+
+        <View
+            android:id="@+id/dividing_line_3"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv2"
+            android:layout_marginLeft="15dp"
+            android:background="#B3B3B3" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imgerr"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:src="@drawable/alarm"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/vreturned"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="1dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="1dp"
+        android:src="@drawable/returned"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/popup_layout"
+        android:layout_width="168dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/side_menu_layout"
+        android:background="#cd101010"
+        android:visibility="gone" >
+
+        <View
+            android:id="@+id/top_red_bar"
+            android:layout_width="168dp"
+            android:layout_height="3dp"
+            android:layout_alignParentTop="true"
+            android:background="#990000" />
+
+        <ImageView
+            android:id="@+id/btn_briefing"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/sm_briefing" />
+
+        <ImageView
+            android:id="@+id/btn_calendar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/btn_briefing"
+            android:src="@drawable/sm_add_calendar" />
+
+        <ImageView
+            android:id="@+id/btn_alt_order"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/btn_calendar"
+            android:src="@drawable/sm_change_date" />
+
+        <ImageView
+            android:id="@+id/btn_alt_branch"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/btn_alt_order"
+            android:src="@drawable/sm_change_branch" />
+
+        <ImageView
+            android:id="@+id/btn_preview"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/btn_alt_branch"
+            android:src="@drawable/imgpreview" />
+    </RelativeLayout>
+
+</RelativeLayout>

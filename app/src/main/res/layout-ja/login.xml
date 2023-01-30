@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/screenBackGround"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:layoutDirection="ltr"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/loginlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:background="#ffffff" >
+
+        <View
+            android:id="@+id/dividing_line_3"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/tv2"
+            android:background="#B3B3B3" />
+
+        <TextView
+            android:id="@+id/loginHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp"
+            android:text="@string/login_heder"
+            android:textColor="#505050"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/settingbtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="17dp"
+            android:src="@drawable/settings" />
+    </RelativeLayout>
+
+    <TableLayout
+        android:id="@+id/tbl1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginlayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp" >
+
+        <TableRow
+            android:layout_marginTop="30dip"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:background="@drawable/textbg"
+                android:hint="@string/login_username_hint"
+                android:maxLength="30"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:typeface="normal" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="10dip"
+            android:gravity="center" >
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="2"
+                android:background="@drawable/textbg"
+                android:hint="@string/login_password_hint"
+                android:inputType="textPassword"
+                android:maxLength="30"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:typeface="normal" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="0dip"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/resetbtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="1dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="42dp"
+                android:paddingRight="42dp"
+                android:paddingTop="0dp"
+                android:src="@drawable/login_clear" />
+
+            <ImageView
+                android:id="@+id/loginbtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="1dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="42dp"
+                android:paddingRight="42dp"
+                android:paddingTop="0dp"
+                android:src="@drawable/login_go" />
+        </TableRow>
+    </TableLayout>
+
+    <ImageView
+        android:id="@+id/btmBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/navigation_bar"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/darktview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/darkness_value"
+        android:visibility="gone" />
+
+    
+
+</RelativeLayout>

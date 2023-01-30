@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- row.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layoutDirection="ltr" >
+
+    <!--
+             <ImageView android:id="@+id/iv"
+		        android:layout_width="wrap_content" 
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/arrow"
+		        android:layout_alignParentRight="true"
+		        android:layout_centerVertical="true"
+		        android:layout_marginRight="10dp"	        
+		     />
+    -->
+
+    <ImageView
+        android:id="@+id/leftiv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp" />
+
+    <RelativeLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/rightiv"
+        android:layout_toRightOf="@+id/leftiv"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="#373435"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv1"
+            android:layout_marginBottom="7dp"
+            android:singleLine="true"
+            android:textColor="#373435"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:typeface="normal" />
+
+        <View
+            android:id="@+id/dividing_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tv2"
+            android:layout_marginLeft="55dp"
+            android:background="#B3B3B3" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/rightiv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/downnnn" />
+
+    <ListView
+        android:id="@+id/joblistbelow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linear_layout"
+        android:layout_below="@+id/linear_layout"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="2dp"
+        android:cacheColorHint="#00000000"
+        android:divider="#e36c09"
+        android:dividerHeight="1px"
+        android:visibility="gone" >
+    </ListView>
+
+</RelativeLayout>

@@ -1,0 +1,979 @@
+package com.checker.sa.android.data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import com.checker.sa.android.helper.Helper;
+import com.mor.sa.android.activities.QuestionnaireActivity;
+
+public class Set implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private int objectCountAtTimeOfDownloading;
+	private int objectCountAtTimeOfSaving;
+	private String SetVersionID="";
+	private ArrayList<EditorNote> editorNotes;
+
+	public String getSetVersionID() {
+		return SetVersionID;
+	}
+
+	public void setSetVersionID(String setVersionID) {
+		SetVersionID = setVersionID;
+	}
+
+	public int getObjectCountAtTimeOfDownloading() {
+		return objectCountAtTimeOfDownloading;
+	}
+
+	public void setObjectCountAtTimeOfDownloading(
+			int objectCountAtTimeOfDownloading) {
+		this.objectCountAtTimeOfDownloading = objectCountAtTimeOfDownloading;
+	}
+
+	public int getObjectCountAtTimeOfSaving() {
+		return objectCountAtTimeOfSaving;
+	}
+
+	public void setObjectCountAtTimeOfSaving(int objectCountAtTimeOfSaving) {
+		this.objectCountAtTimeOfSaving = objectCountAtTimeOfSaving;
+	}
+
+	public ArrayList<LoopsEntry> loopData = null;
+	public ArrayList<Block> blockList = null;
+
+	public ArrayList<Block> getListBlocks() {
+		return blockList;
+	}
+
+	public void setListBlock(Block block) {
+		if (blockList == null)
+			blockList = new ArrayList<Block>();
+		if (block!=null && block.getName()!=null && (block.getName().equals("B1") || block.getName().equals("B3")))
+		blockList.add(block);
+	}
+
+	public void setListBlocks(ArrayList<Block> blocks) {
+		blockList = blocks;
+	}
+
+	public ArrayList<ItemPositionInBlock> itemInBlocks = null;
+
+	public ArrayList<ItemPositionInBlock> getListItemPositionInBlock() {
+		return itemInBlocks;
+	}
+
+	public void setItemPositionInBlock(ItemPositionInBlock itemInBlock) {
+		if (itemInBlocks == null)
+			itemInBlocks = new ArrayList<ItemPositionInBlock>();
+		itemInBlocks.add(itemInBlock);
+	}
+
+	public void setListItemPositionInBlock(ArrayList<ItemPositionInBlock> blocks) {
+		itemInBlocks = blocks;
+	}
+
+	public ArrayList<Survey> currentSurveys;
+	private String setID;
+	private String AllowCheckerToSetLang;
+	private String isDifferentLangsAvailable;
+
+	private String setName, setBriefingContent, setCode, companyLink,
+			setDescription, setTypeLink, clientLink, charLink, clientName, ver,
+			altLangID;
+	private String defaultPaymentForChecker, defaultBonusPayment;
+	private String enableValidationQuestion, enableNonansweredConfirmation, RestrictGalleryAccess,
+			enableQuestionNumberingInForm, showTOC, allowCritFileUpload,
+			askForServiceDetails, askForPurchaseDetails,
+			autoApproveTransportation, autoApprovePayment, autoApproveService,
+			autoApprovePurchase, showFreeTextBox, showProgressBar,
+			allowCheckerToSetFinishTime, showHeader, showFooter,
+			showSaveAndExitButton, showPreviewButton, showBackButton,
+			automaticApproval, gradingSystem, askForTransportationDetails,
+			AnswersActAsSubmit, ForceImageStamp;
+	private String questionsPerPage;
+
+	private ArrayList<Objects> listObjects = new ArrayList<Objects>();
+	private ArrayList<Chapters> listChapters = new ArrayList<Chapters>();
+	private ArrayList<ChangeConditions> changeConditions = new ArrayList<ChangeConditions>();
+	private ArrayList<Workers> listWorkers = new ArrayList<Workers>();
+	private ArrayList<Branches> listBranches = new ArrayList<Branches>();
+	private ArrayList<Products> listProducts = new ArrayList<Products>();
+	private ArrayList<ProductLocations> listProductLocations = new ArrayList<ProductLocations>();
+	private ArrayList<ProductProperties> listProductProperties = new ArrayList<ProductProperties>();
+
+	private ArrayList<Objects> randomObjects;
+
+	private String wasSentBack;
+	private ArrayList<Cert> certs;
+	public void setCertificates(ArrayList<Cert> listCerts) {
+		// TODO Auto-generated method stub
+		this.certs = listCerts;
+	}
+
+	public ArrayList<Cert> getCertificates() {
+		// TODO Auto-generated method stub
+		return this.certs;
+	}
+
+	public String getRestrictGalleryAccess() {
+		return RestrictGalleryAccess;
+	}
+
+	public void setRestrictGalleryAccess(String restrictGalleryAccess) {
+		RestrictGalleryAccess = restrictGalleryAccess;
+	}
+
+	public ArrayList<LoopsEntry> getLoopAgainstListName(String listname,
+														ArrayList<LoopsEntry> loopDataSelected, boolean isAll) {
+
+		ArrayList<LoopsEntry> loopdatasel = new ArrayList<LoopsEntry>();
+		try {
+			boolean check;
+			for (int i = 0; i <= loopDataSelected.size() - 1; i++) {
+				if (listname.equals(loopDataSelected.get(i).getListName())) {
+					check = isAlreadyAdded(loopdatasel, loopDataSelected.get(i));
+					if (check == false || isAll) {
+						loopdatasel.add(loopDataSelected.get(i));
+					}
+
+				}
+			}
+		} catch (Exception ex) {
+			int i = 0;
+			i++;
+		}
+		return loopdatasel;
+	}
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public ArrayList<LoopsEntry> getLoopAgainstListNamenColumname(
+			String listname, String columnName,
+			ArrayList<LoopsEntry> loopDataSelected, boolean isAll,
+			String columnData) {
+		if (loopDataSelected == null)
+			return new ArrayList<LoopsEntry>();
+		ArrayList<LoopsEntry> loopdatasel = new ArrayList<LoopsEntry>();
+		// check if this column name exists in this list
+		boolean isthisColumnExists = false;
+		loopDataSelected = getLoopAgainstListName(listname, loopDataSelected,
+				isAll);
+		for (int i = 0; i < loopDataSelected.size(); i++) {
+			if (columnName.equals(loopDataSelected.get(i).getColumnName())) {
+				isthisColumnExists = true;
+				break;
+			}
+		}
+		// DBAdapter.LogCommunication("loops.txt", "Loop start"+" ||");
+		for (int i = 0; i <= loopDataSelected.size() - 1; i++) {
+			boolean check;
+			if (!isthisColumnExists
+					|| ((columnName.equals(loopDataSelected.get(i)
+							.getColumnName())) && ((columnData == null || columnData
+							.equals(loopDataSelected.get(i).getColumnData()))))) {
+				check = isAlreadyAdded(loopdatasel, loopDataSelected.get(i));
+				if (check == false || isAll == true) {
+					loopdatasel.add(loopDataSelected.get(i));
+				}
+
+			}
+		}
+
+		return loopdatasel;
+	}
+
+	public ArrayList<LoopsEntry> getLoopAgainstListNamenColumnamenPArentRow(
+			String loopSource, String columnName,
+			ArrayList<LoopsEntry> previousList, boolean b, String columnData,
+			ArrayList<LoopsEntry> allLoopData) {
+
+		ArrayList<LoopsEntry> thisLoopList = new ArrayList<LoopsEntry>();
+		for (int i = 0; i < previousList.size(); i++) {
+			if (previousList.get(i) != null) {
+				LoopsEntry le = getLoopAgainstListNamenColumDatanRowNumbernColumnName(
+						allLoopData, loopSource, columnName, columnData,
+						previousList.get(i).rowNumber);
+				thisLoopList.add(le);
+			}
+
+		}
+		return thisLoopList;
+	}
+
+	public static LoopsEntry getLoopAgainstListNamenColumDatanRowNumbernColumnName(
+			ArrayList<LoopsEntry> loopDataSelected, String listname,
+			String columnName, String columnData, int rownumber) {
+		if (columnData != null && columnData.contains("$"))
+			columnData = QuestionnaireActivity.cleanColumnData(columnData);
+		ArrayList<LoopsEntry> loopdatasel = new ArrayList<LoopsEntry>();
+		for (int i = 0; i <= loopDataSelected.size() - 1; i++) {
+			boolean check;
+			if (listname.equals(loopDataSelected.get(i).getListName())
+					&& (columnData == null || columnData
+							.equals(loopDataSelected.get(i).getColumnData()))
+					&& (columnName == null || columnName
+							.equals(loopDataSelected.get(i).columnName))
+					&& rownumber == loopDataSelected.get(i).getRowNumber()) {
+
+				return loopDataSelected.get(i);
+
+			}
+		}
+
+		return null;
+	}
+
+	public static LoopsEntry getLoopAgainstListNamenColumDatanRowNumber(
+			ArrayList<LoopsEntry> loopDataSelected, String listname,
+			String columnData, int rownumber) {
+		if (columnData != null && columnData.contains("$"))
+			columnData = QuestionnaireActivity.cleanColumnData(columnData);
+		ArrayList<LoopsEntry> loopdatasel = new ArrayList<LoopsEntry>();
+		for (int i = 0; i <= loopDataSelected.size() - 1; i++) {
+			boolean check;
+			if (listname.equals(loopDataSelected.get(i).getListName())
+					&& (columnData == null || columnData
+							.equals(loopDataSelected.get(i).getColumnData()))
+					&& rownumber == loopDataSelected.get(i).getRowNumber()) {
+
+				return loopDataSelected.get(i);
+
+			}
+		}
+
+		return null;
+	}
+
+	public static LoopsEntry getLoopAgainstListNamenColumNamenRowNumber(
+			ArrayList<LoopsEntry> loopDataSelected, String listname,
+			String columnName, int rownumber) {
+
+		ArrayList<LoopsEntry> loopdatasel = new ArrayList<LoopsEntry>();
+		for (int i = 0; i <= loopDataSelected.size() - 1; i++) {
+			boolean check;
+			if (listname.equals(loopDataSelected.get(i).getListName())
+					&& columnName.equals(loopDataSelected.get(i)
+							.getColumnName())
+					&& rownumber == loopDataSelected.get(i).getRowNumber()) {
+
+				return loopDataSelected.get(i);
+
+			}
+		}
+
+		return null;
+	}
+
+	public ArrayList<LoopsEntry> getLoopAgainstListNamenColumnamenparentname(
+			String listname, String columnName, String parentColumnNames,
+			String parentColumnData, ArrayList<LoopsEntry> loopDataSelected,
+			boolean isAll) {
+
+		ArrayList<LoopsEntry> loopDatanSelected = getLoopAgainstListNamenColumname(
+				listname, parentColumnNames, loopDataSelected, true,
+				parentColumnData);
+
+		ArrayList<LoopsEntry> loopdatasel = new ArrayList<LoopsEntry>();
+
+		for (int i = 0; i <= loopDataSelected.size() - 1; i++) {
+			boolean check;
+			if (listname.equals(loopDataSelected.get(i).getListName())
+					&& columnName.equals(loopDataSelected.get(i)
+							.getColumnName())) {
+
+				check = isInSameRowAs(loopDatanSelected,
+						loopDataSelected.get(i));
+				if (check == true) {
+
+					check = isAlreadyAdded(loopdatasel, loopDataSelected.get(i));
+					if (check == false || isAll) {
+						loopdatasel.add(loopDataSelected.get(i));
+					}
+				}
+
+			}
+		}
+
+		if (loopdatasel.size() == 0 && loopDatanSelected.size() > 0)
+			return loopDatanSelected;
+		return loopdatasel;
+	}
+
+	public LoopsEntry get901SingleData(String dataId, String listname,
+			String columnName, int rowNumber) {
+
+		String[] dataids = dataId.split("\\^");
+		int maxRow = rowNumber;
+		for (int i = 0; i < dataids.length; i++) {
+			String dataid2 = dataids[i];
+			int indexStart = dataid2.indexOf("$");
+			int indexEnd = dataid2.length();
+			if (indexStart > 0 && indexEnd > 0) {
+				String thisRowNumber = dataid2.substring(indexStart, indexEnd);
+				thisRowNumber += "";
+				thisRowNumber = thisRowNumber.replace("$", "");
+				int rn = Integer.valueOf(thisRowNumber);
+				if (rn > maxRow)
+					maxRow = rn;
+			}
+		}
+		for (int i = 0; i <= loopData.size() - 1; i++) {
+
+			if (listname.equals(loopData.get(i).getListName())
+					&& columnName.equals(loopData.get(i).getColumnName())
+					&& loopData.get(i).getRowNumber() == maxRow) {
+				return loopData.get(i);
+
+			}
+		}
+
+		return null;
+	}
+
+	private boolean isInSameRowAs(ArrayList<LoopsEntry> loopDatanSelected,
+			LoopsEntry loopsEntry) {
+		for (int i = 0; i < loopDatanSelected.size(); i++) {
+			if (loopDatanSelected.get(i).rowNumber == loopsEntry.rowNumber)
+				return true;
+		}
+		return false;
+	}
+
+	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public static boolean isAlreadyAdded(ArrayList<LoopsEntry> list,
+			LoopsEntry input) {
+		for (int i = 0; i < list.size(); i++) {
+			if (input.columnData.equals(list.get(i).columnData)) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	public String getSetID() {
+		return setID;
+	}
+
+	public void setSetID(String setID) {
+		this.setID = setID;
+	}
+
+	public String getAnswersActAsSubmit() {
+		return AnswersActAsSubmit;
+	}
+
+	public void setAnswersActAsSubmit(String answersActAsSubmit) {
+		AnswersActAsSubmit = answersActAsSubmit;
+	}
+
+	public String getBriefingContent() {
+		return setBriefingContent;
+	}
+
+	public void setBriefingContent(String setBriefingContent) {
+		this.setBriefingContent = setBriefingContent;
+	}
+
+	public String getSetName() {
+		return setName;
+	}
+
+	public void setSetName(String setName) {
+		if (setName.toLowerCase().contains("bill")) {
+			int i = 0;
+			i++;
+		}
+		this.setName = setName;
+	}
+
+	public String getSetCode() {
+		return setCode;
+	}
+
+	public void setSetCode(String setCode) {
+		this.setCode = setCode;
+	}
+
+	public String getCompanyLink() {
+		return companyLink;
+	}
+
+	public void setCompanyLink(String companyLink) {
+		Helper.setCompanyLink(companyLink);
+		this.companyLink = companyLink;
+	}
+
+	public String getSetDescription() {
+		return setDescription;
+	}
+
+	public void setSetDescription(String setDescription) {
+		this.setDescription = setDescription;
+	}
+
+	public String getSetTypeLink() {
+		return setTypeLink;
+	}
+
+	public void setSetTypeLink(String setTypeLink) {
+		this.setTypeLink = setTypeLink;
+	}
+
+	public String getClientLink() {
+		return clientLink;
+	}
+
+	public void setClientLink(String clientLink) {
+		this.clientLink = clientLink;
+	}
+
+	public String getCharLink() {
+		return charLink;
+	}
+
+	public void setCharLink(String charLink) {
+		this.charLink = charLink;
+	}
+
+	public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+
+	public String getVer() {
+		return ver;
+	}
+
+	public void setVer(String ver) {
+		this.ver = ver;
+	}
+
+	public String getAltLangID() {
+		return altLangID;
+	}
+
+	public void setAltLangID(String altLangID) {
+		this.altLangID = altLangID;
+	}
+
+	public String getDefaultPaymentForChecker() {
+		return defaultPaymentForChecker;
+	}
+
+	public void setDefaultPaymentForChecker(String defaultPaymentForChecker) {
+		this.defaultPaymentForChecker = defaultPaymentForChecker;
+	}
+
+	public String getDefaultBonusPayment() {
+		return defaultBonusPayment;
+	}
+
+	public void setDefaultBonusPayment(String defaultBonusPayment) {
+		this.defaultBonusPayment = defaultBonusPayment;
+	}
+
+	public String getEnableValidationQuestion() {
+		return enableValidationQuestion;
+	}
+
+	public void setEnableValidationQuestion(String enableValidationQuestion) {
+		this.enableValidationQuestion = enableValidationQuestion;
+	}
+
+	public String getEnableNonansweredConfirmation() {
+		return enableNonansweredConfirmation;
+	}
+
+	public void setEnableNonansweredConfirmation(
+			String enableNonansweredConfirmation) {
+		this.enableNonansweredConfirmation = enableNonansweredConfirmation;
+	}
+
+	public String getEnableQuestionNumberingInForm() {
+		return enableQuestionNumberingInForm;
+	}
+
+	public void setEnableQuestionNumberingInForm(
+			String enableQuestionNumberingInForm) {
+		this.enableQuestionNumberingInForm = enableQuestionNumberingInForm;
+	}
+
+	public String getShowTOC() {
+		return showTOC;
+	}
+
+	public void setShowTOC(String showTOC) {
+		this.showTOC = showTOC;
+	}
+
+	public String getAllowCritFileUpload() {
+		return allowCritFileUpload;
+	}
+
+	public void setAllowCritFileUpload(String allowCritFileUpload) {
+		this.allowCritFileUpload = allowCritFileUpload;
+	}
+
+	public String getAskForServiceDetails() {
+		return askForServiceDetails;
+	}
+
+	public void setAskForServiceDetails(String askForServiceDetails) {
+		this.askForServiceDetails = askForServiceDetails;
+	}
+
+	public String getAskForPurchaseDetails() {
+		return askForPurchaseDetails;
+	}
+
+	public void setAskForPurchaseDetails(String askForPurchaseDetails) {
+		this.askForPurchaseDetails = askForPurchaseDetails;
+	}
+
+	public String getAutoApproveTransportation() {
+		return autoApproveTransportation;
+	}
+
+	public void setAutoApproveTransportation(String autoApproveTransportation) {
+		this.autoApproveTransportation = autoApproveTransportation;
+	}
+
+	public String getAutoApprovePayment() {
+		return autoApprovePayment;
+	}
+
+	public void setAutoApprovePayment(String autoApprovePayment) {
+		this.autoApprovePayment = autoApprovePayment;
+	}
+
+	public String getAutoApproveService() {
+		return autoApproveService;
+	}
+
+	public void setAutoApproveService(String autoApproveService) {
+		this.autoApproveService = autoApproveService;
+	}
+
+	public String getAutoApprovePurchase() {
+		return autoApprovePurchase;
+	}
+
+	public void setAutoApprovePurchase(String autoApprovePurchase) {
+		this.autoApprovePurchase = autoApprovePurchase;
+	}
+
+	public String getShowFreeTextBox() {
+		return showFreeTextBox;
+	}
+
+	public void setShowFreeTextBox(String showFreeTextBox) {
+		this.showFreeTextBox = showFreeTextBox;
+	}
+
+	public String getShowProgressBar() {
+		return showProgressBar;
+	}
+
+	public void setShowProgressBar(String showProgressBar) {
+		this.showProgressBar = showProgressBar;
+	}
+
+	public String getAllowCheckerToSetFinishTime() {
+		return allowCheckerToSetFinishTime;
+	}
+
+	public void setAllowCheckerToSetFinishTime(
+			String allowCheckerToSetFinishTime) {
+		this.allowCheckerToSetFinishTime = allowCheckerToSetFinishTime;
+	}
+
+	public String getShowHeader() {
+		return showHeader;
+	}
+
+	public void setShowHeader(String showHeader) {
+		this.showHeader = showHeader;
+	}
+
+	public String getShowFooter() {
+		return showFooter;
+	}
+
+	public void setShowFooter(String showFooter) {
+		this.showFooter = showFooter;
+	}
+
+	public String getShowSaveAndExitButton() {
+		return showSaveAndExitButton;
+	}
+
+	public void setShowSaveAndExitButton(String showSaveAndExitButton) {
+		this.showSaveAndExitButton = showSaveAndExitButton;
+	}
+
+	public String getShowPreviewButton() {
+		return showPreviewButton;
+	}
+
+	public void setShowPreviewButton(String showPreviewButton) {
+		if (showPreviewButton == null)
+			this.showPreviewButton = "1";
+		this.showPreviewButton = showPreviewButton;
+		// this.showBackButton = showPreviewButton;
+	}
+
+	public String getShowBackButton() {
+		return showBackButton;
+	}
+
+	public void setShowBackButton(String showPreviewButton) {
+		if (showPreviewButton == null)
+			this.showBackButton = "1";
+		this.showBackButton = showPreviewButton;
+	}
+
+	public String getAutomaticApproval() {
+		return automaticApproval;
+	}
+
+	public void setAutomaticApproval(String automaticApproval) {
+		this.automaticApproval = automaticApproval;
+	}
+
+	public String getGradingSystem() {
+		return gradingSystem;
+	}
+
+	public void setGradingSystem(String gradingSystem) {
+		this.gradingSystem = gradingSystem;
+	}
+
+	public String getAskForTransportationDetails() {
+		return askForTransportationDetails;
+	}
+
+	public void setAskForTransportationDetails(
+			String askForTransportationDetails) {
+		this.askForTransportationDetails = askForTransportationDetails;
+	}
+
+	public String getAllowCheckerToSetLang() {
+		return AllowCheckerToSetLang;
+	}
+
+	public void setAllowCheckerToSetLang(String allowCheckerToSetLang) {
+		AllowCheckerToSetLang = allowCheckerToSetLang;
+	}
+
+	public String getIsDifferentLangsAvailable() {
+		return isDifferentLangsAvailable;
+	}
+
+	public void setIsDifferentLangsAvailable(String isDifferentLangsAvailable) {
+		this.isDifferentLangsAvailable = isDifferentLangsAvailable;
+	}
+
+	public String getQuestionsPerPage() {
+		return questionsPerPage;
+	}
+
+	public void setQuestionsPerPage(String questionsPerPage) {
+		this.questionsPerPage = questionsPerPage;
+	}
+
+	public ArrayList<Objects> getListObjects() {
+
+		return getStructuredListObjects(false);
+	}
+
+	public void setListObjects(Objects object) {
+		listObjects.add(object);
+	}
+
+	public void setListObjectsfromDB(ArrayList<Objects> object) {
+		listObjects = object;
+	}
+
+	public void addListObjectsfromDB(ArrayList<Objects> object) {
+		if (listObjects == null)
+			listObjects = object;
+		else {
+			for (int i = 0; i < object.size(); i++) {
+				listObjects.add(object.get(i));
+			}
+		}
+	}
+
+	public ArrayList<Chapters> getListChapters() {
+		return listChapters;
+	}
+
+	public void setListChapters(ArrayList<Chapters> listChapters) {
+		this.listChapters = listChapters;
+	}
+
+	public ArrayList<ChangeConditions> getChangeConditions() {
+		return changeConditions;
+	}
+
+	public void setChangeConditions(ArrayList<ChangeConditions> changeConditions) {
+		this.changeConditions = changeConditions;
+	}
+
+	public ArrayList<Workers> getListWorkers() {
+		return listWorkers;
+	}
+
+	public void setListWorkers(Workers workers) {
+		listWorkers.add(workers);
+	}
+
+	public void setListWorkers(ArrayList<Workers> workers) {
+		listWorkers = workers;
+	}
+
+	public ArrayList<Branches> getListBranches() {
+		return listBranches;
+	}
+
+	public void setListBranches(Branches branches) {
+		listBranches.add(branches);
+	}
+
+	public void setListBranches(ArrayList<Branches> branches) {
+		listBranches = branches;
+	}
+
+	public ArrayList<Products> getListProducts() {
+		return listProducts;
+	}
+
+	public void setListProducts(Products products) {
+		listProducts.add(products);
+	}
+
+	public void setListProducts(ArrayList<Products> products) {
+		listProducts = products;
+	}
+
+	public ArrayList<ProductLocations> getListProductLocations() {
+		return listProductLocations;
+	}
+
+	public void setListProductLocations(ProductLocations location) {
+		listProductLocations.add(location);
+	}
+
+	public void setListProductLocations(ArrayList<ProductLocations> locations) {
+		listProductLocations = locations;
+	}
+
+	public ArrayList<ProductProperties> getListProductProperties() {
+		return listProductProperties;
+	}
+
+	public void setListProductProperties(ProductProperties location) {
+		listProductProperties.add(location);
+	}
+
+	public void setListProductProperties(ArrayList<ProductProperties> locations) {
+		listProductProperties = locations;
+	}
+
+	public void setAlternateListObjects(Objects objects, String altid) {
+		if (listObjects == null || objects == null)
+			return;
+		for (int i = 0; i < listObjects.size(); i++) {
+			if (listObjects.get(i).getDataID() != null
+					&& listObjects.get(i).getDataID()
+							.equals(objects.getDataID())) {
+				listObjects.get(i).altmiDescription.add(new AltLangStrings(
+						altid, objects.getMiDescription()));
+				listObjects.get(i).altQuestionDescription
+						.add(new AltLangStrings(altid, objects
+								.getAltDescription()));
+				listObjects.get(i).altQuestionTexts.add(new AltLangStrings(
+						altid, objects.getAltQuestion()));
+				listObjects.get(i).altTexts.add(new AltLangStrings(altid,
+						objects.getAltText()));
+				listObjects.get(i).altGroupNames.add(new AltLangStrings(altid,
+						objects.getAltGroupName()));
+			}
+		}
+
+	}
+
+	public void setAlternateListAnswers(Objects objects, Answers answers,
+			String altid) {
+		if (listObjects == null || objects == null || answers == null)
+			return;
+		for (int i = 0; i < listObjects.size(); i++) {
+			if (listObjects.get(i).getDataID() != null
+					&& listObjects.get(i).getDataID()
+							.equals(objects.getDataID())) {
+				ArrayList<Answers> allAnswers = listObjects.get(i)
+						.getListAnswers();
+				if (allAnswers != null) {
+					for (int j = 0; j < allAnswers.size(); j++) {
+						if (allAnswers.get(j).getAnswerID() != null
+								&& allAnswers.get(j).getAnswerID()
+										.equals(answers.getAnswerID())) {
+							allAnswers.get(j).altanswers
+									.add(new AltLangStrings(altid, answers
+											.getAltAnswer()));
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	public void setAlternateListTitles(Objects objects, Titles answers,
+			String altid) {
+		if (listObjects == null || objects == null || answers == null)
+			return;
+		for (int i = 0; i < listObjects.size(); i++) {
+			if (listObjects.get(i).getDataID() != null
+					&& listObjects.get(i).getDataID()
+							.equals(objects.getDataID())) {
+				ArrayList<Titles> allAnswers = listObjects.get(i)
+						.getQuestionTitles();
+				if (allAnswers != null) {
+					for (int j = 0; j < allAnswers.size(); j++) {
+						if (allAnswers.get(j).getqgtID() != null
+								&& allAnswers.get(j).getqgtID()
+										.equals(answers.getqgtID())) {
+							allAnswers.get(j).altTitles.add(new AltLangStrings(
+									altid, answers.getAltTitle()));
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	public String getForceImageStamp() {
+		return ForceImageStamp;
+	}
+
+	public void setForceImageStamp(String forceImageStamp) {
+		ForceImageStamp = forceImageStamp;
+	}
+
+	public void structureBlocksAndObjects() {
+		if (blockList != null && blockList.size() > 0) {
+			for (int i = 0; i < blockList.size(); i++) {
+				int start = -1;
+				int end = -1;
+
+				try {
+					start = Integer.parseInt(blockList.get(i).getStartIndex()) - 1;
+					if ((i + 1) < blockList.size()) {
+						end = Integer.parseInt(blockList.get(i + 1)
+								.getStartIndex()) - 1;
+					} else
+						end = listObjects.size();
+
+				} catch (Exception ex) {
+
+				}
+				if (start >= 0 && end <= listObjects.size()) {
+					for (int j = start; j < end; j++) {
+						blockList.get(i).setObject(listObjects.get(j));
+					}
+				}
+			}
+		}
+	}
+
+	public ArrayList<Objects> getStructuredListObjects(boolean directHit) {
+
+		// if (blockList != null && blockList.size() > 0) {
+		// if (randomObjects == null || directHit) {
+		// randomObjects = new ArrayList<Objects>();
+		//
+		// for (int i = 0; i < blockList.size(); i++) {
+		// ArrayList<Objects> theObjects = blockList.get(i)
+		// .getStructuredObjects();
+		// if (theObjects != null)
+		// randomObjects.addAll(theObjects);
+		// }
+		// }
+		// return randomObjects;
+		// } else {
+		// return listObjects;
+		// }
+		//
+		return listObjects;
+	}
+
+	public void setWasSentBack(String wasSentBack) {
+		this.wasSentBack = wasSentBack;
+
+	}
+
+	public String getWasSentBack() {
+		return this.wasSentBack;
+
+	}
+	public ArrayList<EditorNote> getEditorNotes() {
+		return this.editorNotes;
+
+	}
+    public void setEditorNotes(ArrayList<EditorNote> editorNotes) {
+		this.editorNotes=editorNotes;
+    }
+
+	public void randomizeTheseObjects(String start, String end, int seed) {
+		ArrayList<Objects> tempObjects=new ArrayList<Objects>();
+		int startIndex=(int)Integer.parseInt(start);
+		int endIndex= (int) Integer.parseInt(end);
+		for (int i=0;i<listObjects.size();i++)
+		{
+			try {
+				int thisIndex = (int) Integer.parseInt(listObjects.get(i).getObjectOrder());
+				if (thisIndex >= startIndex && thisIndex < endIndex) {
+					tempObjects.add(listObjects.get(i));
+					listObjects.remove(i);
+					i=i-1;
+				}
+			}
+			catch(Exception ex)
+			{
+				int o=0;
+				o++;
+			}
+		}
+		if (tempObjects!=null && tempObjects.size()>1)
+		{
+			 tempObjects=QuestionnaireActivity.randomizeQuestionsForBlocks(tempObjects,seed);
+			for (int i=0;i<listObjects.size();i++)
+			{
+				try {
+					int thisIndex = (int) Integer.parseInt(listObjects.get(i).getObjectOrder());
+					if (thisIndex == endIndex) {
+						listObjects.addAll(i,tempObjects);
+						break;
+					}
+				}
+				catch(Exception ex)
+				{
+					int o=0;
+					o++;
+				}
+			}
+		}
+	}
+}
+/********************* set Class Closed *****************************************/
