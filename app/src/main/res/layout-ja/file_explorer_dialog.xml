@@ -44,7 +44,7 @@
         android:layout_marginTop="15dp"
         android:text=""
         android:textColor="#8e8e8e"
-        android:textSize="20dp" /> 
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/btn_dismiss"
@@ -54,7 +54,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="10dp"
-        android:background="#b2cb39"
+        android:background="@color/light_blue"
         android:paddingBottom="6dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
@@ -63,7 +63,5 @@
         android:textColor="#ffffff"
         android:textSize="16dp"
         android:textStyle="bold" />
-    
-    
 
 </RelativeLayout>

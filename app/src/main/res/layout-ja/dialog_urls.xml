@@ -30,9 +30,10 @@
         android:layout_height="35dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/login_green_bg"
+        android:background="@color/light_blue"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
+        android:textColor="@color/white"
         android:text="X" />
 
 </RelativeLayout>

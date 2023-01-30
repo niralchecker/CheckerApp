@@ -241,7 +241,6 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
     private boolean isBranchPropErr;
     private String alternateResult;
 
-    private TextView toolbarTitle;
 
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
@@ -347,7 +346,6 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
             // tabOne.setPaintFlags(tabOne.getPaintFlags()
             // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "assigned";
-            toolbarTitle.setText(spanString);
             // ltabOne.setBackgroundColor(Color.parseColor(color_select));
         }
         if (tabNumber == 2) {
@@ -366,7 +364,6 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
             tabTwo.setTextColor(Color.parseColor(txt_color_select));
             tabTwo.setText(spanString);
             filter = "scheduled";
-            toolbarTitle.setText(spanString);
             // ltabTwo.setBackgroundColor(Color.parseColor(color_select));
         }
         if (tabNumber == 3) {
@@ -386,7 +383,6 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
             // tabThree.setPaintFlags(tabThree.getPaintFlags()
             // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "in progress";
-            toolbarTitle.setText(spanString);
             // ltabThree.setBackgroundColor(Color.parseColor(color_select));
         }
         if (tabNumber == 4) {
@@ -405,7 +401,6 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
             tabFour.setTextColor(Color.parseColor(txt_color_select));
             // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "completed";
-            toolbarTitle.setText(spanString);
             // ltabFour.setBackgroundColor(Color.parseColor(color_select));
         }
         try {
@@ -1184,7 +1179,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
             case 5:
                 isJobselected = true;
                 intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -1725,7 +1720,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
             case 3:
                 isJobselected = true;
                 Intent intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -2201,7 +2196,6 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
         tabFour.setTextSize(UIHelper.getFontSizeTabs(NewJobListActivity.this,
                 tabFour.getTextSize()));
 
-        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         loadViews();
 
         ManageTabs(2);
@@ -5076,7 +5070,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
             case Constants.MENUID_DOWNLOAD_SETTINGS:
                 isJobselected = true;
                 Intent intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();

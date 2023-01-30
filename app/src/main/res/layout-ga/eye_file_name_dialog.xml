@@ -11,9 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:background="#121212"
         android:text="@string/file_details"
-        android:textColor="#94ba09"
+        android:textColor="#007BFF"
         android:textSize="15sp"
         android:visibility="visible" />
 
@@ -95,13 +94,13 @@
             android:layout_below="@+id/sizeText"
             android:layout_centerInParent="true"
             android:layout_marginTop="15dp"
-            android:background="#94ba09"
-            android:paddingBottom="5dp"
+            android:background="#007BFF"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:paddingTop="5dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="5dp"
             android:text="@string/open_file"
-            android:textColor="#121212"
+            android:textColor="@color/white"
             android:textSize="16dp" />
     </RelativeLayout>
 

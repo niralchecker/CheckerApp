@@ -519,11 +519,14 @@
                 android:layout_height="35dp"
                 android:layout_below="@+id/txtComment"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="#9DC40F"
-                android:tag="Apply"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
+                android:tag="Apply"
                 android:text="@string/s_item_column_0_line_523_file_122"
                 android:textColor="@color/white" />
         </RelativeLayout>

@@ -133,7 +133,7 @@ public static ArrayList<QuestionnaireData> thisSavedAnswer = null;
 		if ((myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""))
 				.equals("")) {
 			Intent intent = new Intent(this.getApplicationContext(),
-					SettingsActivity.class);
+					NewSettingsActivity.class);
 			startActivity(intent);
 			finish();
 		}

@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
-    android:layoutDirection="ltr" >
+    android:layoutDirection="ltr">
 
     <LinearLayout
         android:id="@+id/weeklayout"
@@ -26,7 +27,9 @@
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="1dp"
-                android:src="@drawable/back_green" />
+                android:src="@drawable/back_green"
+                android:tint="@color/light_blue"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -50,7 +53,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="2dp"
-                android:background="#9dc40f" />
+                android:background="@color/light_blue" />
 
             <TextView
                 android:id="@+id/tvMap"
@@ -60,7 +63,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/mapOrListBtn"
                 android:text="@string/s_item_column_0_line_59_file_52"
-                android:textColor="#9dc40f"
+                android:textColor="@color/light_blue"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -72,7 +75,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/mapOrListBtn"
                 android:text="@string/s_item_column_0_line_71_file_52"
-                android:textColor="#9dc40f"
+                android:textColor="@color/light_blue"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -88,7 +91,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/filter_grey" />
+                android:src="@drawable/filter_grey"
+                android:tint="@color/light_blue"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -104,7 +108,8 @@
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:paddingRight="3dp"
-                android:src="@drawable/refresh" />
+                android:src="@drawable/refresh"
+                android:tint="@color/light_blue"/>
         </RelativeLayout>
     </LinearLayout>
     <AutoCompleteTextView
@@ -211,7 +216,7 @@
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
-            android:background="@drawable/login_green_bg"
+            android:background="@color/light_blue"
             android:text="@string/s_item_column_0_line_183_file_52"
             android:textColor="@color/white"
             android:visibility="gone" />
@@ -281,7 +286,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#9dc40f"
+                            android:background="@color/light_blue"
                             android:visibility="gone" />
                     </RelativeLayout>
 
@@ -305,7 +310,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#9dc40f"
+                            android:background="@color/light_blue"
                             android:visibility="visible" />
                     </RelativeLayout>
 
@@ -330,7 +335,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#9dc40f"
+                            android:background="@color/light_blue"
                             android:visibility="gone" />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -364,7 +369,7 @@
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="@string/s_item_column_0_line_337_file_52"
-                        android:textColor="#9dc40f"
+                        android:textColor="#007BFF"
                         android:textSize="13dp"
                         android:textStyle="normal" />
 
@@ -373,7 +378,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f" />
+                        android:background="#007BFF" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -397,7 +402,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f"
+                        android:background="#007BFF"
                         android:visibility="gone" />
                 </RelativeLayout>
 
@@ -422,7 +427,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f"
+                        android:background="#007BFF"
                         android:visibility="gone" />
                 </RelativeLayout>
 
@@ -447,7 +452,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f"
+                        android:background="#007BFF"
                         android:visibility="gone" />
                 </RelativeLayout>
             </LinearLayout>
@@ -530,7 +535,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/login_green_bg"
+                android:background="@color/light_blue"
                 android:text="@string/s_item_column_0_line_415_file_52"
                 android:textColor="#ffffff" />
 
@@ -544,7 +549,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/login_green_bg"
+                android:background="@color/light_blue"
                 android:text="@string/s_item_column_0_line_429_file_52"
                 android:textColor="#ffffff" />
         </RelativeLayout>

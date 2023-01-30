@@ -68,7 +68,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_67_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_94_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -121,7 +121,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_120_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -150,7 +150,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_149_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -177,7 +177,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_176_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -206,7 +206,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_205_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -235,7 +235,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_234_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -264,7 +264,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_263_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -293,7 +293,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_292_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -322,7 +322,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_321_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -351,7 +351,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_350_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -380,7 +380,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_379_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -409,7 +409,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_408_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -437,7 +437,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_436_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -466,7 +466,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="@string/s_item_column_0_line_465_file_37"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="16dp"
             android:textStyle="bold" />
 

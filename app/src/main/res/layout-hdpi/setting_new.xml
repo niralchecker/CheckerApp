@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/backGroundDrawable"
     android:layout_width="fill_parent"
-    android:layoutDirection="ltr"
     android:layout_height="fill_parent"
-    android:background="@drawable/background" >
+    android:background="@drawable/background"
+    android:layoutDirection="ltr">
 
     <RelativeLayout
         android:id="@+id/rvjobdetailscreen"
@@ -12,14 +12,14 @@
         android:layout_height="55dp"
         android:layout_alignParentTop="true"
         android:background="#ffffff"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <View
             android:id="@+id/dividing_line_3"
             android:layout_width="match_parent"
             android:layout_height="2px"
-            android:layout_alignParentBottom="true"
             android:layout_below="@+id/tv2"
+            android:layout_alignParentBottom="true"
             android:background="#B3B3B3" />
 
         <ImageButton
@@ -50,7 +50,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/jd_heder"
-            android:visibility="invisible" >
+            android:visibility="invisible">
 
             <Button
                 android:id="@+id/btnproxy"
@@ -59,10 +59,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:background="@color/accept_btn_selector"
-                android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
                 android:text="@string/settings_page_proxy" />
         </RelativeLayout>
     </RelativeLayout>
@@ -74,8 +74,7 @@
         android:layout_alignParentBottom="true"
         android:background="#ffffff"
         android:orientation="horizontal"
-        android:visibility="gone" >
-    </RelativeLayout>
+        android:visibility="gone"></RelativeLayout>
 
     <ScrollView
         android:id="@+id/jdmiddle"
@@ -83,13 +82,15 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/jdbottomrv"
         android:layout_below="@+id/rvjobdetailscreen"
-        android:visibility="gone" >
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" >
+            android:layout_marginRight="5dp">
 
             <TextView
                 android:id="@+id/jdsurvey"
@@ -118,8 +119,8 @@
                 android:id="@+id/jdsurvey_quotas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/jdsurvey_name"
+                android:layout_alignParentLeft="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_quotas"
@@ -131,8 +132,8 @@
                 android:id="@+id/jdsurvey_quotas_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/jdsurvey_quotas"
+                android:layout_alignParentLeft="true"
                 android:paddingLeft="15dp"
                 android:paddingRight="5dp" />
 
@@ -140,8 +141,8 @@
                 android:id="@+id/jdsurvey_allocations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/jdsurvey_quotas_list"
+                android:layout_alignParentLeft="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_allocations"
@@ -153,8 +154,8 @@
                 android:id="@+id/jdsurvey_allocations_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/jdsurvey_allocations"
+                android:layout_alignParentLeft="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp" />
         </RelativeLayout>
@@ -167,34 +168,34 @@
         android:layout_above="@+id/jdbottomrv"
         android:layout_below="@+id/rvjobdetailscreen"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" >
+        android:layout_marginRight="5dp">
 
         <TableLayout
             android:id="@+id/settingtl"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="10dip" >
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="10dp">
 
             <TableRow
-                android:layout_marginBottom="10dip"
                 android:layout_marginTop="10dip"
-                android:gravity="center" >
+                android:layout_marginBottom="10dip"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/s_urltext"
                     style="bold"
-                    android:layout_width="90dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:paddingLeft="5dp"
                     android:text="@string/settings_system_url_lbl"
                     android:textColor="#000000"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/s_url"
-                    android:layout_width="170dp"
+                    android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/textbg"
@@ -209,9 +210,9 @@
             </TableRow>
 
             <TableRow
-                android:layout_marginBottom="10dip"
                 android:layout_marginTop="10dip"
-                android:gravity="center" >
+                android:layout_marginBottom="10dip"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/s_languagetext"
@@ -231,9 +232,9 @@
             </TableRow>
 
             <TableRow
-                android:layout_marginBottom="10dip"
                 android:layout_marginTop="10dip"
-                android:gravity="center" >
+                android:layout_marginBottom="10dip"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/s_themetext"
@@ -253,9 +254,9 @@
             </TableRow>
 
             <TableRow
-                android:layout_marginBottom="10dip"
                 android:layout_marginTop="10dip"
-                android:gravity="center" >
+                android:layout_marginBottom="10dip"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/s_branchwisesorting"
@@ -277,9 +278,9 @@
             </TableRow>
 
             <TableRow
-                android:layout_marginBottom="10dip"
                 android:layout_marginTop="10dip"
-                android:gravity="center" >
+                android:layout_marginBottom="10dip"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/s_croppingText"
@@ -299,23 +300,23 @@
                     android:textOn="@string/s_on"
                     android:textSize="14sp" />
             </TableRow>
-            
 
 
             <TableRow
-                android:layout_marginBottom="10dip"
                 android:layout_marginTop="10dip"
-                android:gravity="right" >
+                android:layout_marginBottom="10dip"
+                android:gravity="right">
 
                 <ImageView
                     android:id="@+id/savebtn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center_vertical"
-                    android:paddingBottom="5dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:src="@drawable/save" >
+                    android:paddingBottom="5dp"
+                    android:src="@drawable/save"
+                    android:tint="@color/light_blue">
 
                     <requestFocus />
                 </ImageView>
@@ -340,5 +341,5 @@
         android:background="@color/darkness_value"
         android:visibility="gone" />
 
-    
+
 </RelativeLayout>

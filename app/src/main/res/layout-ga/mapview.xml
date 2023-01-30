@@ -20,7 +20,8 @@
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/filter_green" />
+            android:src="@drawable/filter_green"
+            android:tint="@color/light_blue"/>
     </RelativeLayout>
 
     <TextView

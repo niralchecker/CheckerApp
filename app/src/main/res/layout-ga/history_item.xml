@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:singleLine="true"
-        android:textColor="#9dc40f"
+        android:textColor="@color/light_blue"
         android:textSize="14dp"
         android:textStyle="bold" />
 

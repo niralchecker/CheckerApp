@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:layoutDirection="ltr" >
+    android:layoutDirection="ltr">
 
     <LinearLayout
         android:id="@+id/weeklayout"
@@ -11,14 +12,14 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:background="#ffffff"
-        android:weightSum="6.5" >
+        android:weightSum="6.5">
 
         <RelativeLayout
             android:id="@+id/back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.5" >
+            android:layout_weight="0.5">
 
             <ImageView
                 android:id="@+id/backBtn"
@@ -26,22 +27,22 @@
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="1dp"
-                android:src="@drawable/back_green" />
+                android:src="@drawable/back_green"
+                android:tint="@color/light_blue" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1" >
-        </RelativeLayout>
+            android:layout_weight="1"></RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/mapOrList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="3" >
+            android:layout_weight="3">
 
             <View
                 android:id="@+id/mapOrListBtn"
@@ -50,7 +51,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="2dp"
-                android:background="#9dc40f" />
+                android:background="@color/light_blue" />
 
             <TextView
                 android:id="@+id/tvMap"
@@ -60,7 +61,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@+id/mapOrListBtn"
                 android:text="@string/s_item_column_0_line_59_file_52"
-                android:textColor="#9dc40f"
+                android:textColor="@color/light_blue"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -72,7 +73,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/mapOrListBtn"
                 android:text="@string/s_item_column_0_line_71_file_52"
-                android:textColor="#9dc40f"
+                android:textColor="@color/light_blue"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -81,14 +82,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/filterBtn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/filter_grey" />
+                android:src="@drawable/filter_grey"
+                android:tint="@color/light_blue" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -96,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/refreshBtn"
@@ -104,43 +106,48 @@
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:paddingRight="3dp"
-                android:src="@drawable/refresh" />
+                android:src="@drawable/refresh"
+                android:tint="@color/light_blue" />
         </RelativeLayout>
     </LinearLayout>
+
     <AutoCompleteTextView
         android:id="@+id/countrybox"
-        android:hint="@string/countries"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/weeklayout"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp"
-        android:ems="10" ></AutoCompleteTextView>
+        android:ems="10"
+        android:hint="@string/countries"></AutoCompleteTextView>
+
     <RelativeLayout
         android:id="@+id/downarrowlayout"
-        android:layout_below="@+id/weeklayout"
-        android:layout_alignParentRight="true"
         android:layout_width="40dp"
-        android:layout_height="40dp" >
+        android:layout_height="40dp"
+        android:layout_below="@+id/weeklayout"
+        android:layout_alignParentRight="true">
+
         <ImageView
             android:layout_width="28dp"
             android:layout_height="22dp"
+            android:layout_alignParentBottom="true"
             android:src="@drawable/down_arrow"
-            android:visibility="invisible"
-            android:layout_alignParentBottom="true"/>
+            android:visibility="invisible" />
     </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/framView"
-        android:layout_below="@+id/countrybox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/countrybox">
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
+            class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.SupportMapFragment" />
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 
@@ -148,8 +155,8 @@
         android:id="@+id/LocationBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:src="@drawable/location" />
 
     <ListView
@@ -169,7 +176,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/weeklayout"
         android:background="#ffffff"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/EmptyListMsg"
@@ -190,17 +197,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5px"
         android:background="#bc000000"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <CheckBox
             android:id="@+id/chkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
             android:textColor="#FFFFFF"
             android:textSize="16dp"
             android:textStyle="normal" />
@@ -211,7 +218,7 @@
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
-            android:background="@drawable/login_green_bg"
+            android:background="@color/light_blue"
             android:text="@string/s_item_column_0_line_183_file_52"
             android:textColor="@color/white"
             android:visibility="gone" />
@@ -223,17 +230,17 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/weeklayout"
         android:background="#D3D3D3"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff" >
+            android:background="#ffffff">
 
             <RelativeLayout
                 android:id="@+id/DateFilterLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/DateFilterT"
@@ -251,21 +258,21 @@
                 android:id="@+id/dateFilterView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/DateFilterLayout" >
+                android:layout_below="@+id/DateFilterLayout">
 
                 <RelativeLayout
                     android:id="@+id/DateFilterBtns"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" >
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="18dp">
 
                     <RelativeLayout
                         android:id="@+id/today"
                         android:layout_width="100dp"
                         android:layout_height="30dp"
-                        android:paddingLeft="2dp" >
+                        android:paddingLeft="2dp">
 
                         <TextView
                             android:id="@+id/ttoday"
@@ -281,7 +288,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#9dc40f"
+                            android:background="@color/light_blue"
                             android:visibility="gone" />
                     </RelativeLayout>
 
@@ -289,7 +296,7 @@
                         android:id="@+id/nextSevenDays"
                         android:layout_width="130dp"
                         android:layout_height="30dp"
-                        android:layout_toRightOf="@+id/today" >
+                        android:layout_toRightOf="@+id/today">
 
                         <TextView
                             android:id="@+id/tnextSevenDays"
@@ -305,7 +312,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#9dc40f"
+                            android:background="@color/light_blue"
                             android:visibility="visible" />
                     </RelativeLayout>
 
@@ -314,7 +321,7 @@
                         android:layout_width="100dp"
                         android:layout_height="30dp"
                         android:layout_toRightOf="@+id/nextSevenDays"
-                        android:background="#565656" >
+                        android:background="#565656">
 
                         <TextView
                             android:id="@+id/tcustom"
@@ -330,7 +337,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="2dp"
                             android:layout_alignParentBottom="true"
-                            android:background="#9dc40f"
+                            android:background="@color/light_blue"
                             android:visibility="gone" />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -341,8 +348,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/DateFilterBtns"
                     android:background="#565656"
-                    android:visibility="gone" >
-                </RelativeLayout>
+                    android:visibility="gone"></RelativeLayout>
             </RelativeLayout>
 
             <LinearLayout
@@ -350,12 +356,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dateFilterView"
-                android:layout_marginTop="18dp" >
+                android:layout_marginTop="18dp">
 
                 <RelativeLayout
                     android:id="@+id/clientTxtView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/ClientFilterT"
@@ -364,7 +370,7 @@
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:text="@string/s_item_column_0_line_337_file_52"
-                        android:textColor="#9dc40f"
+                        android:textColor="#007BFF"
                         android:textSize="13dp"
                         android:textStyle="normal" />
 
@@ -373,13 +379,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f" />
+                        android:background="#007BFF" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchTxtView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/branchFilterT"
@@ -397,14 +403,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f"
+                        android:background="#007BFF"
                         android:visibility="gone" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchTxtCodeView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/branchCodeFilterT"
@@ -422,14 +428,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f"
+                        android:background="#007BFF"
                         android:visibility="gone" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchTxtPropsView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/branchTxtPropsFilterT"
@@ -447,7 +453,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="2dp"
                         android:layout_alignParentBottom="true"
-                        android:background="#9dc40f"
+                        android:background="#007BFF"
                         android:visibility="gone" />
                 </RelativeLayout>
             </LinearLayout>
@@ -457,7 +463,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ClientFilterV"
-                android:layout_marginBottom="20dp" >
+                android:layout_marginBottom="20dp">
 
                 <RelativeLayout
                     android:id="@+id/ClientFilter"
@@ -467,8 +473,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="visible" >
-                </RelativeLayout>
+                    android:visibility="visible"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchFilter"
@@ -477,8 +482,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="invisible" >
-                </RelativeLayout>
+                    android:visibility="invisible"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchCodeFilter"
@@ -487,8 +491,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="invisible" >
-                </RelativeLayout>
+                    android:visibility="invisible"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/propsFilter"
@@ -497,8 +500,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="invisible" >
-                </RelativeLayout>
+                    android:visibility="invisible"></RelativeLayout>
 
                 <ImageView
                     android:id="@+id/lang_dividing_line_kink"
@@ -514,9 +516,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_below="@+id/lang_dividing_line_kink"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/grey_separator" />
             </RelativeLayout>
 
@@ -524,13 +526,13 @@
                 android:id="@+id/btnCancel"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/BranchFilterV"
-                android:layout_marginBottom="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/login_green_bg"
+                android:layout_marginBottom="5dp"
+                android:background="@color/light_blue"
                 android:text="@string/s_item_column_0_line_415_file_52"
                 android:textColor="#ffffff" />
 
@@ -538,13 +540,13 @@
                 android:id="@+id/btnApply"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/BranchFilterV"
-                android:layout_marginBottom="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/login_green_bg"
+                android:layout_marginBottom="5dp"
+                android:background="@color/light_blue"
                 android:text="@string/s_item_column_0_line_429_file_52"
                 android:textColor="#ffffff" />
         </RelativeLayout>

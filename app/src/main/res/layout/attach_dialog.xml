@@ -14,7 +14,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
         android:text="@string/s_item_column_0_line_13_file_124"
-        android:textColor="#b2cb39"
+        android:textColor="@color/light_blue"
         android:textSize="22dp"
         android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#b2cb39"
+        android:background="@color/light_blue"
         android:paddingBottom="6dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"

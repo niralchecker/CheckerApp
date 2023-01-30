@@ -842,7 +842,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
 //                .title("Camera") //Any title for the bubble view
 //                .description("Android's own camera with all features.") //More detailed description
 //                .arrowPosition(BubbleShowCase.ArrowPosition.RIGHT) //You can force the position of the arrow to change the location of the bubble.
-//                .backgroundColor(Color.parseColor("#94ba09")) //Bubble background color
+//                .backgroundColor(Color.parseColor("#007BFF")) //Bubble background color
 //                .textColor(Color.WHITE) //Bubble Text color
 //                .titleTextSize(20) //Title text size in SP (default value 16sp)
 //                .descriptionTextSize(15) //Subtitle text size in SP (default value 14sp)

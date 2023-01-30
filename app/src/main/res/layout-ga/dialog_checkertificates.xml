@@ -5,9 +5,9 @@
     android:layout_gravity="center_horizontal"
     android:layout_marginBottom="20dp"
     android:background="@drawable/custom_toast_border"
+    android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:layoutDirection="ltr" >
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/textView1"
@@ -19,16 +19,17 @@
         android:text="@string/start_checkertificates"
         android:textColor="#232323"
         android:textSize="16dp" />
-    
-     <ImageView
+
+    <ImageView
         android:id="@+id/checkertRefreshImg"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:padding="3dp"
         android:layout_marginRight="3dp"
-        android:src="@drawable/refresh" />
+        android:padding="3dp"
+        android:src="@drawable/refresh"
+        android:tint="@color/light_blue" />
 
     <ListView
         android:id="@+id/lvjobs"
@@ -46,10 +47,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/custom_toast_border"
-        android:paddingBottom="5dp"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingTop="5dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="5dp"
         android:text="@string/close"
         android:textColor="#cc0000"
         android:textSize="16dp" />

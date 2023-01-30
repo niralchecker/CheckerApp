@@ -243,6 +243,8 @@ public class JobListActivity extends Activity implements OnClickListener,
     private String color_select = "#94BzA09";
     private String txt_color_select = "#007BFF";
 
+    private TextView toolbarTitle;
+
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
             try {
@@ -287,8 +289,9 @@ public class JobListActivity extends Activity implements OnClickListener,
                     R.string.job_list_tab_assigned)));
             tabOne.setTextColor(Color.parseColor(txt_color_unselect));
             tabOne.setChecked(false);
-//            tabOneOneb.setChecked(false);
-//            tabOneOneb.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            tabOneb.setChecked(false);
+//
+//            tabOneb.setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
         if (tabNumber != 2) {
             // tabTwo.setPaintFlags(0);
@@ -299,7 +302,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             tabTwo.setTextColor(Color.parseColor(txt_color_unselect));
             tabTwo.setChecked(false);
 //            tabTwob.setChecked(false);
-//            tabTwobob.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            tabTwob.setBackgroundColor(Color.parseColor("#FFFFFF"));
             ltabTwo.setBackgroundColor(Color.parseColor(color_unselect));
         }
         if (tabNumber != 3) {
@@ -311,7 +314,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             tabThree.setTextColor(Color.parseColor(txt_color_unselect));
             tabThree.setChecked(false);
 //            tabThreeb.setChecked(false);
-//            tabThreebhreeb.setBackgroundColor(Color.parseColor("#FFFFFF"));
+//            tabThreeb.setBackgroundColor(Color.parseColor("#FFFFFF"));
             ltabThree.setBackgroundColor(Color.parseColor(color_unselect));
         }
         if (tabNumber != 4) {
@@ -346,6 +349,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             // tabOne.setPaintFlags(tabOne.getPaintFlags()
             // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "assigned";
+            toolbarTitle.setText(spanString);
             // ltabOne.setBackgroundColor(Color.parseColor(color_select));
         }
         if (tabNumber == 2) {
@@ -364,6 +368,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             tabTwo.setTextColor(Color.parseColor(txt_color_select));
             tabTwo.setText(spanString);
             filter = "scheduled";
+            toolbarTitle.setText(spanString);
             // ltabTwo.setBackgroundColor(Color.parseColor(color_select));
         }
         if (tabNumber == 3) {
@@ -383,6 +388,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             // tabThree.setPaintFlags(tabThree.getPaintFlags()
             // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "in progress";
+            toolbarTitle.setText(spanString);
             // ltabThree.setBackgroundColor(Color.parseColor(color_select));
         }
         if (tabNumber == 4) {
@@ -401,12 +407,13 @@ public class JobListActivity extends Activity implements OnClickListener,
             tabFour.setTextColor(Color.parseColor(txt_color_select));
             // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "completed";
+            toolbarTitle.setText(spanString);
             // ltabFour.setBackgroundColor(Color.parseColor(color_select));
         }
         try {
             if (mAdapter != null) {
                 mFilter = filter;
-                LongOperation op = new LongOperation();
+                JobListActivity.LongOperation op = new JobListActivity.LongOperation();
                 op.execute();
                 // mAdapter.doFilter(filter, JobListActivity.this, false);
 
@@ -416,6 +423,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         } catch (Exception ex) {
         }
     }
+
 
     // boolean isBusy = false;
 
@@ -1179,7 +1187,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             case 5:
                 isJobselected = true;
                 intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -1720,7 +1728,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             case 3:
                 isJobselected = true;
                 Intent intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -2197,6 +2205,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                 tabThree.getTextSize()));
         tabFour.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
                 tabFour.getTextSize()));
+
+        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
 
         loadViews();
 
@@ -5073,7 +5083,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             case Constants.MENUID_DOWNLOAD_SETTINGS:
                 isJobselected = true;
                 Intent intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();

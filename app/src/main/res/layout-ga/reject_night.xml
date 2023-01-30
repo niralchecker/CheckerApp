@@ -65,7 +65,7 @@
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
                     android:text="@string/questionnaire_btn_text"
-                    android:textColor="#000000"
+                    android:textColor="@color/white"
                     android:textSize="18dip"
                     android:textStyle="bold" />
             </TableRow>

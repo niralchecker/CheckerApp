@@ -280,7 +280,7 @@ public class LoginFileActivity extends Activity implements OnClickListener {
 		if ((myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""))
 				.equals("")) {
 			intent = new Intent(this.getApplicationContext(),
-					SettingsActivity.class);
+					NewSettingsActivity.class);
 			startActivity(intent);
 			finish();
 		}
@@ -396,7 +396,7 @@ public class LoginFileActivity extends Activity implements OnClickListener {
 
 		case R.id.settingbtn:
 			Intent intent = new Intent(this.getApplicationContext(),
-					SettingsActivity.class);
+					NewSettingsActivity.class);
 			startActivity(intent);
 			finish();
 			break;
