@@ -44,7 +44,7 @@ public class Revamped_Loading_Dialog extends Dialog implements
                 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
                 lp.copyFrom(dialog.getWindow().getAttributes());
                 lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
                 lp.gravity = Gravity.CENTER;
                 dialog.getWindow().setAttributes(lp);
                 dialog.setCancelable(false);

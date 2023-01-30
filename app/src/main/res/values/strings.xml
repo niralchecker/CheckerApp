@@ -613,7 +613,7 @@
     <string name="joblist_all_jobs" translatable="false">Show all Jobs</string>
 
     <!-- Job Filter Screen -->
-    <string name="job_filter_title" translatable="false">Search</string>
+    <string name="job_filter_title" translatable="false">Filter settings</string>
     <string name="job_filter_choose_job_type_lbl" translatable="false">Choose Client</string>
     <string name="job_filter_choose_city_lbl" translatable="false">Choose City</string>
     <string name="job_filter_date_range_lbl" translatable="false">Date Range</string>
@@ -624,12 +624,12 @@
     <string name="job_filter_select_date" translatable="false"><u>Select date</u></string>
 
     <string-array name="job_filter_job_list" translatable="false">
-        <item> Select All</item>
+        <item> Choose client</item>
         <item> Retail</item>
         <item> Start and End</item>
     </string-array>
     <string-array name="job_filter_region_list" translatable="false">
-        <item>Select All</item>
+        <item>Choose region</item>
         <item>--------</item>
         <item>Argentina</item>
     </string-array>

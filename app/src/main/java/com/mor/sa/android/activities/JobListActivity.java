@@ -223,6 +223,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     private ImageView imgtabTwo;
     private ImageView imgtabThree;
     private ImageView imgtabFour;
+    private ImageView imgMap;
     private ImageView bimgtabSync;
     private ImageView bimgtabOne;
     private ImageView bimgtabTwo;
@@ -2169,6 +2170,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         imgtabTwo = (ImageView) findViewById(R.id.img_tab_two);
         imgtabThree = (ImageView) findViewById(R.id.img_tab_three);
         imgtabFour = (ImageView) findViewById(R.id.img_tab_four);
+        imgMap = (ImageView) findViewById(R.id.iv_map);
 
         bimgtabSync = (ImageView) findViewById(R.id.img_tab_sync_balloon);
         bimgtabOne = (ImageView) findViewById(R.id.img_tab_one_balloon);
@@ -2272,7 +2274,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
             }
         });
-        ltabSync.setOnClickListener(new OnClickListener() {
+        imgMap.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
