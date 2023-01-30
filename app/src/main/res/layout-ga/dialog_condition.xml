@@ -48,11 +48,12 @@
 
     <Button
         android:id="@+id/btnClose"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/login_green_bg"
+        android:background="@color/light_blue"
+        android:textColor="@color/white"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/alert_btn_lbl_ok" />

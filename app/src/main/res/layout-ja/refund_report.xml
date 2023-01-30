@@ -21,7 +21,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10px"
-            android:src="@drawable/back_green" />
+            android:src="@drawable/back_green"
+            android:tint="@color/light_blue"/>
 
         <View
             android:id="@+id/dividing_line_3"
@@ -40,7 +41,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="mm yy"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="26sp" />
 
         <ImageView
@@ -60,7 +61,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10px"
             android:layout_toLeftOf="@+id/update_button"
-            android:src="@drawable/filter_grey" />
+            android:src="@drawable/filter_grey"
+            android:tint="@color/light_blue"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -148,7 +150,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_234_file_37"
-                    android:textColor="#9DC40F"
+                    android:textColor="@color/light_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -195,7 +197,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_194_file_102"
-                    android:textColor="#9DC40F"
+                    android:textColor="@color/light_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -242,7 +244,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_241_file_102"
-                    android:textColor="#9DC40F"
+                    android:textColor="@color/light_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -289,7 +291,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_288_file_102"
-                    android:textColor="#9DC40F"
+                    android:textColor="@color/light_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

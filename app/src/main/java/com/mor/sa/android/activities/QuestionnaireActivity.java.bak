@@ -911,7 +911,7 @@ public class QuestionnaireActivity extends Activity implements
                             html += "<li>" + getHtmlImageView(null,
                                     listObjects.get(i).getListAnswers().get(j).getIconName(),
                                     helper.readFile(listObjects.get(i).getListAnswers().get(j).getIconName(),
-                                            false)) + "<b style='color:white; background-color:#94BA09; padding-left:5px; padding-right:5px'>" + convertCodeIfPossible(listObjects.get(i).getListAnswers().get(j).getAnswer(), thisInstance) + "</b></li>";
+                                            false)) + "<b style='color:white; background-color:#007BFF; padding-left:5px; padding-right:5px'>" + convertCodeIfPossible(listObjects.get(i).getListAnswers().get(j).getAnswer(), thisInstance) + "</b></li>";
                         else
                             html += "<li>" + getHtmlImageView(null,
                                     listObjects.get(i).getListAnswers().get(j).getIconName(),

@@ -187,7 +187,8 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:text="@string/disable_proxy" >
+                    android:text="@string/disable_proxy"
+                    android:textColor="@color/white">
 
                     <requestFocus />
                 </Button>
@@ -203,7 +204,8 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:text="@string/settings_save_btn" >
+                    android:text="@string/settings_save_btn"
+                    android:textColor="@color/white">
 
                     <requestFocus />
                 </Button>

@@ -237,8 +237,8 @@ public class JobListActivity extends Activity implements OnClickListener,
     private ImageView btnErr;
     private String color_unselect = "#FFFFFF";
     private String txt_color_unselect = "#CFDA9A";
-    private String color_select = "#94BA09";
-    private String txt_color_select = "#94BA09";
+    private String color_select = "#007BFF";
+    private String txt_color_select = "#007BFF";
 
 
     public String getLocalIpAddress() {
@@ -1191,7 +1191,7 @@ if (content.contains("not allowed to"))
             case 5:
                 isJobselected = true;
                 intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -1730,7 +1730,7 @@ if (content.contains("not allowed to"))
             case 3:
                 isJobselected = true;
                 Intent intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -5011,7 +5011,7 @@ issue="2466";
             case Constants.MENUID_DOWNLOAD_SETTINGS:
                 isJobselected = true;
                 Intent intent = new Intent(this.getApplicationContext(),
-                        SettingsActivity.class);
+                        NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();

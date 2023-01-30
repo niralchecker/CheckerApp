@@ -22,7 +22,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10px"
-            android:src="@drawable/back_green" />
+            android:src="@drawable/back_green"
+            android:tint="@color/light_blue"/>
 
         <View
             android:id="@+id/dividing_line_3"
@@ -31,7 +32,7 @@
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/tv2"
             android:background="#B3B3B3" />
-0
+
         <TextView
             android:id="@+id/jd_heder"
             android:layout_width="match_parent"
@@ -41,7 +42,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="Archived Orders"
-            android:textColor="#9dc40f"
+            android:textColor="@color/light_blue"
             android:textSize="26sp" />
     </RelativeLayout>
 

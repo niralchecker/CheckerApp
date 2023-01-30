@@ -26,7 +26,7 @@
             android:layout_gravity="center_vertical"
             android:padding="3dp"
             android:text="@string/s_item_column_0_line_25_file_77"
-            android:textColor="#CFDA9A"
+            android:textColor="@color/light_blue"
             android:textSize="16dp" />
     </LinearLayout>
 
@@ -73,7 +73,7 @@
             android:paddingRight="20dp"
             android:paddingTop="5dp"
             android:text="@string/alert_btn_lbl_ok"
-            android:textColor="#CFDA9A"
+            android:textColor="@color/light_blue"
             android:textSize="16dp" />
     </LinearLayout>
 

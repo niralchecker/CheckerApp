@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toplayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical"
-    android:layoutDirection="ltr" >
+    android:layoutDirection="ltr"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-            <TextView
+
+        <TextView
             android:id="@+id/txtHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -17,14 +20,15 @@
             android:text=""
             android:textColor="#676767"
             android:textSize="18dp" />
+
         <ImageView
             android:id="@+id/imgUpload"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/upload_archive"
             android:layout_alignParentRight="true"
             android:layout_marginRight="3dp"
-             />
+            android:src="@drawable/upload_archive"
+            app:tint="@color/light_blue" />
 
     </RelativeLayout>
 

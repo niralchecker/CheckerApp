@@ -2,19 +2,19 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:layoutDirection="ltr" >
+    android:layoutDirection="ltr">
 
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:weightSum="20" >
+        android:weightSum="20">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="20" >
+            android:layout_weight="20">
 
             <ImageView
                 android:id="@+id/btn_up"
@@ -22,6 +22,7 @@
                 android:layout_height="50dp"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/back_up"
+                android:tint="@color/light_blue"
                 android:visibility="visible" />
 
             <Spinner
@@ -45,9 +46,9 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/btn_dismiss"
         android:layout_below="@+id/layout"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" >
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp">
 
         <ToggleButton
             android:id="@+id/btn_select_unselect"
@@ -86,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/img_file"
@@ -103,10 +104,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_file"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
             android:text="@string/s_item_column_0_line_107_file_94"
             android:textColor="#0000fc"
             android:textSize="20dp" />
@@ -116,13 +117,13 @@
         android:id="@+id/btn_dismiss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#b2cb39"
-        android:paddingBottom="6dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_blue"
         android:paddingLeft="25dp"
-        android:paddingRight="25dp"
         android:paddingTop="6dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="6dp"
         android:text="@string/job_filter_default_dd_option"
         android:textColor="#ffffff"
         android:textSize="16dp"

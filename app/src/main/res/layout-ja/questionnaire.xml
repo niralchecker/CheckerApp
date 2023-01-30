@@ -106,7 +106,7 @@
                 android:layout_centerVertical="true"
                 app:background_progressbar_color="#cfda9a"
                 app:background_progressbar_width="2dp"
-                app:progressbar_color="#94BA09"
+                app:progressbar_color="#007BFF"
                 app:progressbar_width="5dp" />
             <TextView
                 android:id="@+id/txtpercent"
@@ -114,7 +114,7 @@
                 android:layout_height="35dp"
                 android:textSize="13dp"
                 android:gravity="center"
-                android:textColor="#94BA09"
+                android:textColor="#007BFF"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 />

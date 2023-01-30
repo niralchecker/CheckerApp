@@ -15,14 +15,14 @@
             android:layout_gravity="right"
             android:layout_weight="1"
             android:text=""
-            android:textColor="#9DC40F"
+            android:textColor="@color/light_blue"
             android:textSize="14sp"
             android:textStyle="normal" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@drawable/green_separator" />
+            android:background="@color/light_blue" />
 
         <TextView
             android:id="@+id/tvright"

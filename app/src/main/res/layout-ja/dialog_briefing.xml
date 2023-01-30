@@ -4,20 +4,20 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:background="@drawable/custom_toast_border"
+    android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:layoutDirection="ltr" >
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:padding="3dp"
         android:text="@string/txt_briefing"
         android:textColor="#232323"
-        android:layout_centerHorizontal="true"
         android:textSize="20dp" />
 
     <WebView
@@ -35,17 +35,19 @@
         android:padding="3dp"
         android:text="@string/preview_err"
         android:textColor="#232323"
-        android:visibility="gone"
-        android:textSize="16dp" />
+        android:textSize="16dp"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/btnClose"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/login_green_bg"
+        android:background="@color/light_blue"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="@string/alert_btn_lbl_ok" />
+        android:text="@string/alert_btn_lbl_ok"
+        android:textColor="@color/white" />
 
 </RelativeLayout>
