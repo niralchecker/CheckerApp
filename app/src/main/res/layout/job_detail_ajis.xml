@@ -259,6 +259,8 @@
                 android:layout_below="@+id/jdsurvey_allocations"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="5dp"
+                android:divider="@color/light_blue"
+                android:dividerHeight="1dp"
                 android:paddingRight="5dp" />
         </RelativeLayout>
     </ScrollView>
@@ -385,7 +387,8 @@
         android:layout_above="@+id/jdbottomrv"
         android:layout_below="@+id/rvjobdetailscreen"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="5dp"
+        android:visibility="visible">
 
         <RelativeLayout
             android:layout_width="fill_parent"

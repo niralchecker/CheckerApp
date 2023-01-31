@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:padding="3dp"
         android:text="@string/start_checkertificates"
-        android:textColor="#232323"
+        android:textColor="@color/light_blue"
         android:textSize="16dp" />
 
     <ImageView

@@ -181,7 +181,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_name"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -203,7 +203,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_branchfname"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -226,7 +226,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_quotas"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -237,6 +237,8 @@
                 android:layout_below="@+id/jdsurvey_quotas"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="15dp"
+                android:divider="@color/light_blue"
+                android:dividerHeight="1dp"
                 android:paddingRight="5dp" />
 
             <TextView
@@ -248,7 +250,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_allocations"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -259,6 +261,8 @@
                 android:layout_below="@+id/jdsurvey_allocations"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="5dp"
+                android:divider="@color/light_blue"
+                android:dividerHeight="1dp"
                 android:paddingRight="5dp" />
         </RelativeLayout>
     </ScrollView>
