@@ -2212,7 +2212,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         loadViews();
 
-        ManageTabs(1);
+        ManageTabs(2);
 
         // getRQSLocation loc = new getRQSLocation(JobListActivity.this);
         // loc.execute();

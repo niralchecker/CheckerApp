@@ -26,7 +26,7 @@
             android:layout_gravity="center_vertical"
             android:padding="3dp"
             android:text="Android Tutorial Custom Toast"
-            android:textColor="#CFDA9A"
+            android:textColor="@color/light_blue"
             android:textSize="16dp" />
     </LinearLayout>
 
@@ -37,7 +37,7 @@
         android:layout_gravity="center_vertical"
         android:padding="3dp"
         android:text="@string/s_item_column_0_line_36_file_125"
-        android:textColor="#CFDA9A"
+        android:textColor="@color/light_blue"
         android:textSize="16dp" />
 
     <LinearLayout

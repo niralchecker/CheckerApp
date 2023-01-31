@@ -22,7 +22,6 @@
                 android:layout_height="50dp"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/back_up"
-                android:tint="@color/light_blue"
                 android:visibility="visible" />
 
             <Spinner

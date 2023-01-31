@@ -402,8 +402,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
 		gEndDate = dateFormat.format(cal.getTime());
 
 		ImageView backbtn = (ImageView) findViewById(R.id.backBtn);
-		backbtn.setImageDrawable(getResources().getDrawable(
-				getIcon("prev_btnn")));
+//		backbtn.setImageDrawable(getResources().getDrawable(
+//				getIcon("prev_btnn")));
 
 		ImageView prefere = (ImageView) findViewById(R.id.filterBtn);
 		prefere.setImageDrawable(getResources()

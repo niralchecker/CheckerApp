@@ -67,13 +67,13 @@
             android:id="@+id/btnOk"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_toast_border_green"
+            android:background="@color/light_blue"
             android:paddingBottom="5dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="5dp"
             android:text="@string/alert_btn_lbl_ok"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/white"
             android:textSize="16dp" />
     </LinearLayout>
 
