@@ -5,14 +5,13 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:layoutDirection="ltr"
-    android:padding="5dip" >
+    android:padding="5dip">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:baselineAligned="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/month_container"
@@ -21,36 +20,36 @@
             android:layout_margin="5dp"
             android:background="@drawable/month_year_picker_bg"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/month_plus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
                 android:src="@drawable/btn_plus" />
 
             <EditText
                 android:id="@+id/month_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
+                android:background="#ffffff"
                 android:focusable="false"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textColor="#121212" >
-            </EditText>
+                android:textColor="#121212"></EditText>
 
             <ImageView
                 android:id="@+id/month_minus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="12dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="12dp"
                 android:src="@drawable/btn_min" />
         </LinearLayout>
 
@@ -62,23 +61,23 @@
             android:background="@drawable/month_year_picker_bg"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/date_plus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
                 android:src="@drawable/btn_plus" />
 
             <EditText
                 android:id="@+id/date_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
-                android:background="#bdc40f"
+                android:background="#ffffff"
                 android:gravity="center"
                 android:inputType="number"
                 android:singleLine="true"
@@ -88,10 +87,10 @@
                 android:id="@+id/date_minus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="12dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="12dp"
                 android:src="@drawable/btn_min" />
         </LinearLayout>
 
@@ -102,22 +101,23 @@
             android:layout_margin="5dp"
             android:background="@drawable/month_year_picker_bg"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/year_plus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
                 android:src="@drawable/btn_plus" />
 
             <EditText
                 android:id="@+id/year_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
+                android:background="#ffffff"
                 android:gravity="center"
                 android:inputType="number"
                 android:singleLine="true"
@@ -127,10 +127,10 @@
                 android:id="@+id/year_minus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="12dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="12dp"
                 android:src="@drawable/btn_min" />
         </LinearLayout>
 
@@ -138,44 +138,43 @@
             android:id="@+id/hour_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/month_year_picker_bg"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/hour_plus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
                 android:src="@drawable/btn_plus" />
 
             <EditText
                 android:id="@+id/hour_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
-                android:background="#bdc40f"
+                android:background="#ffffff"
                 android:gravity="center"
                 android:inputType="number"
                 android:singleLine="true"
-                android:textColor="#121212" >
-            </EditText>
+                android:textColor="#121212"></EditText>
 
             <ImageView
                 android:id="@+id/hour_minus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="12dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="12dp"
                 android:src="@drawable/btn_min" />
         </LinearLayout>
 
@@ -187,23 +186,23 @@
             android:background="@drawable/month_year_picker_bg"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/min_plus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
                 android:src="@drawable/btn_plus" />
 
             <EditText
                 android:id="@+id/min_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
-                android:background="#bdc40f"
+                android:background="#ffffff"
                 android:gravity="center"
                 android:inputType="number"
                 android:singleLine="true"
@@ -213,10 +212,10 @@
                 android:id="@+id/min_minus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:paddingBottom="12dp"
                 android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:paddingTop="12dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="12dp"
                 android:src="@drawable/btn_min" />
         </LinearLayout>
     </LinearLayout>

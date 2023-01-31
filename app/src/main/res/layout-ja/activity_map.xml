@@ -27,6 +27,7 @@
         android:id="@+id/filterBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:tint="@color/light_blue"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/filter_green" />

@@ -310,6 +310,7 @@
                         android:id="@+id/dialog_save"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:tint="@color/light_blue"
                         android:src="@drawable/search" />
                 </TableRow>
             </TableLayout>

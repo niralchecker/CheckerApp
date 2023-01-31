@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:layoutDirection="ltr" >
+    android:layout_centerInParent="true">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/backgroundTheme"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/background" >
+            android:background="@drawable/background">
 
             <TextView
                 android:id="@+id/Label_jobfilter_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/job_filter_title"
                 android:textColor="#000000"
                 android:textSize="25sp"
@@ -28,143 +29,217 @@
 
             <TableLayout
                 android:id="@+id/jobfilter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_below="@+id/jobfilter_title"
+                android:padding="10dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp" >
+                android:layout_marginTop="40dp">
 
-                <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                <!--                <TableRow-->
+                <!--                    android:layout_margin="10dip"-->
+                <!--                    android:gravity="center" >-->
 
-                    <TextView
-                        android:id="@+id/Label_jobtypelist"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:text="@string/job_filter_choose_job_type_lbl"
-                        android:textColor="#000000"
-                        android:textSize="16dip" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp">
 
                     <Spinner
                         android:id="@+id/jobtypelist"
-                        android:layout_width="140dp"
+                        android:layout_width="240dp"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
                         android:entries="@array/job_filter_job_list"
                         android:paddingLeft="5dp" />
-                </TableRow>
 
-                <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|end"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
 
-                    <TextView
-                        android:id="@+id/Label_regionlist"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:text="@string/job_filter_choose_city_lbl"
-                        android:textColor="#000000"
-                        android:textSize="16dip" />
+                </androidx.cardview.widget.CardView>
+
+
+                <!--                </TableRow>-->
+
+                <!--                <TableRow-->
+                <!--                    android:layout_margin="10dip"-->
+                <!--                    android:gravity="center">-->
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp">
 
                     <Spinner
                         android:id="@+id/regionlist"
-                        android:layout_width="140dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
-                        android:entries="@array/job_filter_region_list" />
-                </TableRow>
+                        android:entries="@array/job_filter_region_list"
+                        android:paddingLeft="5dp" />
 
-                <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|end"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
 
-                    <TextView
-                        android:id="@+id/Label_bcodelist"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:text="@string/jd_branchname"
-                        android:textColor="#000000"
-                        android:textSize="16dip" />
+                </androidx.cardview.widget.CardView>
+                <!--                </TableRow>-->
+
+                <!--                <TableRow-->
+                <!--                    android:layout_margin="10dip"-->
+                <!--                    android:gravity="center">-->
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp">
 
                     <Spinner
                         android:id="@+id/bcodelist"
-                        android:layout_width="140dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
-                        android:entries="@array/job_filter_region_list" />
-                </TableRow>
+                        android:entries="@array/job_filter_region_list"
+                        android:paddingLeft="5dp" />
 
-                <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|end"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
+
+                </androidx.cardview.widget.CardView>
+
+                <!--                </TableRow>-->
+
+                <!--                <TableRow-->
+                <!--                    android:layout_margin="10dip"-->
+                <!--                    android:gravity="center">-->
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp">
 
                     <TextView
-                        android:id="@+id/Label_bproplist"
-                        android:layout_width="110dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:text="@string/jd_branchprops"
-                        android:textColor="#000000"
-                        android:textSize="16dip" />
+                        android:padding="8dp"
+                        android:visibility="gone"
+                        android:text="Branch"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#AEAEAE"
+                        android:textSize="16sp" />
 
                     <Spinner
                         android:id="@+id/bproplist"
-                        android:layout_width="140dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
-                        android:entries="@array/job_filter_region_list" />
-                </TableRow>
+                        android:entries="@array/job_filter_region_list"
+                        android:paddingLeft="5dp" />
 
-                <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|end"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
 
-                    <TextView
-                        android:id="@+id/Label_regionlist"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:text="@string/jd_regions"
-                        android:textColor="#000000"
-                        android:textSize="16dip" />
+                </androidx.cardview.widget.CardView>
+
+                <!--                </TableRow>-->
+
+                <!--                <TableRow-->
+                <!--                    android:layout_margin="10dip"-->
+                <!--                    android:gravity="center">-->
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp">
 
                     <Spinner
-                        android:id="@+id/bregionlist"
-                        android:layout_width="140dp"
+                        android:id="@+id/fromList"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
-                        android:entries="@array/job_filter_region_list" />
-                </TableRow>
+                        android:entries="@array/job_filter_region_list"
+                        android:paddingLeft="5dp" />
 
-                <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|end"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
 
-                    <TextView
-                        android:id="@+id/Label_projectlist"
-                        android:layout_width="110dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:text="@string/jd_projects"
-                        android:textColor="#000000"
-                        android:textSize="16dip" />
+                </androidx.cardview.widget.CardView>
+
+                <!--                </TableRow>-->
+
+                <!--                <TableRow-->
+                <!--                    android:layout_margin="10dip"-->
+                <!--                    android:gravity="center">-->
+                <!--                    -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp">
 
                     <Spinner
                         android:id="@+id/bprojectslist"
-                        android:layout_width="140dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
-                        android:entries="@array/job_filter_region_list" />
-                </TableRow>
+                        android:entries="@array/job_filter_region_list"
+                        android:paddingLeft="5dp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical|end"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
+
+                </androidx.cardview.widget.CardView>
+
+                <!--                </TableRow>-->
 
                 <TableRow
                     android:layout_margin="10dip"
-                    android:gravity="center" >
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/calandertitle"
@@ -179,8 +254,11 @@
                 </TableRow>
 
                 <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                    android:layout_marginStart="5dip"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginEnd="5dip"
+                    android:layout_marginBottom="10dip"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/Label_sdate"
@@ -202,8 +280,8 @@
                 </TableRow>
 
                 <TableRow
-                    android:layout_margin="10dip"
-                    android:gravity="center" >
+                    android:layout_margin="5dip"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/Label_enddate"
@@ -226,12 +304,13 @@
 
                 <TableRow
                     android:layout_margin="10dip"
-                    android:gravity="right" >
+                    android:gravity="right">
 
                     <ImageView
                         android:id="@+id/dialog_save"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:tint="@color/light_blue"
                         android:src="@drawable/search" />
                 </TableRow>
             </TableLayout>

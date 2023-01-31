@@ -52,6 +52,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10px"
             android:src="@drawable/refresh"
+            android:tint="@color/light_blue"
             android:visibility="invisible" />
 
         <ImageView
@@ -331,26 +332,26 @@
 
                 <Button
                     android:id="@+id/btnRefund"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_below="@+id/ReportTypeSp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:background="@drawable/login_green_bg"
                     android:text="@string/s_item_column_0_line_336_file_102"
+                    android:background="@color/light_blue"
                     android:textColor="@color/white"
                     android:visibility="visible" />
 
                 <Button
                     android:id="@+id/btnCancel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_below="@+id/ReportTypeSp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:background="@drawable/login_green_bg"
+                    android:background="@color/light_blue"
                     android:text="@string/s_item_column_0_line_349_file_102"
                     android:textColor="@color/white"
                     android:visibility="visible" />
