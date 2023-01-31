@@ -1288,6 +1288,7 @@ public class JobItemAdapter extends BaseAdapter {
                         android.R.color.white));
             }
 
+            //Assigned tab data
             if (order.getOrderID().contains("-")) {
                 Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
                         "-", ""));

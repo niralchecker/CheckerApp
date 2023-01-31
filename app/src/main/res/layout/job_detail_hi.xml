@@ -181,7 +181,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_name"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -203,7 +203,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_branchfname"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -226,7 +226,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_quotas"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -248,7 +248,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_allocations"
-                android:textColor="#000000"
+                android:textColor="@color/light_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
