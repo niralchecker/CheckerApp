@@ -170,7 +170,7 @@ public class JobFilterDialog extends Dialog implements
 		fillSpinner(jobTypeSpinner, "jobtype");
 		regionTypeSpinner = (Spinner) findViewById(R.id.regionlist);
 		fillSpinner(regionTypeSpinner, "city");
-		bregionspinner = (Spinner) findViewById(R.id.bregionlist);
+		bregionspinner = (Spinner) findViewById(R.id.fromList);
 		fillSpinner(bregionspinner, "region");
 		bcodelistSpinner = (Spinner) findViewById(R.id.bcodelist);
 		fillSpinner(bcodelistSpinner, "bcode");
@@ -290,13 +290,15 @@ public class JobFilterDialog extends Dialog implements
 		if (str.equals("bcode"))
 			return getbranchCodeArraY();
 		else if (str.equals("city"))
-			return getCityArraY();
+//			return getCityArraY();
+			return getPropList();
 		else if (str.equals("region"))
 			return getRegionArraY();
 		else if (str.equals("bprojects"))
 			return getProjectsArraY();
 		else if (str.equals("bprop"))
-			return getPropList();
+//			return getPropList();
+			return getCityArraY();
 		else
 			return getJobTypeArraY();
 	}
@@ -306,7 +308,7 @@ public class JobFilterDialog extends Dialog implements
 			return null;
 		int count = Orders.getBranchProps().size();
 		Vector<String> vector = new Vector<String>();
-		vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+		vector.add(joblist.getString(R.string.job_filter_default_choose_job_type));
 		boolean isExits = false;
 		for (int ordercount = 0; ordercount < count; ordercount++) {
 			isExits = false;
@@ -360,7 +362,7 @@ public class JobFilterDialog extends Dialog implements
 	private String[] getRegionArraY() {
 		int count = Orders.getOrders().size();
 		Vector<String> vector = new Vector<String>();
-		vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+		vector.add(joblist.getString(R.string.job_filter_default_From));
 		boolean isExits = false;
 		for (int ordercount = 0; ordercount < count; ordercount++) {
 			isExits = false;
@@ -387,7 +389,7 @@ public class JobFilterDialog extends Dialog implements
 	private String[] getProjectsArraY() {
 		int count = Orders.getOrders().size();
 		Vector<String> vector = new Vector<String>();
-		vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+		vector.add(joblist.getString(R.string.job_filter_default_To));
 		boolean isExits = false;
 		for (int ordercount = 0; ordercount < count; ordercount++) {
 			isExits = false;
@@ -414,7 +416,7 @@ public class JobFilterDialog extends Dialog implements
 	private String[] getbranchCodeArraY() {
 		int count = Orders.getOrders().size();
 		Vector<String> vector = new Vector<String>();
-		vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+		vector.add(joblist.getString(R.string.job_filter_default_choose_region));
 		boolean isExits = false;
 		for (int ordercount = 0; ordercount < count; ordercount++) {
 			isExits = false;
@@ -441,7 +443,7 @@ public class JobFilterDialog extends Dialog implements
 	private String[] getJobTypeArraY() {
 		int count = Orders.getOrders().size();
 		Vector<String> vector = new Vector<String>();
-		vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+		vector.add(joblist.getString(R.string.job_filter_default_choose_client));
 		boolean isExits = false;
 		for (int ordercount = 0; ordercount < count; ordercount++) {
 			isExits = false;

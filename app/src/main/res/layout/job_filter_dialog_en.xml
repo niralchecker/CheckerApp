@@ -137,10 +137,20 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="20dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:visibility="gone"
+                        android:text="Branch"
+                        android:layout_marginTop="5dp"
+                        android:textColor="#AEAEAE"
+                        android:textSize="16sp" />
 
                     <Spinner
                         android:id="@+id/bproplist"
@@ -175,12 +185,11 @@
                     app:cardCornerRadius="5dp">
 
                     <Spinner
-                        android:id="@+id/bregionlist"
+                        android:id="@+id/fromList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
-
                         android:entries="@array/job_filter_region_list"
                         android:paddingLeft="5dp" />
 
