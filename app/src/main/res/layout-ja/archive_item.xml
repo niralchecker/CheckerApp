@@ -28,7 +28,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="3dp"
             android:src="@drawable/upload_archive"
-            app:tint="@color/light_blue" />
+            android:tint="@color/light_blue" />
 
     </RelativeLayout>
 

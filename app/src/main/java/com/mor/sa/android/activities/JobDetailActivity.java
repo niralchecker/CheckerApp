@@ -2633,7 +2633,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 		Context cntxt = getApplicationContext();
 		Helper.changeImageViewSrc(mapbtn, cntxt);
 		Helper.changeImageViewSrc(calendarBtn, cntxt);
-		Helper.changeImageViewSrc(alBtn, cntxt);
+//		Helper.changeImageViewSrc(alBtn, cntxt);
 		Helper.changeImageViewSrc(rejectbtnImg, cntxt);
 		Helper.changeImageViewSrc(acceptbtnImg, cntxt);
 

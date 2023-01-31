@@ -93,7 +93,7 @@
                                 android:padding="10dp"
                                 android:scaleType="center"
                                 android:src="@drawable/down_arrow"
-                                app:tint="@color/light_blue" />
+                                android:tint="@color/light_blue" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -145,7 +145,7 @@
                                 android:padding="10dp"
                                 android:scaleType="center"
                                 android:src="@drawable/down_arrow"
-                                app:tint="@color/light_blue" />
+                                android:tint="@color/light_blue" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -195,7 +195,7 @@
                                 android:padding="10dp"
                                 android:scaleType="center"
                                 android:src="@drawable/down_arrow"
-                                app:tint="@color/light_blue" />
+                                android:tint="@color/light_blue" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -246,7 +246,7 @@
                                 android:padding="10dp"
                                 android:scaleType="center"
                                 android:src="@drawable/down_arrow"
-                                app:tint="@color/light_blue" />
+                                android:tint="@color/light_blue" />
 
                         </androidx.cardview.widget.CardView>
 

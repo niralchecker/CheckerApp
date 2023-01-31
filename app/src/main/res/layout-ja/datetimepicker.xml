@@ -37,11 +37,11 @@
                 android:id="@+id/month_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
-                android:background="#CEEBF1"
+                android:background="@color/white"
                 android:focusable="false"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textColor="#C0C0C0" >
+                android:textColor="@color/black" >
             </EditText>
 
             <ImageView
@@ -78,11 +78,11 @@
                 android:id="@+id/date_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
-                android:background="#CEEBF1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:inputType="number"
                 android:singleLine="true"
-                android:textColor="#C0C0C0" />
+                android:textColor="@color/black" />
 
             <ImageView
                 android:id="@+id/date_minus"
@@ -118,11 +118,11 @@
                 android:id="@+id/year_display"
                 android:layout_width="45dp"
                 android:layout_height="35dp"
-                android:background="#CEEBF1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:inputType="number"
                 android:singleLine="true"
-                android:textColor="#C0C0C0" />
+                android:textColor="@color/black" />
 
             <ImageView
                 android:id="@+id/year_minus"
