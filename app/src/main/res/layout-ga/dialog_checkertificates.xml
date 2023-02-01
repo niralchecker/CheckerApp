@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:padding="3dp"
         android:text="@string/start_checkertificates"
-        android:textColor="@color/light_blue"
+        android:textColor="@color/dark_blue"
         android:textSize="16dp" />
 
     <ImageView
@@ -29,7 +29,7 @@
         android:layout_marginRight="3dp"
         android:padding="3dp"
         android:src="@drawable/refresh"
-        android:tint="@color/light_blue" />
+        android:tint="@color/dark_blue" />
 
     <ListView
         android:id="@+id/lvjobs"

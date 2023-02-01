@@ -32,7 +32,7 @@
             android:layout_centerVertical="true"
             android:background="#ffffff"
             android:src="@drawable/btn_help"
-            android:tint="@color/light_blue"
+            android:tint="@color/dark_blue"
             android:visibility="visible" />
 
         <TextView
@@ -172,7 +172,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/settings_system_url_lbl"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -183,7 +183,7 @@
                     android:layout_below="@+id/s_urltext"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <EditText
                     android:id="@+id/s_url"
@@ -225,7 +225,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/settings_language_lbl"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -236,7 +236,7 @@
                     android:layout_below="@+id/s_languagetext"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -286,7 +286,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/settings_themes_lbl"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -297,7 +297,7 @@
                     android:layout_below="@+id/s_themetext"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -348,7 +348,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/settings_image_resizing"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -359,7 +359,7 @@
                     android:layout_below="@+id/s_image_resizing"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -410,7 +410,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_branch_sorting"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -421,7 +421,7 @@
                     android:layout_below="@+id/s_branchwisesorting"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -471,7 +471,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_tracker_heading"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -482,7 +482,7 @@
                     android:layout_below="@+id/s_tracker_setting"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <TextView
                     android:id="@+id/s_trackerText"
@@ -528,7 +528,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_489_file_121"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -539,7 +539,7 @@
                     android:layout_below="@+id/s_camra_setting"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <TextView
                     android:id="@+id/s_croppingText"
@@ -741,7 +741,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_647_file_27"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -752,7 +752,7 @@
                     android:layout_below="@+id/s_job_setting"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@color/light_blue" />
+                    android:background="@color/dark_blue" />
 
                 <TextView
                     android:id="@+id/s_switch_alternate_jobs"
@@ -898,7 +898,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/s_item_column_0_line_774_file_27"
-                    android:backgroundTint="@color/light_blue"
+                    android:backgroundTint="@color/dark_blue"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 

@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10px"
             android:src="@drawable/back_green"
-            android:tint="@color/light_blue"/>
+            android:tint="@color/dark_blue"/>
 
         <View
             android:id="@+id/dividing_line_3"
@@ -42,7 +42,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="Archived Orders"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/dark_blue"
             android:textSize="26sp" />
     </RelativeLayout>
 

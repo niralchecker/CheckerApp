@@ -16,7 +16,7 @@
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:tint="@color/light_blue"
+        android:tint="@color/dark_blue"
         android:src="@drawable/filter_green" />
 
     <RelativeLayout

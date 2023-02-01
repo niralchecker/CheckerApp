@@ -121,7 +121,7 @@
                 android:layout_below="@+id/altlayout"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
-                android:background="@color/light_blue"
+                android:background="@color/dark_blue"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/s_item_column_0_line_523_file_122"

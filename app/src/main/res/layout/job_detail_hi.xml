@@ -26,7 +26,7 @@
             android:layout_marginRight="10px"
             android:src="@drawable/jobs_map"
             android:tag="map_button"
-            android:tint="@color/light_blue" />
+            android:tint="@color/dark_blue" />
 
         <ImageView
             android:id="@+id/jdcalendarbtn"
@@ -39,7 +39,7 @@
             android:layout_toRightOf="@+id/jdmapbtn"
             android:src="@drawable/ic_calendar"
             android:tag="calendar_btn"
-            android:tint="@color/light_blue"
+            android:tint="@color/dark_blue"
             android:visibility="visible" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_marginRight="10px"
             android:src="@drawable/alt_lang"
             android:tag="alt_lang"
-            android:tint="@color/light_blue" />
+            android:tint="@color/dark_blue" />
 
         <View
             android:id="@+id/dividing_line_3"
@@ -141,7 +141,7 @@
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/acceptbtn"
                     android:text="@string/jd_accept_btn_text"
-                    android:textColor="@color/light_blue" />
+                    android:textColor="@color/dark_blue" />
 
                 <ImageView
                     android:id="@+id/acceptbtn"
@@ -181,7 +181,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_name"
-                android:textColor="@color/light_blue"
+                android:textColor="@color/dark_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -203,7 +203,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_branchfname"
-                android:textColor="@color/light_blue"
+                android:textColor="@color/dark_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -226,7 +226,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_quotas"
-                android:textColor="@color/light_blue"
+                android:textColor="@color/dark_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -237,7 +237,7 @@
                 android:layout_below="@+id/jdsurvey_quotas"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="15dp"
-                android:divider="@color/light_blue"
+                android:divider="@color/dark_blue"
                 android:dividerHeight="1dp"
                 android:paddingRight="5dp" />
 
@@ -250,7 +250,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_allocations"
-                android:textColor="@color/light_blue"
+                android:textColor="@color/dark_blue"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -261,7 +261,7 @@
                 android:layout_below="@+id/jdsurvey_allocations"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="5dp"
-                android:divider="@color/light_blue"
+                android:divider="@color/dark_blue"
                 android:dividerHeight="1dp"
                 android:paddingRight="5dp" />
         </RelativeLayout>
@@ -425,7 +425,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_date"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -433,7 +433,7 @@
                             android:id="@+id/separator1"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jddatev"
@@ -463,7 +463,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_status"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -471,7 +471,7 @@
                             android:id="@+id/separator2"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdstausv"
@@ -503,7 +503,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_description"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -511,7 +511,7 @@
                             android:id="@+id/separator3"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jddescriptionv"
@@ -541,7 +541,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_setname"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -549,7 +549,7 @@
                             android:id="@+id/separator4"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdsetnamev"
@@ -579,7 +579,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_clientname"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -587,7 +587,7 @@
                             android:id="@+id/separator5"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdclientv"
@@ -617,7 +617,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_branchname"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -625,7 +625,7 @@
                             android:id="@+id/separator6"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdbranch_name_val"
@@ -655,7 +655,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_branchfname"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -663,7 +663,7 @@
                             android:id="@+id/separator7"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdbranchfnamev"
@@ -693,7 +693,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_cityname"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -701,7 +701,7 @@
                             android:id="@+id/separator8"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdcitynv"
@@ -731,7 +731,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_address"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -739,7 +739,7 @@
                             android:id="@+id/separator9"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdaddv"
@@ -769,7 +769,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_branchpno"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -777,7 +777,7 @@
                             android:id="@+id/separator10"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdbranchpv"
@@ -807,7 +807,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_openinghours"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -815,7 +815,7 @@
                             android:id="@+id/separator11"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdopeninghv"
@@ -845,7 +845,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_stime"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -853,7 +853,7 @@
                             android:id="@+id/separator12"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdtimesv"
@@ -883,7 +883,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_etime"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -891,7 +891,7 @@
                             android:id="@+id/separator13"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdtimeev"
@@ -921,7 +921,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/jd_purchasedesc"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -929,7 +929,7 @@
                             android:id="@+id/separator14"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdpurchasedes_v"
@@ -959,7 +959,7 @@
                             android:layout_weight="1"
                             android:paddingRight="5dp"
                             android:text="@string/jd_can_purchase"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -967,7 +967,7 @@
                             android:id="@+id/separator15"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/jdcanpurchase_v"
@@ -997,7 +997,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/sNonRefundableServicePayment"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -1005,7 +1005,7 @@
                             android:id="@+id/separator16"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/sNonRefundableServicePayment_v"
@@ -1035,7 +1035,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/transportation_payment"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -1043,7 +1043,7 @@
                             android:id="@+id/separator17"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/sTransportationPayment_v"
@@ -1073,7 +1073,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/sCriticismPayment"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -1081,7 +1081,7 @@
                             android:id="@+id/separator18"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/sCriticismPayment_v"
@@ -1111,7 +1111,7 @@
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/sBonusPayment"
-                            android:textColor="@color/light_blue"
+                            android:textColor="@color/dark_blue"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
@@ -1119,7 +1119,7 @@
                             android:id="@+id/separator19"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/light_blue" />
+                            android:background="@color/dark_blue" />
 
                         <TextView
                             android:id="@+id/sBonusPayment_v"

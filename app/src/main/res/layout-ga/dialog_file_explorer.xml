@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/light_blue"
+        android:background="@color/dark_blue"
         android:paddingLeft="25dp"
         android:paddingTop="6dp"
         android:paddingRight="25dp"

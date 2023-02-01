@@ -524,7 +524,7 @@
                 android:layout_below="@+id/txtComment"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
-                android:background="@color/light_blue"
+                android:background="@color/dark_blue"
                 android:tag="Apply"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"

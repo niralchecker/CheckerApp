@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:padding="3dp"
         android:text="@string/s_item_column_0_line_15_file_108"
-        android:textColor="@color/light_blue"
+        android:textColor="@color/dark_blue"
         android:textSize="16dp" />
 
     <ListView

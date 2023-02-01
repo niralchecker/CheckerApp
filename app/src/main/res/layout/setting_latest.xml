@@ -339,7 +339,7 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="5dp"
                     android:src="@drawable/save"
-                    android:tint="@color/light_blue">
+                    android:tint="@color/dark_blue">
 
                     <requestFocus />
                 </ImageView>

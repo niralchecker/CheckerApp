@@ -1059,7 +1059,7 @@
                 android:id="@+id/view_side_menu_top_green"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
-                android:background="@color/light_blue">
+                android:background="@color/dark_blue">
 
                 <ImageView
                     android:id="@+id/btnItem"

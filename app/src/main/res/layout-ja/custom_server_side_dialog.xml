@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/btnOk"
         android:layout_below="@+id/textView1"
-        android:divider="@color/light_blue"
+        android:divider="@color/dark_blue"
         android:dividerHeight="0px" />
 
     <Button

@@ -38,7 +38,7 @@
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="viewfinder_mask">#60000000</color>
-    <color name="light_blue">#007BFF</color>
+    <color name="dark_blue">#007BFF</color>
 
 
 </resources>

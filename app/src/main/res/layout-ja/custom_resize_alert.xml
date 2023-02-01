@@ -26,7 +26,7 @@
             android:layout_gravity="center_vertical"
             android:padding="3dp"
             android:text="@string/s_item_column_0_line_25_file_77"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/dark_blue"
             android:textSize="16dp" />
     </LinearLayout>
 
@@ -67,7 +67,7 @@
             android:id="@+id/btnOk"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@color/light_blue"
+            android:background="@color/dark_blue"
             android:paddingBottom="5dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"

@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10px"
             android:src="@drawable/back_green"
-            android:tint="@color/light_blue"/>
+            android:tint="@color/dark_blue"/>
 
         <View
             android:id="@+id/dividing_line_3"
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text=""
-            android:textColor="@color/light_blue"
+            android:textColor="@color/dark_blue"
             android:textSize="26sp" />
 
         <ImageView
@@ -53,7 +53,7 @@
             android:layout_marginRight="10px"
             android:src="@drawable/refresh"
             android:visibility="visible"
-            android:tint="@color/light_blue"/>
+            android:tint="@color/dark_blue"/>
 
         <ImageView
             android:id="@+id/filterbtn"
@@ -64,7 +64,7 @@
             android:layout_toLeftOf="@+id/update_button"
             android:src="@drawable/filter_grey"
             android:visibility="visible"
-            android:tint="@color/light_blue"/>
+            android:tint="@color/dark_blue"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -152,7 +152,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_234_file_37"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -199,7 +199,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_194_file_102"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -246,7 +246,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_241_file_102"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -293,7 +293,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="15dp"
                     android:text="@string/s_item_column_0_line_288_file_102"
-                    android:textColor="@color/light_blue"
+                    android:textColor="@color/dark_blue"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -339,7 +339,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:background="@color/light_blue"
+                    android:background="@color/dark_blue"
                     android:text="@string/s_item_column_0_line_336_file_102"
                     android:textColor="@color/white"
                     android:visibility="visible" />
@@ -352,7 +352,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_margin="3dp"
                     android:layout_weight="1"
-                    android:background="@color/light_blue"
+                    android:background="@color/dark_blue"
                     android:text="@string/s_item_column_0_line_349_file_102"
                     android:textColor="@color/white"
                     android:visibility="visible" />
@@ -377,7 +377,7 @@
         android:layout_marginLeft="15px"
         android:layout_marginRight="15px"
         android:cacheColorHint="#00000000"
-        android:divider="@color/light_blue"
+        android:divider="@color/dark_blue"
         android:dividerHeight="4px"
         android:visibility="visible" />
 

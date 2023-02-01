@@ -44,7 +44,7 @@
         android:layout_height="35dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/light_blue"
+        android:background="@color/dark_blue"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/alert_btn_lbl_ok"
