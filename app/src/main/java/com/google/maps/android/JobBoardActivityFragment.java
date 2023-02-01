@@ -391,7 +391,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 		filterLayout = (ScrollView) findViewById(R.id.filterLayout);
 		// radioFilter = (RadioGroup) findViewById(R.id.radioFilter);
 		pickerView.setVisibility(RelativeLayout.GONE);
-		tnextSevenDays.setTextColor(Color.parseColor("#9dc40f"));
+		tnextSevenDays.setTextColor(Color.parseColor("#007BFF"));
 		custom.setBackgroundColor(Color.parseColor("#ffffff"));
 		nextSevenDays.setBackgroundColor(Color.parseColor("#ffffff"));
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
@@ -482,7 +482,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 						.contains(Helper.CONST_BE_THERE)) {
 					ttoday.setTextColor(Color.parseColor(Helper.appColor));
 				} else
-					ttoday.setTextColor(Color.parseColor("#9dc40f"));
+					ttoday.setTextColor(Color.parseColor("#007BFF"));
 				tcustom.setTextColor(Color.parseColor("#000000"));
 				tnextSevenDays.setTextColor(Color.parseColor("#000000"));
 				customBottom.setVisibility(View.GONE);
@@ -517,7 +517,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 					tnextSevenDays.setTextColor(Color
 							.parseColor(Helper.appColor));
 				} else
-					tnextSevenDays.setTextColor(Color.parseColor("#9dc40f"));
+					tnextSevenDays.setTextColor(Color.parseColor("#007BFF"));
 
 				customBottom.setVisibility(View.GONE);
 				nextSevenBottom.setVisibility(View.VISIBLE);
@@ -550,7 +550,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 						.contains(Helper.CONST_BE_THERE)) {
 					tcustom.setTextColor(Color.parseColor(Helper.appColor));
 				} else
-					tcustom.setTextColor(Color.parseColor("#9dc40f"));
+					tcustom.setTextColor(Color.parseColor("#007BFF"));
 
 				tnextSevenDays.setTextColor(Color.parseColor("#000000"));
 				customBottom.setVisibility(View.VISIBLE);
@@ -598,7 +598,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 					ClientFilterT.setTextColor(Color
 							.parseColor(Helper.appColor));
 				} else
-					ClientFilterT.setTextColor(Color.parseColor("#9dc40f"));
+					ClientFilterT.setTextColor(Color.parseColor("#007BFF"));
 
 				ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
 				branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
@@ -630,7 +630,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 					branchPropsFilterT.setTextColor(Color
 							.parseColor(Helper.appColor));
 				} else
-					branchPropsFilterT.setTextColor(Color.parseColor("#9dc40f"));
+					branchPropsFilterT.setTextColor(Color.parseColor("#007BFF"));
 
 				branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
 				branchTxtCodeBottom.setVisibility(RelativeLayout.INVISIBLE);
@@ -663,7 +663,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 					branchCodeFilterT.setTextColor(Color
 							.parseColor(Helper.appColor));
 				} else
-					branchCodeFilterT.setTextColor(Color.parseColor("#9dc40f"));
+					branchCodeFilterT.setTextColor(Color.parseColor("#007BFF"));
 
 				ClientFilterT.setTextColor(Color.parseColor("#000000"));
 				ClientTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
@@ -696,7 +696,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 					branchFilterT.setTextColor(Color
 							.parseColor(Helper.appColor));
 				} else
-					branchFilterT.setTextColor(Color.parseColor("#9dc40f"));
+					branchFilterT.setTextColor(Color.parseColor("#007BFF"));
 
 				ClientFilterT.setTextColor(Color.parseColor("#000000"));
 				ClientTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
@@ -1302,7 +1302,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 				.contains(Helper.CONST_BE_THERE)) {
 			ClientFilterT.setTextColor(Color.parseColor(Helper.appColor));
 		} else
-			ClientFilterT.setTextColor(Color.parseColor("#9dc40f"));
+			ClientFilterT.setTextColor(Color.parseColor("#007BFF"));
 		ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
 		branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
 		ClientFilter.setVisibility(RelativeLayout.VISIBLE);

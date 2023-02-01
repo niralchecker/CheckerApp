@@ -112,6 +112,7 @@
                 android:tint="@color/dark_blue"/>
         </RelativeLayout>
     </LinearLayout>
+
     <AutoCompleteTextView
         android:id="@+id/countrybox"
         android:hint="@string/countries"
