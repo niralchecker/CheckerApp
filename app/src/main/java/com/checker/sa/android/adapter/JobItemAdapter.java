@@ -1173,18 +1173,29 @@ public class JobItemAdapter extends BaseAdapter {
                 .equals(tabFilterTwo.toLowerCase()))) {
 
             TextView tv = (TextView) row.findViewById(R.id.tv1);
+            TextView tvDec = (TextView) row.findViewById(R.id.tvDec);
             tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
             TextView datetv = (TextView) row.findViewById(R.id.tv2);
             TextView branchtv = (TextView) row.findViewById(R.id.tvbranch);
             TextView counttv = (TextView) row.findViewById(R.id.tvcount);
             tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
-            ImageView iv = (ImageView) row.findViewById(R.id.iv_down_arrow);
-//            row.setOnClickListener(new OnClickListener() {
+            TextView tvReject = (TextView) row.findViewById(R.id.tv_reject);
+            TextView tvAccept = (TextView) row.findViewById(R.id.tv_accept);
+            View view2 = (View) row.findViewById(R.id.view2);
+//            tvReject.setOnClickListener(new OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    Toast.makeText(ct, "click on row", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ct, "click on tvReject", Toast.LENGTH_SHORT).show();
 //                }
 //            });
+//
+//            tvAccept.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(ct, "click on tvAccept", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+
             // ImageView iv = (ImageView) row.findViewById(R.id.leftiv);
             // iv.setVisibility(RelativeLayout.GONE);
             final ImageView ivRight = (ImageView) row
@@ -1305,15 +1316,21 @@ public class JobItemAdapter extends BaseAdapter {
                     return row;
                 }
 
+                branchtv.setVisibility(View.GONE);
+                view2.setVisibility(View.GONE);
+
             } else if (order != null && order.getSetName() != null
                     && !order.getSetName().equals("")) {
                 if (order.getClientName() == null)
                     order.setClientName("");
                 if (order.getSetName() == null)
                     order.setSetName("");
-                Spanned sp = Html.fromHtml(order.getClientName() + ", "
-                        + order.getSetName());
+//                Spanned sp = Html.fromHtml(order.getClientName() + ", "
+//                        + order.getSetName());
+                Spanned sp = Html.fromHtml(order.getClientName());
+                Spanned spDec = Html.fromHtml(order.getSetName());
                 tv.setText(sp.toString());
+                tvDec.setText(spDec.toString());
             } else {
                 if (order.getClientName() == null)
                     order.setClientName("");

@@ -181,7 +181,7 @@
             app:fontFamily="@font/roboto_bold"
             app:layout_constraintBottom_toBottomOf="@+id/sidemenuicon1"
             app:layout_constraintStart_toEndOf="@id/sidemenuicon1"
-            app:layout_constraintTop_toTopOf="@+id/sidemenuicon1"/>
+            app:layout_constraintTop_toTopOf="@+id/sidemenuicon1" />
 
         <ImageView
             android:id="@+id/iv_top_menu"
@@ -409,6 +409,7 @@
             android:cacheColorHint="#00000000"
             android:divider="#B3B3B3"
             android:dividerHeight="0px"
+            android:layout_marginTop="10dp"
             android:padding="10dp"
             app:layout_constraintBottom_toTopOf="@+id/menulayout"
             app:layout_constraintStart_toStartOf="parent"
@@ -443,6 +444,7 @@
             android:cacheColorHint="#00000000"
             android:divider="#FFFFFF"
             android:dividerHeight="1px"
+            android:layout_marginTop="10dp"
             android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_filter" />

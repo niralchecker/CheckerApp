@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:padding="10dp"
-    android:layoutDirection="ltr">
+    android:layoutDirection="ltr"
+    android:padding="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -54,8 +54,8 @@
                 android:layout_height="1dp"
                 android:layout_below="@id/tvbranch"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="#DADADA" />
-
 
             <TextView
                 android:id="@+id/tv1"
@@ -63,11 +63,40 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2"
                 android:layout_marginStart="7dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_toEndOf="@id/checkbox"
                 android:text="H&amp;M"
                 android:textColor="#98AC2E"
                 android:textSize="18sp"
                 app:fontFamily="@font/roboto_regular" />
+
+            <TextView
+                android:id="@+id/tvDec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@id/tv1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAlignment="textEnd"
+                android:textColor="#666666"
+                android:textSize="19sp"
+                app:fontFamily="@font/roboto_regular"
+                tools:text="H&amp;M" />
+
+            <ImageView
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/view2"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/img_checkbox" />
 
             <TextView
                 android:id="@+id/tv2"
@@ -75,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/checkbox"
                 android:text="26.05.2021"
                 android:textColor="#AEAEAE"
                 android:textSize="14sp"
@@ -92,9 +122,10 @@
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/tv1"
+                android:layout_below="@id/tvDec"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/checkbox"
                 android:background="#DADADA" />
 
             <TextView
@@ -128,6 +159,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/checkbox"
                 android:singleLine="true"
                 android:textColor="#666666"
                 android:textSize="14sp"
@@ -151,15 +183,17 @@
             <RelativeLayout
                 android:id="@+id/cl_bottom"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_below="@+id/view2"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/iv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="10dp"
                     android:padding="2dp"
                     android:src="@drawable/ic_location_gray" />
@@ -168,9 +202,12 @@
                     android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="5dp"
-                    android:text="1.2 Km"
                     android:layout_toEndOf="@id/iv_location"
+                    android:gravity="center"
+                    android:text="1.2 Km"
                     android:textColor="#BCBCBC"
                     android:textSize="16sp"
                     app:fontFamily="@font/roboto_bold" />
@@ -179,34 +216,45 @@
                     android:id="@+id/tv_reject"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@id/tv_location"
+                    android:gravity="center"
                     android:padding="5dp"
                     android:text="Reject"
-                    android:layout_toEndOf="@id/tv_location"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     app:fontFamily="@font/roboto_regular" />
 
-                <!--                <Button-->
-                <!--                    android:id="@+id/btn_accept"-->
-                <!--                    android:layout_width="100dp"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginEnd="15dp"-->
-                <!--                    android:background="@drawable/border_green"-->
-                <!--                    android:padding="7dp"-->
-                <!--                    android:text="Accept"-->
-                <!--                    android:layout_toEndOf="@id/tv_reject"-->
-                <!--                    android:textAlignment="center"-->
-                <!--                    android:textColor="#BDD82F"-->
-                <!--                    android:textSize="18sp"-->
-                <!--                    app:fontFamily="@font/roboto_bold" />-->
+                <TextView
+                    android:id="@+id/tv_accept"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_toStartOf="@id/iv_down_arrow"
+                    android:background="@drawable/border_green"
+                    android:gravity="center"
+                    android:padding="7dp"
+                    android:text="Accept"
+                    android:textAlignment="center"
+                    android:textColor="#BDD82F"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/roboto_bold" />
 
                 <ImageView
                     android:id="@+id/iv_down_arrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
                     android:padding="5dp"
                     android:src="@drawable/ic_down_arrow" />
 
