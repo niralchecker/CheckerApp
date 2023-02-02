@@ -27,15 +27,20 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
+
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 
 import com.checker.sa.android.data.InProgressFileData;
 import com.checker.sa.android.data.Objects;
@@ -1182,19 +1187,60 @@ public class JobItemAdapter extends BaseAdapter {
             TextView tvReject = (TextView) row.findViewById(R.id.tv_reject);
             TextView tvAccept = (TextView) row.findViewById(R.id.tv_accept);
             View view2 = (View) row.findViewById(R.id.view2);
-//            tvReject.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(ct, "click on tvReject", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//
-//            tvAccept.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(ct, "click on tvAccept", Toast.LENGTH_SHORT).show();
-//                }
-//            });
+            View view1 = (View) row.findViewById(R.id.view1);
+            LinearLayout llSchedulesExpandLayout = (LinearLayout) row.findViewById(R.id.ll_schedules_expand_layout);
+            LinearLayout llAssignedExpandLayout = (LinearLayout) row.findViewById(R.id.ll_assigned_expand_layout);
+            ImageView ivDownArrow = (ImageView) row.findViewById(R.id.iv_down_arrow);
+            CardView cardView = (CardView) row.findViewById(R.id.cardView);
+            NestedScrollView nestedScroll = (NestedScrollView) row.findViewById(R.id.nestedScroll);
+
+            nestedScroll.setVisibility(View.GONE);
+
+            TextView tvSurveyName = (TextView) row.findViewById(R.id.tv_survey_name);
+            TextView tvBranchFullName = (TextView) row.findViewById(R.id.tv_branch_full_name);
+            TextView tvClientDesc = (TextView) row.findViewById(R.id.tv_client_desc);
+            TextView tvQuestionnaire = (TextView) row.findViewById(R.id.tv_questionnaire);
+            TextView tvBranch_s = (TextView) row.findViewById(R.id.tv_branch_s);
+            TextView tvBranchFullName_s = (TextView) row.findViewById(R.id.tv_branch_full_name_s);
+            TextView tvCity = (TextView) row.findViewById(R.id.tv_city);
+            TextView tvAddress = (TextView) row.findViewById(R.id.tv_address);
+            TextView tvBranchPhone = (TextView) row.findViewById(R.id.tv_branch_phone);
+            TextView tvOpeningHours = (TextView) row.findViewById(R.id.tv_opening_hours);
+            TextView tvStartTime = (TextView) row.findViewById(R.id.tv_start_time);
+            TextView tvEndTime = (TextView) row.findViewById(R.id.tv_end_time);
+            TextView tvPurchaseDescription = (TextView) row.findViewById(R.id.tv_purchase_description);
+            TextView tvMakePurchase = (TextView) row.findViewById(R.id.tv_make_purchase);
+            TextView tvNonRefundableServicePayment = (TextView) row.findViewById(R.id.tv_nonRefundableServicePayment);
+            TextView tvTransportationPayment = (TextView) row.findViewById(R.id.tv_transportation_payment);
+            TextView tvCriticismPayment = (TextView) row.findViewById(R.id.tv_criticism_payment);
+            TextView tvBonusPayment = (TextView) row.findViewById(R.id.tv_bonus_payment);
+
+            ListView lvjdsurvey_quotas_list = (ListView) row.findViewById(R.id.quotas_list);
+            ListView lvjdsurvey_allocations_list = (ListView) row.findViewById(R.id.allocations_list);
+
+            ivDownArrow.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (nestedScroll.getVisibility() == View.GONE) {
+                        nestedScroll.setVisibility(View.VISIBLE);
+//                        ivDownArrow.setBackgroundDrawable(ct.getResources()
+//                                .getDrawable(R.drawable.ic_upper_arrow));
+
+                        if (order.getOrderID().contains("-")) {
+                            llAssignedExpandLayout.setVisibility(View.VISIBLE);
+                            llSchedulesExpandLayout.setVisibility(View.GONE);
+                        } else if (order != null && order.getSetName() != null
+                                && !order.getSetName().equals("")) {
+                            llAssignedExpandLayout.setVisibility(View.GONE);
+                            llSchedulesExpandLayout.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        nestedScroll.setVisibility(View.GONE);
+//                        ivDownArrow.setBackgroundDrawable(ct.getResources()
+//                                .getDrawable(R.drawable.ic_down_arrow));
+                    }
+                }
+            });
 
             // ImageView iv = (ImageView) row.findViewById(R.id.leftiv);
             // iv.setVisibility(RelativeLayout.GONE);
@@ -1225,45 +1271,43 @@ public class JobItemAdapter extends BaseAdapter {
                 });
                 jobItemList.setAdapter(new jobInnerItemAdapter(act,
                         this.joblistarray.get(position).listOrders));
-                jobItemList.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1,
-                                            int arg2, long arg3) {
-                        if (joblistarray.get(position).listOrders != null
-                                && joblistarray.get(position).listOrders
-                                .get(arg2) != null
-                                && joblistarray.get(position).listOrders.get(
-                                arg2).getStatusName() != null
-                                && joblistarray.get(position).listOrders
-                                .get(arg2).getStatusName()
-                                .equals("wrong")) {
-                            Log.e("itemClick", "if_true");
-                            // showRAlert(JobListActivity.this);
-                        } else {
-                            Intent intent = new Intent(ct
-                                    .getApplicationContext(),
-                                    JobDetailActivity.class);
-                            // isJobselected = true;
-                            if (joblistarray.get(position).listOrders != null
-                                    && joblistarray.get(position).listOrders
-                                    .size() > 0) {
-
-                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
-                                // );
-                                intent.putExtra("OrderID", joblistarray
-                                        .get(position).listOrders.get(arg2)
-                                        .getOrderID());
-                            }
-                            intent.putExtra("OrderIndex", arg2);
-                            intent.putExtra("Index", arg2);
-                            Constants.setLocale(act);
-                            act.startActivityForResult(intent,
-                                    JOB_DETAIL_ACTIVITY_CODE);
-
-                            Log.e("itemClick", "else_true");
-                        }
-                    }
-                });
+//                TODO JobDetailActivity
+//                jobItemList.setOnItemClickListener(new OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> arg0, View arg1,
+//                                            int arg2, long arg3) {
+//                        if (joblistarray.get(position).listOrders != null
+//                                && joblistarray.get(position).listOrders
+//                                .get(arg2) != null
+//                                && joblistarray.get(position).listOrders.get(
+//                                arg2).getStatusName() != null
+//                                && joblistarray.get(position).listOrders
+//                                .get(arg2).getStatusName()
+//                                .equals("wrong")) {
+//                            // showRAlert(JobListActivity.this);
+//                        } else {
+//                            Intent intent = new Intent(ct
+//                                    .getApplicationContext(),
+//                                    JobDetailActivity.class);
+//                            // isJobselected = true;
+//                            if (joblistarray.get(position).listOrders != null
+//                                    && joblistarray.get(position).listOrders
+//                                    .size() > 0) {
+//
+//                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
+//                                // );
+//                                intent.putExtra("OrderID", joblistarray
+//                                        .get(position).listOrders.get(arg2)
+//                                        .getOrderID());
+//                            }
+//                            intent.putExtra("OrderIndex", arg2);
+//                            intent.putExtra("Index", arg2);
+//                            Constants.setLocale(act);
+//                            act.startActivityForResult(intent,
+//                                    JOB_DETAIL_ACTIVITY_CODE);
+//                        }
+//                    }
+//                });
                 jobItemList.setVisibility(View.GONE);
                 setListViewHeightBasedOnChildren(jobItemList);
                 ivRight.setVisibility(View.VISIBLE);
@@ -1306,6 +1350,10 @@ public class JobItemAdapter extends BaseAdapter {
                 if (s != null && s.getSurveyName() != null) {
                     // tv.setText(order.getOrderID()+s.getSurveyName());
                     tv.setText(s.getSurveyName());
+                    tvSurveyName.setText(s.getSurveyName());
+                    tvBranchFullName.setText(s.getBranchFullName());
+
+
                 } else {
                     if (!Constants.getDateFilter())
                         ivRight.setVisibility(RelativeLayout.GONE);
@@ -1317,7 +1365,31 @@ public class JobItemAdapter extends BaseAdapter {
                 }
 
                 branchtv.setVisibility(View.GONE);
-                view2.setVisibility(View.GONE);
+                counttv.setVisibility(View.GONE);
+                view1.setVisibility(View.GONE);
+
+
+                if (s != null && s.getArrayQuotas() != null) {
+                    String str[] = s.getArrayQuotas();
+
+                    ArrayAdapter adapter = new ArrayAdapter(ct,
+                            UIHelper.getListLayoutSize(ct), str);
+                    lvjdsurvey_quotas_list.setAdapter(adapter);
+
+                    setListViewHeightBased(lvjdsurvey_quotas_list);
+                }
+
+
+                if (s != null && s.getArrayAllocations() != null) {
+
+                    String str[] = s.getArrayAllocations();
+
+                    ArrayAdapter adapter = new ArrayAdapter(ct,
+                            UIHelper.getListLayoutSize(ct), str);
+                    lvjdsurvey_allocations_list.setAdapter(adapter);
+                    setListViewHeightBased(lvjdsurvey_allocations_list);
+                }
+
 
             } else if (order != null && order.getSetName() != null
                     && !order.getSetName().equals("")) {
@@ -1329,8 +1401,40 @@ public class JobItemAdapter extends BaseAdapter {
 //                        + order.getSetName());
                 Spanned sp = Html.fromHtml(order.getClientName());
                 Spanned spDec = Html.fromHtml(order.getSetName());
-                tv.setText(sp.toString());
-                tvDec.setText(spDec.toString());
+                Spanned spClientDec = Html.fromHtml(order.getDescription());
+
+                tv = getTextFromHtmlFormate(order.getClientName(), tv);
+                tvDec = getTextFromHtmlFormate(order.getSetName(), tvDec);
+                tvClientDesc = getTextFromHtmlFormate(order.getDescription(), tvClientDesc);
+                tvQuestionnaire = getTextFromHtmlFormate(order.getSetName(), tvQuestionnaire);
+                tvBranch_s = getTextFromHtmlFormate(order.getBranchName(), tvBranch_s);
+                tvBranchFullName_s = getTextFromHtmlFormate(order.getBranchFullname(), tvBranchFullName_s);
+                tvCity = getTextFromHtmlFormate(order.getCityName(), tvCity);
+                tvAddress = getTextFromHtmlFormate(order.getAddress(), tvAddress);
+                tvBranchPhone = getTextFromHtmlFormate(order.getBranchPhone(), tvBranchPhone);
+                tvOpeningHours = getTextFromHtmlFormate(order.getOpeningHours(), tvOpeningHours);
+                tvStartTime = getTextFromHtmlFormate(order.getTimeStart(), tvStartTime);
+                tvEndTime = getTextFromHtmlFormate(order.getTimeEnd(), tvEndTime);
+                tvPurchaseDescription = getTextFromHtmlFormate(order.getsPurchaseDescription(), tvPurchaseDescription);
+                tvNonRefundableServicePayment = getTextFromHtmlFormate(order.getsNonRefundableServicePayment(), tvNonRefundableServicePayment);
+                tvTransportationPayment = getTextFromHtmlFormate(
+                        order.getsTransportationPayment(), tvTransportationPayment);
+                tvCriticismPayment = getTextFromHtmlFormate(
+                        order.getsCriticismPayment(), tvCriticismPayment);
+                tvBonusPayment = getTextFromHtmlFormate(order.getsBonusPayment(),
+                        tvBonusPayment);
+
+                if ((order != null && order.getsPurchase() != null && order
+                        .getsPurchase().equals("1"))) {
+                    tvMakePurchase = getTextFromHtmlFormate(
+                            con.getString(R.string.questionnaire_exit_delete_alert_yes),
+                            tvMakePurchase);
+                } else {
+                    tvMakePurchase = getTextFromHtmlFormate(
+                            con.getString(R.string.questionnaire_exit_delete_alert_no),
+                            tvMakePurchase);
+                }
+
             } else {
                 if (order.getClientName() == null)
                     order.setClientName("");
@@ -1413,8 +1517,10 @@ public class JobItemAdapter extends BaseAdapter {
                     // }
                     // });
                 } else {
-                    Spanned sp = Html.fromHtml(getDate(order.getDate()) + ", "
-                            + order.getBranchName());
+//                    Spanned sp = Html.fromHtml(getDate(order.getDate()) + ", "
+//                            + order.getBranchName());
+                    Spanned sp = Html.fromHtml(getDate(order.getDate()));
+
 
                     if (Constants.getFullBranchName()
                             && order.getBranchFullname() != null
@@ -1424,9 +1530,9 @@ public class JobItemAdapter extends BaseAdapter {
                                 + order.getAddress());
 
                     branchtv.setText(order.getBranchName());
-                    branchtv.setVisibility(RelativeLayout.VISIBLE);
+                    branchtv.setVisibility(View.VISIBLE);
                     // branchtv.setVisibility(RelativeLayout.GONE);
-                    counttv.setVisibility(RelativeLayout.GONE);
+                    counttv.setVisibility(View.GONE);
                     datetv.setText(sp.toString());
                 }
 
@@ -1534,55 +1640,54 @@ public class JobItemAdapter extends BaseAdapter {
                 });
                 jobItemList.setAdapter(new jobInnerItemAdapter(act,
                         this.joblistarray.get(position).listOrders));
-                jobItemList.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1,
-                                            int arg2, long arg3) {
-                        if (joblistarray.get(position).listSurveys != null
-                                && joblistarray.get(position).listSurveys
-                                .get(arg2) != null) {
-                            // showRAlert(JobListActivity.this);
-                            Log.e("itemClick_1", "if_true");
-                        } else {
-                            Log.e("itemClick_1", "else_true");
-                            Intent intent = new Intent(ct
-                                    .getApplicationContext(),
-                                    JobDetailActivity.class);
-                            // isJobselected = true;
-                            if (joblistarray.get(position).listSurveys != null
-                                    && joblistarray.get(position).listSurveys
-                                    .size() > 0) {
-                                Order o_rder = joblistarray.get(position).orderItem;
-                                Survey s = Surveys.getCurrentSurve(o_rder
-                                        .getOrderID().replace("-", ""));
-                                if (s != null && s.getSurveyName() != null) {
-
-                                } else {
-
-                                    Toast.makeText(
-                                            con,
-                                            con.getResources()
-                                                    .getString(
-                                                            R.string.could_not_retrieve),
-                                            Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-
-                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
-                                // );
-                                intent.putExtra("SurveyID", joblistarray
-                                        .get(position).listSurveys.get(arg2)
-                                        .getSurveyID());
-                                intent.putExtra("OrderID", "");
-                            }
-                            intent.putExtra("OrderIndex", arg2);
-                            intent.putExtra("Index", arg2);
-                            Constants.setLocale(act);
-                            act.startActivityForResult(intent,
-                                    JOB_DETAIL_ACTIVITY_CODE);
-                        }
-                    }
-                });
+//                TODO JobDetailActivity
+//                jobItemList.setOnItemClickListener(new OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> arg0, View arg1,
+//                                            int arg2, long arg3) {
+//                        if (joblistarray.get(position).listSurveys != null
+//                                && joblistarray.get(position).listSurveys
+//                                .get(arg2) != null) {
+//                            // showRAlert(JobListActivity.this);
+//                        } else {
+//                            Intent intent = new Intent(ct
+//                                    .getApplicationContext(),
+//                                    JobDetailActivity.class);
+//                            // isJobselected = true;
+//                            if (joblistarray.get(position).listSurveys != null
+//                                    && joblistarray.get(position).listSurveys
+//                                    .size() > 0) {
+//                                Order o_rder = joblistarray.get(position).orderItem;
+//                                Survey s = Surveys.getCurrentSurve(o_rder
+//                                        .getOrderID().replace("-", ""));
+//                                if (s != null && s.getSurveyName() != null) {
+//
+//                                } else {
+//
+//                                    Toast.makeText(
+//                                            con,
+//                                            con.getResources()
+//                                                    .getString(
+//                                                            R.string.could_not_retrieve),
+//                                            Toast.LENGTH_SHORT).show();
+//                                    return;
+//                                }
+//
+//                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
+//                                // );
+//                                intent.putExtra("SurveyID", joblistarray
+//                                        .get(position).listSurveys.get(arg2)
+//                                        .getSurveyID());
+//                                intent.putExtra("OrderID", "");
+//                            }
+//                            intent.putExtra("OrderIndex", arg2);
+//                            intent.putExtra("Index", arg2);
+//                            Constants.setLocale(act);
+//                            act.startActivityForResult(intent,
+//                                    JOB_DETAIL_ACTIVITY_CODE);
+//                        }
+//                    }
+//                });
                 jobItemList.setVisibility(View.GONE);
                 setListViewHeightBasedOnChildren(jobItemList);
                 ivRight.setVisibility(View.VISIBLE);
@@ -1707,5 +1812,38 @@ public class JobItemAdapter extends BaseAdapter {
         params.height = totalHeight
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+    }
+
+    public void setListViewHeightBased(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            try {
+                View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            } catch (Exception ex) {
+
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = 150 + totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
+    private TextView getTextFromHtmlFormate(String html, TextView tv) {
+        if (html == null)
+            html = "";
+        Spanned sp = Html.fromHtml(html);
+        if (tv != null && sp != null)
+            tv.setText(sp, BufferType.SPANNABLE);
+        return tv;
     }
 }
