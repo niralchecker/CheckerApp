@@ -178,7 +178,7 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="10dp"
                 android:layout_toEndOf="@id/checkbox"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -190,7 +190,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <View
                             android:layout_width="match_parent"
@@ -211,6 +211,30 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="3434343434"
+                            android:textColor="#666666"
+                            android:textSize="18sp"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#DADADA" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Status"
+                            android:textColor="#AEAEAE"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <TextView
+                            android:id="@+id/tv_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="status"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -622,7 +646,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <!--                        <LinearLayout-->
                         <!--                            android:layout_width="match_parent"-->
@@ -784,11 +808,9 @@
                     android:id="@+id/tv_accept"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="0dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="0dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_toStartOf="@id/iv_down_arrow"
                     android:background="@drawable/border_green"
                     android:gravity="center"
@@ -797,7 +819,39 @@
                     android:textAlignment="center"
                     android:textColor="#BDD82F"
                     android:textSize="18sp"
+                    android:visibility="visible"
                     app:fontFamily="@font/roboto_bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_start_job"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/border_blue"
+                    android:orientation="horizontal"
+                    android:padding="2dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_start_job" />
+
+                    <TextView
+                        android:id="@+id/tv_start_job"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@id/iv_down_arrow"
+                        android:fontFamily="@font/roboto_bold"
+                        android:padding="7dp"
+                        android:text="Start Job"
+                        android:textColor="@color/dark_blue"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
 
                 <ImageView
                     android:id="@+id/iv_down_arrow"

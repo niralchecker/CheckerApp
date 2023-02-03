@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="250dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:background="@color/transparent"
     android:layoutDirection="ltr">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/background">
+        android:background="@drawable/new_button">
 
         <TextView
             android:id="@+id/jobfilter_title"
@@ -21,55 +22,50 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <TableLayout
-            android:id="@+id/jobfilter"
+        <TextView
+            android:id="@+id/tv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/jobfilter_title"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp">
+            android:text="@string/reject_job_popup_reason_lbl"
+            android:visibility="gone"
+            android:textColor="#000000"
+            android:textSize="16dp" />
 
-            <TableRow android:layout_margin="10dip">
+        <EditText
+            android:id="@+id/edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jobfilter_title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="top"
+            android:hint="@string/reject_job_popup_reason_lbl"
+            android:lines="5"
+            android:padding="10dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/reject_job_popup_reason_lbl"
-                    android:textColor="#000000"
-                    android:textSize="16dp" />
+        <Button
+            android:id="@+id/ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edittext"
+            android:layout_alignStart="@id/edittext"
+            android:layout_alignEnd="@id/edittext"
+            android:layout_gravity="right"
+            android:layout_span="2"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/new_button"
+            android:backgroundTint="@color/dark_blue"
+            android:paddingLeft="10dp"
+            android:paddingTop="6dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/questionnaire_btn_text"
+            android:textColor="@color/white"
+            android:textSize="18dip"
+            android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/edittext"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/textbg"
-                    android:gravity="top"
-                    android:hint="@string/reject_job_popup_reason_lbl"
-                    android:lines="5"
-                    android:padding="10dp" />
-            </TableRow>
-
-            <TableRow android:layout_margin="10dip">
-
-                <Button
-                    android:id="@+id/ok_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_span="2"
-                    android:background="@color/accept_btn_selector"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/questionnaire_btn_text"
-                    android:textColor="@color/white"
-                    android:textSize="18dip"
-                    android:textStyle="bold" />
-            </TableRow>
-        </TableLayout>
     </RelativeLayout>
 
 </RelativeLayout>

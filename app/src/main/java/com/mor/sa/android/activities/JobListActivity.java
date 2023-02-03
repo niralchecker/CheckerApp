@@ -1193,14 +1193,14 @@ public class JobListActivity extends Activity implements OnClickListener,
                 startActivity(intent);
                 finish();
                 break;
-            case 6:
-                // FILTER jobs
-                JobFilterDialog dialog = new JobFilterDialog(this);
-                dialog.show();
-                isJobselected = true;
-                break;
+//            case 6:
+//                // FILTER jobs
+//                JobFilterDialog dialog = new JobFilterDialog(this);
+//                dialog.show();
+//                isJobselected = true;
+//                break;
 
-            case 7:
+            case 6:
                 // MAPSSSS
                 // Getting status
                 status = GooglePlayServicesUtil
@@ -1221,15 +1221,15 @@ public class JobListActivity extends Activity implements OnClickListener,
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                 }
                 break;
-            case 8:
+            case 7:
                 load_certificates(null);
                 break;
 
-            case 9:// edit hopper
+            case 8:// edit hopper
                 editShopperInfo();
                 break;
 
-            case 10:// reviews history
+            case 9:// reviews history
                 isJobselected = true;
                 intent = new Intent(JobListActivity.this.getApplicationContext(),
                         CritHistoryReportActivity.class);
@@ -1262,10 +1262,10 @@ public class JobListActivity extends Activity implements OnClickListener,
             // }
             //
             // break;
-            case 11:
+            case 10:
                 ExitFromJobList();
                 break;
-            case 12:
+            case 11:
                 openArciveScreen();
                 break;
 
@@ -2039,10 +2039,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                     getString(R.string.settings_page_title),
                     getString(R.string.settings_page_title), getIcon("gear")));// 5
 
-        menuItems.add(new com.checker.sa.android.data.MenuItem(
-                getString(R.string.job_list_menu_upload_complete_job),
-                getString(R.string.job_list_menu_upload_complete_job),
-                getIcon("filterjobs")));// 6
+//        menuItems.add(new com.checker.sa.android.data.MenuItem(
+//                getString(R.string.job_list_menu_upload_complete_job),
+//                getString(R.string.job_list_menu_upload_complete_job),
+//                getIcon("filterjobs")));// 6
+
+//        menuItems.remove(6);
 
         menuItems.add(new com.checker.sa.android.data.MenuItem(
                 getString(R.string.job_list_menu_update_list),
@@ -8656,6 +8658,71 @@ public class JobListActivity extends Activity implements OnClickListener,
         color_select = Helper.getappColor();
 //        txt_color_select = Helper.getappColor();
 //        txt_color_unselect = Helper.getunselectedappColor();
+    }
+
+    Order order;
+    Survey survey;
+    String OrderID;
+    private final int QUESTIONNAIRE_ACTIVITY_CODE = 1;
+
+
+    public void BeginReview(boolean isFromWatch) {
+        // if(!Helper.isParsed()){
+        // ShowAlert(JobDetailActivity.this,
+        // getString(R.string.jd_parsing_alert_title),
+        // getString(R.string.jd_parsing_alert_msg),
+        // getString(R.string.alert_btn_lbl_ok));
+        // return;
+        // }
+        // if(!dataSaved)
+        // new saveSetThread().start();
+        if (survey != null) {
+            int i = 0;
+            i++;
+        }
+        if (OrderID.contains("-")) {
+            Intent intent = new Intent(this.getApplicationContext(),
+                    QuestionnaireActivity.class);
+            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, OrderID);
+            intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
+            if (isFromWatch)
+                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+            else
+                startActivity(intent);
+        } else {
+            Intent intent = new Intent(this.getApplicationContext(),
+                    QuestionnaireActivity.class);
+//            if (order == null)
+//                setOrder();
+            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+                    order.getOrderID());
+            intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
+            if (isFromWatch)
+                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+            else
+                startActivity(intent);
+        }
+    }
+
+    public void start_job() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // mEditText.setText( "" );
+//
+//                if (aceeptbtn.getText().toString()
+//                        .equals(getString(R.string.jd_begin_review_btn_text))) {
+                BeginReview(true);
+//
+//                } else if (aceeptbtn
+//                        .getText()
+//                        .toString()
+//                        .equals(getString(R.string.jd_continue_review_btn_text))) {
+//
+//                    BeginReview(true);
+//                }
+            }
+        });
     }
 
 }
