@@ -757,46 +757,58 @@
                 android:layout_marginBottom="5dp"
                 android:background="#DADADA" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/cl_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_below="@+id/view2"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="4">
 
-                <ImageView
-                    android:id="@+id/iv_location"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
                     android:layout_marginStart="10dp"
-                    android:padding="2dp"
-                    android:src="@drawable/ic_location_gray" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_toEndOf="@id/iv_location"
-                    android:gravity="center"
-                    android:text="1.2 Km"
-                    android:textColor="#BCBCBC"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/roboto_bold" />
+                    <ImageView
+                        android:id="@+id/iv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_location_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_toEndOf="@id/iv_location"
+                        android:gravity="center"
+                        android:text="1.2 Km"
+                        android:textColor="#BCBCBC"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/roboto_bold" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_reject"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginStart="20dp"
                     android:layout_toEndOf="@id/tv_location"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Reject"
@@ -804,68 +816,66 @@
                     android:textSize="20sp"
                     app:fontFamily="@font/roboto_regular" />
 
-                <TextView
-                    android:id="@+id/tv_accept"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toStartOf="@id/iv_down_arrow"
-                    android:background="@drawable/border_green"
-                    android:gravity="center"
-                    android:padding="7dp"
-                    android:text="Accept"
-                    android:textAlignment="center"
-                    android:textColor="#BDD82F"
-                    android:textSize="18sp"
-                    android:visibility="visible"
-                    app:fontFamily="@font/roboto_bold" />
-
                 <LinearLayout
-                    android:id="@+id/ll_start_job"
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/border_blue"
-                    android:orientation="horizontal"
-                    android:padding="2dp"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_start_job" />
+                    android:layout_toStartOf="@id/iv_down_arrow"
+                    android:layout_weight="1.5">
 
                     <TextView
-                        android:id="@+id/tv_start_job"
+                        android:id="@+id/tv_accept"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_green"
+                        android:gravity="center"
+                        android:padding="7dp"
+                        android:text="Accept"
+                        android:textAlignment="center"
+                        android:textColor="#BDD82F"
+                        android:textSize="18sp"
+                        android:visibility="visible"
+                        app:fontFamily="@font/roboto_bold" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_start_job"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@id/iv_down_arrow"
-                        android:fontFamily="@font/roboto_bold"
-                        android:padding="7dp"
-                        android:text="Start Job"
-                        android:textColor="@color/dark_blue"
-                        android:textSize="14sp" />
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/border_blue"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_start_job" />
+
+                        <TextView
+                            android:id="@+id/tv_start_job"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toStartOf="@id/iv_down_arrow"
+                            android:fontFamily="@font/roboto_bold"
+                            android:padding="7dp"
+                            android:text="Start Job"
+                            android:textColor="@color/dark_blue"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/iv_down_arrow"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="10dp"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:padding="5dp"
                     android:src="@drawable/ic_down_arrow" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:id="@+id/dividing_line_1"
@@ -1001,3 +1011,4 @@
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
+

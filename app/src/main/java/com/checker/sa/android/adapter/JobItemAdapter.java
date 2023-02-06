@@ -64,6 +64,7 @@ import com.checker.sa.android.helper.Constants;
 import com.checker.sa.android.helper.DateTVListener;
 import com.checker.sa.android.helper.Helper;
 import com.checker.sa.android.helper.UIHelper;
+import com.google.android.gms.maps.model.LatLng;
 import com.mor.sa.android.activities.JobDetailActivity;
 import com.mor.sa.android.activities.JobListActivity;
 import com.mor.sa.android.activities.QuestionnaireActivity;
@@ -1192,6 +1193,8 @@ public class JobItemAdapter extends BaseAdapter {
             TextView datetv = (TextView) row.findViewById(R.id.tv2);
             TextView branchtv = (TextView) row.findViewById(R.id.tvbranch);
             TextView counttv = (TextView) row.findViewById(R.id.tvcount);
+            TextView tvLocation = (TextView) row.findViewById(R.id.tv_location);
+            ImageView ivLocation = (ImageView) row.findViewById(R.id.iv_location);
             tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
             TextView tvReject = (TextView) row.findViewById(R.id.tv_reject);
             TextView tvAccept = (TextView) row.findViewById(R.id.tv_accept);
@@ -1430,8 +1433,6 @@ public class JobItemAdapter extends BaseAdapter {
                     tv.setText(s.getSurveyName());
                     tvSurveyName.setText(s.getSurveyName());
                     tvBranchFullName.setText(s.getBranchFullName());
-
-
                 } else {
                     if (!Constants.getDateFilter())
                         ivRight.setVisibility(RelativeLayout.GONE);
@@ -1445,6 +1446,22 @@ public class JobItemAdapter extends BaseAdapter {
                 branchtv.setVisibility(View.GONE);
                 counttv.setVisibility(View.GONE);
                 view1.setVisibility(View.GONE);
+
+                try {
+                    if (order.getBranchLong() != null && order.getBranchLat() != null) {
+                        double location_latitude = Double.parseDouble(order.getBranchLat());
+                        double location_longitude = Double.parseDouble(order.getBranchLong());
+                        String get_location = String.valueOf(((JobListActivity) con).CalculationByDistance(Constants.user_location_latitude, location_latitude, Constants.user_location_longitude, location_longitude));
+                        tvLocation.setText(get_location + " Km");
+                        tvLocation.setVisibility(View.VISIBLE);
+                        ivLocation.setVisibility(View.VISIBLE);
+                    } else if (order.getBranchLong() == null || order.getBranchLat() == null) {
+                        tvLocation.setVisibility(View.GONE);
+                        ivLocation.setVisibility(View.GONE);
+                    }
+                } catch (NumberFormatException e) {
+
+                }
 
 
                 if (s != null && s.getArrayQuotas() != null) {
@@ -1477,9 +1494,6 @@ public class JobItemAdapter extends BaseAdapter {
                     order.setSetName("");
 //                Spanned sp = Html.fromHtml(order.getClientName() + ", "
 //                        + order.getSetName());
-                Spanned sp = Html.fromHtml(order.getClientName());
-                Spanned spDec = Html.fromHtml(order.getSetName());
-                Spanned spClientDec = Html.fromHtml(order.getDescription());
 
                 tv = getTextFromHtmlFormate(order.getClientName(), tv);
                 tvDec = getTextFromHtmlFormate(order.getSetName(), tvDec);
@@ -1502,6 +1516,23 @@ public class JobItemAdapter extends BaseAdapter {
                 tvBonusPayment = getTextFromHtmlFormate(order.getsBonusPayment(),
                         tvBonusPayment);
                 tvStatus = getTextFromHtmlFormate(order.getStatusName(), tvStatus);
+
+                try {
+                    if (order.getBranchLong() != null && order.getBranchLat() != null) {
+                        double location_latitude = Double.parseDouble(order.getBranchLat());
+                        double location_longitude = Double.parseDouble(order.getBranchLong());
+                        String get_location = String.valueOf(((JobListActivity) con).CalculationByDistance(Constants.user_location_latitude, location_latitude, Constants.user_location_longitude, location_longitude));
+                        tvLocation.setText(get_location + " Km");
+                        tvLocation.setVisibility(View.VISIBLE);
+                        ivLocation.setVisibility(View.VISIBLE);
+                    } else {
+                        tvLocation.setVisibility(View.GONE);
+                        ivLocation.setVisibility(View.GONE);
+                    }
+                } catch (NumberFormatException e) {
+
+                }
+
 
                 if ((order != null && order.getsPurchase() != null && order
                         .getsPurchase().equals("1"))) {

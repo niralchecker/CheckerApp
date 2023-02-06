@@ -62,6 +62,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -73,6 +75,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ResultReceiver;
 import android.provider.MediaStore.MediaColumns;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -105,6 +108,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.checker.sa.android.adapter.AlternateJobsAdapter;
 import com.checker.sa.android.adapter.CheckertificateAdapter;
@@ -159,6 +166,12 @@ import com.checker.sa.android.transport.Connector;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
@@ -245,6 +258,14 @@ public class JobListActivity extends Activity implements OnClickListener,
     private String txt_color_select = "#007BFF";
 
     private TextView toolbarTitle;
+
+
+    private FusedLocationProviderClient fusedLocationClient;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
+    private LocationAddressResultReceiver addressResultReceiver;
+    private TextView currentAddTv;
+    private Location currentLocation;
+    private LocationCallback locationCallback;
 
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
@@ -1773,6 +1794,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         super.onResume();
         Constants.setLocale(JobListActivity.this);
+        startLocationUpdates();
         // AutoSync();
     }
 
@@ -2505,6 +2527,19 @@ public class JobListActivity extends Activity implements OnClickListener,
                 dialog.show();
             }
         });
+
+
+        addressResultReceiver = new LocationAddressResultReceiver(new Handler());
+        currentAddTv = findViewById(R.id.textView);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                currentLocation = locationResult.getLocations().get(0);
+                getAddress();
+            }
+        };
+        startLocationUpdates();
 
 
     }
@@ -8724,5 +8759,103 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
         });
     }
+
+    @SuppressWarnings("MissingPermission")
+    private void startLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new
+                            String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        } else {
+            LocationRequest locationRequest = new LocationRequest();
+            locationRequest.setInterval(2000);
+            locationRequest.setFastestInterval(1000);
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+        }
+    }
+
+    @SuppressWarnings("MissingPermission")
+    private void getAddress() {
+        if (!Geocoder.isPresent()) {
+            Toast.makeText(JobListActivity.this, "Can't find current address, ",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(this, GetAddressIntentService.class);
+        intent.putExtra("add_receiver", addressResultReceiver);
+        intent.putExtra("add_location", currentLocation);
+        startService(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
+    int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startLocationUpdates();
+            } else {
+                Toast.makeText(this, "Location permission not granted, " + "restart the app if you want the feature", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class LocationAddressResultReceiver extends ResultReceiver {
+        LocationAddressResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            if (resultCode == 0) {
+                Log.d("Address", "Location null retrying");
+                getAddress();
+            }
+            if (resultCode == 1) {
+                Log.e("resultCode_1", "Address not found");
+//                Toast.makeText(JobListActivity.this, "Address not found, ", Toast.LENGTH_SHORT).show();
+            }
+            String currentAdd = resultData.getString("address_result");
+            showResults(currentAdd);
+        }
+    }
+
+    public void showResults(String currentAdd) {
+        currentAddTv.setText(currentAdd);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        fusedLocationClient.removeLocationUpdates(locationCallback);
+    }
+
+    public double CalculationByDistance(double StartP_latitude, double EndP_latitude, double StartP_longitude, double EndP_longitude) {
+        int Radius = 6371;// radius of earth in Km
+//        double lat1 = StartP.latitude;
+//        double lat2 = EndP.latitude;
+//        double lon1 = StartP.longitude;
+//        double lon2 = EndP.longitude;
+        double dLat = Math.toRadians(EndP_latitude - StartP_latitude);
+        double dLon = Math.toRadians(EndP_longitude - StartP_longitude);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(StartP_latitude))
+                * Math.cos(Math.toRadians(EndP_latitude)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult = Radius * c;
+        double km = valueResult / 1;
+        DecimalFormat newFormat = new DecimalFormat("####");
+        int kmInDec = Integer.valueOf(newFormat.format(km));
+        double meter = valueResult % 1000;
+        int meterInDec = Integer.valueOf(newFormat.format(meter));
+        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
+                + " Meter   " + meterInDec);
+
+        return Integer.valueOf(newFormat.format(km));
+    }
+
 
 }

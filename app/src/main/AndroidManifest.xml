@@ -25,6 +25,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.camera.flash"
@@ -47,6 +48,10 @@
         android:theme="@android:style/Theme.NoTitleBar"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden">
+        <activity
+            android:name=".FindUserLocationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".NewRegisterActivity"
             android:exported="false" />
@@ -105,6 +110,7 @@
                     android:scheme="wear" />
             </intent-filter>
         </service>
+        <service android:name=".GetAddressIntentService" />
         <service
             android:name=".audioMediaRecorderService"
             android:enabled="true"
@@ -133,6 +139,7 @@
         <activity
             android:name=".SplashScreen"
             android:clearTaskOnLaunch="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="locale|orientation"
             android:exported="true"
             android:screenOrientation="portrait">
