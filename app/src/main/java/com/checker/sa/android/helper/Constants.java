@@ -1,5 +1,7 @@
 package com.checker.sa.android.helper;
 
+import com.checker.sa.android.data.Order;
+import com.checker.sa.android.data.orderListItem;
 import com.google.android.gms.maps.model.LatLng;
 import com.mor.sa.android.activities.JobListActivity;
 import com.mor.sa.android.activities.QuestionnaireActivity;
@@ -14,12 +16,16 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class Constants {
 
     public static double user_location_latitude;
     public static double user_location_longitude;
+
+    public static ArrayList<orderListItem> orderList;
+
     public static String UPLOAD_PATH = "/data/data/com.mor.sa.android.activity/uploads/";
     public static String DOWNLOAD_PATH = "/data/data/com.mor.sa.android.activity/downloadfiles/";
     public static boolean isQAAllowed = false;

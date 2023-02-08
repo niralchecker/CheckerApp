@@ -49,9 +49,13 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden">
         <activity
-            android:name=".FindUserLocationActivity"
+            android:name=".ShowJobInMapViewActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".FindUserLocationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".NewRegisterActivity"
             android:exported="false" />
@@ -139,10 +143,10 @@
         <activity
             android:name=".SplashScreen"
             android:clearTaskOnLaunch="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="locale|orientation"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />

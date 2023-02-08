@@ -334,135 +334,151 @@
         android:layout_marginTop="-15dp"
         android:background="@drawable/bg_img_job_list">
 
-        <ImageView
-            android:id="@+id/errorbtn"
-            android:layout_width="0px"
-            android:layout_height="0px"
-            android:src="@drawable/assigned"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RelativeLayout
-            android:id="@+id/layout_filter"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#787878"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/txtfilter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-
-            <ImageView
-                android:id="@+id/crossbtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:src="@drawable/knob_cancel"
-                tools:ignore="DuplicateIds" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_attach_err"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#b2cb39"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/layout_filter">
-
-            <ImageView
-                android:id="@+id/crossbtn"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:src="@drawable/exclamation" />
-
-            <TextView
-                android:id="@+id/txterr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/crossbtn"
-                android:text="@string/attach_err_job_list"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-        </RelativeLayout>
-
-        <ListView
-            android:id="@+id/joblist"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="#00000000"
-            android:divider="#B3B3B3"
-            android:dividerHeight="0px"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/menulayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_attach_err" />
-
-        <RelativeLayout
-            android:id="@+id/menulayout"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="#80000000"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/errorbtn"
+                android:layout_width="0px"
+                android:layout_height="0px"
+                android:src="@drawable/assigned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/layout_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#787878"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/txtfilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/white"
+                    android:textSize="12dp" />
+
+                <ImageView
+                    android:id="@+id/crossbtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/knob_cancel"
+                    tools:ignore="DuplicateIds" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_attach_err"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#b2cb39"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/layout_filter">
+
+                <ImageView
+                    android:id="@+id/crossbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:src="@drawable/exclamation" />
+
+                <TextView
+                    android:id="@+id/txterr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/crossbtn"
+                    android:text="@string/attach_err_job_list"
+                    android:textColor="@android:color/white"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/joblist"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:cacheColorHint="#00000000"
+                android:divider="#B3B3B3"
+                android:dividerHeight="0px"
+                android:padding="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/menulayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_attach_err" />
+
+            <RelativeLayout
+                android:id="@+id/menulayout"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:background="#80000000"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/menubtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="28dp"
+                    android:text="..."
+                    android:textColor="#ffffff"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/joblistdark"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:cacheColorHint="#00000000"
+                android:divider="#FFFFFF"
+                android:dividerHeight="1px"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_filter" />
 
             <TextView
-                android:id="@+id/menubtn"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:paddingLeft="18dp"
-                android:paddingRight="28dp"
-                android:text="..."
-                android:textColor="#ffffff"
-                android:textSize="30dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                android:layout_marginBottom="50dp"
+                android:text="Location"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <ListView
-            android:id="@+id/joblistdark"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="#00000000"
-            android:divider="#FFFFFF"
-            android:dividerHeight="1px"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_filter" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="15sp"
-            android:visibility="gone"
-            android:textColor="#000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="50dp"
-            android:text="Location"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/iv_map_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/iv_map"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/img_map" />
 
 
     <ImageView
@@ -956,7 +972,8 @@
         android:id="@+id/screenworking"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/darkness_value">
+        android:background="@color/darkness_value"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/txtSwitching"

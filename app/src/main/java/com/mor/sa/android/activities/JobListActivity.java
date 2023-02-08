@@ -110,6 +110,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -2542,8 +2543,17 @@ public class JobListActivity extends Activity implements OnClickListener,
         startLocationUpdates();
 
 
+        ImageView iv_map_list = (ImageView) findViewById(R.id.iv_map_list);
+        iv_map_list.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        JobListActivity.this.getApplicationContext(),
+                        ShowJobInMapViewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
 
     protected int getMinute(String start) {
         // TODO Auto-generated method stub
@@ -4573,7 +4583,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // seting list here
                 showDbjobsPostPart();
                 // ManageTabs(1);
-
             }
 
             if (pngItems != null && pngItems.size() > 0
@@ -4915,6 +4924,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                 mAdapter.doFilter(mFilter, JobListActivity.this, true);
                 updateFiler(null);
                 jobItemList.setAdapter(mAdapter);
+
+                Constants.orderList = joborders;
             } catch (Exception ex) {
                 int i = 0;
                 i++;
