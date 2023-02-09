@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,6 +32,9 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import com.checker.sa.android.helper.Constants;
 import com.checker.sa.android.helper.Helper;
 import com.checker.sa.android.helper.UIHelper;
+import com.checker.sa.android.transport.Connector;
+import com.elconfidencial.bubbleshowcase.BubbleShowCase;
+import com.elconfidencial.bubbleshowcase.BubbleShowCaseBuilder;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -37,55 +42,27 @@ import java.util.Locale;
 public class NewSettingsActivity extends AppCompatActivity implements View.OnClickListener,
         View.OnFocusChangeListener {
 
-//    RelativeLayout rvinjobscreen;
-//    //    EditText systemUrl;
-//    TextView tvSystemURL;
-//
-//    //    ImageView helpbtn;
-//    TextView tvTheme, s_urltext, s_image_resizing, s_camra_setting,
-//            s_job_setting;
-//    View s_urltext_dividing_line, s_languagetext_dividing_line,
-//            s_themetexttext_dividing_line,
-//            s_image_resizingtexttext_dividing_line,
-//            s_branchwisesorting_dividing_line, s_tracker_setting_dividing_line,
-//            s_camra_setting_dividing_line, s_job_setting_dividing_line;
+    EditText systemUrl;
+
     AppCompatButton save;
     SharedPreferences myPrefs;
     AppCompatSpinner spinner, theme, resizing_list, branch_spinner;
     int modeSelect;
     TextView tv;
     String[] languages = null;
-    //    private ToggleButton switchSorting;
-//    private ToggleButton switchTimeStamp;
-//    private ToggleButton switchFilterDate;
-//    private ToggleButton switchAnotherPhoto;
-//    private ToggleButton switchBranchName;
-//    private ToggleButton switchDeviceCamera;
-//    private ToggleButton switchCropping;
-//    private ToggleButton switchResolution;
-//    private ToggleButton switchWifiOnly;
-//    private TextView s_branchwisesorting;
-//    private TextView s_croppingText;
-//    private TextView s_anotherText;
-//    private TextView s_switch_branch_name;
-//    private ToggleButton switchAlternateJobs;
-//    private ToggleButton switchBackup;
-    private LinearLayoutCompat switchtracking;
-    private LinearLayoutCompat switchhorses;
-    //    TextView textView;
-//    TextView s_switch_time_stamp, s_trackerText;
-//    private TextView s_switch_filter_date;
-//    private TextView s_tracker_setting;
+    private LinearLayoutCompat switchtracking, switchBranchName, switchFilterDate, switchWifiOnly, switchAlternateJobs;
+    private LinearLayoutCompat switchhorses, switchCropping, switchDeviceCamera, switchResolution, switchAnotherPhoto;
     RelativeLayout layout;
-    //    private boolean isFirstTime;
-    //    private ScrollView scroll;
-//    private TextView tvLanguage;
-//    private TextView s_switchDeviceCameraText;
-//    private TextView s_resolutionSelector;
-//    private TextView s_switch_alternate_jobs;
     boolean isJobChecked = false;
+    boolean isBranchName = false;
+    boolean isFilterDate = false;
     boolean isHorsesChecked = false;
-
+    boolean isWifiOnly = false;
+    boolean isAlternateJobs = false;
+    boolean isSwitchCropping = false;
+    boolean isDeviceCamera = false;
+    boolean isResolution = false;
+    boolean isAnotherPhoto = false;
 
     public void makeGuideDialog(Context context) {
 
@@ -175,47 +152,29 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
 //                textView.getTextSize()));
         switchtracking = (LinearLayoutCompat) findViewById(R.id.toggleJobs);
         switchhorses = (LinearLayoutCompat) findViewById(R.id.toggleHorses);
-//        switchFilterDate = (ToggleButton) findViewById(R.id.switch_filter_date);
-//        switchAnotherPhoto = (ToggleButton) findViewById(R.id.switchAnother);
-//        switchTimeStamp = (ToggleButton) findViewById(R.id.switch_time_stamp);
-//        switchBranchName = (ToggleButton) findViewById(R.id.switch_branch_name);
-//        switchDeviceCamera= (ToggleButton) findViewById(R.id.switchDeviceCamera);
-//        switchCropping = (ToggleButton) findViewById(R.id.switchCropping);
-//        switchResolution = (ToggleButton) findViewById(R.id.switchResolution);
-//        switchWifiOnly = (ToggleButton) findViewById(R.id.switch_wifi_only);
-//        switchAlternateJobs = (ToggleButton) findViewById(R.id.switch_alternate_jobs);
-//        switchBackup = (ToggleButton) findViewById(R.id.switchBackup);
-//        s_trackerText = (TextView) findViewById(R.id.s_trackerText);
-//        s_switchDeviceCameraText= (TextView) findViewById(R.id.s_switchDeviceCameraText);
-//        s_urltext = (TextView) findViewById(R.id.s_urltext);
-//        s_image_resizing = (TextView) findViewById(R.id.s_image_resizing);
-//        s_camra_setting = (TextView) findViewById(R.id.s_camra_setting);
-//        s_job_setting = (TextView) findViewById(R.id.s_job_setting);
-//
-//        s_switch_time_stamp = (TextView) findViewById(R.id.s_switch_time_stamp);
-//        s_switch_time_stamp.setTextSize(UIHelper.getFontSize(
-//                NewSettingsActivity.this, s_switch_time_stamp.getTextSize()));
+        switchBranchName = (LinearLayoutCompat) findViewById(R.id.switch_branch_name);
+        switchFilterDate = (LinearLayoutCompat) findViewById(R.id.switch_filter_date);
+        switchWifiOnly = (LinearLayoutCompat) findViewById(R.id.switch_wifi_only);
+        switchAlternateJobs = (LinearLayoutCompat) findViewById(R.id.switch_alternate_jobs);
+        switchCropping = (LinearLayoutCompat) findViewById(R.id.switchCropping);
+        switchDeviceCamera = (LinearLayoutCompat) findViewById(R.id.switchDeviceCamera);
+        switchResolution = (LinearLayoutCompat) findViewById(R.id.switchResolution);
+        switchAnotherPhoto = (LinearLayoutCompat) findViewById(R.id.switchAnother);
+
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         String url = myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, null);
 
-//        systemUrl = (EditText) findViewById(R.id.s_url);
-//        if (getPackageName() != null
-//                && getPackageName().contains(Helper.CONSTPACKAGEPREFIX)) {
-//            systemUrl.setEnabled(false);
-//        }
-//        systemUrl.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-//                systemUrl.getTextSize()));
+        systemUrl = (EditText) findViewById(R.id.s_url);
+        if (getPackageName() != null
+                && getPackageName().contains(Helper.CONSTPACKAGEPREFIX)) {
+            systemUrl.setEnabled(false);
+        }
+        systemUrl.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
+                systemUrl.getTextSize()));
+
         branch_spinner = (AppCompatSpinner) findViewById(R.id.tvSpinnerBranchSorting);
         spinner = (AppCompatSpinner) findViewById(R.id.tvSpinnerLanguage);
 
-//        s_urltext_dividing_line = (View) findViewById(R.id.s_urltext_dividing_line);
-//        s_languagetext_dividing_line = (View) findViewById(R.id.s_languagetext_dividing_line);
-//        s_themetexttext_dividing_line = (View) findViewById(R.id.s_themetexttext_dividing_line);
-//        s_image_resizingtexttext_dividing_line = (View) findViewById(R.id.s_image_resizingtexttext_dividing_line);
-//        s_branchwisesorting_dividing_line = (View) findViewById(R.id.s_branchwisesorting_dividing_line);
-//        s_tracker_setting_dividing_line = (View) findViewById(R.id.s_tracker_setting_dividing_line);
-//        s_camra_setting_dividing_line = (View) findViewById(R.id.s_camra_setting_dividing_line);
-//        s_job_setting_dividing_line = (View) findViewById(R.id.s_job_setting_dividing_line);
 
         String str = android.os.Build.VERSION.SDK;
         int sdk = Integer.valueOf(str);
@@ -267,19 +226,6 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-        // switchSorting.setOnCheckedChangeListener(new
-        // OnCheckedChangeListener() {
-        //
-        // @Override
-        // public void onCheckedChanged(CompoundButton buttonView,
-        // boolean isChecked) {
-        // SharedPreferences.Editor prefsEditor = myPrefs.edit();
-        // prefsEditor.putBoolean(Constants.SETTINGS_ENABLE_SORTING,
-        // isChecked);
-        // prefsEditor.commit();
-        // }
-        // });
-
         ArrayAdapter adapter = new ArrayAdapter(
                 this, UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect),
                 languages);
@@ -328,169 +274,84 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
                 NewSettingsActivity.this, modeSelect));
         resizing_list.setAdapter(resizeAdapter);
 
-//        s_branchwisesorting = (TextView) findViewById(R.id.s_branchwisesorting);
-//        s_branchwisesorting.setTextSize(UIHelper.getFontSize(
-//                NewSettingsActivity.this, s_branchwisesorting.getTextSize()));
-        // if (Helper.getTheme(NewSettingsActivity.this) == 1)
-        // s_branchwisesorting.setTextColor(getResources().getColor(
-        // android.R.color.white));
 
-//        s_croppingText = (TextView) findViewById(R.id.s_croppingText);
-//        s_croppingText.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-//                s_croppingText.getTextSize()));
-
-//        s_resolutionSelector = (TextView) findViewById(R.id.s_resolutionSelector);
-//        s_resolutionSelector.setTextSize(UIHelper.getFontSize(
-//                NewSettingsActivity.this, s_resolutionSelector.getTextSize()));
-//
-//        s_anotherText = (TextView) findViewById(R.id.s_anotherText);
-//        s_anotherText.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-//                s_anotherText.getTextSize()));
-        // if (Helper.getTheme(NewSettingsActivity.this) == 1)
-        // s_croppingText.setTextColor(getResources().getColor(
-        // android.R.color.white));
-//        s_switch_filter_date = (TextView) findViewById(R.id.s_switch_filter_date);
-//        s_switch_filter_date.setTextSize(UIHelper.getFontSize(
-//                NewSettingsActivity.this, s_switch_filter_date.getTextSize()));
-//
-//        s_switch_alternate_jobs = (TextView) findViewById(R.id.s_switch_alternate_jobs);
-//        s_switch_alternate_jobs.setTextSize(UIHelper.getFontSize(
-//                NewSettingsActivity.this, s_switch_alternate_jobs.getTextSize()));
-//
-//        s_switch_branch_name = (TextView) findViewById(R.id.s_switch_branch_name);
-//        s_switch_branch_name.setTextSize(UIHelper.getFontSize(
-//                NewSettingsActivity.this, s_switch_branch_name.getTextSize()));
-//
-//        s_tracker_setting = (TextView) findViewById(R.id.s_tracker_setting);
-//        s_tracker_setting.setTextSize(UIHelper.getFontSize(
-//                NewSettingsActivity.this, s_tracker_setting.getTextSize()));
-
-        // if (Helper.getTheme(NewSettingsActivity.this) == 1)
-        // s_croppingText.setTextColor(getResources().getColor(
-        // android.R.color.white));
-
-//        tvLanguage = (TextView) findViewById(R.id.s_languagetext);
-//        tvLanguage.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-//                tvLanguage.getTextSize()));
-        // if (Helper.getTheme(NewSettingsActivity.this) == 1)
-        // tvLanguage.setTextColor(getResources().getColor(
-        // android.R.color.white));
-
-//        tvSystemURL = (TextView) findViewById(R.id.s_urltext);
-//        tvSystemURL.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-//                tvSystemURL.getTextSize()));
-        // if (Helper.getTheme(NewSettingsActivity.this) == 1)
-        // tvSystemURL.setTextColor(getResources().getColor(
-        // android.R.color.white));
-
-//        tvTheme = (TextView) findViewById(R.id.s_themetext);
-//        tvTheme.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-//                tvTheme.getTextSize()));
-
-//        ((TextView) findViewById(R.id.s_image_resizing)).setTextSize(UIHelper
-//                .getFontSize(NewSettingsActivity.this,
-//                        ((TextView) findViewById(R.id.s_image_resizing))
-//                                .getTextSize()));
-        // if (Helper.getTheme(NewSettingsActivity.this) == 1)
-        // tvTheme.setTextColor(getResources().getColor(android.R.color.white));
-
-//        systemUrl
-//                .setWidth((Helper.getViewWidth(this.getApplicationContext())) * 2);
+        systemUrl.setWidth((Helper.getViewWidth(this.getApplicationContext())) * 2);
         save = (AppCompatButton) findViewById(R.id.btnSave);
-        // save.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-        // save.getTextSize()));
-        // save.requestFocus();
 
-//        systemUrl.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
-//                systemUrl.getTextSize()));
+        systemUrl.setTextSize(UIHelper.getFontSize(NewSettingsActivity.this,
+                systemUrl.getTextSize()));
         save.setOnClickListener(this);
-
-//		proxy = (Button) findViewById(R.id.btnproxy);
-//		proxy.setOnClickListener(this);
 
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-//        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_BRANCH_FULL_NAME,
-//                Helper.ENABLEBRANCHFULLNAMEBYDEFAULT)) {
-//            switchBranchName.setChecked(true);
-//        } else {
-//            switchBranchName.setChecked(false);
-//        }
+        /** switchBranchName **/
 
-//        switchBranchName
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor.putBoolean(
-//                                Constants.SETTINGS_ENABLE_BRANCH_FULL_NAME,
-//                                isChecked);
-//                        prefsEditor.commit();
-//                    }
-//                });
-//
-//        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_DATE_FILTER,
-//                Helper.ENABLEDATEFILTERBYDEFAULT)) {
-//            switchFilterDate.setChecked(true);
-//        } else {
-//            switchFilterDate.setChecked(false);
-//        }
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_BRANCH_FULL_NAME,
+                Helper.ENABLEBRANCHFULLNAMEBYDEFAULT)) {
+            setToggle(switchBranchName, true);
+        } else {
+            setToggle(switchBranchName, false);
+        }
+        switchBranchName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-//        switchFilterDate
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor.putBoolean(
-//                                Constants.SETTINGS_ENABLE_DATE_FILTER,
-//                                isChecked);
-//                        prefsEditor.commit();
-//                    }
-//                });
+                if (switchBranchName.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isBranchName = true;
+                    setToggle(switchBranchName, true);
+                } else {
+                    isBranchName = false;
+                    setToggle(switchBranchName, false);
+                }
+
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor.putBoolean(
+                        Constants.SETTINGS_ENABLE_BRANCH_FULL_NAME,
+                        isBranchName);
+                prefsEditor.commit();
+
+            }
+        });
+
+
+        /** switchFilterDate **/
+
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_DATE_FILTER,
+                Helper.ENABLEDATEFILTERBYDEFAULT)) {
+            setToggle(switchFilterDate, true);
+        } else {
+            setToggle(switchFilterDate, false);
+        }
+        switchFilterDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (switchFilterDate.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isFilterDate = true;
+                    setToggle(switchFilterDate, true);
+                } else {
+                    isFilterDate = false;
+                    setToggle(switchFilterDate, false);
+                }
+
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor.putBoolean(
+                        Constants.SETTINGS_ENABLE_DATE_FILTER,
+                        isFilterDate);
+                prefsEditor.commit();
+
+            }
+        });
+
+
+        /** switchtracking **/
+
         if (myPrefs.getBoolean(Constants.SETTINGS_switchtracking,
                 Helper.ENABLETRACKINGBYDEFAULT)) {
             setToggle(switchtracking, true);
         } else {
             setToggle(switchtracking, false);
         }
-
-
-//        switchtracking
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor.putBoolean(
-//                                Constants.SETTINGS_switchtracking, isChecked);
-//                        prefsEditor.commit();
-//                        if (isChecked) {
-//                            try {
-////							Intent i = new Intent(NewSettingsActivity.this,
-////									comService.class);
-////							i.putExtra("KEY1",
-////									"Value to be used by the service");
-////							startService(i);
-//                                Helper.setAN168Log("line 447, bool=" + isChecked);
-//                            } catch (Exception ex) {
-//                                Helper.setAN168Log("crashed line 451");
-//                            }
-//                        } else if (isMyServiceRunning(comService.class)) {
-//                            Helper.setAN168Log("line 454, bool=" + isChecked);
-////							Intent i = new Intent(NewSettingsActivity.this,
-////									comService.class);
-////							i.putExtra("KEY1",
-////									"hideicon");
-////							stopService(i);
-//                        }
-//                    }
-//                });
-
         switchtracking.setOnClickListener(view -> {
             if (switchtracking.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
                 isJobChecked = true;
@@ -505,25 +366,19 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
             prefsEditor.commit();
             if (isJobChecked) {
                 try {
-//							Intent i = new Intent(NewSettingsActivity.this,
-//									comService.class);
-//							i.putExtra("KEY1",
-//									"Value to be used by the service");
-//							startService(i);
                     Helper.setAN168Log("line 447, bool=" + isJobChecked);
                 } catch (Exception ex) {
                     Helper.setAN168Log("crashed line 451");
                 }
             } else if (isMyServiceRunning(comService.class)) {
                 Helper.setAN168Log("line 454, bool=" + isJobChecked);
-//							Intent i = new Intent(NewSettingsActivity.this,
-//									comService.class);
-//							i.putExtra("KEY1",
-//									"hideicon");
-//							stopService(i);
             }
 
         });
+
+
+        /** switchhorses **/
+
         switchhorses.setOnClickListener(view -> {
             if (switchhorses.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
                 isHorsesChecked = true;
@@ -534,180 +389,188 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-//        if (myPrefs.getBoolean(Constants.SETTINGS_SHOW_ANOTHER_PHOTO,
-//                Helper.ENABLEMULTIPLEPICTUREDEFAULT)) {
-//            switchAnotherPhoto.setChecked(true);
-//        } else {
-//            switchAnotherPhoto.setChecked(false);
-//        }
 
-//        switchAnotherPhoto
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor.putBoolean(
-//                                Constants.SETTINGS_SHOW_ANOTHER_PHOTO,
-//                                isChecked);
-//                        prefsEditor.commit();
-//                    }
-//                });
+        /** switchAnotherPhoto **/
 
-//        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_TIME_STAMP,
-//                Helper.ENABLETIMESTAMPBYDEFAULT)) {
-//            switchTimeStamp.setChecked(true);
-//        } else {
-//            switchTimeStamp.setChecked(false);
-//        }
-//
-//        switchTimeStamp
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor
-//                                .putBoolean(
-//                                        Constants.SETTINGS_ENABLE_TIME_STAMP,
-//                                        isChecked);
-//                        prefsEditor.commit();
-//                    }
-//                });
-//        if (myPrefs.getBoolean(Constants.SETTINGS_BACKUP, true)) {
-//            switchBackup.setChecked(true);
-//        } else {
-//            switchBackup.setChecked(false);
-//        }
-//
-//        switchBackup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView,
-//                                         boolean isChecked) {
-//                SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                prefsEditor.putBoolean(Constants.SETTINGS_BACKUP, isChecked);
-//                prefsEditor.commit();
-//            }
-//        });
-//
-//        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_CROPPING, false)) {
-//
-//            switchCropping.setChecked(true);
-//        } else {
-//            switchCropping.setChecked(false);
-//        }
-//
-//        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_DEFAULT_CAMERA, false)) {
-//            switchDeviceCamera.setChecked(true);
-//        } else {
-//            switchDeviceCamera.setChecked(false);
-//        }
-//
-//        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_RESOLUTION, false)) {
-//            switchResolution.setChecked(true);
-//        } else {
-//            switchResolution.setChecked(false);
-//        }
-//        if (myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false)) {
-//            switchWifiOnly.setChecked(true);
-//        } else {
-//            switchWifiOnly.setChecked(false);
-//        }
-//        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_ALTERNATE_ORDER,
-//                Helper.ENABLEALTERNATEJOBS)) {
-//            switchAlternateJobs.setChecked(true);
-//        } else {
-//            switchAlternateJobs.setChecked(false);
-//        }
-//        switchAlternateJobs
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor.putBoolean(
-//                                Constants.SETTINGS_ENABLE_ALTERNATE_ORDER,
-//                                isChecked);
-//                        prefsEditor.commit();
-//
-//                    }
-//                });
-//        switchDeviceCamera
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor.putBoolean(
-//                                Constants.SETTINGS_ENABLE_DEFAULT_CAMERA, isChecked);
-//                        prefsEditor.commit();
-//                        Helper.setDeviceCamera(isChecked);
-//                    }
-//                });
-//        switchCropping
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor.putBoolean(
-//                                Constants.SETTINGS_ENABLE_CROPPING, isChecked);
-//                        prefsEditor.commit();
-//                    }
-//                });
-//        switchResolution
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor
-//                                .putBoolean(
-//                                        Constants.SETTINGS_ENABLE_RESOLUTION,
-//                                        isChecked);
-//                        prefsEditor.commit();
-//                    }
-//                });
-//        switchWifiOnly
-//                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//                    @Override
-//                    public void onCheckedChanged(CompoundButton buttonView,
-//                                                 boolean isChecked) {
-//                        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                        prefsEditor
-//                                .putBoolean(
-//                                        Constants.SETTINGS_WIFI_ONLY,
-//                                        isChecked);
-//                        prefsEditor.commit();
-//                    }
-//                });
+        if (myPrefs.getBoolean(Constants.SETTINGS_SHOW_ANOTHER_PHOTO,
+                Helper.ENABLEMULTIPLEPICTUREDEFAULT)) {
+            setToggle(switchAnotherPhoto, false);
+        } else {
+            setToggle(switchAnotherPhoto, false);
+        }
+        switchAnotherPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switchAnotherPhoto.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isAnotherPhoto = true;
+                    setToggle(switchAnotherPhoto, true);
+                } else {
+                    isAnotherPhoto = false;
+                    setToggle(switchAnotherPhoto, false);
+                }
 
-//        systemUrl.setText(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY,
-//                ""));
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor.putBoolean(
+                        Constants.SETTINGS_SHOW_ANOTHER_PHOTO,
+                        isAnotherPhoto);
+                prefsEditor.commit();
+            }
+        });
+
+
+        /** switchCropping **/
+
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_CROPPING, false)) {
+            setToggle(switchCropping, true);
+        } else {
+            setToggle(switchCropping, false);
+        }
+
+        switchCropping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switchCropping.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isSwitchCropping = true;
+                    setToggle(switchCropping, true);
+                } else {
+                    isSwitchCropping = false;
+                    setToggle(switchCropping, false);
+                }
+
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor.putBoolean(
+                        Constants.SETTINGS_ENABLE_CROPPING, isSwitchCropping);
+                prefsEditor.commit();
+            }
+        });
+
+
+        /** switchDeviceCamera **/
+
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_DEFAULT_CAMERA, false)) {
+            setToggle(switchDeviceCamera, true);
+        } else {
+            setToggle(switchDeviceCamera, false);
+        }
+
+        switchDeviceCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switchDeviceCamera.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isDeviceCamera = true;
+                    setToggle(switchDeviceCamera, true);
+                } else {
+                    isDeviceCamera = false;
+                    setToggle(switchDeviceCamera, false);
+                }
+
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor.putBoolean(
+                        Constants.SETTINGS_ENABLE_DEFAULT_CAMERA, isDeviceCamera);
+                prefsEditor.commit();
+                Helper.setDeviceCamera(isDeviceCamera);
+
+            }
+        });
+
+
+        /** switchResolution **/
+
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_RESOLUTION, false)) {
+            setToggle(switchResolution, true);
+        } else {
+            setToggle(switchResolution, false);
+        }
+        switchResolution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switchResolution.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isResolution = true;
+                    setToggle(switchResolution, true);
+                } else {
+                    isResolution = false;
+                    setToggle(switchResolution, false);
+                }
+
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor
+                        .putBoolean(
+                                Constants.SETTINGS_ENABLE_RESOLUTION,
+                                isResolution);
+                prefsEditor.commit();
+            }
+        });
+
+
+        /** switchWifiOnly **/
+
+        if (myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false)) {
+            setToggle(switchWifiOnly, true);
+        } else {
+            setToggle(switchWifiOnly, false);
+        }
+        switchWifiOnly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switchWifiOnly.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isWifiOnly = true;
+                    setToggle(switchWifiOnly, true);
+                } else {
+                    isWifiOnly = false;
+                    setToggle(switchWifiOnly, false);
+                }
+
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor
+                        .putBoolean(
+                                Constants.SETTINGS_WIFI_ONLY,
+                                isWifiOnly);
+                prefsEditor.commit();
+            }
+        });
+
+
+        /** switchAlternateJobs **/
+
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_ALTERNATE_ORDER,
+                Helper.ENABLEALTERNATEJOBS)) {
+            setToggle(switchAlternateJobs, true);
+        } else {
+            setToggle(switchAlternateJobs, false);
+        }
+        switchAlternateJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (switchAlternateJobs.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                    isAlternateJobs = true;
+                    setToggle(switchAlternateJobs, true);
+                } else {
+                    isAlternateJobs = false;
+                    setToggle(switchAlternateJobs, false);
+                }
+
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor.putBoolean(
+                        Constants.SETTINGS_ENABLE_ALTERNATE_ORDER,
+                        isAlternateJobs);
+                prefsEditor.commit();
+
+            }
+        });
+
+
+        systemUrl.setText(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY,
+                ""));
         modeSelect = myPrefs.getInt(Constants.SETTINGS_MODE_INDEX, 1);
-
-        // theme.setSelection(modeSelect);
-        // if (modeSelect == 0)
-        // setInvertDisplay(0);
-        // else
-        // setInvertDisplay(1);
-//        systemUrl.setFocusable(true);
-//        systemUrl.setOnFocusChangeListener(this);
+        systemUrl.setFocusable(true);
+        systemUrl.setOnFocusChangeListener(this);
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         }
 
-        // systemUrl.setText("www.checker-soft.com/gfk-training-3");
 
         spinner.setSelection(myPrefs.getInt(Constants.SETTINGS_LANGUAGE_INDEX,
                 0));
@@ -725,8 +588,6 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
                 SharedPreferences.Editor prefsEditor = myPrefs.edit();
                 prefsEditor.putInt(Constants.SETTINGS_LANGUAGE_INDEX, arg2);
                 prefsEditor.commit();
-                // ACRA.getErrorReporter().putCustomData("System Language",
-                // languages[arg2].toString());
             }
 
             @Override
@@ -746,12 +607,6 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
                 Helper.setTheme(position);
 
                 modeSelect = position;
-                //
-                // theme.setSelection(modeSelect);
-                // if (modeSelect == 0)
-                // setInvertDisplay(1);
-                // else
-                // setInvertDisplay(0);
             }
 
             @Override
@@ -826,30 +681,22 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-//        setInvertDisplay(0);
         save.requestFocus();
-//        systemUrl.clearFocus();
-
-        loadViews();
-//		switchDeviceCamera.setFocusable(true);
-//		switchDeviceCamera.setFocusableInTouchMode(true);
-//		switchDeviceCamera.requestFocus(View.FOCUS_DOWN);
-
+        systemUrl.clearFocus();
     }
 
-//    private BubbleShowCaseBuilder showMenuShowCase() {
-//        return new BubbleShowCaseBuilder(this) //Activity instance
-//                .title("Camera") //Any title for the bubble view
-//                .description("Android's own camera with all features.") //More detailed description
-//                .arrowPosition(BubbleShowCase.ArrowPosition.RIGHT) //You can force the position of the arrow to change the location of the bubble.
-//                .backgroundColor(Color.parseColor("#007BFF")) //Bubble background color
-//                .textColor(Color.WHITE) //Bubble Text color
-//                .titleTextSize(20) //Title text size in SP (default value 16sp)
-//                .descriptionTextSize(15) //Subtitle text size in SP (default value 14sp)
-//                .showOnce("BUBBLE_SHOW_CAMERA123") //Id to show only once the BubbleShowCase
-//
-//                .targetView(switchDeviceCamera);
-//    }
+    private BubbleShowCaseBuilder showMenuShowCase() {
+        return new BubbleShowCaseBuilder(this) //Activity instance
+                .title("Camera") //Any title for the bubble view
+                .description("Android's own camera with all features.") //More detailed description
+                .arrowPosition(BubbleShowCase.ArrowPosition.RIGHT) //You can force the position of the arrow to change the location of the bubble.
+                .backgroundColor(Color.parseColor("#007BFF")) //Bubble background color
+                .textColor(Color.WHITE) //Bubble Text color
+                .titleTextSize(20) //Title text size in SP (default value 16sp)
+                .descriptionTextSize(15) //Subtitle text size in SP (default value 14sp)
+                .showOnce("BUBBLE_SHOW_CAMERA123") //Id to show only once the BubbleShowCase
+                .targetView(switchDeviceCamera);
+    }
 
     public boolean IsInternetConnectted() {
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -866,47 +713,41 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View arg0) {
-        // TODO Auto-generated method stub
 
-//        if (helpbtn!=null && helpbtn.getId() == arg0.getId()) {
-//            makeGuideDialog(NewSettingsActivity.this);
-//        }
         if (save.getId() == arg0.getId()) {
-//            hideKeyBoard();
+            hideKeyBoard();
             if (IsInternetConnectted()) {
                 String systemurll = Helper.getSystemURLfromDB();
 
-//                String editTextURL = systemUrl.getText().toString();
+                String editTextURL = systemUrl.getText().toString();
 
-//                if (!editTextURL.equals(systemurll)) {
-//                    setLogin(false);
-//                }
+                if (!editTextURL.equals(systemurll)) {
+                    setLogin(false);
+                }
             }
-//            if (Helper.IsEmptyString(systemUrl.getText().toString())) {
-//                ShowAlert(NewSettingsActivity.this,
-//                        getString(R.string.error_alert_title),
-//                        getString(R.string.settings_url_alert),
-//                        getString(R.string.alert_btn_lbl_ok));
-//                return;
-//            } else {
-//                String addedurl = systemUrl.getText().toString();
-//                if (!addedurl.equals(Helper.getSystemURLfromDB())) {
-//                    Helper.setSystemURL(Helper.getValidURL(systemUrl.getText()
-//                            .toString()));
-//                    // hideKeyBoard();
-//                    SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//                    prefsEditor.putString(Constants.SETTINGS_SYSTEM_URL_KEY,
-//                            Helper.getSystemURLfromDB());
-//                    prefsEditor.commit();
-//                    Connector.cookies = null;
-//                    Connector.cookies = null;
-//                }
+            if (Helper.IsEmptyString(systemUrl.getText().toString())) {
+                ShowAlert(NewSettingsActivity.this,
+                        getString(R.string.error_alert_title),
+                        getString(R.string.settings_url_alert),
+                        getString(R.string.alert_btn_lbl_ok));
+                return;
+            } else {
+                String addedurl = systemUrl.getText().toString();
+                if (!addedurl.equals(Helper.getSystemURLfromDB())) {
+                    Helper.setSystemURL(Helper.getValidURL(systemUrl.getText()
+                            .toString()));
+                    SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                    prefsEditor.putString(Constants.SETTINGS_SYSTEM_URL_KEY,
+                            Helper.getSystemURLfromDB());
+                    prefsEditor.commit();
+                    Connector.cookies = null;
+                }
 
-            Intent intent = new Intent(this.getApplicationContext(),
-                    NewLoginActivity.class);
-            startActivity(intent);
-            finish();
-//            }
+                Intent intent = new Intent(this.getApplicationContext(),
+                        NewLoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 
@@ -918,7 +759,6 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
         prefsEditor.putString(Constants.POST_FIELD_LOGIN_USERNAME, "");
         prefsEditor.putString(Constants.POST_FIELD_LOGIN_PASSWORD, "");
         prefsEditor.commit();
-        // saveOfflineData();
     }
 
     public void ShowAlert(Context context, String title, String message,
@@ -943,7 +783,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (hasFocus) {
-//            systemUrl.setSelection(systemUrl.getText().length());
+            systemUrl.setSelection(systemUrl.getText().length());
         }
     }
 
@@ -954,84 +794,6 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void loadViews() {
-
-        // EditText systemUrl;
-        // Button save;
-        // Button proxy;
-        // Spinner spinner, theme, resizing_list, branch_spinner;
-//        Helper.changeBtnColor(save);
-        // TextView textView;
-        // TextView s_switch_time_stamp;
-        // TextView tv;
-        // TextView tvSystemURL;
-        // TextView tvLanguage;
-        // TextView tvTheme;
-        // private TextView s_branchwisesorting;
-        // private TextView s_croppingText;
-        // private TextView s_anotherText;
-        // private TextView s_switch_alternate_jobs;
-        // private TextView s_switch_branch_name;
-        // private TextView s_switch_filter_date;
-        // private TextView s_tracker_setting;
-//        Helper.changeTxtViewColor(textView);
-
-//        Helper.changeTxtViewColor(s_urltext);
-//        Helper.changeTxtViewColor(s_trackerText);
-//        Helper.changeTxtViewColor(s_image_resizing);
-//        Helper.changeTxtViewColor(s_camra_setting);
-//        Helper.changeTxtViewColor(s_job_setting);
-//        Helper.changeTxtViewColor(s_switch_time_stamp);
-//        Helper.changeTxtViewColor(tv);
-//        Helper.changeTxtViewColor(tvLanguage);
-//        Helper.changeTxtViewColor(tvTheme);
-//        Helper.changeTxtViewColor(s_branchwisesorting);
-//        Helper.changeTxtViewColor(s_resolutionSelector);
-//        Helper.changeTxtViewColor(s_croppingText);
-//        Helper.changeTxtViewColor(s_anotherText);
-//        Helper.changeTxtViewColor(s_switch_alternate_jobs);
-//        Helper.changeTxtViewColor(s_switch_branch_name);
-//        Helper.changeTxtViewColor(s_switch_filter_date);
-//        Helper.changeTxtViewColor(s_tracker_setting);
-
-//		private TextView s_switchDeviceCameraText;
-//		private TextView s_resolutionSelector;
-//		private TextView s_switch_alternate_jobs;
-//		Helper.changeText(s_switchDeviceCameraText,"?????????????????");
-//		Helper.changeText(s_resolutionSelector,"");
-//		Helper.changeText(s_switch_alternate_jobs,"");
-
-//        Helper.changeViewColor(s_urltext_dividing_line);
-//        Helper.changeViewColor(s_languagetext_dividing_line);
-//        Helper.changeViewColor(s_themetexttext_dividing_line);
-//        Helper.changeViewColor(s_image_resizingtexttext_dividing_line);
-//        Helper.changeViewColor(s_branchwisesorting_dividing_line);
-//        Helper.changeViewColor(s_tracker_setting_dividing_line);
-//        Helper.changeViewColor(s_camra_setting_dividing_line);
-//        Helper.changeViewColor(s_job_setting_dividing_line);
-        // private ToggleButton switchSorting;
-        // private ToggleButton switchTimeStamp;
-        // private ToggleButton switchFilterDate;
-        // private ToggleButton switchAnotherPhoto;
-        // private ToggleButton switchBranchName;
-        // private ToggleButton switchCropping;
-        // private ToggleButton switchAlternateJobs;
-        // private ToggleButton switchBackup;
-        // private ToggleButton switchtracking;
-
-//        Helper.changeToggleColor(switchSorting);
-//        Helper.changeToggleColor(switchResolution);
-//        Helper.changeToggleColor(switchTimeStamp);
-//        Helper.changeToggleColor(switchFilterDate);
-//        Helper.changeToggleColor(switchAnotherPhoto);
-//        Helper.changeToggleColor(switchBranchName);
-//        Helper.changeToggleColor(switchCropping);
-//        Helper.changeToggleColor(switchAlternateJobs);
-//        Helper.changeToggleColor(switchBackup);
-//        Helper.changeToggleButtonColor(switchtracking, isJobChecked);
-        // RelativeLayout layout;
     }
 
     public static void setToggle(LinearLayoutCompat view, boolean isToggleOn) {

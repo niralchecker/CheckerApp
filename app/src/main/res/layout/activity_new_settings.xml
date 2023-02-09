@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="86dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="25dp"
                 android:text="@string/setting"
                 android:textColor="@color/white"
@@ -53,6 +53,48 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/settings_system_url_lbl"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/black_corners_1dp"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        android:padding="1dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardUrl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="5dp">
+
+                            <EditText
+                                android:id="@+id/s_url"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/transparent"
+                                android:focusableInTouchMode="true"
+                                android:hint="@string/settings_system_url_hint"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textSize="14sp"
+                                android:textStyle="normal"
+                                android:typeface="normal" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
                         android:text="@string/settings_language_lbl"
                         android:textColor="@color/black"
                         android:textSize="14sp"
@@ -80,10 +122,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="start"
-                                android:layout_marginEnd="30dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="15dp"
+                                android:layout_marginEnd="30dp"
                                 android:backgroundTint="@color/white"
+                                android:textColor="@color/black"
                                 app:fontFamily="@font/roboto_regular" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -132,10 +174,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="start"
                                 android:layout_marginStart="15dp"
+                                android:backgroundTint="@color/white"
                                 android:text="@string/find_horses_near_me"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:backgroundTint="@color/white"
                                 app:fontFamily="@font/roboto_regular" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -177,15 +219,16 @@
                             app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="5dp">
 
-                            <androidx.appcompat.widget.AppCompatSpinner                                android:id="@+id/tvSpinnerImageResizing"
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/tvSpinnerImageResizing"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="start"
                                 android:layout_marginStart="15dp"
+                                android:backgroundTint="@color/white"
                                 android:text="@string/find_horses_near_me"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:backgroundTint="@color/white"
                                 app:fontFamily="@font/roboto_regular" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -233,10 +276,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="start"
                                 android:layout_marginStart="15dp"
+                                android:backgroundTint="@color/white"
                                 android:text="@string/find_horses_near_me"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:backgroundTint="@color/white"
                                 app:fontFamily="@font/roboto_regular" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -317,6 +360,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             app:fontFamily="@font/roboto_regular" />
+
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/toggleHorses"
                             android:layout_width="54dp"
@@ -340,6 +384,379 @@
                         android:layout_height="1dp"
                         android:background="#C4C4C4" />
 
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_item_column_0_line_489_file_121"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_image_cropping"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <!--                            <ToggleButton-->
+                            <!--                                android:id="@+id/switchCropping"-->
+                            <!--                                android:layout_width="80dp"-->
+                            <!--                                android:layout_height="38dp"-->
+                            <!--                                android:layout_alignBottom="@+id/s_croppingText"-->
+                            <!--                                android:layout_alignParentRight="true"-->
+                            <!--                                android:background="@drawable/ic_new_toggle"-->
+                            <!--                                android:textColor="#ffffff"-->
+                            <!--                                android:textSize="14sp" />-->
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switchCropping"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_owncamera_nn"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switchDeviceCamera"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_resolution_selector"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switchResolution"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_item_column_0_line_580_file_121"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switchAnother"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/s_item_column_0_line_647_file_27"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_switch_auto_uploading"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <!--                            <ToggleButton-->
+                            <!--                                android:id="@+id/switchCropping"-->
+                            <!--                                android:layout_width="80dp"-->
+                            <!--                                android:layout_height="38dp"-->
+                            <!--                                android:layout_alignBottom="@+id/s_croppingText"-->
+                            <!--                                android:layout_alignParentRight="true"-->
+                            <!--                                android:background="@drawable/ic_new_toggle"-->
+                            <!--                                android:textColor="#ffffff"-->
+                            <!--                                android:textSize="14sp" />-->
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switch_alternate_jobs"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_switch_wifi_uploading"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switch_wifi_only"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_switch_branch_name"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switch_branch_name"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="15dp"
+                                android:layout_weight="1"
+                                android:text="@string/s_switch_filter_date"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:id="@+id/switch_filter_date"
+                                android:layout_width="54dp"
+                                android:layout_height="27dp"
+                                android:background="@drawable/gray_corners"
+                                android:layoutDirection="ltr"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="2dp"
+                                    app:srcCompat="@drawable/white_owal" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#C4C4C4" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnSave"
                         android:layout_width="match_parent"
@@ -349,8 +766,8 @@
                         android:background="@drawable/rounded_button"
                         android:gravity="center"
                         android:padding="12dp"
-                        android:textColor="@color/white"
-                        android:text="Save &amp; Continue" />
+                        android:text="Save &amp; Continue"
+                        android:textColor="@color/white" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.cardview.widget.CardView>
