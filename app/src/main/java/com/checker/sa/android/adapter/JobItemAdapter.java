@@ -1,5 +1,7 @@
 package com.checker.sa.android.adapter;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -1285,6 +1287,7 @@ public class JobItemAdapter extends BaseAdapter {
                 tvStatusShow.setText(con.getString(R.string.jd_continue_review_btn_text));
             }
 
+            myPrefs = con.getSharedPreferences("pref", MODE_PRIVATE);
             tvAccept.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1292,8 +1295,9 @@ public class JobItemAdapter extends BaseAdapter {
                             .equals(con.getString(R.string.jd_begin_btn_text))) {
                         if (order.getOrderID().contains("-")) {
                             if (order.getStatusName().equals("survey")) {
-
-                                if (survey != null && survey.isAllocationReached()) {
+                                Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
+                                        "-", ""));
+                                if (s != null && s.isAllocationReached()) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(con);
                                     builder.setMessage(
                                                     con.getResources()
