@@ -1,13 +1,5 @@
 package com.checker.sa.android.adapter;
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,16 +11,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -45,10 +34,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 
 import com.checker.sa.android.data.BasicLog;
-import com.checker.sa.android.data.InProgressFileData;
+import com.checker.sa.android.data.Cert;
 import com.checker.sa.android.data.Objects;
 import com.checker.sa.android.data.Order;
-import com.checker.sa.android.data.Orders;
 import com.checker.sa.android.data.QuestionnaireData;
 import com.checker.sa.android.data.Set;
 import com.checker.sa.android.data.SubmitQuestionnaireData;
@@ -58,18 +46,24 @@ import com.checker.sa.android.data.filePathDataID;
 import com.checker.sa.android.data.orderListItem;
 import com.checker.sa.android.data.parser.Parser;
 import com.checker.sa.android.db.DBHelper;
-import com.checker.sa.android.dialog.RefusalReasonDialog;
 import com.checker.sa.android.helper.BranchTVListener;
 import com.checker.sa.android.helper.Constants;
 import com.checker.sa.android.helper.DateTVListener;
 import com.checker.sa.android.helper.Helper;
 import com.checker.sa.android.helper.UIHelper;
-import com.google.android.gms.maps.model.LatLng;
-import com.mor.sa.android.activities.JobDetailActivity;
+import com.checker.sa.android.helper.jobBoardCertsListener;
 import com.mor.sa.android.activities.JobListActivity;
 import com.mor.sa.android.activities.QuestionnaireActivity;
 import com.mor.sa.android.activities.R;
 import com.mor.sa.android.activities.SplashScreen;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class JobItemAdapter extends BaseAdapter {
 
@@ -122,7 +116,8 @@ public class JobItemAdapter extends BaseAdapter {
 
     boolean isFromWatch;
 
-    private final int QUESTIONNAIRE_ACTIVITY_CODE = 1;
+    TextView tvAccept, tvStatusShow, tvRejectShow;
+
 
     public void setDateCallback(DateTVListener dateCallback) {
         this.dateCallback = dateCallback;
@@ -211,7 +206,7 @@ public class JobItemAdapter extends BaseAdapter {
                           ImageView imgtabTwo, ImageView imgtabThree, ImageView imgtabFour,
                           TextView txttabSync, TextView txttabOne, TextView txttabTwo,
                           TextView txttabThree, TextView txttabFour, View ltabOne,
-                          View ltabTwo, View ltabThree, View ltabFour) {
+                          View ltabTwo, View ltabThree, View ltabFour, onJobItemClickListener mListener, onJobStartClickLister mJobStartListener) {
 
         this.VtabOne = ltabOne;
         this.VtabTwo = ltabTwo;
@@ -238,6 +233,8 @@ public class JobItemAdapter extends BaseAdapter {
             this.tabFilterTwo = tabFilte;
         this.tabFilter = tabFilte;
         this.joblistarray = this.full_joblistarray = listarray;
+        this.mListener = mListener;
+        this.mJobStartListener = mJobStartListener;
 
     }
 
@@ -260,6 +257,40 @@ public class JobItemAdapter extends BaseAdapter {
     public ProgressDialog pd;
     private boolean isLongTaskCalled = true;
     protected View lastpopuplayout;
+
+    SharedPreferences myPrefs;
+
+    Order order;
+    Survey survey;
+    boolean isSurvey;
+    private boolean isBriefing;
+    private final int JOB_GPS_CODE = 678;
+    private Set set;
+    private ArrayList<Cert> pendingCerts = null;
+    //    String OrderID;
+    private boolean refreshJoblist;
+
+    private int serverGroupedNumber;
+
+    private static jobBoardCertsListener certCallBack;
+
+
+    private onJobItemClickListener mListener;
+
+    public interface onJobItemClickListener {
+        void onItemClick(int position);
+    }
+
+    private onJobStartClickLister mJobStartListener;
+
+    public interface onJobStartClickLister {
+        void onJobStartClick(int position);
+
+    }
+
+//    public void setOnItemClickListener(onItemClickListener listener) {
+//        this.mListener = listener;
+//    }
 
     public void callCount() {
         filterOne = "assigned";
@@ -627,7 +658,6 @@ public class JobItemAdapter extends BaseAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        // TODO Auto-generated method stub
         super.notifyDataSetChanged();
         int i = 0;
         i++;
@@ -677,7 +707,6 @@ public class JobItemAdapter extends BaseAdapter {
                 Order order = full_joblistarray.get(i).orderItem;
                 if (order != null
                         && (order.getStatusName().toLowerCase()
-
                         .equals(tabFilter.toLowerCase()) || order
                         .getStatusName().toLowerCase()
                         .equals(tabFilterTwo.toLowerCase()))) {
@@ -901,7 +930,6 @@ public class JobItemAdapter extends BaseAdapter {
 //				server_attached_files = (ArrayList<InProgressFileData>) DBHelper
 //						.convertFromBytes("inprogress_data");
 //			} catch (IOException e) {
-//				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
 
@@ -1001,26 +1029,6 @@ public class JobItemAdapter extends BaseAdapter {
                     }
 
                     customAlert(con, string);
-                    // AlertDialog.Builder builder = new
-                    // AlertDialog.Builder(con);
-
-                    // <string name="deleted_review">[QUESTIONNAIRE] Review for
-                    // Branch [BRANCH], [DATE] is already submitted from another
-                    // device, uploading it again will overwrite all information
-                    // on server. please contact office to validate.</string>
-
-                    // builder.setMessage(act.getString(R.string.returned_review))
-                    // .setCancelable(false)
-                    // .setPositiveButton(
-                    // act.getString(R.string.button_ok),
-                    // new DialogInterface.OnClickListener() {
-                    // public void onClick(
-                    // DialogInterface dialog, int id) {
-                    // // do things
-                    // }
-                    // });
-                    // AlertDialog alert = builder.create();
-                    // alert.show();
                 }
             });
         }
@@ -1197,7 +1205,9 @@ public class JobItemAdapter extends BaseAdapter {
             ImageView ivLocation = (ImageView) row.findViewById(R.id.iv_location);
             tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
             TextView tvReject = (TextView) row.findViewById(R.id.tv_reject);
-            TextView tvAccept = (TextView) row.findViewById(R.id.tv_accept);
+            tvAccept = (TextView) row.findViewById(R.id.tv_accept);
+            tvStatusShow = (TextView) row.findViewById(R.id.tv_status_show);
+            tvRejectShow = (TextView) row.findViewById(R.id.tv_reject_show);
             View view2 = (View) row.findViewById(R.id.view2);
             View view1 = (View) row.findViewById(R.id.view1);
             LinearLayout llSchedulesExpandLayout = (LinearLayout) row.findViewById(R.id.ll_schedules_expand_layout);
@@ -1206,6 +1216,7 @@ public class JobItemAdapter extends BaseAdapter {
             CardView cardView = (CardView) row.findViewById(R.id.cardView);
             NestedScrollView nestedScroll = (NestedScrollView) row.findViewById(R.id.nestedScroll);
             LinearLayout llStartJob = (LinearLayout) row.findViewById(R.id.ll_start_job);
+            LinearLayout llAccept = (LinearLayout) row.findViewById(R.id.ll_accept);
 
             TextView tvSurveyName = (TextView) row.findViewById(R.id.tv_survey_name);
             TextView tvBranchFullName = (TextView) row.findViewById(R.id.tv_branch_full_name);
@@ -1226,11 +1237,14 @@ public class JobItemAdapter extends BaseAdapter {
             TextView tvCriticismPayment = (TextView) row.findViewById(R.id.tv_criticism_payment);
             TextView tvBonusPayment = (TextView) row.findViewById(R.id.tv_bonus_payment);
             TextView tvStatus = (TextView) row.findViewById(R.id.tv_status);
+            TextView tvStatusAssigned = (TextView) row.findViewById(R.id.tv_status_assigned);
 
             ListView lvjdsurvey_quotas_list = (ListView) row.findViewById(R.id.quotas_list);
             ListView lvjdsurvey_allocations_list = (ListView) row.findViewById(R.id.allocations_list);
 
             nestedScroll.setVisibility(View.GONE);
+
+            tvRejectShow.setText(con.getResources().getString(R.string.jd_reject_btn_text));
 
             ivDownArrow.setOnClickListener(new OnClickListener() {
                 @Override
@@ -1256,72 +1270,258 @@ public class JobItemAdapter extends BaseAdapter {
                 }
             });
 
+
+            if (order.getOrderID().contains("-"))
+                tvStatusShow.setText(con.getString(R.string.jd_begin_btn_text));
+            else if (order.getStatusName().equals("Assigned"))
+                tvStatusShow.setText(con.getString(R.string.jd_accept_btn_text));
+            else if (order.getStatusName().equals("Scheduled") || order.getStatusName().equals("cert"))
+                tvStatusShow.setText(con.getString(R.string.jd_begin_review_btn_text));
+            else if (order.getStatusName().equals("in progress") || order.getStatusName().equals("In progress") || order.getStatusName().toLowerCase().equals("archived"))// (getString(R.string.jd_begin_button_status_inprogress)))
+                tvStatusShow.setText(con.getString(R.string.jd_continue_review_btn_text));
+            else if (order.getStatusName().equals("Completed"))// (getString(R.string.jd_begin_button_status_completed)))
+            {
+                // rejectbtn.setText(getString(R.string.jd_synch_button_text));
+                tvStatusShow.setText(con.getString(R.string.jd_continue_review_btn_text));
+            }
+
             tvAccept.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    llStartJob.setVisibility(View.VISIBLE);
-                    tvAccept.setVisibility(View.GONE);
-                    ivDownArrow.setVisibility(View.GONE);
+                    if (tvStatusShow.getText().toString()
+                            .equals(con.getString(R.string.jd_begin_btn_text))) {
+                        if (order.getOrderID().contains("-")) {
+                            if (order.getStatusName().equals("survey")) {
 
+                                if (survey != null && survey.isAllocationReached()) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(con);
+                                    builder.setMessage(
+                                                    con.getResources()
+                                                            .getString(
+                                                                    R.string.questionnaire_open_survey_alert))
+                                            .setTitle(
+                                                    con.getResources().getString(
+                                                            R.string._alert_title))
+                                            .setCancelable(false)
+                                            .setPositiveButton(
+                                                    con.getResources().getString(
+                                                            R.string.button_ok),
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(
+                                                                DialogInterface dialog,
+                                                                int id) {
+                                                            dialog.dismiss();
+//                                                            ((Activity) con).finish();
+                                                        }
+                                                    });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                                } else {
+                                    SplashScreen.addLog(new BasicLog(
+                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                                    ((JobListActivity) con).startLocationCheckerAdapter();
+                                }
+
+                            } else {
+                                SplashScreen.addLog(new BasicLog(
+                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                                ((JobListActivity) con).startLocationCheckerAdapter();
+                            }
+                        }
+                    }
+                    if (tvStatusShow.getText().toString()
+                            .equals(con.getString(R.string.jd_accept_btn_text))) {
+                        int ins = ((JobListActivity) con).IsInternetConnecttedAdapter();
+                        if (ins >= 0) {
+                            ((JobListActivity) con).ShowAlertButton(con,
+                                    con.getString(R.string.jd_parsing_alert_title),
+                                    con.getString(R.string.accept_job_fail_alert),
+                                    con.getString(R.string.alert_btn_lbl_ok));
+                            return;
+                        }
+                        ((JobListActivity) con).someMethod(con.getString(R.string.jd_accept_btn_text));
+
+                    } else if (tvStatusShow.getText().toString()
+                            .equals(con.getString(R.string.jd_begin_review_btn_text))) {
+                        if (isBriefing == true) {
+                            isBriefing = false;
+//                            showBriefing();
+                        } else {
+                            SplashScreen.addLog(new BasicLog(
+                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + order.getOrderID() + " = " + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                            ((JobListActivity) con).startLocationCheckerAdapter();
+                        }
+
+                    } else if (tvStatusShow.getText().toString()
+                            .equals(con.getString(R.string.jd_continue_review_btn_text))) {
+                        SplashScreen.addLog(new BasicLog(
+                                myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + order.getOrderID() + " = " + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                        if (Settings.Secure.getString(
+                                con.getContentResolver(),
+                                Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+                            ((JobListActivity) con).MockGPSALERT();
+                            return;
+                        }
+
+                        ((JobListActivity) con).BeginReview(false);
+                    }
                 }
             });
 
-//            llStartJob.setOnClickListener(new OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    llStartJob.setVisibility(View.GONE);
-//                    tvAccept.setVisibility(View.VISIBLE);
-//                    ivDownArrow.setVisibility(View.VISIBLE);
-//                }
-//            });
+            llAccept.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(con, "accept_layout_click", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            if ((order != null && order.getStatusName() != null && order.getStatusName().toLowerCase().contains("archive")) || (order != null && order.getAsArchive())) {
+                tvRejectShow.setText(con.getResources().getString(R.string.button_back_archive));
+            }
+
+            tvReject.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemClick(position);
+                }
+            });
 
             llStartJob.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if (this.isBriefing == true) {
-//                        isBriefing = false;
-//                        showBriefing();
-//                    } else {
+
+                    mJobStartListener.onJobStartClick(position);
+
+//                    if (order.getOrderID().contains("-")) {
+//                        if (order.getStatusName().equals("survey")) {
+//
+//                            if (survey != null && survey.isAllocationReached()) {
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(
+//                                        con);
+//                                builder.setMessage(
+//                                                con.getResources()
+//                                                        .getString(
+//                                                                R.string.questionnaire_open_survey_alert))
+//                                        .setTitle(
+//                                                con.getResources().getString(
+//                                                        R.string._alert_title))
+//                                        .setCancelable(false)
+//                                        .setPositiveButton(
+//                                                con.getResources().getString(
+//                                                        R.string.button_ok),
+//                                                new DialogInterface.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(
+//                                                            DialogInterface dialog,
+//                                                            int id) {
+//                                                        dialog.dismiss();
+////                                                        finish();
+//                                                    }
+//                                                });
+//                                AlertDialog alert = builder.create();
+//                                alert.show();
+//                            } else {
+//                                SplashScreen.addLog(new BasicLog(
+//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+//
+//                                ((JobListActivity) con).startLocationCheckerAdapter();
+//                            }
+//
+//                        } else {
+//                            SplashScreen.addLog(new BasicLog(
+//                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+//
+//                            ((JobListActivity) con).startLocationCheckerAdapter();
+//                        }
+//                    }
+//
+//                    if (order.getStatusName().equals("Scheduled") || order.getStatusName().equals("cert")) {
+//                        if (isBriefing == true) {
+//                            isBriefing = false;
+////                                showBriefing();
+//                        } else {
+//                            SplashScreen.addLog(new BasicLog(
+//                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + order.getOrderID() + " = " + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+//
+//                            ((JobListActivity) con).startLocationCheckerAdapter();
+//                        }
+//
+//                    } else if (order.getStatusName().equals("Completed") || order.getStatusName().equals("in progress") || order.getStatusName().equals("In progress") || order.getStatusName().equals("archived")) {
 //                        SplashScreen.addLog(new BasicLog(
 //                                myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
 //                                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + order.getOrderID() + " = " + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
 //
-//                        startLocationChecker();
+//                        if (Settings.Secure.getString(
+//                                con.getContentResolver(),
+//                                Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+//                            ((JobListActivity) con).MockGPSALERT();
+//                            return;
+//                        }
+//
+//                        ((JobListActivity) con).BeginReview(false);
 //                    }
+
+
                     //"OrderID" - Assigned
                     //"SurveyID" - Scheduled,Other
 
-                    if (order.getOrderID().contains("-")) {
-//                        Toast.makeText(con, "Assigned tab", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(con.getApplicationContext(),
-                                QuestionnaireActivity.class);
-                        intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, order.getOrderID());
-                        intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
-//                        if (isFromWatch)
-//                            con.startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-//                        else
-                        con.startActivity(intent);
-                    } else if (order != null && order.getSetName() != null
-                            && !order.getSetName().equals("")) {
-//                        Toast.makeText(con, "Scheduled tab", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(con.getApplicationContext(),
-                                QuestionnaireActivity.class);
-                        if (order == null)
-                            setOrder();
-                        intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                                order.getOrderID());
-                        intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
-//                        if (isFromWatch)
-//                            startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-//                        else
-                        con.startActivity(intent);
-
-                    } else {
-//                        Toast.makeText(con, "Other tab", Toast.LENGTH_SHORT).show();
-                    }
+//                    if (order.getOrderID().contains("-")) {
+////                        ((JobListActivity) con).BeginReview(true);
+//
+//                        Intent intent = new Intent(con.getApplicationContext(),
+//                                QuestionnaireActivity.class);
+//                        intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, order.getOrderID());
+//                        intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
+//                        intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, myPrefs.getString("order_id", ""));
+//                        intent.putExtra(Constants.FIELD_ORDER_SET_ID, myPrefs.getString("setid", ""));
+//                        con.startActivity(intent);
+//
+//                    } else if (order != null && order.getSetName() != null
+//                            && !order.getSetName().equals("")) {
+//
+////                        ((JobListActivity) con).BeginReview(true);
+//                        Intent intent = new Intent(con.getApplicationContext(),
+//                                QuestionnaireActivity.class);
+//                        if (order == null)
+//                            ((JobListActivity) con).setOrder();
+//                        intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+//                                order.getOrderID());
+//                        intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
+////                        if (isFromWatch)
+////                            startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+////                        else
+//                        con.startActivity(intent);
+//
+//                    } else {
+////                        Toast.makeText(con, "Other tab", Toast.LENGTH_SHORT).show();
+//                    }
                 }
             });
+
+
+            String status = order.getStatusName().toLowerCase();
+
+            if (order != null && (status.equals(filterOne.toLowerCase()) || (status.equals(sfilterOne.toLowerCase())))) {
+                llStartJob.setVisibility(View.GONE);
+                tvAccept.setVisibility(View.VISIBLE);
+            } else {
+                llStartJob.setVisibility(View.VISIBLE);
+                tvAccept.setVisibility(View.GONE);
+            }
+
 
             // ImageView iv = (ImageView) row.findViewById(R.id.leftiv);
             // iv.setVisibility(RelativeLayout.GONE);
@@ -1353,42 +1553,42 @@ public class JobItemAdapter extends BaseAdapter {
                 jobItemList.setAdapter(new jobInnerItemAdapter(act,
                         this.joblistarray.get(position).listOrders));
 //                TODO JobDetailActivity
-                jobItemList.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1,
-                                            int arg2, long arg3) {
-                        if (joblistarray.get(position).listOrders != null
-                                && joblistarray.get(position).listOrders
-                                .get(arg2) != null
-                                && joblistarray.get(position).listOrders.get(
-                                arg2).getStatusName() != null
-                                && joblistarray.get(position).listOrders
-                                .get(arg2).getStatusName()
-                                .equals("wrong")) {
-                            // showRAlert(JobListActivity.this);
-                        } else {
-                            Intent intent = new Intent(ct
-                                    .getApplicationContext(),
-                                    JobDetailActivity.class);
-                            // isJobselected = true;
-                            if (joblistarray.get(position).listOrders != null
-                                    && joblistarray.get(position).listOrders
-                                    .size() > 0) {
-
-                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
-                                // );
-                                intent.putExtra("OrderID", joblistarray
-                                        .get(position).listOrders.get(arg2)
-                                        .getOrderID());
-                            }
-                            intent.putExtra("OrderIndex", arg2);
-                            intent.putExtra("Index", arg2);
-                            Constants.setLocale(act);
-                            act.startActivityForResult(intent,
-                                    JOB_DETAIL_ACTIVITY_CODE);
-                        }
-                    }
-                });
+//                jobItemList.setOnItemClickListener(new OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> arg0, View arg1,
+//                                            int arg2, long arg3) {
+//                        if (joblistarray.get(position).listOrders != null
+//                                && joblistarray.get(position).listOrders
+//                                .get(arg2) != null
+//                                && joblistarray.get(position).listOrders.get(
+//                                arg2).getStatusName() != null
+//                                && joblistarray.get(position).listOrders
+//                                .get(arg2).getStatusName()
+//                                .equals("wrong")) {
+//                            // showRAlert(JobListActivity.this);
+//                        } else {
+//                            Intent intent = new Intent(ct
+//                                    .getApplicationContext(),
+//                                    JobDetailActivity.class);
+//                            // isJobselected = true;
+//                            if (joblistarray.get(position).listOrders != null
+//                                    && joblistarray.get(position).listOrders
+//                                    .size() > 0) {
+//
+//                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
+//                                // );
+//                                intent.putExtra("OrderID", joblistarray
+//                                        .get(position).listOrders.get(arg2)
+//                                        .getOrderID());
+//                            }
+//                            intent.putExtra("OrderIndex", arg2);
+//                            intent.putExtra("Index", arg2);
+//                            Constants.setLocale(act);
+//                            act.startActivityForResult(intent,
+//                                    JOB_DETAIL_ACTIVITY_CODE);
+//                        }
+//                    }
+//                });
                 jobItemList.setVisibility(View.GONE);
                 setListViewHeightBasedOnChildren(jobItemList);
 //                ivRight.setVisibility(View.VISIBLE);
@@ -1433,6 +1633,7 @@ public class JobItemAdapter extends BaseAdapter {
                     tv.setText(s.getSurveyName());
                     tvSurveyName.setText(s.getSurveyName());
                     tvBranchFullName.setText(s.getBranchFullName());
+                    tvStatusAssigned = getTextFromHtmlFormate(order.getStatusName(), tvStatusAssigned);
                 } else {
                     if (!Constants.getDateFilter())
                         ivRight.setVisibility(RelativeLayout.GONE);
@@ -1488,6 +1689,7 @@ public class JobItemAdapter extends BaseAdapter {
 
             } else if (order != null && order.getSetName() != null
                     && !order.getSetName().equals("")) {
+
                 if (order.getClientName() == null)
                     order.setClientName("");
                 if (order.getSetName() == null)
@@ -1544,34 +1746,6 @@ public class JobItemAdapter extends BaseAdapter {
                             con.getString(R.string.questionnaire_exit_delete_alert_no),
                             tvMakePurchase);
                 }
-
-                tvReject.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                        Toast.makeText(con,
-//                                "You are click on scheduled reject button ",
-//                                Toast.LENGTH_LONG).show();
-
-                        if (order != null
-                                && order.getAllowShoppersToRejectJobs() != null
-                                && order.getAllowShoppersToRejectJobs().equals("2")) {
-                            Toast.makeText(con,
-                                    "You are not allowed to reject jobs.",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                        if (order != null
-                                && order.getAllowShoppersToRejectJobs() != null
-                                && order.getAllowShoppersToRejectJobs().equals("1")
-                                && !order.getStatusName().equals("Assigned")) {
-
-                            Toast.makeText(con,
-                                    "You are not allowed to reject this job.",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                        RefusalReasonDialog dialog = new RefusalReasonDialog(con);
-                        dialog.show();
-                    }
-                });
 
             } else {
                 if (order.getClientName() == null)
@@ -1779,53 +1953,53 @@ public class JobItemAdapter extends BaseAdapter {
                 jobItemList.setAdapter(new jobInnerItemAdapter(act,
                         this.joblistarray.get(position).listOrders));
 //                TODO JobDetailActivity
-                jobItemList.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View arg1,
-                                            int arg2, long arg3) {
-                        if (joblistarray.get(position).listSurveys != null
-                                && joblistarray.get(position).listSurveys
-                                .get(arg2) != null) {
-                            // showRAlert(JobListActivity.this);
-                        } else {
-                            Intent intent = new Intent(ct
-                                    .getApplicationContext(),
-                                    JobDetailActivity.class);
-                            // isJobselected = true;
-                            if (joblistarray.get(position).listSurveys != null
-                                    && joblistarray.get(position).listSurveys
-                                    .size() > 0) {
-                                Order o_rder = joblistarray.get(position).orderItem;
-                                Survey s = Surveys.getCurrentSurve(o_rder
-                                        .getOrderID().replace("-", ""));
-                                if (s != null && s.getSurveyName() != null) {
-
-                                } else {
-
-                                    Toast.makeText(
-                                            con,
-                                            con.getResources()
-                                                    .getString(
-                                                            R.string.could_not_retrieve),
-                                            Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-
-                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
-                                // );
-                                intent.putExtra("SurveyID", joblistarray
-                                        .get(position).listSurveys.get(arg2)
-                                        .getSurveyID());
-                                intent.putExtra("OrderID", "");
-                            }
-                            intent.putExtra("OrderIndex", arg2);
-                            intent.putExtra("Index", arg2);
-                            Constants.setLocale(act);
-                            act.startActivityForResult(intent,
-                                    JOB_DETAIL_ACTIVITY_CODE);
-                        }
-                    }
-                });
+//                jobItemList.setOnItemClickListener(new OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> arg0, View arg1,
+//                                            int arg2, long arg3) {
+//                        if (joblistarray.get(position).listSurveys != null
+//                                && joblistarray.get(position).listSurveys
+//                                .get(arg2) != null) {
+//                            // showRAlert(JobListActivity.this);
+//                        } else {
+//                            Intent intent = new Intent(ct
+//                                    .getApplicationContext(),
+//                                    JobDetailActivity.class);
+//                            // isJobselected = true;
+//                            if (joblistarray.get(position).listSurveys != null
+//                                    && joblistarray.get(position).listSurveys
+//                                    .size() > 0) {
+//                                Order o_rder = joblistarray.get(position).orderItem;
+//                                Survey s = Surveys.getCurrentSurve(o_rder
+//                                        .getOrderID().replace("-", ""));
+//                                if (s != null && s.getSurveyName() != null) {
+//
+//                                } else {
+//
+//                                    Toast.makeText(
+//                                            con,
+//                                            con.getResources()
+//                                                    .getString(
+//                                                            R.string.could_not_retrieve),
+//                                            Toast.LENGTH_SHORT).show();
+//                                    return;
+//                                }
+//
+//                                // intent.putExtra("briefing",joblistarray.get(position).listOrders.
+//                                // );
+//                                intent.putExtra("SurveyID", joblistarray
+//                                        .get(position).listSurveys.get(arg2)
+//                                        .getSurveyID());
+//                                intent.putExtra("OrderID", "");
+//                            }
+//                            intent.putExtra("OrderIndex", arg2);
+//                            intent.putExtra("Index", arg2);
+//                            Constants.setLocale(act);
+//                            act.startActivityForResult(intent,
+//                                    JOB_DETAIL_ACTIVITY_CODE);
+//                        }
+//                    }
+//                });
                 jobItemList.setVisibility(View.GONE);
                 setListViewHeightBasedOnChildren(jobItemList);
                 ivRight.setVisibility(View.VISIBLE);
@@ -1985,75 +2159,26 @@ public class JobItemAdapter extends BaseAdapter {
         return tv;
     }
 
-    Order order;
-    Survey survey;
-    boolean isSurvey;
-    private boolean isBriefing;
 
-    private void setOrder() {
-        Bundle b = ((Activity) con).getIntent().getExtras();
-
-        if (b == null)
-            return;
-
-        String OrderID = b.getString("OrderID");
-        String SurveyID = b.getString("SurveyID");
-
-        if (SurveyID != null && !SurveyID.equals("")
-                && Surveys.getSets() != null) {
-            for (int i = 0; i < Surveys.getSets().size(); i++) {
-                survey = Surveys.getSets().get(i);
-                order = null;
-                if (survey.getSurveyID().equals(SurveyID))
-                    break;
-            }
-            // order = Orders.getOrders().get(index);
-//            if (survey != null)
-//                setValueFieldText(survey);
-            isBriefing = false;
-        } else {
-            for (int i = 0; i < Orders.getOrders().size(); i++) {
-                order = Orders.getOrders().get(i);
-                if (order != null && order.getOrderID().equals(OrderID))
-                    break;
-            }
-            // order = Orders.getOrders().get(index);
-            if (order != null) {
-                isSurvey = OrderID.contains("-");
-//                setValueFieldText(isSurvey);
-
-                if (order.getBriefingContent() != null
-                        && !order.getBriefingContent().equals("")) {
-                    isBriefing = true;
-                }
-
-            }
-        }
-
-//        if (order != null) {
-//            SharedPreferences myPrefs = getSharedPreferences("pref",
-//                    MODE_PRIVATE);
-//            SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//            prefsEditor.putString(Constants.Crash_Last_SETID, order.getSetID());
-//            prefsEditor.commit();
-//            set = getSetsRecords(order.getSetID());
-//            if (spinner != null
-//                    && set != null
-//                    && set.getAllowCheckerToSetLang() != null
-//                    && (set.getAllowCheckerToSetLang().equals("1") || (set
-//                    .getListObjects() != null
-//                    && set.getListObjects().size() > 0
-//                    && set.getListObjects().get(0) != null
-//                    && set.getListObjects().get(0).altTexts != null && set
-//                    .getListObjects().get(0).altTexts.size() > 0))) {
+    //new code.....
+//    public void start_job() {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // mEditText.setText( "" );
 //
-//            } else if (spinner != null)
-//                spinner.setVisibility(RelativeLayout.GONE);
+//                if (aceeptbtn.getText().toString()
+//                        .equals(getString(R.string.jd_begin_review_btn_text))) {
+//                    BeginReview(true);
 //
-//        }
-        // Set set = getSetsRecords(order.getSetID());
-        // int count = set.getListObjects().size();
-        // Log.v("Count: ", ""+count);
-
-    }
+//                } else if (aceeptbtn
+//                        .getText()
+//                        .toString()
+//                        .equals(getString(R.string.jd_continue_review_btn_text))) {
+//
+//                    BeginReview(true);
+//                }
+//            }
+//        });
+//    }
 }

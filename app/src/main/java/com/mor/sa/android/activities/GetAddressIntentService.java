@@ -51,7 +51,7 @@ public class GetAddressIntentService extends IntentService {
             sendResultsToReceiver(1, msg);
         } else {
             Address address = addresses.get(0);
-            Log.e("Address", address.toString());
+//            Log.e("Address", address.toString());
             Constants.user_location_latitude = address.getLatitude();
             Constants.user_location_longitude = address.getLongitude();
 

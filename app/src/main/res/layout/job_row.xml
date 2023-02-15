@@ -170,6 +170,26 @@
                 android:typeface="normal"
                 tools:text="12" />
 
+            <TextView
+                android:id="@+id/tv_status_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view1"
+                android:layout_toRightOf="@id/tvcount"
+                android:text="Status"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_reject_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view1"
+                android:layout_marginStart="20dp"
+                android:layout_toRightOf="@id/tv_status_show"
+                android:text="Status"
+                android:textColor="#000000"
+                android:visibility="invisible" />
+
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/nestedScroll"
                 android:layout_width="match_parent"
@@ -178,7 +198,7 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="10dp"
                 android:layout_toEndOf="@id/checkbox"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -190,7 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <View
                             android:layout_width="match_parent"
@@ -646,12 +666,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <!--                        <LinearLayout-->
                         <!--                            android:layout_width="match_parent"-->
                         <!--                            android:layout_height="wrap_content"-->
                         <!--                            android:orientation="vertical">-->
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#DADADA" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Status"
+                            android:textColor="#AEAEAE"
+                            android:textSize="14sp"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <TextView
+                            android:id="@+id/tv_status_assigned"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="status"
+                            android:textColor="#666666"
+                            android:textSize="18sp"
+                            app:fontFamily="@font/roboto_regular" />
 
                         <View
                             android:layout_width="match_parent"
@@ -771,8 +815,8 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginStart="10dp"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
@@ -817,6 +861,7 @@
                     app:fontFamily="@font/roboto_regular" />
 
                 <LinearLayout
+                    android:id="@+id/ll_accept"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_toStartOf="@id/iv_down_arrow"

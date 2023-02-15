@@ -198,25 +198,31 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
         joborders = Constants.orderList;
 
-        for (int i = 0; i < jobordersss.size(); i++) {
-            joborders.add(new orderListItem(jobordersss.get(i), null));
-        }
-
-        Double[] latitude = new Double[jobordersss.size()];
-        Double[] longitude = new Double[jobordersss.size()];
-
-        for (int i = 0; i < jobordersss.size(); i++) {
-
-            latitude[i] = parseDouble(jobordersss.get(i).getBranchLat());
-            longitude[i] = parseDouble(jobordersss.get(i).getBranchLong());
-            locationArrayList.add(new LatLng(latitude[i], longitude[i]));
-            locationTitle.add(jobordersss.get(i).getBranchFullname());
-            title = jobordersss.get(i).getBranchFullname();
+        try {
+            for (int i = 0; i < jobordersss.size(); i++) {
+                joborders.add(new orderListItem(jobordersss.get(i), null));
+            }
 
 
-            Log.e("jobordersss", latitude[i].toString());
-            Log.e("jobordersss", longitude[i].toString());
-            Log.e("jobordersss", title.toString());
+            Double[] latitude = new Double[jobordersss.size()];
+            Double[] longitude = new Double[jobordersss.size()];
+
+            for (int i = 0; i < jobordersss.size(); i++) {
+
+                latitude[i] = parseDouble(jobordersss.get(i).getBranchLat());
+                longitude[i] = parseDouble(jobordersss.get(i).getBranchLong());
+                locationArrayList.add(new LatLng(latitude[i], longitude[i]));
+                locationTitle.add(jobordersss.get(i).getBranchFullname());
+                title = jobordersss.get(i).getBranchFullname();
+
+
+                Log.e("jobordersss", latitude[i].toString());
+                Log.e("jobordersss", longitude[i].toString());
+                Log.e("jobordersss", title.toString());
+            }
+
+        } catch (Exception e) {
+
         }
 
     }

@@ -179,7 +179,7 @@ public class comunicator extends WearableListenerService implements
 		} else if (messageEvent.getPath().equalsIgnoreCase(START_JOB)) {
 			if (comunicator.detailJob != null) {
 
-				((JobDetailActivity) comunicator.detailJob).start_job();
+				((JobListActivity) comunicator.detailJob).start_job();
 			}
 
 		} else if (comunicator.questionJob != null) {

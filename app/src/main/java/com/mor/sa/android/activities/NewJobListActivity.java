@@ -4844,7 +4844,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
                 mAdapter = new JobItemAdapter(NewJobListActivity.this, joborders,
                         mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
                         bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
-                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour);
+                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour,null,null);
                 mAdapter.setBranchCallback(this);
                 mAdapter.setDateCallback(this);
                 mAdapter.doFilter(mFilter, NewJobListActivity.this, true);
@@ -5281,7 +5281,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
         mAdapter = new JobItemAdapter(NewJobListActivity.this, joborders, mFilter,
                 bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
                 txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
-                ltabOne, ltabTwo, ltabThree, ltabFour);
+                ltabOne, ltabTwo, ltabThree, ltabFour,null,null);
         mAdapter.setBranchCallback(this);
         updateFiler(filterString);
         try {
@@ -5663,7 +5663,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
                             mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
                             bimgtabThree, bimgtabFour, txttabSync, txttabOne,
                             txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
-                            ltabThree, ltabFour);
+                            ltabThree, ltabFour,null,null);
                     mAdapter.setBranchCallback(this);
                 } else {
                     mAdapter.mainSetter(NewJobListActivity.this, joborders, mFilter,

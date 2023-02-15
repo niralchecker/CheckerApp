@@ -1,44 +1,5 @@
 package com.mor.sa.android.activities;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang.SerializationUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -68,15 +29,14 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.ResultReceiver;
 import android.provider.MediaStore.MediaColumns;
+import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.util.Base64;
@@ -110,7 +70,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -149,12 +108,13 @@ import com.checker.sa.android.data.Surveys;
 import com.checker.sa.android.data.UploadingProgressBars;
 import com.checker.sa.android.data.filePathDataID;
 import com.checker.sa.android.data.orderListItem;
+import com.checker.sa.android.data.parser.Parser;
 import com.checker.sa.android.data.pngItem;
 import com.checker.sa.android.data.validationSets;
-import com.checker.sa.android.data.parser.Parser;
 import com.checker.sa.android.db.DBAdapter;
 import com.checker.sa.android.db.DBHelper;
 import com.checker.sa.android.dialog.JobFilterDialog;
+import com.checker.sa.android.dialog.RefusalReasonDialog;
 import com.checker.sa.android.dialog.Revamped_Loading_Dialog;
 import com.checker.sa.android.helper.BranchTVListener;
 import com.checker.sa.android.helper.Constants;
@@ -172,7 +132,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
@@ -180,6 +139,45 @@ import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 import com.google.maps.android.JobBoardActivityFragment;
 import com.google.maps.android.MapActivity;
+
+import org.apache.commons.lang.SerializationUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class JobListActivity extends Activity implements OnClickListener,
         BranchTVListener, GoogleApiClient.ConnectionCallbacks,
@@ -258,15 +256,38 @@ public class JobListActivity extends Activity implements OnClickListener,
     private String color_select = "#94BzA09";
     private String txt_color_select = "#007BFF";
 
+
+    // New Code
     private TextView toolbarTitle;
-
-
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 2;
     private LocationAddressResultReceiver addressResultReceiver;
     private TextView currentAddTv;
     private Location currentLocation;
     private LocationCallback locationCallback;
+
+    Order order;
+    Survey survey;
+    String OrderID;
+    private final int QUESTIONNAIRE_ACTIVITY_CODE = 1;
+
+
+    // Reject Accept Code
+    private static final String START_JOB = "/start_job";
+
+    private Set set;
+    private ArrayList<Cert> pendingCerts = null;
+    private boolean refreshJoblist;
+
+    private int serverGroupedNumber;
+    public int msgId;
+    private String groupedNumber;
+    private static jobBoardCertsListener certCallBack;
+
+    private boolean isBriefing;
+
+    private int jobListItemId;
+//    private int jobStartItemId;
 
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
@@ -305,140 +326,111 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             imgtabOne.setImageDrawable(getResources().getDrawable(
                     getIcon("img_assigned_u")));
-            // imgtabOne.setImageDrawable(getBubble(12));
-
-            // tabOne.setPaintFlags(0);
             tabOne.setText(android.text.Html.fromHtml(getResources().getString(
                     R.string.job_list_tab_assigned)));
             tabOne.setTextColor(Color.parseColor(txt_color_unselect));
             tabOne.setChecked(false);
-//            tabOneb.setChecked(false);
-//
-//            tabOneb.setBackgroundColor(Color.parseColor("#FFFFFF"));
         }
         if (tabNumber != 2) {
-            // tabTwo.setPaintFlags(0);
+
             imgtabTwo.setImageDrawable(getResources().getDrawable(
                     getIcon("img_scheduled_u")));
             tabTwo.setText(android.text.Html.fromHtml(getResources().getString(
                     R.string.job_list_tab_scheduled)));
             tabTwo.setTextColor(Color.parseColor(txt_color_unselect));
             tabTwo.setChecked(false);
-//            tabTwob.setChecked(false);
-//            tabTwob.setBackgroundColor(Color.parseColor("#FFFFFF"));
             ltabTwo.setBackgroundColor(Color.parseColor(color_unselect));
         }
         if (tabNumber != 3) {
-            // tabThree.setPaintFlags(0);
+
             imgtabThree.setImageDrawable(getResources().getDrawable(
                     getIcon("img_in_progress_u")));
             tabThree.setText(android.text.Html.fromHtml(getResources()
                     .getString(R.string.job_list_tab_in_progress)));
             tabThree.setTextColor(Color.parseColor(txt_color_unselect));
             tabThree.setChecked(false);
-//            tabThreeb.setChecked(false);
-//            tabThreeb.setBackgroundColor(Color.parseColor("#FFFFFF"));
             ltabThree.setBackgroundColor(Color.parseColor(color_unselect));
         }
         if (tabNumber != 4) {
-            // tabFour.setPaintFlags(0);
+
             imgtabFour.setImageDrawable(getResources().getDrawable(
                     getIcon("img_completed_u")));
             tabFour.setText(android.text.Html.fromHtml(getResources()
                     .getString(R.string.job_list_tab_completed)));
             tabFour.setTextColor(Color.parseColor(txt_color_unselect));
             tabFour.setChecked(false);
-//            tabFourb.setChecked(false);
-//            tabFourb.setBackgroundColor(Color.parseColor("#FFFFFF"));
             ltabFour.setBackgroundColor(Color.parseColor(color_unselect));
         }
 
         if (tabNumber == 1) {
 
-//            tabOneb.setBackgroundColor(Color.parseColor(color_select));
             imgtabOne.setImageDrawable(getResources().getDrawable(
                     getIcon("img_assigned")));
 
             SpannableString spanString = new SpannableString(getResources()
                     .getString(R.string.job_list_tab_assigned));
-            // spanString.setSpan(new UnderlineSpan(), 0, spanString.length(),
-            // 0);
+
             spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
                     spanString.length(), 0);
             tabOne.setTextColor(Color.parseColor(txt_color_select));
-            // spanString.setSpan(new StyleSpan(Typeface.ITALIC), 0,
-            // spanString.length(), 0);
+
             tabOne.setText(spanString);
-            // tabOne.setPaintFlags(tabOne.getPaintFlags()
-            // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
+
             filter = "assigned";
             toolbarTitle.setText(spanString);
-            // ltabOne.setBackgroundColor(Color.parseColor(color_select));
+
         }
         if (tabNumber == 2) {
-//            tabTwob.setBackgroundColor(Color.parseColor(color_select));
+
             imgtabTwo.setImageDrawable(getResources().getDrawable(
                     getIcon("img_scheduled")));
 
             SpannableString spanString = new SpannableString(getResources()
                     .getString(R.string.job_list_tab_scheduled));
-            // spanString.setSpan(new UnderlineSpan(), 0, spanString.length(),
-            // 0);
+
             spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
                     spanString.length(), 0);
-            // spanString.setSpan(new StyleSpan(Typeface.ITALIC), 0,
-            // spanString.length(), 0);
+
             tabTwo.setTextColor(Color.parseColor(txt_color_select));
             tabTwo.setText(spanString);
             filter = "scheduled";
             toolbarTitle.setText(spanString);
-            // ltabTwo.setBackgroundColor(Color.parseColor(color_select));
+
         }
         if (tabNumber == 3) {
-//            tabThreeb.setBackgroundColor(Color.parseColor(color_select));
             imgtabThree.setImageDrawable(getResources().getDrawable(
                     getIcon("img_in_progress")));
             SpannableString spanString = new SpannableString(getResources()
                     .getString(R.string.job_list_tab_in_progress));
-            // spanString.setSpan(new UnderlineSpan(), 0, spanString.length(),
-            // 0);
+
             spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
                     spanString.length(), 0);
-            // spanString.setSpan(new StyleSpan(Typeface.ITALIC), 0,
-            // spanString.length(), 0);
+
             tabThree.setText(spanString);
             tabThree.setTextColor(Color.parseColor(txt_color_select));
-            // tabThree.setPaintFlags(tabThree.getPaintFlags()
-            // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "in progress";
             toolbarTitle.setText(spanString);
-            // ltabThree.setBackgroundColor(Color.parseColor(color_select));
         }
         if (tabNumber == 4) {
-//            tabFourb.setBackgroundColor(Color.parseColor(color_select));
+
             imgtabFour.setImageDrawable(getResources().getDrawable(
                     getIcon("img_completed")));
             SpannableString spanString = new SpannableString(getResources()
                     .getString(R.string.job_list_tab_completed));
-            // spanString.setSpan(new UnderlineSpan(), 0, spanString.length(),
-            // 0);
+
             spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
                     spanString.length(), 0);
-            // spanString.setSpan(new StyleSpan(Typeface.ITALIC), 0,
-            // spanString.length(), 0);
+
             tabFour.setText(spanString);
             tabFour.setTextColor(Color.parseColor(txt_color_select));
-            // | Paint.UNDERLINE_TEXT_FLAG | Paint.FAKE_BOLD_TEXT_FLAG);
             filter = "completed";
             toolbarTitle.setText(spanString);
-            // ltabFour.setBackgroundColor(Color.parseColor(color_select));
         }
         try {
             if (mAdapter != null) {
                 mFilter = filter;
-                JobListActivity.LongOperation op = new JobListActivity.LongOperation();
+                LongOperation op = new LongOperation();
                 op.execute();
-                // mAdapter.doFilter(filter, JobListActivity.this, false);
 
             }
             layoutWorking.setVisibility(RelativeLayout.GONE);
@@ -447,61 +439,6 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
     }
 
-
-    // boolean isBusy = false;
-
-    // boolean login_check=false;
-
-    void stopLocationChecker() {
-        Context context = JobListActivity.this;
-        LocationManager locationManager = (LocationManager) context
-                .getSystemService(Context.LOCATION_SERVICE);
-        // if (Helper.lThread != null)
-        // Helper.lThread.isPost = false;
-
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-
-            // OPen GPS settings
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(
-                            getResources().getString(
-                                    R.string.questionnaire_gps_off_alert))
-                    .setTitle(getResources().getString(R.string._alert_title))
-                    .setCancelable(false)
-                    .setPositiveButton(
-                            getResources()
-                                    .getString(
-                                            R.string.questionnaire_exit_delete_alert_yes),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    // comunicator.JobList = null;
-                                    startActivityForResult(
-                                            new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),
-                                            JOB_GPS_OFF_CODE);
-
-                                    dialog.dismiss();
-
-                                }
-                            })
-                    .setNegativeButton(
-                            getResources()
-                                    .getString(
-                                            R.string.questionnaire_exit_delete_alert_no),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    dialog.dismiss();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-
-    }
 
     private void setInvertDisplay() {
         if (Helper.getTheme(JobListActivity.this) == 0) {
@@ -544,14 +481,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             String userName = myPrefs.getString(
                     Constants.POST_FIELD_LOGIN_USERNAME, "");
 
-            // locationThread lThread = new locationThread();
-            // lThread.startLocationThread(getApplicationContext(), userName);
-        }
-        // else if (locationManager
-        // .isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-        //
-        // }
-        else {
+        } else {
             // OPen GPS settings
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(
@@ -584,7 +514,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                                 @Override
                                 public void onClick(DialogInterface dialog,
                                                     int id) {
-                                    // startLocationChecker();
                                     dialog.dismiss();
                                     myPrefs = getSharedPreferences("pref",
                                             MODE_PRIVATE);
@@ -593,10 +522,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                                             .getString(
                                                     Constants.POST_FIELD_LOGIN_USERNAME,
                                                     "");
-                                    // locationThread lThread = new
-                                    // locationThread();
-                                    // lThread.startLocationThread(
-                                    // getApplicationContext(), userName);
                                 }
                             });
             AlertDialog alert = builder.create();
@@ -639,7 +564,6 @@ public class JobListActivity extends Activity implements OnClickListener,
             err_dialog.findViewById(R.id.briefingView).setVisibility(RelativeLayout.GONE);
 
         } else {
-            //.setVisibility(RelativeLayout.INVISIBLE);
             if (content != null && !content.equals("")) {
                 content = content.replace("&lt;", "<");
                 content = content.replace("&gt;", ">");
@@ -662,10 +586,9 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (b == false)//preview dialog
         {
 
-            //txt.setText("Preview");
             txt.setText(context.getResources().getString(R.string.questionnaire_preview_menu));
             btnClose.setText(context.getResources().getString(R.string.close));
-            //btnClose.setText("Close");
+
         }
         err_dialog.show();
     }
@@ -678,8 +601,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         err_dialog.setContentView(R.layout.dialog_urls);
         err_dialog.findViewById(R.id.textView1).setVisibility(
                 RelativeLayout.GONE);
-        // err_dialog.findViewById(R.id.btnClose).setVisibility(
-        // RelativeLayout.GONE);
+
         WebView wv = (WebView) err_dialog.findViewById(R.id.briefingView);
         wv.getSettings().setJavaScriptEnabled(true);
         wv.getSettings().setLoadWithOverviewMode(true);
@@ -704,8 +626,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // TODO Auto-generated method stub
                 super.onPageStarted(view, url, favicon);
 
-                // url = url +
-                // "";//https://checker-soft.com/testing/c_main.php?msg=Settings%20saved!
                 if (url != null
                         && (url.toLowerCase().contains("c_main.php") || url
                         .toLowerCase().contains("login.php"))) {
@@ -822,12 +742,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         String h = "";
         for (int j = 0; j < pngItems.size(); j++) {
-            // if (h.equals(getJobName(jobordersss, pngItems.get(j)))) {
-            //
-            // } else {
-            // h = getJobName(jobordersss, pngItems.get(j));
-            // listValues.add("-" + getJobName(jobordersss, pngItems.get(j)));
-            // }
+
             listValues.add(pngItems.get(j).MediaFile);
         }
 
@@ -1260,30 +1175,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 // historyOfReview();
                 break;
-            // case 11:// contact using whatsapp
-            //
-            // try {
-            //
-            // Intent sendIntent = new Intent(Intent.ACTION_SENDTO,
-            // Uri.parse("smsto:" + "" + Helper.helpline + "?body="
-            // + ""));
-            // sendIntent.setPackage("com.whatsapp");
-            // startActivity(sendIntent);
-            // } catch (Exception e) {
-            // e.printStackTrace();
-            // customAlert(
-            // JobListActivity.this,
-            // getResources().getString(
-            // R.string.whatsapp_not_available));
-            // // Intent sendIntent = new Intent(Intent.ACTION_DIAL);
-            // // sendIntent.setData(Uri.parse("tel:" + Helper.helpline));
-            // // startActivity(sendIntent);
-            // // Toast.makeText(JobListActivity.this,
-            // // "it may be you dont have whatsapp", Toast.LENGTH_LONG)
-            // // .show();
-            // }
-            //
-            // break;
             case 10:
                 ExitFromJobList();
                 break;
@@ -1789,14 +1680,71 @@ public class JobListActivity extends Activity implements OnClickListener,
         return true;
     }
 
+    public static boolean isFromWatch;
+
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stubse
-
         super.onResume();
         Constants.setLocale(JobListActivity.this);
-        startLocationUpdates();
-        // AutoSync();
+
+//        Bundle b = getIntent().getExtras();
+//
+//        if (b == null) {
+//            finish();
+//            return;
+//        }
+//
+//        if (b.containsKey(Constants.POST_FIELD_IS_ARCHIVE)) {
+//            finish();
+//            return;
+//        }
+        if (JobListActivity.isFromWatch) {
+            JobListActivity.isFromWatch = false;
+            finish();
+        }
+        comunicator.detailJob = JobListActivity.this;
+        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+//        modeSelect = myPrefs.getInt(Constants.SETTINGS_MODE_INDEX, 1);
+        if (myPrefs.contains("ispaused")
+                && myPrefs.getBoolean("ispaused", false)) {
+
+            OrderID = myPrefs.getString("order_id", "");
+            if (OrderID.contains("-")) {
+                Intent intent = new Intent(this.getApplicationContext(),
+                        QuestionnaireActivity.class);
+                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+                        myPrefs.getString("order_id", ""));
+                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+                        myPrefs.getString("setid", ""));
+                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+                        myPrefs.getString("setid", ""));
+                intent.putExtra("isPaused", true);
+                startActivity(intent);
+                Log.e("order_getSetID_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+            } else {
+                Intent intent = new Intent(this.getApplicationContext(),
+                        QuestionnaireActivity.class);
+                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+                        myPrefs.getString("order_id", ""));
+                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+                        myPrefs.getString("setid", ""));
+                intent.putExtra("isPaused", true);
+                startActivity(intent);
+                Log.e("order_getSetID_else_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+            }
+
+            Log.e("OrderID_onResume", OrderID);
+            return;
+        }
+//        if (CheckerApp.getQuestionResult() != null) {
+//
+//            b = getIntent().getExtras();
+//            if (b != null && OrderID == null || OrderID.length() == 0) {
+//
+//                OrderID = b.getString("OrderID");
+//            }
+//            onQuestionResult(CheckerApp.getQuestionResult());
+//        }
     }
 
     public void onStartDevicePermissions() {
@@ -2066,8 +2014,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 //                getString(R.string.job_list_menu_upload_complete_job),
 //                getString(R.string.job_list_menu_upload_complete_job),
 //                getIcon("filterjobs")));// 6
-
-//        menuItems.remove(6);
 
         menuItems.add(new com.checker.sa.android.data.MenuItem(
                 getString(R.string.job_list_menu_update_list),
@@ -2422,6 +2368,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
             }
 
+            //arg2 = position , arg3 = id
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
@@ -2446,58 +2393,64 @@ public class JobListActivity extends Activity implements OnClickListener,
                     showRAlert(JobListActivity.this);
                 } else {
 //                    TODO JobDetailActivity
-//                    Intent intent = new Intent(JobListActivity.this
-//                            .getApplicationContext(), JobDetailActivity.class);
-//                    JobDetailActivity
-//                            .setCertsCallback(new jobBoardCertsListener() {
-//
-//                                @Override
-//                                public void certCallBack(ArrayList<Cert> certs) {
-//                                    load_certificates(certs);
-//                                }
-//                            });
-//                    isJobselected = true;
-//                    if (mAdapter.joblistarray != null
-//                            && mAdapter.joblistarray.size() > 0) {
-//                        if (mAdapter.joblistarray.get(arg2).orderItem != null) {
-//                            intent.putExtra("OrderID", mAdapter.joblistarray
-//                                    .get(arg2).orderItem.getOrderID());
-//                            intent.putExtra(
-//                                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-//                                    mAdapter.joblistarray.get(arg2).orderItem
-//                                            .getCount() + "");
-//                            String OrderID = mAdapter.joblistarray
-//                                    .get(arg2).orderItem.getOrderID();
-//                            String surveyId = "";
-//                            if (OrderID.contains("-")) {
-//                                surveyId = (OrderID.replace("-", ""));
-//                                Survey survey = Surveys.getCurrentSurve(surveyId);
-//                                boolean b = survey.isAllocationReached();
-//                                if (b)//ALLOCATION REACHED
-//                                {
-//                                    Toast.makeText(JobListActivity.this,
-//                                            getString(R.string.questionnaire_open_survey_alert)
-//                                            , Toast.LENGTH_SHORT).show();
-//                                    return;
-//                                }
-//                            }
-//                        } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
-//                            intent.putExtra("SurveyID", mAdapter.joblistarray
-//                                    .get(arg2).surveyItem.getSurveyID());
-//
-//                        }
-//
-//                    } else
-//                        intent.putExtra(
-//                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-//                                "1");
-//                    intent.putExtra("OrderIndex", arg2);
-//                    intent.putExtra("Index", arg2);
-//                    // comunicator.JobList = null;
-//                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+
+                    Log.e("onItemClick", mAdapter.joblistarray
+                            .get(arg2).orderItem.getOrderID());
+                    Intent intent = new Intent(JobListActivity.this
+                            .getApplicationContext(), JobDetailActivity.class);
+                    JobDetailActivity
+                            .setCertsCallback(new jobBoardCertsListener() {
+
+                                @Override
+                                public void certCallBack(ArrayList<Cert> certs) {
+                                    load_certificates(certs);
+                                }
+                            });
+                    isJobselected = true;
+                    if (mAdapter.joblistarray != null
+                            && mAdapter.joblistarray.size() > 0) {
+                        if (mAdapter.joblistarray.get(arg2).orderItem != null) {
+//                            TODO OrderID
+                            intent.putExtra("OrderID", mAdapter.joblistarray
+                                    .get(arg2).orderItem.getOrderID());
+                            intent.putExtra(
+                                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                    mAdapter.joblistarray.get(arg2).orderItem
+                                            .getCount() + "");
+                            String OrderID = mAdapter.joblistarray
+                                    .get(arg2).orderItem.getOrderID();
+                            String surveyId = "";
+                            if (OrderID.contains("-")) {
+                                surveyId = (OrderID.replace("-", ""));
+                                Survey survey = Surveys.getCurrentSurve(surveyId);
+                                boolean b = survey.isAllocationReached();
+                                if (b)//ALLOCATION REACHED
+                                {
+                                    Toast.makeText(JobListActivity.this,
+                                            getString(R.string.questionnaire_open_survey_alert)
+                                            , Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+                        } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
+//                            TODO SurveyID
+                            intent.putExtra("SurveyID", mAdapter.joblistarray
+                                    .get(arg2).surveyItem.getSurveyID());
+
+                        }
+
+                    } else
+                        intent.putExtra(
+                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                "1");
+                    intent.putExtra("OrderIndex", arg2);
+                    intent.putExtra("Index", arg2);
+                    // comunicator.JobList = null;
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                 }
             }
         });
+
         Helper.setConfigChange(false);
         loadOfflineJobs(login_check);
         AutoSync();
@@ -2520,15 +2473,17 @@ public class JobListActivity extends Activity implements OnClickListener,
         prefsEditor = myPrefs.edit();
         SplashScreen.sendCrashReport(myPrefs, JobListActivity.this);
 
+
+        //new code
         ImageView ivTopMenu = (ImageView) findViewById(R.id.iv_top_menu);
         ivTopMenu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 JobFilterDialog dialog = new JobFilterDialog(JobListActivity.this);
                 dialog.show();
+                isJobselected = true;
             }
         });
-
 
         addressResultReceiver = new LocationAddressResultReceiver(new Handler());
         currentAddTv = findViewById(R.id.textView);
@@ -2553,6 +2508,39 @@ public class JobListActivity extends Activity implements OnClickListener,
                 startActivity(intent);
             }
         });
+
+
+//        this.groupedNumber = b.getString(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER);
+//        this.groupedNumber = mAdapter.joblistarray.get(jobListItemId).orderItem.getCount() + "";
+
+//        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+//        if (myPrefs.contains("ispaused")
+//                && myPrefs.getBoolean("ispaused", false)) {
+//            OrderID = myPrefs.getString("order_id", "");
+//            if (OrderID.contains("-")) {
+//                Intent intent = new Intent(this.getApplicationContext(),
+//                        QuestionnaireActivity.class);
+//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+//                        myPrefs.getString("order_id", ""));
+//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+//                        myPrefs.getString("setid", ""));
+//                comunicator.detailJob = null;
+//                startActivity(intent);
+//                Log.e("OrderID_onCreate", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
+//            } else {
+//                Intent intent = new Intent(this.getApplicationContext(),
+//                        QuestionnaireActivity.class);
+//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+//                        myPrefs.getString("order_id", ""));
+//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+//                        myPrefs.getString("setid", ""));
+//                comunicator.detailJob = null;
+//                startActivity(intent);
+//                Log.e("OrderID_onCreate_else", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
+//            }
+//            return;
+//        }
+
     }
 
     protected int getMinute(String start) {
@@ -4918,7 +4906,144 @@ public class JobListActivity extends Activity implements OnClickListener,
                 mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
                         mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
                         bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
-                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour);
+                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Log.e("position_activity", String.valueOf(position));
+
+//                      TODO jobListItemId
+
+//                        mAdapter.joblistarray.get(jobListItemId).orderItem.  getOrderID()
+                        jobListItemId = position;
+
+                        if (mAdapter.joblistarray.get(position).orderItem != null
+                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
+                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
+                            Toast.makeText(JobListActivity.this,
+                                    "You are not allowed to reject jobs.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        if (mAdapter.joblistarray.get(position).orderItem != null
+                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
+                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1")
+                                && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
+
+                            Toast.makeText(JobListActivity.this,
+                                    "You are not allowed to reject this job.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        RefusalReasonDialog dialog = new RefusalReasonDialog(JobListActivity.this);
+                        dialog.show();
+
+                    }
+                }, new JobItemAdapter.onJobStartClickLister() {
+                    @Override
+                    public void onJobStartClick(int position) {
+
+//                        TODO jobStartItemId
+
+                        jobListItemId = position;
+
+//                        if (mAdapter.joblistarray.get(position).orderItem.getOrderID().contains("-")) {
+//                            if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("survey")) {
+//
+//                                if (mAdapter.joblistarray.get(position).surveyItem != null && mAdapter.joblistarray.get(position).surveyItem.isAllocationReached()) {
+//                                    AlertDialog.Builder builder = new AlertDialog.Builder(
+//                                            JobListActivity.this);
+//                                    builder.setMessage(
+//                                                    getResources()
+//                                                            .getString(
+//                                                                    R.string.questionnaire_open_survey_alert))
+//                                            .setTitle(
+//                                                    getResources().getString(
+//                                                            R.string._alert_title))
+//                                            .setCancelable(false)
+//                                            .setPositiveButton(
+//                                                    getResources().getString(
+//                                                            R.string.button_ok),
+//                                                    new DialogInterface.OnClickListener() {
+//                                                        @Override
+//                                                        public void onClick(
+//                                                                DialogInterface dialog,
+//                                                                int id) {
+//                                                            dialog.dismiss();
+//                                                            finish();
+//                                                        }
+//                                                    });
+//                                    AlertDialog alert = builder.create();
+//                                    alert.show();
+//                                } else {
+//                                    SplashScreen.addLog(new BasicLog(
+//                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                                    startLocationChecker();
+//                                }
+//
+//                            } else {
+//                                SplashScreen.addLog(new BasicLog(
+//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                                startLocationChecker();
+//                            }
+//                        }
+//
+//                        if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Scheduled") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("cert")) {
+//                            if (isBriefing == true) {
+//                                isBriefing = false;
+////                                showBriefing();
+//                            } else {
+//                                SplashScreen.addLog(new BasicLog(
+//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                                startLocationChecker();
+//                            }
+//
+//                        } else if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Completed") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("in progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("In progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("archived")) {
+//                            SplashScreen.addLog(new BasicLog(
+//                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                            if (Settings.Secure.getString(
+//                                    JobListActivity.this.getContentResolver(),
+//                                    Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+//                                MockGPSALERT();
+//                                return;
+//                            }
+//
+//                            BeginReview(false);
+//                        }
+                        if (mAdapter.joblistarray.get(position).orderItem.getOrderID().contains("-")) {
+                            Intent intent = new Intent(getApplicationContext(),
+                                    QuestionnaireActivity.class);
+                            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(position).orderItem.getOrderID());
+                            intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(position).orderItem.getSetID());
+
+                            if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Scheduled") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("cert"))
+                                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+                            else
+                                startActivity(intent);
+                            Log.e("OrderID_BeginReview", mAdapter.joblistarray.get(position).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(),
+                                    QuestionnaireActivity.class);
+                            if (mAdapter.joblistarray.get(jobListItemId).orderItem == null)
+                                setOrder();
+                            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
+                            intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getSetID());
+                            if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Completed") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("in progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("In progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("archived"))
+                                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+                            else
+                                startActivity(intent);
+//                            Log.e("OrderID_BeginReview_else", order.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+                        }
+
+
+                    }
+                });
                 mAdapter.setBranchCallback(this);
                 mAdapter.setDateCallback(this);
                 mAdapter.doFilter(mFilter, JobListActivity.this, true);
@@ -5357,7 +5482,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         mAdapter = new JobItemAdapter(JobListActivity.this, joborders, mFilter,
                 bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
                 txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
-                ltabOne, ltabTwo, ltabThree, ltabFour);
+                ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
         mAdapter.setBranchCallback(this);
         updateFiler(filterString);
         try {
@@ -5739,7 +5864,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                             mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
                             bimgtabThree, bimgtabFour, txttabSync, txttabOne,
                             txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
-                            ltabThree, ltabFour);
+                            ltabThree, ltabFour, null, null);
                     mAdapter.setBranchCallback(this);
                 } else {
                     mAdapter.mainSetter(JobListActivity.this, joborders, mFilter,
@@ -5759,7 +5884,16 @@ public class JobListActivity extends Activity implements OnClickListener,
                     ManageTabs(2);
                     ShowOrphanFiles();
                 }
+                break;
             }
+            case (QUESTIONNAIRE_ACTIVITY_CODE):
+                if (data != null && data.hasExtra("from_watch")) {
+                    Intent intent = new Intent();
+                    intent.putExtra("from_watch", true);
+                    setResult(2, intent);
+                    finish();
+                }
+                break;
         }
     }
 
@@ -5775,6 +5909,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             public void onClick(View arg0) {
+                Log.e("btnCross", "true");
                 v.setVisibility(RelativeLayout.GONE);
                 CheckerApp.globalFilterVar = null;
                 ShowDBJobs();
@@ -6113,7 +6248,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    private boolean showLogin(String result) {
+    public boolean showLogin(String result) {
         if (result.contains("error="))
             return false;
         String result1 = new Parser().getValue(result,
@@ -7149,7 +7284,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                         set = (Set) DBHelper.convertFromBytesWithOrder(setId,
                                 sq.getOrderid());
                     } catch (Exception e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                         set = null;
                     }
@@ -7270,7 +7404,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                 try {
                     set = (Set) DBHelper.convertFromBytes(setlink);
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                     set = null;
                 }
@@ -7400,7 +7533,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                                     sdf.format(new Date()), sq
                                             .getOrderid());
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
                         String where = Constants.DB_TABLE_JOBLIST_ORDERID
@@ -7831,6 +7963,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             @Override
             public void run() {
                 try {
+                    if (messageEvent.getPath().equalsIgnoreCase(START_JOB)) {
+
+                    }
 
                 } catch (Exception ex) {
                     Toast.makeText(JobListActivity.this,
@@ -8706,70 +8841,9 @@ public class JobListActivity extends Activity implements OnClickListener,
 //        txt_color_unselect = Helper.getunselectedappColor();
     }
 
-    Order order;
-    Survey survey;
-    String OrderID;
-    private final int QUESTIONNAIRE_ACTIVITY_CODE = 1;
 
+    // Location code..
 
-    public void BeginReview(boolean isFromWatch) {
-        // if(!Helper.isParsed()){
-        // ShowAlert(JobDetailActivity.this,
-        // getString(R.string.jd_parsing_alert_title),
-        // getString(R.string.jd_parsing_alert_msg),
-        // getString(R.string.alert_btn_lbl_ok));
-        // return;
-        // }
-        // if(!dataSaved)
-        // new saveSetThread().start();
-        if (survey != null) {
-            int i = 0;
-            i++;
-        }
-        if (OrderID.contains("-")) {
-            Intent intent = new Intent(this.getApplicationContext(),
-                    QuestionnaireActivity.class);
-            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, OrderID);
-            intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
-            if (isFromWatch)
-                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-            else
-                startActivity(intent);
-        } else {
-            Intent intent = new Intent(this.getApplicationContext(),
-                    QuestionnaireActivity.class);
-//            if (order == null)
-//                setOrder();
-            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                    order.getOrderID());
-            intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
-            if (isFromWatch)
-                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-            else
-                startActivity(intent);
-        }
-    }
-
-    public void start_job() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // mEditText.setText( "" );
-//
-//                if (aceeptbtn.getText().toString()
-//                        .equals(getString(R.string.jd_begin_review_btn_text))) {
-                BeginReview(true);
-//
-//                } else if (aceeptbtn
-//                        .getText()
-//                        .toString()
-//                        .equals(getString(R.string.jd_continue_review_btn_text))) {
-//
-//                    BeginReview(true);
-//                }
-            }
-        });
-    }
 
     @SuppressWarnings("MissingPermission")
     private void startLocationUpdates() {
@@ -8867,6 +8941,765 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         return Integer.valueOf(newFormat.format(km));
     }
+
+
+    // Reject Accept Code
+
+    public boolean CheckResponseAdapter(String result, String failMessage) {
+
+        msgId = R.string.reject_job_sucess_alert;
+        // <GroupedNumber>1</GroupedNumber>
+        if (result != null && result.toLowerCase().contains("<groupednumber>")) {
+            String parsed = result.toLowerCase();
+            int indexOf = parsed.indexOf("<groupednumber>") + 15;
+            int indexOf2 = parsed.indexOf("</groupednumber>");
+            int i = 1;
+            try {
+                parsed = parsed.substring(indexOf, indexOf2);
+
+                i = Integer.parseInt(parsed);
+            } catch (Exception ex) {
+
+            }
+
+
+            if (groupedNumber != null && !groupedNumber.equals("")) {
+                refreshJoblist = false;
+                serverGroupedNumber = i;
+                return true;
+            } else {
+                refreshJoblist = false;
+                return true;
+            }
+        }
+
+        if (!Helper.IsValidResponse(result,
+                Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
+            ShowAlertButton(this,
+                    getString(R.string.error_alert_title), failMessage,
+                    getString(R.string.alert_btn_lbl_ok));
+            return false;
+        }
+
+        if (result != null
+                && result.toLowerCase().contains("order+is+not+assiged")) {
+            msgId = R.string.error_order_not_assigned;
+            return true;
+        }
+        result = result.substring(
+                result.indexOf(Constants.JOB_DETAIL_RESP_FIELD_PARAM),
+                result.indexOf("</status>"));
+        if (!(result.endsWith("1"))) {
+            ShowAlertButton(this,
+                    getString(R.string.error_alert_title), failMessage,
+                    getString(R.string.alert_btn_lbl_ok));
+            return false;
+        }
+        return true;
+    }
+
+    public void rejectJob(String str) {
+
+        if (IsInternetConnecttedAdapter() >= 0) {
+            ShowAlertButton(this,
+                    getString(R.string.jd_parsing_alert_title),
+                    getString(R.string.reject_job_fail_alert),
+                    getString(R.string.alert_btn_lbl_ok));
+            return;
+        }
+        new JobTask().execute("", str);
+    }
+
+    public void BeginReview(boolean isFromWatch) {
+        if (survey != null) {
+            int i = 0;
+            i++;
+        }
+//        OrderID = mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID();
+
+        if (mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID().contains("-")) {
+            Intent intent = new Intent(getApplicationContext(),
+                    QuestionnaireActivity.class);
+            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
+            intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getSetID());
+            if (isFromWatch)
+                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+            else
+                startActivity(intent);
+            Log.e("OrderID_BeginReview", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+            Log.e("OrderID_BeginReview_jobStartItemId", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+        } else {
+            Intent intent = new Intent(getApplicationContext(),
+                    QuestionnaireActivity.class);
+            if (mAdapter.joblistarray.get(jobListItemId).orderItem == null)
+                setOrder();
+            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
+            intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getSetID());
+            if (isFromWatch)
+                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+            else
+                startActivity(intent);
+            Log.e("OrderID_BeginReview_else", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+            Log.e("OrderID_BeginReview_else_jobStartItemId", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+        }
+    }
+
+    public void ShowAlertButton(Context context, String title, final String message,
+                                String button_lbl) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle(title);
+        TextView textView = new TextView(context);
+        setFontSize(textView);
+        textView.setText(message);
+        alert.setView(textView);
+
+        // alert.setMessage(message);
+        alert.setPositiveButton(button_lbl,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Revamped_Loading_Dialog.hide_dialog();
+                        if (message
+                                .equals(getString(R.string.reject_job_sucess_alert))
+                                || message
+                                .equals(getString(R.string.error_order_not_assigned))
+                                || message
+                                .equals(getString(R.string.alert_sync_jobs_again)))
+                            showJobList();
+                    }
+                });
+        alert.show();
+    }
+
+    private void showJobList() {
+        Intent intent = new Intent();
+        intent.putExtra(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY, true);
+        setResult(RESULT_OK, intent);
+
+        jobListTaskHandler = new JobbListTask(false, false);
+        jobListTaskHandler.execute();
+    }
+
+    public void MockGPSALERT() {
+        // OPen GPS settings
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(
+                        getResources().getString(R.string.questionnaire_mock_gps_alert))
+                .setTitle(getResources().getString(R.string._alert_title))
+                .setCancelable(false)
+                .setPositiveButton(
+                        getResources().getString(
+                                R.string.questionnaire_exit_delete_alert_yes),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                startActivityForResult(
+                                        new Intent(
+                                                android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS),
+                                        JOB_GPS_CODE);
+
+                                dialog.dismiss();
+
+                            }
+                        })
+                .setNegativeButton(
+                        getResources().getString(
+                                R.string.questionnaire_exit_delete_alert_no),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                BeginReview(false);
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+    public void startLocationCheckerAdapter() {
+        Context context = JobListActivity.this;
+        LocationManager locationManager = (LocationManager) context
+                .getSystemService(Context.LOCATION_SERVICE);
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+            if (Settings.Secure.getString(context.getContentResolver(),
+                    Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+                MockGPSALERT();
+                return;
+            }
+            myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+
+            String userName = myPrefs.getString(
+                    Constants.POST_FIELD_LOGIN_USERNAME, "");
+
+            for (int i = 0; i < joborders.size(); i++) {
+                if (joborders.get(i).orderItem.getOrderID()
+                        .equals(mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID())) {
+                    joborders.get(i).orderItem
+                            .setStatusName("Scheduled");
+                }
+            }
+
+            BeginReview(false);
+
+        } else {
+            // OPen GPS settings
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(
+                            getResources().getString(R.string.questionnaire_gps_alert))
+                    .setTitle(getResources().getString(R.string._alert_title))
+                    .setCancelable(false)
+                    .setPositiveButton(
+                            getResources()
+                                    .getString(
+                                            R.string.questionnaire_exit_delete_alert_yes),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    startActivityForResult(
+                                            new Intent(
+                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),
+                                            JOB_GPS_CODE);
+
+                                    dialog.dismiss();
+
+                                }
+                            })
+                    .setNegativeButton(
+                            getResources()
+                                    .getString(
+                                            R.string.questionnaire_exit_delete_alert_no),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    // startLocationChecker();
+                                    dialog.dismiss();
+                                    myPrefs = getSharedPreferences("pref",
+                                            MODE_PRIVATE);
+
+                                    String userName = myPrefs
+                                            .getString(
+                                                    Constants.POST_FIELD_LOGIN_USERNAME,
+                                                    "");
+                                    BeginReview(false);
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
+    }
+
+    private boolean showLoginAdapter(String result) {
+        String result1 = new Parser().getValue(result,
+                Constants.LOGIN_RESP_FIELD_PARAM);
+        if (result1 == null)
+            return false;
+        if (result1.equals("0")) {
+            SharedPreferences myPrefs = getSharedPreferences("pref",
+                    MODE_PRIVATE);
+            SharedPreferences.Editor prefsEditor = myPrefs.edit();
+            prefsEditor.putBoolean(Constants.ALREADY_LOGIN_STATUS, false);
+            prefsEditor.commit();
+            Intent intent = new Intent(this.getApplicationContext(),
+                    LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return false;
+    }
+
+    public void saveOfflineQuestionaire() {
+        // SQLiteDatabase db = DBAdapter.openDataBase();
+        if (mAdapter.joblistarray.get(jobListItemId).orderItem == null)
+            setOrder();
+        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{
+                        Constants.DB_TABLE_ORDERS_ORDERID,
+                        Constants.DB_TABLE_ORDERS_STATUS,
+                        Constants.DB_TABLE_ORDERS_START_TIME,}, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID(),
+                "Scheduled", "", null); // getString(R.string.jd_begin_button_status_scheduled),
+        // db);
+        // DBAdapter.closeDataBase(db);
+        for (int oid = 0; oid < joborders.size(); oid++) {
+            if (joborders.get(oid).orderItem.getOrderID().equals(mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID())) {
+                joborders.get(oid).orderItem.setStatusName("Scheduled");
+                break;
+            }
+        }
+    }
+
+    public void someMethod(String str) {
+        new JobTask().execute(str, "");
+    }
+
+    //TODO JobTask
+    public class JobTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, null);
+        }
+
+        private ArrayList<Cert> parseCertificateResult(String result) {
+
+            Parser parser = new Parser();
+            parser.parseXMLValues(result, Constants.CERTS_FIELD_PARAM);
+            return parser.listCerts;
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            if (Connector.cookies == null) {
+                if (showLoginAdapter(doLogin()))
+                    return "SessionExpire";
+            }
+
+            Log.e("Job_doInBackground", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
+
+            String result = "";
+            if (params[0].equals(getString(R.string.jd_accept_btn_text))) {
+                if (set != null && set.getCertificates() != null
+                        && set.getCertificates().size() > 0) {
+                    List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
+                    String data = Connector.postForm(
+                            Constants.getCheckerTificates("9.7", true), extraDataList);
+                    if (data.contains("<script>")) {
+                        doLogin();
+                        data = Connector
+                                .postForm(Constants.getCheckerTificates("9.7", true),
+                                        extraDataList);
+                    }
+                    if (data != null && data.contains("<status>1</status>")) {
+                        return null;
+                    } else {
+                        // no error parse here
+                        ArrayList<Cert> listOfCerts = parseCertificateResult(data);
+
+                        ArrayList<Cert> shortList = set.getCertificates();
+
+                        if (shortList != null && listOfCerts != null) {
+                            ArrayList<Cert> templistOfCerts = new ArrayList<Cert>();
+                            for (int i = 0; i < listOfCerts.size(); i++) {
+                                boolean isPresent = false;
+                                for (int j = 0; j < shortList.size(); j++) {
+                                    String certID = shortList.get(j)
+                                            .getCertificateID();
+                                    if (listOfCerts.get(i) != null
+                                            && listOfCerts.get(i)
+                                            .getCertificateID() != null
+                                            && listOfCerts.get(i)
+                                            .getCertificateID()
+                                            .equals(certID)
+                                            && !listOfCerts.get(i).getStatus().toLowerCase()
+                                            .equals("passed")) {
+                                        isPresent = true;
+                                        break;
+                                    }
+
+                                }
+                                if (isPresent)
+                                    templistOfCerts.add(listOfCerts.get(i));
+                            }
+                            if (templistOfCerts != null && templistOfCerts.size() > 0) {
+                                JobListActivity.this.pendingCerts = templistOfCerts;
+                                return null;
+                            }
+                        }
+                    }
+                }
+
+                doLogin();
+
+                result = AcceptJob();
+//				if (result.contains("<script>")) {
+//
+//					result = AcceptJob();
+//				}
+                return result;
+            } else {
+                doLogin();
+                return RejectJob(params[1]);
+            }
+        }
+
+        public String doLogin() {
+            SharedPreferences myPrefs = getSharedPreferences("pref",
+                    MODE_PRIVATE);
+            return loginPost(
+                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
+                    myPrefs.getString(Constants.POST_FIELD_LOGIN_PASSWORD, ""),
+                    Constants.POST_VALUE_LOGIN_DO_LOGIN);
+        }
+
+        private String loginPost(final String username, final String password,
+                                 String dologin) {
+            // Initialize the login data to POST
+            List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_LOGIN_USERNAME, username));
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_LOGIN_PASSWORD, password));
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_LOGIN_DO_LOGIN, dologin));
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_LOGIN_NO_REDIR,
+                    Constants.POST_VALUE_LOGIN_NO_REDIR));
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_LOGIN_IS_APP,
+                    Constants.POST_VALUE_LOGIN_IS_APP));
+            return Connector.postForm(Constants.getLoginURL(), extraDataList);
+        }
+
+        private void On_ExitanddeleteButton_Click(String orderID) {
+            String where = Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "="
+                    + "\"" + orderID + "\"";
+            DBAdapter.openDataBase();
+            DBAdapter.LogCommunication("checkerDBLog.txt",
+                    "jobdetail-deleteThisQuestionnaire=" + where);
+            DBAdapter.db.delete(Constants.DB_TABLE_QUESTIONNAIRE, where, null);
+            DBAdapter.openDataBase();
+            DBAdapter.db.delete(Constants.DB_TABLE_ANSWERS, where, null);
+            DBAdapter.openDataBase();
+            // DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE, where, null);
+            // DBAdapter.openDataBase();
+            DBAdapter.db.delete(Constants.DB_TABLE_POS, where, null);
+            DBAdapter.openDataBase();
+            DBAdapter.db.delete(Constants.DB_TABLE_ORDERS, where, null);
+            DBAdapter.openDataBase();
+            DBAdapter.db.delete(Constants.DB_TABLE_SUBMITSURVEY, where, null);
+            DBAdapter.openDataBase();
+            DBAdapter.db.delete(Constants.DB_TABLE_JOBLIST, where, null);
+
+            // exitAfterSubmitSurveyOrExitandsave(2);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result == null && pendingCerts != null) {
+                ShowCertAlert(pendingCerts);
+                Revamped_Loading_Dialog.hide_dialog();
+                return;
+            }
+            if (result == null || result.equals("SessionExpire")) {
+                Revamped_Loading_Dialog.hide_dialog();
+                return;
+            }
+            if (result != null && result.endsWith("r")) {
+                SplashScreen.addLog(new BasicLog(
+                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Rejecting Order!" + mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + " Reply from server= " + result, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+
+                result = result.substring(0, result.length() - 1);
+                // dialog.onPostExecute();
+                if (CheckResponseAdapter(result, getString(R.string.reject_job_fail_alert))) {
+                    ShowAlertButton(JobListActivity.this,
+                            getString(R.string.jd_parsing_alert_title),
+                            getString(msgId),
+                            getString(R.string.alert_btn_lbl_ok));
+
+                    // On_ExitanddeleteButton_Click(order.getOrderID());
+                    DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
+                            new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
+                                    Constants.DB_TABLE_ORDERS_STATUS,
+                                    Constants.DB_TABLE_ORDERS_START_TIME,},
+                            mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID(), "Scheduled", "", null);
+                } else {
+                    if (refreshJoblist == true) {
+                        // showSyncAlert();
+                    }
+                }
+                Revamped_Loading_Dialog.hide_dialog();
+            } else {
+                SplashScreen.addLog(new BasicLog(
+                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Accepting Order!" + mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + " Reply from server= " + result, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+
+                if (CheckResponseAdapter(result,
+                        getString(R.string.invalid_server_response_alert))) {
+//                    tvAccept.setText(getString(R.string.jd_begin_review_btn_text));
+                    if (mAdapter.joblistarray.get(jobListItemId).orderItem.getCount() < 2
+                            || (groupedNumber != null
+                            && groupedNumber.length() > 0 && serverGroupedNumber <= 1)) {
+                        saveOfflineQuestionaire();
+                        Revamped_Loading_Dialog.hide_dialog();
+                        return;
+                    }
+                    {
+                        // SQLiteDatabase db = DBAdapter.openDataBase();
+                        for (int i = 0; i < Orders.getOrders().size(); i++) {
+                            Order innerorder = Orders.getOrders().get(i);
+                            if ((mAdapter.joblistarray.get(jobListItemId).orderItem.getBranchLink().equals(innerorder
+                                    .getBranchLink()))
+                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getMassID().equals(innerorder
+                                    .getMassID()))
+                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getDate().equals(innerorder
+                                    .getDate()))
+                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getSetLink().equals(innerorder
+                                    .getSetLink()))
+                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals(innerorder
+                                    .getStatusName()))) {
+                                if (!mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID().equals(
+                                        innerorder.getOrderID())) {
+                                    Orders.getOrders().get(i)
+                                            .setStatusName("Scheduled");
+                                    DBHelper.updateOrders(
+                                            Constants.DB_TABLE_ORDERS,
+                                            new String[]{
+                                                    Constants.DB_TABLE_ORDERS_ORDERID,
+                                                    Constants.DB_TABLE_ORDERS_STATUS,
+                                                    Constants.DB_TABLE_ORDERS_START_TIME,},
+                                            innerorder.getOrderID(),
+                                            "Scheduled", "", null);
+                                }
+                            }
+                        }
+                    }
+                    // DBAdapter.closeDataBase(db);
+                    saveOfflineQuestionaire();
+                    Revamped_Loading_Dialog.hide_dialog();
+                } else {
+                    if (refreshJoblist == true) {
+                        // showSyncAlert();
+                    }
+                }
+
+            }
+        }
+
+        public String RejectJob(String reason) {
+            if (mAdapter.joblistarray.get(jobListItemId).orderItem == null || mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() == null)
+                return null;
+            List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_VALUE_JOB_DETAIL_REJECT,
+                    Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_JOB_DETAIL_ORDER_ID,
+                    mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_JOB_DETAIL_REFUSAL_REASON, reason));
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                    groupedNumber));
+
+            // dialog.onPostExecute();
+            String result = Connector.postForm(Constants.getJobStartURL(),
+                    extraDataList);
+            return result + "r";
+        }
+
+        private String AcceptJob() {
+            List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
+            String result = null;
+            extraDataList.add(Helper.getNameValuePair(
+                    Constants.POST_VALUE_JOB_DETAIL_ACCEPT,
+                    Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
+            if (mAdapter.joblistarray.get(jobListItemId).orderItem == null || mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() == null)
+                setOrder();
+            if (mAdapter.joblistarray.get(jobListItemId).orderItem != null && mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() != null) {
+                extraDataList.add(Helper.getNameValuePair(
+                        Constants.POST_FIELD_JOB_DETAIL_ORDER_ID,
+                        mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+                extraDataList.add(Helper.getNameValuePair(
+                        Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                        groupedNumber));
+                result = Connector.postForm(Constants.getJobStartURL(),
+                        extraDataList);
+            }
+            return result;
+        }
+    }
+
+    public void ShowCertAlert(ArrayList<Cert> pendingCerts) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                JobListActivity.this);
+        builder.setCancelable(false);
+        builder.setMessage(
+                        getResources().getString(R.string.attached_certificate_msg))
+                .setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (JobListActivity.certCallBack != null)
+                            JobListActivity.certCallBack
+                                    .certCallBack(JobListActivity.this.pendingCerts);
+                        finish();
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setCancelable(false).show();
+    }
+
+    public void setOrder() {
+        Bundle b = getIntent().getExtras();
+
+        if (b == null)
+            return;
+
+//        String OrderID = b.getString("OrderID");
+//        String SurveyID = b.getString("SurveyID");
+        String OrderID = mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID();
+        String SurveyID = mAdapter.joblistarray.get(jobListItemId).surveyItem.getSurveyID();
+
+        if (SurveyID != null && !SurveyID.equals("")
+                && Surveys.getSets() != null) {
+            for (int i = 0; i < Surveys.getSets().size(); i++) {
+                survey = Surveys.getSets().get(i);
+                order = null;
+                if (survey.getSurveyID().equals(SurveyID))
+                    break;
+            }
+            // order = Orders.getOrders().get(index);
+//            if (survey != null)
+//                setValueFieldText(survey);
+            isBriefing = false;
+        } else {
+            for (int i = 0; i < Orders.getOrders().size(); i++) {
+                order = Orders.getOrders().get(i);
+                if (order != null && order.getOrderID().equals(OrderID))
+                    break;
+            }
+            // order = Orders.getOrders().get(index);
+            if (order != null) {
+//                isSurvey = OrderID.contains("-");
+//                setValueFieldText(isSurvey);
+
+                if (order.getBriefingContent() != null
+                        && !order.getBriefingContent().equals("")) {
+                    isBriefing = true;
+                }
+
+            }
+        }
+    }
+
+    public int IsInternetConnecttedAdapter() {
+        ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo i = conMgr.getActiveNetworkInfo();
+        conMgr = null;
+        if (i == null)
+            return 0;
+        return -1;
+    }
+
+    public void start_job() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // mEditText.setText( "" );
+
+                if (mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals("Scheduled") || mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals("cert")) {
+                    BeginReview(true);
+
+                } else if (mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals("in progress") || mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals("In progress") || mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals("archived") || mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals("Completed")) {
+                    BeginReview(true);
+                }
+            }
+        });
+    }
+
+    private void onQuestionResult(Intent data) {
+
+        {
+            CheckerApp.clearQuestionResult();
+            setResult(RESULT_OK, data);
+            if (OrderID.contains("-")) {
+                if (data.getExtras().getString(Constants.BRANCH_NAME) != null) {
+                    String thisBranch = data.getExtras().getString(
+                            Constants.BRANCH_NAME);
+                    DBHelper.updateSurveySelectedBranch(thisBranch, OrderID);
+                }
+                if (data.getExtras().getInt(Constants.QUESTIONNAIRE_STAUS) == 142) {
+                    ArrayList<Order> jobordersss = DBHelper
+                            .getOrders(
+                                    null,
+                                    Constants.DB_TABLE_JOBLIST,
+                                    new String[]{
+                                            Constants.DB_TABLE_JOBLIST_ORDERID,
+                                            Constants.DB_TABLE_JOBLIST_DATE,
+                                            Constants.DB_TABLE_JOBLIST_SN,
+                                            Constants.DB_TABLE_JOBLIST_DESC,
+                                            Constants.DB_TABLE_JOBLIST_SETNAME,
+                                            Constants.DB_TABLE_JOBLIST_SETLINK,
+                                            Constants.DB_TABLE_JOBLIST_CN,
+                                            Constants.DB_TABLE_JOBLIST_BFN,
+                                            Constants.DB_TABLE_JOBLIST_BN,
+                                            Constants.DB_TABLE_JOBLIST_CITYNAME,
+                                            Constants.DB_TABLE_JOBLIST_ADDRESS,
+                                            Constants.DB_TABLE_JOBLIST_BP,
+                                            Constants.DB_TABLE_JOBLIST_OH,
+                                            Constants.DB_TABLE_JOBLIST_TS,
+                                            Constants.DB_TABLE_JOBLIST_TE,
+                                            Constants.DB_TABLE_JOBLIST_SETID,
+                                            Constants.DB_TABLE_JOBLIST_BL,
+                                            Constants.DB_TABLE_JOBLIST_BLNG,
+                                            Constants.DB_TABLE_JOBLIST_FN,
+                                            Constants.DB_TABLE_JOBLIST_JC,
+                                            Constants.DB_TABLE_JOBLIST_JI,
+                                            Constants.DB_TABLE_JOBLIST_BLINK,
+                                            Constants.DB_TABLE_JOBLIST_MID,
+                                            Constants.DB_TABLE_CHECKER_CODE,
+                                            Constants.DB_TABLE_CHECKER_LINK,
+                                            Constants.DB_TABLE_BRANCH_CODE,
+                                            Constants.DB_TABLE_SETCODE,
+                                            Constants.DB_TABLE_PURCHASE_DESCRIPTION,
+                                            Constants.DB_TABLE_PURCHASE,
+                                            Constants.DB_TABLE_JOBLIST_BRIEFING,
+                                            Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
+                                            Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
+                                            Constants.DB_TABLE_JOBLIST_sTransportationPayment,
+                                            Constants.DB_TABLE_JOBLIST_sCriticismPayment,
+                                            Constants.DB_TABLE_JOBLIST_sBonusPayment,
+                                            Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
+                                            Constants.DB_TABLE_JOBLIST_sinprogressonserver,
+                                            Constants.DB_TABLE_JOBLIST_sProjectName,
+                                            Constants.DB_TABLE_JOBLIST_sRegionName,
+                                            Constants.DB_TABLE_JOBLIST_sdeletedjob,
+                                            Constants.DB_TABLE_JOBLIST_sProjectID,},
+                                    Constants.DB_TABLE_JOBLIST_JI);
+                    if (jobordersss != null) {
+                    }
+
+                }
+
+                // else finish();
+                OrderID = Orders.getNextSurveyOrder(OrderID);
+                Bundle b = getIntent().getExtras();
+                if (b != null) {
+
+                    b.putString("OrderID", OrderID);
+                }
+                OrderID = b.getString("OrderID");
+                if (OrderID.contains("-")) {
+//                    getthisOrderFromListView(OrderID);
+//                    setSurveyData(OrderID.replace("-", ""));
+                } else
+                    finish();
+                if (OrderID != null) {
+
+                    return;
+                }
+
+            }
+
+        }
+        finish();
+
+    }
+
 
 
 }

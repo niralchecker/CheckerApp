@@ -22169,7 +22169,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         intent.putExtra("from_watch", true);
         setResult(1, intent);
         comunicator.questionJob = null;
-        JobDetailActivity.isFromWatch = true;
+        JobListActivity.isFromWatch = true;
         finish();
 
     }
