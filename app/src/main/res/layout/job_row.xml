@@ -1055,5 +1055,10 @@
             android:visibility="gone" />
     </androidx.cardview.widget.CardView>
 
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
 </LinearLayout>
 

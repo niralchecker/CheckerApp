@@ -15,6 +15,8 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FilenameUtils;
@@ -73,6 +76,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
@@ -1757,9 +1761,9 @@ public class QuestionnaireActivity extends Activity implements
         else qd.setAnswerText("");
         extraDataList.add(Helper.getNameValuePair("obj" + newDataId + "-mi",
                 qd.getAnswerText()));
-        if(qd.getQuestionText()!=null)
-        extraDataList.add(Helper.getNameValuePair("obj" + newDataId
-                + "-questionText", qd.getQuestionText().trim()));
+        if (qd.getQuestionText() != null)
+            extraDataList.add(Helper.getNameValuePair("obj" + newDataId
+                    + "-questionText", qd.getQuestionText().trim()));
         return extraDataList;
     }
 
@@ -2980,7 +2984,7 @@ public class QuestionnaireActivity extends Activity implements
             // to my own objects anyways...
         } catch (Exception ex) {
             Toast.makeText(this.getApplicationContext(),
-                    getString(R.string.pos_not_attach), Toast.LENGTH_LONG)
+                            getString(R.string.pos_not_attach), Toast.LENGTH_LONG)
                     .show();
         }
     }
@@ -3076,7 +3080,7 @@ public class QuestionnaireActivity extends Activity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
-        Toast.makeText(QuestionnaireActivity.this,"3078",Toast.LENGTH_LONG).show();
+        Toast.makeText(QuestionnaireActivity.this, "3078", Toast.LENGTH_LONG).show();
         if (attach_btn_view != null
                 && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE
                 && adapter != null) {
@@ -3444,8 +3448,61 @@ public class QuestionnaireActivity extends Activity implements
                     }
                 }
                 break;
+            case PICK_AUDIO:
+                if (resultCode == RESULT_OK) {
+                    // Audio is Picked in format of URI
+                    Uri uri = data.getData();
+                    try {
+                        String uriString = uri.toString();
+                        File myFile = new File(uriString);
+                        //    String path = myFile.getAbsolutePath();
+                        String displayName = null;
+                        String path2 = getAudioPath(uri);
+                        File f = new File(path2);
+                        long fileSizeInBytes = f.length();
+                        long fileSizeInKB = fileSizeInBytes / 1024;
+                        long fileSizeInMB = fileSizeInKB / 1024;
+                        Log.e("path2", path2);
+                        Log.e("uri", uri.toString());
+
+                        filePathDataID fId = new filePathDataID();
+
+                        String dataid = questionObject.getDataID();
+                        if (dataid.contains("^")) {
+                            dataid += "#@" + questionObject.getLoopInfo();
+                        }
+//            fId.setDataID(dataid, islast);
+
+                        fId.setFilePath(path2);
+                        fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
+                        fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchName());
+                        fId.setUPLOAD_FILe_SET_NAME(order.getSetName());
+                        fId.setUPLOAD_FILe_DATE(sdf.format(new Date()));
+                        fId.setUPLOAD_FILe_Sample_size(helper.getSampleSize());
+
+                        fId.setUPLOAD_FILe_PRODUCTID(currentProductId);
+                        fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
+                        uploadList.add(fId);
+                        uploadFileList.add(uri);
+
+                    } catch (Exception e) {
+                        //handle exception
+                    }
+
+                }
+                break;
         }
         updateServerSideFiles();
+    }
+
+    //    TODO Audio
+    private String getAudioPath(Uri uri) {
+        String[] data = {MediaStore.Audio.Media.DATA};
+        CursorLoader loader = new CursorLoader(getApplicationContext(), uri, data, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
     public void updateServerSideFiles() {
@@ -3708,7 +3765,7 @@ public class QuestionnaireActivity extends Activity implements
                 File file = new File(path_Camera);
                 uri_Camera = Uri.fromFile(file);
             } else {
-                if (data != null && data.hasExtra("data") ) {
+                if (data != null && data.hasExtra("data")) {
 //                    path_Camera = getRealPathFromURI(data.getData());
 //                    File file = new File(path_Camera);
 //                    uri_Camera = Uri.fromFile(file);
@@ -3719,9 +3776,9 @@ public class QuestionnaireActivity extends Activity implements
 //                                + path_Camera);
 //
 //                    }
-                    Bitmap theImage = (Bitmap)data.getExtras().get("data");
-                    String str="";
-                    str+="";
+                    Bitmap theImage = (Bitmap) data.getExtras().get("data");
+                    String str = "";
+                    str += "";
 
                 } else {
                     customToast(
@@ -5083,12 +5140,15 @@ public class QuestionnaireActivity extends Activity implements
                 menu.add(0, Constants.MENUID_VIDEO_OPTION_LAST, 0,
                         getString(R.string.video_menu_text));
 
+                menu.add(0, Constants.MENUID_AUDIO_OPTION_LAST, 0,
+                        getString(R.string.voice_menu_text));
+
                 if (attach_btn_view != null
                         && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
                     // ShowAttachedFiles();
                 } else
-                    menu.add(0, Constants.MENUID_AUDIO_OPTION_LAST, 0,
-                            getString(R.string.voice_menu_text));
+                    menu.add(0, Constants.MENUID_AUDIO_OPTION_GALLERY_LAST, 0,
+                            getString(R.string.get_audio_menu_text));
             } else {
                 menu.add(0, Constants.MENUID_SIGN, 0,
                         getString(R.string.questionnaire_sign));
@@ -5104,6 +5164,9 @@ public class QuestionnaireActivity extends Activity implements
 
                 menu.add(0, Constants.MENUID_AUDIO_OPTION, 0,
                         getString(R.string.voice_menu_text));
+
+                menu.add(0, Constants.MENUID_AUDIO_OPTION_GALLERY, 0,
+                        getString(R.string.get_audio_menu_text));
             }
             photomenu = false;
         } else {
@@ -5371,8 +5434,8 @@ public class QuestionnaireActivity extends Activity implements
                 return true;
             case Constants.MENUID_CAMERA_OPTION:
                 boolean camerapermission = Checkcamerapermission();
-                if (!camerapermission)
-                {}else {
+                if (!camerapermission) {
+                } else {
                     if (Helper.getOriginalSampleSize() >= 3) {
                         customAskAlert(false);
                     } else {
@@ -5387,16 +5450,17 @@ public class QuestionnaireActivity extends Activity implements
                 return true;
             case Constants.MENUID_VIDEO_OPTION:
                 boolean camerapermissionn = Checkcamerapermission();
-                if (!camerapermissionn)
-                {}else{
-                openVideo(CAMERA_VID_REQUEST, false);
-                onSaveState(2);
-                photomenu = false;}
+                if (!camerapermissionn) {
+                } else {
+                    openVideo(CAMERA_VID_REQUEST, false);
+                    onSaveState(2);
+                    photomenu = false;
+                }
                 return true;
             case Constants.MENUID_AUDIO_OPTION:
-                boolean audiopermission =checkpermissionforaudiorecording();
-                if (!audiopermission)
-                {}else {
+                boolean audiopermission = checkpermissionforaudiorecording();
+                if (!audiopermission) {
+                } else {
                     recorder.btnRecordClick(false);
                     photomenu = false;
                 }
@@ -5414,40 +5478,50 @@ public class QuestionnaireActivity extends Activity implements
                 return true;
             case Constants.MENUID_CAMERA_OPTION_LAST:
                 boolean camerapermissionnt = Checkcamerapermission();
-                if (!camerapermissionnt)
-                {}else{
-                if (Helper.getOriginalSampleSize() >= 3) {
-                    customAskAlert(true);
+                if (!camerapermissionnt) {
                 } else {
-                    // openCamera(CAMERA_PIC_REQUEST_LAST, true);
-                    // onSaveState(1);
-                    // photomenu = false;
-                    start_camera(null);
-                }
+                    if (Helper.getOriginalSampleSize() >= 3) {
+                        customAskAlert(true);
+                    } else {
+                        // openCamera(CAMERA_PIC_REQUEST_LAST, true);
+                        // onSaveState(1);
+                        // photomenu = false;
+                        start_camera(null);
+                    }
                 }
                 return true;
             case Constants.MENUID_VIDEO_OPTION_LAST:
                 boolean camerapermissionnn = Checkcamerapermission();
-                if (!camerapermissionnn)
-                {}else{
-                openVideo(VIDEO_LAST, true);
-                onSaveState(2);
-                photomenu = false;}
-                return true;
-            case Constants.MENUID_AUDIO_OPTION_LAST:
-                boolean audiopermissionn =checkpermissionforaudiorecording();
-                if (!audiopermissionn)
-                {}else {
-                recorder.btnRecordClick(true);
-                photomenu = false;
+                if (!camerapermissionnn) {
+                } else {
+                    openVideo(VIDEO_LAST, true);
+                    onSaveState(2);
+                    photomenu = false;
                 }
                 return true;
+            case Constants.MENUID_AUDIO_OPTION_LAST:
+                boolean audiopermissionn = checkpermissionforaudiorecording();
+                if (!audiopermissionn) {
+                } else {
+                    recorder.btnRecordClick(true);
+                    photomenu = false;
+                }
+                return true;
+            case Constants.MENUID_AUDIO_OPTION_GALLERY:
+            case Constants.MENUID_AUDIO_OPTION_GALLERY_LAST:
+                Intent videoIntent = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(videoIntent, "Select Audio"), PICK_AUDIO);
 
+                return true;
             default:
 
                 return true;//super.onOptionsItemSelected(item);
         }
     }
+
+    private final int PICK_AUDIO = 1;
 
     private SubmitQuestionnaireData checkAndGetPurchaseData() {
         SubmitQuestionnaireData sbmitData = null;
@@ -5643,7 +5717,7 @@ public class QuestionnaireActivity extends Activity implements
                 Survey survey = Surveys.getCurrentSurve(surveyId);
                 if (survey != null && survey.getThankYouMessage() != null) {
                     Toast.makeText(QuestionnaireActivity.this,
-                            survey.getThankYouMessage(), Toast.LENGTH_LONG)
+                                    survey.getThankYouMessage(), Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -7233,7 +7307,7 @@ public class QuestionnaireActivity extends Activity implements
                 break;
             }
             if (Helper.comapreString(questionObject.getObjectType(), "20")
-                    && questionObject.getMiType()!=null) {
+                    && questionObject.getMiType() != null) {
                 questionObject.setObjectType("4");
                 questionObject.setQuestionTypeLink("1");
             }
@@ -8040,10 +8114,12 @@ public class QuestionnaireActivity extends Activity implements
             hasrecordaudio = this.checkSelfPermission(android.Manifest.permission.RECORD_AUDIO);
         }
 
-        if(hasrecordaudio!=PackageManager.PERMISSION_GRANTED  ){
+        if (hasrecordaudio != PackageManager.PERMISSION_GRANTED) {
             Alertdialogtoopensettings_recording();
-        return false;}
-    return true;}
+            return false;
+        }
+        return true;
+    }
 
     private boolean isMiHidden(String miType) {
         if (miType.equals("11")
@@ -8685,7 +8761,7 @@ public class QuestionnaireActivity extends Activity implements
                                     pos_shelf_item.listProducts.get(
                                             selectedProduct - 1).getProductID(),
                                     pos_shelf_item.listProductLocations.get(
-                                            selectedLocation - 1)
+                                                    selectedLocation - 1)
                                             .getProdLocationID());
 
                     currentItem.setDay(txtAddExpiration.getDay());
@@ -9766,7 +9842,7 @@ public class QuestionnaireActivity extends Activity implements
                                     pos_shelf_item.listProducts.get(
                                             selectedProduct - 1).getProductID(),
                                     pos_shelf_item.listProductLocations.get(
-                                            selectedLocation - 1)
+                                                    selectedLocation - 1)
                                             .getProdLocationID())));
 
         }
@@ -9794,7 +9870,7 @@ public class QuestionnaireActivity extends Activity implements
                                     pos_shelf_item.listProducts.get(
                                             selectedProduct - 1).getProductID(),
                                     pos_shelf_item.listProductLocations.get(
-                                            selectedLocation - 1)
+                                                    selectedLocation - 1)
                                             .getProdLocationID())));
 
         }
@@ -9809,7 +9885,7 @@ public class QuestionnaireActivity extends Activity implements
                                     pos_shelf_item.listProducts.get(
                                             selectedProduct - 1).getProductID(),
                                     pos_shelf_item.listProductLocations.get(
-                                            selectedLocation - 1)
+                                                    selectedLocation - 1)
                                             .getProdLocationID())));
 
         }
@@ -13158,7 +13234,7 @@ public class QuestionnaireActivity extends Activity implements
         LinearLayout.LayoutParams lpimage = new LinearLayout.LayoutParams(
                 dpToPx(21), dpToPx(21));
         lpimage.setMargins(5, 0, 5, 0);
-ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
+        ratingBar.setPadding(0, dpToPx(15), 0, dpToPx(15));
 //        LinearLayout.LayoutParams lpratingbar = new LinearLayout.LayoutParams(
 //                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutRadioGroup.addView(ratingBar);
@@ -14963,6 +15039,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         return ib;
     }
 
+    //    TODO showEyeDialog
     public void showEyeDialog(final Context context,
                               final InProgressFileData value, final Dialog dialog) {
         final Dialog rowView = new Dialog(context);
@@ -15045,7 +15122,8 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
                     try {
                         if (item_ext.equalsIgnoreCase(".mp3")
                                 || item_ext.equalsIgnoreCase(".pcm")
-                                || item_ext.equalsIgnoreCase(".m4a")) {
+                                || item_ext.equalsIgnoreCase(".m4a")
+                                || item_ext.equalsIgnoreCase(".wav")) {
 
 //                            Intent i = new Intent();
 //                            i.setAction(android.content.Intent.ACTION_VIEW);
@@ -15263,6 +15341,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         dialog.show();
     }
 
+    //    TODO Show Files
     public void customAlertforServerSideFile(Context context,
                                              String textString, final ArrayList<InProgressFileData> valuess) {
         final Dialog dialog = new Dialog(QuestionnaireActivity.this);
@@ -15302,7 +15381,8 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }
-    public void customaudioplayer(String audiopath ) {
+
+    public void customaudioplayer(String audiopath) {
         final Dialog dialog = new Dialog(QuestionnaireActivity.this);
         try {
             dialog.setContentView(R.layout.custom_audio_player);
@@ -15314,34 +15394,36 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
 
         SeekBar seekBar = (SeekBar) dialog.findViewById(R.id.seekBar);
         Button play_pause = (Button) dialog.findViewById(R.id.play_pause);
-        TextView audio_time =(TextView)dialog.findViewById(R.id.audio_time);
-        final MediaPlayer mp=new MediaPlayer();
-        try{
+        TextView audio_time = (TextView) dialog.findViewById(R.id.audio_time);
+        final MediaPlayer mp = new MediaPlayer();
+        try {
             //you can change the path, here path is external directory(e.g. sdcard) /Music/maine.mp3
             mp.setDataSource(audiopath);
 
             mp.prepare();
-        }catch(Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         play_pause.setText("Playing");
         play_pause.setTag("Playing");
         int total = mp.getDuration();
-        seekBar.setMax((int)total);
+        seekBar.setMax((int) total);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mp.start()   ;
+                mp.start();
             }
-        },200);
+        }, 200);
 
         play_pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(play_pause.getTag().toString().equals("Playing")){
+                if (play_pause.getTag().toString().equals("Playing")) {
                     play_pause.setText("Paused");
                     play_pause.setTag("Paused");
                     mp.pause();
-                }else if(play_pause.getTag().toString().equals("Paused")){
+                } else if (play_pause.getTag().toString().equals("Paused")) {
                     play_pause.setText("Playing");
                     play_pause.setTag("Playing");
                     mp.start();
@@ -15350,15 +15432,15 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         });
 
 
-          ///////////////
-          Handler mHandler = new Handler();
+        ///////////////
+        Handler mHandler = new Handler();
 //Make sure you update Seekbar on UI thread
         QuestionnaireActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(mp != null){
+                if (mp != null) {
                     int mCurrentPosition = mp.getCurrentPosition();// / 1000;
-                    seekBar.setProgress((int)mCurrentPosition);
+                    seekBar.setProgress((int) mCurrentPosition);
                     int startTime = mp.getCurrentPosition();
                     audio_time.setText(String.format("%d:%d",
                             TimeUnit.MILLISECONDS.toMinutes((long) startTime),
@@ -15584,7 +15666,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             hascamera = this.checkSelfPermission(android.Manifest.permission.CAMERA);
         }
-        if (  hascamera != PackageManager.PERMISSION_GRANTED) {
+        if (hascamera != PackageManager.PERMISSION_GRANTED) {
             Alertdialogtoopensettings_camera();
             return false;
         }
@@ -15593,7 +15675,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
 
     private void Alertdialogtoopensettings_camera() {
         new AlertDialog.Builder(QuestionnaireActivity.this)
-                 .setTitle("Permission error")
+                .setTitle("Permission error")
                 .setMessage("You will not be able to use Camera, since you didn't grant the app respective permissions.")
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
@@ -15610,6 +15692,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
     private void Alertdialogtoopensettings_recording() {
         new AlertDialog.Builder(QuestionnaireActivity.this)
                 .setTitle("Permission error")
@@ -18436,8 +18519,8 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
                 .makeHtmlString(getString(R.string.questionnaire_exit_delete_alert)));
         builder.setView(textView);
         builder.setPositiveButton(
-                getString(R.string.questionnaire_exit_delete_alert_yes),
-                dialogClickListener)
+                        getString(R.string.questionnaire_exit_delete_alert_yes),
+                        dialogClickListener)
                 .setNegativeButton(
                         getString(R.string.questionnaire_exit_delete_alert_no),
                         dialogClickListener).show();
@@ -19773,19 +19856,19 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         if (text.contains("&lt;=")) {
 
             str = text.split("&lt;=");
-            long time1=convertDateTimeToNumber(str[0].trim());
-            long time2=convertDateTimeToNumber(str[1].trim());
+            long time1 = convertDateTimeToNumber(str[0].trim());
+            long time2 = convertDateTimeToNumber(str[1].trim());
 
             try {
 
-                double i = (double)time2;
+                double i = (double) time2;
 
-                if (i==-1)
-                    i=Double.parseDouble(str[1].trim());
+                if (i == -1)
+                    i = Double.parseDouble(str[1].trim());
 
 
-                if (time1>-1)
-                    total=(double)time1;
+                if (time1 > -1)
+                    total = (double) time1;
                 else total = calculateMath(str[0], total);
 
                 if (total <= i)
@@ -19800,19 +19883,19 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         } else if (text.contains("&gt;=")) {
 
             str = text.split("&gt;=");
-            long time1=convertDateTimeToNumber(str[0].trim());
-            long time2=convertDateTimeToNumber(str[1].trim());
+            long time1 = convertDateTimeToNumber(str[0].trim());
+            long time2 = convertDateTimeToNumber(str[1].trim());
 
             try {
 
-                double i = (double)time2;
+                double i = (double) time2;
 
-                if (i==-1)
-                    i=Double.parseDouble(str[1].trim());
+                if (i == -1)
+                    i = Double.parseDouble(str[1].trim());
 
 
-                if (time1>-1)
-                    total=(double)time1;
+                if (time1 > -1)
+                    total = (double) time1;
                 else total = calculateMath(str[0], total);
 
                 if (total >= i)
@@ -19827,19 +19910,19 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         } else if (text.contains("&lt;")) {
 
             str = text.split("&lt;");
-            long time1=convertDateTimeToNumber(str[0].trim());
-            long time2=convertDateTimeToNumber(str[1].trim());
+            long time1 = convertDateTimeToNumber(str[0].trim());
+            long time2 = convertDateTimeToNumber(str[1].trim());
 
             try {
 
-                double i = (double)time2;
+                double i = (double) time2;
 
-                if (i==-1)
-                    i=Double.parseDouble(str[1].trim());
+                if (i == -1)
+                    i = Double.parseDouble(str[1].trim());
 
 
-                if (time1>-1)
-                    total=(double)time1;
+                if (time1 > -1)
+                    total = (double) time1;
                 else total = calculateMath(str[0], total);
 
                 if (total < i)
@@ -19854,19 +19937,19 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
         } else if (text.contains("&gt;")) {
 
             str = text.split("&gt;");
-            long time1=convertDateTimeToNumber(str[0].trim());
-            long time2=convertDateTimeToNumber(str[1].trim());
+            long time1 = convertDateTimeToNumber(str[0].trim());
+            long time2 = convertDateTimeToNumber(str[1].trim());
 
             try {
 
-                double i = (double)time2;
+                double i = (double) time2;
 
-                if (i==-1)
-                    i=Double.parseDouble(str[1].trim());
+                if (i == -1)
+                    i = Double.parseDouble(str[1].trim());
 
 
-                if (time1>-1)
-                    total=(double)time1;
+                if (time1 > -1)
+                    total = (double) time1;
                 else total = calculateMath(str[0], total);
 
                 if (total > i)
@@ -19883,19 +19966,19 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
 
             str = text.split("!=");
             boolean b = (str[1].contains("'"));
-            long time1=convertDateTimeToNumber(str[0].trim());
-            long time2=convertDateTimeToNumber(str[1].trim());
+            long time1 = convertDateTimeToNumber(str[0].trim());
+            long time2 = convertDateTimeToNumber(str[1].trim());
 
             try {
 
-                double i = (double)time2;
+                double i = (double) time2;
 
-                if (i==-1)
-                    i=Double.parseDouble(str[1].trim());
+                if (i == -1)
+                    i = Double.parseDouble(str[1].trim());
 
 
-                if (time1>-1)
-                    total=(double)time1;
+                if (time1 > -1)
+                    total = (double) time1;
                 else total = calculateMath(str[0], total);
 
                 if (total != i)
@@ -20838,11 +20921,11 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
             int end = text.indexOf("]$");
             int nextStart = text.indexOf("$[", end + 2);
             int nextEnd = text.indexOf("]$", end + 2);
-           // Toast.makeText(QuestionnaireActivity.this, nextStart + "......" + text + "..." + nextEnd, Toast.LENGTH_LONG).show();
+            // Toast.makeText(QuestionnaireActivity.this, nextStart + "......" + text + "..." + nextEnd, Toast.LENGTH_LONG).show();
             if (nextEnd < nextStart)//implementing this for condition 4
             {
                 end = nextEnd;
-               // Toast.makeText(QuestionnaireActivity.this, "....................................", Toast.LENGTH_LONG).show();
+                // Toast.makeText(QuestionnaireActivity.this, "....................................", Toast.LENGTH_LONG).show();
             }
             if (start == -1 || end == -1)
                 break;
@@ -21378,8 +21461,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
                 }
 
 
-
-                return convertDateTimeToNumber(value)+"";
+                return convertDateTimeToNumber(value) + "";
             case 1300:
                 value = "";
                 if (questionnaireData != null) {
@@ -21426,7 +21508,7 @@ ratingBar.setPadding(0,dpToPx(15),0,dpToPx(15));
     }
 
     private long convertDateTimeToNumber(String value) {
-        long l=-1;
+        long l = -1;
         if (value.contains(":") && !value.contains("-")
                 && (this.isDisplayCondition || this.thisAutoValues != null)) {
             String s = value;

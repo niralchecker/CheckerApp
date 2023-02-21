@@ -1686,63 +1686,8 @@ public class JobListActivity extends Activity implements OnClickListener,
     protected void onResume() {
         super.onResume();
         Constants.setLocale(JobListActivity.this);
-
-//        Bundle b = getIntent().getExtras();
-//
-//        if (b == null) {
-//            finish();
-//            return;
-//        }
-//
-//        if (b.containsKey(Constants.POST_FIELD_IS_ARCHIVE)) {
-//            finish();
-//            return;
-//        }
-        if (JobListActivity.isFromWatch) {
-            JobListActivity.isFromWatch = false;
-            finish();
-        }
         comunicator.detailJob = JobListActivity.this;
-        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-//        modeSelect = myPrefs.getInt(Constants.SETTINGS_MODE_INDEX, 1);
-        if (myPrefs.contains("ispaused")
-                && myPrefs.getBoolean("ispaused", false)) {
-
-            OrderID = myPrefs.getString("order_id", "");
-            if (OrderID.contains("-")) {
-                Intent intent = new Intent(this.getApplicationContext(),
-                        QuestionnaireActivity.class);
-                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                        myPrefs.getString("order_id", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
-                intent.putExtra("isPaused", true);
-                startActivity(intent);
-                Log.e("order_getSetID_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
-            } else {
-                Intent intent = new Intent(this.getApplicationContext(),
-                        QuestionnaireActivity.class);
-                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                        myPrefs.getString("order_id", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
-                intent.putExtra("isPaused", true);
-                startActivity(intent);
-                Log.e("order_getSetID_else_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
-            }
-
-            Log.e("OrderID_onResume", OrderID);
-            return;
-        }
 //        if (CheckerApp.getQuestionResult() != null) {
-//
-//            b = getIntent().getExtras();
-//            if (b != null && OrderID == null || OrderID.length() == 0) {
-//
-//                OrderID = b.getString("OrderID");
-//            }
 //            onQuestionResult(CheckerApp.getQuestionResult());
 //        }
     }
@@ -2509,37 +2454,34 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
         });
 
+        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+        if (myPrefs.contains("ispaused")
+                && myPrefs.getBoolean("ispaused", false)) {
+            OrderID = myPrefs.getString("order_id", "");
+            if (OrderID.contains("-")) {
+                Intent intent = new Intent(this.getApplicationContext(),
+                        QuestionnaireActivity.class);
+                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+                        myPrefs.getString("order_id", ""));
+                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+                        myPrefs.getString("setid", ""));
+                comunicator.detailJob = null;
+                startActivity(intent);
+                Log.e("OrderID_onCreate", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
+            } else {
+                Intent intent = new Intent(this.getApplicationContext(),
+                        QuestionnaireActivity.class);
+                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+                        myPrefs.getString("order_id", ""));
+                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+                        myPrefs.getString("setid", ""));
+                comunicator.detailJob = null;
+                startActivity(intent);
+                Log.e("OrderID_onCreate_else", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
+            }
+            return;
+        }
 
-//        this.groupedNumber = b.getString(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER);
-//        this.groupedNumber = mAdapter.joblistarray.get(jobListItemId).orderItem.getCount() + "";
-
-//        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-//        if (myPrefs.contains("ispaused")
-//                && myPrefs.getBoolean("ispaused", false)) {
-//            OrderID = myPrefs.getString("order_id", "");
-//            if (OrderID.contains("-")) {
-//                Intent intent = new Intent(this.getApplicationContext(),
-//                        QuestionnaireActivity.class);
-//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-//                        myPrefs.getString("order_id", ""));
-//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-//                        myPrefs.getString("setid", ""));
-//                comunicator.detailJob = null;
-//                startActivity(intent);
-//                Log.e("OrderID_onCreate", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
-//            } else {
-//                Intent intent = new Intent(this.getApplicationContext(),
-//                        QuestionnaireActivity.class);
-//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-//                        myPrefs.getString("order_id", ""));
-//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-//                        myPrefs.getString("setid", ""));
-//                comunicator.detailJob = null;
-//                startActivity(intent);
-//                Log.e("OrderID_onCreate_else", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
-//            }
-//            return;
-//        }
 
     }
 
@@ -4932,6 +4874,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                                     "You are not allowed to reject this job.",
                                     Toast.LENGTH_LONG).show();
                         }
+                        Constants.screen_type_dialog = 1;
                         RefusalReasonDialog dialog = new RefusalReasonDialog(JobListActivity.this);
                         dialog.show();
 
@@ -4943,6 +4886,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 //                        TODO jobStartItemId
 
                         jobListItemId = position;
+                        isJobselected = true;
 
 //                        if (mAdapter.joblistarray.get(position).orderItem.getOrderID().contains("-")) {
 //                            if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("survey")) {
@@ -5024,9 +4968,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                             if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Scheduled") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("cert"))
                                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
                             else
-                                startActivity(intent);
-                            Log.e("OrderID_BeginReview", mAdapter.joblistarray.get(position).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
-
+//                                startActivity(intent);
+                                startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                         } else {
                             Intent intent = new Intent(getApplicationContext(),
                                     QuestionnaireActivity.class);
@@ -5037,8 +4980,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                             if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Completed") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("in progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("In progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("archived"))
                                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
                             else
-                                startActivity(intent);
-//                            Log.e("OrderID_BeginReview_else", order.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+//                                startActivity(intent);
+                                startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                         }
 
 
@@ -5886,7 +5829,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
                 break;
             }
-            case (QUESTIONNAIRE_ACTIVITY_CODE):
+            case (QUESTIONNAIRE_ACTIVITY_CODE): {
                 if (data != null && data.hasExtra("from_watch")) {
                     Intent intent = new Intent();
                     intent.putExtra("from_watch", true);
@@ -5894,6 +5837,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     finish();
                 }
                 break;
+            }
         }
     }
 
@@ -9025,7 +8969,8 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (isFromWatch)
                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
             else
-                startActivity(intent);
+//                startActivity(intent);
+                startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
             Log.e("OrderID_BeginReview", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
             Log.e("OrderID_BeginReview_jobStartItemId", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
         } else {
@@ -9038,7 +8983,8 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (isFromWatch)
                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
             else
-                startActivity(intent);
+//                startActivity(intent);
+                startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
             Log.e("OrderID_BeginReview_else", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
             Log.e("OrderID_BeginReview_else_jobStartItemId", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
         }
@@ -9684,7 +9630,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
                 OrderID = b.getString("OrderID");
                 if (OrderID.contains("-")) {
-//                    getthisOrderFromListView(OrderID);
+                    getthisOrderFromListView(OrderID);
 //                    setSurveyData(OrderID.replace("-", ""));
                 } else
                     finish();
@@ -9696,8 +9642,50 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
 
         }
-        finish();
 
+    }
+
+    Order jobOrder = null;
+
+    private void getthisOrderFromListView(String orderID2) {
+        try {
+            jobOrder = DBHelper.getOrder(Constants.DB_TABLE_JOBLIST, new String[]{
+                            Constants.DB_TABLE_JOBLIST_ORDERID,
+                            Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN,
+                            Constants.DB_TABLE_JOBLIST_DESC,
+                            Constants.DB_TABLE_JOBLIST_SETNAME,
+                            Constants.DB_TABLE_JOBLIST_SETLINK,
+                            Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN,
+                            Constants.DB_TABLE_JOBLIST_BN,
+                            Constants.DB_TABLE_JOBLIST_CITYNAME,
+                            Constants.DB_TABLE_JOBLIST_ADDRESS,
+                            Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH,
+                            Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE,
+                            Constants.DB_TABLE_JOBLIST_SETID,
+                            Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG,
+                            Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC,
+                            Constants.DB_TABLE_JOBLIST_JI,
+                            Constants.DB_TABLE_JOBLIST_BLINK,
+                            Constants.DB_TABLE_JOBLIST_MID,
+                            Constants.DB_TABLE_CHECKER_CODE,
+                            Constants.DB_TABLE_CHECKER_LINK,
+                            Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE,
+                            Constants.DB_TABLE_PURCHASE_DESCRIPTION,
+                            Constants.DB_TABLE_PURCHASE,
+                            Constants.DB_TABLE_JOBLIST_BRIEFING,
+                            Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
+                            Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
+                            Constants.DB_TABLE_JOBLIST_sTransportationPayment,
+                            Constants.DB_TABLE_JOBLIST_sCriticismPayment,
+                            Constants.DB_TABLE_JOBLIST_sBonusPayment,},
+                    Constants.DB_TABLE_JOBLIST_ORDERID + "='" + OrderID + "'");
+
+            if (jobOrder != null) {
+            }
+        } catch (Exception ex) {
+            Toast.makeText(JobListActivity.this, "Issue while retrieving data, please re-login and try!", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
 

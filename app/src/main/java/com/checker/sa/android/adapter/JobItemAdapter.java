@@ -1244,7 +1244,15 @@ public class JobItemAdapter extends BaseAdapter {
             ListView lvjdsurvey_quotas_list = (ListView) row.findViewById(R.id.quotas_list);
             ListView lvjdsurvey_allocations_list = (ListView) row.findViewById(R.id.allocations_list);
 
+            View space = (View) row.findViewById(R.id.space);
+
+
             nestedScroll.setVisibility(View.GONE);
+            space.setVisibility(View.GONE);
+
+            if (position == getCount() - 1) {
+                space.setVisibility(View.VISIBLE);
+            }
 
             tvRejectShow.setText(con.getResources().getString(R.string.jd_reject_btn_text));
 

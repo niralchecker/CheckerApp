@@ -26,6 +26,8 @@ public class Constants {
 
     public static ArrayList<orderListItem> orderList;
 
+    public static int screen_type_dialog = 0;
+
     public static String UPLOAD_PATH = "/data/data/com.mor.sa.android.activity/uploads/";
     public static String DOWNLOAD_PATH = "/data/data/com.mor.sa.android.activity/downloadfiles/";
     public static boolean isQAAllowed = false;
@@ -839,10 +841,12 @@ public class Constants {
     public static final int MENUID_CAMERA_OPTION = 112;
     public static final int MENUID_VIDEO_OPTION = 113;
     public static final int MENUID_AUDIO_OPTION = 114;
+    public static final int MENUID_AUDIO_OPTION_GALLERY = 116;
     public static final int MENUID_IMAGE_GALLERY_OPTION_LAST = 511;
     public static final int MENUID_CAMERA_OPTION_LAST = 512;
     public static final int MENUID_VIDEO_OPTION_LAST = 513;
     public static final int MENUID_AUDIO_OPTION_LAST = 514;
+    public static final int MENUID_AUDIO_OPTION_GALLERY_LAST = 516;
     public static final int MENUID_SUBMIT = 115;
     public static final String BRANCH_NAME = "survey_branch";
     public static final String FILE_DATE_WISE = "FILE_DATE_WISE";

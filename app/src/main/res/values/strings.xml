@@ -760,6 +760,7 @@
     <string name="already_submit_review_alert" translatable="false">survey already submitted</string>
     <string name="camera_menu_text" translatable="false">Camera</string>
     <string name="video_menu_text" translatable="false">Video</string>
+    <string name="get_audio_menu_text" translatable="false">Get Audio File</string>
     <string name="voice_menu_text" translatable="false">Ongoing audio recording</string>
     <string name="gallery_menu_text" translatable="false">Gallery</string>
     <string name="file_size_text" translatable="false">File size is greater then 10Mb, Try again with smaller size.</string>
