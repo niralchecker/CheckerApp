@@ -259,6 +259,8 @@ public class QuestionnaireActivity extends Activity implements
     private static final int FILE_SELECT_CODE_CUSTOM = 112211;
     private static final int VIDEO_LAST = 887766;
     private static final int CAMERA_PIC_REQUEST_LAST = 5401;
+    private static final int AUDIO_FIle_LAST = 10122;
+    private static final int AUDIO_FIle = 10022;
     private ArrayList<Quota> thisSurveyQuotas;
     ArrayList<AutoValues> thisAutoValues = null;
     private String surveyId;
@@ -2717,6 +2719,7 @@ public class QuestionnaireActivity extends Activity implements
     private Intent restoreIntentData;
     private boolean isRestoreCamera;
     private boolean isRestoreCropping;
+    private boolean isRestoringAudio;
     private ImageView previousImg;
     private ImageView nextImg;
 
@@ -3307,11 +3310,14 @@ public class QuestionnaireActivity extends Activity implements
                 break;
             case VIDEO_LAST:
                 if (resultCode == Activity.RESULT_OK) {
-                    if (!isRestoring)
+                    Log.e("VIDEO_LAST", "true");
+                    if (!isRestoring) {
                         videoCase(data, true);
-                    else {
+                        Log.e("VIDEO_LAST_if", "true");
+                    } else {
                         isRestoreVideo = true;
                         restoreIntentData = data;
+                        Log.e("VIDEO_LAST_else", "true");
                     }
                 }
 
@@ -3329,11 +3335,14 @@ public class QuestionnaireActivity extends Activity implements
                 // onRestoreData();
                 // } else
                 if (resultCode == Activity.RESULT_OK) {
-                    if (!isRestoring)
+                    Log.e("202", "true");
+                    if (!isRestoring) {
                         videoCase(data, false);
-                    else {
+                        Log.e("202_if", "true");
+                    } else {
                         isRestoreVideo = true;
                         restoreIntentData = data;
+                        Log.e("202_else", "true");
                     }
                 }
 
@@ -3448,6 +3457,148 @@ public class QuestionnaireActivity extends Activity implements
                     }
                 }
                 break;
+
+            case AUDIO_FIle:
+                if (resultCode == Activity.RESULT_OK) {
+                    myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+
+                    if (!isRestoring)
+                        audioFileCase(data, false);
+                    else {
+                        isRestoringAudio = true;
+                        restoreIntentData = data;
+                    }
+                    Log.e("onActivity_AUDIO_FIle", "true");
+                }
+
+//                if (resultCode == Activity.RESULT_OK) {
+//                    // Audio is Picked in format of URI
+//                    Uri uri = data.getData();
+//                    try {
+//                        String uriString = uri.toString();
+//                        File myFile = new File(uriString);
+//                        //    String path = myFile.getAbsolutePath();
+//                        String displayName = null;
+//                        String path2 = getAudioPath(uri);
+//                        File f = new File(path2);
+//                        long fileSizeInBytes = f.length();
+//                        long fileSizeInKB = fileSizeInBytes / 1024;
+//                        long fileSizeInMB = fileSizeInKB / 1024;
+//                        Log.e("path2__", path2);
+//                        Log.e("uri__", uri.toString());
+//
+//                        filePathDataID fId = new filePathDataID();
+//
+//                        String dataid = null;
+//                        if (questionObject != null
+//                                && questionObject.getDataID() != null
+//                                && isLastAttachment == false)
+//                            dataid = questionObject.getDataID();
+//                        else
+//                            isLastAttachment = true;
+//
+////                        if (dataid != null && dataid.contains("^")) {
+////                            dataid += "#@" + questionObject.getLoopInfo();
+////                        }
+//
+//                        fId.setDataID(dataid, false);
+//                        fId.setFilePath(path2);
+//                        fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
+//                        fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchName());
+//                        fId.setUPLOAD_FILe_SET_NAME(order.getSetName());
+//                        fId.setUPLOAD_FILe_DATE(sdf.format(new Date()));
+//                        fId.setUPLOAD_FILe_Sample_size(helper.getSampleSize());
+//
+//                        fId.setUPLOAD_FILe_PRODUCTID(currentProductId);
+//                        fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
+//                        uploadList.add(fId);
+//                        uploadFileList.add(uri);
+//                        uploadFileListDataId.add(questionObject.getDataID());
+//                        String[] items = new String[uploadFileList.size()];
+//                        if (isLastAttachment == true
+//                                && attach_btn_view != null
+//                                && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
+//                            ShowAttachedFiles();
+//                        }
+//
+//
+//                    } catch (Exception e) {
+//                        //handle exception
+//                    }
+//
+//                }
+
+                break;
+            case AUDIO_FIle_LAST:
+                if (resultCode == Activity.RESULT_OK) {
+                    myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+
+                    if (!isRestoring)
+                        audioFileCase(data, true);
+                    else {
+                        isRestoringAudio = true;
+                        restoreIntentData = data;
+                    }
+                    Log.e("onActivity_AUDIO_FIle_LAST", "true");
+                }
+//                if (resultCode == RESULT_OK) {
+//                    // Audio is Picked in format of URI
+//                    Uri uri = data.getData();
+//                    try {
+//                        String uriString = uri.toString();
+//                        File myFile = new File(uriString);
+//                        //    String path = myFile.getAbsolutePath();
+//                        String displayName = null;
+//                        String path2 = getAudioPath(uri);
+//                        File f = new File(path2);
+//                        long fileSizeInBytes = f.length();
+//                        long fileSizeInKB = fileSizeInBytes / 1024;
+//                        long fileSizeInMB = fileSizeInKB / 1024;
+//                        Log.e("path2_last", path2);
+//                        Log.e("uri_last", uri.toString());
+//
+//                        filePathDataID fId = new filePathDataID();
+//
+//                        String dataid = null;
+//                        if (questionObject != null
+//                                && questionObject.getDataID() != null
+//                                && isLastAttachment == false)
+//                            dataid = questionObject.getDataID();
+//                        else
+//                            isLastAttachment = true;
+//
+//                        if (dataid != null && dataid.contains("^")) {
+//                            dataid += "#@" + questionObject.getLoopInfo();
+//                        }
+//
+//                        fId.setDataID(dataid, true);
+//                        fId.setFilePath(path2);
+//                        fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
+//                        fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchName());
+//                        fId.setUPLOAD_FILe_SET_NAME(order.getSetName());
+//                        fId.setUPLOAD_FILe_DATE(sdf.format(new Date()));
+//                        fId.setUPLOAD_FILe_Sample_size(helper.getSampleSize());
+//
+//                        fId.setUPLOAD_FILe_PRODUCTID(currentProductId);
+//                        fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
+//                        uploadList.add(fId);
+//                        uploadFileList.add(uri);
+//                        uploadFileListDataId.add(questionObject.getDataID());
+//                        String[] items = new String[uploadFileList.size()];
+//                        if (isLastAttachment == true
+//                                && attach_btn_view != null
+//                                && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
+//                            ShowAttachedFiles();
+//                        }
+//
+//
+//                    } catch (Exception e) {
+//                        //handle exception
+//                    }
+//
+//                }
+
+                break;
             case PICK_AUDIO:
                 if (resultCode == RESULT_OK) {
                     // Audio is Picked in format of URI
@@ -3459,21 +3610,31 @@ public class QuestionnaireActivity extends Activity implements
                         String displayName = null;
                         String path2 = getAudioPath(uri);
                         File f = new File(path2);
-                        long fileSizeInBytes = f.length();
-                        long fileSizeInKB = fileSizeInBytes / 1024;
-                        long fileSizeInMB = fileSizeInKB / 1024;
+//                        long fileSizeInBytes = f.length();
+//                        long fileSizeInKB = fileSizeInBytes / 1024;
+//                        long fileSizeInMB = fileSizeInKB / 1024;
                         Log.e("path2", path2);
                         Log.e("uri", uri.toString());
 
                         filePathDataID fId = new filePathDataID();
 
-                        String dataid = questionObject.getDataID();
-                        if (dataid.contains("^")) {
-                            dataid += "#@" + questionObject.getLoopInfo();
-                        }
-//            fId.setDataID(dataid, islast);
+                        String dataid = null;
+                        if (questionObject != null
+                                && questionObject.getDataID() != null
+                                && isLastAttachment == false)
+                            dataid = questionObject.getDataID();
+                        else
+                            isLastAttachment = true;
+
+//                        if (dataid != null && dataid.contains("^")) {
+//                            dataid += "#@" + questionObject.getLoopInfo();
+//                        }
+
+
+                        fId.setDataID(dataid, false);
 
                         fId.setFilePath(path2);
+                        fId.setUPLOAD_FILe_ORDERID(order.getOrderID());
                         fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
                         fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchName());
                         fId.setUPLOAD_FILe_SET_NAME(order.getSetName());
@@ -3484,6 +3645,14 @@ public class QuestionnaireActivity extends Activity implements
                         fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
                         uploadList.add(fId);
                         uploadFileList.add(uri);
+                        uploadFileListDataId.add(questionObject.getDataID());
+                        String[] items = new String[uploadFileList.size()];
+                        if (isLastAttachment == true
+                                && attach_btn_view != null
+                                && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
+                            ShowAttachedFiles();
+                        }
+
 
                     } catch (Exception e) {
                         //handle exception
@@ -3503,6 +3672,62 @@ public class QuestionnaireActivity extends Activity implements
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    private void audioFileCase(Intent data, boolean isLast) {
+        // Audio is Picked in format of URI
+        Uri uri = data.getData();
+        try {
+            String uriString = uri.toString();
+            File myFile = new File(uriString);
+            //    String path = myFile.getAbsolutePath();
+            String displayName = null;
+            String path2 = getAudioPath(uri);
+            File f = new File(path2);
+//            long fileSizeInBytes = f.length();
+//            long fileSizeInKB = fileSizeInBytes / 1024;
+//            long fileSizeInMB = fileSizeInKB / 1024;
+            Log.e("path2", path2);
+            Log.e("uri", uri.toString());
+
+            filePathDataID fId = new filePathDataID();
+
+            String dataid = null;
+            if (questionObject != null
+                    && questionObject.getDataID() != null
+                    && isLastAttachment == false)
+                dataid = questionObject.getDataID();
+            else
+                isLastAttachment = true;
+
+            if (dataid.contains("^")) {
+                dataid += "#@" + questionObject.getLoopInfo();
+            }
+
+            fId.setDataID(dataid, isLast);
+            fId.setFilePath(path2);
+            fId.setUPLOAD_FILe_ORDERID(order.getOrderID());
+            fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
+            fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchName());
+            fId.setUPLOAD_FILe_SET_NAME(order.getSetName());
+            fId.setUPLOAD_FILe_DATE(sdf.format(new Date()));
+            fId.setUPLOAD_FILe_Sample_size(helper.getSampleSize());
+
+            fId.setUPLOAD_FILe_PRODUCTID(currentProductId);
+            fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
+            uploadList.add(fId);
+            uploadFileList.add(uri);
+            uploadFileListDataId.add(questionObject.getDataID());
+            String[] items = new String[uploadFileList.size()];
+            if (isLastAttachment == true
+                    && attach_btn_view != null
+                    && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
+                ShowAttachedFiles();
+            }
+
+        } catch (Exception e) {
+            //handle exception
+        }
     }
 
     public void updateServerSideFiles() {
@@ -5140,15 +5365,15 @@ public class QuestionnaireActivity extends Activity implements
                 menu.add(0, Constants.MENUID_VIDEO_OPTION_LAST, 0,
                         getString(R.string.video_menu_text));
 
-                menu.add(0, Constants.MENUID_AUDIO_OPTION_LAST, 0,
-                        getString(R.string.voice_menu_text));
+                menu.add(0, Constants.MENUID_AUDIO_FILES_OPTION_LAST, 0,
+                        getString(R.string.get_audio_menu_text));
 
                 if (attach_btn_view != null
                         && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
                     // ShowAttachedFiles();
                 } else
-                    menu.add(0, Constants.MENUID_AUDIO_OPTION_GALLERY_LAST, 0,
-                            getString(R.string.get_audio_menu_text));
+                    menu.add(0, Constants.MENUID_AUDIO_OPTION_LAST, 0,
+                            getString(R.string.voice_menu_text));
             } else {
                 menu.add(0, Constants.MENUID_SIGN, 0,
                         getString(R.string.questionnaire_sign));
@@ -5165,8 +5390,8 @@ public class QuestionnaireActivity extends Activity implements
                 menu.add(0, Constants.MENUID_AUDIO_OPTION, 0,
                         getString(R.string.voice_menu_text));
 
-                menu.add(0, Constants.MENUID_AUDIO_OPTION_GALLERY, 0,
-                        getString(R.string.get_audio_menu_text));
+                menu.add(0, Constants.MENUID_AUDIO_FILES_OPTION, 0,
+                        getString(R.string.get_audio_menu_text_2));
             }
             photomenu = false;
         } else {
@@ -5448,15 +5673,6 @@ public class QuestionnaireActivity extends Activity implements
                     }
                 }
                 return true;
-            case Constants.MENUID_VIDEO_OPTION:
-                boolean camerapermissionn = Checkcamerapermission();
-                if (!camerapermissionn) {
-                } else {
-                    openVideo(CAMERA_VID_REQUEST, false);
-                    onSaveState(2);
-                    photomenu = false;
-                }
-                return true;
             case Constants.MENUID_AUDIO_OPTION:
                 boolean audiopermission = checkpermissionforaudiorecording();
                 if (!audiopermission) {
@@ -5490,10 +5706,21 @@ public class QuestionnaireActivity extends Activity implements
                     }
                 }
                 return true;
+            case Constants.MENUID_VIDEO_OPTION:
+                boolean camerapermissionn = Checkcamerapermission();
+                if (!camerapermissionn) {
+                } else {
+                    Log.e("MENUID_VIDEO_OPTION", "true");
+                    openVideo(CAMERA_VID_REQUEST, false);
+                    onSaveState(2);
+                    photomenu = false;
+                }
+                return true;
             case Constants.MENUID_VIDEO_OPTION_LAST:
                 boolean camerapermissionnn = Checkcamerapermission();
                 if (!camerapermissionnn) {
                 } else {
+                    Log.e("MENUID_VIDEO_OPTION_LAST", "true");
                     openVideo(VIDEO_LAST, true);
                     onSaveState(2);
                     photomenu = false;
@@ -5507,12 +5734,20 @@ public class QuestionnaireActivity extends Activity implements
                     photomenu = false;
                 }
                 return true;
-            case Constants.MENUID_AUDIO_OPTION_GALLERY:
-            case Constants.MENUID_AUDIO_OPTION_GALLERY_LAST:
-                Intent videoIntent = new Intent(
-                        Intent.ACTION_PICK,
-                        android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(Intent.createChooser(videoIntent, "Select Audio"), PICK_AUDIO);
+            case Constants.MENUID_AUDIO_FILES_OPTION:
+                Log.e("AUDIO_FIle", "true");
+                openAudioFiles(AUDIO_FIle, false);
+                photomenu = false;
+                return true;
+
+            case Constants.MENUID_AUDIO_FILES_OPTION_LAST:
+                Log.e("AUDIO_FIle_LAST", "true");
+                openAudioFiles(AUDIO_FIle_LAST, true);
+                photomenu = false;
+//                Intent videoIntent = new Intent(
+//                        Intent.ACTION_PICK,
+//                        android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(Intent.createChooser(videoIntent, "Select Audio"), PICK_AUDIO);
 
                 return true;
             default:
@@ -5522,6 +5757,19 @@ public class QuestionnaireActivity extends Activity implements
     }
 
     private final int PICK_AUDIO = 1;
+
+    private void openAudioFiles(int input, boolean b) {
+//        Intent videoIntent = new Intent(
+//                Intent.ACTION_PICK,
+//                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+//        startActivityForResult(Intent.createChooser(videoIntent, "Select Audio"), input);
+
+        Intent intent = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(Intent.createChooser(intent, "Select Audio"), input);
+    }
+
 
     private SubmitQuestionnaireData checkAndGetPurchaseData() {
         SubmitQuestionnaireData sbmitData = null;
@@ -7375,6 +7623,7 @@ public class QuestionnaireActivity extends Activity implements
                     questionnaireLayout.addView(tv,
                             getAttechmentLayout(viewId - 1));
 
+//                    TODO
                     serverSideFiles = getServerSideFiles(server_attached_files,
                             false, uploadList);
                     eyeView = getEyeView();
@@ -8177,6 +8426,9 @@ public class QuestionnaireActivity extends Activity implements
         } else if (isRestoreCropping) {
             isRestoreCropping = false;
             croppingCase(restoreIntentData, false);
+        } else if (isRestoringAudio) {
+            isRestoringAudio = false;
+            audioFileCase(restoreIntentData, false);
         }
 
     }
@@ -10582,6 +10834,7 @@ public class QuestionnaireActivity extends Activity implements
         return questionnaireLayout;
     }
 
+//    TODO getServerSideFiles
     private ArrayList<InProgressFileData> getServerSideFiles(
             ArrayList<InProgressFileData> server_attached_files2,
             boolean isLast, ArrayList<filePathDataID> uploadList2) {
