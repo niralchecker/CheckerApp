@@ -52,6 +52,9 @@ import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+
 import com.checker.sa.android.data.BasicLog;
 import com.checker.sa.android.db.DBAdapter;
 import com.checker.sa.android.helper.Constants;
@@ -456,17 +459,46 @@ public class SplashScreen extends Activity {
         int hascamera = this.checkSelfPermission(Manifest.permission.CAMERA);
         // int haswriteexternalstorage = this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int haswakelock = this.checkSelfPermission(Manifest.permission.WAKE_LOCK);
+        int hasread_image = this.checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES);
+        int hasread_audio = this.checkSelfPermission(Manifest.permission.READ_MEDIA_AUDIO);
+        int hasread_video = this.checkSelfPermission(Manifest.permission.READ_MEDIA_VIDEO);
 
 
         //if (haswriteexternalstorage != PackageManager.PERMISSION_GRANTED ||
-        if (hasreadexternalstorage != PackageManager.PERMISSION_GRANTED)
+//        if (hasreadexternalstorage != PackageManager.PERMISSION_GRANTED)
+////                    || hasrecordaudio != PackageManager.PERMISSION_GRANTED ||
+////                    hasaccessc != PackageManager.PERMISSION_GRANTED || hasaccessnetworkstate != PackageManager.PERMISSION_GRANTED ||
+////                    hasintermission != PackageManager.PERMISSION_GRANTED || hascamera != PackageManager.PERMISSION_GRANTED ||
+////                    haswakelock != PackageManager.PERMISSION_GRANTED || hasreadexternalstorage != PackageManager.PERMISSION_GRANTED)
+//        {
+//            return false;
+//
+//        }
+
+//        Manifest.permission.READ_MEDIA_IMAGES,
+//                Manifest.permission.READ_MEDIA_AUDIO,
+//                Manifest.permission.,
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (hasread_image != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            } else if (hasread_audio != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            } else if (hasread_video != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+
+        } else {
+            if (hasreadexternalstorage != PackageManager.PERMISSION_GRANTED)
 //                    || hasrecordaudio != PackageManager.PERMISSION_GRANTED ||
 //                    hasaccessc != PackageManager.PERMISSION_GRANTED || hasaccessnetworkstate != PackageManager.PERMISSION_GRANTED ||
 //                    hasintermission != PackageManager.PERMISSION_GRANTED || hascamera != PackageManager.PERMISSION_GRANTED ||
 //                    haswakelock != PackageManager.PERMISSION_GRANTED || hasreadexternalstorage != PackageManager.PERMISSION_GRANTED)
-        {
-            return false;
+            {
+                return false;
 
+            }
         }
 
 
@@ -475,16 +507,16 @@ public class SplashScreen extends Activity {
 
     private boolean grantPermissions(int lastpermission) {
         boolean allgranted = true;
+        List<String> permissions = new ArrayList<String>();
+
+        Log.e("version_code", String.valueOf(Build.VERSION.SDK_INT));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             int hasreadexternalstorage = this.checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE);
             int hasrecordaudio = this.checkSelfPermission(android.Manifest.permission.RECORD_AUDIO);
             int hasaccessc = this.checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-
             int hascamera = this.checkSelfPermission(android.Manifest.permission.CAMERA);
 
-
-            List<String> permissions = new ArrayList<String>();
 
             if (hasaccessc != PackageManager.PERMISSION_GRANTED && lastpermission < 1) {
                 permissions.add(android.Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -504,36 +536,112 @@ public class SplashScreen extends Activity {
                 allgranted = false;
             }
 
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            int hasread_image = this.checkSelfPermission(Manifest.permission.READ_MEDIA_IMAGES);
+            int hasread_audio = this.checkSelfPermission(Manifest.permission.READ_MEDIA_AUDIO);
+            int hasread_video = this.checkSelfPermission(Manifest.permission.READ_MEDIA_VIDEO);
+
+            if (hasread_image != PackageManager.PERMISSION_GRANTED && lastpermission < 5) {
+                permissions.add(android.Manifest.permission.READ_MEDIA_IMAGES);
+                requestPermissions(permissions.toArray(new String[]{Manifest.permission.READ_MEDIA_IMAGES}), 5);
+                allgranted = false;
+            } else if (hasread_audio != PackageManager.PERMISSION_GRANTED && lastpermission < 6) {
+                permissions.add(android.Manifest.permission.READ_MEDIA_AUDIO);
+                requestPermissions(permissions.toArray(new String[]{Manifest.permission.READ_MEDIA_AUDIO}), 6);
+                allgranted = false;
+            } else if (hasread_video != PackageManager.PERMISSION_GRANTED && lastpermission < 7) {
+                permissions.add(android.Manifest.permission.READ_MEDIA_VIDEO);
+                requestPermissions(permissions.toArray(new String[]{Manifest.permission.READ_MEDIA_VIDEO}), 7);
+                allgranted = false;
+            }
 
         }
         return allgranted;
     }
 
+    public static String[] storge_permissions = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA
+    };
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    public static String[] storge_permissions_33 = {
+            Manifest.permission.READ_MEDIA_IMAGES,
+            Manifest.permission.READ_MEDIA_AUDIO,
+            Manifest.permission.READ_MEDIA_VIDEO,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA
+    };
+
+    public static String[] permissions() {
+        String[] p;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            p = storge_permissions_33;
+        } else {
+            p = storge_permissions;
+        }
+        return p;
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        ActivityCompat.requestPermissions(SplashScreen.this,
+//                permissions(),
+//                1);
 
-        if (requestCode == 1 || requestCode == 2 || requestCode == 3 || requestCode == 4) {
+        if (requestCode == 1 || requestCode == 2 || requestCode == 3 || requestCode == 4 || requestCode == 5 || requestCode == 6 || requestCode == 7) {
             if (grantResults.length > 0) {
                 boolean anyfalsepermission = grantPermissions(requestCode);
-                if (requestCode == 4) {
-                    if (grantResults.length > 0) {
-                        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                            //If user presses allow
-                            boolean allChecktoMoveFiles = ChecktoMoveFiles();
-                            //if (allChecktoMoveFiles)
-                            {
-                                try {
-                                    progressd = new ProgressDialog(SplashScreen.this);
-                                    progressd.setMessage("Moving external memory files to internal...");
-                                    progressd.show();
-                                    ChecktoMoveDbfilestoInternal();
-                                } catch (Exception e) {
+                Log.e("version_code__", String.valueOf(Build.VERSION.SDK_INT));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    if (requestCode == 5 || requestCode == 6 || requestCode == 7) {
+                        if (grantResults.length > 0) {
+                            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                                //If user presses allow
+                                boolean allChecktoMoveFiles = ChecktoMoveFiles();
+                                //if (allChecktoMoveFiles)
+                                {
+                                    try {
+                                        progressd = new ProgressDialog(SplashScreen.this);
+                                        progressd.setMessage("Moving external memory files to internal...");
+                                        progressd.show();
+                                        ChecktoMoveDbfilestoInternal();
+                                    } catch (Exception e) {
+                                    }
                                 }
+                            } else {
+                                // grantPermissions(3);
+                                Alertdialogtoopensettings();
                             }
-                        } else {
-                            // grantPermissions(3);
-                            Alertdialogtoopensettings();
+                        }
+                    }
+                } else {
+                    if (requestCode == 4) {
+                        if (grantResults.length > 0) {
+                            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                                //If user presses allow
+                                boolean allChecktoMoveFiles = ChecktoMoveFiles();
+                                //if (allChecktoMoveFiles)
+                                {
+                                    try {
+                                        progressd = new ProgressDialog(SplashScreen.this);
+                                        progressd.setMessage("Moving external memory files to internal...");
+                                        progressd.show();
+                                        ChecktoMoveDbfilestoInternal();
+                                    } catch (Exception e) {
+                                    }
+                                }
+                            } else {
+                                // grantPermissions(3);
+                                Alertdialogtoopensettings();
+                            }
                         }
                     }
                 }
