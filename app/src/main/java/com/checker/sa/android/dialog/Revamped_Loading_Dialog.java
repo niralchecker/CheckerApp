@@ -40,7 +40,7 @@ public class Revamped_Loading_Dialog extends Dialog implements
                         .getDecorView()
                         .getBackground()
                         .setColorFilter(
-                                new LightingColorFilter(0x60cdcdcd, 0x60121212));
+                                new LightingColorFilter(0x1a262c, 0x1a262c));
                 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
                 lp.copyFrom(dialog.getWindow().getAttributes());
                 lp.width = WindowManager.LayoutParams.MATCH_PARENT;

@@ -1448,6 +1448,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                                 Toast.LENGTH_LONG).show();
                         break;
                     }
+                    Constants.screen_type_dialog = 2;
                     RefusalReasonDialog dialog = new RefusalReasonDialog(this);
                     dialog.show();
                 } else if (aceeptbtn.getText().toString()

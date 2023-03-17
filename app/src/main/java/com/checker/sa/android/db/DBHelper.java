@@ -2120,8 +2120,8 @@ public class DBHelper {
 							set.getIsDifferentLangsAvailable());
 
 					DBAdapter.openDataBase();
-					DBAdapter.db.insert(Constants.DB_TABLE_SETS, null, values);
 					try {
+						DBAdapter.db.insert(Constants.DB_TABLE_SETS, null, values);
 						AddQuestionnaire(this_dialog, set.getListObjects(),
 								set.getSetID(), set.getCompanyLink());
 					} catch (Exception ex) {

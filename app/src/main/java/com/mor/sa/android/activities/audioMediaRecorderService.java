@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.media.MediaRecorder;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.checker.sa.android.data.BasicLog;
 import com.checker.sa.android.helper.Constants;
@@ -26,7 +27,11 @@ public class audioMediaRecorderService extends Service {
                 myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
                 myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
                 "Audio stopped", fileName.replace(".", "__")));
-        recorder.stop();
+        try{
+            recorder.stop();
+        }catch (Exception e){
+            Log.e("Exception",e.toString());
+        }
         recorder.release();
     }
 
@@ -39,7 +44,7 @@ public class audioMediaRecorderService extends Service {
         values.put(MediaStore.MediaColumns.TITLE, fileName);
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.HE_AAC);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         recorder.setOutputFile(fileName);
         try {
             recorder.prepare();

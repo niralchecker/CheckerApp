@@ -6149,12 +6149,15 @@ public class JobListActivity extends Activity implements OnClickListener,
             // int size = set.getListObjects().size();
             // Log.v("Size= ", ""+size);
             // }
-            if (dialog != null)
-                dialog.changeMessage(dialog.getContext().getResources()
-                        .getString(R.string.aaparsing_complete));
-            DBHelper.deleteRecords(null);
-            Parser.allCorrectSets = DBHelper.AddSetss(Sets.getSets(),
-                    Revamped_Loading_Dialog.getDialog(), Lists.getAllLists());
+            try {
+                if (dialog != null)
+                    dialog.changeMessage(dialog.getContext().getResources()
+                            .getString(R.string.aaparsing_complete));
+                DBHelper.deleteRecords(null);
+                Parser.allCorrectSets = DBHelper.AddSetss(Sets.getSets(),
+                        Revamped_Loading_Dialog.getDialog(), Lists.getAllLists());
+            }catch (Exception e){}
+
             // DBAdapter.closeDataBase(db);
             return true;
         }
@@ -7427,13 +7430,17 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 } else {
 
-                    if (res.contains("<script>")) {
-                        doLogin();
-                        res = Connector.saveFiletoServer(
-                                (forceSmping != null && forceSmping.equals("1")),
-                                path, Constants.getAttachmentURL(),
-                                sq.getOrderid(), did, sq.getUnix(),
-                                uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
+                    try {
+                        if (res.contains("<script>")) {
+                            doLogin();
+                            res = Connector.saveFiletoServer(
+                                    (forceSmping != null && forceSmping.equals("1")),
+                                    path, Constants.getAttachmentURL(),
+                                    sq.getOrderid(), did, sq.getUnix(),
+                                    uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
+                        }
+                    } catch (Exception e) {
+                        Log.e("exception", e.toString());
                     }
                     SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(),
                             myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),

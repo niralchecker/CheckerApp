@@ -608,6 +608,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                             "You are not allowed to reject this job.",
                             Toast.LENGTH_LONG).show();
                 }
+                Constants.screen_type_dialog = 0;
                 RefusalReasonDialog dialog = new RefusalReasonDialog(ShowJobInMapViewActivity.this);
                 dialog.show();
             }

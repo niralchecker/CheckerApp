@@ -26,11 +26,14 @@ public class RefusalReasonDialog extends Dialog implements android.view.View.OnC
     JobListActivity jobdetail;
 
     ShowJobInMapViewActivity showJobInMapViewActivity;
+    JobDetailActivity jobDetailScreen;
 
     public RefusalReasonDialog(Context context) {
         super(context);
         if (Constants.screen_type_dialog == 1) {
             jobdetail = (JobListActivity) context;
+        } else if (Constants.screen_type_dialog == 2) {
+            jobDetailScreen = (JobDetailActivity) context;
         } else {
             showJobInMapViewActivity = (ShowJobInMapViewActivity) context;
         }
@@ -54,6 +57,10 @@ public class RefusalReasonDialog extends Dialog implements android.view.View.OnC
                     ShowAlert(jobdetail, jobdetail.getString(R.string._alert_title),
                             jobdetail.getString(R.string.reject_job_resusal_text_alert),
                             jobdetail.getString(R.string.alert_btn_lbl_ok));
+                } else if (Constants.screen_type_dialog == 2) {
+                    ShowAlert(jobDetailScreen, jobdetail.getString(R.string._alert_title),
+                            jobDetailScreen.getString(R.string.reject_job_resusal_text_alert),
+                            jobdetail.getString(R.string.alert_btn_lbl_ok));
                 } else {
                     ShowAlert(showJobInMapViewActivity, jobdetail.getString(R.string._alert_title),
                             jobdetail.getString(R.string.reject_job_resusal_text_alert),
@@ -62,6 +69,8 @@ public class RefusalReasonDialog extends Dialog implements android.view.View.OnC
             } else {
                 if (Constants.screen_type_dialog == 1) {
                     jobdetail.rejectJob(et.getText().toString());
+                } if (Constants.screen_type_dialog == 2) {
+                    jobDetailScreen.rejectJob(et.getText().toString());
                 } else {
                     showJobInMapViewActivity.rejectJob(et.getText().toString());
                 }
