@@ -4844,7 +4844,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
                 mAdapter = new JobItemAdapter(NewJobListActivity.this, joborders,
                         mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
                         bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
-                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour,null,null);
+                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
                 mAdapter.setBranchCallback(this);
                 mAdapter.setDateCallback(this);
                 mAdapter.doFilter(mFilter, NewJobListActivity.this, true);
@@ -5139,7 +5139,7 @@ public class NewJobListActivity extends Activity implements View.OnClickListener
 
     }
 
-    private void showLanguageDialog(String string, final boolean isFirstTime) {
+    public void showLanguageDialog(String string, final boolean isFirstTime) {
         final LanguageDialog langDialog = new LanguageDialog(
                 NewJobListActivity.this, string);
         final ArrayList<AltLanguage> allLangs = DBHelper.getLanguages(false);

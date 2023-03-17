@@ -1218,6 +1218,8 @@ public class JobItemAdapter extends BaseAdapter {
             CardView cardView = (CardView) row.findViewById(R.id.cardView);
             NestedScrollView nestedScroll = (NestedScrollView) row.findViewById(R.id.nestedScroll);
             LinearLayout llStartJob = (LinearLayout) row.findViewById(R.id.ll_start_job);
+            TextView tvStartJob = (TextView) row.findViewById(R.id.tv_start_job);
+            ImageView ivLanguage = (ImageView) row.findViewById(R.id.iv_language);
             LinearLayout llAccept = (LinearLayout) row.findViewById(R.id.ll_accept);
 
             TextView tvSurveyName = (TextView) row.findViewById(R.id.tv_survey_name);
@@ -1408,7 +1410,11 @@ public class JobItemAdapter extends BaseAdapter {
                 }
             });
 
-            llStartJob.setOnClickListener(new OnClickListener() {
+            ivLanguage.setOnClickListener(v -> ((JobListActivity)ct).showLanguageDialog(
+                    ct.getResources().getString(
+                            R.string.preffered_questionnaire_language), false));
+
+            tvStartJob.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
 

@@ -5283,7 +5283,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    private void showLanguageDialog(String string, final boolean isFirstTime) {
+    public void showLanguageDialog(String string, final boolean isFirstTime) {
         final LanguageDialog langDialog = new LanguageDialog(
                 JobListActivity.this, string);
         final ArrayList<AltLanguage> allLangs = DBHelper.getLanguages(false);
