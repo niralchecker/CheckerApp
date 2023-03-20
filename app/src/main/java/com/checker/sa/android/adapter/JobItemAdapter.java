@@ -1394,7 +1394,7 @@ public class JobItemAdapter extends BaseAdapter {
             llAccept.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(con, "accept_layout_click", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(con, "accept_layout_click", Toast.LENGTH_SHORT).show();
                 }
             });
 

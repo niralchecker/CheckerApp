@@ -167,6 +167,19 @@
                 android:typeface="normal"
                 tools:text="12" />
 
+            <TextView
+                android:id="@+id/tv_show_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view1"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="7dp"
+                android:layout_toEndOf="@id/tvcount"
+                android:textSize="15sp"
+                android:visibility="gone"
+                android:textColor="@color/blue_default"
+                app:fontFamily="@font/roboto_regular" />
+
             <ScrollView
                 android:id="@+id/nestedScroll"
                 android:layout_width="match_parent"
