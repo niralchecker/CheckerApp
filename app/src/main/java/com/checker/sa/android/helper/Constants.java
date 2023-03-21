@@ -26,7 +26,7 @@ public class Constants {
 
     public static ArrayList<orderListItem> orderList;
 
-    public static int screen_type_dialog = 0;
+    public static int screen_type_dialog = -1;
 
     public static String UPLOAD_PATH = "/data/data/com.mor.sa.android.activity/uploads/";
     public static String DOWNLOAD_PATH = "/data/data/com.mor.sa.android.activity/downloadfiles/";
