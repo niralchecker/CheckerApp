@@ -69,10 +69,6 @@
             android:name=".NewRegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".NewJobListActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
             android:name=".NewLoginActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

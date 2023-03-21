@@ -6156,7 +6156,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                 DBHelper.deleteRecords(null);
                 Parser.allCorrectSets = DBHelper.AddSetss(Sets.getSets(),
                         Revamped_Loading_Dialog.getDialog(), Lists.getAllLists());
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
 
             // DBAdapter.closeDataBase(db);
             return true;
@@ -9694,7 +9695,6 @@ public class JobListActivity extends Activity implements OnClickListener,
             finish();
         }
     }
-
 
 
 }
