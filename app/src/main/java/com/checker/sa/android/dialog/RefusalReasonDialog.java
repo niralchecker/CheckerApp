@@ -50,32 +50,34 @@ public class RefusalReasonDialog extends Dialog implements android.view.View.OnC
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
-        if (OK_btn.getId() == v.getId()) {
-            if (et.getText().toString().equals("")) {
-                if (Constants.screen_type_dialog == 1) {
-                    ShowAlert(jobdetail, jobdetail.getString(R.string._alert_title),
-                            jobdetail.getString(R.string.reject_job_resusal_text_alert),
-                            jobdetail.getString(R.string.alert_btn_lbl_ok));
-                } else if (Constants.screen_type_dialog == 2) {
-                    ShowAlert(jobDetailScreen, jobdetail.getString(R.string._alert_title),
-                            jobDetailScreen.getString(R.string.reject_job_resusal_text_alert),
-                            jobdetail.getString(R.string.alert_btn_lbl_ok));
-                } else if (Constants.screen_type_dialog == 3) {
-                    ShowAlert(showJobInMapViewActivity, jobdetail.getString(R.string._alert_title),
-                            jobdetail.getString(R.string.reject_job_resusal_text_alert),
-                            jobdetail.getString(R.string.alert_btn_lbl_ok));
+        try {
+            if (OK_btn.getId() == v.getId()) {
+                if (et.getText().toString().equals("")) {
+                    if (Constants.screen_type_dialog == 1) {
+                        ShowAlert(jobdetail, jobdetail.getString(R.string._alert_title),
+                                jobdetail.getString(R.string.reject_job_resusal_text_alert),
+                                jobdetail.getString(R.string.alert_btn_lbl_ok));
+                    } else if (Constants.screen_type_dialog == 2) {
+                        ShowAlert(jobDetailScreen, jobdetail.getString(R.string._alert_title),
+                                jobDetailScreen.getString(R.string.reject_job_resusal_text_alert),
+                                jobdetail.getString(R.string.alert_btn_lbl_ok));
+                    } else if (Constants.screen_type_dialog == 3) {
+                        ShowAlert(showJobInMapViewActivity, jobdetail.getString(R.string._alert_title),
+                                jobdetail.getString(R.string.reject_job_resusal_text_alert),
+                                jobdetail.getString(R.string.alert_btn_lbl_ok));
+                    }
+                } else {
+                    if (Constants.screen_type_dialog == 1) {
+                        jobdetail.rejectJob(et.getText().toString());
+                    } else if (Constants.screen_type_dialog == 2) {
+                        jobDetailScreen.rejectJob(et.getText().toString());
+                    } else if (Constants.screen_type_dialog == 3) {
+                        showJobInMapViewActivity.rejectJob(et.getText().toString());
+                    }
+                    this.dismiss();
                 }
-            } else {
-                if (Constants.screen_type_dialog == 1) {
-                    jobdetail.rejectJob(et.getText().toString());
-                } else if (Constants.screen_type_dialog == 2) {
-                    jobDetailScreen.rejectJob(et.getText().toString());
-                } else if (Constants.screen_type_dialog == 3) {
-                    showJobInMapViewActivity.rejectJob(et.getText().toString());
-                }
-                this.dismiss();
             }
+        } catch (Exception e) {
         }
     }
 

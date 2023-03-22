@@ -1,7 +1,7 @@
 package com.mor.sa.android.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,11 +24,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -934,30 +934,67 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
     public void ShowAlertButton(Context context, String title, final String message,
                                 String button_lbl) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        alert.setTitle(title);
-        TextView textView = new TextView(context);
-//        setFontSize(textView);
-        textView.setText(message);
-        alert.setView(textView);
 
-        // alert.setMessage(message);
-        alert.setPositiveButton(button_lbl,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        Revamped_Loading_Dialog.hide_dialog();
-                        if (message
-                                .equals(getString(R.string.reject_job_sucess_alert))
-                                || message
-                                .equals(getString(R.string.error_order_not_assigned))
-                                || message
-                                .equals(getString(R.string.alert_sync_jobs_again)))
-                            showJobList();
-                    }
-                });
-        alert.show();
+//        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+//        alert.setTitle(title);
+//        TextView textView = new TextView(context);
+//        setFontSize(textView);
+//        textView.setText(message);
+//        alert.setView(textView);
+//
+//        // alert.setMessage(message);
+//        alert.setPositiveButton(button_lbl,
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                        Revamped_Loading_Dialog.hide_dialog();
+//                        if (message
+//                                .equals(getString(R.string.reject_job_sucess_alert))
+//                                || message
+//                                .equals(getString(R.string.error_order_not_assigned))
+//                                || message
+//                                .equals(getString(R.string.alert_sync_jobs_again)))
+//                            showJobList();
+//                    }
+//                });
+//        alert.show();
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.mapview_custom_dialog, null);
+        builder.setView(customLayout);
+
+        TextView title_text = customLayout.findViewById(R.id.title);
+        title_text.setText(title);
+        TextView message_text = customLayout.findViewById(R.id.text);
+        message_text.setText(message);
+
+        Button btn = customLayout.findViewById(R.id.dialogButtonOK);
+        btn.setText(button_lbl);
+
+        // create the alert dialog
+        AlertDialog dialog_ = builder.create();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_.dismiss();
+                Revamped_Loading_Dialog.hide_dialog();
+                if (message
+                        .equals(getString(R.string.reject_job_sucess_alert))
+                        || message
+                        .equals(getString(R.string.error_order_not_assigned))
+                        || message
+                        .equals(getString(R.string.alert_sync_jobs_again)))
+                    showJobList();
+            }
+        });
+
+        // show the alert dialog
+        dialog_.show();
     }
 
     private void showJobList() {
