@@ -9191,6 +9191,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     public void someMethod(String str) {
         new JobTask().execute(str, "");
+        ManageTabs(2);
     }
 
     //TODO JobTask
