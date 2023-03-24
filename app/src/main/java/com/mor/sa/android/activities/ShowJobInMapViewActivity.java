@@ -344,8 +344,10 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             try {
                 MarkerOptions markerOptions = new MarkerOptions();
 
-                double latitude = Double.valueOf(orders.get(i).orderItem.getBranchLat());
-                double longitude = Double.valueOf(orders.get(i).orderItem.getBranchLong());
+                double latitude = Double.parseDouble(orders.get(i).orderItem.getBranchLat());
+//                double latitude = Double.valueOf(orders.get(i).orderItem.getBranchLat());
+                double longitude = Double.parseDouble(orders.get(i).orderItem.getBranchLong());
+//                double longitude = Double.valueOf(orders.get(i).orderItem.getBranchLong());
                 LatLng latlng = new LatLng(latitude, longitude);
                 markerOptions.position(latlng);
 //                markerOptions.title(latlng.latitude + " : " + latlng.longitude);
@@ -353,11 +355,11 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
                 if (orders.get(i).orderItem.getStatusName().equals("Assigned")) {
                     markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.assigned_job_location));
-                } else if (orders.get(i).orderItem.getStatusName().equals("Scheduled")) {
+                } else if (orders.get(i).orderItem.getStatusName().equals("Scheduled") || orders.get(i).orderItem.getStatusName().equals("cert")) {
                     markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.scheduled_job_location));
                 } else if (orders.get(i).orderItem.getStatusName().equals("Completed")) {
                     markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.completed_job_location));
-                } else {
+                } else if (orders.get(i).orderItem.getStatusName().equals("in progress") || orders.get(i).orderItem.getStatusName().equals("In progress") || orders.get(i).orderItem.getStatusName().toLowerCase().equals("archived")) {
                     markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.in_progress_job_location));
                 }
 

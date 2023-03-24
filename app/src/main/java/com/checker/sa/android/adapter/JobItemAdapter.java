@@ -1410,7 +1410,7 @@ public class JobItemAdapter extends BaseAdapter {
                 }
             });
 
-            ivLanguage.setOnClickListener(v -> ((JobListActivity)ct).showLanguageDialog(
+            ivLanguage.setOnClickListener(v -> ((JobListActivity) ct).showLanguageDialog(
                     ct.getResources().getString(
                             R.string.preffered_questionnaire_language), false));
 
