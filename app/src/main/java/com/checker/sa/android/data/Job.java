@@ -83,7 +83,7 @@ public class Job implements Serializable {
 
 	public String getColor() {
 		if (color == null || color.equals("")) {
-			color = "#ff0000";
+			color = "#95BAE1";
 		}
 		return color;// hexColor
 		// return CertID;
