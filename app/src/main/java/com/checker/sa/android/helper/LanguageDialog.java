@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 public class LanguageDialog implements OnMultiChoiceClickListener {
 	String[] _items = null;
@@ -85,10 +87,19 @@ public class LanguageDialog implements OnMultiChoiceClickListener {
 		setItems(listFinalAnswers);
 		setSelection(listFinalSelectedAnswers);
 
+		TextView textView = new TextView(context);
+		textView.setPadding(20, 30, 20, 30);
+		textView.setTextSize(20F);
+		textView.setBackgroundColor(Color.parseColor("#1792ff"));
+		textView.setTextColor(Color.WHITE);
+		textView.setText(title);
+
 		final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		if (title != null && title.length() > 0) {
-			builder.setTitle(title);
+//			builder.setTitle(title);
+			builder.setCustomTitle(textView);
 		}
+
 		builder.setMultiChoiceItems(_items, mSelection, this);
 		if (this.btnListener != null)
 			builder.setPositiveButton(
