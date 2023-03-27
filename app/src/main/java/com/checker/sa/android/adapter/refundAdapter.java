@@ -194,16 +194,16 @@ public class refundAdapter extends ArrayAdapter<RefundData> {
 				&& data.getPaid().equals("1")) {
 			dialog.findViewById(R.id.topbar).setBackgroundColor(
 					Color.parseColor(context.getResources().getString(
-							R.color.refund_green)));
+							R.color.dark_blue)));
 			dialog.findViewById(R.id.bottombar).setBackgroundColor(
 					Color.parseColor(context.getResources().getString(
-							R.color.refund_green)));
+							R.color.dark_blue)));
 			status_text.setText(getContext().getResources().getString(
 					R.string.s_item_column_0_line_194_file_210));
 		}
 		dialog.findViewById(R.id.bottombar).setBackgroundColor(
 				Color.parseColor(context.getResources().getString(
-						R.color.refund_green)));
+						R.color.dark_blue)));
 		approved_paid.setText(getContext().getResources().getString(
 				R.string.s_item_column_0_line_199_file_210));
 		Helper.changeTxtViewBothColors(approved_paid);
