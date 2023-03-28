@@ -61,7 +61,7 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="17dp"
                 android:layout_toEndOf="@id/checkbox"
-                android:text="26.05.2021"
+                tools:text="26.05.2021"
                 android:textColor="#AEAEAE"
                 android:textSize="14sp"
                 app:fontFamily="@font/roboto_regular" />
@@ -81,7 +81,7 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="15dp"
                 android:layout_toStartOf="@id/iv_calendar"
-                android:text="Start at 08:00"
+                tools:text="Start at 08:00"
                 android:textColor="#AEAEAE"
                 android:textSize="14sp"
                 app:fontFamily="@font/roboto_regular" />
@@ -103,7 +103,7 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@id/checkbox"
-                android:text="H&amp;M"
+                tools:text="H&amp;M"
                 android:textColor="#98AC2E"
                 android:textSize="18sp"
                 app:fontFamily="@font/roboto_regular" />
@@ -221,7 +221,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="3434343434"
+                            tools:text="3434343434"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -245,7 +245,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="status"
+                            tools:text="status"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -270,7 +270,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="to check pur desc"
+                            tools:text="to check pur desc"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -295,7 +295,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="check questionnaire"
+                            tools:text="check questionnaire"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -320,7 +320,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="name branch"
+                            tools:text="name branch"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -345,7 +345,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="name branch full name"
+                            tools:text="name branch full name"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -370,7 +370,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="name city"
+                            tools:text="name city"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -395,7 +395,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="name address"
+                            tools:text="name address"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -420,7 +420,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="name branch phone"
+                            tools:text="name branch phone"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -445,7 +445,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="opening hours"
+                            tools:text="opening hours"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -470,7 +470,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="show time"
+                            tools:text="show time"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -495,7 +495,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="show time"
+                            tools:text="show time"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -520,7 +520,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="purchase description"
+                            tools:text="purchase description"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -545,7 +545,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="make purchase"
+                            tools:text="make purchase"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -570,7 +570,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="NonRefundableServicePayment"
+                            tools:text="NonRefundableServicePayment"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -595,7 +595,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="transportation payment"
+                            tools:text="transportation payment"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -620,7 +620,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="criticism payment"
+                            tools:text="criticism payment"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -645,7 +645,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="bonus payment"
+                            tools:text="bonus payment"
                             android:textColor="#666666"
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular" />
@@ -805,7 +805,7 @@
                         android:layout_marginStart="5dp"
                         android:layout_toEndOf="@id/iv_location"
                         android:gravity="center"
-                        android:text="1.2 Km"
+                        tools:text="1.2 Km"
                         android:textColor="#BCBCBC"
                         android:textSize="16sp"
                         app:fontFamily="@font/roboto_bold" />

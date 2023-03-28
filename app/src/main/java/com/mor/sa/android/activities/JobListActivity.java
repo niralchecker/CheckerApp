@@ -4295,7 +4295,11 @@ public class JobListActivity extends Activity implements OnClickListener,
                 int i = 0;
                 i++;
             }
+
+            Log.e("jobordersss_activity", String.valueOf(jobordersss.size()));
+
             ArrayList<orderListItem> joborders = null;
+
             try {
 
                 if (jobordersss != null) {
@@ -4309,8 +4313,9 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                         joborders.add(new orderListItem(jobordersss.get(i), null));
                     }
-
+                    Log.e("joborders_activity", String.valueOf(joborders.size()));
                 }
+
 
             } catch (Exception ex) {
             }

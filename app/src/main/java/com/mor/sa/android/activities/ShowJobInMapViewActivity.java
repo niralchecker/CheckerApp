@@ -1,7 +1,6 @@
 package com.mor.sa.android.activities;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -89,7 +87,9 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -105,31 +105,22 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
     private GoogleMap mMap;
     private SupportMapFragment mapfragment;
-    private ArrayList<LatLng> locationArrayList;
-    private ArrayList<String> locationTitle;
 
     public static ArrayList<orderListItem> joborders;
     ArrayList<Order> jobordersss = null;
 
     private HashMap<Marker, orderListItem> markersHash;
     private String orderid;
-    String title;
-
     private CardView cardView;
     private ImageView iv_close, ivLocation, iv_map_list, iv_language;
     ListView lvjdsurvey_quotas_list, lvjdsurvey_allocations_list;
     LinearLayout llSchedulesExpandLayout, llAssignedExpandLayout, llStartJob;
     View view1;
-    TextView tv_show_status, tvReject, tvAccept, tv, tvBranchFullName, tvBranch, tvCount, tvDec, tvLocation, tvSurveyName, tvClientDesc, tvQuestionnaire, tvBranch_s, tvBranchFullName_s, tvCity, tvAddress, tvBranchPhone, tvOpeningHours, tvStartTime, tvEndTime, tvPurchaseDescription, tvMakePurchase, tvNonRefundableServicePayment, tvTransportationPayment, tvCriticismPayment, tvBonusPayment, tvStatus;
-
+    TextView tv_show_status, tvReject, tvAccept, tv, tvBranchFullName, tvBranch, tvCount, tvDec, tvLocation, tvSurveyName, tvClientDesc, tvQuestionnaire, tvBranch_s, tvBranchFullName_s, tvCity, tvAddress, tvBranchPhone, tvOpeningHours, tvStartTime, tvEndTime, tvPurchaseDescription, tvMakePurchase, tvNonRefundableServicePayment, tvTransportationPayment, tvCriticismPayment, tvBonusPayment, tvStatus, tvTime, tvDate;
     private final int QUESTIONNAIRE_ACTIVITY_CODE = 1;
-
     orderListItem cardItemDetails;
-
     private ArrayList<Cert> pendingCerts = null;
-
     private static jobBoardCertsListener certCallBack;
-
     SharedPreferences myPrefs;
 
     public int msgId;
@@ -143,6 +134,8 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
     String statusname;
     private boolean isBriefing;
     private final int JOB_GPS_CODE = 678;
+    Survey survey;
+    boolean isSurvey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +161,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         tvBranchPhone = (TextView) findViewById(R.id.tv_branch_phone);
         tvOpeningHours = (TextView) findViewById(R.id.tv_opening_hours);
         tvStartTime = (TextView) findViewById(R.id.tv_start_time);
+        tvTime = (TextView) findViewById(R.id.tv_time);
         tvEndTime = (TextView) findViewById(R.id.tv_end_time);
         tvPurchaseDescription = (TextView) findViewById(R.id.tv_purchase_description);
         tvMakePurchase = (TextView) findViewById(R.id.tv_make_purchase);
@@ -179,6 +173,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         tvLocation = (TextView) findViewById(R.id.tv_location);
         tvReject = (TextView) findViewById(R.id.tv_reject);
         tv_show_status = (TextView) findViewById(R.id.tv_show_status);
+        tvDate = (TextView) findViewById(R.id.tv_date);
 
         ivLocation = (ImageView) findViewById(R.id.iv_location);
         iv_map_list = (ImageView) findViewById(R.id.iv_map_list);
@@ -212,77 +207,80 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapfragment.getMapAsync(this);
 
-        locationArrayList = new ArrayList<>();
-        locationTitle = new ArrayList<>();
+//        locationArrayList = new ArrayList<>();
+//        locationTitle = new ArrayList<>();
 
-        jobordersss = DBHelper
-                .getOrders(
-                        DBHelper.whereJobListNotArchived,
-                        Constants.DB_TABLE_JOBLIST,
-                        new String[]{
-                                Constants.DB_TABLE_JOBLIST_ORDERID,
-                                Constants.DB_TABLE_JOBLIST_DATE,
-                                Constants.DB_TABLE_JOBLIST_SN,
-                                Constants.DB_TABLE_JOBLIST_DESC,
-                                Constants.DB_TABLE_JOBLIST_SETNAME,
-                                Constants.DB_TABLE_JOBLIST_SETLINK,
-                                Constants.DB_TABLE_JOBLIST_CN,
-                                Constants.DB_TABLE_JOBLIST_BFN,
-                                Constants.DB_TABLE_JOBLIST_BN,
-                                Constants.DB_TABLE_JOBLIST_CITYNAME,
-                                Constants.DB_TABLE_JOBLIST_ADDRESS,
-                                Constants.DB_TABLE_JOBLIST_BP,
-                                Constants.DB_TABLE_JOBLIST_OH,
-                                Constants.DB_TABLE_JOBLIST_TS,
-                                Constants.DB_TABLE_JOBLIST_TE,
-                                Constants.DB_TABLE_JOBLIST_SETID,
-                                Constants.DB_TABLE_JOBLIST_BL,
-                                Constants.DB_TABLE_JOBLIST_BLNG,
-                                Constants.DB_TABLE_JOBLIST_FN,
-                                Constants.DB_TABLE_JOBLIST_JC,
-                                Constants.DB_TABLE_JOBLIST_JI,
-                                Constants.DB_TABLE_JOBLIST_BLINK,
-                                Constants.DB_TABLE_JOBLIST_MID,
-                                Constants.DB_TABLE_CHECKER_CODE,
-                                Constants.DB_TABLE_CHECKER_LINK,
-                                Constants.DB_TABLE_BRANCH_CODE,
-                                Constants.DB_TABLE_SETCODE,
-                                Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                                Constants.DB_TABLE_PURCHASE,
-                                Constants.DB_TABLE_JOBLIST_BRIEFING,
-                                Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                                Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                                Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                                Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                                Constants.DB_TABLE_JOBLIST_sBonusPayment,
-                                Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-                                Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-                                Constants.DB_TABLE_JOBLIST_sProjectName,
-                                Constants.DB_TABLE_JOBLIST_sRegionName,
-                                Constants.DB_TABLE_JOBLIST_sdeletedjob,
-                                Constants.DB_TABLE_JOBLIST_sProjectID,},
-                        Constants.DB_TABLE_JOBLIST_JI);
+//        jobordersss = DBHelper
+//                .getOrders(
+//                        DBHelper.whereJobListNotArchived,
+//                        Constants.DB_TABLE_JOBLIST,
+//                        new String[]{
+//                                Constants.DB_TABLE_JOBLIST_ORDERID,
+//                                Constants.DB_TABLE_JOBLIST_DATE,
+//                                Constants.DB_TABLE_JOBLIST_SN,
+//                                Constants.DB_TABLE_JOBLIST_DESC,
+//                                Constants.DB_TABLE_JOBLIST_SETNAME,
+//                                Constants.DB_TABLE_JOBLIST_SETLINK,
+//                                Constants.DB_TABLE_JOBLIST_CN,
+//                                Constants.DB_TABLE_JOBLIST_BFN,
+//                                Constants.DB_TABLE_JOBLIST_BN,
+//                                Constants.DB_TABLE_JOBLIST_CITYNAME,
+//                                Constants.DB_TABLE_JOBLIST_ADDRESS,
+//                                Constants.DB_TABLE_JOBLIST_BP,
+//                                Constants.DB_TABLE_JOBLIST_OH,
+//                                Constants.DB_TABLE_JOBLIST_TS,
+//                                Constants.DB_TABLE_JOBLIST_TE,
+//                                Constants.DB_TABLE_JOBLIST_SETID,
+//                                Constants.DB_TABLE_JOBLIST_BL,
+//                                Constants.DB_TABLE_JOBLIST_BLNG,
+//                                Constants.DB_TABLE_JOBLIST_FN,
+//                                Constants.DB_TABLE_JOBLIST_JC,
+//                                Constants.DB_TABLE_JOBLIST_JI,
+//                                Constants.DB_TABLE_JOBLIST_BLINK,
+//                                Constants.DB_TABLE_JOBLIST_MID,
+//                                Constants.DB_TABLE_CHECKER_CODE,
+//                                Constants.DB_TABLE_CHECKER_LINK,
+//                                Constants.DB_TABLE_BRANCH_CODE,
+//                                Constants.DB_TABLE_SETCODE,
+//                                Constants.DB_TABLE_PURCHASE_DESCRIPTION,
+//                                Constants.DB_TABLE_PURCHASE,
+//                                Constants.DB_TABLE_JOBLIST_BRIEFING,
+//                                Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
+//                                Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
+//                                Constants.DB_TABLE_JOBLIST_sTransportationPayment,
+//                                Constants.DB_TABLE_JOBLIST_sCriticismPayment,
+//                                Constants.DB_TABLE_JOBLIST_sBonusPayment,
+//                                Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
+//                                Constants.DB_TABLE_JOBLIST_sinprogressonserver,
+//                                Constants.DB_TABLE_JOBLIST_sProjectName,
+//                                Constants.DB_TABLE_JOBLIST_sRegionName,
+//                                Constants.DB_TABLE_JOBLIST_sdeletedjob,
+//                                Constants.DB_TABLE_JOBLIST_sProjectID,},
+//                        Constants.DB_TABLE_JOBLIST_JI);
 
         joborders = Constants.orderList;
+//        Log.e("jobordersss", String.valueOf(jobordersss.size()));
+        Log.e("joborders", String.valueOf(joborders.size()));
+        Log.e("Constants_orderList", String.valueOf(Constants.orderList.size()));
 
         try {
-            for (int i = 0; i < jobordersss.size(); i++) {
-                joborders.add(new orderListItem(jobordersss.get(i), null));
-            }
+//            for (int i = 0; i < jobordersss.size(); i++) {
+//                joborders.add(new orderListItem(jobordersss.get(i), null));
+//            }
 
 
-            Double[] latitude = new Double[jobordersss.size()];
-            Double[] longitude = new Double[jobordersss.size()];
+//            Double[] latitude = new Double[jobordersss.size()];
+//            Double[] longitude = new Double[jobordersss.size()];
 
-            for (int i = 0; i < jobordersss.size(); i++) {
-
-                latitude[i] = parseDouble(jobordersss.get(i).getBranchLat());
-                longitude[i] = parseDouble(jobordersss.get(i).getBranchLong());
-                locationArrayList.add(new LatLng(latitude[i], longitude[i]));
-                locationTitle.add(jobordersss.get(i).getBranchFullname());
-                title = jobordersss.get(i).getBranchFullname();
-
-            }
+//            for (int i = 0; i < jobordersss.size(); i++) {
+//
+//                latitude[i] = parseDouble(jobordersss.get(i).getBranchLat());
+//                longitude[i] = parseDouble(jobordersss.get(i).getBranchLong());
+//                locationArrayList.add(new LatLng(latitude[i], longitude[i]));
+//                locationTitle.add(jobordersss.get(i).getBranchFullname());
+////                title = jobordersss.get(i).getBranchFullname();
+//
+//            }
 
         } catch (Exception e) {
 
@@ -309,14 +307,26 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         setMapView(joborders);
     }
 
-    private double parseDouble(String s) {
-        if (s == null || s.isEmpty())
-            return -34;
-        else
-            return Double.parseDouble(s);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onResume", "true");
+
+        cardView.setVisibility(View.GONE);
+        try {
+            if (mMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
+                mMap.clear();
+                setMapView(joborders);
+                JobLoadMap op = new JobLoadMap();
+                op.execute();
+                // add markers from database to the map
+            }
+        } catch (Exception e) {
+        }
+
     }
 
-    private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
+    private BitmapDescriptor BitmapFromVector(Context context, int vectorResId, int width, int height) {
         // below line is use to generate a drawable.
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
 
@@ -325,7 +335,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
         // below line is use to create a bitmap for our
         // drawable which we have added.
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
         // below line is use to add bitmap in our canvas.
         Canvas canvas = new Canvas(bitmap);
@@ -345,25 +355,22 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 MarkerOptions markerOptions = new MarkerOptions();
 
                 double latitude = Double.parseDouble(orders.get(i).orderItem.getBranchLat());
-//                double latitude = Double.valueOf(orders.get(i).orderItem.getBranchLat());
                 double longitude = Double.parseDouble(orders.get(i).orderItem.getBranchLong());
-//                double longitude = Double.valueOf(orders.get(i).orderItem.getBranchLong());
                 LatLng latlng = new LatLng(latitude, longitude);
                 markerOptions.position(latlng);
-//                markerOptions.title(latlng.latitude + " : " + latlng.longitude);
                 markerOptions.title(orders.get(i).orderItem.getBranchFullname());
 
                 if (orders.get(i).orderItem.getStatusName().equals("Assigned")) {
-                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.assigned_job_location));
+                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.assigned_job_location, 100, 140));
                 } else if (orders.get(i).orderItem.getStatusName().equals("Scheduled") || orders.get(i).orderItem.getStatusName().equals("cert")) {
-                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.scheduled_job_location));
+                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.scheduled_job_location, 120, 160));
                 } else if (orders.get(i).orderItem.getStatusName().equals("Completed")) {
-                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.completed_job_location));
+                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.completed_job_location, 140, 180));
                 } else if (orders.get(i).orderItem.getStatusName().equals("in progress") || orders.get(i).orderItem.getStatusName().equals("In progress") || orders.get(i).orderItem.getStatusName().toLowerCase().equals("archived")) {
-                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.in_progress_job_location));
+                    markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.in_progress_job_location, 160, 200));
                 }
 
-                statusname = orders.get(i).orderItem.getStatusName();
+                Log.e("status_name_id", orders.get(i).orderItem.getStatusName() + " , " + orders.get(i).orderItem.getOrderID());
 
                 if (markersHash == null)
                     markersHash = new HashMap<Marker, orderListItem>();
@@ -444,11 +451,11 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         if (thiItem.orderItem.getStatusName().equals("Assigned") || thiItem.orderItem.getStatusName().equals("Survey")) {
             llStartJob.setVisibility(View.GONE);
             tvAccept.setVisibility(View.VISIBLE);
-            Log.e("getStatusName", thiItem.orderItem.getStatusName());
+            Log.e("getStatusName", thiItem.orderItem.getStatusName() + " , " + thiItem.orderItem.getOrderID());
         } else {
             llStartJob.setVisibility(View.VISIBLE);
             tvAccept.setVisibility(View.GONE);
-            Log.e("getStatusName_else", thiItem.orderItem.getStatusName());
+            Log.e("getStatusName_else", thiItem.orderItem.getStatusName() + " , " + thiItem.orderItem.getOrderID());
         }
 
         //Assigned tab data
@@ -542,6 +549,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             tvBranchPhone = getTextFromHtmlFormate(thiItem.orderItem.getBranchPhone(), tvBranchPhone);
             tvOpeningHours = getTextFromHtmlFormate(thiItem.orderItem.getOpeningHours(), tvOpeningHours);
             tvStartTime = getTextFromHtmlFormate(thiItem.orderItem.getTimeStart(), tvStartTime);
+            tvTime = getTextFromHtmlFormate(thiItem.orderItem.getTimeStart(), tvTime);
             tvEndTime = getTextFromHtmlFormate(thiItem.orderItem.getTimeEnd(), tvEndTime);
             tvPurchaseDescription = getTextFromHtmlFormate(thiItem.orderItem.getsPurchaseDescription(), tvPurchaseDescription);
             tvNonRefundableServicePayment = getTextFromHtmlFormate(thiItem.orderItem.getsNonRefundableServicePayment(), tvNonRefundableServicePayment);
@@ -552,6 +560,8 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             tvBonusPayment = getTextFromHtmlFormate(thiItem.orderItem.getsBonusPayment(),
                     tvBonusPayment);
             tvStatus = getTextFromHtmlFormate(thiItem.orderItem.getStatusName(), tvStatus);
+            Spanned sp = Html.fromHtml(getDate(thiItem.orderItem.getDate()));
+            tvDate.setText(sp.toString());
 
             try {
                 if (thiItem.orderItem.getBranchLong() != null && thiItem.orderItem.getBranchLat() != null) {
@@ -682,6 +692,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
                 llStartJob.setVisibility(View.VISIBLE);
                 tvAccept.setVisibility(View.GONE);
+                cardView.setVisibility(View.GONE);
             }
         });
 
@@ -847,9 +858,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
         return Integer.valueOf(newFormat.format(km));
     }
-
-    Survey survey;
-    boolean isSurvey;
 
     private void setOrder(orderListItem thiItem) {
         Bundle b = getIntent().getExtras();
@@ -1031,7 +1039,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     return "SessionExpire";
             }
 
-            Log.e("Job_doInBackground", cardItemDetails.orderItem.getOrderID());
+//            Log.e("Job_doInBackground", cardItemDetails.orderItem.getOrderID());
 
             String result = "";
             if (params[0].equals(getString(R.string.jd_accept_btn_text))) {
@@ -1270,6 +1278,19 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             // dialog.onPostExecute();
             String result = Connector.postForm(Constants.getJobStartURL(),
                     extraDataList);
+//            cardView.setVisibility(View.GONE);
+            try {
+                if (mMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
+                    mMap.clear();
+                    Log.e("reject", "true");
+                    cardView.setVisibility(View.GONE);
+                    if (cardItemDetails != null)
+                        initJobDetails(cardItemDetails, ShowJobInMapViewActivity.this);
+                    // add markers from database to the map
+                }
+            } catch (Exception e) {
+
+            }
             return result + "r";
         }
 
@@ -1290,6 +1311,18 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                         groupedNumber));
                 result = Connector.postForm(Constants.getJobStartURL(),
                         extraDataList);
+            }
+            try {
+                if (mMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
+                    mMap.clear();
+                    Log.e("accept", "true");
+                    cardView.setVisibility(View.GONE);
+                    if (cardItemDetails != null)
+                        initJobDetails(cardItemDetails, ShowJobInMapViewActivity.this);
+                    // add markers from database to the map
+                }
+            } catch (Exception e) {
+
             }
             return result;
         }
@@ -3228,9 +3261,10 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     QuestionnaireActivity.class);
             intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, thiItem.orderItem.getOrderID());
             intent.putExtra(Constants.FIELD_ORDER_SET_ID, thiItem.orderItem.getSetID());
-            if (thiItem.orderItem.getStatusName().equals("Scheduled") || thiItem.orderItem.getStatusName().equals("cert"))
+            if (thiItem.orderItem.getStatusName().equals("Scheduled") || thiItem.orderItem.getStatusName().equals("cert") || isFromWatch) {
                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-            else
+                finish();
+            } else
                 startActivity(intent);
         } else {
             Intent intent = new Intent(this.getApplicationContext(),
@@ -3240,10 +3274,89 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
                     thiItem.orderItem.getOrderID());
             intent.putExtra(Constants.FIELD_ORDER_SET_ID, thiItem.orderItem.getSetID());
-            if (thiItem.orderItem.getStatusName().equals("Completed") || thiItem.orderItem.getStatusName().equals("in progress") || thiItem.orderItem.getStatusName().equals("In progress") || thiItem.orderItem.getStatusName().equals("archived"))
+            if (isFromWatch || thiItem.orderItem.getStatusName().equals("Completed") || thiItem.orderItem.getStatusName().equals("in progress") || thiItem.orderItem.getStatusName().equals("In progress") || thiItem.orderItem.getStatusName().equals("archived")) {
                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-            else
+                finish();
+            } else
                 startActivity(intent);
+        }
+    }
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    String getDate(String date) {
+        Date d = null;
+        try {
+            d = sdf.parse(date);
+            DateFormat dateFormat = android.text.format.DateFormat
+                    .getDateFormat(this);
+            String str = dateFormat.format(d);
+            return str;
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    public class JobLoadMap extends AsyncTask<String, String, ArrayList<Order>> {
+
+        @Override
+        protected ArrayList<Order> doInBackground(String... strings) {
+            ArrayList<Order> jobList = new ArrayList<>();
+            jobList = DBHelper
+                    .getOrders(
+                            DBHelper.whereJobListNotArchived,
+                            Constants.DB_TABLE_JOBLIST,
+                            new String[]{
+                                    Constants.DB_TABLE_JOBLIST_ORDERID,
+                                    Constants.DB_TABLE_JOBLIST_DATE,
+                                    Constants.DB_TABLE_JOBLIST_SN,
+                                    Constants.DB_TABLE_JOBLIST_DESC,
+                                    Constants.DB_TABLE_JOBLIST_SETNAME,
+                                    Constants.DB_TABLE_JOBLIST_SETLINK,
+                                    Constants.DB_TABLE_JOBLIST_CN,
+                                    Constants.DB_TABLE_JOBLIST_BFN,
+                                    Constants.DB_TABLE_JOBLIST_BN,
+                                    Constants.DB_TABLE_JOBLIST_CITYNAME,
+                                    Constants.DB_TABLE_JOBLIST_ADDRESS,
+                                    Constants.DB_TABLE_JOBLIST_BP,
+                                    Constants.DB_TABLE_JOBLIST_OH,
+                                    Constants.DB_TABLE_JOBLIST_TS,
+                                    Constants.DB_TABLE_JOBLIST_TE,
+                                    Constants.DB_TABLE_JOBLIST_SETID,
+                                    Constants.DB_TABLE_JOBLIST_BL,
+                                    Constants.DB_TABLE_JOBLIST_BLNG,
+                                    Constants.DB_TABLE_JOBLIST_FN,
+                                    Constants.DB_TABLE_JOBLIST_JC,
+                                    Constants.DB_TABLE_JOBLIST_JI,
+                                    Constants.DB_TABLE_JOBLIST_BLINK,
+                                    Constants.DB_TABLE_JOBLIST_MID,
+                                    Constants.DB_TABLE_CHECKER_CODE,
+                                    Constants.DB_TABLE_CHECKER_LINK,
+                                    Constants.DB_TABLE_BRANCH_CODE,
+                                    Constants.DB_TABLE_SETCODE,
+                                    Constants.DB_TABLE_PURCHASE_DESCRIPTION,
+                                    Constants.DB_TABLE_PURCHASE,
+                                    Constants.DB_TABLE_JOBLIST_BRIEFING,
+                                    Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
+                                    Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
+                                    Constants.DB_TABLE_JOBLIST_sTransportationPayment,
+                                    Constants.DB_TABLE_JOBLIST_sCriticismPayment,
+                                    Constants.DB_TABLE_JOBLIST_sBonusPayment,
+                                    Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
+                                    Constants.DB_TABLE_JOBLIST_sinprogressonserver,
+                                    Constants.DB_TABLE_JOBLIST_sProjectName,
+                                    Constants.DB_TABLE_JOBLIST_sRegionName,
+                                    Constants.DB_TABLE_JOBLIST_sdeletedjob,
+                                    Constants.DB_TABLE_JOBLIST_sProjectID,},
+                            Constants.DB_TABLE_JOBLIST_JI);
+            jobList = jobordersss;
+            return jobList;
         }
     }
 
