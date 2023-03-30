@@ -4533,16 +4533,16 @@ public class JobListActivity extends Activity implements OnClickListener,
             cleanUploaedJobsHere(null);
 
 //            TODO JobDetailActivity
-//            if (certorderid != null) {
-//
-//                Intent intent = new Intent(
-//                        JobListActivity.this.getApplicationContext(),
-//                        JobDetailActivity.class);
-//                isJobselected = true;
-//                intent.putExtra("OrderID", certorderid);
-//                callJobDetail(intent, JOB_DETAIL_ACTIVITY_CODE);
-//
-//            }
+            if (certorderid != null) {
+
+                Intent intent = new Intent(
+                        JobListActivity.this.getApplicationContext(),
+                        JobDetailActivity.class);
+                isJobselected = true;
+                intent.putExtra("OrderID", certorderid);
+                callJobDetail(intent, JOB_DETAIL_ACTIVITY_CODE);
+
+            }
 
         }
 
