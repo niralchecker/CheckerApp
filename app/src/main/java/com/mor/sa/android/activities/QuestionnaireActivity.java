@@ -2428,10 +2428,10 @@ public class QuestionnaireActivity extends Activity implements
     private void postAsyncDbFunctions() {
         PrepareScreen();
         //LoginActivity.dataid =null;
-        if (LoginActivity.dataid != null && LoginActivity.dataid.length() > 0
+        if (NewLoginActivity.dataid != null && NewLoginActivity.dataid.length() > 0
                 && order != null && !order.getOrderID().contains("CC")) {
-            lastDataId = LoginActivity.dataid;
-            prepareLayoutByRestoring(LoginActivity.dataid);
+            lastDataId = NewLoginActivity.dataid;
+            prepareLayoutByRestoring(NewLoginActivity.dataid);
         } else {
 
             if (isRestoring && order != null && !order.getOrderID().contains("CC")) {
@@ -4451,9 +4451,9 @@ public class QuestionnaireActivity extends Activity implements
             Orders.setBranchProps(branchProps);
 
         }
-        if (LoginActivity.thisOrder != null && LoginActivity.thisSet != null
-                && LoginActivity.thisSavedAnswer != null) {
-            order = LoginActivity.thisOrder;
+        if (NewLoginActivity.thisOrder != null && NewLoginActivity.thisSet != null
+                && NewLoginActivity.thisSavedAnswer != null) {
+            order = NewLoginActivity.thisOrder;
         } else {
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
                 order = Orders.getOrders().get(ordercount);
@@ -19792,7 +19792,7 @@ public class QuestionnaireActivity extends Activity implements
             prefsEditor.putBoolean(Constants.ALREADY_LOGIN_STATUS, false);
             prefsEditor.commit();
             Intent intent = new Intent(this.getApplicationContext(),
-                    LoginActivity.class);
+                    NewLoginActivity.class);
             startActivity(intent);
             Intent data = new Intent();
             if (orderID.contains("-")) {
@@ -21945,9 +21945,9 @@ public class QuestionnaireActivity extends Activity implements
 
     private void getSavedQuestionnaire() {
 
-        if (LoginActivity.thisOrder != null && LoginActivity.thisSet != null
-                && LoginActivity.thisSavedAnswer != null) {
-            questionnaireData = LoginActivity.thisSavedAnswer;
+        if (NewLoginActivity.thisOrder != null && NewLoginActivity.thisSet != null
+                && NewLoginActivity.thisSavedAnswer != null) {
+            questionnaireData = NewLoginActivity.thisSavedAnswer;
             return;
         }
         questionnaireData = DBHelper.getQuestionnaireList(

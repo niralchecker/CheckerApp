@@ -1047,19 +1047,19 @@ public class JobItemAdapter extends BaseAdapter {
         final ImageView imgpopup = (ImageView) row.findViewById(R.id.ivbrief);
         final RelativeLayout popuplayout = (RelativeLayout) row
                 .findViewById(R.id.popup_layout);
-        imgpopup.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (popuplayout.getVisibility() == RelativeLayout.VISIBLE)
-                    popuplayout.setVisibility(RelativeLayout.GONE);
-                else {
-                    if (lastpopuplayout != null)
-                        lastpopuplayout.setVisibility(RelativeLayout.GONE);
-                    popuplayout.setVisibility(RelativeLayout.VISIBLE);
-                    lastpopuplayout = popuplayout;
-                }
-            }
-        });
+//        imgpopup.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (popuplayout.getVisibility() == RelativeLayout.VISIBLE)
+//                    popuplayout.setVisibility(RelativeLayout.GONE);
+//                else {
+//                    if (lastpopuplayout != null)
+//                        lastpopuplayout.setVisibility(RelativeLayout.GONE);
+//                    popuplayout.setVisibility(RelativeLayout.VISIBLE);
+//                    lastpopuplayout = popuplayout;
+//                }
+//            }
+//        });
         if (order != null && order.getOrderID() != null
                 && !order.getOrderID().contains("-")
                 && order.getStatusName() != null
@@ -1617,23 +1617,23 @@ public class JobItemAdapter extends BaseAdapter {
                 ivRight.setVisibility(View.GONE);
             }
 
-            ivRight.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    if (jobItemList.getVisibility() == View.GONE) {
-                        jobItemList.setVisibility(View.VISIBLE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.upppp));
-                        if (lastpopuplayout != null)
-                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
-                    } else {
-                        jobItemList.setVisibility(View.GONE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.downnnn));
-                    }
-                }
-            });
+//            ivRight.setOnClickListener(new OnClickListener() {
+//
+//                @Override
+//                public void onClick(View arg0) {
+//                    if (jobItemList.getVisibility() == View.GONE) {
+//                        jobItemList.setVisibility(View.VISIBLE);
+//                        ivRight.setBackgroundDrawable(ct.getResources()
+//                                .getDrawable(R.drawable.upppp));
+//                        if (lastpopuplayout != null)
+//                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
+//                    } else {
+//                        jobItemList.setVisibility(View.GONE);
+//                        ivRight.setBackgroundDrawable(ct.getResources()
+//                                .getDrawable(R.drawable.downnnn));
+//                    }
+//                }
+//            });
 
             if (Helper.getTheme(ct) == 0) {
                 tv.setTextColor(ct.getResources().getColor(
@@ -2020,27 +2020,27 @@ public class JobItemAdapter extends BaseAdapter {
 //                });
                 jobItemList.setVisibility(View.GONE);
                 setListViewHeightBasedOnChildren(jobItemList);
-                ivRight.setVisibility(View.VISIBLE);
+                ivRight.setVisibility(View.GONE);
             } else {
                 if (!Constants.getDateFilter())
                     ivRight.setVisibility(View.GONE);
             }
 
-            ivRight.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    if (jobItemList.getVisibility() == View.GONE) {
-                        jobItemList.setVisibility(View.VISIBLE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.upppp));
-                    } else {
-                        jobItemList.setVisibility(View.GONE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.downnnn));
-                    }
-                }
-            });
+//            ivRight.setOnClickListener(new OnClickListener() {
+//
+//                @Override
+//                public void onClick(View arg0) {
+//                    if (jobItemList.getVisibility() == View.GONE) {
+//                        jobItemList.setVisibility(View.VISIBLE);
+//                        ivRight.setBackgroundDrawable(ct.getResources()
+//                                .getDrawable(R.drawable.upppp));
+//                    } else {
+//                        jobItemList.setVisibility(View.GONE);
+//                        ivRight.setBackgroundDrawable(ct.getResources()
+//                                .getDrawable(R.drawable.downnnn));
+//                    }
+//                }
+//            });
 
             if (Helper.getTheme(ct) == 0) {
                 tv.setTextColor(ct.getResources().getColor(

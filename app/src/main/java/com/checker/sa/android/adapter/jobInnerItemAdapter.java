@@ -288,7 +288,7 @@ public class jobInnerItemAdapter extends BaseAdapter {
         ImageView imgpopup = (ImageView) row.findViewById(R.id.ivbrief);
         final RelativeLayout popuplayout = (RelativeLayout) row
                 .findViewById(R.id.popup_layout);
-        imgpopup.setVisibility(RelativeLayout.VISIBLE);
+//        imgpopup.setVisibility(RelativeLayout.VISIBLE);
         if (order.getStatusName().toLowerCase().contains("rogress") ||
                 order.getStatusName().toLowerCase().contains("completed")) {
             imgChangeDate.setVisibility(RelativeLayout.INVISIBLE);
@@ -351,19 +351,19 @@ public class jobInnerItemAdapter extends BaseAdapter {
                 }
             });
 
-            imgpopup.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (popuplayout.getVisibility() == RelativeLayout.VISIBLE)
-                        popuplayout.setVisibility(RelativeLayout.GONE);
-                    else {
-                        if (lastpopuplayout != null)
-                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
-                        popuplayout.setVisibility(RelativeLayout.VISIBLE);
-                        lastpopuplayout = popuplayout;
-                    }
-                }
-            });
+//            imgpopup.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (popuplayout.getVisibility() == RelativeLayout.VISIBLE)
+//                        popuplayout.setVisibility(RelativeLayout.GONE);
+//                    else {
+//                        if (lastpopuplayout != null)
+//                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
+//                        popuplayout.setVisibility(RelativeLayout.VISIBLE);
+//                        lastpopuplayout = popuplayout;
+//                    }
+//                }
+//            });
 
             if (order.getBriefingContent() != null
                     && order.getBriefingContent().trim().length() > 0) {
