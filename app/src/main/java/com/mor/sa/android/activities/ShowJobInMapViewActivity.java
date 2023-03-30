@@ -243,6 +243,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         mapfragment.getMapAsync(this);
 
         joborders = JobListActivity.joborders;
+        Log.e("joborders", String.valueOf(joborders.size()));
 
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
@@ -353,7 +354,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
                             final orderListItem thiItem = markersHash.get(arg0);
                             cardItemDetails = thiItem;
-
                             if (thiItem != null) {
                                 initJobDetails(thiItem, ShowJobInMapViewActivity.this);
                             }
@@ -617,9 +617,10 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                                 getString(R.string.alert_btn_lbl_ok));
                         return;
                     }
-                    new JobTask().execute(getString(R.string.jd_accept_btn_text),
-                            "");
-                    // aceeptbtn.setBackgroundResource(R.drawable.acceptbtn_n);
+//                    new JobTask().execute(getString(R.string.jd_accept_btn_text),
+//                            "");
+                    someMethod(getString(R.string.jd_accept_btn_text));
+
                 } else if (tv_show_status.getText().toString()
                         .equals(getString(R.string.jd_begin_review_btn_text))) {
                     if (isBriefing == true) {
@@ -1319,7 +1320,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             // dialog.onPostExecute();
             String result = Connector.postForm(Constants.getJobStartURL(),
                     extraDataList);
-            cardView.setVisibility(View.GONE);
             try {
                 if (mMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
                     mMap.clear();
@@ -1377,7 +1377,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             prefsEditor.putBoolean(Constants.ALREADY_LOGIN_STATUS, false);
             prefsEditor.commit();
             Intent intent = new Intent(this.getApplicationContext(),
-                    LoginActivity.class);
+                    NewLoginActivity.class);
             startActivity(intent);
             finish();
             return true;
@@ -3488,7 +3488,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
             Log.e("jobordersss_activity", String.valueOf(jobordersss.size()));
 
-            ArrayList<orderListItem> joborders = null;
+//            ArrayList<orderListItem> joborders = null;
 
             try {
 
@@ -5535,6 +5535,13 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             data_id = data_id.substring(0, data_id.indexOf(";"));
         }
         return data_id;
+    }
+
+    public void someMethod(String str) {
+        new JobTask().execute(str, "");
+        setMapView(joborders);
+        LongOperation op = new LongOperation();
+        op.execute();
     }
 
 }

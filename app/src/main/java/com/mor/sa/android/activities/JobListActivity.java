@@ -4997,6 +4997,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 mAdapter.doFilter(mFilter, JobListActivity.this, true);
                 updateFiler(null);
                 jobItemList.setAdapter(mAdapter);
+                Log.e("joborders_activity", String.valueOf(joborders.size()));
 
                 Constants.orderList = joborders;
             } catch (Exception ex) {
