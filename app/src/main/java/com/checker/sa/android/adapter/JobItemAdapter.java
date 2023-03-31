@@ -1617,6 +1617,7 @@ public class JobItemAdapter extends BaseAdapter {
                         }
                     }
                 });
+                //TODO Date filter
                 jobItemList.setVisibility(View.GONE);
                 setListViewHeightBasedOnChildren(jobItemList);
                 ivRight.setVisibility(View.VISIBLE);
@@ -1628,13 +1629,13 @@ public class JobItemAdapter extends BaseAdapter {
                 tvDec.setVisibility(View.GONE);
             } else {
                 // if (!Constants.getDateFilter())
-                imgpopup.setVisibility(RelativeLayout.VISIBLE);
+                imgpopup.setVisibility(RelativeLayout.GONE);
                 ivRight.setVisibility(View.GONE);
-                clBottom.setVisibility(View.GONE);
-                ivCalendar.setVisibility(View.GONE);
-                viewDate.setVisibility(View.GONE);
-                tvTime.setVisibility(View.GONE);
-                tvDec.setVisibility(View.GONE);
+                clBottom.setVisibility(View.VISIBLE);
+                ivCalendar.setVisibility(View.VISIBLE);
+                viewDate.setVisibility(View.VISIBLE);
+                tvTime.setVisibility(View.VISIBLE);
+                tvDec.setVisibility(View.VISIBLE);
             }
 
             ivRight.setOnClickListener(new OnClickListener() {
@@ -1990,7 +1991,7 @@ public class JobItemAdapter extends BaseAdapter {
                 });
                 jobItemList.setAdapter(new jobInnerItemAdapter(act,
                         this.joblistarray.get(position).listOrders));
-//                TODO JobDetailActivity
+//                TODO JobDetailActivity_2
                 jobItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View arg1,
@@ -2038,12 +2039,23 @@ public class JobItemAdapter extends BaseAdapter {
                         }
                     }
                 });
+                //TODO Date filter_2
                 jobItemList.setVisibility(View.GONE);
                 setListViewHeightBasedOnChildren(jobItemList);
                 ivRight.setVisibility(View.GONE);
+//                clBottom.setVisibility(View.GONE);
+//                ivCalendar.setVisibility(View.GONE);
+//                viewDate.setVisibility(View.GONE);
+//                tvTime.setVisibility(View.GONE);
+//                tvDec.setVisibility(View.GONE);
             } else {
                 if (!Constants.getDateFilter())
                     ivRight.setVisibility(View.GONE);
+//                clBottom.setVisibility(View.VISIBLE);
+//                ivCalendar.setVisibility(View.VISIBLE);
+//                viewDate.setVisibility(View.VISIBLE);
+//                tvTime.setVisibility(View.VISIBLE);
+//                tvDec.setVisibility(View.VISIBLE);
             }
 
             ivRight.setOnClickListener(new OnClickListener() {
