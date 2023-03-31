@@ -112,7 +112,7 @@ public class jobInnerItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflator = act.getLayoutInflater();
         final Order order = joblistarray.get(position);
-        View row = inflator.inflate(R.layout.new_item_assigned, parent, false);
+        View row = inflator.inflate(R.layout.job_inner_row, parent, false);
         ImageView returnedReview = (ImageView) row.findViewById(R.id.vreturned);
         ImageView err = (ImageView) row.findViewById(R.id.imgerr);
         if (order != null && order.getOrderID() != null && !order.getOrderID().contains("-") && order.getIsJobInProgressOnServer() != null
@@ -159,11 +159,16 @@ public class jobInnerItemAdapter extends BaseAdapter {
             });
         }
 
-        TextView tv = (TextView) row.findViewById(R.id.tv_name);
+//        TextView tv = (TextView) row.findViewById(R.id.tv_name);
+//        tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
+//        TextView datetv = (TextView) row.findViewById(R.id.tv_date);
+//        tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
+//        ImageView iv = (ImageView) row.findViewById(R.id.iv_location);
+        TextView tv = (TextView) row.findViewById(R.id.tv1);
         tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
-        TextView datetv = (TextView) row.findViewById(R.id.tv_date);
+        TextView datetv = (TextView) row.findViewById(R.id.tv2);
         tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
-        ImageView iv = (ImageView) row.findViewById(R.id.iv_location);
+        ImageView iv = (ImageView) row.findViewById(R.id.leftiv);
         iv.setVisibility(RelativeLayout.GONE);
 
         if (Helper.getTheme(ct) == 0) {
