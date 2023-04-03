@@ -134,6 +134,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         GoogleApiClient.OnConnectionFailedListener, MessageApi.MessageListener {
 
     private GoogleMap mMap;
+    MarkerOptions markerOptions = new MarkerOptions();
     private SupportMapFragment mapfragment;
 
     public static ArrayList<orderListItem> joborders;
@@ -242,12 +243,52 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapfragment.getMapAsync(this);
 
-        joborders = JobListActivity.joborders;
-        Log.e("joborders", String.valueOf(joborders.size()));
+        //...........
+        Log.e("onCreate", "true");
+        initGoogleApiClient();
+        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor outState = myPrefs.edit();
+
+        if (outState != null) {
+            outState.putBoolean("ispaused", false);
+            outState.commit();
+        }
+
+        outState.putString(Constants.Crash_Last_SETID, "");
+        outState.putString(Constants.Crash_Last_ORDERID, "");
+        outState.commit();
+
+        try {
+            LongOperation op = new LongOperation();
+            op.execute();
+        } catch (Exception ex) {
+        }
 
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+        Bundle b = getIntent().getExtras();
+        boolean login_check = false;
+        if (b != null) {
+            login_check = b.getBoolean(Constants.IS_LOGIN);
+        }
 
-        initGoogleApiClient();
+        Log.e("login_check_map", String.valueOf(login_check));
+        DBAdapter db = new DBAdapter(this.getApplicationContext());
+
+        try {
+
+            myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+
+            db.createDataBase(Helper.getSystemURLfromDB(),
+                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
+                    null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Surveys.setSets(DBHelper.getSurveyyRecords());
+        Helper.setConfigChange(false);
+
+        loadOfflineJobs(login_check);
 
         iv_language.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,10 +316,9 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         try {
             if (mMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
                 mMap.clear();
-                setMapView(joborders);
-                initJobDetails(cardItemDetails, ShowJobInMapViewActivity.this);
                 LongOperation op = new LongOperation();
                 op.execute();
+                setMapView(joborders);
                 // add markers from database to the map
             }
         } catch (Exception e) {
@@ -312,7 +352,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
     private void setMapView(List<orderListItem> orders) {
         for (int i = 0; i < orders.size(); i++) {
             try {
-                MarkerOptions markerOptions = new MarkerOptions();
+
 
                 double latitude = Double.parseDouble(orders.get(i).orderItem.getBranchLat());
                 double longitude = Double.parseDouble(orders.get(i).orderItem.getBranchLong());
@@ -329,8 +369,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 } else if (orders.get(i).orderItem.getStatusName().equals("in progress") || orders.get(i).orderItem.getStatusName().equals("In progress") || orders.get(i).orderItem.getStatusName().toLowerCase().equals("archived")) {
                     markerOptions.icon(BitmapFromVector(getApplicationContext(), R.drawable.in_progress_job_location, 160, 200));
                 }
-
-                Log.e("status_name_id", orders.get(i).orderItem.getStatusName() + " , " + orders.get(i).orderItem.getOrderID());
 
                 if (markersHash == null)
                     markersHash = new HashMap<Marker, orderListItem>();
@@ -452,7 +490,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 if (thiItem.orderItem.getBranchLong() != null && thiItem.orderItem.getBranchLat() != null) {
                     double location_latitude = Double.parseDouble(thiItem.orderItem.getBranchLat());
                     double location_longitude = Double.parseDouble(thiItem.orderItem.getBranchLong());
-                    String get_location = String.valueOf(((JobListActivity) con).CalculationByDistance(Constants.user_location_latitude, location_latitude, Constants.user_location_longitude, location_longitude));
+                    String get_location = String.valueOf(CalculationByDistance(Constants.user_location_latitude, location_latitude, Constants.user_location_longitude, location_longitude));
                     tvLocation.setText(get_location + " Km");
                     tvLocation.setVisibility(View.VISIBLE);
                     ivLocation.setVisibility(View.VISIBLE);
@@ -617,8 +655,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                                 getString(R.string.alert_btn_lbl_ok));
                         return;
                     }
-//                    new JobTask().execute(getString(R.string.jd_accept_btn_text),
-//                            "");
+
                     someMethod(getString(R.string.jd_accept_btn_text));
 
                 } else if (tv_show_status.getText().toString()
@@ -707,29 +744,67 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 //                    BeginReview(true, thiItem);
 //                }
 
-                if (thiItem.orderItem.getOrderID().contains("-")) {
-                    Intent intent = new Intent(getApplicationContext(),
-                            QuestionnaireActivity.class);
-                    intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, thiItem.orderItem.getOrderID());
-                    intent.putExtra(Constants.FIELD_ORDER_SET_ID, thiItem.orderItem.getSetID());
+//                if (thiItem.orderItem.getOrderID().contains("-")) {
+//                    Intent intent = new Intent(getApplicationContext(),
+//                            QuestionnaireActivity.class);
+//                    intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, thiItem.orderItem.getOrderID());
+//                    intent.putExtra(Constants.FIELD_ORDER_SET_ID, thiItem.orderItem.getSetID());
+//
+//                    if (thiItem.orderItem.getStatusName().equals("Scheduled") || thiItem.orderItem.getStatusName().equals("cert"))
+//                        startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+//                    else
+//                        startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+//
+//                } else {
+//                    Intent intent = new Intent(getApplicationContext(),
+//                            QuestionnaireActivity.class);
+//                    if (thiItem.orderItem == null)
+//                        setOrder(thiItem);
+//                    intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, thiItem.orderItem.getOrderID());
+//                    intent.putExtra(Constants.FIELD_ORDER_SET_ID, thiItem.orderItem.getSetID());
+//                    if (thiItem.orderItem.getStatusName().equals("Completed") || thiItem.orderItem.getStatusName().equals("in progress") || thiItem.orderItem.getStatusName().equals("In progress") || thiItem.orderItem.getStatusName().equals("archived"))
+//                        startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+//                    else
+//                        startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+//                }
 
-                    if (thiItem.orderItem.getStatusName().equals("Scheduled") || thiItem.orderItem.getStatusName().equals("cert"))
-                        startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-                    else
-                        startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                //...........
+                isJobselected = true;
+                Intent intent = new Intent(ShowJobInMapViewActivity.this
+                        .getApplicationContext(), JobDetailActivity.class);
+                if (thiItem != null) {
+                    if (thiItem.orderItem != null) {
+//                            TODO OrderID
+                        intent.putExtra("OrderID", thiItem.orderItem.getOrderID());
+                        intent.putExtra(
+                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                thiItem.orderItem
+                                        .getCount() + "");
+                        String OrderID = thiItem.orderItem.getOrderID();
+                        String surveyId = "";
+                        if (OrderID.contains("-")) {
+                            surveyId = (OrderID.replace("-", ""));
+                            Survey survey = Surveys.getCurrentSurve(surveyId);
+                            boolean b = survey.isAllocationReached();
+                            if (b)//ALLOCATION REACHED
+                            {
+                                Toast.makeText(ShowJobInMapViewActivity.this,
+                                        getString(R.string.questionnaire_open_survey_alert)
+                                        , Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                    } else if (thiItem.surveyItem != null) {
+//                            TODO SurveyID
+                        intent.putExtra("SurveyID", thiItem.surveyItem.getSurveyID());
 
-                } else {
-                    Intent intent = new Intent(getApplicationContext(),
-                            QuestionnaireActivity.class);
-                    if (thiItem.orderItem == null)
-                        setOrder(thiItem);
-                    intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, thiItem.orderItem.getOrderID());
-                    intent.putExtra(Constants.FIELD_ORDER_SET_ID, thiItem.orderItem.getSetID());
-                    if (thiItem.orderItem.getStatusName().equals("Completed") || thiItem.orderItem.getStatusName().equals("in progress") || thiItem.orderItem.getStatusName().equals("In progress") || thiItem.orderItem.getStatusName().equals("archived"))
-                        startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-                    else
-                        startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
-                }
+                    }
+
+                } else
+                    intent.putExtra(
+                            Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                            "1");
+                startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
             }
         });
 
@@ -796,10 +871,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
     public double CalculationByDistance(double StartP_latitude, double EndP_latitude, double StartP_longitude, double EndP_longitude) {
         int Radius = 6371;// radius of earth in Km
-//        double lat1 = StartP.latitude;
-//        double lat2 = EndP.latitude;
-//        double lon1 = StartP.longitude;
-//        double lon2 = EndP.longitude;
         double dLat = Math.toRadians(EndP_latitude - StartP_latitude);
         double dLon = Math.toRadians(EndP_longitude - StartP_longitude);
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
@@ -825,9 +896,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         if (b == null)
             return;
 
-//        String OrderID = b.getString("OrderID");
-//        String SurveyID = b.getString("SurveyID");
-
         String OrderID = thiItem.orderItem.getOrderID();
         String SurveyID = thiItem.surveyItem.getSurveyID();
 
@@ -839,9 +907,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 if (survey.getSurveyID().equals(SurveyID))
                     break;
             }
-            // order = Orders.getOrders().get(index);
-//            if (survey != null)
-//                setValueFieldText(survey);
             isBriefing = false;
         } else {
             for (int i = 0; i < Orders.getOrders().size(); i++) {
@@ -849,10 +914,9 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 if (thiItem.orderItem != null && thiItem.orderItem.getOrderID().equals(OrderID))
                     break;
             }
-            // order = Orders.getOrders().get(index);
+
             if (thiItem.orderItem != null) {
                 isSurvey = OrderID.contains("-");
-//                setValueFieldText(isSurvey);
 
                 if (thiItem.orderItem.getBriefingContent() != null
                         && !thiItem.orderItem.getBriefingContent().equals("")) {
@@ -891,7 +955,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     return;
                 }
                 String orderid = "";
-                // if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     // stopLocationChecker();
                     Bundle b = data.getExtras();
@@ -958,32 +1021,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     }
                 }
                 setOrderList();
-//                if (CheckerApp.globalFilterVar != null) {
-//                    //updateFiler(null);
-//                    joborders = getFilterArray(CheckerApp.globalFilterVar);
-//                } else updateFiler(null);
-//                if (mAdapter == null) {
-//                    mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
-//                            mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
-//                            bimgtabThree, bimgtabFour, txttabSync, txttabOne,
-//                            txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
-//                            ltabThree, ltabFour, null, null);
-//                    mAdapter.setBranchCallback(this);
-//                } else {
-//                    mAdapter.mainSetter(JobListActivity.this, joborders, mFilter,
-//                            bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-//                            bimgtabFour, txttabSync, txttabOne, txttabTwo,
-//                            txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
-//                            ltabFour);
-//                }
-//
-//
-//                if (jobItemList.getAdapter() == null)
-//                    jobItemList.setAdapter(mAdapter);
-//                else {
-//                    mAdapter.notifyDataSetChanged();
                 setMapView(joborders);
-//                }
                 if (!dontrun) {
                     setMapView(joborders);
                     ShowOrphanFiles();
@@ -1084,8 +1122,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 if (showLoginAdapter(doLogin()))
                     return "SessionExpire";
             }
-
-//            Log.e("Job_doInBackground", cardItemDetails.orderItem.getOrderID());
 
             String result = "";
             if (params[0].equals(getString(R.string.jd_accept_btn_text))) {
@@ -1194,8 +1230,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             DBAdapter.openDataBase();
             DBAdapter.db.delete(Constants.DB_TABLE_ANSWERS, where, null);
             DBAdapter.openDataBase();
-            // DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE, where, null);
-            // DBAdapter.openDataBase();
             DBAdapter.db.delete(Constants.DB_TABLE_POS, where, null);
             DBAdapter.openDataBase();
             DBAdapter.db.delete(Constants.DB_TABLE_ORDERS, where, null);
@@ -1204,7 +1238,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             DBAdapter.openDataBase();
             DBAdapter.db.delete(Constants.DB_TABLE_JOBLIST, where, null);
 
-            // exitAfterSubmitSurveyOrExitandsave(2);
         }
 
         @Override
@@ -1352,12 +1385,8 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                         extraDataList);
             }
             try {
-                if (mMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
-                    mMap.clear();
-                    Log.e("accept", "true");
-                    cardView.setVisibility(View.GONE);
-                    // add markers from database to the map
-                }
+                Log.e("accept", "true");
+                cardView.setVisibility(View.GONE);
             } catch (Exception e) {
 
             }
@@ -1820,12 +1849,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         private boolean saveSetDatatoLocalDB() {
             if (Sets.getSets() == null || Sets.getSets().isEmpty())
                 return false;
-            // for(int i=0;i<Sets.getSets().size();i++)
-            // {
-            // Set set = Sets.getSets().get(i);
-            // int size = set.getListObjects().size();
-            // Log.v("Size= ", ""+size);
-            // }
             try {
                 if (dialog != null)
                     dialog.changeMessage(dialog.getContext().getResources()
@@ -1882,7 +1905,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             String chkurl = Constants.getcheckConnectionURL(newUrlForEUClients);
             boolean isOk = Connector.checkConnection(chkurl);
             if (isOk) {
-                JobListActivity.setAlternateURL(newUrlForEUClients, myPrefs);
+                setAlternateURL(newUrlForEUClients, myPrefs);
                 return isOk;
             }
         }
@@ -1898,6 +1921,15 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         }
         // Initialize the login data to POST
         return Connector.checkConnection(chkurl);
+    }
+
+    public static void setAlternateURL(String newEurURL, SharedPreferences myPrefs) {
+        SharedPreferences.Editor prefsEditor = myPrefs.edit();
+        prefsEditor.putString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, newEurURL);
+        prefsEditor.commit();
+        Helper.setAlternateSystemURL(myPrefs.getString(
+                Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
+
     }
 
     public void getLanguages() {
@@ -2777,17 +2809,10 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             showListTaskHandler.execute();
 
         } catch (Exception ex) {
-            // ShowAlert(JobListActivity.this,
-            // JobListActivity.this.getString(R.string.alert_working),
-            // JobListActivity.this.getString(R.string.alert_working_msg),
-            // JobListActivity.this.getString(R.string.button_ok));
         }
     }
 
     private String removeGarbageFromTop(String thisSet) {
-//        if (thisSet!=null && thisSet.trim().toLowerCase().startsWith("<?xml version"))
-//            return thisSet;
-//        thisSet=thisSet.substring(thisSet.indexOf("<?xml version"));
         return thisSet;
     }
 
@@ -2861,10 +2886,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         for (int index = 0; index < size; index++) {
             order = temporder.get(index);
             order.setJobCount(0);
-            // String status = getStatusByOrderID(order.getOrderID(),
-            // ordersArr);
-            // if(!status.equals(""))
-            // temporder.get(index).setStatusName(status);
+
             for (int innerindex = 0; innerindex < size; innerindex++) {
                 innerorder = temporder.get(innerindex);
                 try {
@@ -2887,17 +2909,14 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     e.printStackTrace();
                 }
             }
-            // order.setIndex(index);
             temporder1.add(new orderListItem(order, delete));
             for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
                 temporder.remove(delete.get(deleteindex));
             }
             size = temporder.size();
-            // delete.clear();
             delete = new ArrayList<Order>();
         }
         joborders = temporder1;
-        // delete.clear();
         delete = null;
     }
 
@@ -2935,8 +2954,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
                 } catch (Exception ex) {
                 }
-//                Revamped_Loading_Dialog.show_dialog(ShowJobInMapViewActivity.this,
-//                        getResources().getString(R.string.alert_switching));
             }
         }
 
@@ -2947,36 +2964,8 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 Orders.setBranchProps(branchProps);
                 Surveys.setSets(DBHelper.getSurveyyRecords());
                 setOrderList();
-                // setSurveyList'();
-                // seting list here
-//                showDbjobsPostPart();
-                // ManageTabs(1);
             }
-
-//            if (pngItems != null && pngItems.size() > 0
-//                    || isBranchPropErr == true) {
-//                if (btnErr != null)
-//                    btnErr.setVisibility(RelativeLayout.VISIBLE);
-//            } else {
-//                if (btnErr != null)
-//                    btnErr.setVisibility(RelativeLayout.GONE);
-//            }
-
             Revamped_Loading_Dialog.hide_dialog();
-//            cleanUploaedJobsHere(null);
-
-//            TODO JobDetailActivity
-//            if (certorderid != null) {
-//
-//                Intent intent = new Intent(
-//                        JobListActivity.this.getApplicationContext(),
-//                        JobDetailActivity.class);
-//                isJobselected = true;
-//                intent.putExtra("OrderID", certorderid);
-//                callJobDetail(intent, JOB_DETAIL_ACTIVITY_CODE);
-//
-//            }
-
         }
 
         @Override
@@ -3158,16 +3147,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             }
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-            String userName = myPrefs.getString(
-                    Constants.POST_FIELD_LOGIN_USERNAME, "");
-            // if (Helper.lThread == null) {
-            // Helper.lThread = new locationThread();
-            // Helper.lThread.isPost = true;
-            // } else {
-            // Helper.lThread.isPost = true;
-            // }
-            // Helper.lThread.startLocationThread(getApplicationContext(),
-            // userName);
             for (int i = 0; i < joborders.size(); i++) {
                 if (joborders.get(i).orderItem.getOrderID()
                         .equals(thiItem.orderItem.getOrderID())) {
@@ -3179,10 +3158,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             BeginReview(false, thiItem);
 
         }
-        // else if (locationManager
-        // .isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-        //
-        // }
+
         else {
             // OPen GPS settings
 
@@ -3199,16 +3175,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                                 @Override
                                 public void onClick(DialogInterface dialog,
                                                     int id) {
-
-                                    // Sent user to GPS settings screen
-                                    // final ComponentName toLaunch = new
-                                    // ComponentName("com.android.settings","com.android.settings.SecuritySettings");
-                                    // final Intent intent = new
-                                    // Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                    // intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                                    // intent.setComponent(toLaunch);
-                                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    // startActivityForResult(intent, 1);
 
                                     startActivityForResult(
                                             new Intent(
@@ -3236,12 +3202,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                                             .getString(
                                                     Constants.POST_FIELD_LOGIN_USERNAME,
                                                     "");
-                                    // locationThread lThread = new
-                                    // locationThread();
-                                    // lThread.startLocationThread(
-                                    // getApplicationContext(), userName);
-                                    // JobListActivity.joborders.get(localindex).orderItem
-                                    // .setStatusName("Scheduled");
                                     BeginReview(false, thiItem);
                                 }
                             });
@@ -3340,65 +3300,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
         return "";
     }
 
-    public class JobLoadMap extends AsyncTask<String, String, ArrayList<orderListItem>> {
-
-        @Override
-        protected ArrayList<orderListItem> doInBackground(String... strings) {
-            ArrayList<orderListItem> jobList = new ArrayList<>();
-//            jobList = DBHelper
-//                    .getOrders(
-//                            DBHelper.whereJobListNotArchived,
-//                            Constants.DB_TABLE_JOBLIST,
-//                            new String[]{
-//                                    Constants.DB_TABLE_JOBLIST_ORDERID,
-//                                    Constants.DB_TABLE_JOBLIST_DATE,
-//                                    Constants.DB_TABLE_JOBLIST_SN,
-//                                    Constants.DB_TABLE_JOBLIST_DESC,
-//                                    Constants.DB_TABLE_JOBLIST_SETNAME,
-//                                    Constants.DB_TABLE_JOBLIST_SETLINK,
-//                                    Constants.DB_TABLE_JOBLIST_CN,
-//                                    Constants.DB_TABLE_JOBLIST_BFN,
-//                                    Constants.DB_TABLE_JOBLIST_BN,
-//                                    Constants.DB_TABLE_JOBLIST_CITYNAME,
-//                                    Constants.DB_TABLE_JOBLIST_ADDRESS,
-//                                    Constants.DB_TABLE_JOBLIST_BP,
-//                                    Constants.DB_TABLE_JOBLIST_OH,
-//                                    Constants.DB_TABLE_JOBLIST_TS,
-//                                    Constants.DB_TABLE_JOBLIST_TE,
-//                                    Constants.DB_TABLE_JOBLIST_SETID,
-//                                    Constants.DB_TABLE_JOBLIST_BL,
-//                                    Constants.DB_TABLE_JOBLIST_BLNG,
-//                                    Constants.DB_TABLE_JOBLIST_FN,
-//                                    Constants.DB_TABLE_JOBLIST_JC,
-//                                    Constants.DB_TABLE_JOBLIST_JI,
-//                                    Constants.DB_TABLE_JOBLIST_BLINK,
-//                                    Constants.DB_TABLE_JOBLIST_MID,
-//                                    Constants.DB_TABLE_CHECKER_CODE,
-//                                    Constants.DB_TABLE_CHECKER_LINK,
-//                                    Constants.DB_TABLE_BRANCH_CODE,
-//                                    Constants.DB_TABLE_SETCODE,
-//                                    Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-//                                    Constants.DB_TABLE_PURCHASE,
-//                                    Constants.DB_TABLE_JOBLIST_BRIEFING,
-//                                    Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-//                                    Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-//                                    Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-//                                    Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-//                                    Constants.DB_TABLE_JOBLIST_sBonusPayment,
-//                                    Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-//                                    Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-//                                    Constants.DB_TABLE_JOBLIST_sProjectName,
-//                                    Constants.DB_TABLE_JOBLIST_sRegionName,
-//                                    Constants.DB_TABLE_JOBLIST_sdeletedjob,
-//                                    Constants.DB_TABLE_JOBLIST_sProjectID,},
-//                            Constants.DB_TABLE_JOBLIST_JI);
-//            jobList = jobordersss;
-            setMapView(joborders);
-            return joborders;
-        }
-    }
-
-
     //TODO
     private class LongOperation extends AsyncTask<String, Void, ArrayList<orderListItem>> {
 
@@ -3486,7 +3387,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 i++;
             }
 
-            Log.e("jobordersss_activity", String.valueOf(jobordersss.size()));
+            Log.e("jobordersss_map", String.valueOf(jobordersss.size()));
 
 //            ArrayList<orderListItem> joborders = null;
 
@@ -3503,7 +3404,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
                         joborders.add(new orderListItem(jobordersss.get(i), null));
                     }
-                    Log.e("joborders_activity", String.valueOf(joborders.size()));
+                    Log.e("joborders_map_", String.valueOf(joborders.size()));
                 }
 
 
@@ -3546,10 +3447,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 for (int index = 0; index < size; index++) {
                     order = temporder.get(index);
                     order.setJobCount(0);
-                    // String status = getStatusByOrderID(order.getOrderID(),
-                    // ordersArr);
-                    // if(!status.equals(""))
-                    // temporder.get(index).setStatusName(status);
+
                     for (int innerindex = 0; innerindex < size; innerindex++) {
                         innerorder = temporder.get(innerindex);
                         try {
@@ -3598,7 +3496,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     "POST_STARTED", "LONG_OPERATION"));
             try {
                 if (joborders != null && joborders.size() >= 1) {
-                    JobListActivity.joborders = joborders;
+                    joborders = joborders;
 //                    showDbjobsPostPart();
                     setMapView(joborders);
 //                    if (mFilter.equals("completed")) {
@@ -3819,8 +3717,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     Orders.setBranchProps(branchProps);
                     Surveys.setSets(DBHelper.getSurveyyRecords());
                     setOrderList();
-                    // setSurveyList'();
-                    // seting list here
                     showDbjobsPostPart();
                 }
             }
@@ -3853,18 +3749,8 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
         if (IsInternetConnectted()) {
             if (isWifiOnly) {
-
-//                if (isWifiStatus()) {
-                // wifi is enabled
-//                } else {
                 ShowDBJobs();
-//                    customAlert(
-//                            JobListActivity.this,
-//                            getResources().getString(
-//                                    R.string.wifi_not_enabled));
                 return;
-
-//                }
             }
 
             SubmitSurveyTask sbmtSurveyTask = new SubmitSurveyTask();
@@ -3911,25 +3797,12 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
     }
 
     private void showDbjobsPostPart() {
-//        if (CheckerApp.globalFilterVar != null)
-//            FilterJobList(CheckerApp.globalFilterVar);
-//        else {
         try {
-//                mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
-//                        mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-//                        bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
-//                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour);
-//                mAdapter.setBranchCallback(this);
-//                mAdapter.setDateCallback(this);
-//                mAdapter.doFilter(mFilter, JobListActivity.this, true);
-//                updateFiler(null);
-//                jobItemList.setAdapter(mAdapter);
             setMapView(joborders);
         } catch (Exception ex) {
             int i = 0;
             i++;
         }
-//        }
     }
 
     private String cert;
@@ -3955,16 +3828,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
 
         public SubmitSurveyTask() {
-//            textFilePath="W29iajE1NjA3MC1xdWVzdGlvblRleHRdID0+INeQ15bXldeoINen15XXpNeV16og16nXqNeV16og16LXptee15kg16TXoNeV15kg157Xntek15LXoteZ150g15vXkteV158gLSDXqdeo16TXqNek15nXnSAvINei15LXnNeV16og16jXmden15XXqiDXkNeVINee15zXkNeV16og16HXl9eV16jXlCAvINen16jXmNeV16DXmdedIC8g15zXldec15nXnSBbb2JqMTU2MTA3LW1pXSA9PiBbb2JqMTU2MTIyLWFuc3dlclRleHQxXSA9PiBbb2JqMTU2MDk3LW1pXSA9PiBbb2JqMTU2MTE0LWFuc3dlclRleHQxXSA9PiDXm9efIFtvYmoxNTYzMTMtbWldID0+IFtvYmoxNTYzMDEtcXVlc3Rpb25UZXh0XSA9PiDXlNeQ150g16DXptek15Qg15DXmdepINem15XXldeqINee16nXldeX15cg15HXnteb16nXmdeoINeg15nXmdeTIFtvYmoxNTYzMTUtYW5zd2VyVGV4dDFdID0+INeb158gW29iajE1NjExMC1hbnN3ZXJUZXh0MV0gPT4g16nXqNeV16og15jXldeRINee15DXldeTIFtTZXRJRF0gPT4gMjM4NCBbb2JqMTU2MTAxXSA9PiA2NzQ0IFtvYmoxNTYxMTYtbWldID0+IFtvYmoxNTYwOTZdID0+IDk2MzkgW29iajE1NjExNl0gPT4gNjc2MiBbb2JqMTU2MDcyLW1pXSA9PiBbb2JqMTU2MzAzLWFuc3dlclRleHQxXSA9PiDXmNeV15EgW1RvdGFsQW5zd2Vyc1NlbnRdID0+IDU5IFtvYmoxNTYxMjUtbWldID0+IFtvYmoxNTYzMDFdID0+IDYyMDUgW3B1cmNoYXNlX1B1cmNoYXNlUGF5bWVudF0gPT4gMTQgW29iajE1NjI5Nl0gPT4gNjE3NCBbb2JqMTU2MzE2XSA9PiA3MTk5IFtvYmoxNTYxMjUtcXVlc3Rpb25UZXh0XSA9PiDXp9eV16TXldeqINeU15nXpteZ15DXlCDXnteQ15XXmdeZ16nXldeqINeR15TXqteQ150g15zXnteh16TXqCDXlNec16fXldeX15XXqiDXlNee157XqteZ16DXmdedINeR16fXldek15QgW29iajE1NjA3MV0gPT4gNjU3NCBbb2JqMTU2MzA2LW1pXSA9PiBbb2JqMTU2MTAwLW1pXSA9PiBbb2JqMTYwNzcxLW1pXSA9PiAxMzo1ODo0NCBbb2JqMTU2MDkwLW1pXSA9PiBbb2JqMTU2MTE2LXF1ZXN0aW9uVGV4dF0gPT4g15HXqteX15nXnNeqINee16rXnyDXlNep16jXldeqINeU16jXmdedINeo15DXqdeVINec15zXp9eV15cg15XXkdeo15og15HXkdeo15vXlCDXnteZ15zXldec15nXqiDXkdeQ157Xptei15XXqiDXlNee16nXpNeYICLXqdec15XXnSwg15nXqSDXnNeaINeb16jXmNeZ16Eg15zXmdeZ16Mg16HXmNeZ15nXnD8iIFtvYmoxNTYxMjYtYW5zd2VyVGV4dDFdID0+IFtvYmoxNTYyOTYtbWldID0+IFtyZXBvcnRlZF9TdGFydFRpbWVdID0+IDIwMjAtMDEtMjMgMTM6NTg6NDkgW29iajE1NjExOC1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MDk0LXF1ZXN0aW9uVGV4dF0gPT4g15TXkNedINeR15nXqNeoINec157XmSDXnteZ15XXoteTINeU16rXm9ep15nXqD8gW29iajE1NjEwNy1xdWVzdGlvblRleHRdID0+INeU15XXpteiINee15XXpteoINep15wg15zXmdeZ16Mg15vXldec15wg15TXodeR16gg157Xp9em15XXoteZINec15LXkdeZINeU15nXldeq15Ug15fXnNeV16TXlCDXqNeQ15XXmdeUIFtvYmoxNTYxMTEtcXVlc3Rpb25UZXh0XSA9PiDXqdedINeQ15nXqSDXlNem15XXldeqINeU16DXkdeT16cgW29iajE1NjMxNS1taV0gPT4gW0NyaXRFbmRMYXRdID0+IDMyLjA5MzY2NjA3NjY2MDE2IFtvYmoxNTYwNzItYW5zd2VyVGV4dDFdID0+INecIteoIC0g15DXmdefINen15XXpNeV16og15HXqdeo15XXqiDXotem157XmSBbb2JqMTU2MzA3LWFuc3dlclRleHQxXSA9PiDXm9efIFtvYmoxNTYzMDZdID0+IDYyMzAgW29iajE1NjExOC1taV0gPT4gW29iajE1NjA5MF0gPT4gNjcwNCBbb2JqMTU2Mjk5LXF1ZXN0aW9uVGV4dF0gPT4g15TXkNedINeg16bXpNeUINeQ15nXqSDXpteV15XXqiDXntep15XXl9eXINeR157Xm9ep15nXqCDXoNeZ15nXkyBbb2JqMTU2MTEwXSA9PiA2NzUwIFtvYmoxNTk5MDUtYW5zd2VyVGV4dDFdID0+INeb158gW29iajE1NjMxNi1xdWVzdGlvblRleHRdID0+INee15PXpNeZINeU16HXldek16gg16TXmdeZ15Eg157XnNeQ15nXnSDXldee15XXpteS15nXnSDXkdeU150g15vXnCDXlNee15XXpteo15nXnSDXnteq15XXnteX16jXmdedINeR15TXqteQ150g15zXqteQ16jXmdeaIFtvYmoxNTYxMjVdID0+IDcxMDAgW29iajE1NjMwNy1xdWVzdGlvblRleHRdID0+INee15fXmdeo15kg15TXp9eV16TXlCDXqdecINeU157Xldem16jXmdedINep16DXqNeb16nXlSDXqteV15DXnteZ150g15zXnteX15nXqNeZ150g16LXnCDXpNeZINeU16nXmdec15XXmCAvINeq15XXldeZ15XXqiDXlNee15fXmdeoIFtvYmoxNTYwNzEtcXVlc3Rpb25UZXh0XSA9PiDXlNeo16bXpNeUINeR15DXlteV16gg16fXldek15XXqiDXqdeo15XXqiDXotem157XmSDXoNen15nXlCAo15DXmdefINep16fXmdeV16ov16DXmdeZ16jXldeqL9eb16rXnteZINec15vXnNeV15opIFtvYmoxNjA3NzAtcXVlc3Rpb25UZXh0XSA9PiDXqdei16og15vXoNeZ16HXlDogW29iajE1OTkwNS1taV0gPT4gW29iajE1NjMwMC1hbnN3ZXJUZXh0MV0gPT4g15zXkCBbb2JqMTU2MzA4LW1pXSA9PiDXp9eZ15HXnNeUINeh15nXldeiINee16LXldeR15PXqiDXkNeX16jXqiBbb2JqMTU2MzAyLXF1ZXN0aW9uVGV4dF0gPT4g15vXnCDXk9ec16TXp9eZINeU16fXldek15XXqiDXpNeg15XXmdeZ150gW29iajE1NjA5Ni1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MDk1XSA9PiA2NzI3IFtvYmoxNTYyOTgtbWldID0+IFtvYmoxNTYxMDBdID0+IDk2MzkgW29iajE1NjI5Ny1hbnN3ZXJUZXh0MV0gPT4g15jXldeRIFtvYmoxNTYxMTEtbWldID0+INeQ16jXmdefIFtvYmoxNTYzMTctbWldID0+IFtvYmoxNTYzMDBdID0+IDYyMDAgW29iajE1NjMxNV0gPT4gNzE5NCBbb2JqMTU2MTI2LXF1ZXN0aW9uVGV4dF0gPT4g15TXoteo15XXqiBbb2JqMTU2MDcwXSA9PiA2NTc2IFtvYmoxNTYxMjMtYW5zd2VyVGV4dDFdID0+INecIteoIFtvYmoxNTYxMDVdID0+IDk2MzkgW29iajE1NjMxNi1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MTExLWFuc3dlclRleHQxXSA9PiBbb2JqMTU2MTE3LXF1ZXN0aW9uVGV4dF0gPT4g15TXqdeo15XXqiDXlNeZ15Qg15DXk9eZ15EgLyDXnteX15nXmdeaIC8g16DXoteZ150gW29iajE1NjEwMy1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MzAxLW1pXSA9PiBbb2JqMTU2MzEyLWFuc3dlclRleHQxXSA9PiBbb2JqMTYwNDA3XSA9PiA5NjM5IFtvYmoxNTYzMDQtYW5zd2VyVGV4dDFdID0+INec15zXkCDXntek15LXoteZ150gW29iajE2MDQwNy1taV0gPT4gW29iajE1NjA5NS1xdWVzdGlvblRleHRdID0+INeU15DXnSDXkNeqL9eUINec15XXp9eXL9eqINeq16jXldek15XXqiDXoNeV16HXpNeV16ov16rXldeh16TXmSDXqteW15XXoNeUINeg15XXodek15nXnT8gW29iajE1OTkwNy1taV0gPT4gMTMuOSBbb2JqMTU2MTA0LW1pXSA9PiBbb2JqMTU2MzA1XSA9PiA2MjI5IFtvYmoxNTYwOTQtbWldID0+IFtvYmoxNTYzMTAtbWldID0+INec16ggW29iajE1NjA5MC1xdWVzdGlvblRleHRdID0+INeQ15nXqSDXlNem15XXldeqINeU16DXkdeT16cgW29iajE1NjEwMy1xdWVzdGlvblRleHRdID0+INeU16nXqNeV16og15TXmdeUINeQ15PXmdeRIC8g157Xl9eZ15nXmiAvINeg16LXmdedIFtvYmoxNTYwNjktbWldID0+IFtvYmoxNTYxMjRdID0+IDk2MzcgW29iajE1NjMxNy1xdWVzdGlvblRleHRdID0+INeb15wg15TXnteV16bXqNeZ150g15TXnteV16bXkteZ150g15HXkNeg15Mg15vXoNeZ16HXlCDXntep15XXnNeY15nXnSBbb2JqMTU2MTEzLW1pXSA9PiDXqteSINeU16nXnSDXkNeZ16DXoNeVINeU15nXlCDXnteV15PXpNehINeQ15zXkCDXkdeb16rXkSDXmdeTINeV15PXlNeV15kgW0NyaXRGcmVlVGV4dF0gPT4gW29iajE1NjMwOC1xdWVzdGlvblRleHRdID0+INeb15DXqdeoINeU15zXp9eV15cg15HXmden16kg15zXqdec150g15PXqNeaINeU15DXpNec15nXp9em15nXlCAtINeQ15nXqSDXlNem15XXldeqINeU15vXmdeoINeQ16og15TXqdeo15XXqiDXldeZ15PXoiDXnNeq16TXotecINeQ15XXqteVINee15AnINeV16LXkyDXqicgLSAo15HXl9eZ16jXlCDXkdeQ157Xptei15kg16rXqdec15XXnSDXlNeo15zXldeV16DXmNeZINeR16fXldek15QsINeU16DXl9eZ15nXqiDXlNec16fXldeXINec15zXl9eV16Ug16LXnCDXm9ek16rXldeoINeU16rXqdec15XXnSDXldec15TXlteZ158g16fXldeTINeQ15nXqdeV16gg15HXnyA1INeh16TXqNeV16og15TXnteV16TXmdeiINei15wg15LXkdeZINem15Ig15TXp9eV16TXlCwg15DXmdep15XXqCDXodeV16TXmSDXqdecINeU16rXqdec15XXnSkgW29iajE1NjMxMi1xdWVzdGlvblRleHRdID0+INeU16LXqNeV16ogW29iajE1NjA3Mi1xdWVzdGlvblRleHRdID0+INeU15DXnSDXqtem15XXkteqINeS15Eg16fXldek15XXqiDXqdeo15XXqiDXotem157XmSDXntec15DXldeqPyBbb2JqMTU2MDkzLWFuc3dlclRleHQxXSA9PiBbb2JqMTYwNzcxLXF1ZXN0aW9uVGV4dF0gPT4g16nXoteqINeZ16bXmdeQ15Q6IFtvYmoxNTYxMjItbWldID0+INec16ggW29iajE1NjEwNy1hbnN3ZXJUZXh0MV0gPT4g15zXkCBbb2JqMTU2MDk0XSA9PiA2NzIyIFtvYmoxNTYzMDMtcXVlc3Rpb25UZXh0XSA9PiDXkNeW15XXqCDXoteR15XXk9eUINep15wg15TXp9eV16TXkNeZ16og157XodeV15PXqCAtINeQ15nXnyDXoteS15zXldeqIC8g16fXqNeY15XXoNeZ150g16HXl9eV16jXlCDXnteh15HXmdeRINeV157XkNeX15XXqNeZINeT15zXpNen15kg15TXp9eV16TXldeqIFtvYmoxNTYxMTRdID0+IDY3NTkgW29iajE1NjMwOC1hbnN3ZXJUZXh0MV0gPT4g15vXnyAtINeU15vXmdeoINeQ16og15TXqdeZ16jXldeqINeV15nXk9eiINec16rXpNei15wg15DXldeq15Ug157XkCDXldei15Mg16ogW29iajE1NjMwMy1taV0gPT4gW0NyaXRTdGFydExhdF0gPT4gMzIuMDkyODc2NDM0MzI2MTcgW29iajE2MDQwNy1xdWVzdGlvblRleHRdID0+INeU15DXnSDXlNeo15XXp9eXINep15DXnCDXnNeh15nXkdeqINeg15jXmdec16og15HXqNeW15w/IFtvYmoxNTk5MDYtYW5zd2VyVGV4dDFdID0+IFtvYmoxNjA3NzAtYW5zd2VyVGV4dDFdID0+IFtvYmoxNTYwOTYtbWldID0+IFtyZXBvcnRlZF9GaW5pc2hUaW1lXSA9PiAyMDIwLTAxLTIzIDE0OjA5OjQ0IFtvYmoxNTYzMTItbWldID0+INeU16jXkdeUINeQ16DXqdeZINem15XXldeqINec15zXkCDXnteT15nXnSBbb2JqMTU2MzE0XSA9PiA2MTY4IFtvYmoxNTYxMDRdID0+IDk2MzkgW29iajE1NjEwMC1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MDcxLW1pXSA9PiBbb2JqMTU2MzAxLWFuc3dlclRleHQxXSA9PiDXnNeQIFtvYmoxNTYxMTgtcXVlc3Rpb25UZXh0XSA9PiDXoNek16jXkyDXkdeR16jXm9eUIFtvYmoxNTYwOTctYW5zd2VyVGV4dDFdID0+INeb158gW29iajE1NjEyMi1xdWVzdGlvblRleHRdID0+INep150g15DXmdepINeU16bXldeV16og15TXoNeR15PXpyDXkdeQ15bXldeoINen15XXpNeV16og16nXqNeV16og16LXptee15kgW29iajE1NjA4OS1hbnN3ZXJUZXh0MV0gPT4gW29iajE1NjI5OC1hbnN3ZXJUZXh0MV0gPT4g15zXkCBbb2JqMTU2MDk2LXF1ZXN0aW9uVGV4dF0gPT4g15TXkNedINeg15nXqtefINeU16HXkdeoINen16bXqCDXotecINeU157Xldem16g/IFtvYmoxNTYxMjQtbWldID0+IFtvYmoxNTYxMTMtcXVlc3Rpb25UZXh0XSA9PiDXoteg15Mg16rXkiDXqdedINeg16fXmSDXldee15XXk9ek16EgW29iajE1NjMwNF0gPT4gNjIyMCBbb2JqMTU2MDY5LWFuc3dlclRleHQxXSA9PiDXnCLXqC3XkNeZ158g16fXldek15XXqiDXkdep16jXldeqINei16bXnteZIFtvYmoxNTYyOTldID0+IDYxOTUgW29iajE1NjA4OS1taV0gPT4g16jXldeR15AgW29iajE1NjMwNS1taV0gPT4g157Xldem15LXmdedINee15XXpteo15nXnSBbb2JqMTU2MTIzXSA9PiA5NjM3IFtvYmoxNTYxMDQtcXVlc3Rpb25UZXh0XSA9PiDXqdeQ15wg15DXnSDXpteo15nXmiDXoteV15Mg157XqdeU15UgW29iajE2MDc3MC1taV0gPT4gMTM6NDc6MzkgW29iajE1NjA5MS1xdWVzdGlvblRleHRdID0+INeh15vXnSDXlNeo15LXqdeq15og157XoNeb15XXoNeV16og15TXmdeV16LXpS/XqiDXnNeU16LXoNeZ16cg15zXmiDXqdeo15XXqiDXntei15wg15XXntei15HXqCBbb2JqMTU2MzE4LXF1ZXN0aW9uVGV4dF0gPT4g15vXnCDXnteV16bXqNeZINeQ16DXkyDXm9eg15nXodeUINee15XXpteS15nXnSDXldeR16TXmdeZ16HXmdeg15Ig157XnNeQIFtvYmoxNTYxMjQtYW5zd2VyVGV4dDFdID0+INecIteoIFtvYmoxNTYxMTYtYW5zd2VyVGV4dDFdID0+INeX15zXp9eZLdeZ16bXqCDXp9ep16gg16LXmdefL9eR15nXqNeaINec16nXnNeV150g15HXnNeR15MgW1VuaXhUaW1lc3RhbXBdID0+IDE1Nzk3ODEzOTE5NTIgW29iajE1NjA5OC1taV0gPT4gW29iajE1NjMxNy1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MzE0LW1pXSA9PiBbb2JqMTU2Mjk2LXF1ZXN0aW9uVGV4dF0gPT4g15TXnteT16TXmdedINeg16fXmdeZ150gW29iajE1NjEwNC1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MDY5LXF1ZXN0aW9uVGV4dF0gPT4g15DXlteV16gg16fXldek15XXqiDXqdeo15XXqiDXotem157XmSDXnteQ15XXmdepIFtvYmoxNTYzMDktcXVlc3Rpb25UZXh0XSA9PiDXlNeQ150g16DXotep15Qg16DXodeZ15XXnyDXnNei16DXmdeZ158g15DXldeq15og15HXm9eo15jXmdehINeQ15Ug15zXl9ec15XXpNeZ158g15zXlNei15HXmdeoINeQ15XXqteaINec15DXmdepINem15XXldeqINeQ15fXqCDXnNen15HXnCDXlNeh15HXqCDXotecINeU15vXqNeY15nXoSBbb2JqMTU5OTA1LXF1ZXN0aW9uVGV4dF0gPT4g15DXmdepINeU16bXldeV16og15HXp9eV16TXlCDXlNen16TXmdeTINep15zXkCDXnNeU16bXmdeiINee15HXptei15nXnSDXm9ec16nXlNedINec157XoteYINeS15XXqNejINec15nXmdejIFtvYmoxNTYzMDldID0+IDYyNDggW29iajE1NjMxMy1hbnN3ZXJUZXh0MV0gPT4g15jXldeRIFtvYmoxNTYwNzAtYW5zd2VyVGV4dDFdID0+INecIteoIC0g15DXmdefINen15XXpNeV16og15HXqdeo15XXqiDXotem157XmSBbb2JqMTU2MzA1LWFuc3dlclRleHQxXSA9PiDXnNeQIFtvYmoxNTYzMTMtcXVlc3Rpb25UZXh0XSA9PiDXl9ec15XXoNeV16og15TXl9eW15nXqiDXoNen15nXmdedIC0g15vXkteV158gLSDXnNeb15zXldeaINeV16HXnNeV15jXmdeZ16QgW29iajE1NjExNy1taV0gPT4gW29iajE1OTkwNy1hbnN3ZXJUZXh0MV0gPT4gW29iajE1NjExM10gPT4gOTYzOCBbb2JqMTU2MzA0LXF1ZXN0aW9uVGV4dF0gPT4g15DXlteV16gg15TXp9eV16TXldeqINek16DXldeZINee157XpNeS16LXmdedINeb15LXldefIC0g16nXqNek16jXpNeZ150gLyDXoteS15zXldeqINeo15nXp9eV16og15DXlSDXntec15DXldeqINeR16HXl9eV16jXlCAvINeh15XXnNee15XXqiDXpNeq15XXl9eZ150g16nXkNeZ16DXnSDXnteQ15XXmdeZ16nXmdedIC8g16fXqNeY15XXoNeZ150gLyDXnNeV15zXmdedIC8g16bXlden15zXmdedINek16rXldeX15nXnSBbQ3JpdFN0YXJ0TG9uZ10gPT4gMzQuODY1NDA5ODUxMDc0MjIgW29iajE1NjEyNi1taV0gPT4g15zXqCBbb2JqMTU2MzEzXSA9PiA2MTYxIFtvYmoxNTYzMDctbWldID0+IFtvYmoxNTYwNjldID0+IDY1NjYgW29iajE1NjEwMS1taV0gPT4gW29iajE1NjA5OF0gPT4gNjczMSBbb2JqMTU2MDkxLW1pXSA9PiBbb2JqMTU2Mjk3LW1pXSA9PiBbb2JqMTU2MTE4XSA9PiA5NjM5IFtvYmoxNTYxMDNdID0+IDk2MzkgW29iajE1NjA5NC1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTYwNDA3LWFuc3dlclRleHQxXSA9PiDXm9efIFtvYmoxNTYwOTAtYW5zd2VyVGV4dDFdID0+INeo15XXp9eXIFtvYmoxNTk5MDVdID0+IDk2MzkgW29iajE1NjExMC1taV0gPT4gW29iajE1NjMxNi1taV0gPT4gW29iajE1NjMwOS1hbnN3ZXJUZXh0MV0gPT4g15zXkCBbb2JqMTU2MTIzLXF1ZXN0aW9uVGV4dF0gPT4g15TXkNedINeR15bXntefINep15TXldeq15og15HXkNeW15XXqCDXlNen15XXpNeV16osINeU16bXmdei15Ug15zXmiDXodeZ15XXoi/XlNeb15XXldeg15Q/IFtvYmoxNTYzMDNdID0+IDYyMTQgW29iajE1NjMwMC1xdWVzdGlvblRleHRdID0+INeU15DXnSDXoNem16TXlCDXkNeZ16kg16bXldeV16og16LXnSDXnteb16nXmdeoINeg15nXmdeTINeR15DXldec150g15TXnteb15nXqNeUICjXnteX15bXmdenINeR15vXmdehINeQ15Ug15HXmdeTINeQ15Ug16LXnCDXlNeT15zXpNenKSBbb2JqMTU2Mjk4XSA9PiA2MTkwIFtvYmoxNTYzMThdID0+IDcyMTEgW29iajE1NjA5Ny1xdWVzdGlvblRleHRdID0+INeg16rXoNeVINeU15XXqNeQ15XXqiDXqdeZ157XldepINeR16LXnCDXpNeUIFtvYmoxNTYxMTQtcXVlc3Rpb25UZXh0XSA9PiDXkNeZ16kg15TXpteV15XXqiDXnNeR16kg15fXldec16bXqiDXpNeV15zXlSwg157Xm9eg16Eg15DXqNeV15og15vXldec15wg15In15nXoNehINec15zXkCDXp9eo16LXmdedICjXnNeQINeY16jXmdeZ16DXmdeg15Ig15DXlSDXkdeo157XldeT15QpLCDXoNei15wg16HXkteV16jXlCDXldeR157Xp9eo15Qg16nXnCDXntei15nXnCDXpNec15nXliwg15zXkdepL9eUINeQ15XXqteVINee16LXnCDXl9eV15zXpteqINeU16TXldec15UgKNeo15zXldeV16DXmNeZINeR16LXmden16gg15zXl9eV15PXqdeZINeU15fXldeo16MpIFtvYmoxNjA3NzEtYW5zd2VyVGV4dDFdID0+IFtvYmoxNTYxMDUtcXVlc3Rpb25UZXh0XSA9PiDXoNek16jXkyDXkdeR16jXm9eUIFtDcml0RW5kTG9uZ10gPT4gMzQuODY1NTEyODQ3OTAwMzkgW29iajE1NjMwMC1taV0gPT4gW29iajE1NjEwMS1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MzEwLWFuc3dlclRleHQxXSA9PiBbb2JqMTU5OTA2LW1pXSA9PiA0MTk5NTE5IFtvYmoxNTYxMDAtcXVlc3Rpb25UZXh0XSA9PiDXoteg15Mg16rXkiDXqdedINeg16fXmSDXldee15XXk9ek16EgW2lvc19hcHB2ZXJzaW9uXSA9PiA2LjEzNC45OSB8fGNvbmRpdGlvbj0xfDE2MDQwN3w5NjM5fGNvbmRpdGlvbj0xfDE1NjEwMXw2NzQ0fGNvbmRpdGlvbj0xfDE1NjEwMXw2NzQwfGNvbmRpdGlvbj0xfDE1NjMwMnw2MjA5fGNvbmRpdGlvbj0xfDE1NjA2OXw2NTY3fGNvbmRpdGlvbj0xfDE1NjA3MHw2NTc2IFtvYmoxNTYzMDItYW5zd2VyVGV4dDFdID0+INec15AgW29iajE1NjMwOS1taV0gPT4gW29iajE1NjMwOF0gPT4gNjIzOSBbb2JqMTU2MDk4LWFuc3dlclRleHQxXSA9PiDXnCLXqCAtINeR157Xp9eo15Qg16nXnCDXqNeV16fXlyDXldek16jXlyDXqdeg15HXk9enIFtvYmoxNTYyOTctcXVlc3Rpb25UZXh0XSA9PiDXlNee15PXpNeZ150g157XnNeQ15nXnSDXldee16HXldeT16jXmdedINeR16TXmdeZ16HXmdeg15IgW29iajE1NjMxNC1xdWVzdGlvblRleHRdID0+INep15zXmCDXodeV16TXqCDXpNeQ16jXnSDXntei15wg15fXlteZ16og15TXl9eg15XXqiDXoNen15kg15XXnteV15DXqCDXm9eV15zXlSBbb2JqMTU2MDkzLW1pXSA9PiDXkdeo15bXnCBbcHVyY2hhc2VfUHVyY2hhc2VJbnZvaWNlTnVtYmVyXSA9PiA0MTk5NTE5IFtvYmoxNTYyOTktbWldID0+IFtvYmoxNTYyOTktYW5zd2VyVGV4dDFdID0+INec15AgW29iajE1OTkwNi1xdWVzdGlvblRleHRdID0+INee16HXpNeoINeX16nXkdeV16DXmdeqINen16DXmdeUIFtvYmoxNTYxMDMtbWldID0+IFtvYmoxNTYzMDUtcXVlc3Rpb25UZXh0XSA9PiDXkdeh16DXmdek15nXnSDXkdeU150g15nXqSDXkteRINen15XXpNeUINeg157XldeaINep157XldeoINec15Ag15zXlNem15nXkiDXnteV16bXqNeZ150g16LXnCDXkteR15kg15TXnteT16Mg15TXotec15nXldefIFtvYmoxNTYzMTgtbWldID0+IFtwdXJjaGFzZV9QdXJjaGFzZURlc2NyaXB0aW9uXSA9PiDXnNeR15zXlSBbb2JqMTU2MTI1LWFuc3dlclRleHQxXSA9PiDXlNeZ15Qg16bXldeo15og15HXpNeq15nXl9eqINen15XXpNeUINeV15vXqNeW15UgLyDXpNeq15fXlSBbb2JqMTU2MTE3LWFuc3dlclRleHQxXSA9PiDXm9efIFtvYmoxNTYwOTEtYW5zd2VyVGV4dDFdID0+INep16jXldeqINeY15XXkSDXnteQ15XXkyBbb2JqMTU2MzE4LWFuc3dlclRleHQxXSA9PiDXm9efIFtvYmoxNTYxMTMtYW5zd2VyVGV4dDFdID0+INec15AgW29iajE1NjA5N10gPT4gOTYzOSBbb2JqMTU2MTE3XSA9PiA5NjM5IFtvYmoxNTYxMDUtYW5zd2VyVGV4dDFdID0+INeb158gW29iajE1NjMxNC1hbnN3ZXJUZXh0MV0gPT4g15vXnyBbb2JqMTU2MDcxLWFuc3dlclRleHQxXSA9PiDXnCLXqCAtINeQ15nXnyDXp9eV16TXldeqINeR16nXqNeV16og16LXptee15kgW29iajE1NjMwMi1taV0gPT4g15TXotee15PXldeqINei157Xldeh15XXqiDXkdee15XXpteo15nXnSBbb2JqMTU2MzA2LWFuc3dlclRleHQxXSA9PiDXm9efIFtvYmoxNTYxMDUtbWldID0+IFtvYmoxNTYxMjQtcXVlc3Rpb25UZXh0XSA9PiDXlNeQ150g15TXpNeg15nXlCDXkNec15nXmiDXoNei16nXqteUINeR16bXldeo15Qg15DXk9eZ15HXlCDXldep16jXldeq15nXqiBbT3JkZXJJRF0gPT4gMjU0NTMzIFtvYmoxNTYzMDJdID0+IDYyMTAgW29iajE1NjI5N10gPT4gNjE4MiBbb2JqMTU2MDk1LW1pXSA9PiBbb2JqMTU2MzE3XSA9PiA3MjA1IFtvYmoxNTYwNzJdID0+IDY1ODIgW29iajE1NjA5OC1xdWVzdGlvblRleHRdID0+INeU15DXnSDXoNen15gg15HXpNei15XXnNeUINec15fXmdeW15XXpyDXlNee16nXm9eZ15XXqiDXlNen16nXqCBbb2JqMTU2MTA3XSA9PiA5NjM4IFtvYmoxNTYwNzAtbWldID0+IFtvYmoxNTYxMTQtbWldID0+IFtvYmoxNTYwODktcXVlc3Rpb25UZXh0XSA9PiDXqdedINeQ15nXqSDXlNem15XXldeqINeU16DXkdeT16cgW29iajE1NjA5My1xdWVzdGlvblRleHRdID0+INeh15XXkiDXlNeR16LXmdeUINep15TXldei15zXqteUIFtvYmoxNTYxMTAtcXVlc3Rpb25UZXh0XSA9PiDXodeb150g15DXqiDXlNeo15LXqdeq15og157XoNeb15XXoNeV16og15DXmdepINeU16bXldeV16og15HXp9eV16TXlCDXnNeU16LXoNeZ16cg15zXmiDXqdeo15XXqiDXntei15wg15XXntei15HXqCBbb2JqMTU2MDk1LWFuc3dlclRleHQxXSA9PiDXm9efIFtvYmoxNTYyOTYtYW5zd2VyVGV4dDFdID0+INeY15XXkSBbb2JqMTU2MTAxLXF1ZXN0aW9uVGV4dF0gPT4g15nXldei16Uv16og15TXmNeR16Ig15zXkdepL9eUINeX15XXnNem16og16TXldec15UsINee15vXoNehINeQ16jXldeaINeb15XXnNecINeSJ9eZ16DXoSDXnNec15Ag16fXqNei15nXnSwg16DXotecINeh15LXldeo15Qg15XXkdee16fXqNeUINep15wg157XoteZ15wg16TXnNeZ15YsINec15HXqS/XlCDXkNeV16rXlSDXntei15wg15fXldec16bXqiDXlNek15XXnNeVLiDXkdee16fXqNeUINep15wg16jXlden15cv16osINeX15zXldenINeg16fXmSwg16jXm9eV16Eg15XXnteS15XXlNelLCDXnteb16DXoSDXkNeo15XXmiDXm9eV15zXnCDXkifXmdeg16Eg15zXnNeQINen16jXoteZ150gW29iajE1NjEyMy1taV0gPT4gW29iajE1NjMwN10gPT4gNjIzNSBbb2JqMTU2Mjk4LXF1ZXN0aW9uVGV4dF0gPT4g15TXkNedINeg16bXpNeUINeQ15nXqSDXpteV15XXqiDXotedINee15vXqdeZ16gg16DXmdeZ15Mg15HXkNeV15zXnSDXlNee15vXmdeo15QgKNee15fXlteZ16cg15HXm9eZ16Eg15DXlSDXkdeZ15Mg15DXlSDXotecINeU15PXnNek16cpIFtvYmoxNTYwOTFdID0+IDY3MTYgW29iajE1NjMxNS1xdWVzdGlvblRleHRdID0+INeb15wg157Xldem16jXmSDXlNeh15XXpNeoIDUg15DXqdeoINeg157XpteQ15nXnSDXkdeq16bXldeS15Qg157XqdeV15zXmNeZ150gW29iajE1OTkwNy1xdWVzdGlvblRleHRdID0+INeh15vXldedINen16DXmdeUIFtvYmoxNTYzMDQtbWldID0+IFtvYmoxNTYzMDYtcXVlc3Rpb25UZXh0XSA9PiDXkNeW15XXqCDXlNee16HXmNeZ16fXmdedINeV15TXntee16rXp9eZ150g15HXp9eV16TXlCDXntec15Ag15DXlSDXpNeo15XXoSDXotecINeU15nXl9eZ15PXlCDXnNec15Ag15fXldeo15nXnSBbb2JqMTU2MzEwLXF1ZXN0aW9uVGV4dF0gPT4g16nXnSDXkNeZ16kg15TXpteV15XXqiDXkden15XXpNeU";
-
-            //textFilePath.toLowerCase();
-//            File root = android.os.Environment.getExternalStorageDirectory();
-//            String path = root.getAbsolutePath() + "/mnt/sdcard/CheckerSecret/submission.txt";
-//            File dir = new File(path);
-//            if (dir.exists()) {
-//                textFilePath=dir.getAbsolutePath();
-//            }
-
         }
 
         public SubmitSurveyTask(SubmitQuestionnaireData archivedSQ) {
@@ -3978,7 +3841,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             if (progressBars != null && progressBars.getDialog() != null
                     && progressBars.getDialog().isShowing())
                 progressBars.getDialog().dismiss();
-//            progressBars = customProgressAlert(JobListActivity.this);
         }
 
         @Override
@@ -3992,7 +3854,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             upload_comp_jobs = false;
             Helper.syncing = false;
-            // executeJobList();
             sendMessage(STOP_UPLOAD, null);
             ShowDBJobs();
             if (isOnlyCertificate) {
@@ -4001,7 +3862,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                     Cert c = new Cert();
                     c.setCertID(ShowJobInMapViewActivity.this.cert);
                     shortList.add(c);
-//                    load_certificates(shortList);
                     if (result.contains("Passed")) {
                         Toast.makeText(getApplicationContext(),
                                         "CheckerTificate Passed", Toast.LENGTH_LONG)
@@ -4116,8 +3976,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             }
             if (!inProgress)
                 sqd = getNumberofQuestionnaire(inProgress, isCertificate);
-//            else
-//                sqd = mAdapter.getInProgressJobs();
+
             if (sqd == null || sqd.size() < 1) {
                 return "";
             }
@@ -4187,7 +4046,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                                 + sq.getOrderid() + "\"");
                 sq.setSetid(setlink);
                 try {
-                    // set = (Set) DBHelper.convertFromBytes(setId);
                     set = (Set) DBHelper.convertFromBytesWithOrder(setlink,
                             sq.getOrderid());
                     sq.setSetVersionID(set.getSetVersionID());
@@ -4491,22 +4349,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                         }
 
                         changeJobStatus("archived", sq.getOrderid(), sdf.format(myCalendar.getTime()), null);
-//                            DBHelper.deleteJobli.stRecords(where);
-//                            DBHelper.deleteRecordbyOrdeid(Constants.DB_TABLE_QUESTIONNAIRE_ORDERID
-//                                    + "="
-//                                    + "\""
-//                                    + sqd.get(i).getOrderid()
-//                                    + "\"");
-//
-//                            DBHelper.updateOrders(
-//                                    Constants.DB_TABLE_ORDERS,
-//                                    new String[]{
-//                                            Constants.DB_TABLE_ORDERS_ORDERID,
-//                                            Constants.DB_TABLE_ORDERS_STATUS,
-//                                            Constants.DB_TABLE_ORDERS_START_TIME,},
-//                                    sqd.get(i).getOrderid(), "uploaded on "
-//                                            + sdf.format(myCalendar.getTime()),
-//                                    "");
+
                     } catch (Exception ex) {
                         String str = "";
                         str += "";
@@ -5453,18 +5296,8 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                         answer.getAnswer()));
             }
         }
-        // if (qd.getFreetext() != null
-        // && !qd.getFreetext().equals("")
-        // && ((qd.getAnswersList() == null) || qd.getAnswersList().size() ==
-        // 0)) {
-        // extraDataList.add(Helper.getNameValuePair("obj" + newDataId
-        // + "-answerText1", qd.getFreetext()));
-        // } else
+
         if (qd.getFreetext() != null && !qd.getFreetext().equals("")) {
-            // extraDataList.add(Helper.getNameValuePair("obj" + newDataId,
-            // ""));
-            // extraDataList.add(Helper.getNameValuePair("obj" + newDataId
-            // + "-answerText1", ""));
             extraDataList.add(Helper.getNameValuePair(prefix + "obj"
                     + newDataId + "-mi" + postfix, qd.getFreetext()));
         } else
@@ -5539,9 +5372,43 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
     public void someMethod(String str) {
         new JobTask().execute(str, "");
-        setMapView(joborders);
-        LongOperation op = new LongOperation();
-        op.execute();
+        try {
+            if (mMap != null) { //prevent crashing if the map doesn't exist yet (eg. on starting activity)
+                mMap.clear();
+                LongOperation op = new LongOperation();
+                op.execute();
+                joborders.clear();
+                setMapView(joborders);
+                // add markers from database to the map
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    private void loadOfflineJobs(boolean login_check) {
+        ShowDBJobs();
+
+        if (login_check) {
+            if (IsInternetConnectted()) {
+                int size = DBHelper.getLanguages(false).size();
+                if (size == 0)
+                    executeLangList();
+                else
+                    executeJobList(false, false);
+            }
+        } else if (joborders == null
+                || joborders.size() == 0
+                || (getIntent() != null && getIntent().getExtras() != null && getIntent()
+                .getExtras().getBoolean(
+                        Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY))) {
+            if (IsInternetConnectted()) {
+                int size = DBHelper.getLanguages(false).size();
+                if (size == 0)
+                    executeLangList();
+                else
+                    executeJobList(false, false);
+            }
+        }
     }
 
 }
