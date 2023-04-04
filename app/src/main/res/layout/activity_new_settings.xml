@@ -348,6 +348,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:visibility="gone"
                         android:layout_marginBottom="10dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -382,6 +383,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
+                        android:visibility="gone"
                         android:background="#C4C4C4" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
