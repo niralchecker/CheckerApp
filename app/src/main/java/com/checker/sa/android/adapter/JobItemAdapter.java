@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.Spanned;
@@ -29,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.Toast;
@@ -38,8 +40,10 @@ import androidx.core.widget.NestedScrollView;
 
 import com.checker.sa.android.data.BasicLog;
 import com.checker.sa.android.data.Cert;
+import com.checker.sa.android.data.CustomFields;
 import com.checker.sa.android.data.Objects;
 import com.checker.sa.android.data.Order;
+import com.checker.sa.android.data.Orders;
 import com.checker.sa.android.data.QuestionnaireData;
 import com.checker.sa.android.data.Set;
 import com.checker.sa.android.data.SubmitQuestionnaireData;
@@ -120,7 +124,7 @@ public class JobItemAdapter extends BaseAdapter {
 
     boolean isFromWatch;
 
-    TextView tvAccept, tvStatusShow, tvRejectShow,tvTime,tvDec;
+    TextView tvAccept, tvStatusShow, tvRejectShow, tvTime, tvDec;
 
 
     public void setDateCallback(DateTVListener dateCallback) {
@@ -292,7 +296,7 @@ public class JobItemAdapter extends BaseAdapter {
     private onJobStartClickLister mJobStartListener;
 
     public interface onJobStartClickLister {
-        void onJobStartClick(int position);
+        void onJobStartClick(int position, String status);
 
     }
 
@@ -964,8 +968,9 @@ public class JobItemAdapter extends BaseAdapter {
         final Order order = joblistarray.get(position).orderItem;
         ImageView returnedReview = (ImageView) row.findViewById(R.id.vreturned);
         ImageView err = (ImageView) row.findViewById(R.id.imgerr);
-
         Survey survey = joblistarray.get(position).surveyItem;
+
+
         if (order != null && order.getOrderID() != null && !order.getOrderID().contains("-")
                 && order.getIsJobInProgressOnServer() != null
                 && order.getIsJobInProgressOnServer().contains("true")
@@ -1401,14 +1406,6 @@ public class JobItemAdapter extends BaseAdapter {
                 }
             });
 
-            llAccept.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Toast.makeText(con, "accept_layout_click", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-
             if ((order != null && order.getStatusName() != null && order.getStatusName().toLowerCase().contains("archive")) || (order != null && order.getAsArchive())) {
                 tvRejectShow.setText(con.getResources().getString(R.string.button_back_archive));
             }
@@ -1428,7 +1425,14 @@ public class JobItemAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    mJobStartListener.onJobStartClick(position);
+                    if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_begin_review_btn_text))) {
+                        Constants.accept_txt = "Begin_Survey";
+                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+                    } else if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_continue_review_btn_text))) {
+                        Constants.accept_txt = "Continue_survey";
+                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+                    }
+
 
 //                    if (order.getOrderID().contains("-")) {
 //                        if (order.getStatusName().equals("survey")) {
