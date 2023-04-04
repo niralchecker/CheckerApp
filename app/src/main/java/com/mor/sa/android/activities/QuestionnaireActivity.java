@@ -3349,14 +3349,18 @@ public class QuestionnaireActivity extends Activity implements
                 break;
             case PIC_CROP:
 
-                if (resultCode == Activity.RESULT_OK || data.getData() != null) {
-                    if (!isRestoring)
-                        croppingCase(data, false);
-                    else {
-                        isRestoreCropping = true;
-                        restoreIntentData = data;
+                try{
+                    if (resultCode == Activity.RESULT_OK || data.getData() != null) {
+                        if (!isRestoring)
+                            croppingCase(data, false);
+                        else {
+                            isRestoreCropping = true;
+                            restoreIntentData = data;
+                        }
                     }
+                }catch (Exception e){
                 }
+
                 break;
             case PIC_CROP_LAST:
 

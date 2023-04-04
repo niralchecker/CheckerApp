@@ -1555,8 +1555,7 @@ public class JobItemAdapter extends BaseAdapter {
             }
 
 
-            // ImageView iv = (ImageView) row.findViewById(R.id.leftiv);
-            // iv.setVisibility(RelativeLayout.GONE);
+            //TODO
             final ImageView ivRight = (ImageView) row
                     .findViewById(R.id.rightiv);
             final ListView jobItemList = (ListView) row
@@ -1569,17 +1568,17 @@ public class JobItemAdapter extends BaseAdapter {
 
                     @Override
                     public void onClick(View v) {
-                        if (jobItemList.getVisibility() == View.GONE) {
-                            jobItemList.setVisibility(View.VISIBLE);
-                            ivRight.setBackgroundDrawable(ct.getResources()
-                                    .getDrawable(R.drawable.upppp));
-                            if (lastpopuplayout != null)
-                                lastpopuplayout.setVisibility(RelativeLayout.GONE);
-                        } else {
-                            jobItemList.setVisibility(View.GONE);
-                            ivRight.setBackgroundDrawable(ct.getResources()
-                                    .getDrawable(R.drawable.downnnn));
-                        }
+//                        if (jobItemList.getVisibility() == View.GONE) {
+//                            jobItemList.setVisibility(View.VISIBLE);
+//                            ivRight.setBackgroundDrawable(ct.getResources()
+//                                    .getDrawable(R.drawable.upppp));
+//                            if (lastpopuplayout != null)
+//                                lastpopuplayout.setVisibility(RelativeLayout.GONE);
+//                        } else {
+//                            jobItemList.setVisibility(View.GONE);
+//                            ivRight.setBackgroundDrawable(ct.getResources()
+//                                    .getDrawable(R.drawable.downnnn));
+//                        }
                     }
                 });
                 jobItemList.setAdapter(new jobInnerItemAdapter(act,
@@ -1650,8 +1649,8 @@ public class JobItemAdapter extends BaseAdapter {
                         jobItemList.setVisibility(View.VISIBLE);
                         ivRight.setBackgroundDrawable(ct.getResources()
                                 .getDrawable(R.drawable.upppp));
-                        if (lastpopuplayout != null)
-                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
+//                        if (lastpopuplayout != null)
+//                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
                     } else {
                         jobItemList.setVisibility(View.GONE);
                         ivRight.setBackgroundDrawable(ct.getResources()
@@ -1968,6 +1967,7 @@ public class JobItemAdapter extends BaseAdapter {
             tv.setTextSize(UIHelper.getFontSize(ct, tv.getTextSize()));
             ImageView iv = (ImageView) row.findViewById(R.id.leftiv);
             iv.setBackgroundResource(getResource("survey"));
+            //TODO
             final ImageView ivRight = (ImageView) row
                     .findViewById(R.id.rightiv);
             final ListView jobItemList = (ListView) row
@@ -1982,15 +1982,15 @@ public class JobItemAdapter extends BaseAdapter {
 
                     @Override
                     public void onClick(View v) {
-                        if (jobItemList.getVisibility() == View.GONE) {
-                            jobItemList.setVisibility(View.VISIBLE);
-                            ivRight.setBackgroundDrawable(ct.getResources()
-                                    .getDrawable(R.drawable.upppp));
-                        } else {
-                            jobItemList.setVisibility(View.GONE);
-                            ivRight.setBackgroundDrawable(ct.getResources()
-                                    .getDrawable(R.drawable.downnnn));
-                        }
+//                        if (jobItemList.getVisibility() == View.GONE) {
+//                            jobItemList.setVisibility(View.VISIBLE);
+//                            ivRight.setBackgroundDrawable(ct.getResources()
+//                                    .getDrawable(R.drawable.upppp));
+//                        } else {
+//                            jobItemList.setVisibility(View.GONE);
+//                            ivRight.setBackgroundDrawable(ct.getResources()
+//                                    .getDrawable(R.drawable.downnnn));
+//                        }
                     }
                 });
                 jobItemList.setAdapter(new jobInnerItemAdapter(act,
