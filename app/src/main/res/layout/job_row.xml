@@ -48,14 +48,32 @@
             android:layout_toRightOf="@+id/side_menu_layout"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/checkbox"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv2"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/img_checkbox" />
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/uncheck_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/uncheck_checkbox"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/check_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/check_checkbox"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv2"
@@ -63,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="10dp"
-                android:layout_toEndOf="@id/checkbox"
+                android:layout_toEndOf="@id/cl_checkbox"
                 android:text="26.05.2021"
                 android:textColor="#AEAEAE"
                 android:textSize="14sp"
@@ -97,7 +115,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_calendar" />
+                android:src="@drawable/bitcoin_cash_logo" />
 
             <TextView
                 android:id="@+id/tv1"
@@ -106,7 +124,7 @@
                 android:layout_below="@+id/tv2"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
-                android:layout_toEndOf="@id/checkbox"
+                android:layout_toEndOf="@id/cl_checkbox"
                 android:text="H&amp;M"
                 android:textColor="#98AC2E"
                 android:textSize="18sp"
@@ -137,7 +155,7 @@
                 android:layout_below="@id/tvDec"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="6dp"
-                android:layout_toEndOf="@id/checkbox"
+                android:layout_toEndOf="@id/cl_checkbox"
                 android:background="#DADADA" />
 
             <TextView
@@ -150,7 +168,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginBottom="10dp"
-                android:layout_toEndOf="@id/checkbox"
+                android:layout_toEndOf="@id/cl_checkbox"
                 android:singleLine="true"
                 android:textColor="#666666"
                 android:textSize="14sp"
@@ -198,7 +216,7 @@
                 android:layout_below="@id/tvbranch"
                 android:layout_marginStart="7dp"
                 android:layout_marginEnd="10dp"
-                android:layout_toEndOf="@id/checkbox"
+                android:layout_toEndOf="@id/cl_checkbox"
                 android:visibility="visible">
 
                 <LinearLayout
@@ -875,7 +893,7 @@
                         android:background="@drawable/border_green"
                         android:gravity="center"
                         android:padding="7dp"
-                        android:text="Accept"
+                        android:text="Apply"
                         android:textAlignment="center"
                         android:textColor="#BDD82F"
                         android:textSize="18sp"
@@ -962,9 +980,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
             android:layout_marginRight="5dp"
-            android:visibility="invisible"
-            android:background="@drawable/downnnn" />
-
+            android:background="@drawable/downnnn"
+            android:visibility="invisible" />
 
 
         <RelativeLayout
@@ -1062,7 +1079,7 @@
     <View
         android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="80dp"/>
+        android:layout_height="80dp" />
 
 </LinearLayout>
 

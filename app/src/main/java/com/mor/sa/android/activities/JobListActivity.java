@@ -2408,59 +2408,59 @@ public class JobListActivity extends Activity implements OnClickListener,
                 } else {
 //                    TODO JobDetailActivity
 
-                    Log.e("onItemClick", mAdapter.joblistarray
-                            .get(arg2).orderItem.getOrderID());
-                    Intent intent = new Intent(JobListActivity.this
-                            .getApplicationContext(), JobDetailActivity.class);
-                    JobDetailActivity
-                            .setCertsCallback(new jobBoardCertsListener() {
-
-                                @Override
-                                public void certCallBack(ArrayList<Cert> certs) {
-                                    load_certificates(certs);
-                                }
-                            });
-                    isJobselected = true;
-                    if (mAdapter.joblistarray != null
-                            && mAdapter.joblistarray.size() > 0) {
-                        if (mAdapter.joblistarray.get(arg2).orderItem != null) {
-//                            TODO OrderID
-                            intent.putExtra("OrderID", mAdapter.joblistarray
-                                    .get(arg2).orderItem.getOrderID());
-                            intent.putExtra(
-                                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                    mAdapter.joblistarray.get(arg2).orderItem
-                                            .getCount() + "");
-                            String OrderID = mAdapter.joblistarray
-                                    .get(arg2).orderItem.getOrderID();
-                            String surveyId = "";
-                            if (OrderID.contains("-")) {
-                                surveyId = (OrderID.replace("-", ""));
-                                Survey survey = Surveys.getCurrentSurve(surveyId);
-                                boolean b = survey.isAllocationReached();
-                                if (b)//ALLOCATION REACHED
-                                {
-                                    Toast.makeText(JobListActivity.this,
-                                            getString(R.string.questionnaire_open_survey_alert)
-                                            , Toast.LENGTH_SHORT).show();
-                                    return;
-                                }
-                            }
-                        } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
-//                            TODO SurveyID
-                            intent.putExtra("SurveyID", mAdapter.joblistarray
-                                    .get(arg2).surveyItem.getSurveyID());
-
-                        }
-
-                    } else
-                        intent.putExtra(
-                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                "1");
-                    intent.putExtra("OrderIndex", arg2);
-                    intent.putExtra("Index", arg2);
-                    // comunicator.JobList = null;
-                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+//                    Log.e("onItemClick", mAdapter.joblistarray
+//                            .get(arg2).orderItem.getOrderID());
+//                    Intent intent = new Intent(JobListActivity.this
+//                            .getApplicationContext(), JobDetailActivity.class);
+//                    JobDetailActivity
+//                            .setCertsCallback(new jobBoardCertsListener() {
+//
+//                                @Override
+//                                public void certCallBack(ArrayList<Cert> certs) {
+//                                    load_certificates(certs);
+//                                }
+//                            });
+//                    isJobselected = true;
+//                    if (mAdapter.joblistarray != null
+//                            && mAdapter.joblistarray.size() > 0) {
+//                        if (mAdapter.joblistarray.get(arg2).orderItem != null) {
+////                            TODO OrderID
+//                            intent.putExtra("OrderID", mAdapter.joblistarray
+//                                    .get(arg2).orderItem.getOrderID());
+//                            intent.putExtra(
+//                                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+//                                    mAdapter.joblistarray.get(arg2).orderItem
+//                                            .getCount() + "");
+//                            String OrderID = mAdapter.joblistarray
+//                                    .get(arg2).orderItem.getOrderID();
+//                            String surveyId = "";
+//                            if (OrderID.contains("-")) {
+//                                surveyId = (OrderID.replace("-", ""));
+//                                Survey survey = Surveys.getCurrentSurve(surveyId);
+//                                boolean b = survey.isAllocationReached();
+//                                if (b)//ALLOCATION REACHED
+//                                {
+//                                    Toast.makeText(JobListActivity.this,
+//                                            getString(R.string.questionnaire_open_survey_alert)
+//                                            , Toast.LENGTH_SHORT).show();
+//                                    return;
+//                                }
+//                            }
+//                        } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
+////                            TODO SurveyID
+//                            intent.putExtra("SurveyID", mAdapter.joblistarray
+//                                    .get(arg2).surveyItem.getSurveyID());
+//
+//                        }
+//
+//                    } else
+//                        intent.putExtra(
+//                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+//                                "1");
+//                    intent.putExtra("OrderIndex", arg2);
+//                    intent.putExtra("Index", arg2);
+//                    // comunicator.JobList = null;
+//                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                 }
             }
         });

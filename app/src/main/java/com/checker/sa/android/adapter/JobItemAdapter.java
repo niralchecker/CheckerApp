@@ -126,6 +126,8 @@ public class JobItemAdapter extends BaseAdapter {
 
     TextView tvAccept, tvStatusShow, tvRejectShow, tvTime, tvDec;
 
+//    boolean select = false;
+
 
     public void setDateCallback(DateTVListener dateCallback) {
         this.dateCallback = dateCallback;
@@ -1270,6 +1272,24 @@ public class JobItemAdapter extends BaseAdapter {
             if (position == getCount() - 1) {
                 space.setVisibility(View.VISIBLE);
             }
+
+//            ImageView uncheck_checkbox = (ImageView) row.findViewById(R.id.uncheck_checkbox);
+//            ImageView check_checkbox = (ImageView) row.findViewById(R.id.check_checkbox);
+//            ConstraintLayout cl_checkbox = (ConstraintLayout) row.findViewById(R.id.cl_checkbox);
+//            cl_checkbox.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    select = !select;
+//                    if (select) {
+//                        check_checkbox.setVisibility(View.VISIBLE);
+//                        uncheck_checkbox.setVisibility(View.GONE);
+//                    } else {
+//                        check_checkbox.setVisibility(View.GONE);
+//                        uncheck_checkbox.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//            });
+
 
             tvRejectShow.setText(con.getResources().getString(R.string.jd_reject_btn_text));
 

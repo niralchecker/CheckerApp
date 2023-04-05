@@ -188,7 +188,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:src="@drawable/top_bar_menu"
+            android:src="@drawable/img_filter_off"
+            app:layout_constraintBottom_toBottomOf="@+id/sidemenuicon1"
+            app:layout_constraintEnd_toStartOf="@id/iv_notification"
+            app:layout_constraintTop_toTopOf="@+id/sidemenuicon1" />
+
+        <ImageView
+            android:id="@+id/iv_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:src="@drawable/img_notification"
             app:layout_constraintBottom_toBottomOf="@+id/sidemenuicon1"
             app:layout_constraintEnd_toStartOf="@id/cv_profile"
             app:layout_constraintTop_toTopOf="@+id/sidemenuicon1" />
@@ -318,11 +328,70 @@
             android:gravity="center_horizontal" />
     </LinearLayout>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_show_jobs_counts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cl_top"
+        android:layout_marginTop="-12dp"
+        android:background="@drawable/bg_rounded_light_blue15"
+        android:backgroundTint="#88C8F4"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="155"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Available open jobs"
+                android:textColor="#ffffff" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="27"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Applied"
+                android:textColor="#ffffff" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <View
         android:id="@+id/layout_tab_bottom"
         android:layout_width="match_parent"
         android:layout_height="3px"
-        android:layout_below="@+id/cl_top"
+        android:layout_below="@+id/ll_show_jobs_counts"
         android:background="@drawable/bottom_line" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -331,14 +400,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/clBottom"
         android:layout_below="@+id/layout_tab_bottom"
-        android:layout_marginTop="-15dp"
         android:background="@drawable/bg_img_job_list">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_list_view"
             android:layout_width="match_parent"
-            android:visibility="visible"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/errorbtn"
@@ -412,7 +480,7 @@
                 android:id="@+id/joblist"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:cacheColorHint="#00000000"
                 android:divider="#B3B3B3"
                 android:dividerHeight="0px"
@@ -447,7 +515,7 @@
                 android:id="@+id/joblistdark"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:cacheColorHint="#00000000"
                 android:divider="#FFFFFF"
                 android:dividerHeight="1px"
