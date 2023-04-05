@@ -58,6 +58,9 @@
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden">
         <activity
+            android:name=".SplashScreen"
+            android:exported="false" />
+        <activity
             android:name=".ShowJobInMapViewActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -146,7 +149,7 @@
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".NewDashboardScreenActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="locale|orientation"
             android:exported="true"
