@@ -4365,7 +4365,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 i++;
             }
 
-            Log.e("jobordersss_activity", String.valueOf(jobordersss.size()));
+//            Log.e("jobordersss_activity", String.valueOf(jobordersss.size()));
 
             ArrayList<orderListItem> joborders = null;
 
