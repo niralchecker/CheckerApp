@@ -13,6 +13,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/search_bg"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_search_text"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:hint="Search by country"
+            android:imeOptions="actionDone"
+            android:paddingStart="10dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textColorHint="#858282" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
     <ImageView
         android:id="@+id/iv_map_list"
         android:layout_width="wrap_content"
@@ -61,10 +93,10 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="17dp"
                 android:layout_toEndOf="@id/checkbox"
-                tools:text="26.05.2021"
                 android:textColor="#AEAEAE"
                 android:textSize="14sp"
-                app:fontFamily="@font/roboto_regular" />
+                app:fontFamily="@font/roboto_regular"
+                tools:text="26.05.2021" />
 
             <View
                 android:layout_width="0dp"
@@ -81,10 +113,10 @@
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="15dp"
                 android:layout_toStartOf="@id/iv_calendar"
-                tools:text="Start at 08:00"
                 android:textColor="#AEAEAE"
                 android:textSize="14sp"
-                app:fontFamily="@font/roboto_regular" />
+                app:fontFamily="@font/roboto_regular"
+                tools:text="Start at 08:00" />
 
             <ImageView
                 android:id="@+id/iv_calendar"
@@ -93,7 +125,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="17dp"
                 android:layout_marginEnd="17dp"
-                android:src="@drawable/ic_calendar" />
+                android:src="@drawable/bitcoin_cash_logo" />
 
             <TextView
                 android:id="@+id/tv1"
@@ -103,10 +135,10 @@
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="7dp"
                 android:layout_toEndOf="@id/checkbox"
-                tools:text="H&amp;M"
                 android:textColor="#98AC2E"
                 android:textSize="18sp"
-                app:fontFamily="@font/roboto_regular" />
+                app:fontFamily="@font/roboto_regular"
+                tools:text="H&amp;M" />
 
             <TextView
                 android:id="@+id/tvDec"
@@ -172,12 +204,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/view1"
-                android:layout_marginTop="7dp"
                 android:layout_marginStart="7dp"
+                android:layout_marginTop="7dp"
                 android:layout_toEndOf="@id/tvcount"
+                android:textColor="@color/blue_default"
                 android:textSize="15sp"
                 android:visibility="gone"
-                android:textColor="@color/blue_default"
                 app:fontFamily="@font/roboto_regular" />
 
             <ScrollView
@@ -221,10 +253,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="3434343434"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="3434343434" />
 
                         <View
                             android:layout_width="match_parent"
@@ -245,10 +277,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="status"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="status" />
 
                         <View
                             android:layout_width="match_parent"
@@ -270,10 +302,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="to check pur desc"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="to check pur desc" />
 
                         <View
                             android:layout_width="match_parent"
@@ -295,10 +327,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="check questionnaire"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="check questionnaire" />
 
                         <View
                             android:layout_width="match_parent"
@@ -320,10 +352,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="name branch"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="name branch" />
 
                         <View
                             android:layout_width="match_parent"
@@ -345,10 +377,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="name branch full name"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="name branch full name" />
 
                         <View
                             android:layout_width="match_parent"
@@ -370,10 +402,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="name city"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="name city" />
 
                         <View
                             android:layout_width="match_parent"
@@ -395,10 +427,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="name address"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="name address" />
 
                         <View
                             android:layout_width="match_parent"
@@ -420,10 +452,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="name branch phone"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="name branch phone" />
 
                         <View
                             android:layout_width="match_parent"
@@ -445,10 +477,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="opening hours"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="opening hours" />
 
                         <View
                             android:layout_width="match_parent"
@@ -470,10 +502,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="show time"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="show time" />
 
                         <View
                             android:layout_width="match_parent"
@@ -495,10 +527,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="show time"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="show time" />
 
                         <View
                             android:layout_width="match_parent"
@@ -520,10 +552,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="purchase description"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="purchase description" />
 
                         <View
                             android:layout_width="match_parent"
@@ -545,10 +577,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="make purchase"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="make purchase" />
 
                         <View
                             android:layout_width="match_parent"
@@ -570,10 +602,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="NonRefundableServicePayment"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="NonRefundableServicePayment" />
 
                         <View
                             android:layout_width="match_parent"
@@ -595,10 +627,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="transportation payment"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="transportation payment" />
 
                         <View
                             android:layout_width="match_parent"
@@ -620,10 +652,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="criticism payment"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="criticism payment" />
 
                         <View
                             android:layout_width="match_parent"
@@ -645,10 +677,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            tools:text="bonus payment"
                             android:textColor="#666666"
                             android:textSize="18sp"
-                            app:fontFamily="@font/roboto_regular" />
+                            app:fontFamily="@font/roboto_regular"
+                            tools:text="bonus payment" />
 
                     </LinearLayout>
 
@@ -805,10 +837,10 @@
                         android:layout_marginStart="5dp"
                         android:layout_toEndOf="@id/iv_location"
                         android:gravity="center"
-                        tools:text="1.2 Km"
                         android:textColor="#BCBCBC"
                         android:textSize="16sp"
-                        app:fontFamily="@font/roboto_bold" />
+                        app:fontFamily="@font/roboto_bold"
+                        tools:text="1.2 Km" />
 
                 </LinearLayout>
 
@@ -840,7 +872,7 @@
                         android:background="@drawable/border_green"
                         android:gravity="center"
                         android:padding="7dp"
-                        android:text="Accept"
+                        android:text="Apply"
                         android:textAlignment="center"
                         android:textColor="#BDD82F"
                         android:textSize="18sp"
