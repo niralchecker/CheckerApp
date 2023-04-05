@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true">
+    android:layout_width="350dp"
+    android:layout_height="wrap_content">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,30 +10,233 @@
 
         <RelativeLayout
             android:id="@+id/backgroundTheme"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@drawable/background">
+            android:background="@drawable/background"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/Label_jobfilter_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
                 android:text="@string/job_filter_title"
                 android:textColor="#000000"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textSize="26sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/Label_jobfilter_title"
+                android:layout_marginTop="10dp"
+                android:background="#80A19F9F" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_Filter_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Filter by Time interval:"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_Filter_time"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Today"
+                    android:textColor="#797979"
+                    android:textSize="19sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_next_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_today"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox_next_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Next 30 Days"
+                    android:textColor="#797979"
+                    android:textSize="19sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_dates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_next_day"
+                android:layout_marginTop="5dp"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_sdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date Start"
+                        android:textColor="#797979"
+                        android:textSize="16dip" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardUseCompatPadding="true"
+                        app:strokeColor="#DADADA"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/startdate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:text="31/07/2012"
+                                android:textColor="#000000"
+                                android:textSize="16dip"
+                                app:layout_constraintEnd_toStartOf="@+id/iv_calendar_start"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_calendar_start"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/startdate"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/img_calender" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_edate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date End"
+                        android:textColor="#797979"
+                        android:textSize="16dip" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardUseCompatPadding="true"
+                        app:strokeColor="#DADADA"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/enddate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:text="31/07/2012"
+                                android:textColor="#000000"
+                                android:textSize="16dip"
+                                app:layout_constraintEnd_toStartOf="@+id/iv_calendar_end"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_calendar_end"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/enddate"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/img_calender" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/ll_dates"
+                android:layout_marginTop="20dp"
+                android:background="#80A19F9F" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_Filter_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_1"
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Filter by:"
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
             <TableLayout
                 android:id="@+id/jobfilter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/tv_Filter_by"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-                android:padding="10dp">
+                android:layout_marginTop="10dp">
 
                 <!--                <TableRow-->
                 <!--                    android:layout_margin="10dip"-->
@@ -239,7 +441,8 @@
 
                 <TableRow
                     android:layout_margin="10dip"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/calandertitle"
@@ -258,7 +461,8 @@
                     android:layout_marginTop="10dip"
                     android:layout_marginEnd="5dip"
                     android:layout_marginBottom="10dip"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/Label_sdate"
@@ -270,7 +474,7 @@
                         android:textSize="16dip" />
 
                     <TextView
-                        android:id="@+id/startdate"
+                        android:id="@+id/startdate_"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -281,7 +485,8 @@
 
                 <TableRow
                     android:layout_margin="5dip"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/Label_enddate"
@@ -293,7 +498,7 @@
                         android:textSize="16dip" />
 
                     <TextView
-                        android:id="@+id/enddate"
+                        android:id="@+id/enddate_"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -304,16 +509,74 @@
 
                 <TableRow
                     android:layout_margin="10dip"
-                    android:gravity="right">
+                    android:gravity="right"
+                    android:visibility="gone">
 
                     <ImageView
-                        android:id="@+id/dialog_save"
+                        android:id="@+id/dialog_save_"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/search"
                         android:tint="@color/dark_blue" />
                 </TableRow>
             </TableLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jobfilter"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"
+                android:weightSum="1.5">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/dialog_save"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_bg_radius_6"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Apply filters"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_clear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_bg_radius_6"
+                        android:backgroundTint="#66DFDCDC"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Clear"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
         </RelativeLayout>
     </ScrollView>
 
