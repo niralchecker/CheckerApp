@@ -17,6 +17,8 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -43,6 +45,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -172,6 +175,8 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
     boolean upload_comp_jobs = false, isJobselected = false;
 
+    SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,6 +229,59 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
         view1 = (View) findViewById(R.id.view1);
 
+        searchView = findViewById(R.id.idSearchView);
+
+        mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        // adding on query listener for our search view.
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // on below line we are getting the
+                // location name from search view.
+                String location = searchView.getQuery().toString();
+
+                // below line is to create a list of address
+                // where we will store the list of all address.
+                List<Address> addressList = null;
+
+                // checking if the entered location is null or not.
+                if (location != null || location.equals("")) {
+                    // on below line we are creating and initializing a geo coder.
+                    Geocoder geocoder = new Geocoder(ShowJobInMapViewActivity.this);
+                    try {
+                        // on below line we are getting location from the
+                        // location name and adding that location to address list.
+                        addressList = geocoder.getFromLocationName(location, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    // on below line we are getting the location
+                    // from our list a first position.
+                    Address address = addressList.get(0);
+
+                    // on below line we are creating a variable for our location
+                    // where we will add our locations latitude and longitude.
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+
+                    // on below line we are adding marker to that position.
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+
+                    // below line is to animate camera to that position.
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        // at last we calling our map fragment to update.
+        mapfragment.getMapAsync(this);
+
+
         cardView.setVisibility(View.GONE);
 
         iv_map_list.setOnClickListener(new View.OnClickListener() {
@@ -239,9 +297,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 cardView.setVisibility(View.GONE);
             }
         });
-
-        mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapfragment.getMapAsync(this);
 
         //...........
         Log.e("onCreate", "true");
@@ -3157,9 +3212,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
 
             BeginReview(false, thiItem);
 
-        }
-
-        else {
+        } else {
             // OPen GPS settings
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

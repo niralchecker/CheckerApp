@@ -22,6 +22,7 @@
         android:layout_marginEnd="15dp"
         android:background="@drawable/search_bg"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,6 +45,19 @@
             android:textColor="#000000"
             android:textColorHint="#858282" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--search view to search our location-->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/idSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/search_bg"
+        android:elevation="5dp"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search by country" />
 
     <ImageView
         android:id="@+id/iv_map_list"
