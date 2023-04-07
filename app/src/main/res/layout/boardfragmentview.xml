@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#ffffff"
     android:layoutDirection="ltr">
 
@@ -11,40 +11,38 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:background="#ffffff"
-        android:weightSum="6.5" >
+        android:weightSum="6.5">
 
         <RelativeLayout
-            android:id="@+id/back"
+            android:id="@+id/back_"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.5" >
+            android:layout_weight="0.5">
 
             <ImageView
-                android:id="@+id/backBtn"
+                android:id="@+id/backBtn_"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:paddingLeft="1dp"
                 android:src="@drawable/back_green"
-                android:tint="@color/dark_blue"
-                />
+                android:tint="@color/dark_blue" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1" >
-        </RelativeLayout>
+            android:layout_weight="1"></RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/mapOrList"
+            android:id="@+id/mapOrList_"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="3" >
+            android:layout_weight="3"
+            android:visibility="invisible">
 
             <View
                 android:id="@+id/mapOrListBtn"
@@ -80,19 +78,19 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/filter"
+            android:id="@+id/filter_"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/filterBtn"
+                android:id="@+id/filterBtn_"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/filter_grey"
-                android:tint="@color/dark_blue"/>
+                android:tint="@color/dark_blue" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -100,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/refreshBtn"
@@ -109,73 +107,257 @@
                 android:layout_alignParentRight="true"
                 android:paddingRight="3dp"
                 android:src="@drawable/refresh"
-                android:tint="@color/dark_blue"/>
+                android:tint="@color/dark_blue" />
         </RelativeLayout>
     </LinearLayout>
 
-    <AutoCompleteTextView
-        android:id="@+id/countrybox"
-        android:hint="@string/countries"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/weeklayout"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
-        android:ems="10" ></AutoCompleteTextView>
     <RelativeLayout
         android:id="@+id/downarrowlayout"
-        android:layout_below="@+id/weeklayout"
-        android:layout_alignParentRight="true"
         android:layout_width="40dp"
-        android:layout_height="40dp" >
+        android:layout_height="40dp"
+        android:layout_below="@+id/weeklayout"
+        android:layout_alignParentRight="true">
+
         <ImageView
             android:layout_width="28dp"
             android:layout_height="22dp"
+            android:layout_alignParentBottom="true"
             android:src="@drawable/down_arrow"
-            android:visibility="invisible"
-            android:layout_alignParentBottom="true"/>
+            android:visibility="invisible" />
     </RelativeLayout>
-    <FrameLayout
-        android:id="@+id/framView"
-        android:layout_below="@+id/countrybox"
+
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/framView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_below="@+id/countrybox">-->
+
+            <fragment
+                android:id="@+id/mapView"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    <!--    </FrameLayout>-->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="70dp"
+        android:background="#007BFF"
+        android:padding="10dp"
+        android:visibility="visible">
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.SupportMapFragment" />
+        <RelativeLayout
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/side_menu_line" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Job Board"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            app:fontFamily="@font/roboto_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/back"
+            app:layout_constraintStart_toEndOf="@id/back"
+            app:layout_constraintTop_toTopOf="@+id/back" />
+
+        <RelativeLayout
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/back"
+            app:layout_constraintEnd_toStartOf="@id/iv_notification"
+            app:layout_constraintTop_toTopOf="@+id/back">
+
+            <ImageView
+                android:id="@+id/filterBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/img_filter_off" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/img_notification"
+            app:layout_constraintBottom_toBottomOf="@+id/back"
+            app:layout_constraintEnd_toStartOf="@id/cv_profile"
+            app:layout_constraintTop_toTopOf="@+id/back" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/demo_image" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/countrybox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cl_top"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/search_bg"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/countries"
+        android:padding="13dp"
+        android:visibility="visible">
+
+    </AutoCompleteTextView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_show_jobs_counts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cl_top"
+        android:layout_marginTop="-12dp"
+        android:background="@drawable/bg_rounded_light_blue15"
+        android:backgroundTint="#88C8F4"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:weightSum="2">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="155"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Available open jobs"
+                android:textColor="#ffffff" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="27"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Applied"
+                android:textColor="#ffffff" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_select_clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="#E9F6FE"
+        android:layout_below="@+id/ll_show_jobs_counts">
+
+        <TextView
+            android:id="@+id/tv_select_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_all"
+            android:textColor="#000000"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto_regular" />
+
+        <TextView
+            android:id="@+id/tv_clearer_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clearer_all"
+            android:textColor="#666666"
+            android:padding="15dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto_regular" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <ImageView
         android:id="@+id/LocationBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:src="@drawable/location" />
 
     <ListView
         android:id="@+id/jobList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottombar"
-        android:layout_below="@+id/weeklayout"
-        android:cacheColorHint="#ffffff"
-        android:divider="#ffffff"
-        android:dividerHeight="20px"
+        android:layout_below="@+id/ll_select_clear"
+        android:layout_marginBottom="15dp"
+        android:background="#E9F6FE"
+        android:divider="#E9F6FE"
+        android:dividerHeight="0px"
         android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/emptyListLabel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/weeklayout"
+        android:layout_below="@+id/countrybox"
         android:background="#ffffff"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/EmptyListMsg"
@@ -195,32 +377,79 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5px"
-        android:background="#bc000000"
-        android:visibility="gone" >
+        android:padding="10dp"
+        android:background="#ffffff"
+        android:visibility="invisible">
+
 
         <CheckBox
             android:id="@+id/chkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:visibility="gone"
+            android:paddingBottom="10dp"
             android:textColor="#FFFFFF"
             android:textSize="16dp"
             android:textStyle="normal" />
 
+        <TextView
+            android:id="@+id/tv_remove_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="50dp"
+            android:text="@string/remove_selected"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
         <Button
             android:id="@+id/btnApplyAll"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
-            android:background="@color/dark_blue"
-            android:text="@string/s_item_column_0_line_183_file_52"
-            android:textColor="@color/white"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/border_green"
+            android:fontFamily="@font/roboto_bold"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Accept Selected"
+            android:textColor="#BDD82F"
+            android:textSize="14sp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mapOrList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/bottombar"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/img_list" />
+
+        <ImageView
+            android:id="@+id/iv_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/img_map"
             android:visibility="gone" />
+
     </RelativeLayout>
 
     <ScrollView
@@ -229,17 +458,17 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/weeklayout"
         android:background="#D3D3D3"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff" >
+            android:background="#ffffff">
 
             <RelativeLayout
                 android:id="@+id/DateFilterLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/DateFilterT"
@@ -257,21 +486,21 @@
                 android:id="@+id/dateFilterView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/DateFilterLayout" >
+                android:layout_below="@+id/DateFilterLayout">
 
                 <RelativeLayout
                     android:id="@+id/DateFilterBtns"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="18dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" >
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="18dp">
 
                     <RelativeLayout
                         android:id="@+id/today"
                         android:layout_width="100dp"
                         android:layout_height="30dp"
-                        android:paddingLeft="2dp" >
+                        android:paddingLeft="2dp">
 
                         <TextView
                             android:id="@+id/ttoday"
@@ -295,7 +524,7 @@
                         android:id="@+id/nextSevenDays"
                         android:layout_width="130dp"
                         android:layout_height="30dp"
-                        android:layout_toRightOf="@+id/today" >
+                        android:layout_toRightOf="@+id/today">
 
                         <TextView
                             android:id="@+id/tnextSevenDays"
@@ -320,7 +549,7 @@
                         android:layout_width="100dp"
                         android:layout_height="30dp"
                         android:layout_toRightOf="@+id/nextSevenDays"
-                        android:background="#565656" >
+                        android:background="#565656">
 
                         <TextView
                             android:id="@+id/tcustom"
@@ -347,8 +576,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/DateFilterBtns"
                     android:background="#565656"
-                    android:visibility="gone" >
-                </RelativeLayout>
+                    android:visibility="gone"></RelativeLayout>
             </RelativeLayout>
 
             <LinearLayout
@@ -356,12 +584,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dateFilterView"
-                android:layout_marginTop="18dp" >
+                android:layout_marginTop="18dp">
 
                 <RelativeLayout
                     android:id="@+id/clientTxtView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/ClientFilterT"
@@ -385,7 +613,7 @@
                 <RelativeLayout
                     android:id="@+id/branchTxtView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/branchFilterT"
@@ -410,7 +638,7 @@
                 <RelativeLayout
                     android:id="@+id/branchTxtCodeView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/branchCodeFilterT"
@@ -435,7 +663,7 @@
                 <RelativeLayout
                     android:id="@+id/branchTxtPropsView"
                     android:layout_width="80dp"
-                    android:layout_height="30dp" >
+                    android:layout_height="30dp">
 
                     <TextView
                         android:id="@+id/branchTxtPropsFilterT"
@@ -463,7 +691,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ClientFilterV"
-                android:layout_marginBottom="20dp" >
+                android:layout_marginBottom="20dp">
 
                 <RelativeLayout
                     android:id="@+id/ClientFilter"
@@ -473,8 +701,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="visible" >
-                </RelativeLayout>
+                    android:visibility="visible"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchFilter"
@@ -483,8 +710,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="invisible" >
-                </RelativeLayout>
+                    android:visibility="invisible"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchCodeFilter"
@@ -493,8 +719,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="invisible" >
-                </RelativeLayout>
+                    android:visibility="invisible"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/propsFilter"
@@ -503,8 +728,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:visibility="invisible" >
-                </RelativeLayout>
+                    android:visibility="invisible"></RelativeLayout>
 
                 <ImageView
                     android:id="@+id/lang_dividing_line_kink"
@@ -520,9 +744,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_below="@+id/lang_dividing_line_kink"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
+                    android:layout_marginBottom="15dp"
                     android:background="@drawable/grey_separator" />
             </RelativeLayout>
 
@@ -530,12 +754,12 @@
                 android:id="@+id/btnCancel"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_below="@+id/BranchFilterV"
-                android:layout_marginBottom="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/dark_blue"
                 android:text="@string/s_item_column_0_line_415_file_52"
                 android:textColor="#ffffff" />
@@ -544,12 +768,12 @@
                 android:id="@+id/btnApply"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
                 android:layout_below="@+id/BranchFilterV"
-                android:layout_marginBottom="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@color/dark_blue"
                 android:text="@string/s_item_column_0_line_429_file_52"
                 android:textColor="#ffffff" />

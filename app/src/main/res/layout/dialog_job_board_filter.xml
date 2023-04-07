@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/Label_jobfilter_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/job_filter_title"
+                android:textColor="#000000"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#80A19F9F"
+                app:layout_constraintTop_toBottomOf="@+id/Label_jobfilter_title" />
+
+            <TextView
+                android:id="@+id/tv_Filter_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Filter by Time interval:"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <LinearLayout
+                android:id="@+id/ll_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Filter_time">
+
+                <CheckBox
+                    android:id="@+id/checkbox_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Today"
+                    android:textColor="#797979"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_next_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/ll_today">
+
+                <CheckBox
+                    android:id="@+id/checkbox_next_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Next 30 Days"
+                    android:textColor="#797979"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_dates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:weightSum="2"
+                app:layout_constraintTop_toBottomOf="@+id/ll_next_day">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_sdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date Start"
+                        android:textColor="#797979"
+                        android:textSize="16dip" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardUseCompatPadding="true"
+                        app:strokeColor="#DADADA"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/startdate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:text="__-__-____"
+                                android:textColor="#000000"
+                                android:textSize="16dip"
+                                app:layout_constraintEnd_toStartOf="@+id/iv_calendar_start"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/iv_calendar_start"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/startdate"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/img_calender" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_edate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date End"
+                        android:textColor="#797979"
+                        android:textSize="16dip" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardUseCompatPadding="true"
+                        app:strokeColor="#DADADA"
+                        app:strokeWidth="1dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/enddate"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true"
+                                android:text="__-__-____"
+                                android:textColor="#000000"
+                                android:textSize="16dip"
+                                app:layout_constraintEnd_toStartOf="@+id/iv_calendar_end"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <ImageView
+                                android:id="@+id/iv_calendar_end"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/enddate"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/img_calender" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="#80A19F9F"
+                app:layout_constraintTop_toBottomOf="@+id/ll_dates" />
+
+            <TextView
+                android:id="@+id/tv_Filter_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Filter by:"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_1" />
+
+            <RelativeLayout
+                android:id="@+id/ClientFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:background="#DCD9D9"
+                app:layout_constraintTop_toBottomOf="@+id/tv_Filter_by">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:padding="12dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_down_arrow_blue" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/branchFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:background="#DCD9D9"
+                app:layout_constraintTop_toBottomOf="@+id/ClientFilter">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:padding="12dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_down_arrow_blue" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/branchCodeFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:background="#DCD9D9"
+                app:layout_constraintTop_toBottomOf="@+id/branchFilter">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:padding="12dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_down_arrow_blue" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/propsFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:background="#DCD9D9"
+                app:layout_constraintTop_toBottomOf="@+id/branchCodeFilter">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:padding="12dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_down_arrow_blue" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_view_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/propsFilter"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"
+                android:weightSum="1.5">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:id="@+id/btnApply"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_bg_radius_6"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Apply filters"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_bg_radius_6"
+                        android:backgroundTint="#66DFDCDC"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Clear"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#ffffff">-->
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/DateFilterLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/DateFilterT"-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingLeft="5dp"-->
+<!--                    android:paddingRight="5dp"-->
+<!--                    android:text="@string/s_item_column_0_line_214_file_52"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textStyle="normal" />-->
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/dateFilterView"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/DateFilterLayout">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/DateFilterBtns"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_marginBottom="18dp">-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/today"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:paddingLeft="2dp">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/ttoday"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:text="@string/s_item_column_0_line_246_file_52"-->
+<!--                            android:textColor="#000000"-->
+<!--                            android:textSize="16dp" />-->
+
+<!--                        <View-->
+<!--                            android:id="@+id/todayBottom"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="2dp"-->
+<!--                            android:layout_alignParentBottom="true"-->
+<!--                            android:background="@color/dark_blue"-->
+<!--                            android:visibility="gone" />-->
+<!--                    </RelativeLayout>-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/nextSevenDays"-->
+<!--                        android:layout_width="130dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_toRightOf="@+id/today">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tnextSevenDays"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:text="@string/s_item_column_0_line_270_file_52"-->
+<!--                            android:textColor="#000000"-->
+<!--                            android:textSize="16dp" />-->
+
+<!--                        <View-->
+<!--                            android:id="@+id/nextSevenBottom"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="2dp"-->
+<!--                            android:layout_alignParentBottom="true"-->
+<!--                            android:background="@color/dark_blue"-->
+<!--                            android:visibility="visible" />-->
+<!--                    </RelativeLayout>-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:id="@+id/custom"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_toRightOf="@+id/nextSevenDays"-->
+<!--                        android:background="#565656">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tcustom"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_centerInParent="true"-->
+<!--                            android:text="@string/s_item_column_0_line_295_file_52"-->
+<!--                            android:textColor="#000000"-->
+<!--                            android:textSize="16dp" />-->
+
+<!--                        <View-->
+<!--                            android:id="@+id/customBottom"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="2dp"-->
+<!--                            android:layout_alignParentBottom="true"-->
+<!--                            android:background="@color/dark_blue"-->
+<!--                            android:visibility="gone" />-->
+<!--                    </RelativeLayout>-->
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/customlayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/DateFilterBtns"-->
+<!--                    android:background="#565656"-->
+<!--                    android:visibility="gone"></RelativeLayout>-->
+<!--            </RelativeLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ClientFilterV"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/dateFilterView"-->
+<!--                android:layout_marginTop="18dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/clientTxtView"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="30dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/ClientFilterT"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingLeft="5dp"-->
+<!--                        android:paddingRight="5dp"-->
+<!--                        android:text="@string/s_item_column_0_line_337_file_52"-->
+<!--                        android:textColor="#007BFF"-->
+<!--                        android:textSize="13dp"-->
+<!--                        android:textStyle="normal" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/ClientTxtBottom"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="2dp"-->
+<!--                        android:layout_alignParentBottom="true"-->
+<!--                        android:background="#007BFF" />-->
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/branchTxtView"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="30dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/branchFilterT"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingLeft="5dp"-->
+<!--                        android:paddingRight="5dp"-->
+<!--                        android:text="@string/s_item_column_0_line_361_file_52"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textSize="13dp"-->
+<!--                        android:textStyle="normal" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/branchTxtBottom"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="2dp"-->
+<!--                        android:layout_alignParentBottom="true"-->
+<!--                        android:background="#007BFF"-->
+<!--                        android:visibility="gone" />-->
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/branchTxtCodeView"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="30dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/branchCodeFilterT"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingLeft="5dp"-->
+<!--                        android:paddingRight="5dp"-->
+<!--                        android:text="@string/s_item_column_0_line_362_file_52"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textSize="13dp"-->
+<!--                        android:textStyle="normal" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/branchCodeTxtBottom"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="2dp"-->
+<!--                        android:layout_alignParentBottom="true"-->
+<!--                        android:background="#007BFF"-->
+<!--                        android:visibility="gone" />-->
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/branchTxtPropsView"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="30dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/branchTxtPropsFilterT"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingLeft="5dp"-->
+<!--                        android:paddingRight="5dp"-->
+<!--                        android:text="@string/s_item_column_0_line_363_file_52"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textSize="13dp"-->
+<!--                        android:textStyle="normal" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/branchTxtPropsBottom"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="2dp"-->
+<!--                        android:layout_alignParentBottom="true"-->
+<!--                        android:background="#007BFF"-->
+<!--                        android:visibility="gone" />-->
+<!--                </RelativeLayout>-->
+<!--            </LinearLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/BranchFilterV"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/ClientFilterV"-->
+<!--                android:layout_marginBottom="20dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/ClientFilter"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_marginLeft="30dp"-->
+<!--                    android:layout_marginRight="30dp"-->
+<!--                    android:visibility="visible"></RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/branchFilter"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:layout_marginLeft="30dp"-->
+<!--                    android:layout_marginRight="30dp"-->
+<!--                    android:visibility="invisible"></RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/branchCodeFilter"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:layout_marginLeft="30dp"-->
+<!--                    android:layout_marginRight="30dp"-->
+<!--                    android:visibility="invisible"></RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/propsFilter"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:layout_marginLeft="30dp"-->
+<!--                    android:layout_marginRight="30dp"-->
+<!--                    android:visibility="invisible"></RelativeLayout>-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/lang_dividing_line_kink"-->
+<!--                    android:layout_width="10dp"-->
+<!--                    android:layout_height="10dp"-->
+<!--                    android:layout_alignBottom="@+id/branchFilter"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_marginRight="30dp"-->
+<!--                    android:src="@drawable/kink" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/lang_dividing_line"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:layout_below="@+id/lang_dividing_line_kink"-->
+<!--                    android:layout_marginLeft="30dp"-->
+<!--                    android:layout_marginRight="30dp"-->
+<!--                    android:layout_marginBottom="15dp"-->
+<!--                    android:background="@drawable/grey_separator" />-->
+<!--            </RelativeLayout>-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btnCancel"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_below="@+id/BranchFilterV"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:background="@color/dark_blue"-->
+<!--                android:text="@string/s_item_column_0_line_415_file_52"-->
+<!--                android:textColor="#ffffff" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btnApply"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_below="@+id/BranchFilterV"-->
+<!--                android:layout_alignParentLeft="true"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:background="@color/dark_blue"-->
+<!--                android:text="@string/s_item_column_0_line_429_file_52"-->
+<!--                android:textColor="#ffffff" />-->
+<!--        </RelativeLayout>-->
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

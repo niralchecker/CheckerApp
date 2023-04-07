@@ -808,5 +808,8 @@
     <string name="retype_password">Retype Password</string>
     <string name="register">Register</string>
     <string name="registration">Registration</string>
+    <string name="remove_selected" translatable="false"><u>Remove Selected</u></string>
+    <string name="select_all" translatable="false"><u>Select all</u></string>
+    <string name="clearer_all" translatable="false"><u>Clearer all</u></string>
 
 </resources>
