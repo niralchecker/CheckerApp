@@ -114,6 +114,7 @@ import static android.widget.Toast.makeText;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -210,7 +211,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
     TextView tv_select_all, tv_clearer_all, tv_remove_selected;
 
     CheckBox checkbox_today, checkbox_next_day;
-    TextView s_date, e_date,tv_clients;
+    TextView s_date, e_date, tv_clients;
 
     public static void setJobBardCallback(jobBoardCertsListener dateCallback) {
         JobBoardActivityFragment.jobboardListener = dateCallback;
@@ -391,7 +392,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 if (listOFOrders != null && listOFOrders.size() > 0) {
-                    openDialog(null, null);
+                    openDialog(null, null, 1);
                 }
             }
         });
@@ -491,10 +492,11 @@ public class JobBoardActivityFragment extends FragmentActivity {
             public void PassIndex(int index, Marker arg0) {
                 // TODO Auto-generated method stub
 
+                Log.e("PassIndex", "true");
                 int id2 = index;
                 // Toast.makeText(getApplicationContext(), id2+"", 400).show();
                 openDialog(adapter.getValues().get(id2), adapter.getValues()
-                        .get(id2).getM());
+                        .get(id2).getM(), 0);
 
             }
         };
@@ -2199,7 +2201,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
                             if (thiItem != null) {
                                 tvBranch.setText(thiItem.getBranchFullname());
-                                openDialog(thiItem, arg0);
+                                Log.e("map_view", "true");
+                                openDialog(thiItem, arg0, 1);
                             }
 
                             return v;
@@ -2356,7 +2359,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
     Dialog dialog = null;
     private Spinner altSpinner;
 
-    public void openDialog(final Job thiItem, final Marker arg0) {
+    public void openDialog(final Job thiItem, final Marker arg0, int type) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -2399,12 +2402,13 @@ public class JobBoardActivityFragment extends FragmentActivity {
         else dialog.setContentView(R.layout.job_board_dialog);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         dialog.getWindow().setLayout(lp.width, lp.height);
 
         TextView clientName, cityName, branchName, address, description, qustionnaire, shortname, addedAt, startAndndTime, BranchOpeingHours, SurveyPayment, BonusPayment, TarnsportionPayment, branchphone;
-        RelativeLayout topbar;
+        RelativeLayout topbar, layout_apply_msg;
+        CardView cardView;
         topbar = (RelativeLayout) dialog.findViewById(R.id.topbar);
 
         if (thiItem == null) {
@@ -2485,6 +2489,18 @@ public class JobBoardActivityFragment extends FragmentActivity {
             TarnsportionPayment = (TextView) dialog
                     .findViewById(R.id.TarnsportionPayment);
 
+            cardView = dialog.findViewById(R.id.cardView);
+            layout_apply_msg = dialog.findViewById(R.id.layout_apply_msg);
+
+            if (type == 0) {
+                //PassIndex
+                layout_apply_msg.setVisibility(View.VISIBLE);
+                cardView.setVisibility(View.GONE);
+            } else {
+                layout_apply_msg.setVisibility(View.GONE);
+                cardView.setVisibility(View.VISIBLE);
+            }
+
             if (thiItem.getoaID() != null && thiItem.getoaID().length() > 0) {
                 topbar.setBackgroundColor(Color.parseColor("#2cbdbf"));
                 dialog.findViewById(R.id.btnApply).setBackgroundColor(
@@ -2538,6 +2554,18 @@ public class JobBoardActivityFragment extends FragmentActivity {
             TarnsportionPayment.setText(thiItem.getTransportationPayment());
         }
         dialog.findViewById(R.id.xbutton).setOnClickListener(
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            dialog.dismiss();
+                        } catch (Exception ex) {
+
+                        }
+
+                    }
+                });
+        dialog.findViewById(R.id.btn_cancel).setOnClickListener(
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2610,6 +2638,56 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 }
             }
         });
+
+        Button dialog_save = dialog.findViewById(R.id.dialog_save);
+        dialog_save.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (thiItem == null) {
+                    apply(txtComment.getText().toString(),
+                            ((Job) listOFOrders.get(0)).getOrderID(),
+                            dialog, ((Job) listOFOrders.get(0)).getM(),
+                            ((Job) listOFOrders.get(0)), true);
+                } else {
+                    if (orders != null
+                            && orders.length > 1
+                            && altSpinner != null
+                            && altSpinner.getSelectedItemPosition() > 0
+                            && altSpinner.getSelectedItemPosition() < orders.length) {
+                        String date = orders[altSpinner
+                                .getSelectedItemPosition()];
+                        if (date != null && date.length() > 0) {
+                            date = date.replace(".", "-");
+                        }
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+                                "dd-MM-yyyy", Locale.ENGLISH);
+                        try {
+                            Date dateTemp = simpleDateFormat.parse(date);
+                            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(
+                                    "yyyy-MM-dd", Locale.ENGLISH);
+                            date = simpleDateFormat1.format(dateTemp);
+                            // date =
+                            // simpleDateFormat1.parse(date2);
+
+                        } catch (ParseException ex) {
+                        }
+                        Toast.makeText(
+                                        getApplicationContext(),
+                                        txtComment.getText().toString() + " " + "("
+                                                + date + ")", Toast.LENGTH_LONG)
+                                .show();
+                        apply(txtComment.getText().toString() + " " + "("
+                                        + date + ")", thiItem.getOrderID(), dialog,
+                                arg0, thiItem, false);
+                    } else {
+                        apply(txtComment.getText().toString(),
+                                thiItem.getOrderID(), dialog, arg0,
+                                thiItem, false);
+                    }
+                }
+                refresh_submit(true);
+            }
+        });
         if (thiItem != null && thiItem.getoaID() != null
                 && thiItem.getoaID().length() > 0) {
             txtComment.setText(thiItem.getApplicationComment());
@@ -2618,6 +2696,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     .setText("Remove Application");
             // dialog.findViewById(R.id.btnApply).setEnabled(false);
         }
+
         dialog.show();
     }
 
