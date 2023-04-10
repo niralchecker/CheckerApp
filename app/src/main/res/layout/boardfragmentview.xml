@@ -132,11 +132,11 @@
     <!--        android:layout_height="match_parent"-->
     <!--        android:layout_below="@+id/countrybox">-->
 
-            <fragment
-                android:id="@+id/mapView"
-                class="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+    <fragment
+        android:id="@+id/mapView"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <!--    </FrameLayout>-->
 
 
@@ -282,7 +282,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
+                android:id="@+id/tv_applied_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
@@ -290,7 +291,7 @@
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -644,10 +645,10 @@
                                         android:id="@+id/iv_calendar_start"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
+                                        android:src="@drawable/img_calender"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toEndOf="@id/startdate"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        android:src="@drawable/img_calender" />
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -699,10 +700,10 @@
                                         android:id="@+id/iv_calendar_end"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
+                                        android:src="@drawable/img_calender"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toEndOf="@id/enddate"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        android:src="@drawable/img_calender" />
+                                        app:layout_constraintTop_toTopOf="parent" />
 
                                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -897,10 +898,10 @@
                         android:id="@+id/tv_clients"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:text="Clients"
                         android:textSize="18sp"
-                        android:visibility="gone"
-                        android:layout_centerVertical="true"/>
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/iv_drop_arrow"
@@ -1006,9 +1007,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/btn_bg_radius_6"
                 android:backgroundTint="#66DFDCDC"
-                android:layout_marginBottom="5dp"
                 android:text="@string/s_item_column_0_line_415_file_52"
                 android:textColor="#000000" />
 

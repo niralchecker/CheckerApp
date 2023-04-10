@@ -112,7 +112,6 @@ import com.mor.sa.android.activities.comunicator;
 
 import static android.widget.Toast.makeText;
 
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -311,6 +310,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
     private RelativeLayout imgarrow;
     private LinearLayoutCompat ll_show_jobs_counts, ll_select_clear;
 
+    TextView tv_applied_no;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -324,6 +325,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
         tv_clearer_all = findViewById(R.id.tv_clearer_all);
         tv_remove_selected = findViewById(R.id.tv_remove_selected);
         tv_clients = findViewById(R.id.tv_clients);
+        tv_applied_no = findViewById(R.id.tv_applied_no);
+        tv_applied_no.setText(Integer.toString(Constants.applied_count));
 
         tv_select_all.setOnClickListener(new OnClickListener() {
             @Override
