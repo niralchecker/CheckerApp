@@ -306,29 +306,29 @@
         android:id="@+id/ll_select_clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_below="@+id/ll_show_jobs_counts"
         android:background="#E9F6FE"
-        android:layout_below="@+id/ll_show_jobs_counts">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_select_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="15dp"
             android:text="@string/select_all"
             android:textColor="#000000"
-            android:padding="15dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/roboto_regular" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_clearer_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="15dp"
             android:text="@string/clearer_all"
             android:textColor="#666666"
-            android:padding="15dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/roboto_regular" />
+            android:textSize="18sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -377,8 +377,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5px"
-        android:padding="10dp"
         android:background="#ffffff"
+        android:padding="10dp"
         android:visibility="invisible">
 
 
@@ -390,11 +390,11 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
-            android:visibility="gone"
             android:paddingBottom="10dp"
             android:textColor="#FFFFFF"
             android:textSize="16dp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_remove_selected"
@@ -430,8 +430,8 @@
         android:id="@+id/mapOrList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/bottombar"
+        android:layout_centerHorizontal="true"
         android:visibility="visible">
 
         <ImageView
@@ -456,19 +456,55 @@
         android:id="@+id/filterLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/weeklayout"
-        android:background="#D3D3D3"
+        android:layout_below="@+id/cl_top"
+        android:layout_centerInParent="true"
+        android:background="#33000000"
+        android:padding="25dp"
         android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff">
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/Label_jobfilter_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/job_filter_title"
+                android:textColor="#000000"
+                android:textSize="26sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/Label_jobfilter_title"
+                android:layout_marginTop="10dp"
+                android:background="#80A19F9F" />
+
+            <TextView
+                android:id="@+id/tv_Filter_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Filter by Time interval:"
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
             <RelativeLayout
                 android:id="@+id/DateFilterLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_Filter_time"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/DateFilterT"
@@ -484,29 +520,35 @@
 
             <RelativeLayout
                 android:id="@+id/dateFilterView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/DateFilterLayout">
+                android:layout_below="@+id/tv_Filter_time"
+                android:layout_marginTop="10dp">
 
                 <RelativeLayout
                     android:id="@+id/DateFilterBtns"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="18dp">
 
                     <RelativeLayout
                         android:id="@+id/today"
-                        android:layout_width="100dp"
-                        android:layout_height="30dp"
-                        android:paddingLeft="2dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_today"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/ttoday"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@id/checkbox_today"
                             android:text="@string/s_item_column_0_line_246_file_52"
                             android:textColor="#000000"
                             android:textSize="16dp" />
@@ -522,15 +564,22 @@
 
                     <RelativeLayout
                         android:id="@+id/nextSevenDays"
-                        android:layout_width="130dp"
-                        android:layout_height="30dp"
-                        android:layout_toRightOf="@+id/today">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/today">
+
+                        <CheckBox
+                            android:id="@+id/checkbox_next_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:id="@+id/tnextSevenDays"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
+                            android:layout_marginStart="5dp"
+                            android:layout_toEndOf="@id/checkbox_next_day"
                             android:text="@string/s_item_column_0_line_270_file_52"
                             android:textColor="#000000"
                             android:textSize="16dp" />
@@ -541,15 +590,135 @@
                             android:layout_height="2dp"
                             android:layout_alignParentBottom="true"
                             android:background="@color/dark_blue"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
                     </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_dates"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/nextSevenDays"
+                        android:layout_marginTop="5dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_sdate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date Start"
+                                android:textColor="#797979"
+                                android:textSize="16dip" />
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardUseCompatPadding="true"
+                                app:strokeColor="#DADADA"
+                                app:strokeWidth="1dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:id="@+id/startdate"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="__-__-____"
+                                        android:textColor="#000000"
+                                        android:textSize="16dip"
+                                        app:layout_constraintEnd_toStartOf="@+id/iv_calendar_start"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_calendar_start"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@id/startdate"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        android:src="@drawable/img_calender" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_edate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date End"
+                                android:textColor="#797979"
+                                android:textSize="16dip" />
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardUseCompatPadding="true"
+                                app:strokeColor="#DADADA"
+                                app:strokeWidth="1dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp">
+
+                                    <TextView
+                                        android:id="@+id/enddate"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true"
+                                        android:text="__-__-____"
+                                        android:textColor="#000000"
+                                        android:textSize="16dip"
+                                        app:layout_constraintEnd_toStartOf="@+id/iv_calendar_end"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                                    <ImageView
+                                        android:id="@+id/iv_calendar_end"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@id/enddate"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        android:src="@drawable/img_calender" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <RelativeLayout
                         android:id="@+id/custom"
                         android:layout_width="100dp"
                         android:layout_height="30dp"
                         android:layout_toRightOf="@+id/nextSevenDays"
-                        android:background="#565656">
+                        android:background="#565656"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tcustom"
@@ -584,7 +753,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dateFilterView"
-                android:layout_marginTop="18dp">
+                android:layout_marginTop="18dp"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/clientTxtView"
@@ -686,49 +856,124 @@
                 </RelativeLayout>
             </LinearLayout>
 
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/dateFilterView"
+                android:layout_marginTop="20dp"
+                android:background="#80A19F9F" />
+
+            <TextView
+                android:id="@+id/tv_Filter_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_1"
+                android:layout_marginTop="23dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Filter by:"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
             <RelativeLayout
                 android:id="@+id/BranchFilterV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ClientFilterV"
+                android:layout_below="@+id/tv_Filter_by"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp">
 
                 <RelativeLayout
                     android:id="@+id/ClientFilter"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:visibility="visible"></RelativeLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rounded_edittext">
+
+                    <TextView
+                        android:id="@+id/tv_clients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clients"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        android:layout_centerVertical="true"/>
+
+                    <ImageView
+                        android:id="@+id/iv_drop_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchFilter"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/ClientFilter"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:visibility="invisible"></RelativeLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rounded_edittext">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
+
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/branchCodeFilter"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/branchFilter"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:visibility="invisible"></RelativeLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rounded_edittext">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/propsFilter"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/branchCodeFilter"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:visibility="invisible"></RelativeLayout>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rounded_edittext">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:padding="12dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_down_arrow_blue" />
+
+                </RelativeLayout>
 
                 <ImageView
                     android:id="@+id/lang_dividing_line_kink"
@@ -737,7 +982,8 @@
                     android:layout_alignBottom="@+id/branchFilter"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/kink" />
+                    android:src="@drawable/kink"
+                    android:visibility="gone" />
 
                 <View
                     android:id="@+id/lang_dividing_line"
@@ -747,7 +993,8 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="15dp"
-                    android:background="@drawable/grey_separator" />
+                    android:background="@drawable/grey_separator"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <Button
@@ -759,14 +1006,15 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/btn_bg_radius_6"
+                android:backgroundTint="#66DFDCDC"
                 android:layout_marginBottom="5dp"
-                android:background="@color/dark_blue"
                 android:text="@string/s_item_column_0_line_415_file_52"
-                android:textColor="#ffffff" />
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/btnApply"
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/BranchFilterV"
                 android:layout_alignParentLeft="true"
@@ -774,8 +1022,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
-                android:background="@color/dark_blue"
-                android:text="@string/s_item_column_0_line_429_file_52"
+                android:background="@drawable/btn_bg_radius_6"
+                android:text="Apply filters"
                 android:textColor="#ffffff" />
         </RelativeLayout>
     </ScrollView>

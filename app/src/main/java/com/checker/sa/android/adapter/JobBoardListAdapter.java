@@ -118,10 +118,10 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
 
         TextView critlink, Payment, cityName, clientName, branchName, dates, total, showDistance;
         CardView cardView;
-        View green_view;
         RelativeLayout topbar;
-//		Button btnApply;
-        TextView btnApply;
+        View green_view;
+		Button btnApply;
+//        TextView btnApply;
         float distance = (float) -1.0;
         if (data.getBranchLat() != null && data.getBranchLat().length() > 0
                 && data.getBranchLong() != null
@@ -153,42 +153,32 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
         dates = (TextView) dialog.findViewById(R.id.Dates);
         total = (TextView) dialog.findViewById(R.id.Total);
         showDistance = (TextView) dialog.findViewById(R.id.ShowDistance);
-//		btnApply = (Button) dialog.findViewById(R.id.btnApply);
-        btnApply = (TextView) dialog.findViewById(R.id.btnApply);
+		btnApply = (Button) dialog.findViewById(R.id.btnApply);
+//        btnApply = (TextView) dialog.findViewById(R.id.btnApply);
         Payment = (TextView) dialog.findViewById(R.id.Payment);
         cardView = (CardView) dialog.findViewById(R.id.cardView);
         green_view = (View) dialog.findViewById(R.id.green_view);
 
         CheckBox cb = (CheckBox) dialog.findViewById(R.id.chkBox);
 
-        if (btnApply.getText().toString().equals(R.string.s_item_column_0_line_145_file_223)){
-            btnApply.setVisibility(View.GONE);
-            green_view.setVisibility(View.VISIBLE);
-        }else {
-            btnApply.setVisibility(View.VISIBLE);
-            green_view.setVisibility(View.GONE);
-        }
 
         if (data.getoaID() != null && data.getoaID().length() > 0) {
             topbar.setBackgroundColor(Color.parseColor("#2cbdbf"));
-            btnApply.setVisibility(View.GONE);
-            green_view.setVisibility(View.VISIBLE);
             btnApply.setBackgroundColor(Color.parseColor("#a7a9ab"));
             btnApply.setText(getContext().getResources().getString(
                     R.string.s_item_column_0_line_145_file_223));
             cb.setVisibility(RelativeLayout.INVISIBLE);
             cb.setEnabled(false);
+            green_view.setVisibility(View.VISIBLE);
             cardView.setBackgroundColor(Color.parseColor("#dfe5eb"));
 
-            // btnApply.setEnabled(false);
         } else {
 
             topbar.setBackgroundColor(Color.parseColor("#f18931"));
         }
         topbar.setBackgroundColor(Color.parseColor(data.getColor()));
-//		Helper.changeBtnColor(btnApply);
-        Helper.changeTxtViewColor(btnApply);
-        // Helper.changeTobBoardColor(topbar);
+		Helper.changeBtnColor(btnApply);
+//        Helper.changeTxtViewColor(btnApply);
         if (cb.isChecked())
             btnApply.setVisibility(RelativeLayout.GONE);
         if (Constants.getLoginURL() != null && Constants.getLoginURL().toLowerCase().contains("ajis")) {
@@ -207,8 +197,6 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
         branchName = getTextFromHtmlFormate(data.getDescription(), branchName);
         dates.setText(data.getDate());
         total.setText(data.getOrderCount());
-        // showDistance.setText(data.getBranchLat() + "," +
-        // data.getBranchLong());
         if (distance >= 0) {
             distance = Math.round(distance);
             int dis = (int) distance;

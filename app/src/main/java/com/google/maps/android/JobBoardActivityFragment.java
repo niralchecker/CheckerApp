@@ -209,6 +209,9 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
     TextView tv_select_all, tv_clearer_all, tv_remove_selected;
 
+    CheckBox checkbox_today, checkbox_next_day;
+    TextView s_date, e_date,tv_clients;
+
     public static void setJobBardCallback(jobBoardCertsListener dateCallback) {
         JobBoardActivityFragment.jobboardListener = dateCallback;
     }
@@ -319,6 +322,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
         tv_select_all = findViewById(R.id.tv_select_all);
         tv_clearer_all = findViewById(R.id.tv_clearer_all);
         tv_remove_selected = findViewById(R.id.tv_remove_selected);
+        tv_clients = findViewById(R.id.tv_clients);
 
         tv_select_all.setOnClickListener(new OnClickListener() {
             @Override
@@ -412,6 +416,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
         custom = (RelativeLayout) findViewById(R.id.custom);
         refresh = (RelativeLayout) findViewById(R.id.refresh);
         back = (RelativeLayout) findViewById(R.id.back);
+        checkbox_today = (CheckBox) findViewById(R.id.checkbox_today);
+        checkbox_next_day = (CheckBox) findViewById(R.id.checkbox_next_day);
 
         pickerView = new CalendarPickerView(JobBoardActivityFragment.this);
         jobList = (ListView) findViewById(R.id.jobList);
@@ -435,7 +441,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
         filterLayout = (ScrollView) findViewById(R.id.filterLayout);
         // radioFilter = (RadioGroup) findViewById(R.id.radioFilter);
         pickerView.setVisibility(RelativeLayout.GONE);
-        tnextSevenDays.setTextColor(Color.parseColor("#007BFF"));
+//        tnextSevenDays.setTextColor(Color.parseColor("#007BFF"));
         custom.setBackgroundColor(Color.parseColor("#ffffff"));
         nextSevenDays.setBackgroundColor(Color.parseColor("#ffffff"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",
@@ -526,8 +532,11 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 tcustom.setTextColor(Color.parseColor("#000000"));
                 tnextSevenDays.setTextColor(Color.parseColor("#000000"));
                 customBottom.setVisibility(View.GONE);
-                nextSevenBottom.setVisibility(View.GONE);
-                todayBottom.setVisibility(View.VISIBLE);
+//                nextSevenBottom.setVisibility(View.GONE);
+//                todayBottom.setVisibility(View.VISIBLE);
+                checkbox_today.setChecked(true);
+                checkbox_next_day.setChecked(false);
+
                 SimpleDateFormat dateFormat = new SimpleDateFormat(
                         "yyyy-MM-dd", Locale.ENGLISH);
                 Calendar cal = Calendar.getInstance();
@@ -546,6 +555,41 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 // refresh_submit(false);
             }
         });
+
+        checkbox_today.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Helper.getSystemURL() != null
+                        && Helper.getSystemURL().toLowerCase()
+                        .contains(Helper.CONST_BE_THERE)) {
+                    ttoday.setTextColor(Color.parseColor(Helper.appColor));
+                } else
+                    ttoday.setTextColor(Color.parseColor("#007BFF"));
+                tcustom.setTextColor(Color.parseColor("#000000"));
+                tnextSevenDays.setTextColor(Color.parseColor("#000000"));
+                customBottom.setVisibility(View.GONE);
+//                nextSevenBottom.setVisibility(View.GONE);
+//                todayBottom.setVisibility(View.VISIBLE);
+                checkbox_today.setChecked(true);
+                checkbox_next_day.setChecked(false);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat(
+                        "yyyy-MM-dd", Locale.ENGLISH);
+                Calendar cal = Calendar.getInstance();
+                refreshDate = false;
+                if (gStartDate == null
+                        || !gStartDate.equals(dateFormat.format(cal.getTime())))
+                    refreshDate = true;
+                gStartDate = dateFormat.format(cal.getTime());
+                if (gEndDate == null
+                        || !gEndDate.equals(dateFormat.format(cal.getTime())))
+                    refreshDate = true;
+                gEndDate = dateFormat.format(cal.getTime());
+                Log.e("gStartDate_today_checkBox", gStartDate);
+                Log.e("gEndDate_today_checkBox", gEndDate);
+
+            }
+        });
         // +7days
         nextSevenDays.setOnClickListener(new OnClickListener() {
             @Override
@@ -562,8 +606,10 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     tnextSevenDays.setTextColor(Color.parseColor("#007BFF"));
 
                 customBottom.setVisibility(View.GONE);
-                nextSevenBottom.setVisibility(View.VISIBLE);
+//                nextSevenBottom.setVisibility(View.VISIBLE);
                 todayBottom.setVisibility(View.GONE);
+                checkbox_today.setChecked(false);
+                checkbox_next_day.setChecked(true);
                 pickerView.setVisibility(RelativeLayout.GONE);
                 SimpleDateFormat dateFormat = new SimpleDateFormat(
                         "yyyy-MM-dd", Locale.ENGLISH);
@@ -583,6 +629,44 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 Log.e("gEndDate_nextSevenDays", gEndDate);
             }
         });
+
+        checkbox_next_day.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ttoday.setTextColor(Color.parseColor("#000000"));
+                tcustom.setTextColor(Color.parseColor("#000000"));
+                if (Helper.getSystemURL() != null
+                        && Helper.getSystemURL().toLowerCase()
+                        .contains(Helper.CONST_BE_THERE)) {
+                    tnextSevenDays.setTextColor(Color
+                            .parseColor(Helper.appColor));
+                } else
+                    tnextSevenDays.setTextColor(Color.parseColor("#007BFF"));
+
+                customBottom.setVisibility(View.GONE);
+//                nextSevenBottom.setVisibility(View.VISIBLE);
+                todayBottom.setVisibility(View.GONE);
+                checkbox_today.setChecked(false);
+                checkbox_next_day.setChecked(true);
+                pickerView.setVisibility(RelativeLayout.GONE);
+                SimpleDateFormat dateFormat = new SimpleDateFormat(
+                        "yyyy-MM-dd", Locale.ENGLISH);
+                Calendar cal = Calendar.getInstance();
+                refreshDate = false;
+                if (gStartDate == null
+                        || !gStartDate.equals(dateFormat.format(cal.getTime())))
+                    refreshDate = true;
+                gStartDate = dateFormat.format(cal.getTime());
+                cal.add(cal.DATE, 30);
+                if (gEndDate == null
+                        || !gEndDate.equals(dateFormat.format(cal.getTime())))
+                    refreshDate = true;
+                gEndDate = dateFormat.format(cal.getTime());
+                // refresh_submit(false);
+                Log.e("gStartDate_nextSevenDays_checkBox", gStartDate);
+                Log.e("gEndDate_nextSevenDays_checkBox", gEndDate);
+            }
+        });
         // custom
         custom.setOnClickListener(new OnClickListener() {
             @Override
@@ -598,8 +682,10 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
                 tnextSevenDays.setTextColor(Color.parseColor("#000000"));
                 customBottom.setVisibility(View.VISIBLE);
-                nextSevenBottom.setVisibility(View.GONE);
+//                nextSevenBottom.setVisibility(View.GONE);
                 todayBottom.setVisibility(View.GONE);
+                checkbox_today.setChecked(false);
+                checkbox_next_day.setChecked(false);
                 customLayout.setVisibility(RelativeLayout.VISIBLE);
                 refreshDate = true;
             }
@@ -621,8 +707,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
             public void onClick(View v) {
                 if (ClientFilter == null || branchFilter == null)
                     return;
-//                showhide_filter();
-                showFilterDialog(JobBoardActivityFragment.this);
+                showhide_filter();
+//                showFilterDialog(JobBoardActivityFragment.this);
             }
         });
         clientTxtView.setOnClickListener(new OnClickListener() {
@@ -646,14 +732,14 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     ClientFilterT.setTextColor(Color.parseColor("#007BFF"));
 
                 ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
-                branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
-                branchTxtCodeBottom.setVisibility(RelativeLayout.INVISIBLE);
-                branchPropsBottom.setVisibility(RelativeLayout.INVISIBLE);
-                propsFilter.setVisibility(RelativeLayout.INVISIBLE);
-                // branchPropsFilterT.setVisibility(RelativeLayout.INVISIBLE);
+                branchTxtBottom.setVisibility(RelativeLayout.VISIBLE);
+                branchTxtCodeBottom.setVisibility(RelativeLayout.VISIBLE);
+                branchPropsBottom.setVisibility(RelativeLayout.VISIBLE);
+                propsFilter.setVisibility(RelativeLayout.VISIBLE);
+                // branchPropsFilterT.setVisibility(RelativeLayout.VISIBLE);
                 ClientFilter.setVisibility(RelativeLayout.VISIBLE);
-                branchCodeFilter.setVisibility(RelativeLayout.INVISIBLE);
-                branchFilter.setVisibility(RelativeLayout.INVISIBLE);
+                branchCodeFilter.setVisibility(RelativeLayout.VISIBLE);
+                branchFilter.setVisibility(RelativeLayout.VISIBLE);
             }
         });
 
@@ -677,15 +763,15 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 } else
                     branchPropsFilterT.setTextColor(Color.parseColor("#007BFF"));
 
-                branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
-                branchTxtCodeBottom.setVisibility(RelativeLayout.INVISIBLE);
-                branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
+                branchTxtBottom.setVisibility(RelativeLayout.VISIBLE);
+                branchTxtCodeBottom.setVisibility(RelativeLayout.VISIBLE);
+                branchTxtBottom.setVisibility(RelativeLayout.VISIBLE);
                 branchPropsBottom.setVisibility(RelativeLayout.VISIBLE);
-                ClientTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
+                ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
 
-                ClientFilter.setVisibility(RelativeLayout.INVISIBLE);
-                branchCodeFilter.setVisibility(RelativeLayout.INVISIBLE);
-                branchFilter.setVisibility(RelativeLayout.INVISIBLE);
+                ClientFilter.setVisibility(RelativeLayout.VISIBLE);
+                branchCodeFilter.setVisibility(RelativeLayout.VISIBLE);
+                branchFilter.setVisibility(RelativeLayout.VISIBLE);
                 propsFilter.setVisibility(RelativeLayout.VISIBLE);
             }
         });
@@ -711,15 +797,15 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     branchCodeFilterT.setTextColor(Color.parseColor("#007BFF"));
 
                 ClientFilterT.setTextColor(Color.parseColor("#000000"));
-                ClientTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
-                branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
-                branchPropsBottom.setVisibility(RelativeLayout.INVISIBLE);
-                propsFilter.setVisibility(RelativeLayout.INVISIBLE);
+                ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
+                branchTxtBottom.setVisibility(RelativeLayout.VISIBLE);
+                branchPropsBottom.setVisibility(RelativeLayout.VISIBLE);
+                propsFilter.setVisibility(RelativeLayout.VISIBLE);
 
                 branchTxtCodeBottom.setVisibility(RelativeLayout.VISIBLE);
-                ClientFilter.setVisibility(RelativeLayout.INVISIBLE);
+                ClientFilter.setVisibility(RelativeLayout.VISIBLE);
                 branchCodeFilter.setVisibility(RelativeLayout.VISIBLE);
-                branchFilter.setVisibility(RelativeLayout.INVISIBLE);
+                branchFilter.setVisibility(RelativeLayout.VISIBLE);
             }
         });
 
@@ -744,15 +830,15 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     branchFilterT.setTextColor(Color.parseColor("#007BFF"));
 
                 ClientFilterT.setTextColor(Color.parseColor("#000000"));
-                ClientTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
+                ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
                 branchTxtBottom.setVisibility(RelativeLayout.VISIBLE);
-                branchTxtCodeBottom.setVisibility(RelativeLayout.INVISIBLE);
-                branchPropsBottom.setVisibility(RelativeLayout.INVISIBLE);
-                propsFilter.setVisibility(RelativeLayout.INVISIBLE);
+                branchTxtCodeBottom.setVisibility(RelativeLayout.VISIBLE);
+                branchPropsBottom.setVisibility(RelativeLayout.VISIBLE);
+                propsFilter.setVisibility(RelativeLayout.VISIBLE);
 
-                ClientFilter.setVisibility(RelativeLayout.INVISIBLE);
+                ClientFilter.setVisibility(RelativeLayout.VISIBLE);
                 branchFilter.setVisibility(RelativeLayout.VISIBLE);
-                branchCodeFilter.setVisibility(RelativeLayout.INVISIBLE);
+                branchCodeFilter.setVisibility(RelativeLayout.VISIBLE);
             }
         });
         // radioFilter.setOnCheckedChangeListener(new OnCheckedChangeListener()
@@ -845,6 +931,23 @@ public class JobBoardActivityFragment extends FragmentActivity {
         } else {
             //showGPSDisabledAlertToUser();
         }
+
+        s_date = (TextView) findViewById(R.id.startdate);
+        e_date = (TextView) findViewById(R.id.enddate);
+        s_date.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tag = 1;
+                openDatePicker();
+            }
+        });
+        e_date.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tag = 2;
+                openDatePicker();
+            }
+        });
 
     }
 
@@ -1291,12 +1394,10 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-
                     }
                 }, multipleClientSpinner);
         propsFilter = (RelativeLayout) findViewById(R.id.propsFilter);
@@ -1348,13 +1449,13 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     }
                 }, multipleBranchSpinner);
 
-        ClientFilter.setVisibility(RelativeLayout.VISIBLE);
-        branchFilter.setVisibility(RelativeLayout.INVISIBLE);
+//        ClientFilter.setVisibility(RelativeLayout.VISIBLE);
+//        branchFilter.setVisibility(RelativeLayout.INVISIBLE);
 
-        branchCodeFilter.setVisibility(RelativeLayout.INVISIBLE);
-        if (customLayout.getVisibility() == RelativeLayout.VISIBLE) {
-            customLayout.setVisibility(RelativeLayout.GONE);
-        }
+//        branchCodeFilter.setVisibility(RelativeLayout.INVISIBLE);
+//        if (customLayout.getVisibility() == RelativeLayout.VISIBLE) {
+//            customLayout.setVisibility(RelativeLayout.GONE);
+//        }
         branchFilterT.setTextColor(Color.parseColor("#000000"));
         if (Helper.getSystemURL() != null
                 && Helper.getSystemURL().toLowerCase()
@@ -1362,10 +1463,10 @@ public class JobBoardActivityFragment extends FragmentActivity {
             ClientFilterT.setTextColor(Color.parseColor(Helper.appColor));
         } else
             ClientFilterT.setTextColor(Color.parseColor("#007BFF"));
-        ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
-        branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
-        ClientFilter.setVisibility(RelativeLayout.VISIBLE);
-        branchFilter.setVisibility(RelativeLayout.INVISIBLE);
+//        ClientTxtBottom.setVisibility(RelativeLayout.VISIBLE);
+//        branchTxtBottom.setVisibility(RelativeLayout.INVISIBLE);
+//        ClientFilter.setVisibility(RelativeLayout.VISIBLE);
+//        branchFilter.setVisibility(RelativeLayout.INVISIBLE);
 
         btnCancel.setOnClickListener(new OnClickListener() {
 
@@ -2954,182 +3055,10 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 + listOfCheckBoxes.size() + ")");
     }
 
-    private Dialog filterDialog;
-
-    private MultiSelectionSpinner multipleClientSpinner_filter;
-    private MultiSelectionSpinner multipleBranchSpinner_filter;
-    private MultiSelectionSpinner multipleBranchCodeSpinner_filter;
-    private MultiSelectionSpinner multiplePropsSpinner_filter;
-
-    TextView s_date, e_date;
     int tag = 0;// , d1, m1, y1, d2, m2, y2;
     String[] monthVal = {"01", "02", "03", "04", "05", "06", "07", "08", "09",
             "10", "11", "12"};
 
-    private void showFilterDialog(Context context) {
-        filterDialog = new Dialog(context);
-        filterDialog.setContentView(R.layout.dialog_job_board_filter);
-
-        // set the custom dialog components - text, image and button
-        ArrayList<NameValuePair> clients = new ArrayList<NameValuePair>();
-        ArrayList<NameValuePair> locations = new ArrayList<NameValuePair>();
-        ArrayList<NameValuePair> branches = new ArrayList<NameValuePair>();
-        ArrayList<NameValuePair> props = new ArrayList<NameValuePair>();
-
-        for (int i = 0; i < result_filter.size(); i++) {
-
-            for (int j = 0; result_filter.get(i).getBranchProps() != null
-                    && j < result_filter.get(i).getBranchProps().size(); j++) {
-                if (result_filter.get(i).getBranchProps().get(j) != null
-                        && result_filter.get(i).getBranchProps().get(j)
-                        .getPropertyName().length() > 0) {
-                    props = insertProp(result_filter.get(i).getBranchProps().get(j)
-                            .getPropertyName(), result_filter.get(i).getBranchProps()
-                            .get(j).getContent(), props, (i + 1) + "");
-                }
-            }
-
-            if (result_filter.get(i).getClientName() != null
-                    && result_filter.get(i).getClientName().length() > 0) {
-                clients = insertNewItem(result_filter.get(i).getClientName(), clients,
-                        (i + 1) + "");
-            }
-
-            if (result_filter.get(i).getBranchName() != null
-                    && result_filter.get(i).getBranchName().length() > 0) {
-                branches = insertNewItem(result_filter.get(i).getBranchName(),
-                        branches, (i + 1) + "");
-            }
-
-            if (result_filter.get(i).getRegionName() != null
-                    && result_filter.get(i).getRegionName().length() > 0
-                    && result_filter.get(i).getCityName() != null
-                    && result_filter.get(i).getCityName().length() > 0) {
-                locations = insertNewItem(result_filter.get(i).getCityName() + " ("
-                        + result_filter.get(i).getRegionName() + ")", locations, (i + 1)
-                        + "");
-            }
-
-        }
-
-        RelativeLayout ClientFilter = (RelativeLayout) filterDialog.findViewById(R.id.ClientFilter);//Client
-        multipleClientSpinner_filter = getMultipleDropdown(toStringArray(clients),
-                ClientFilter, new OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent,
-                                               View view, int position, long id) {
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                }, multipleClientSpinner_filter);
-
-        RelativeLayout branchFilter = (RelativeLayout) filterDialog.findViewById(R.id.branchFilter);//City
-        multipleBranchSpinner_filter = getMultipleDropdown(toStringArray(locations),
-                branchFilter, new OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent,
-                                               View view, int position, long id) {
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                }, multipleBranchSpinner_filter);
-
-        RelativeLayout branchCodeFilter = (RelativeLayout) filterDialog.findViewById(R.id.branchCodeFilter);//Branch
-        multipleBranchCodeSpinner_filter = getMultipleDropdown(
-                toStringArray(branches), branchCodeFilter,
-                new OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent,
-                                               View view, int position, long id) {
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                }, multipleBranchCodeSpinner_filter);
-
-        RelativeLayout propsFilter = (RelativeLayout) filterDialog.findViewById(R.id.propsFilter);//properties
-        multiplePropsSpinner_filter = getMultipleDropdown(toStringArray(props),
-                propsFilter, new OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent,
-                                               View view, int position, long id) {
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                }, multiplePropsSpinner_filter);
-
-        Button btnCancel = (Button) filterDialog.findViewById(R.id.btnCancel);
-        Button btnApply = (Button) filterDialog.findViewById(R.id.btnApply);
-        btnCancel.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                multipleBranchSpinner.setSelection(-1);
-                multipleClientSpinner.setSelection(-1);
-                multipleBranchCodeSpinner.setSelection(-1);
-                multiplePropsSpinner.setSelection(-1);
-                pickerView.unSetDates();
-                nextSevenDays.performClick();
-                refresh_submit(true);
-//                showhide_filter();
-                filterDialog.dismiss();
-            }
-        });
-        btnApply.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pickerView.setVisibility(RelativeLayout.GONE);
-                if (refreshDate) {
-                    refresh_submit(true);
-                } else {
-                    filterItems(multipleBranchSpinner_filter.getSelectedStrings(),
-                            multipleClientSpinner_filter.getSelectedStrings(),
-                            multipleBranchCodeSpinner_filter.getSelectedStrings(),
-                            multiplePropsSpinner_filter.getSelectedStrings(), result_filter);
-                }
-                filterDialog.dismiss();
-//                showhide_filter();
-            }
-        });
-
-        s_date = (TextView) filterDialog.findViewById(R.id.startdate);
-        e_date = (TextView) filterDialog.findViewById(R.id.enddate);
-        s_date.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tag = 1;
-                openDatePicker();
-            }
-        });
-        e_date.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tag = 2;
-                openDatePicker();
-            }
-        });
-
-        filterDialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        filterDialog.show();
-    }
 
     private DatePickerDialog.OnDateSetListener setDate = new DatePickerDialog.OnDateSetListener() {
 
@@ -3164,28 +3093,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
         int d = cl.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog dp = new DatePickerDialog(JobBoardActivityFragment.this, setDate, y, m, d);
         dp.show();
-    }
-
-
-    public static void customAlert(Context context, String textString) {
-        final Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.custom_red_alert);
-
-        // set the custom dialog components - text, image and button
-        TextView text = (TextView) dialog.findViewById(R.id.textView1);
-        text.setText(textString);
-
-        Button dialogButton = (Button) dialog.findViewById(R.id.btnOk);
-        // if button is clicked, close the custom dialog
-        dialogButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.show();
     }
 
 }
