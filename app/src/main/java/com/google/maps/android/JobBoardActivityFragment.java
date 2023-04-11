@@ -204,9 +204,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
     private Location currentLot;
     private int resultCode;
 
-    ImageView iv_list, iv_map;
-
-    private ArrayList<Job> result_filter;
+    ImageView iv_list, iv_map, filterBtn;
 
     TextView tv_select_all, tv_clearer_all, tv_remove_selected;
 
@@ -434,6 +432,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
         locationBtn = (ImageView) findViewById(R.id.LocationBtn);
         iv_list = (ImageView) findViewById(R.id.iv_list);
         iv_map = (ImageView) findViewById(R.id.iv_map);
+        filterBtn = (ImageView) findViewById(R.id.filterBtn);
         emptyListLabel = (RelativeLayout) findViewById(R.id.emptyListLabel);
 
 
@@ -1289,6 +1288,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 refreshDate = false;
                 Revamped_Loading_Dialog.show_dialog(
                         JobBoardActivityFragment.this, null);
+                filterBtn.setImageDrawable(getResources().getDrawable(R.drawable.img_filter_off));
                 this.updateDate = null;
             }
 
@@ -1307,8 +1307,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 result = filterbyDistance(result);
                 setMarkers(result, 0);
                 setFilters(result);
-//                setFilterNewDialog(result,filterDialog);
-                result_filter = result;
             }
 
             @Override
@@ -1478,6 +1476,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
             @Override
             public void onClick(View v) {
+                filterBtn.setImageDrawable(getResources().getDrawable(R.drawable.img_filter_off));
                 multipleBranchSpinner.setSelection(-1);
                 multipleClientSpinner.setSelection(-1);
                 multipleBranchCodeSpinner.setSelection(-1);
@@ -1492,6 +1491,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 pickerView.setVisibility(RelativeLayout.GONE);
+                filterBtn.setImageDrawable(getResources().getDrawable(R.drawable.img_filter_on));
                 if (refreshDate) {
                     refresh_submit(true);
                 } else {
