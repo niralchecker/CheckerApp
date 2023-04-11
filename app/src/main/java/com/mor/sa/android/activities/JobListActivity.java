@@ -298,6 +298,8 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     private int selectJobOderId;
 
+    TextView tv_applied_no;
+
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
             try {
@@ -2551,6 +2553,8 @@ public class JobListActivity extends Activity implements OnClickListener,
             return;
         }
 
+        tv_applied_no = findViewById(R.id.tv_applied_no);
+        tv_applied_no.setText(Integer.toString(Constants.applied_count));
 
     }
 
