@@ -115,6 +115,7 @@ import static android.widget.Toast.makeText;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -2409,9 +2410,12 @@ public class JobBoardActivityFragment extends FragmentActivity {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         dialog.getWindow().setLayout(lp.width, lp.height);
 
-        TextView clientName, cityName, branchName, address, description, qustionnaire, shortname, addedAt, startAndndTime, BranchOpeingHours, SurveyPayment, BonusPayment, TarnsportionPayment, branchphone;
+        TextView clientName, cityName, branchName, address, description, qustionnaire, shortname, addedAt, startAndndTime, BranchOpeingHours, SurveyPayment, BonusPayment, TarnsportionPayment, branchphone, showDistance;
+        TextView tv_start_time, tv_end_time;
         RelativeLayout topbar, layout_apply_msg;
         CardView cardView;
+        NestedScrollView nestedScroll;
+        ImageView iv_down_arrow;
         topbar = (RelativeLayout) dialog.findViewById(R.id.topbar);
 
         if (thiItem == null) {
@@ -2491,9 +2495,40 @@ public class JobBoardActivityFragment extends FragmentActivity {
             BonusPayment = (TextView) dialog.findViewById(R.id.BonusPayment);
             TarnsportionPayment = (TextView) dialog
                     .findViewById(R.id.TarnsportionPayment);
-
             cardView = dialog.findViewById(R.id.cardView);
             layout_apply_msg = dialog.findViewById(R.id.layout_apply_msg);
+            showDistance = (TextView) dialog.findViewById(R.id.ShowDistance);
+            iv_down_arrow = dialog.findViewById(R.id.iv_down_arrow);
+            nestedScroll = dialog.findViewById(R.id.nestedScroll);
+
+            iv_down_arrow.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (nestedScroll.getVisibility() == View.GONE) {
+                        nestedScroll.setVisibility(View.VISIBLE);
+                    } else {
+                        nestedScroll.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            float distance = (float) -1.0;
+            if (thiItem.getBranchLat() != null && thiItem.getBranchLat().length() > 0
+                    && thiItem.getBranchLong() != null
+                    && thiItem.getBranchLong().length() > 0 && thisPersonLocaation != null) {
+                Location loc1 = new Location("");
+                loc1.setLatitude(Double.parseDouble(thiItem.getBranchLat()));
+                loc1.setLongitude(Double.parseDouble(thiItem.getBranchLong()));
+                distance = thisPersonLocaation.distanceTo(loc1);
+            }
+
+            distance = (float) (distance / 1000.0);
+
+            if (distance >= 0) {
+                distance = Math.round(distance);
+                int dis = (int) distance;
+                showDistance.setText(dis + " Km");
+            }
 
             if (type == 0) {
                 //PassIndex
@@ -2525,12 +2560,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
             }
             topbar.setBackgroundColor(Color.parseColor(thiItem.getColor()));
 
-            // if (thiItem.getoaID() != null && thiItem.getoaID().length() > 0)
-            // {
-            // topbar.setBackgroundColor(Color.parseColor("#007fff"));
-            // } else {
-            // topbar.setBackgroundColor(Color.parseColor("#ff0000"));
-            // }
             clientName.setText(thiItem.getClientName());
             branchName.setText(thiItem.getBranchFullname());
             cityName.setText(thiItem.getCityName());
@@ -2541,14 +2570,19 @@ public class JobBoardActivityFragment extends FragmentActivity {
             shortname.setText(thiItem.getBranchName());
             if (thiItem.getStart_time() == null || thiItem.getTimeEnd() == null) {
                 if (thiItem.getStart_time() == null) {
-                    startAndndTime.setText("" + "-" + thiItem.getTimeEnd());
+                    startAndndTime.setText("" + "" + thiItem.getTimeEnd());
                 } else {
-                    startAndndTime.setText(thiItem.getStart_time() + "-" + "");
+                    startAndndTime.setText("Start at " + thiItem.getStart_time() + "" + "");
                 }
             } else {
-                startAndndTime.setText(thiItem.getStart_time() + "-"
-                        + thiItem.getTimeEnd());
+                startAndndTime.setText("Start at " + thiItem.getStart_time());
             }
+
+            tv_start_time = dialog.findViewById(R.id.tv_start_time);
+            tv_end_time = dialog.findViewById(R.id.tv_end_time);
+            tv_start_time.setText(thiItem.getStart_time());
+            tv_end_time.setText(thiItem.getTimeEnd());
+
             BranchOpeingHours.setText(thiItem.getOpeningHours());
             addedAt.setText(thiItem.getDate());
             branchphone.setText(thiItem.getBranchPhone());

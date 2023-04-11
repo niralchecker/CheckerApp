@@ -18,10 +18,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 
 import com.checker.sa.android.data.Job;
 import com.checker.sa.android.helper.Constants;
@@ -116,11 +118,13 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
 
     public void updateRow(Job data, View dialog, int isDetailed2) {
 
-        TextView critlink, Payment, cityName, clientName, branchName, dates, total, showDistance;
+        TextView critlink, Payment, cityName, clientName, branchName, dates, total, showDistance, tv_time;
         CardView cardView;
         RelativeLayout topbar;
         View green_view;
-		Button btnApply;
+        Button btnApply;
+        NestedScrollView nestedScroll;
+        ImageView iv_down_arrow;
 //        TextView btnApply;
         float distance = (float) -1.0;
         if (data.getBranchLat() != null && data.getBranchLat().length() > 0
@@ -153,14 +157,28 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
         dates = (TextView) dialog.findViewById(R.id.Dates);
         total = (TextView) dialog.findViewById(R.id.Total);
         showDistance = (TextView) dialog.findViewById(R.id.ShowDistance);
-		btnApply = (Button) dialog.findViewById(R.id.btnApply);
+        btnApply = (Button) dialog.findViewById(R.id.btnApply);
 //        btnApply = (TextView) dialog.findViewById(R.id.btnApply);
         Payment = (TextView) dialog.findViewById(R.id.Payment);
+        tv_time = (TextView) dialog.findViewById(R.id.tv_time);
         cardView = (CardView) dialog.findViewById(R.id.cardView);
         green_view = (View) dialog.findViewById(R.id.green_view);
 
         CheckBox cb = (CheckBox) dialog.findViewById(R.id.chkBox);
 
+        iv_down_arrow = dialog.findViewById(R.id.iv_down_arrow);
+        nestedScroll = dialog.findViewById(R.id.nestedScroll);
+
+        iv_down_arrow.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nestedScroll.getVisibility() == View.GONE) {
+                    nestedScroll.setVisibility(View.VISIBLE);
+                } else {
+                    nestedScroll.setVisibility(View.GONE);
+                }
+            }
+        });
 
         if (data.getoaID() != null && data.getoaID().length() > 0) {
             topbar.setBackgroundColor(Color.parseColor("#2cbdbf"));
@@ -177,8 +195,19 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
             topbar.setBackgroundColor(Color.parseColor("#f18931"));
         }
         topbar.setBackgroundColor(Color.parseColor(data.getColor()));
-		Helper.changeBtnColor(btnApply);
+        Helper.changeBtnColor(btnApply);
 //        Helper.changeTxtViewColor(btnApply);
+
+        if (data.getStart_time() == null || data.getTimeEnd() == null) {
+            if (data.getStart_time() == null) {
+                tv_time.setText("" + "" + data.getTimeEnd());
+            } else {
+                tv_time.setText("Start at " + data.getStart_time() + "" + "");
+            }
+        } else {
+            tv_time.setText("Start at " + data.getStart_time());
+        }
+
         if (cb.isChecked())
             btnApply.setVisibility(RelativeLayout.GONE);
         if (Constants.getLoginURL() != null && Constants.getLoginURL().toLowerCase().contains("ajis")) {
