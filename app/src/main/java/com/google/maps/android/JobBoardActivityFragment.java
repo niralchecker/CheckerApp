@@ -394,7 +394,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 if (listOFOrders != null && listOFOrders.size() > 0) {
-                    openDialog(null, null, 1);
+                    openDialog(null, null, 2);
                 }
             }
         });
@@ -2417,39 +2417,43 @@ public class JobBoardActivityFragment extends FragmentActivity {
         NestedScrollView nestedScroll;
         ImageView iv_down_arrow;
         topbar = (RelativeLayout) dialog.findViewById(R.id.topbar);
+        cardView = dialog.findViewById(R.id.cardView);
+        layout_apply_msg = dialog.findViewById(R.id.layout_apply_msg);
 
         if (thiItem == null) {
-            topbar.setBackgroundColor(Color.parseColor("#f18931"));
-            dialog.findViewById(R.id.layout_1).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_2).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_3).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_4).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_5).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_6).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_7).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_8).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_9).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_10).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_11).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_12).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_13).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.layout_14).setVisibility(
-                    RelativeLayout.GONE);
-            dialog.findViewById(R.id.altlayout).setVisibility(
-                    RelativeLayout.GONE);
+            layout_apply_msg.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.GONE);
+//            topbar.setBackgroundColor(Color.parseColor("#f18931"));
+//            dialog.findViewById(R.id.layout_1).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_2).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_3).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_4).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_5).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_6).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_7).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_8).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_9).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_10).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_11).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_12).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_13).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.layout_14).setVisibility(
+//                    RelativeLayout.GONE);
+//            dialog.findViewById(R.id.altlayout).setVisibility(
+//                    RelativeLayout.GONE);
         } else {
 
             altSpinner = (Spinner) dialog.findViewById(R.id.altdates);
@@ -2495,8 +2499,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
             BonusPayment = (TextView) dialog.findViewById(R.id.BonusPayment);
             TarnsportionPayment = (TextView) dialog
                     .findViewById(R.id.TarnsportionPayment);
-            cardView = dialog.findViewById(R.id.cardView);
-            layout_apply_msg = dialog.findViewById(R.id.layout_apply_msg);
             showDistance = (TextView) dialog.findViewById(R.id.ShowDistance);
             iv_down_arrow = dialog.findViewById(R.id.iv_down_arrow);
             nestedScroll = dialog.findViewById(R.id.nestedScroll);
@@ -2534,7 +2536,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 //PassIndex
                 layout_apply_msg.setVisibility(View.VISIBLE);
                 cardView.setVisibility(View.GONE);
-            } else {
+            } else if (type == 1) {
                 layout_apply_msg.setVisibility(View.GONE);
                 cardView.setVisibility(View.VISIBLE);
             }
