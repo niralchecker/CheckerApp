@@ -1696,6 +1696,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         super.onResume();
         Constants.setLocale(JobListActivity.this);
         comunicator.detailJob = JobListActivity.this;
+        tv_applied_no.setText(Integer.toString(Constants.applied_count));
 //        if (CheckerApp.getQuestionResult() != null) {
 //            onQuestionResult(CheckerApp.getQuestionResult());
 //        }
@@ -4575,6 +4576,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 } catch (Exception ex) {
                 }
+                tv_applied_no.setText(Integer.toString(Constants.applied_count));
                 Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
                         getResources().getString(R.string.alert_switching));
             }
