@@ -2532,14 +2532,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 showDistance.setText(dis + " Km");
             }
 
-            if (type == 0) {
-                //PassIndex
-                layout_apply_msg.setVisibility(View.VISIBLE);
-                cardView.setVisibility(View.GONE);
-            } else if (type == 1) {
-                layout_apply_msg.setVisibility(View.GONE);
-                cardView.setVisibility(View.VISIBLE);
-            }
 
             if (thiItem.getoaID() != null && thiItem.getoaID().length() > 0) {
                 topbar.setBackgroundColor(Color.parseColor("#2cbdbf"));
@@ -2734,6 +2726,22 @@ public class JobBoardActivityFragment extends FragmentActivity {
             ((Button) dialog.findViewById(R.id.btnApply))
                     .setText("Remove Application");
             // dialog.findViewById(R.id.btnApply).setEnabled(false);
+        }
+
+        if (type == 0) {
+            //PassIndex
+            layout_apply_msg.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.GONE);
+        } else if (type == 1) {
+            layout_apply_msg.setVisibility(View.GONE);
+            cardView.setVisibility(View.VISIBLE);
+            btnApply.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    layout_apply_msg.setVisibility(View.VISIBLE);
+                    cardView.setVisibility(View.GONE);
+                }
+            });
         }
 
         dialog.show();
