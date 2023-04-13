@@ -397,14 +397,14 @@
             android:textStyle="normal"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/tv_remove_selected"
+        <Button
+            android:id="@+id/btnRemoveAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="20dp"
+            android:background="@color/white"
             android:text="@string/remove_selected"
             android:textColor="#000000"
             android:textSize="16sp" />
@@ -416,7 +416,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/border_green"
             android:fontFamily="@font/roboto_bold"
             android:paddingTop="10dp"

@@ -192,7 +192,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
     private boolean isListEmpty = true;
     private Marker thisPersonMarker = null;
     private RelativeLayout bottomBar;
-    private Button btnApplyAll;
+    private Button btnApplyAll, btnRemoveAll;
     private RelativeLayout branchCodeFilter;
     private RelativeLayout propsFilter;
     private RelativeLayout branchTxtPropsView;
@@ -206,7 +206,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
     ImageView iv_list, iv_map, filterBtn;
 
-    TextView tv_select_all, tv_clearer_all, tv_remove_selected;
+    TextView tv_select_all, tv_clearer_all;
 
     CheckBox checkbox_today, checkbox_next_day;
     TextView s_date, e_date, tv_clients;
@@ -322,7 +322,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
         chkbox = (CheckBox) findViewById(R.id.chkBox);
         tv_select_all = findViewById(R.id.tv_select_all);
         tv_clearer_all = findViewById(R.id.tv_clearer_all);
-        tv_remove_selected = findViewById(R.id.tv_remove_selected);
         tv_clients = findViewById(R.id.tv_clients);
         tv_applied_no = findViewById(R.id.tv_applied_no);
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
@@ -336,14 +335,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
         });
 
         tv_clearer_all.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (adapter != null)
-                    adapter.setUnsetCheckBoxes(false);
-            }
-        });
-
-        tv_remove_selected.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (adapter != null)
@@ -389,15 +380,33 @@ public class JobBoardActivityFragment extends FragmentActivity {
         btnApply = (Button) findViewById(R.id.btnApply);
         btnApply.setTag("Apply");
         btnApplyAll = (Button) findViewById(R.id.btnApplyAll);
+        btnRemoveAll = (Button) findViewById(R.id.btnRemoveAll);
         btnApplyAll.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (listOFOrders != null && listOFOrders.size() > 0) {
-                    openDialog(null, null, 2);
+                    openDialog(null, null, -1);
                 }
             }
         });
+
+        btnRemoveAll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listOFOrders != null && listOFOrders.size() > 0) {
+                    for (int i = 0; i < listOFOrders.size(); i++){
+                        ((Job) listOFOrders.get(i)).getM().setIcon(BitmapDescriptorFactory
+                                .fromResource(R.drawable.orangepin));
+                    }
+
+//                    refresh_submit(true);
+                    doEnableDisableMapListButtons();
+
+                }
+            }
+        });
+
         btnCancel = (Button) findViewById(R.id.btnCancel);
         today = (RelativeLayout) findViewById(R.id.today);
         ttoday = (TextView) findViewById(R.id.ttoday);
@@ -1798,6 +1807,21 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
                     arg0.setIcon(BitmapDescriptorFactory
                             .fromResource(R.drawable.orangepin));
+                    if (bulkApply == true && listOFOrders != null
+                            && listOFOrders.size() > 0)
+                        listOFOrders.remove(0);
+                    else if (bulkApply == true && adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    if (bulkApply == true && listOFOrders != null
+                            && listOFOrders.size() > 0) {
+                        remove(comment,
+                                ((Job) listOFOrders.get(0)).getOrderID(), null,
+                                ((Job) listOFOrders.get(0)).getM(),
+                                ((Job) listOFOrders.get(0)), true);
+                    }
+
                 } else {
                     Toast.makeText(JobBoardActivityFragment.this,
                             getResources().getString(R.string.errorRemoving),
@@ -2294,7 +2318,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
         }
         adapter = new JobBoardListAdapter(JobBoardActivityFragment.this,
                 orders, jobBoardlistAdapter_CallBack, thisPersonLocaation,
-                btnApplyAll);
+                btnApplyAll, btnRemoveAll);
         jobList.setAdapter(adapter);
 
         if (orders.size() <= 0
@@ -2329,7 +2353,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
         Helper.changeBtnColor(btnCancel);
         adapter = new JobBoardListAdapter(JobBoardActivityFragment.this,
                 listPins, jobBoardlistAdapter_CallBack, thisPersonLocaation,
-                btnApplyAll);
+                btnApplyAll, btnRemoveAll);
         jobList.setAdapter(adapter);
         if (listPins.size() <= 0
                 && jobList.getVisibility() == RelativeLayout.VISIBLE) {
@@ -2419,7 +2443,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
         topbar = (RelativeLayout) dialog.findViewById(R.id.topbar);
         cardView = dialog.findViewById(R.id.cardView);
         layout_apply_msg = dialog.findViewById(R.id.layout_apply_msg);
-
+        final EditText txtComment = (EditText) dialog
+                .findViewById(R.id.txtComment);
         if (thiItem == null) {
             layout_apply_msg.setVisibility(View.VISIBLE);
             cardView.setVisibility(View.GONE);
@@ -2471,17 +2496,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 }
 
             });
-            // setOnItemClickListener(new OnItemClickListener() {
-            //
-            // @Override
-            // public void onItemClick(AdapterView<?> parent, View view,
-            // int position, long id) {
-            // if (thiItem.getAltDates() == null
-            // || thiItem.getAltDates().size() == 0) {
-            // LoadALTData(thiItem.getOrderID(), altSpinner);
-            // }
-            // }
-            // });
+
             clientName = (TextView) dialog.findViewById(R.id.ClientName);
             branchName = (TextView) dialog.findViewById(R.id.BranchName);
             address = (TextView) dialog.findViewById(R.id.Address);
@@ -2608,8 +2623,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
                     }
                 });
-        final EditText txtComment = (EditText) dialog
-                .findViewById(R.id.txtComment);
+//        final EditText txtComment = (EditText) dialog
+//                .findViewById(R.id.txtComment);
         Button btnApply = (Button) dialog.findViewById(R.id.btnApply);
         Helper.changeBtnColor(btnApply);
         btnApply.setOnClickListener(new OnClickListener() {
@@ -2674,49 +2689,57 @@ public class JobBoardActivityFragment extends FragmentActivity {
         dialog_save.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (thiItem == null) {
-                    apply(txtComment.getText().toString(),
-                            ((Job) listOFOrders.get(0)).getOrderID(),
-                            dialog, ((Job) listOFOrders.get(0)).getM(),
-                            ((Job) listOFOrders.get(0)), true);
-                } else {
-                    if (orders != null
-                            && orders.length > 1
-                            && altSpinner != null
-                            && altSpinner.getSelectedItemPosition() > 0
-                            && altSpinner.getSelectedItemPosition() < orders.length) {
-                        String date = orders[altSpinner
-                                .getSelectedItemPosition()];
-                        if (date != null && date.length() > 0) {
-                            date = date.replace(".", "-");
-                        }
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-                                "dd-MM-yyyy", Locale.ENGLISH);
-                        try {
-                            Date dateTemp = simpleDateFormat.parse(date);
-                            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(
-                                    "yyyy-MM-dd", Locale.ENGLISH);
-                            date = simpleDateFormat1.format(dateTemp);
-                            // date =
-                            // simpleDateFormat1.parse(date2);
-
-                        } catch (ParseException ex) {
-                        }
-                        Toast.makeText(
-                                        getApplicationContext(),
-                                        txtComment.getText().toString() + " " + "("
-                                                + date + ")", Toast.LENGTH_LONG)
-                                .show();
-                        apply(txtComment.getText().toString() + " " + "("
-                                        + date + ")", thiItem.getOrderID(), dialog,
-                                arg0, thiItem, false);
-                    } else {
+                String ButtonTitle = ((Button) dialog
+                        .findViewById(R.id.dialog_save)).getTag().toString();
+                if (ButtonTitle.equals("Apply")) {
+                    if (thiItem == null) {
                         apply(txtComment.getText().toString(),
-                                thiItem.getOrderID(), dialog, arg0,
-                                thiItem, false);
+                                ((Job) listOFOrders.get(0)).getOrderID(),
+                                dialog, ((Job) listOFOrders.get(0)).getM(),
+                                ((Job) listOFOrders.get(0)), true);
+                    } else {
+                        if (orders != null
+                                && orders.length > 1
+                                && altSpinner != null
+                                && altSpinner.getSelectedItemPosition() > 0
+                                && altSpinner.getSelectedItemPosition() < orders.length) {
+                            String date = orders[altSpinner
+                                    .getSelectedItemPosition()];
+                            if (date != null && date.length() > 0) {
+                                date = date.replace(".", "-");
+                            }
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+                                    "dd-MM-yyyy", Locale.ENGLISH);
+                            try {
+                                Date dateTemp = simpleDateFormat.parse(date);
+                                SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(
+                                        "yyyy-MM-dd", Locale.ENGLISH);
+                                date = simpleDateFormat1.format(dateTemp);
+                                // date =
+                                // simpleDateFormat1.parse(date2);
+
+                            } catch (ParseException ex) {
+                            }
+                            Toast.makeText(
+                                            getApplicationContext(),
+                                            txtComment.getText().toString() + " " + "("
+                                                    + date + ")", Toast.LENGTH_LONG)
+                                    .show();
+                            apply(txtComment.getText().toString() + " " + "("
+                                            + date + ")", thiItem.getOrderID(), dialog,
+                                    arg0, thiItem, false);
+                        } else {
+                            apply(txtComment.getText().toString(),
+                                    thiItem.getOrderID(), dialog, arg0,
+                                    thiItem, false);
+                        }
                     }
+                    refresh_submit(true);
+                } else {
+                    remove(txtComment.getText().toString() + " ",
+                            thiItem.getOrderID(), dialog, arg0, thiItem, false);
+                    refresh_submit(true);
                 }
-                refresh_submit(true);
             }
         });
         if (thiItem != null && thiItem.getoaID() != null
@@ -3174,10 +3197,16 @@ public class JobBoardActivityFragment extends FragmentActivity {
                 && btnApplyAll.getText().toString().contains("(")) {
             String text = btnApplyAll.getText().toString();
             text = text.substring(0, text.indexOf("("));
+            String text1 = btnRemoveAll.getText().toString();
+            text1 = text1.substring(0, text1.indexOf("("));
 
             btnApplyAll.setText(text);
+            btnRemoveAll.setText(text1);
         }
         btnApplyAll.setText(btnApplyAll.getText().toString() + "("
+                + listOfCheckBoxes.size() + ")");
+
+        btnRemoveAll.setText(btnRemoveAll.getText().toString() + "("
                 + listOfCheckBoxes.size() + ")");
     }
 

@@ -38,7 +38,7 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
     JobBoardlistAdapter_CallBack jobBoardlistAdapter_CallBack;
     private Location personLocation;
     private JobBoardActivityFragment jobboardact;
-    private Button btnApplyAll;
+    private Button btnApplyAll, btnRemoveAll;
 
     public List<Job> getValues() {
         return values;
@@ -94,7 +94,7 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
     public JobBoardListAdapter(JobBoardActivityFragment context,
                                List<Job> valuess,
                                JobBoardlistAdapter_CallBack mjobBoardlistAdapter_CallBack,
-                               Location thisPersonLocaation, Button btnApplyAll) {
+                               Location thisPersonLocaation, Button btnApplyAll, Button btnRemoveAll) {
         super(context, R.layout.job_board_row, valuess);
         this.jobboardact = context;
         this.context = context;
@@ -102,6 +102,7 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
         this.values = valuess;
         this.personLocation = thisPersonLocaation;
         this.btnApplyAll = btnApplyAll;
+        this.btnRemoveAll = btnRemoveAll;
     }
 
     String tmpHeading = "";
@@ -300,15 +301,21 @@ public class JobBoardListAdapter extends ArrayAdapter<Job> {
             listOfCheckBoxes.remove(buttonView);
         }
         if (btnApplyAll != null && btnApplyAll.getText().toString() != null
-                && btnApplyAll.getText().toString().contains("(")) {
+                && btnApplyAll.getText().toString().contains("(") || btnRemoveAll != null && btnRemoveAll.getText().toString() != null
+                && btnRemoveAll.getText().toString().contains("(")) {
             String text = btnApplyAll.getText().toString();
             text = text.substring(0, text.indexOf("("));
+            String text1 = btnRemoveAll.getText().toString();
+            text1 = text1.substring(0, text1.indexOf("("));
 
             btnApplyAll.setText(text);
+            btnRemoveAll.setText(text1);
         }
         btnApplyAll.setText(btnApplyAll.getText().toString() + "("
                 + listOfCheckBoxes.size() + ")");
 
+        btnRemoveAll.setText(btnRemoveAll.getText().toString() + "("
+                + listOfCheckBoxes.size() + ")");
         jobboardact.setUnSetBottomBar(listOfCheckBoxes);
     }
 
