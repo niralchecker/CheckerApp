@@ -1184,97 +1184,6 @@
                     android:layout_marginTop="15dp"
                     android:background="#B3B3B3" />
             </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/popup_layout"
-                android:layout_width="168dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/side_menu_layout"
-                android:background="#cd101010"
-                android:visibility="gone">
-
-                <View
-                    android:id="@+id/top_red_bar"
-                    android:layout_width="168dp"
-                    android:layout_height="3dp"
-                    android:layout_alignParentTop="true"
-                    android:background="#990000" />
-
-                <ImageView
-                    android:id="@+id/btn_briefing"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:src="@drawable/sm_briefing" />
-
-                <ImageView
-                    android:id="@+id/btn_calendar"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_toLeftOf="@+id/btn_briefing"
-                    android:src="@drawable/sm_add_calendar" />
-
-                <ImageView
-                    android:id="@+id/btn_alt_order"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_toLeftOf="@+id/btn_calendar"
-                    android:src="@drawable/sm_change_date" />
-
-                <ImageView
-                    android:id="@+id/btn_alt_branch"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_toLeftOf="@+id/btn_alt_order"
-                    android:src="@drawable/sm_change_branch" />
-
-                <ImageView
-                    android:id="@+id/btn_preview"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_toLeftOf="@+id/btn_alt_branch"
-                    android:src="@drawable/imgpreview" />
-            </RelativeLayout>
-
-            <ImageView
-                android:id="@+id/imgerr"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="1dp"
-                android:src="@drawable/alarm"
-                android:visibility="gone" />
-
-            <ImageView
-                android:id="@+id/vreturned"
-                android:layout_width="25dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="1dp"
-                android:src="@drawable/returned"
-                android:visibility="gone" />
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
@@ -1339,13 +1248,12 @@
                         android:background="@drawable/btn_bg_radius_6"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:text="Apply"
                         android:tag="Apply"
+                        android:text="Apply"
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
-                        app:layout_constraintBottom_toBottomOf="parent" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout

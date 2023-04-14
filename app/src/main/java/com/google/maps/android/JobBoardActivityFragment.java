@@ -395,7 +395,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 if (listOFOrders != null && listOFOrders.size() > 0) {
-                    for (int i = 0; i < listOFOrders.size(); i++){
+                    for (int i = 0; i < listOFOrders.size(); i++) {
                         ((Job) listOFOrders.get(i)).getM().setIcon(BitmapDescriptorFactory
                                 .fromResource(R.drawable.orangepin));
                     }
@@ -1706,9 +1706,13 @@ public class JobBoardActivityFragment extends FragmentActivity {
                                     .getString(
                                             R.string.s_item_column_0_line_804_file_88),
                             Toast.LENGTH_SHORT).show();
+                    try {
+                        arg0.setIcon(BitmapDescriptorFactory
+                                .fromResource(R.drawable.turqpin));
+                    } catch (Exception e) {
 
-                    arg0.setIcon(BitmapDescriptorFactory
-                            .fromResource(R.drawable.turqpin));
+                    }
+
                     thiItem.setoaID("1");
                     thiItem.setApplicationComment(comment);
                     if (result.contains("1</auto_approve_flag>")) {
