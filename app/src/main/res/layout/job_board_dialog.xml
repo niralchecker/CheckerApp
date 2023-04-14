@@ -487,7 +487,7 @@
                         android:layout_marginBottom="15dp">
 
                         <Spinner
-                            android:id="@+id/altdates"
+                            android:id="@+id/altdates_"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
@@ -499,7 +499,7 @@
                             android:id="@+id/lang_dividing_line_kink"
                             android:layout_width="10dp"
                             android:layout_height="10dp"
-                            android:layout_alignBottom="@+id/altdates"
+                            android:layout_alignBottom="@+id/altdates_"
                             android:layout_alignParentRight="true"
                             android:src="@drawable/kink" />
 
@@ -582,17 +582,18 @@
                     android:layout_toEndOf="@id/chkBox"
                     android:text="26.05.2021"
                     android:textColor="#AEAEAE"
+                    android:visibility="invisible"
                     android:textSize="14sp"
                     app:fontFamily="@font/roboto_regular" />
 
-                <!--            <TextView-->
-                <!--                android:id="@+id/Dates"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_below="@+id/RegionName"-->
-                <!--                android:layout_toRightOf="@+id/AddressT"-->
-                <!--                android:textColor="#cdcdcd"-->
-                <!--                android:textSize="13dp" />-->
+                <Spinner
+                    android:id="@+id/altdates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_toEndOf="@id/chkBox"
+                    android:background="@color/transparent"
+                    android:drawSelectorOnTop="true" />
 
                 <View
                     android:id="@+id/viewDate"
@@ -1139,7 +1140,7 @@
                         <!--                        app:fontFamily="@font/roboto_bold" />-->
 
                         <Button
-                            android:id="@+id/btnApply"
+                            android:id="@+id/btn_show_apply_d"
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:layout_margin="10dp"
@@ -1242,14 +1243,14 @@
                     android:layout_weight="1">
 
                     <Button
-                        android:id="@+id/dialog_save"
+                        android:id="@+id/btnApply"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/btn_bg_radius_6"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:tag="Apply"
-                        android:text="Apply"
+                        android:text="@string/s_item_column_0_line_254_file_137"
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
