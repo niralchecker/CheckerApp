@@ -211,6 +211,9 @@ public class JobBoardActivityFragment extends FragmentActivity {
     CheckBox checkbox_today, checkbox_next_day;
     TextView s_date, e_date, tv_clients;
 
+    Dialog dialog = null;
+    private Spinner altSpinner;
+
     public static void setJobBardCallback(jobBoardCertsListener dateCallback) {
         JobBoardActivityFragment.jobboardListener = dateCallback;
     }
@@ -395,14 +398,12 @@ public class JobBoardActivityFragment extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 if (listOFOrders != null && listOFOrders.size() > 0) {
-                    for (int i = 0; i < listOFOrders.size(); i++) {
-                        ((Job) listOFOrders.get(i)).getM().setIcon(BitmapDescriptorFactory
-                                .fromResource(R.drawable.orangepin));
-                    }
-
-//                    refresh_submit(true);
+//                    for (int i = 0; i < listOFOrders.size(); i++) {
+//                        ((Job) listOFOrders.get(i)).getM().setIcon(BitmapDescriptorFactory
+//                                .fromResource(R.drawable.orangepin));
+//                    }
+                    openDialog(null, null, -2);
                     doEnableDisableMapListButtons();
-
                 }
             }
         });
@@ -907,7 +908,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 doEnableDisableMapListButtons();
-
             }
 
         });
@@ -1811,6 +1811,9 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
                     arg0.setIcon(BitmapDescriptorFactory
                             .fromResource(R.drawable.orangepin));
+                    thiItem.setoaID("1");
+                    thiItem.setApplicationComment(comment);
+
                     if (bulkApply == true && listOFOrders != null
                             && listOFOrders.size() > 0)
                         listOFOrders.remove(0);
@@ -1825,6 +1828,7 @@ public class JobBoardActivityFragment extends FragmentActivity {
                                 ((Job) listOFOrders.get(0)).getM(),
                                 ((Job) listOFOrders.get(0)), true);
                     }
+
 
                 } else {
                     Toast.makeText(JobBoardActivityFragment.this,
@@ -2388,9 +2392,6 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
     }
 
-    Dialog dialog = null;
-    private Spinner altSpinner;
-
     public void openDialog(final Job thiItem, final Marker arg0, int type) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -2451,7 +2452,8 @@ public class JobBoardActivityFragment extends FragmentActivity {
         btn_show_apply_d = dialog.findViewById(R.id.btn_show_apply_d);
         final EditText txtComment = (EditText) dialog
                 .findViewById(R.id.txtComment);
-        if (thiItem == null) {
+
+        if (thiItem == null && type == -1) {
             layout_apply_msg.setVisibility(View.VISIBLE);
             cardView.setVisibility(View.GONE);
 //            topbar.setBackgroundColor(Color.parseColor("#f18931"));
@@ -2485,6 +2487,18 @@ public class JobBoardActivityFragment extends FragmentActivity {
 //                    RelativeLayout.GONE);
 //            dialog.findViewById(R.id.altlayout).setVisibility(
 //                    RelativeLayout.GONE);
+        } else if (thiItem == null && type == -2) {
+            layout_apply_msg.setVisibility(View.VISIBLE);
+            cardView.setVisibility(View.GONE);
+            dialog.findViewById(R.id.btnApply).setBackgroundColor(
+                    Color.parseColor("#a7a9ab"));
+            ((TextView) dialog.findViewById(R.id.btnApply))
+                    .setText(JobBoardActivityFragment.this
+                            .getResources()
+                            .getString(
+                                    R.string.s_item_column_0_line_145_file_223));
+            ((TextView) dialog.findViewById(R.id.btnApply))
+                    .setTag("Remove");
         } else {
 
             altSpinner = (Spinner) dialog.findViewById(R.id.altdates);
@@ -2681,8 +2695,16 @@ public class JobBoardActivityFragment extends FragmentActivity {
                     }
                     refresh_submit(true);
                 } else {
-                    remove(txtComment.getText().toString() + " ",
-                            thiItem.getOrderID(), dialog, arg0, thiItem, false);
+                    if (thiItem == null) {
+                        remove(txtComment.getText().toString(),
+                                ((Job) listOFOrders.get(0)).getOrderID(),
+                                dialog, ((Job) listOFOrders.get(0)).getM(),
+                                ((Job) listOFOrders.get(0)), true);
+                    } else {
+                        remove(txtComment.getText().toString() + " ",
+                                thiItem.getOrderID(), dialog, arg0, thiItem, false);
+                    }
+
                     refresh_submit(true);
 
                 }
