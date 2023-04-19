@@ -73,6 +73,8 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -181,8 +183,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class JobListActivity extends Activity implements OnClickListener,
         BranchTVListener, GoogleApiClient.ConnectionCallbacks,
@@ -288,17 +292,22 @@ public class JobListActivity extends Activity implements OnClickListener,
     public int msgId;
     private String groupedNumber;
     private static jobBoardCertsListener certCallBack;
-
     private boolean isBriefing;
-
     private int jobListItemId;
-//    private int jobStartItemId;
-
     public static boolean isFromWatch;
-
     private int selectJobOderId;
-
     TextView tv_applied_no;
+
+    RelativeLayout layout_job_list;
+
+    // NEW DASHBOARD
+    ConstraintLayout layout_NewDashboardScreen;
+    TextView tv_waiting_acceptance, tv_waiting_implementation, tv_CAPI_assigned, tv_CAPI_inProgress, tv_CAPI_returned, tv_checker_passed, tv_checker_toBePassed;
+    String capi_assigned_count, capi_status_inProgress, capi_status_returned, my_jobs_accept, my_jobs_implement;
+    CardView cardView_CAPI, cardView_MyJobs;
+    ArrayList<orderListItem> jobs_CAPI = new ArrayList<orderListItem>();
+
+    String select_jobs = "MY_JOBS";
 
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
@@ -1848,6 +1857,21 @@ public class JobListActivity extends Activity implements OnClickListener,
             setContentView(R.layout.job_list);
 
 
+        layout_NewDashboardScreen = findViewById(R.id.layout_NewDashboardScreen);
+        layout_job_list = findViewById(R.id.layout_job_list);
+        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
+
+
+        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
+        layout_job_list.setVisibility(View.GONE);
+
+        if (layout_NewDashboardScreen.getVisibility() == View.VISIBLE) {
+            toolbarTitle.setText("Open Jobs");
+        } else {
+            layout_job_list.setVisibility(View.VISIBLE);
+            layout_NewDashboardScreen.setVisibility(View.GONE);
+        }
+
         mFilter = "scheduled";
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
@@ -2195,11 +2219,8 @@ public class JobListActivity extends Activity implements OnClickListener,
         tabFour.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
                 tabFour.getTextSize()));
 
-        toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
-
         loadViews();
 
-        ManageTabs(2);
 
         // getRQSLocation loc = new getRQSLocation(JobListActivity.this);
         // loc.execute();
@@ -2557,6 +2578,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         tv_applied_no = findViewById(R.id.tv_applied_no);
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
 
+        initViewNewDashBoard();
     }
 
     protected int getMinute(String start) {
@@ -4796,7 +4818,46 @@ public class JobListActivity extends Activity implements OnClickListener,
                 for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
 
                     joborders.add(new orderListItem(jobordersss.get(i), null));
+                    Log.e("name", joborders.get(i).orderItem.getClientName());
                 }
+
+                List<orderListItem> filtered_status_my_job_accept = joborders.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("Assigned"))
+                        .collect(Collectors.toList());
+                my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
+
+                List<orderListItem> filtered_status_my_jobs_implement = joborders.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
+                        .collect(Collectors.toList());
+                my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
+
+
+                List<orderListItem> filtered = joborders.stream()
+                        .filter(string -> string.orderItem.getOrderID().contains("-"))
+                        .collect(Collectors.toList());
+                Log.e("filtered", filtered + "  " + filtered.size());
+
+                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                    Log.e("filtered_list", filtered.get(i).orderItem.getStatusName());
+                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+                }
+                List<orderListItem> filtered_status_assigned = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("Assigned"))
+                        .collect(Collectors.toList());
+                capi_assigned_count = String.valueOf(filtered_status_assigned.size());
+
+                List<orderListItem> filtered_status_inProgress = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
+                        .collect(Collectors.toList());
+                capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
+                List<orderListItem> filtered_status_completed = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
+                        .collect(Collectors.toList());
+                capi_status_returned = String.valueOf(filtered_status_completed.size());
+
+                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
+                Log.e("joborders_activity", String.valueOf(joborders.size()));
+                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
                 if (joborders != null) {
                     Orders.setListOrders(jobordersss);
                     Orders.setBranchProps(branchProps);
@@ -4925,186 +4986,158 @@ public class JobListActivity extends Activity implements OnClickListener,
             FilterJobList(CheckerApp.globalFilterVar);
         else {
             try {
-                mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
-                        mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-                        bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
-                        txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        Log.e("position_activity", String.valueOf(position));
+                if (select_jobs == "MY_JOBS") {
+                    mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
+                            mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
+                            bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
+                            txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Log.e("position_activity", String.valueOf(position));
 
 //                      TODO jobListItemId
 
 //                        mAdapter.joblistarray.get(jobListItemId).orderItem.  getOrderID()
-                        jobListItemId = position;
+                            jobListItemId = position;
 
-                        if (mAdapter.joblistarray.get(position).orderItem != null
-                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
-                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
-                            Toast.makeText(JobListActivity.this,
-                                    "You are not allowed to reject jobs.",
-                                    Toast.LENGTH_LONG).show();
+                            if (mAdapter.joblistarray.get(position).orderItem != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
+                                Toast.makeText(JobListActivity.this,
+                                        "You are not allowed to reject jobs.",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            if (mAdapter.joblistarray.get(position).orderItem != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1")
+                                    && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
+
+                                Toast.makeText(JobListActivity.this,
+                                        "You are not allowed to reject this job.",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            Constants.screen_type_dialog = 1;
+                            RefusalReasonDialog dialog = new RefusalReasonDialog(JobListActivity.this);
+                            dialog.show();
+
                         }
-                        if (mAdapter.joblistarray.get(position).orderItem != null
-                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
-                                && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1")
-                                && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
-
-                            Toast.makeText(JobListActivity.this,
-                                    "You are not allowed to reject this job.",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                        Constants.screen_type_dialog = 1;
-                        RefusalReasonDialog dialog = new RefusalReasonDialog(JobListActivity.this);
-                        dialog.show();
-
-                    }
-                }, new JobItemAdapter.onJobStartClickLister() {
-                    @Override
-                    public void onJobStartClick(int position, String status) {
+                    }, new JobItemAdapter.onJobStartClickLister() {
+                        @Override
+                        public void onJobStartClick(int position, String status) {
 
 //                        TODO jobStartItemId
 
-                        jobListItemId = position;
-                        isJobselected = true;
-                        selectJobOderId = Integer.parseInt(mAdapter.joblistarray.get(position).orderItem.getOrderID());
-                        if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
-                            Log.e("Begin_Survey", "true");
-                            if (isBriefing == true) {
-                                isBriefing = false;
+                            jobListItemId = position;
+                            isJobselected = true;
+                            selectJobOderId = Integer.parseInt(mAdapter.joblistarray.get(position).orderItem.getOrderID());
+                            if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
+                                Log.e("Begin_Survey", "true");
+                                if (isBriefing == true) {
+                                    isBriefing = false;
 //                                showBriefing();
-                            } else {
+                                } else {
+                                    SplashScreen.addLog(new BasicLog(
+                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+
+                                    startLocationCheckerAdapter();
+                                }
+                            } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
+                                Log.e("Continue_survey", "true");
                                 SplashScreen.addLog(new BasicLog(
                                         myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
                                         myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
 
-                                startLocationCheckerAdapter();
-                            }
-                        } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
-                            Log.e("Continue_survey", "true");
-                            SplashScreen.addLog(new BasicLog(
-                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+                                if (Settings.Secure.getString(
+                                        JobListActivity.this.getContentResolver(),
+                                        Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+                                    MockGPSALERT();
+                                    return;
+                                }
 
-                            if (Settings.Secure.getString(
-                                    JobListActivity.this.getContentResolver(),
-                                    Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
-                                MockGPSALERT();
-                                return;
+                                BeginReview(false);
                             }
 
-                            BeginReview(false);
                         }
+                    });
 
-//                        if (mAdapter.joblistarray.get(position).orderItem.getOrderID().contains("-")) {
-//                            if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("survey")) {
-//
-//                                if (mAdapter.joblistarray.get(position).surveyItem != null && mAdapter.joblistarray.get(position).surveyItem.isAllocationReached()) {
-//                                    AlertDialog.Builder builder = new AlertDialog.Builder(
-//                                            JobListActivity.this);
-//                                    builder.setMessage(
-//                                                    getResources()
-//                                                            .getString(
-//                                                                    R.string.questionnaire_open_survey_alert))
-//                                            .setTitle(
-//                                                    getResources().getString(
-//                                                            R.string._alert_title))
-//                                            .setCancelable(false)
-//                                            .setPositiveButton(
-//                                                    getResources().getString(
-//                                                            R.string.button_ok),
-//                                                    new DialogInterface.OnClickListener() {
-//                                                        @Override
-//                                                        public void onClick(
-//                                                                DialogInterface dialog,
-//                                                                int id) {
-//                                                            dialog.dismiss();
-//                                                            finish();
-//                                                        }
-//                                                    });
-//                                    AlertDialog alert = builder.create();
-//                                    alert.show();
-//                                } else {
-//                                    SplashScreen.addLog(new BasicLog(
-//                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-//                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
-//
-//                                    startLocationChecker();
-//                                }
-//
-//                            } else {
-//                                SplashScreen.addLog(new BasicLog(
-//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
-//
-//                                startLocationChecker();
-//                            }
-//                        }
-//
-//                        if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Scheduled") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("cert")) {
-//                            if (isBriefing == true) {
-//                                isBriefing = false;
-////                                showBriefing();
-//                            } else {
-//                                SplashScreen.addLog(new BasicLog(
-//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
-//
-//                                startLocationChecker();
-//                            }
-//
-//                        } else if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Completed") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("in progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("In progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("archived")) {
-//                            SplashScreen.addLog(new BasicLog(
-//                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-//                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
-//
-//                            if (Settings.Secure.getString(
-//                                    JobListActivity.this.getContentResolver(),
-//                                    Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
-//                                MockGPSALERT();
-//                                return;
-//                            }
-//
-//                            BeginReview(false);
-//                        }
-//                        if (mAdapter.joblistarray.get(position).orderItem.getOrderID().contains("-")) {
-//                            Intent intent = new Intent(getApplicationContext(),
-//                                    QuestionnaireActivity.class);
-//                            intent.putExtra("OrderID", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
-//                            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
-//                            intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getSetID());
-//
-//                            if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Scheduled") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("cert"))
-//                                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-//                            else
-////                                startActivity(intent);
-//                                startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
-//                        } else {
-//                            Intent intent = new Intent(getApplicationContext(),
-//                                    QuestionnaireActivity.class);
-//                            if (mAdapter.joblistarray.get(jobListItemId).orderItem == null)
-//                                setOrder();
-//                            intent.putExtra("OrderID", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
-//                            intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
-//                            intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getSetID());
-//                            if (mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Completed") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("in progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("In progress") || mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("archived"))
-//                                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
-//                            else
-////                                startActivity(intent);
-//                                startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
-//                        }
+                } else {
+                    Log.e("CAPI_JOBS", "true");
+                    //TODO "CAPI_JOBS"
+                    mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
+                            bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
+                            txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Log.e("position_activity_CAPI_JOBS", String.valueOf(position));
 
+                            jobListItemId = position;
 
-                    }
-                });
+                            if (mAdapter.joblistarray.get(position).orderItem != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
+                                Toast.makeText(JobListActivity.this,
+                                        "You are not allowed to reject jobs.",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            if (mAdapter.joblistarray.get(position).orderItem != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
+                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1")
+                                    && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
+
+                                Toast.makeText(JobListActivity.this,
+                                        "You are not allowed to reject this job.",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            Constants.screen_type_dialog = 1;
+                            RefusalReasonDialog dialog = new RefusalReasonDialog(JobListActivity.this);
+                            dialog.show();
+                        }
+                    }, new JobItemAdapter.onJobStartClickLister() {
+                        @Override
+                        public void onJobStartClick(int position, String status) {
+
+                            jobListItemId = position;
+                            isJobselected = true;
+                            selectJobOderId = Integer.parseInt(mAdapter.joblistarray.get(position).orderItem.getOrderID());
+                            if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
+                                Log.e("Begin_Survey_CAPI_JOBS", "true");
+                                if (isBriefing == true) {
+                                    isBriefing = false;
+//                                showBriefing();
+                                } else {
+                                    SplashScreen.addLog(new BasicLog(
+                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+
+                                    startLocationCheckerAdapter();
+                                }
+                            } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
+                                Log.e("Continue_survey_CAPI_JOBS", "true");
+                                SplashScreen.addLog(new BasicLog(
+                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+
+                                if (Settings.Secure.getString(
+                                        JobListActivity.this.getContentResolver(),
+                                        Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+                                    MockGPSALERT();
+                                    return;
+                                }
+
+                                BeginReview(false);
+                            }
+                        }
+                    });
+                }
+                Log.e("select_jobs", select_jobs);
+
                 mAdapter.setBranchCallback(this);
                 mAdapter.setDateCallback(this);
                 mAdapter.doFilter(mFilter, JobListActivity.this, true);
                 updateFiler(null);
                 jobItemList.setAdapter(mAdapter);
-                Log.e("joborders_activity", String.valueOf(joborders.size()));
 
-                Constants.orderList = joborders;
             } catch (Exception ex) {
                 int i = 0;
                 i++;
@@ -5530,13 +5563,22 @@ public class JobListActivity extends Activity implements OnClickListener,
                 filterString += ", " + fData.date1 + "-" + fData.date3;
         }
 
-        joborders = getFilterArray(fData);
+
+        if (select_jobs == "MY_JOBS") {
+            joborders = getFilterArray(fData);
+            mAdapter = new JobItemAdapter(JobListActivity.this, joborders, mFilter,
+                    bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
+                    txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
+                    ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
+        } else {
+            jobs_CAPI = getFilterArray(fData);
+            mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter,
+                    bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
+                    txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
+                    ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
+        }
 
 
-        mAdapter = new JobItemAdapter(JobListActivity.this, joborders, mFilter,
-                bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
-                txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
-                ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
         mAdapter.setBranchCallback(this);
         updateFiler(filterString);
         try {
@@ -5911,21 +5953,41 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // setSurveyList();
                 if (CheckerApp.globalFilterVar != null) {
                     //updateFiler(null);
-                    joborders = getFilterArray(CheckerApp.globalFilterVar);
+                    if (select_jobs.equals("MY_JOBS"))
+                        joborders = getFilterArray(CheckerApp.globalFilterVar);
+                    else jobs_CAPI = getFilterArray(CheckerApp.globalFilterVar);
                 } else updateFiler(null);
                 if (mAdapter == null) {
-                    mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
-                            mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
-                            bimgtabThree, bimgtabFour, txttabSync, txttabOne,
-                            txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
-                            ltabThree, ltabFour, null, null);
+                    if (select_jobs.equals("MY_JOBS")) {
+                        mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
+                                mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
+                                bimgtabThree, bimgtabFour, txttabSync, txttabOne,
+                                txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
+                                ltabThree, ltabFour, null, null);
+                    } else {
+                        mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI,
+                                mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
+                                bimgtabThree, bimgtabFour, txttabSync, txttabOne,
+                                txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
+                                ltabThree, ltabFour, null, null);
+                    }
+
                     mAdapter.setBranchCallback(this);
                 } else {
-                    mAdapter.mainSetter(JobListActivity.this, joborders, mFilter,
-                            bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-                            bimgtabFour, txttabSync, txttabOne, txttabTwo,
-                            txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
-                            ltabFour);
+                    if (select_jobs == "MY_JOBS") {
+                        mAdapter.mainSetter(JobListActivity.this, joborders, mFilter,
+                                bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
+                                bimgtabFour, txttabSync, txttabOne, txttabTwo,
+                                txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
+                                ltabFour);
+                    } else {
+                        mAdapter.mainSetter(JobListActivity.this, jobs_CAPI, mFilter,
+                                bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
+                                bimgtabFour, txttabSync, txttabOne, txttabTwo,
+                                txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
+                                ltabFour);
+                    }
+
                 }
 
 
@@ -6392,6 +6454,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                 getResources().getString(R.string.press_back_again),
                 Toast.LENGTH_LONG).show();
         ExitFromJobList();
+        layout_job_list.setVisibility(View.GONE);
+        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
     }
 
     public class isAliveTask extends AsyncTask<Void, Integer, String> {
@@ -9808,5 +9872,44 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
     }
 
+    // NEW DASHBOARD
+    private void initViewNewDashBoard() {
+        tv_waiting_acceptance = findViewById(R.id.tv_waiting_acceptance);
+        tv_waiting_implementation = findViewById(R.id.tv_waiting_implementation);
+        tv_CAPI_assigned = findViewById(R.id.tv_CAPI_assigned);
+        tv_CAPI_inProgress = findViewById(R.id.tv_CAPI_inProgress);
+        tv_CAPI_returned = findViewById(R.id.tv_CAPI_returned);
+        tv_checker_passed = findViewById(R.id.tv_checker_passed);
+        tv_checker_toBePassed = findViewById(R.id.tv_checker_toBePassed);
+
+        tv_CAPI_assigned.setText(capi_assigned_count);
+        tv_CAPI_inProgress.setText(capi_status_inProgress);
+        tv_CAPI_returned.setText(capi_status_returned);
+        tv_waiting_acceptance.setText(my_jobs_accept);
+        tv_waiting_implementation.setText(my_jobs_implement);
+        cardView_CAPI = findViewById(R.id.cardView_CAPI);
+        cardView_MyJobs = findViewById(R.id.cardView_MyJobs);
+
+        cardView_CAPI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                select_jobs = "CAPI_JOBS";
+                ManageTabs(1);
+                layout_job_list.setVisibility(View.VISIBLE);
+                layout_NewDashboardScreen.setVisibility(View.GONE);
+                ltabTwo.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        cardView_MyJobs.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                select_jobs = "MY_JOBS";
+                ManageTabs(2);
+                layout_job_list.setVisibility(View.VISIBLE);
+                layout_NewDashboardScreen.setVisibility(View.GONE);
+            }
+        });
+    }
 
 }

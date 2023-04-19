@@ -57,7 +57,8 @@
         android:windowSoftInputMode="stateHidden">
         <activity
             android:name=".NewDashboardScreenActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ShowJobInMapViewActivity"
             android:exported="false"

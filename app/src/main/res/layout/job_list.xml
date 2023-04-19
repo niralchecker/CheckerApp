@@ -328,706 +328,1252 @@
             android:gravity="center_horizontal" />
     </LinearLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_show_jobs_counts"
+    <!-- JOB LIST VIEW START -->
+    <RelativeLayout
+        android:id="@+id/layout_job_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cl_top"
-        android:layout_marginTop="-12dp"
-        android:background="@drawable/bg_rounded_light_blue15"
-        android:backgroundTint="#88C8F4"
-        android:padding="10dp"
-        android:weightSum="2">
+        android:visibility="visible"
+        android:layout_marginTop="-12dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:text="155"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="Available open jobs"
-                android:textColor="#ffffff" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_applied_no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                tools:text="2"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="Applied"
-                android:textColor="#ffffff" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <View
-        android:id="@+id/layout_tab_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="3px"
-        android:layout_below="@+id/ll_show_jobs_counts"
-        android:background="@drawable/bottom_line" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/clBottom"
-        android:layout_below="@+id/layout_tab_bottom"
-        android:background="@drawable/bg_img_job_list">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_list_view"
+            android:id="@+id/ll_show_jobs_counts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_light_blue15"
+            android:backgroundTint="#88C8F4"
+            android:padding="10dp"
+            android:weightSum="2">
 
-            <ImageView
-                android:id="@+id/errorbtn"
-                android:layout_width="0px"
-                android:layout_height="0px"
-                android:src="@drawable/assigned"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RelativeLayout
-                android:id="@+id/layout_filter"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#787878"
-                android:visibility="gone"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/txtfilter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@android:color/white"
-                    android:textSize="12dp" />
-
-                <ImageView
-                    android:id="@+id/crossbtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:src="@drawable/knob_cancel"
-                    tools:ignore="DuplicateIds" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_attach_err"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#b2cb39"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/layout_filter">
-
-                <ImageView
-                    android:id="@+id/crossbtn"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:src="@drawable/exclamation" />
-
-                <TextView
-                    android:id="@+id/txterr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/crossbtn"
-                    android:text="@string/attach_err_job_list"
-                    android:textColor="@android:color/white"
-                    android:textSize="12dp" />
-            </RelativeLayout>
-
-            <ListView
-                android:id="@+id/joblist"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:cacheColorHint="#00000000"
-                android:divider="#B3B3B3"
-                android:dividerHeight="0px"
-                android:padding="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/menulayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_attach_err" />
-
-            <RelativeLayout
-                android:id="@+id/menulayout"
-                android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:background="#80000000"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:id="@+id/menubtn"
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="18dp"
-                    android:paddingRight="28dp"
-                    android:text="..."
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="155"
                     android:textColor="#ffffff"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:textSize="20sp" />
 
-            <ListView
-                android:id="@+id/joblistdark"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:cacheColorHint="#00000000"
-                android:divider="#FFFFFF"
-                android:dividerHeight="1px"
-                android:padding="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_filter" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Available open jobs"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:text="Location"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_applied_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    tools:text="2" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Applied"
+                    android:textColor="#ffffff" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:id="@+id/layout_tab_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:layout_below="@+id/ll_show_jobs_counts"
+            android:background="@drawable/bottom_line" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/clBottom"
+            android:layout_below="@+id/layout_tab_bottom"
+            android:background="@drawable/bg_img_job_list">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/errorbtn"
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:src="@drawable/assigned"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#787878"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtfilter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
+
+                    <ImageView
+                        android:id="@+id/crossbtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:src="@drawable/knob_cancel"
+                        tools:ignore="DuplicateIds" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_attach_err"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#b2cb39"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_filter">
+
+                    <ImageView
+                        android:id="@+id/crossbtn"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:src="@drawable/exclamation" />
+
+                    <TextView
+                        android:id="@+id/txterr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/crossbtn"
+                        android:text="@string/attach_err_job_list"
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/joblist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:cacheColorHint="#00000000"
+                    android:divider="#B3B3B3"
+                    android:dividerHeight="0px"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/menulayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_attach_err" />
+
+                <RelativeLayout
+                    android:id="@+id/menulayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="#80000000"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/menubtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="18dp"
+                        android:paddingRight="28dp"
+                        android:text="..."
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <ListView
+                    android:id="@+id/joblistdark"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:cacheColorHint="#00000000"
+                    android:divider="#FFFFFF"
+                    android:dividerHeight="1px"
+                    android:padding="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_filter" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:text="Location"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/iv_map_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/iv_map"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/img_map" />
-
-
-    <ImageView
-        android:id="@+id/iv_map"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="35dp"
-        android:src="@drawable/bottom_location" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clBottom"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true">
-
-        <LinearLayout
-            android:id="@+id/layout_tab"
-            android:layout_width="fill_parent"
+        <ImageView
+            android:id="@+id/iv_map_list"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            android:weightSum="104"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_above="@id/iv_map"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/img_map" />
+
+        <ImageView
+            android:id="@+id/iv_map"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="35dp"
+            android:src="@drawable/bottom_location" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clBottom"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:id="@+id/layout_tab"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="104"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/layout_tab_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/img_tab_one"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/bottom_assigned"
+                                android:tag="img_assigned_u" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp">
+
+                                <ImageView
+                                    android:id="@+id/img_tab_one_balloon"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/notification"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:id="@+id/txt_tab_one_balloon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@android:color/white"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <ToggleButton
+                        android:id="@+id/tab_one"
+                        android:layout_width="75dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/tab_back"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/tab_light_gray"
+                        android:textOff="@string/job_list_tab_assigned"
+                        android:textOn="@string/job_list_tab_assigned"
+                        android:textSize="10dp" />
+
+                    <!--                <ToggleButton-->
+                    <!--                    android:id="@+id/tab_one_bottom"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="5px"-->
+                    <!--                    android:background="#ffffff"-->
+                    <!--                    android:gravity="center_horizontal"-->
+                    <!--                    android:textOff=""-->
+                    <!--                    android:textOn="" />-->
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_tab_sync_divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/tab_line"
+                        android:gravity="center_horizontal" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_tab_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/img_tab_two"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/bottom_scheduled"
+                                android:tag="img_scheduled_u" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp">
+
+                                <ImageView
+                                    android:id="@+id/img_tab_two_balloon"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/notification"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:id="@+id/txt_tab_two_balloon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <ToggleButton
+                        android:id="@+id/tab_two"
+                        android:layout_width="75dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/tab_back"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/tab_text_color"
+                        android:textOff="@string/job_list_tab_scheduled"
+                        android:textOn="@string/job_list_tab_scheduled"
+                        android:textSize="10dp" />
+
+                    <!--                <ToggleButton-->
+                    <!--                    android:id="@+id/tab_two_bottom"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="5px"-->
+                    <!--                    android:background="#ffffff"-->
+                    <!--                    android:gravity="center_horizontal"-->
+                    <!--                    android:textOff=""-->
+                    <!--                    android:textOn="" />-->
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_tab_one_divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/tab_line"
+                        android:gravity="center_horizontal" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_tab_two1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/img_tab_two1"
+                                android:layout_width="40dp"
+                                android:layout_height="39dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/img_scheduled_u"
+                                android:tag="img_scheduled_u" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp">
+
+                                <ImageView
+                                    android:id="@+id/img_tab_two_balloon1"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/notification"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:id="@+id/txt_tab_two_balloon1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <ToggleButton
+                        android:id="@+id/tab_two1"
+                        android:layout_width="75dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/tab_back"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/tab_text_color"
+                        android:textOff="@string/job_list_tab_scheduled"
+                        android:textOn="@string/job_list_tab_scheduled"
+                        android:textSize="10dp" />
+
+                    <!--                <ToggleButton-->
+                    <!--                    android:id="@+id/tab_two_bottom1"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="5px"-->
+                    <!--                    android:background="#ffffff"-->
+                    <!--                    android:gravity="center_horizontal"-->
+                    <!--                    android:textOff=""-->
+                    <!--                    android:textOn="" />-->
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_tab_two_divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/tab_line"
+                        android:gravity="center_horizontal" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_tab_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/img_tab_three"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/bottom_in_progress"
+                                android:tag="img_in_progress_u" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp">
+
+                                <ImageView
+                                    android:id="@+id/img_tab_three_balloon"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/notification"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:id="@+id/txt_tab_three_balloon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <ToggleButton
+                        android:id="@+id/tab_three"
+                        android:layout_width="75dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/tab_back"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/tab_text_color"
+                        android:textOff="@string/job_list_tab_in_progress"
+                        android:textOn="@string/job_list_tab_in_progress"
+                        android:textSize="10dp" />
+
+                    <!--                <ToggleButton-->
+                    <!--                    android:id="@+id/tab_three_bottom"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="5px"-->
+                    <!--                    android:background="#ffffff"-->
+                    <!--                    android:gravity="center_horizontal"-->
+                    <!--                    android:textOff=""-->
+                    <!--                    android:textOn="" />-->
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout_tab_three_divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="1px"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/tab_line"
+                        android:gravity="center_horizontal" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_tab_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/img_tab_four"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/bottom_completed"
+                                android:tag="img_completed_u" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginRight="2dp">
+
+                                <ImageView
+                                    android:id="@+id/img_tab_four_balloon"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/notification"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:id="@+id/txt_tab_four_balloon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textColor="@android:color/black"
+                                    android:textSize="10dp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <ToggleButton
+                        android:id="@+id/tab_four"
+                        android:layout_width="75dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/tab_back"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/tab_text_color"
+                        android:textOff="@string/job_list_tab_completed"
+                        android:textOn="@string/job_list_tab_completed"
+                        android:textSize="10dp" />
+
+                    <!--                <ToggleButton-->
+                    <!--                    android:id="@+id/tab_four_bottom"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="5px"-->
+                    <!--                    android:background="#ffffff"-->
+                    <!--                    android:gravity="center_horizontal"-->
+                    <!--                    android:textOff=""-->
+                    <!--                    android:textOn="" />-->
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+    <!-- JOB LIST VIEW END -->
+
+    <!-- NEW DASHBOARD VIEW START -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_NewDashboardScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cl_top"
+        android:layout_marginTop="-12dp"
+        android:background="@drawable/bg_rounded_light_blue15"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/layout_tab_one"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="20"
-                android:background="@android:color/white"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="15dp">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_MyJobs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <RelativeLayout
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
 
-                        <ImageView
-                            android:id="@+id/img_tab_one"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/bottom_assigned"
-                            android:tag="img_assigned_u" />
-
-                        <RelativeLayout
+                        <TextView
+                            android:id="@+id/tv_label_myJob"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginRight="2dp">
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="My Jobs"
+                            android:textColor="#666666"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                            <ImageView
-                                android:id="@+id/img_tab_one_balloon"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/notification"
-                                android:visibility="invisible" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:weightSum="2"
+                            app:layout_constraintStart_toStartOf="@id/tv_label_myJob"
+                            app:layout_constraintTop_toBottomOf="@id/tv_label_myJob">
 
-                            <TextView
-                                android:id="@+id/txt_tab_one_balloon"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@android:color/white"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-                    </RelativeLayout>
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_waiting_acceptance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="7"
+                                    android:textColor="#000000"
+                                    android:textSize="38sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="Waiting for acceptance"
+                                    android:textColor="#7A7A7A" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_waiting_implementation"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="8"
+                                    android:textColor="#BDD829"
+                                    android:textSize="38sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="Waiting for implementation"
+                                    android:textColor="#7A7A7A" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_CAPI"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardView_MyJobs">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
+
+                        <TextView
+                            android:id="@+id/tv_label_CAPI"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="CAPI"
+                            android:textColor="#666666"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:weightSum="3"
+                            app:layout_constraintStart_toStartOf="@id/tv_label_CAPI"
+                            app:layout_constraintTop_toBottomOf="@id/tv_label_CAPI">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_CAPI_assigned"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="15"
+                                    android:textColor="#007BFF"
+                                    android:textSize="38sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="Assigned"
+                                    android:textColor="#7A7A7A" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_CAPI_inProgress"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="7"
+                                    android:textColor="#000000"
+                                    android:textSize="38sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="In Progress"
+                                    android:textColor="#7A7A7A" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_CAPI_returned"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5"
+                                    android:textColor="#BDD829"
+                                    android:textSize="38sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="Returned"
+                                    android:textColor="#7A7A7A" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/ll_pos_open_jobs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2"
+                    app:layout_constraintTop_toBottomOf="@id/cardView_CAPI">
+
+                    <LinearLayout
+                        android:id="@+id/ll_pos"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="5dp"
+                            app:cardUseCompatPadding="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <TextView
+                                    android:id="@+id/tv_pos"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="PoS"
+                                    android:textColor="#666666"
+                                    android:textSize="18sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/img_pos"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/tv_pos" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_open_jobs"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="5dp"
+                            app:cardUseCompatPadding="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <TextView
+                                    android:id="@+id/tv_open_jobs"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="Open Jobs"
+                                    android:textColor="#666666"
+                                    android:textSize="18sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@drawable/img_open_job_2"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/tv_open_jobs" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
-                <ToggleButton
-                    android:id="@+id/tab_one"
-                    android:layout_width="75dp"
-                    android:layout_height="34dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/tab_back"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/tab_light_gray"
-                    android:textOff="@string/job_list_tab_assigned"
-                    android:textOn="@string/job_list_tab_assigned"
-                    android:textSize="10dp" />
+                <LinearLayout
+                    android:id="@+id/ll_survey_refund"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2"
+                    app:layout_constraintTop_toBottomOf="@id/ll_pos_open_jobs">
 
-                <!--                <ToggleButton-->
-                <!--                    android:id="@+id/tab_one_bottom"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="5px"-->
-                <!--                    android:background="#ffffff"-->
-                <!--                    android:gravity="center_horizontal"-->
-                <!--                    android:textOff=""-->
-                <!--                    android:textOn="" />-->
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_survey_report"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:layout_weight="1">
 
-            <RelativeLayout
-                android:id="@+id/layout_tab_sync_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:visibility="gone">
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="5dp"
+                            app:cardUseCompatPadding="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <TextView
+                                    android:id="@+id/tv_survey_report"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="Survey Report"
+                                    android:textColor="#666666"
+                                    android:textSize="18sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/img_survey_report"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/tv_survey_report" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_refund_report"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="5dp"
+                            app:cardUseCompatPadding="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp">
+
+                                <TextView
+                                    android:id="@+id/tv_refund_report"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="Refund Report"
+                                    android:textColor="#666666"
+                                    android:textSize="18sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:src="@drawable/img_refund_report"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/tv_refund_report" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <View
-                    android:layout_width="1px"
-                    android:layout_height="80dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/tab_line"
-                    android:gravity="center_horizontal" />
-            </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="#80A19F9F"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_survey_refund" />
 
-            <LinearLayout
-                android:id="@+id/layout_tab_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="20"
-                android:background="@android:color/white"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView_checkertificate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
+                    android:layout_marginTop="15dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardView_MyJobs">
 
-                    <RelativeLayout
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp">
 
-                        <ImageView
-                            android:id="@+id/img_tab_two"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/bottom_scheduled"
-                            android:tag="img_scheduled_u" />
-
-                        <RelativeLayout
+                        <TextView
+                            android:id="@+id/tv_checkertificate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginRight="2dp">
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Checkertificate"
+                            android:textColor="#666666"
+                            android:textSize="20sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                            <ImageView
-                                android:id="@+id/img_tab_two_balloon"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/notification"
-                                android:visibility="invisible" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:weightSum="3"
+                            app:layout_constraintStart_toStartOf="@id/tv_checkertificate"
+                            app:layout_constraintTop_toBottomOf="@id/tv_checkertificate">
 
-                            <TextView
-                                android:id="@+id/txt_tab_two_balloon"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@android:color/black"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-                    </RelativeLayout>
-                </LinearLayout>
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-                <ToggleButton
-                    android:id="@+id/tab_two"
-                    android:layout_width="75dp"
-                    android:layout_height="34dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/tab_back"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/tab_text_color"
-                    android:textOff="@string/job_list_tab_scheduled"
-                    android:textOn="@string/job_list_tab_scheduled"
-                    android:textSize="10dp" />
+                                <TextView
+                                    android:id="@+id/tv_checker_passed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3"
+                                    android:textColor="#7A7A7A"
+                                    android:textSize="38sp" />
 
-                <!--                <ToggleButton-->
-                <!--                    android:id="@+id/tab_two_bottom"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="5px"-->
-                <!--                    android:background="#ffffff"-->
-                <!--                    android:gravity="center_horizontal"-->
-                <!--                    android:textOff=""-->
-                <!--                    android:textOn="" />-->
-            </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="Passed"
+                                    android:textColor="#7A7A7A" />
 
-            <RelativeLayout
-                android:id="@+id/layout_tab_one_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:visibility="gone">
+                            </LinearLayout>
 
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="80dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/tab_line"
-                    android:gravity="center_horizontal" />
-            </RelativeLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/layout_tab_two1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="20"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:visibility="invisible">
+                                <TextView
+                                    android:id="@+id/tv_checker_toBePassed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="1"
+                                    android:textColor="#A8A8A8"
+                                    android:textSize="38sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="To be passed"
+                                    android:textColor="#7A7A7A" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="27dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="70dp"
+                                    android:src="@drawable/img_checkertificate" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/iv_find_jobs"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/img_tab_two1"
-                            android:layout_width="40dp"
-                            android:layout_height="39dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/img_scheduled_u"
-                            android:tag="img_scheduled_u" />
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginRight="2dp">
-
-                            <ImageView
-                                android:id="@+id/img_tab_two_balloon1"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/notification"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:id="@+id/txt_tab_two_balloon1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@android:color/black"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <ToggleButton
-                    android:id="@+id/tab_two1"
-                    android:layout_width="75dp"
-                    android:layout_height="34dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/tab_back"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/tab_text_color"
-                    android:textOff="@string/job_list_tab_scheduled"
-                    android:textOn="@string/job_list_tab_scheduled"
-                    android:textSize="10dp" />
+                    android:src="@drawable/bg_dashborad"
+                    android:visibility="gone" />
 
-                <!--                <ToggleButton-->
-                <!--                    android:id="@+id/tab_two_bottom1"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="5px"-->
-                <!--                    android:background="#ffffff"-->
-                <!--                    android:gravity="center_horizontal"-->
-                <!--                    android:textOff=""-->
-                <!--                    android:textOn="" />-->
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/layout_tab_two_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="80dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/tab_line"
-                    android:gravity="center_horizontal" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_tab_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="20"
-                android:background="@android:color/white"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/img_tab_three"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/bottom_in_progress"
-                            android:tag="img_in_progress_u" />
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginRight="2dp">
-
-                            <ImageView
-                                android:id="@+id/img_tab_three_balloon"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/notification"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:id="@+id/txt_tab_three_balloon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@android:color/black"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <ToggleButton
-                    android:id="@+id/tab_three"
-                    android:layout_width="75dp"
-                    android:layout_height="34dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/tab_back"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/tab_text_color"
-                    android:textOff="@string/job_list_tab_in_progress"
-                    android:textOn="@string/job_list_tab_in_progress"
-                    android:textSize="10dp" />
-
-                <!--                <ToggleButton-->
-                <!--                    android:id="@+id/tab_three_bottom"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="5px"-->
-                <!--                    android:background="#ffffff"-->
-                <!--                    android:gravity="center_horizontal"-->
-                <!--                    android:textOff=""-->
-                <!--                    android:textOn="" />-->
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/layout_tab_three_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="80dp"
-                    android:layout_centerHorizontal="true"
-                    android:background="@drawable/tab_line"
-                    android:gravity="center_horizontal" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_tab_four"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="20"
-                android:background="@android:color/white"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/img_tab_four"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:src="@drawable/bottom_completed"
-                            android:tag="img_completed_u" />
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginRight="2dp">
-
-                            <ImageView
-                                android:id="@+id/img_tab_four_balloon"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/notification"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:id="@+id/txt_tab_four_balloon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@android:color/black"
-                                android:textSize="10dp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <ToggleButton
-                    android:id="@+id/tab_four"
-                    android:layout_width="75dp"
-                    android:layout_height="34dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/tab_back"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/tab_text_color"
-                    android:textOff="@string/job_list_tab_completed"
-                    android:textOn="@string/job_list_tab_completed"
-                    android:textSize="10dp" />
-
-                <!--                <ToggleButton-->
-                <!--                    android:id="@+id/tab_four_bottom"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="5px"-->
-                <!--                    android:background="#ffffff"-->
-                <!--                    android:gravity="center_horizontal"-->
-                <!--                    android:textOff=""-->
-                <!--                    android:textOn="" />-->
-            </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--    ///////-->
+    <!-- NEW DASHBOARD VIEW END -->
 
     <TextView
         android:id="@+id/darktview"

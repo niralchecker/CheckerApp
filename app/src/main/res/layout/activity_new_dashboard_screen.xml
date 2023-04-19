@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_NewDashboardScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -74,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_top">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -97,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:id="@+id/tv_label_myJob"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,7 +109,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -116,50 +117,52 @@
                         app:layout_constraintStart_toStartOf="@id/tv_label_myJob"
                         app:layout_constraintTop_toBottomOf="@id/tv_label_myJob">
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
+                                android:id="@+id/tv_waiting_acceptance"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="7"
                                 android:textColor="#000000"
                                 android:textSize="38sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Waiting for acceptance"
                                 android:textColor="#7A7A7A" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
+                                android:id="@+id/tv_waiting_implementation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="8"
                                 android:textColor="#BDD829"
                                 android:textSize="38sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Waiting for implementation"
                                 android:textColor="#7A7A7A" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -180,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:id="@+id/tv_label_CAPI"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -191,7 +194,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -199,78 +202,81 @@
                         app:layout_constraintStart_toStartOf="@id/tv_label_CAPI"
                         app:layout_constraintTop_toBottomOf="@id/tv_label_CAPI">
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
+                                android:id="@+id/tv_CAPI_assigned"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="15"
                                 android:textColor="#007BFF"
                                 android:textSize="38sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Assigned"
                                 android:textColor="#7A7A7A" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
+                                android:id="@+id/tv_CAPI_inProgress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="7"
                                 android:textColor="#000000"
                                 android:textSize="38sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="In Progress"
                                 android:textColor="#7A7A7A" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
+                                android:id="@+id/tv_CAPI_returned"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="5"
                                 android:textColor="#BDD829"
                                 android:textSize="38sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Returned"
                                 android:textColor="#7A7A7A" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
 
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:id="@+id/ll_pos_open_jobs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -278,7 +284,7 @@
                 android:weightSum="2"
                 app:layout_constraintTop_toBottomOf="@id/cardView_CAPI">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <LinearLayout
                     android:id="@+id/ll_pos"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -297,7 +303,7 @@
                             android:layout_height="wrap_content"
                             android:padding="15dp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:id="@+id/tv_pos"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -308,22 +314,22 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.appcompat.widget.AppCompatImageView
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
+                                android:src="@drawable/img_pos"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_pos"
-                                app:srcCompat="@drawable/img_pos" />
+                                app:layout_constraintTop_toBottomOf="@id/tv_pos" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                </LinearLayout>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <LinearLayout
                     android:id="@+id/ll_open_jobs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -342,7 +348,7 @@
                             android:layout_height="wrap_content"
                             android:padding="15dp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:id="@+id/tv_open_jobs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -353,24 +359,24 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.appcompat.widget.AppCompatImageView
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
+                                android:src="@drawable/img_open_job_2"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_open_jobs"
-                                app:srcCompat="@drawable/img_open_job_2" />
+                                app:layout_constraintTop_toBottomOf="@id/tv_open_jobs" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                </LinearLayout>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:id="@+id/ll_survey_refund"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -378,7 +384,7 @@
                 android:weightSum="2"
                 app:layout_constraintTop_toBottomOf="@id/ll_pos_open_jobs">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <LinearLayout
                     android:id="@+id/ll_survey_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -397,7 +403,7 @@
                             android:layout_height="wrap_content"
                             android:padding="15dp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:id="@+id/tv_survey_report"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -408,22 +414,22 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.appcompat.widget.AppCompatImageView
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
+                                android:src="@drawable/img_survey_report"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_survey_report"
-                                app:srcCompat="@drawable/img_survey_report" />
+                                app:layout_constraintTop_toBottomOf="@id/tv_survey_report" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                </LinearLayout>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <LinearLayout
                     android:id="@+id/ll_refund_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -442,7 +448,7 @@
                             android:layout_height="wrap_content"
                             android:padding="15dp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:id="@+id/tv_refund_report"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -453,22 +459,22 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.appcompat.widget.AppCompatImageView
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
+                                android:src="@drawable/img_refund_report"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_refund_report"
-                                app:srcCompat="@drawable/img_refund_report" />
+                                app:layout_constraintTop_toBottomOf="@id/tv_refund_report" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                </LinearLayout>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -494,7 +500,7 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <TextView
                         android:id="@+id/tv_checkertificate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -505,7 +511,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -513,79 +519,81 @@
                         app:layout_constraintStart_toStartOf="@id/tv_checkertificate"
                         app:layout_constraintTop_toBottomOf="@id/tv_checkertificate">
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
+                                android:id="@+id/tv_checker_passed"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="3"
                                 android:textColor="#7A7A7A"
                                 android:textSize="38sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Passed"
                                 android:textColor="#7A7A7A" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
+                                android:id="@+id/tv_checker_toBePassed"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1"
                                 android:textColor="#A8A8A8"
                                 android:textSize="38sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="To be passed"
                                 android:textColor="#7A7A7A" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
 
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="27dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <androidx.appcompat.widget.AppCompatImageView
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="70dp"
-                                app:srcCompat="@drawable/img_checkertificate" />
+                                android:src="@drawable/img_checkertificate" />
 
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        </LinearLayout>
 
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/iv_find_jobs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:visibility="gone"
-                app:srcCompat="@drawable/bg_dashborad" />
+                android:src="@drawable/bg_dashborad"
+                android:visibility="gone" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
 
     </ScrollView>
 
