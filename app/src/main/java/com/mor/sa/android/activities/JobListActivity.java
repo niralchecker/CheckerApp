@@ -4842,7 +4842,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
                 }
                 List<orderListItem> filtered_status_assigned = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("Assigned"))
+                        .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
                         .collect(Collectors.toList());
                 capi_assigned_count = String.valueOf(filtered_status_assigned.size());
 
