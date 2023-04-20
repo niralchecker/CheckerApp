@@ -731,6 +731,7 @@
     <string name="jd_begin_button_status_scheduled" translatable="false">Scheduled</string>
     <string name="job_list_exit" translatable="false">Exit from job list</string>
     <string name="job_list_archive" translatable="false">Archived Jobs</string>
+    <string name="job_list_home" translatable="false">Home</string>
     <string name="reject_job_resusal_text_alert" translatable="false">Please enter refusal reason</string>
     <string name="job_download_alert" translatable="false">Updated jobs downloading in progress...</string>
     <string name="questionnaire_downlaod_alert" translatable="false">Questionnaires downloading and saving in progress...</string>

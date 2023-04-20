@@ -1088,15 +1088,18 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     public boolean onOptionsItemSelectedHS(int count) {
         switch (count) {
-            case 0:
+            case 0: // Dashboard
+                openDashBoard();
+                break;
+            case 1:
 
                 startDownloadingJobs(false, false);
                 break;
-            case 1:
+            case 2:
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 start_uploading(false);
                 break;
-            case 2:
+            case 3:
                 // open job board
                 // MAPSSSS
                 // Getting status
@@ -1128,7 +1131,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
 
                 break;
-            case 3:
+            case 4:
                 // open refund report
                 isJobselected = true;
                 intent = new Intent(this.getApplicationContext(),
@@ -1136,13 +1139,13 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // comunicator.JobList = null;
                 startActivity(intent);
                 break;
-            case 4:
+            case 5:
                 showLanguageDialog(
                         getResources().getString(
                                 R.string.preffered_questionnaire_language), false);
                 break;
 
-            case 5:
+            case 6:
                 isJobselected = true;
                 intent = new Intent(this.getApplicationContext(),
                         NewSettingsActivity.class);
@@ -1157,7 +1160,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 //                isJobselected = true;
 //                break;
 
-            case 6:
+            case 7:
                 // MAPSSSS
                 // Getting status
                 status = GooglePlayServicesUtil
@@ -1178,15 +1181,15 @@ public class JobListActivity extends Activity implements OnClickListener,
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                 }
                 break;
-            case 7:
+            case 8:
                 load_certificates(null);
                 break;
 
-            case 8:// edit hopper
+            case 9:// edit hopper
                 editShopperInfo();
                 break;
 
-            case 9:// reviews history
+            case 10:// reviews history
                 isJobselected = true;
                 intent = new Intent(JobListActivity.this.getApplicationContext(),
                         CritHistoryReportActivity.class);
@@ -1195,10 +1198,10 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 // historyOfReview();
                 break;
-            case 10:
+            case 11:
                 ExitFromJobList();
                 break;
-            case 11:
+            case 12:
                 openArciveScreen();
                 break;
 
@@ -1515,7 +1518,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         // 9 download in progress
         switch (count) {
 
-            case 0:
+            case 1:
 
                 // open job board
                 // MAPSSSS
@@ -1548,21 +1551,21 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
 
                 break;
-            case 1:
+            case 2:
                 isJobselected = true;
                 intent = new Intent(this.getApplicationContext(),
                         ShopperRefundReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 break;
-            case 2:// shopper info
+            case 3:// shopper info
                 JobFilterDialog dialog = new JobFilterDialog(this);
                 dialog.show();
                 isJobselected = true;
                 // showShopperInfo();
                 break;
 
-            case 3:
+            case 4:
                 // MAPSSSS
                 // Getting status
                 status = GooglePlayServicesUtil
@@ -1588,11 +1591,11 @@ public class JobListActivity extends Activity implements OnClickListener,
             // showShopperInfo();
             // break;
 
-            case 4:// edit hopper
+            case 5:// edit hopper
                 editShopperInfo();
                 break;
 
-            case 5:// reviews history
+            case 6:// reviews history
                 isJobselected = true;
                 intent = new Intent(this.getApplicationContext(),
                         CritHistoryReportActivity.class);
@@ -1601,7 +1604,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 // historyOfReview();
                 break;
-            case 6:// contact using whatsapp
+            case 7:// contact using whatsapp
 
                 try {
 
@@ -1645,21 +1648,21 @@ public class JobListActivity extends Activity implements OnClickListener,
         // 8 upload in progress
         // 9 download in progress
         switch (count) {
-            case 0:
+            case 1:
 
                 startDownloadingJobs(false, false);
                 break;
-            case 1:
+            case 2:
                 start_uploading(false);
                 break;
 
-            case 2:
+            case 3:
                 showLanguageDialog(
                         getResources().getString(
                                 R.string.preffered_questionnaire_language), false);
                 break;
 
-            case 3:
+            case 4:
                 isJobselected = true;
                 Intent intent = new Intent(this.getApplicationContext(),
                         NewSettingsActivity.class);
@@ -1667,14 +1670,14 @@ public class JobListActivity extends Activity implements OnClickListener,
                 startActivity(intent);
                 finish();
                 break;
-            case 4:
+            case 5:
                 // FILTER jobs
                 JobFilterDialog dialog = new JobFilterDialog(this);
                 dialog.show();
                 isJobselected = true;
                 break;
 
-            case 5:
+            case 6:
                 // MAPSSSS
                 // Getting status
                 int status = GooglePlayServicesUtil
@@ -1994,6 +1997,11 @@ public class JobListActivity extends Activity implements OnClickListener,
         synchMenuItems.add(new com.checker.sa.android.data.MenuItem(
                 getString(R.string.start_upload),
                 getString(R.string.start_upload), getIcon("upload_ico")));// 1
+        menuItems
+                .add(new com.checker.sa.android.data.MenuItem(
+                        getString(R.string.job_list_home),
+                        getString(R.string.job_list_home),
+                        getIcon("home")));// dash board
         if (Constants.isQAAllowed)
             menuItems.add(new com.checker.sa.android.data.MenuItem(
                     getString(R.string.questionnaire_send_bug),
@@ -2125,7 +2133,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 .add(new com.checker.sa.android.data.MenuItem(
                         getString(R.string.job_list_archive),
                         getString(R.string.job_list_archive),
-                        getIcon("archive")));// 8
+                        getIcon("archive")));
 
         menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this,
                 menuItems));
@@ -9910,6 +9918,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                 layout_NewDashboardScreen.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void openDashBoard() {
+        layout_job_list.setVisibility(View.GONE);
+        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
+        toolbarTitle.setText("Open Jobs");
     }
 
 }
