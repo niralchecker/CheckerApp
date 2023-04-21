@@ -1453,6 +1453,52 @@ public class JobItemAdapter extends BaseAdapter {
                     } else if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_continue_review_btn_text))) {
                         Constants.accept_txt = "Continue_survey";
                         mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+                    }else if (tvStatusShow.getText().toString()
+                            .equals(con.getString(R.string.jd_begin_btn_text))) {
+                        if (order.getOrderID().contains("-")) {
+                            if (order.getStatusName().equals("survey")) {
+                                Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
+                                        "-", ""));
+                                if (s != null && s.isAllocationReached()) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(con);
+                                    builder.setMessage(
+                                                    con.getResources()
+                                                            .getString(
+                                                                    R.string.questionnaire_open_survey_alert))
+                                            .setTitle(
+                                                    con.getResources().getString(
+                                                            R.string._alert_title))
+                                            .setCancelable(false)
+                                            .setPositiveButton(
+                                                    con.getResources().getString(
+                                                            R.string.button_ok),
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(
+                                                                DialogInterface dialog,
+                                                                int id) {
+                                                            dialog.dismiss();
+//                                                            ((Activity) con).finish();
+                                                        }
+                                                    });
+                                    AlertDialog alert = builder.create();
+                                    alert.show();
+                                } else {
+                                    SplashScreen.addLog(new BasicLog(
+                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                                    ((JobListActivity) con).startLocationCheckerAdapter();
+                                }
+
+                            } else {
+                                SplashScreen.addLog(new BasicLog(
+                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                                ((JobListActivity) con).startLocationCheckerAdapter();
+                            }
+                        }
                     }
 
 
