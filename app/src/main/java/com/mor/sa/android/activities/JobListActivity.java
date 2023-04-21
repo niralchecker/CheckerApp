@@ -209,6 +209,8 @@ public class JobListActivity extends Activity implements OnClickListener,
     private View menuView;
     private ListView menuListView;
     public static ArrayList<orderListItem> joborders;
+    public static List<orderListItem> filtered;
+    public static ArrayList<orderListItem> filtered_other_jobs;
     protected static Activity JobList;
     ArrayList<SubmitQuestionnaireData> sqd;
     Timer timer, downloadjoblistTimer;
@@ -4826,29 +4828,52 @@ public class JobListActivity extends Activity implements OnClickListener,
                 for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
 
                     joborders.add(new orderListItem(jobordersss.get(i), null));
-                    Log.e("name", joborders.get(i).orderItem.getClientName());
+                    Log.e("name", joborders.get(i).orderItem.getStatusName());
                 }
 
-                List<orderListItem> filtered_status_my_job_accept = joborders.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("Assigned"))
-                        .collect(Collectors.toList());
-                my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
-
-                List<orderListItem> filtered_status_my_jobs_implement = joborders.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
-                        .collect(Collectors.toList());
-                my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
-
-
-                List<orderListItem> filtered = joborders.stream()
+                filtered = joborders.stream()
                         .filter(string -> string.orderItem.getOrderID().contains("-"))
                         .collect(Collectors.toList());
-                Log.e("filtered", filtered + "  " + filtered.size());
+//                Log.e("filtered", filtered + "  " + filtered.size());
 
                 for (int i = 0; filtered != null && i < filtered.size(); i++) {
                     Log.e("filtered_list", filtered.get(i).orderItem.getStatusName());
                     jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
                 }
+
+//                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
+//                Log.e("joborders_activity", String.valueOf(joborders.size()));
+//                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
+
+                // Get My jobs excluding CAPI....
+                List<orderListItem> list1 = filtered;
+                List<orderListItem> list2 = joborders;
+
+                List<orderListItem> union = new ArrayList<orderListItem>(list1);
+                union.addAll(list2);
+
+                List<orderListItem> intersection = new ArrayList<orderListItem>(list1);
+                intersection.retainAll(list2);
+                union.removeAll(intersection);
+                // Print the result
+                filtered_other_jobs = new ArrayList<orderListItem>();
+                for (orderListItem n : union) {
+                    Log.e("union", n.orderItem.getStatusName());
+                    filtered_other_jobs.add(new orderListItem(n.orderItem, null));
+                }
+                Log.e("union_size", String.valueOf(filtered_other_jobs.size()));
+
+                //Count jobs for dash board....
+                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned"))
+                        .collect(Collectors.toList());
+                my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
+
+                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
+                        .collect(Collectors.toList());
+                my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
+
                 List<orderListItem> filtered_status_assigned = filtered.stream()
                         .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
                         .collect(Collectors.toList());
@@ -4863,9 +4888,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                         .collect(Collectors.toList());
                 capi_status_returned = String.valueOf(filtered_status_completed.size());
 
-                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
-                Log.e("joborders_activity", String.valueOf(joborders.size()));
-                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
                 if (joborders != null) {
                     Orders.setListOrders(jobordersss);
                     Orders.setBranchProps(branchProps);
@@ -4995,7 +5017,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         else {
             try {
                 if (select_jobs == "MY_JOBS") {
-                    mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
+                    mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs,
                             mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
                             bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
                             txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
@@ -5573,8 +5595,8 @@ public class JobListActivity extends Activity implements OnClickListener,
 
 
         if (select_jobs == "MY_JOBS") {
-            joborders = getFilterArray(fData);
-            mAdapter = new JobItemAdapter(JobListActivity.this, joborders, mFilter,
+            filtered_other_jobs = getFilterArray(fData);
+            mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs, mFilter,
                     bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
                     txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
                     ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
@@ -5962,12 +5984,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                 if (CheckerApp.globalFilterVar != null) {
                     //updateFiler(null);
                     if (select_jobs.equals("MY_JOBS"))
-                        joborders = getFilterArray(CheckerApp.globalFilterVar);
+                        filtered_other_jobs = getFilterArray(CheckerApp.globalFilterVar);
                     else jobs_CAPI = getFilterArray(CheckerApp.globalFilterVar);
                 } else updateFiler(null);
                 if (mAdapter == null) {
                     if (select_jobs.equals("MY_JOBS")) {
-                        mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
+                        mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs,
                                 mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
                                 bimgtabThree, bimgtabFour, txttabSync, txttabOne,
                                 txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
@@ -5983,7 +6005,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     mAdapter.setBranchCallback(this);
                 } else {
                     if (select_jobs == "MY_JOBS") {
-                        mAdapter.mainSetter(JobListActivity.this, joborders, mFilter,
+                        mAdapter.mainSetter(JobListActivity.this, filtered_other_jobs, mFilter,
                                 bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
                                 bimgtabFour, txttabSync, txttabOne, txttabTwo,
                                 txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
