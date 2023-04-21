@@ -6464,6 +6464,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         ExitFromJobList();
         layout_job_list.setVisibility(View.GONE);
         layout_NewDashboardScreen.setVisibility(View.VISIBLE);
+        select_jobs = "";
     }
 
     public class isAliveTask extends AsyncTask<Void, Integer, String> {
@@ -9923,6 +9924,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     private void openDashBoard() {
         layout_job_list.setVisibility(View.GONE);
         layout_NewDashboardScreen.setVisibility(View.VISIBLE);
+        select_jobs = "";
         toolbarTitle.setText("Open Jobs");
     }
 
