@@ -1866,19 +1866,6 @@ public class JobListActivity extends Activity implements OnClickListener,
         layout_job_list = findViewById(R.id.layout_job_list);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
 
-//        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
-//        layout_job_list.setVisibility(View.GONE);
-
-//        if (select_jobs == "MY_JOBS") {
-//            ManageTabs(2);
-//            ltabTwo.setVisibility(View.VISIBLE);
-//        } else {
-//            ManageTabs(1);
-//            ltabTwo.setVisibility(View.INVISIBLE);
-//        }
-//        ManageTabs(2);
-
-        mFilter = "scheduled";
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
         // myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
@@ -2231,12 +2218,13 @@ public class JobListActivity extends Activity implements OnClickListener,
                 tabFour.getTextSize()));
 
         loadViews();
-        ManageTabs(2);
         if (select_jobs == "MY_JOBS") {
-//            ManageTabs(2);
+            ManageTabs(2);
+            mFilter = "scheduled";
             ltabTwo.setVisibility(View.VISIBLE);
         } else {
-//            ManageTabs(1);
+            ManageTabs(1);
+            mFilter = "assigned";
             ltabTwo.setVisibility(View.INVISIBLE);
         }
 
@@ -4437,10 +4425,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                         jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
                     }
 
-//                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
-//                Log.e("joborders_activity", String.valueOf(joborders.size()));
-//                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
-
                     // Get My jobs excluding CAPI....
                     List<orderListItem> list1 = filtered;
                     List<orderListItem> list2 = joborders;
@@ -6175,7 +6159,13 @@ public class JobListActivity extends Activity implements OnClickListener,
                     mAdapter.notifyDataSetChanged();
                 }
                 if (!dontrun) {
-                    ManageTabs(2);
+                    if (select_jobs == "MY_JOBS") {
+                        ManageTabs(2);
+                        mFilter = "scheduled";
+                    } else {
+                        ManageTabs(1);
+                        mFilter = "assigned";
+                    }
                     ShowOrphanFiles();
                 }
                 break;
