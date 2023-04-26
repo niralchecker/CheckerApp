@@ -2233,10 +2233,10 @@ public class JobListActivity extends Activity implements OnClickListener,
         loadViews();
         ManageTabs(2);
         if (select_jobs == "MY_JOBS") {
-            ManageTabs(2);
+//            ManageTabs(2);
             ltabTwo.setVisibility(View.VISIBLE);
         } else {
-            ManageTabs(1);
+//            ManageTabs(1);
             ltabTwo.setVisibility(View.INVISIBLE);
         }
 
