@@ -276,7 +276,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 Intent intent = new Intent(
                         NewDashboardScreenActivity.this,
                         JobListActivity.class);
-                intent.putExtra(Constants.IS_LOGIN, true);
+                intent.putExtra(Constants.IS_LOGIN, false);
                 startActivity(intent);
                 if (myPrefs.getBoolean(Constants.SETTINGS_switchtracking, true)) {
                     SplashScreen.addServiceLog(new BasicLog(
@@ -294,7 +294,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 Intent intent = new Intent(
                         NewDashboardScreenActivity.this,
                         JobListActivity.class);
-                intent.putExtra(Constants.IS_LOGIN, true);
+                intent.putExtra(Constants.IS_LOGIN, false);
                 startActivity(intent);
                 if (myPrefs.getBoolean(Constants.SETTINGS_switchtracking, true)) {
                     SplashScreen.addServiceLog(new BasicLog(

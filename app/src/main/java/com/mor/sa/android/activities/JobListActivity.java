@@ -5223,7 +5223,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                             jobListItemId = position;
                             isJobselected = true;
-                            selectJobOderId = Integer.parseInt(mAdapter.joblistarray.get(position).orderItem.getOrderID());
+//                            selectJobOderId = Integer.parseInt(mAdapter.joblistarray.get(position).orderItem.getOrderID());
 //                            if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
 //                                Log.e("Begin_Survey_CAPI_JOBS", "true");
 //                                if (isBriefing == true) {
