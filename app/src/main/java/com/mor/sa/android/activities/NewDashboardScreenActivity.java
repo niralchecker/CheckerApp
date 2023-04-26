@@ -1,5 +1,7 @@
 package com.mor.sa.android.activities;
 
+import static com.checker.sa.android.helper.Constants.select_jobs;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,22 +14,31 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +56,7 @@ import com.checker.sa.android.data.BasicLog;
 import com.checker.sa.android.data.BranchProperties;
 import com.checker.sa.android.data.Cert;
 import com.checker.sa.android.data.Expiration;
+import com.checker.sa.android.data.FilterData;
 import com.checker.sa.android.data.InProgressAnswersData;
 import com.checker.sa.android.data.ListClass;
 import com.checker.sa.android.data.Lists;
@@ -113,7 +125,7 @@ import java.util.stream.Collectors;
 public class NewDashboardScreenActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, MessageApi.MessageListener {
 
-    CardView cardView_CAPI;
+    CardView cardView_CAPI, cardView_MyJobs;
     SharedPreferences myPrefs;
     private ArrayList<Order> order;
     public ArrayList<orderListItem> joblistarray;
@@ -123,6 +135,8 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
     ArrayList<Order> jobordersss = null;
     private boolean isBranchPropErr;
     public static ArrayList<orderListItem> joborders;
+    public static List<orderListItem> filtered;
+    public static ArrayList<orderListItem> filtered_other_jobs;
     private JobItemAdapter mAdapter;
     private String cert;
     private String certOrdeId;
@@ -134,6 +148,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
     private final int JOB_ARCHIVE_ACTIVITY_CODE = 69;
     ArrayList<BranchProperties> branchProps = null;
     private final int JOB_DETAIL_ACTIVITY_CODE = 2;
+    private final int JOB_GPS_CODE = 678;
     private static final String START_ACTIVITY = "/start_activity";
     private static final String STOP_UPLOAD = "/stop_upload";
     private static final String STOP_DOWNLOAD = "/stop_download";
@@ -141,9 +156,9 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
     Calendar date;
     Timer timer, downloadjoblistTimer;
     Revamped_Loading_Dialog dialog;
-    Vector<String> jobs_CAPI = new Vector<String>();
+    ArrayList<orderListItem> jobs_CAPI = new ArrayList<orderListItem>();
     TextView tv_waiting_acceptance, tv_waiting_implementation, tv_CAPI_assigned, tv_CAPI_inProgress, tv_CAPI_returned, tv_checker_passed, tv_checker_toBePassed;
-    String capi_assigned_count;
+    String capi_assigned_count, capi_status_inProgress, capi_status_returned, my_jobs_accept, my_jobs_implement;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -161,7 +176,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
         // myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-        int language = myPrefs.getInt(Constants.SETTINGS_LANGUAGE_INDEX, 0);
 
         Locale locale = new Locale(
                 Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(
@@ -184,10 +198,10 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
             finish();
         }
 
-        NewLoginActivity.dataid = null;
-        NewLoginActivity.thisOrder = null;
-        NewLoginActivity.thisSet = null;
-        NewLoginActivity.thisSavedAnswer = null;
+//        NewLoginActivity.dataid = null;
+//        NewLoginActivity.thisOrder = null;
+//        NewLoginActivity.thisSet = null;
+//        NewLoginActivity.thisSavedAnswer = null;
 
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor outState = myPrefs.edit();
@@ -242,17 +256,53 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         tv_waiting_implementation = findViewById(R.id.tv_waiting_implementation);
         tv_CAPI_assigned = findViewById(R.id.tv_CAPI_assigned);
         tv_CAPI_inProgress = findViewById(R.id.tv_CAPI_inProgress);
+        tv_CAPI_inProgress = findViewById(R.id.tv_CAPI_inProgress);
         tv_CAPI_returned = findViewById(R.id.tv_CAPI_returned);
         tv_checker_passed = findViewById(R.id.tv_checker_passed);
         tv_checker_toBePassed = findViewById(R.id.tv_checker_toBePassed);
+        cardView_CAPI = findViewById(R.id.cardView_CAPI);
+        cardView_MyJobs = findViewById(R.id.cardView_MyJobs);
 
         tv_CAPI_assigned.setText(capi_assigned_count);
-        cardView_CAPI = findViewById(R.id.cardView_CAPI);
+        tv_CAPI_inProgress.setText(capi_status_inProgress);
+        tv_CAPI_returned.setText(capi_status_returned);
+        tv_waiting_acceptance.setText(my_jobs_accept);
+        tv_waiting_implementation.setText(my_jobs_implement);
 
         cardView_CAPI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                select_jobs = "CAPI_JOBS";
+                Intent intent = new Intent(
+                        NewDashboardScreenActivity.this,
+                        JobListActivity.class);
+                intent.putExtra(Constants.IS_LOGIN, true);
+                startActivity(intent);
+                if (myPrefs.getBoolean(Constants.SETTINGS_switchtracking, true)) {
+                    SplashScreen.addServiceLog(new BasicLog(
+                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting service!", ""));
+                } else {
+                    // switchtracking.setChecked(false);
+                }
+            }
+        });
+        cardView_MyJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                select_jobs = "MY_JOBS";
+                Intent intent = new Intent(
+                        NewDashboardScreenActivity.this,
+                        JobListActivity.class);
+                intent.putExtra(Constants.IS_LOGIN, true);
+                startActivity(intent);
+                if (myPrefs.getBoolean(Constants.SETTINGS_switchtracking, true)) {
+                    SplashScreen.addServiceLog(new BasicLog(
+                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting service!", ""));
+                } else {
+                    // switchtracking.setChecked(false);
+                }
             }
         });
     }
@@ -501,23 +551,58 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
 
                     joborders.add(new orderListItem(jobordersss.get(i), null));
-
-                    // TODO get CAPI jobs list
-                    String client = jobordersss.get(i).getClientName();
-                    jobs_CAPI.add(client);
-                    Log.e("client", jobs_CAPI.get(i).toString());
                 }
 
-
-                List<String> filtered = jobs_CAPI.stream()
-                        .filter(string -> string.contains("-"))
+                filtered = joborders.stream()
+                        .filter(string -> string.orderItem.getOrderID().contains("-"))
                         .collect(Collectors.toList());
-                capi_assigned_count = String.valueOf(filtered.size());
-                Log.e("filtered", filtered + "  " + filtered.size());
+//                Log.e("filtered", filtered + "  " + filtered.size());
 
+                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+                }
 
-                Log.e("joborders", String.valueOf(joborders.size()));
-                Log.e("jobordersss******", String.valueOf(jobordersss.size()));
+                // Get My jobs excluding CAPI....
+                List<orderListItem> list1 = filtered;
+                List<orderListItem> list2 = joborders;
+
+                List<orderListItem> union = new ArrayList<orderListItem>(list1);
+                union.addAll(list2);
+
+                List<orderListItem> intersection = new ArrayList<orderListItem>(list1);
+                intersection.retainAll(list2);
+                union.removeAll(intersection);
+                // Print the result
+                filtered_other_jobs = new ArrayList<orderListItem>();
+                for (orderListItem n : union) {
+                    filtered_other_jobs.add(new orderListItem(n.orderItem, null));
+                }
+                Log.e("union_size", String.valueOf(filtered_other_jobs.size()));
+
+                //Count jobs for dash board....
+                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned"))
+                        .collect(Collectors.toList());
+                my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
+
+                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
+                        .collect(Collectors.toList());
+                my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
+
+                List<orderListItem> filtered_status_assigned = filtered.stream()
+                        .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
+                        .collect(Collectors.toList());
+                capi_assigned_count = String.valueOf(filtered_status_assigned.size());
+
+                List<orderListItem> filtered_status_inProgress = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
+                        .collect(Collectors.toList());
+                capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
+                List<orderListItem> filtered_status_completed = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
+                        .collect(Collectors.toList());
+                capi_status_returned = String.valueOf(filtered_status_completed.size());
 
 
                 if (joborders != null) {
@@ -1615,7 +1700,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
             prefsEditor.putBoolean(Constants.ALREADY_LOGIN_STATUS, false);
             prefsEditor.commit();
             Intent intent = new Intent(this.getApplicationContext(),
-                    LoginActivity.class);
+                    NewLoginActivity.class);
             // comunicator.JobList = null;
             startActivity(intent);
             finish();
@@ -4114,6 +4199,808 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
             // JobListActivity.this.getString(R.string.alert_working_msg),
             // JobListActivity.this.getString(R.string.button_ok));
         }
+    }
+
+    private void editShopperInfo() {
+
+        if (IsInternetConnectted()) {
+            new DoLoginTask(Constants.getEditShopperURL()).execute();
+        } else {
+            customAlert(
+                    NewDashboardScreenActivity.this,
+                    getResources().getString(
+                            R.string.no_internet_connection_alret_message));
+        }
+    }
+
+    public class DoLoginTask extends AsyncTask<Void, Integer, String> {
+        Revamped_Loading_Dialog dialog;
+        private String url;
+
+        public DoLoginTask(String url) {
+            this.url = url;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            Revamped_Loading_Dialog.show_dialog(NewDashboardScreenActivity.this,
+                    "Logging in...");
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Revamped_Loading_Dialog.hide_dialog();
+            if (Connector.setCookieManager(NewDashboardScreenActivity.this))
+                loadUrlInWebViewDialog(NewDashboardScreenActivity.this, this.url);
+            else
+                return;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            checkConnectionPost();
+            if (Connector.cookies == null) {
+                return doLogin();
+            }
+
+            return null;
+        }
+    }
+
+    public static void loadUrlInWebViewDialog(final Activity context, String url) {
+        Connector.setCookieManager(context);
+        final Dialog err_dialog = new Dialog(context,
+                android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        err_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        err_dialog.setContentView(R.layout.dialog_urls);
+        err_dialog.findViewById(R.id.textView1).setVisibility(
+                RelativeLayout.GONE);
+
+        WebView wv = (WebView) err_dialog.findViewById(R.id.briefingView);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.getSettings().setLoadWithOverviewMode(true);
+        wv.getSettings().setUseWideViewPort(true);
+
+        wv.getSettings().setSupportZoom(true);
+        wv.getSettings().setBuiltInZoomControls(true);
+        wv.getSettings().setDisplayZoomControls(false);
+
+        wv.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        wv.setScrollbarFadingEnabled(false);
+        wv.clearCache(true);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(WebView view, String url) {
+                Revamped_Loading_Dialog.hide_dialog();
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                // TODO Auto-generated method stub
+                super.onPageStarted(view, url, favicon);
+
+                if (url != null
+                        && (url.toLowerCase().contains("c_main.php") || url
+                        .toLowerCase().contains("login.php"))) {
+                    err_dialog.dismiss();
+                    Revamped_Loading_Dialog.hide_dialog();
+                    Toast.makeText(
+                                    context,
+                                    context.getResources().getString(
+                                            R.string.task_completed), Toast.LENGTH_LONG)
+                            .show();
+
+                }
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode,
+                                        String description, String failingUrl) {
+                // TODO Auto-generated method stub
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                Revamped_Loading_Dialog.hide_dialog();
+            }
+
+        });
+        wv.getSettings().setUserAgentString("Android");
+        final String mimeType = "text/html";
+        final String encoding = "UTF-8";
+        wv.loadUrl(url);
+
+        Button btnClose = (Button) err_dialog.findViewById(R.id.btnClose);
+
+        Helper.changeBtnColor(btnClose);
+        btnClose.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                err_dialog.dismiss();
+                Revamped_Loading_Dialog.hide_dialog();
+            }
+        });
+        err_dialog.show();
+        Revamped_Loading_Dialog.show_dialog(context, context.getResources()
+                .getString(R.string.jd_please_alert_msg));
+
+    }
+
+    private boolean SubmitSurvey() {
+        try {
+            sqd = getNumberofQuestionnaire(false, false);
+        } catch (IllegalStateException ex) {
+            sqd = null;
+        } catch (IllegalMonitorStateException ex) {
+            sqd = null;
+        }
+
+        if (sqd == null || sqd.size() < 1) {
+            // String where = Constants.DB_TABLE_JOBLIST_SN + "="
+            // + "\"Completed\"";
+            //
+            // DBHelper.deleteJoblistRecords(where);
+            //
+//            changeSyncText(getResources().getString(R.string.job_list_tab_sync));
+
+            return false;
+        }
+        sqd = validateAllSQ(sqd);
+        boolean jobuploaded = false;
+        boolean isquotafull = false;
+        ArrayList<filePathDataID> uploadList = new ArrayList<filePathDataID>();
+        try {
+            for (int i = 0; i < sqd.size(); i++) {
+                SubmitQuestionnaireData sq = sqd.get(i);
+
+                String setId = DBHelper.getShelfSetIdItemsForJobList(
+                        Constants.DB_TABLE_POS,
+                        new String[]{Constants.DB_TABLE_POS_SetId},
+                        Constants.DB_TABLE_POS_OrderId + "=" + "\""
+                                + sq.getOrderid() + "\"");
+                POS_Shelf pos_shelf_item = null;
+                Set set = null;
+                if (setId != null) {
+                    set = validationSets.getSetAvailable(setId);
+                    if (set != null) {
+                        pos_shelf_item = new POS_Shelf(NewDashboardScreenActivity.this);
+                        pos_shelf_item.listProducts = set.getListProducts();
+                        pos_shelf_item.listProductLocations = set
+                                .getListProductLocations();
+                        pos_shelf_item.listProductProperties = set
+                                .getListProductProperties();
+                        if (pos_shelf_item.price_item == null)
+                            pos_shelf_item.price_item = new Price();
+                        if (pos_shelf_item.quantity_item == null)
+                            pos_shelf_item.quantity_item = new Quantity();
+                        if (pos_shelf_item.expiration_item == null)
+                            pos_shelf_item.expiration_item = new Expiration();
+                        if (pos_shelf_item.note_item == null)
+                            pos_shelf_item.note_item = new Note();
+                        if (pos_shelf_item.picture_item == null)
+                            pos_shelf_item.picture_item = new Picture();
+                        pos_shelf_item = DBHelper.getShelfItems(
+                                Constants.DB_TABLE_POS, new String[]{
+                                        Constants.DB_TABLE_POS_LocationId,
+                                        Constants.DB_TABLE_POS_OrderId,
+                                        Constants.DB_TABLE_POS_Price,
+                                        Constants.DB_TABLE_POS_ProductId,
+                                        Constants.DB_TABLE_POS_PropertyId,
+                                        Constants.DB_TABLE_POS_Quantity,
+                                        Constants.DB_TABLE_POS_SetId,
+                                        Constants.DB_TABLE_POS_Notee,
+                                        Constants.DB_TABLE_POS_date},
+                                Constants.DB_TABLE_POS_OrderId + "=" + "\""
+                                        + sq.getOrderid() + "\"",
+                                pos_shelf_item, false);
+                    }
+
+                }
+
+                List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(
+                        false, sq, pos_shelf_item);
+
+                uploadList = DBHelper.getQuestionnaireUploadFilesInDB(
+                        Constants.UPLOAD_FILE_TABLE,
+                        new String[]{Constants.UPLOAD_FILe_MEDIAFILE,
+                                Constants.UPLOAD_FILe_DATAID,
+                                Constants.UPLOAD_FILe_ORDERID,
+                                Constants.UPLOAD_FILe_BRANCH_NAME,
+                                Constants.UPLOAD_FILe_CLIENT_NAME,
+                                Constants.UPLOAD_FILe_DATE,
+                                Constants.UPLOAD_FILe_SET_NAME,
+                                Constants.UPLOAD_FILe_SAMPLE_SIZE,
+                                Constants.UPLOAD_FILe_PRODUCTID,
+                                Constants.UPLOAD_FILe_LOCATIONID,},
+                        Constants.DB_TABLE_SUBMITSURVEY_OID + "=" + "\""
+                                + sq.getOrderid() + "\"",
+                        Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
+                renameCamFiles(uploadList, sq.getUnix());
+
+                String result = Connector.postForm(
+                        Constants.getSubmitSurveyURL(), nvp);
+                for (int j = 0; isquotafull == false && j < uploadList.size(); j++) {
+                    String path = uploadList.get(j).getFilePath();
+                    if (uploadList.get(j).getFilePath().startsWith("content")) {
+                        path = getRealPathFromURI(Uri.parse(uploadList.get(j)
+                                .getFilePath()));
+                    } else if (uploadList.get(j).getFilePath()
+                            .startsWith("file:///")) {
+                        path = path.replace("file:///", "/");
+                    }
+                    String did = uploadList.get(j).getDataID();
+                    if (did.contains("^") || did.contains("=")) {
+                        did = getMePrefix(did);
+                    }
+                    myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+                    String forceSmping = null;
+                    if (set == null) {
+                        String setlink = DBHelper
+                                .getSetIdFromOrder(
+                                        Constants.DB_TABLE_JOBLIST,
+                                        new String[]{Constants.DB_TABLE_JOBLIST_SETID},
+                                        Constants.DB_TABLE_JOBLIST_ORDERID
+                                                + "=" + "\"" + sq.getOrderid()
+                                                + "\"");
+                        try {
+                            set = (Set) DBHelper.convertFromBytes(setlink);
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                            set = null;
+                        }
+                    }
+                    if (set != null)
+                        forceSmping = set.getForceImageStamp();
+                    String res = Connector.saveFiletoServer(
+                            (forceSmping != null && forceSmping.equals("1")),
+                            path, Constants.getAttachmentURL(),
+                            sq.getOrderid(), did, sq.getUnix(),
+                            uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
+                    if (CheckResponse(res)) {
+                        try {
+                            DBHelper.deleteFile(sqd.get(i).getOrderid(),
+                                    uploadList.get(j).getFilePath());
+                            String where = Constants.UPLOAD_FILe_ORDERID + "="
+                                    + "\"" + sqd.get(i).getOrderid()
+                                    + "\" AND "
+                                    + Constants.UPLOAD_FILe_MEDIAFILE + "=\""
+                                    + uploadList.get(j).getFilePath() + "\"";
+                            DBAdapter.openDataBase();
+                            DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE,
+                                    where, null);
+                            DBAdapter.closeDataBase();
+
+                            if (path.contains(Constants.UPLOAD_PATH)) {
+                                File file = new File(path);
+                                file.delete();
+                            }
+                        } catch (Exception ex) {
+                            String str = "";
+                            str += "";
+                        }
+
+                    } else {
+                        SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(),
+                                myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
+                                "Attachments Uploading:NOTSUCCESS" + path + " ORDER" + sq.getOrderid() + "RESPONSE=" + res, "ORPHAN"));
+
+                        if (CheckResponseForStorageQuota(res)) {
+                            ((Activity) NewDashboardScreenActivity.this)
+                                    .runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+
+                                            ShowAlert(
+                                                    NewDashboardScreenActivity.this,
+                                                    "",
+                                                    getResources()
+                                                            .getString(
+                                                                    R.string.qoutafullMsg),
+                                                    "Ok");
+                                        }
+                                    });
+                            isquotafull = true;
+                            // imgmsg="Storage Quota Full!";
+                            break;
+                        }
+                    }
+                }
+
+                if (CheckResponse(result)) {
+                    try {
+                        String where = Constants.DB_TABLE_JOBLIST_ORDERID + "="
+                                + "\"" + sqd.get(i).getOrderid() + "\"";
+                        Calendar myCalendar = Calendar.getInstance();
+                        DBHelper.updateOrders(
+                                Constants.DB_TABLE_ORDERS,
+                                new String[]{
+                                        Constants.DB_TABLE_ORDERS_ORDERID,
+                                        Constants.DB_TABLE_ORDERS_STATUS,
+                                        Constants.DB_TABLE_ORDERS_START_TIME,},
+                                sqd.get(i).getOrderid(),
+                                "uploaded on "
+                                        + sdf.format(myCalendar.getTime()), "", null);
+                    } catch (Exception ex) {
+                        String str = "";
+                        str += "";
+                    }
+                } else {
+                    try {
+                        String where = Constants.DB_TABLE_JOBLIST_ORDERID + "="
+                                + "\"" + sqd.get(i).getOrderid() + "\"";
+                        DBHelper.incrementTriesAgainstOrderId(where, sqd.get(i)
+                                .getTries());
+
+                    } catch (Exception ex) {
+                        String str = "";
+                        str += "";
+                    }
+                }
+
+            }
+        } catch (Exception ex) {
+            int i = 0;
+            i++;
+        }
+        if (jobuploaded) {
+            jobuploaded = false;
+            progressHandler.sendEmptyMessage(0);
+        }
+
+//        changeSyncText(getResources().getString(R.string.job_list_tab_sync));
+
+        return true;
+    }
+
+    public class uploadingOrphanFiesTask extends
+            AsyncTask<Void, Integer, String> {
+        Revamped_Loading_Dialog dialog;
+        private Dialog errDialog;
+        private boolean isForced;
+
+        public uploadingOrphanFiesTask(Dialog dialog2, boolean isForced) {
+            this.errDialog = dialog2;
+            this.isForced = isForced;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            Revamped_Loading_Dialog.show_dialog(NewDashboardScreenActivity.this, null);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Revamped_Loading_Dialog.hide_dialog();
+            if (errDialog != null)
+                errDialog.dismiss();
+            else
+                return;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            checkConnectionPost();
+            if (Connector.cookies == null) {
+                if (showLogin(doLogin()))
+                    return "SessionExpire";
+            }
+//            if (isForced)
+//                sendForceImages(Revamped_Loading_Dialog.getDialog());
+//            else
+//                sendOrphanImages(Revamped_Loading_Dialog.getDialog());
+            return "";
+        }
+
+    }
+
+    Handler progressHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    // ShowDBJobs();
+                    // validateJobs();
+                    Revamped_Loading_Dialog.hide_dialog();
+                    break;
+            }
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        boolean dontrun = false;
+        comunicator.JobList = NewDashboardScreenActivity.this;
+        switch (requestCode) {
+            case (JOB_GPS_CODE): {
+                startLocationChecker();
+                break;
+            }
+            case (JOB_ARCHIVE_ACTIVITY_CODE): {
+                if (ArchiveActivity.toBeUploadedSQ != null) {
+                    SubmitSurveyTask sbmtSurveyTask = new SubmitSurveyTask(ArchiveActivity.toBeUploadedSQ);
+                    sbmtSurveyTask.execute();
+                }
+                break;
+            }
+            case (JOB_DETAIL_ACTIVITY_CODE): {
+                if (data != null && data.hasExtra("from_watch")) {
+                    ShowDBJobs();
+                    return;
+                }
+                String orderid = "";
+                // if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    // stopLocationChecker();
+                    Bundle b = data.getExtras();
+                    if (b != null
+                            && b.getBoolean(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY)) {
+
+                        // new SubmitSurveyTask().execute();
+                        executeJobList(false, false);
+                        // ShowDBJobs();
+                        return;
+                    } else if (b
+                            .getBoolean(Constants.JOB_DETAIL_IS_INVALID_LOGIN_FIELD_KEY)) {
+                        Intent intent = new Intent(this.getApplicationContext(),
+                                NewLoginActivity.class);
+                        // comunicator.JobList = null;
+                        startActivity(intent);
+                        finish();
+                        return;
+                    }
+                    orderid = b.get(Constants.DB_TABLE_QUESTIONNAIRE_ORDERID)
+                            .toString();
+
+                    if (data.getExtras().getInt(Constants.QUESTIONNAIRE_STAUS) == 1) {
+                        SplashScreen.addLog(new BasicLog(
+                                myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
+                                "Job moved to Completed tab" + orderid, orderid));
+
+                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
+                                new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
+                                        Constants.DB_TABLE_ORDERS_STATUS,
+                                        Constants.DB_TABLE_ORDERS_START_TIME,},
+                                orderid, "Completed", "", null);
+                        if (orderid != null && orderid.contains("CC")) {
+                            upload_comp_jobs = true;
+                        }
+                        if (upload_comp_jobs == true || Helper.isMisteroMenu
+                                || Constants.isUploadingEnabled()) {
+                            start_uploading(false);
+                            dontrun = true;
+                        } else
+                            ShowDBJobs();
+                    } else if (data.getExtras().getInt(
+                            Constants.QUESTIONNAIRE_STAUS) == 2
+                            && !orderid.contains("CC")) {
+                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
+                                new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
+                                        Constants.DB_TABLE_ORDERS_STATUS,
+                                        Constants.DB_TABLE_ORDERS_START_TIME,},
+                                orderid, "Scheduled", "", null);
+                    } else if (data.getExtras().getInt(
+                            Constants.QUESTIONNAIRE_STAUS) == 142
+                            || data.getExtras().getInt(
+                            Constants.QUESTIONNAIRE_STAUS) == 42) {
+                        // if (IsInternetConnectted()) {
+                        // start_uploading(false);
+                        // upload_comp_jobs = true;
+                        // return;
+                        // }
+                        ShowDBJobs();
+
+                    } else if (!orderid.contains("-")) {
+                        changeJobStatus("In progress", orderid, b.getString(Constants.DB_TABLE_ORDERS_START_TIME), b.getString(Constants.DB_TABLE_ORDERS_LASTDATAID));
+                    }
+                }
+                setOrderList();
+                // setSurveyList();
+                if (CheckerApp.globalFilterVar != null) {
+                    //updateFiler(null);
+                    joborders = getFilterArray(CheckerApp.globalFilterVar);
+                } else updateFiler(null);
+//                if (mAdapter == null) {
+//                    mAdapter = new JobItemAdapter(NewDashboardScreenActivity.this, joborders,
+//                            mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
+//                            bimgtabThree, bimgtabFour, txttabSync, txttabOne,
+//                            txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
+//                            ltabThree, ltabFour, null, null);
+//                    mAdapter.setBranchCallback(this);
+//                } else {
+//                    mAdapter.mainSetter(JobListActivity.this, joborders, mFilter,
+//                            bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
+//                            bimgtabFour, txttabSync, txttabOne, txttabTwo,
+//                            txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
+//                            ltabFour);
+//                }
+
+
+//                if (jobItemList.getAdapter() == null)
+//                    jobItemList.setAdapter(mAdapter);
+//                else {
+//                    mAdapter.notifyDataSetChanged();
+//                }
+                if (!dontrun) {
+//                    ManageTabs(2);
+                    ShowOrphanFiles();
+                }
+                break;
+            }
+        }
+    }
+
+
+    private void updateFiler(String object) {
+        if (object == null)
+            CheckerApp.globalFilterVar = null;
+        final View v = findViewById(R.id.layout_filter);
+
+        TextView tx = (TextView) findViewById(R.id.txtfilter);
+        tx.setText(object);
+        ImageView btnCross = (ImageView) findViewById(R.id.crossbtn);
+        btnCross.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Log.e("btnCross", "true");
+                v.setVisibility(RelativeLayout.GONE);
+                CheckerApp.globalFilterVar = null;
+                ShowDBJobs();
+            }
+        });
+        if (object == null) {
+            v.setVisibility(RelativeLayout.GONE);
+        } else {
+            tx.setText(object);
+            v.setVisibility(RelativeLayout.VISIBLE);
+        }
+
+    }
+
+    private void ShowOrphanFiles() {
+        LongOrphanOperation op = new LongOrphanOperation();
+        op.execute();
+
+    }
+
+    private class LongOrphanOperation extends
+            AsyncTask<String, Void, ArrayList<filePathDataID>> {
+
+        @Override
+        protected ArrayList<filePathDataID> doInBackground(String... params) {
+            checkConnectionPost();
+            ArrayList<filePathDataID> uploadList = new ArrayList<filePathDataID>();
+            uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(
+                    Constants.UPLOAD_FILE_TABLE, new String[]{
+                            Constants.UPLOAD_FILe_MEDIAFILE,
+                            Constants.UPLOAD_FILe_DATAID,
+                            Constants.UPLOAD_FILe_ORDERID,
+                            Constants.UPLOAD_FILe_BRANCH_NAME,
+                            Constants.UPLOAD_FILe_CLIENT_NAME,
+                            Constants.UPLOAD_FILe_DATE,
+                            Constants.UPLOAD_FILe_SET_NAME,
+                            Constants.UPLOAD_FILe_SAMPLE_SIZE,
+                            Constants.UPLOAD_FILe_PRODUCTID,
+                            Constants.UPLOAD_FILe_LOCATIONID,}, null,
+                    Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
+            if (uploadList != null) {
+                // ArrayList<SubmitQuestionnaireData> orders =
+                // getNumberofQuestionnaire(
+                // false, false);
+                ArrayList<filePathDataID> uploadNewList = new ArrayList<filePathDataID>();
+                for (int i = 0; jobordersss != null && i < uploadList.size(); i++) {
+                    boolean isStillInSystem = false;
+                    for (int j = 0; j < jobordersss.size(); j++) {
+                        if (uploadList.get(i).getUPLOAD_FILe_ORDERID() != null
+                                && jobordersss.get(j).getOrderID() != null
+                                && jobordersss.get(j).getStatusName() != null && !jobordersss.get(j).getStatusName().toLowerCase().contains("archive")
+                                && !jobordersss.get(j).getAsArchive()
+                                && uploadList
+                                .get(i)
+                                .getUPLOAD_FILe_ORDERID()
+                                .equals(jobordersss.get(j).getOrderID())) {
+                            isStillInSystem = true;
+                            break;
+                        }
+                    }
+                    if (isStillInSystem == false) {
+                        uploadNewList.add(uploadList.get(i));
+                    }
+                }
+                return uploadNewList;
+            }
+            return uploadList;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<filePathDataID> uploadList) {
+            try {
+//                showOrphanImages(uploadList, NewDashboardScreenActivity.this);
+
+            } catch (Exception ex) {
+            }
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+    void startLocationChecker() {
+        Context context = NewDashboardScreenActivity.this;
+        LocationManager locationManager = (LocationManager) context
+                .getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+
+            String userName = myPrefs.getString(
+                    Constants.POST_FIELD_LOGIN_USERNAME, "");
+
+        } else {
+            // OPen GPS settings
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(
+                            getResources().getString(R.string.questionnaire_gps_alert))
+                    .setTitle(getResources().getString(R.string._alert_title))
+                    .setCancelable(false)
+                    .setPositiveButton(
+                            getResources()
+                                    .getString(
+                                            R.string.questionnaire_exit_delete_alert_yes),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    // comunicator.JobList = null;
+                                    startActivityForResult(
+                                            new Intent(
+                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),
+                                            JOB_GPS_CODE);
+
+                                    dialog.dismiss();
+
+                                }
+                            })
+                    .setNegativeButton(
+                            getResources()
+                                    .getString(
+                                            R.string.questionnaire_exit_delete_alert_no),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    dialog.dismiss();
+                                    myPrefs = getSharedPreferences("pref",
+                                            MODE_PRIVATE);
+
+                                    String userName = myPrefs
+                                            .getString(
+                                                    Constants.POST_FIELD_LOGIN_USERNAME,
+                                                    "");
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    private ArrayList<orderListItem> getFilterArray(FilterData fData) {
+
+        ArrayList<Order> ordrs = new ArrayList<Order>();
+        if (fData.jobtype.equals(getString(R.string.job_filter_default_dd_option))
+                && fData.city.equals(getString(R.string.job_filter_default_dd_option))
+                && fData.bcode.equals(getString(R.string.job_filter_default_dd_option))
+                && fData.project
+                .equals(getString(R.string.job_filter_default_dd_option))
+                && fData.region
+                .equals(getString(R.string.job_filter_default_dd_option))
+                && fData.bprop.equals(getString(R.string.job_filter_default_dd_option))
+                && fData.date1.equals("1/1/1900") && fData.date3.equals("1/1/1900")) {
+            // joborders = Orders.getOrders();
+
+            for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
+                Order order = Orders.getOrders().get(ordercount);
+                {
+
+                    ordrs.add(order);
+                }
+            }
+
+            // mAdapter = new JobItemAdapter(JobListActivity.this, joborders,
+            // mFilter, imgtabSync, imgtabOne, imgtabTwo, imgtabThree,
+            // imgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
+            // txttabFour);
+            // jobItemList.setAdapter(mAdapter);
+            // jobItemList.setAdapter(new JobItemAdapter(JobListActivity.this,
+            // joborders));
+            // return;
+        } else {
+            for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
+                Order order = Orders.getOrders().get(ordercount);
+                if (Helper.IsValidOrder(order, fData.region, fData.project, fData.bprop, fData.bcode,
+                        fData.jobtype, fData.city, fData.date1, fData.date3,
+                        getString(R.string.job_filter_default_dd_option))) {
+                    ordrs.add(order);
+                }
+            }
+        }
+        joborders.clear();
+
+        Orders.replaceistOrders(ordrs);
+        Order[] ordersArr = null;
+        if (ordrs != null) {
+            ordersArr = new Order[ordrs.size()];
+            ordrs.toArray(ordersArr);
+        }
+        Order order, innerorder;
+        if (joborders == null)
+            joborders = new ArrayList<orderListItem>();
+        // joborders.clear();
+        ArrayList<Order> delete = new ArrayList<Order>();
+        ArrayList<orderListItem> temporder1 = new ArrayList<orderListItem>();
+        ArrayList<Order> temporder = new ArrayList<Order>();
+        temporder = (ArrayList<Order>) ordrs.clone();
+        int size = temporder.size();
+        for (int index = 0; index < size; index++) {
+            order = temporder.get(index);
+            String status = getStatusByOrderID(order.getOrderID(), ordersArr);
+            if (!status.equals(""))
+                temporder.get(index).setStatusName(status);
+        }
+
+        for (int index = 0; index < size; index++) {
+            order = temporder.get(index);
+            order.setJobCount(0);
+            // String status = getStatusByOrderID(order.getOrderID(),
+            // ordersArr);
+            // if(!status.equals(""))
+            // temporder.get(index).setStatusName(status);
+            for (int innerindex = 0; innerindex < size; innerindex++) {
+                innerorder = temporder.get(innerindex);
+                try {
+                    if ((Constants.getDateFilter() || order.getBranchLink()
+                            .equals(innerorder.getBranchLink()))
+                            && (Constants.getDateFilter() || order.getMassID()
+                            .equals(innerorder.getMassID()))
+                            && (order.getDate().equals(innerorder.getDate()))
+                            && (Constants.getDateFilter() || order.getSetLink()
+                            .equals(innerorder.getSetLink()))
+                            && (Constants.getDateFilter() || order
+                            .getStatusName().equals(
+                                    innerorder.getStatusName()))) {
+                        delete.add(innerorder);
+                        order.setCount();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            // order.setIndex(index);
+            temporder1.add(new orderListItem(order, delete));
+            for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
+                temporder.remove(delete.get(deleteindex));
+            }
+            size = temporder.size();
+            // delete.clear();
+            delete = new ArrayList<Order>();
+        }
+        joborders = temporder1;
+        // delete.clear();
+        delete = null;
+        return joborders;
     }
 
     @Override

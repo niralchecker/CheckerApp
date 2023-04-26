@@ -111,7 +111,8 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
         NewLoginActivity.thisSet = null;
         NewLoginActivity.thisSavedAnswer = null;
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-        JobListActivity.setAlternateURL(null, myPrefs);
+//        JobListActivity.setAlternateURL(null, myPrefs);
+        NewDashboardScreenActivity.setAlternateURL(null, myPrefs);
         Constants.setFullBranchName(myPrefs.getBoolean(
                 Constants.SETTINGS_ENABLE_BRANCH_FULL_NAME, false));
         Constants.setDateFilter(myPrefs.getBoolean(
@@ -442,7 +443,9 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
 
                 } else {
 
-                    JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                    JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                            Constants.getSignUpURL());
+                    NewDashboardScreenActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
                             Constants.getSignUpURL());
                     break;
                 }
@@ -460,7 +463,9 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
 
                 } else {
 
-                    JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                    JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                            Constants.getForgotURL());
+                    NewDashboardScreenActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
                             Constants.getForgotURL());
                     break;
                 }
@@ -481,8 +486,11 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
 
             Revamped_Loading_Dialog.hide_dialog();
             if (result != null)
-                JobListActivity.setAlternateURL(newUrlForEUClients, myPrefs);
-            JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                JobListActivity.setAlternateURL(newUrlForEUClients, myPrefs);
+//            JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                    Constants.getSignUpURL());
+                NewDashboardScreenActivity.setAlternateURL(newUrlForEUClients, myPrefs);
+            NewDashboardScreenActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
                     Constants.getSignUpURL());
 
         }
@@ -501,7 +509,8 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
                 boolean isOk = Connector.checkConnection(chkurl);
                 if (isOk) {
                     newUrlForEUClients = url;
-                    JobListActivity.setAlternateURL(url, myPrefs);
+//                    JobListActivity.setAlternateURL(url, myPrefs);
+                    NewDashboardScreenActivity.setAlternateURL(url, myPrefs);
                     return "";
                 } else return null;
             }
@@ -524,8 +533,11 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
 
             Revamped_Loading_Dialog.hide_dialog();
             if (result != null)
-                JobListActivity.setAlternateURL(newUrlForEUClients, myPrefs);
-            JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                JobListActivity.setAlternateURL(newUrlForEUClients, myPrefs);
+//            JobListActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
+//                    Constants.getForgotURL());
+                NewDashboardScreenActivity.setAlternateURL(newUrlForEUClients, myPrefs);
+            NewDashboardScreenActivity.loadUrlInWebViewDialog(NewLoginActivity.this,
                     Constants.getForgotURL());
 
         }
@@ -543,7 +555,8 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
                 boolean isOk = Connector.checkConnection(chkurl);
                 if (isOk) {
                     newUrlForEUClients = url;
-                    JobListActivity.setAlternateURL(url, myPrefs);
+//                    JobListActivity.setAlternateURL(url, myPrefs);
+                    NewDashboardScreenActivity.setAlternateURL(url, myPrefs);
                     return "";
                 } else return null;
             }
@@ -594,8 +607,10 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
     private void workInOfflineMode() {
         if (myPrefs != null
                 && myPrefs.getBoolean(Constants.ALREADY_LOGIN_STATUS, false)) {
+//            Intent intent = new Intent(this.getApplicationContext(),
+//                    JobListActivity.class);
             Intent intent = new Intent(this.getApplicationContext(),
-                    JobListActivity.class);
+                    NewDashboardScreenActivity.class);
             // Toast.makeText(NewLoginActivity.this, "opening joblist screen ",
             // Toast.LENGTH_LONG).show();
 
@@ -705,9 +720,12 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
 
             // ACRA.getErrorReporter().putCustomData("USER Id",
             // _username);
+//            Intent intent = new Intent(
+//                    NewLoginActivity.this.getApplicationContext(),
+//                    JobListActivity.class);
             Intent intent = new Intent(
                     NewLoginActivity.this.getApplicationContext(),
-                    JobListActivity.class);
+                    NewDashboardScreenActivity.class);
             intent.putExtra(Constants.IS_LOGIN, true);
             startActivity(intent);
 
@@ -815,12 +833,14 @@ public class NewLoginActivity extends AppCompatActivity implements View.OnClickL
         this.makeHttps = false;
         newUrlForEUClients =
                 Constants.CompareWithNewUrlList(getResources().getStringArray(R.array.eusystems));
-        JobListActivity.setAlternateURL(null, myPrefs);
+//        JobListActivity.setAlternateURL(null, myPrefs);
+        NewDashboardScreenActivity.setAlternateURL(null, myPrefs);
         if (newUrlForEUClients != null) {
             String chkurl = Constants.getcheckConnectionURL(newUrlForEUClients);
             boolean isOk = Connector.checkConnection(chkurl);
             if (isOk) {
-                JobListActivity.setAlternateURL(newUrlForEUClients, myPrefs);
+//                JobListActivity.setAlternateURL(newUrlForEUClients, myPrefs);
+                NewDashboardScreenActivity.setAlternateURL(newUrlForEUClients, myPrefs);
                 loginurl = Constants.getLoginURL();
             }
 

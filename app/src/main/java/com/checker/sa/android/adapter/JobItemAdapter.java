@@ -718,88 +718,92 @@ public class JobItemAdapter extends BaseAdapter {
             joblistarray = new ArrayList<orderListItem>();
             int count = joblistarray.size();
             c = 0;
-            for (int i = 0; i < full_joblistarray.size(); i++) {
-                Order order = full_joblistarray.get(i).orderItem;
-                if (order != null
-                        && (order.getStatusName().toLowerCase()
-                        .equals(tabFilter.toLowerCase()) || order
-                        .getStatusName().toLowerCase()
-                        .equals(tabFilterTwo.toLowerCase()))) {
-                    c++;
-                    joblistarray.add(full_joblistarray.get(i));
-                }
-
-                if (order != null
-                        && (order.getStatusName().toLowerCase()
-                        .equals(filterOne.toLowerCase()) || (order
-                        .getStatusName().toLowerCase()
-                        .equals(sfilterOne.toLowerCase())))) {
+            try {
+                for (int i = 0; i < full_joblistarray.size(); i++) {
+                    Order order = full_joblistarray.get(i).orderItem;
                     if (order != null
-                            && full_joblistarray.get(i).listOrders != null
-                            && full_joblistarray.get(i).listOrders.size() > 1) {
-                        filterOneCount += full_joblistarray.get(i).listOrders
-                                .size();
-                    } else if (order != null
-                            && full_joblistarray.get(i).listSurveys != null
-                            && full_joblistarray.get(i).listSurveys.size() > 1) {
-                        filterOneCount += full_joblistarray.get(i).listSurveys
-                                .size();
-                    } else
-                        filterOneCount++;
-                }
-                if (order != null
-                        && (order.getStatusName().toLowerCase()
-                        .equals(filterTwo.toLowerCase()))) {
-                    if (order != null
-                            && full_joblistarray.get(i).listOrders != null
-                            && full_joblistarray.get(i).listOrders.size() > 1) {
-                        filterTwoCount += full_joblistarray.get(i).listOrders
-                                .size();
-                    } else if (order != null
-                            && full_joblistarray.get(i).listSurveys != null
-                            && full_joblistarray.get(i).listSurveys.size() > 1) {
-                        filterTwoCount += full_joblistarray.get(i).listSurveys
-                                .size();
-                    } else
-                        filterTwoCount++;
-                }
-                if (order != null
-                        && (order.getStatusName().toLowerCase()
-                        .equals(filterThree.toLowerCase()))) {
+                            && (order.getStatusName().toLowerCase()
+                            .equals(tabFilter.toLowerCase()) || order
+                            .getStatusName().toLowerCase()
+                            .equals(tabFilterTwo.toLowerCase()))) {
+                        c++;
+                        joblistarray.add(full_joblistarray.get(i));
+                    }
 
                     if (order != null
-                            && full_joblistarray.get(i).listOrders != null
-                            && full_joblistarray.get(i).listOrders.size() > 1) {
-                        filterThreeCount += full_joblistarray.get(i).listOrders
-                                .size();
-                    } else if (order != null
-                            && full_joblistarray.get(i).listSurveys != null
-                            && full_joblistarray.get(i).listSurveys.size() > 1) {
-                        filterThreeCount += full_joblistarray.get(i).listSurveys
-                                .size();
-                    } else
-                        filterThreeCount++;
-                }
-                if (order != null
-                        && (order.getStatusName().toLowerCase()
-                        .equals(filterFour.toLowerCase()))) {
+                            && (order.getStatusName().toLowerCase()
+                            .equals(filterOne.toLowerCase()) || (order
+                            .getStatusName().toLowerCase()
+                            .equals(sfilterOne.toLowerCase())))) {
+                        if (order != null
+                                && full_joblistarray.get(i).listOrders != null
+                                && full_joblistarray.get(i).listOrders.size() > 1) {
+                            filterOneCount += full_joblistarray.get(i).listOrders
+                                    .size();
+                        } else if (order != null
+                                && full_joblistarray.get(i).listSurveys != null
+                                && full_joblistarray.get(i).listSurveys.size() > 1) {
+                            filterOneCount += full_joblistarray.get(i).listSurveys
+                                    .size();
+                        } else
+                            filterOneCount++;
+                    }
                     if (order != null
-                            && full_joblistarray.get(i).listOrders != null
-                            && full_joblistarray.get(i).listOrders.size() > 1) {
-                        filterFourCount += full_joblistarray.get(i).listOrders
-                                .size();
-                    } else if (order != null
-                            && full_joblistarray.get(i).listSurveys != null
-                            && full_joblistarray.get(i).listSurveys.size() > 1) {
-                        filterFourCount += full_joblistarray.get(i).listSurveys
-                                .size();
-                    } else
-                        filterFourCount++;
+                            && (order.getStatusName().toLowerCase()
+                            .equals(filterTwo.toLowerCase()))) {
+                        if (order != null
+                                && full_joblistarray.get(i).listOrders != null
+                                && full_joblistarray.get(i).listOrders.size() > 1) {
+                            filterTwoCount += full_joblistarray.get(i).listOrders
+                                    .size();
+                        } else if (order != null
+                                && full_joblistarray.get(i).listSurveys != null
+                                && full_joblistarray.get(i).listSurveys.size() > 1) {
+                            filterTwoCount += full_joblistarray.get(i).listSurveys
+                                    .size();
+                        } else
+                            filterTwoCount++;
+                    }
+                    if (order != null
+                            && (order.getStatusName().toLowerCase()
+                            .equals(filterThree.toLowerCase()))) {
 
+                        if (order != null
+                                && full_joblistarray.get(i).listOrders != null
+                                && full_joblistarray.get(i).listOrders.size() > 1) {
+                            filterThreeCount += full_joblistarray.get(i).listOrders
+                                    .size();
+                        } else if (order != null
+                                && full_joblistarray.get(i).listSurveys != null
+                                && full_joblistarray.get(i).listSurveys.size() > 1) {
+                            filterThreeCount += full_joblistarray.get(i).listSurveys
+                                    .size();
+                        } else
+                            filterThreeCount++;
+                    }
+                    if (order != null
+                            && (order.getStatusName().toLowerCase()
+                            .equals(filterFour.toLowerCase()))) {
+                        if (order != null
+                                && full_joblistarray.get(i).listOrders != null
+                                && full_joblistarray.get(i).listOrders.size() > 1) {
+                            filterFourCount += full_joblistarray.get(i).listOrders
+                                    .size();
+                        } else if (order != null
+                                && full_joblistarray.get(i).listSurveys != null
+                                && full_joblistarray.get(i).listSurveys.size() > 1) {
+                            filterFourCount += full_joblistarray.get(i).listSurveys
+                                    .size();
+                        } else
+                            filterFourCount++;
+
+                    }
                 }
+                Constants.applied_count = filterOneCount + filterTwoCount;
+            } catch (IndexOutOfBoundsException e) {
+
             }
-            Constants.applied_count = filterOneCount + filterTwoCount;
-            Log.e("sum", String.valueOf(filterOneCount + filterTwoCount));
+//            Log.e("sum", String.valueOf(filterOneCount + filterTwoCount));
         }
         isLongTaskCalled = true;
         if (this.txtOne != null && filterOneCount > 0) {
@@ -1453,52 +1457,54 @@ public class JobItemAdapter extends BaseAdapter {
                     } else if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_continue_review_btn_text))) {
                         Constants.accept_txt = "Continue_survey";
                         mJobStartListener.onJobStartClick(position, Constants.accept_txt);
-                    }else if (tvStatusShow.getText().toString()
+                    } else if (tvStatusShow.getText().toString()
                             .equals(con.getString(R.string.jd_begin_btn_text))) {
-                        if (order.getOrderID().contains("-")) {
-                            if (order.getStatusName().equals("survey")) {
-                                Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
-                                        "-", ""));
-                                if (s != null && s.isAllocationReached()) {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(con);
-                                    builder.setMessage(
-                                                    con.getResources()
-                                                            .getString(
-                                                                    R.string.questionnaire_open_survey_alert))
-                                            .setTitle(
-                                                    con.getResources().getString(
-                                                            R.string._alert_title))
-                                            .setCancelable(false)
-                                            .setPositiveButton(
-                                                    con.getResources().getString(
-                                                            R.string.button_ok),
-                                                    new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(
-                                                                DialogInterface dialog,
-                                                                int id) {
-                                                            dialog.dismiss();
-//                                                            ((Activity) con).finish();
-                                                        }
-                                                    });
-                                    AlertDialog alert = builder.create();
-                                    alert.show();
-                                } else {
-                                    SplashScreen.addLog(new BasicLog(
-                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
-
-                                    ((JobListActivity) con).startLocationCheckerAdapter();
-                                }
-
-                            } else {
-                                SplashScreen.addLog(new BasicLog(
-                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
-
-                                ((JobListActivity) con).startLocationCheckerAdapter();
-                            }
-                        }
+                        Constants.accept_txt = "Begin_Interview";
+                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+//                        if (order.getOrderID().contains("-")) {
+//                            if (order.getStatusName().equals("survey")) {
+//                                Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
+//                                        "-", ""));
+//                                if (s != null && s.isAllocationReached()) {
+//                                    AlertDialog.Builder builder = new AlertDialog.Builder(con);
+//                                    builder.setMessage(
+//                                                    con.getResources()
+//                                                            .getString(
+//                                                                    R.string.questionnaire_open_survey_alert))
+//                                            .setTitle(
+//                                                    con.getResources().getString(
+//                                                            R.string._alert_title))
+//                                            .setCancelable(false)
+//                                            .setPositiveButton(
+//                                                    con.getResources().getString(
+//                                                            R.string.button_ok),
+//                                                    new DialogInterface.OnClickListener() {
+//                                                        @Override
+//                                                        public void onClick(
+//                                                                DialogInterface dialog,
+//                                                                int id) {
+//                                                            dialog.dismiss();
+////                                                            ((Activity) con).finish();
+//                                                        }
+//                                                    });
+//                                    AlertDialog alert = builder.create();
+//                                    alert.show();
+//                                } else {
+//                                    SplashScreen.addLog(new BasicLog(
+//                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+//
+//                                    ((JobListActivity) con).startLocationCheckerAdapter();
+//                                }
+//
+//                            } else {
+//                                SplashScreen.addLog(new BasicLog(
+//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+//
+//                                ((JobListActivity) con).startLocationCheckerAdapter();
+//                            }
+//                        }
                     }
 
 

@@ -1,5 +1,7 @@
 package com.mor.sa.android.activities;
 
+import static com.checker.sa.android.helper.Constants.select_jobs;
+
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -308,8 +310,6 @@ public class JobListActivity extends Activity implements OnClickListener,
     String capi_assigned_count, capi_status_inProgress, capi_status_returned, my_jobs_accept, my_jobs_implement;
     CardView cardView_CAPI, cardView_MyJobs;
     ArrayList<orderListItem> jobs_CAPI = new ArrayList<orderListItem>();
-
-    String select_jobs = "MY_JOBS";
 
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
@@ -1254,6 +1254,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             protected void onPreExecute() {
+                Log.e("load_certificates", "onPreExecute");
                 dialogg = new ProgressDialog(JobListActivity.this);
                 dialogg.setMessage(getResources().getString(
                         R.string.checkertificatesmsg));
@@ -1264,7 +1265,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             protected void onPostExecute(String result) {
-
+                Log.e("load_certificates", "onPostExecute");
                 // <status>0</status>
                 // <auto_approve_flag>1</auto_approve_flag>
                 if (result != null && result.contains("<status>1</status>")) {
@@ -1321,6 +1322,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             @Override
             protected String doInBackground(Void... params) {
                 checkConnectionPost();
+                Log.e("load_certificates", "doInBackground");
                 // Initialize the login data to POST
                 List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
                 // extraDataList.add(Helper.getNameValuePair(
@@ -1709,6 +1711,10 @@ public class JobListActivity extends Activity implements OnClickListener,
     protected void onResume() {
         super.onResume();
         Constants.setLocale(JobListActivity.this);
+        if (JobListActivity.isFromWatch) {
+            JobListActivity.isFromWatch = false;
+            finish();
+        }
         comunicator.detailJob = JobListActivity.this;
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
 //        if (CheckerApp.getQuestionResult() != null) {
@@ -1725,10 +1731,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 //            finish();
 //            return;
 //        }
-        if (JobListActivity.isFromWatch) {
-            JobListActivity.isFromWatch = false;
-            finish();
-        }
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 //        modeSelect = myPrefs.getInt(Constants.SETTINGS_MODE_INDEX, 1);
         if (myPrefs.contains("ispaused")
@@ -1740,8 +1742,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                         QuestionnaireActivity.class);
                 intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
                         myPrefs.getString("order_id", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
                 intent.putExtra(Constants.FIELD_ORDER_SET_ID,
                         myPrefs.getString("setid", ""));
                 intent.putExtra("isPaused", true);
@@ -1866,16 +1866,17 @@ public class JobListActivity extends Activity implements OnClickListener,
         layout_job_list = findViewById(R.id.layout_job_list);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
 
+//        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
+//        layout_job_list.setVisibility(View.GONE);
 
-        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
-        layout_job_list.setVisibility(View.GONE);
-
-        if (layout_NewDashboardScreen.getVisibility() == View.VISIBLE) {
-            toolbarTitle.setText("Open Jobs");
-        } else {
-            layout_job_list.setVisibility(View.VISIBLE);
-            layout_NewDashboardScreen.setVisibility(View.GONE);
-        }
+//        if (select_jobs == "MY_JOBS") {
+//            ManageTabs(2);
+//            ltabTwo.setVisibility(View.VISIBLE);
+//        } else {
+//            ManageTabs(1);
+//            ltabTwo.setVisibility(View.INVISIBLE);
+//        }
+//        ManageTabs(2);
 
         mFilter = "scheduled";
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
@@ -2230,7 +2231,14 @@ public class JobListActivity extends Activity implements OnClickListener,
                 tabFour.getTextSize()));
 
         loadViews();
-
+        ManageTabs(2);
+        if (select_jobs == "MY_JOBS") {
+            ManageTabs(2);
+            ltabTwo.setVisibility(View.VISIBLE);
+        } else {
+            ManageTabs(1);
+            ltabTwo.setVisibility(View.INVISIBLE);
+        }
 
         // getRQSLocation loc = new getRQSLocation(JobListActivity.this);
         // loc.execute();
@@ -2257,7 +2265,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 ManageTabs(1);
             }
         });
@@ -2265,7 +2272,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 ManageTabs(2);
             }
         });
@@ -2273,7 +2279,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 ManageTabs(3);
             }
         });
@@ -2281,7 +2286,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 ManageTabs(4);
             }
         });
@@ -2323,7 +2327,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 tabOne.setChecked(true);
 //                tabOneb.setChecked(true);
                 ManageTabs(1);
@@ -2334,7 +2337,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub2
                 tabTwo.setChecked(true);
 //                tabTwob.setChecked(true);
                 ManageTabs(2);
@@ -2442,59 +2444,59 @@ public class JobListActivity extends Activity implements OnClickListener,
                 } else {
 //                    TODO JobDetailActivity
 
-//                    Log.e("onItemClick", mAdapter.joblistarray
-//                            .get(arg2).orderItem.getOrderID());
-//                    Intent intent = new Intent(JobListActivity.this
-//                            .getApplicationContext(), JobDetailActivity.class);
-//                    JobDetailActivity
-//                            .setCertsCallback(new jobBoardCertsListener() {
-//
-//                                @Override
-//                                public void certCallBack(ArrayList<Cert> certs) {
-//                                    load_certificates(certs);
-//                                }
-//                            });
-//                    isJobselected = true;
-//                    if (mAdapter.joblistarray != null
-//                            && mAdapter.joblistarray.size() > 0) {
-//                        if (mAdapter.joblistarray.get(arg2).orderItem != null) {
-////                            TODO OrderID
-//                            intent.putExtra("OrderID", mAdapter.joblistarray
-//                                    .get(arg2).orderItem.getOrderID());
-//                            intent.putExtra(
-//                                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-//                                    mAdapter.joblistarray.get(arg2).orderItem
-//                                            .getCount() + "");
-//                            String OrderID = mAdapter.joblistarray
-//                                    .get(arg2).orderItem.getOrderID();
-//                            String surveyId = "";
-//                            if (OrderID.contains("-")) {
-//                                surveyId = (OrderID.replace("-", ""));
-//                                Survey survey = Surveys.getCurrentSurve(surveyId);
-//                                boolean b = survey.isAllocationReached();
-//                                if (b)//ALLOCATION REACHED
-//                                {
-//                                    Toast.makeText(JobListActivity.this,
-//                                            getString(R.string.questionnaire_open_survey_alert)
-//                                            , Toast.LENGTH_SHORT).show();
-//                                    return;
-//                                }
-//                            }
-//                        } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
-////                            TODO SurveyID
-//                            intent.putExtra("SurveyID", mAdapter.joblistarray
-//                                    .get(arg2).surveyItem.getSurveyID());
-//
-//                        }
-//
-//                    } else
-//                        intent.putExtra(
-//                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-//                                "1");
-//                    intent.putExtra("OrderIndex", arg2);
-//                    intent.putExtra("Index", arg2);
-//                    // comunicator.JobList = null;
-//                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                    Log.e("onItemClick", mAdapter.joblistarray
+                            .get(arg2).orderItem.getOrderID());
+                    Intent intent = new Intent(JobListActivity.this
+                            .getApplicationContext(), JobDetailActivity.class);
+                    JobDetailActivity
+                            .setCertsCallback(new jobBoardCertsListener() {
+
+                                @Override
+                                public void certCallBack(ArrayList<Cert> certs) {
+                                    load_certificates(certs);
+                                }
+                            });
+                    isJobselected = true;
+                    if (mAdapter.joblistarray != null
+                            && mAdapter.joblistarray.size() > 0) {
+                        if (mAdapter.joblistarray.get(arg2).orderItem != null) {
+//                            TODO OrderID
+                            intent.putExtra("OrderID", mAdapter.joblistarray
+                                    .get(arg2).orderItem.getOrderID());
+                            intent.putExtra(
+                                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                    mAdapter.joblistarray.get(arg2).orderItem
+                                            .getCount() + "");
+                            String OrderID = mAdapter.joblistarray
+                                    .get(arg2).orderItem.getOrderID();
+                            String surveyId = "";
+                            if (OrderID.contains("-")) {
+                                surveyId = (OrderID.replace("-", ""));
+                                Survey survey = Surveys.getCurrentSurve(surveyId);
+                                boolean b = survey.isAllocationReached();
+                                if (b)//ALLOCATION REACHED
+                                {
+                                    Toast.makeText(JobListActivity.this,
+                                            getString(R.string.questionnaire_open_survey_alert)
+                                            , Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+                        } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
+//                            TODO SurveyID
+                            intent.putExtra("SurveyID", mAdapter.joblistarray
+                                    .get(arg2).surveyItem.getSurveyID());
+
+                        }
+
+                    } else
+                        intent.putExtra(
+                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                "1");
+                    intent.putExtra("OrderIndex", arg2);
+                    intent.putExtra("Index", arg2);
+                    // comunicator.JobList = null;
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                 }
             }
         });
@@ -2588,7 +2590,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         tv_applied_no = findViewById(R.id.tv_applied_no);
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
 
-        initViewNewDashBoard();
+//        initViewNewDashBoard();
     }
 
     protected int getMinute(String start) {
@@ -4205,6 +4207,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected ArrayList<filePathDataID> doInBackground(String... params) {
+            Log.e("LongOrphanOperation", "doInBackground");
             checkConnectionPost();
             ArrayList<filePathDataID> uploadList = new ArrayList<filePathDataID>();
             uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(
@@ -4253,7 +4256,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         protected void onPostExecute(ArrayList<filePathDataID> uploadList) {
             try {
                 showOrphanImages(uploadList, JobListActivity.this);
-
+                Log.e("LongOrphanOperation", "onPostExecute");
             } catch (Exception ex) {
             }
 
@@ -4281,7 +4284,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected Set doInBackground(String... params) {
-
+            Log.e("DownloadSetTask", "doInBackground");
             Set set = DownloadThisSet(currentSet);
             if (set != null) {
                 ArrayList<Set> sets = new ArrayList<Set>();
@@ -4296,6 +4299,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(Set set) {
+            Log.e("DownloadSetTask", "onPostExecute");
             if (set != null) {
 
                 String orderid = DBHelper.AddCertificateOrder(cert);
@@ -4310,6 +4314,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
+            Log.e("DownloadSetTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
                     getResources()
                             .getString(R.string.downloadingCheckrtificate));
@@ -4325,7 +4330,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected ArrayList<orderListItem> doInBackground(String... params) {
             //String ret = ShowDBJobss("task");
-
+            Log.e("LongOperation", "doInBackground");
             try {
 
                 jobordersss = DBHelper
@@ -4417,7 +4422,40 @@ public class JobListActivity extends Activity implements OnClickListener,
                     joborders = new ArrayList<orderListItem>();
                     for (int i = 0; i < jobordersss.size(); i++) {
 
+                        //TODO ****
                         joborders.add(new orderListItem(jobordersss.get(i), null));
+                    }
+
+
+                    filtered = joborders.stream()
+                            .filter(string -> string.orderItem.getOrderID().contains("-"))
+                            .collect(Collectors.toList());
+//                Log.e("filtered", filtered + "  " + filtered.size());
+
+                    jobs_CAPI.clear();
+                    for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+                    }
+
+//                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
+//                Log.e("joborders_activity", String.valueOf(joborders.size()));
+//                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
+
+                    // Get My jobs excluding CAPI....
+                    List<orderListItem> list1 = filtered;
+                    List<orderListItem> list2 = joborders;
+
+                    List<orderListItem> union = new ArrayList<orderListItem>(list1);
+                    union.addAll(list2);
+
+                    List<orderListItem> intersection = new ArrayList<orderListItem>(list1);
+                    intersection.retainAll(list2);
+                    union.removeAll(intersection);
+                    // Print the result
+                    filtered_other_jobs = new ArrayList<orderListItem>();
+                    filtered_other_jobs.clear();
+                    for (orderListItem n : union) {
+                        filtered_other_jobs.add(new orderListItem(n.orderItem, null));
                     }
                     Log.e("joborders_activity", String.valueOf(joborders.size()));
                 }
@@ -4507,6 +4545,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(ArrayList<orderListItem> joborders) {
+            Log.e("LongOperation", "onPostExecute");
             SplashScreen.addLog(new BasicLog(
                     myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
                     myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
@@ -4535,6 +4574,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             try {
+                Log.e("LongOperation", "onPreExecute");
                 SplashScreen.addLog(new BasicLog(
                         myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
                         myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
@@ -4602,6 +4642,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             {
+                Log.e("ShowDBListTask", "onPreExecute");
                 current = getResources().getConfiguration().locale;
                 try {
                     Revamped_Loading_Dialog.hide_dialog();
@@ -4616,6 +4657,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("ShowDBListTask", "onPostExecute");
             if (joborders != null && joborders.size() >= 1) {
                 Orders.setListOrders(jobordersss);
                 Orders.setBranchProps(branchProps);
@@ -4655,7 +4697,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(Void... params) {
-
+            Log.e("ShowDBListTask", "doInBackground");
             ArrayList<Survey> surveys = Surveys.getSets();
             if (this.certorderid != null) {
             } else {
@@ -4731,6 +4773,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 joborders = new ArrayList<orderListItem>();
                 for (int i = 0; i < jobordersss.size(); i++) {
+                    //TODO ****
                     joborders.add(new orderListItem(jobordersss.get(i), null));
                 }
 
@@ -4828,7 +4871,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                 for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
 
                     joborders.add(new orderListItem(jobordersss.get(i), null));
-                    Log.e("name", joborders.get(i).orderItem.getStatusName());
                 }
 
                 filtered = joborders.stream()
@@ -4837,7 +4879,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 //                Log.e("filtered", filtered + "  " + filtered.size());
 
                 for (int i = 0; filtered != null && i < filtered.size(); i++) {
-                    Log.e("filtered_list", filtered.get(i).orderItem.getStatusName());
                     jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
                 }
 
@@ -4858,7 +4899,6 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // Print the result
                 filtered_other_jobs = new ArrayList<orderListItem>();
                 for (orderListItem n : union) {
-                    Log.e("union", n.orderItem.getStatusName());
                     filtered_other_jobs.add(new orderListItem(n.orderItem, null));
                 }
                 Log.e("union_size", String.valueOf(filtered_other_jobs.size()));
@@ -5060,33 +5100,87 @@ public class JobListActivity extends Activity implements OnClickListener,
                             jobListItemId = position;
                             isJobselected = true;
                             selectJobOderId = Integer.parseInt(mAdapter.joblistarray.get(position).orderItem.getOrderID());
-                            if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
-                                Log.e("Begin_Survey", "true");
-                                if (isBriefing == true) {
-                                    isBriefing = false;
-//                                showBriefing();
-                                } else {
-                                    SplashScreen.addLog(new BasicLog(
-                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//                            if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
+//                                Log.e("Begin_Survey", "true");
+//                                if (isBriefing == true) {
+//                                    isBriefing = false;
+////                                showBriefing();
+//                                } else {
+//                                    SplashScreen.addLog(new BasicLog(
+//                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                                    startLocationCheckerAdapter();
+//                                }
+//                            } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
+//                                Log.e("Continue_survey", "true");
+//                                SplashScreen.addLog(new BasicLog(
+//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                                if (Settings.Secure.getString(
+//                                        JobListActivity.this.getContentResolver(),
+//                                        Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+//                                    MockGPSALERT();
+//                                    return;
+//                                }
+//
+//                                BeginReview(false);
+//                            }
 
-                                    startLocationCheckerAdapter();
+                            Log.e("onItemClick", mAdapter.joblistarray
+                                    .get(position).orderItem.getOrderID());
+                            Intent intent = new Intent(JobListActivity.this
+                                    .getApplicationContext(), JobDetailActivity.class);
+                            JobDetailActivity
+                                    .setCertsCallback(new jobBoardCertsListener() {
+
+                                        @Override
+                                        public void certCallBack(ArrayList<Cert> certs) {
+                                            load_certificates(certs);
+                                        }
+                                    });
+                            isJobselected = true;
+                            if (mAdapter.joblistarray != null
+                                    && mAdapter.joblistarray.size() > 0) {
+                                if (mAdapter.joblistarray.get(position).orderItem != null) {
+//                            TODO OrderID
+                                    intent.putExtra("OrderID", mAdapter.joblistarray
+                                            .get(position).orderItem.getOrderID());
+                                    intent.putExtra(
+                                            Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                            mAdapter.joblistarray.get(position).orderItem
+                                                    .getCount() + "");
+                                    String OrderID = mAdapter.joblistarray
+                                            .get(position).orderItem.getOrderID();
+                                    String surveyId = "";
+                                    if (OrderID.contains("-")) {
+                                        surveyId = (OrderID.replace("-", ""));
+                                        Survey survey = Surveys.getCurrentSurve(surveyId);
+                                        boolean b = survey.isAllocationReached();
+                                        if (b)//ALLOCATION REACHED
+                                        {
+                                            Toast.makeText(JobListActivity.this,
+                                                    getString(R.string.questionnaire_open_survey_alert)
+                                                    , Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                    }
+                                } else if (mAdapter.joblistarray.get(position).surveyItem != null) {
+//                            TODO SurveyID
+                                    intent.putExtra("SurveyID", mAdapter.joblistarray
+                                            .get(position).surveyItem.getSurveyID());
+
                                 }
-                            } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
-                                Log.e("Continue_survey", "true");
-                                SplashScreen.addLog(new BasicLog(
-                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
 
-                                if (Settings.Secure.getString(
-                                        JobListActivity.this.getContentResolver(),
-                                        Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
-                                    MockGPSALERT();
-                                    return;
-                                }
-
-                                BeginReview(false);
-                            }
+                            } else
+                                intent.putExtra(
+                                        Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                        "1");
+                            intent.putExtra("OrderIndex", position);
+                            intent.putExtra("Index", position);
+                            // comunicator.JobList = null;
+                            startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
 
                         }
                     });
@@ -5130,33 +5224,87 @@ public class JobListActivity extends Activity implements OnClickListener,
                             jobListItemId = position;
                             isJobselected = true;
                             selectJobOderId = Integer.parseInt(mAdapter.joblistarray.get(position).orderItem.getOrderID());
-                            if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
-                                Log.e("Begin_Survey_CAPI_JOBS", "true");
-                                if (isBriefing == true) {
-                                    isBriefing = false;
-//                                showBriefing();
-                                } else {
-                                    SplashScreen.addLog(new BasicLog(
-                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//                            if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
+//                                Log.e("Begin_Survey_CAPI_JOBS", "true");
+//                                if (isBriefing == true) {
+//                                    isBriefing = false;
+////                                showBriefing();
+//                                } else {
+//                                    SplashScreen.addLog(new BasicLog(
+//                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                                    startLocationCheckerAdapter();
+//                                }
+//                            } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
+//                                Log.e("Continue_survey_CAPI_JOBS", "true");
+//                                SplashScreen.addLog(new BasicLog(
+//                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+//                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
+//
+//                                if (Settings.Secure.getString(
+//                                        JobListActivity.this.getContentResolver(),
+//                                        Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+//                                    MockGPSALERT();
+//                                    return;
+//                                }
+//
+//                                BeginReview(false);
+//                            }
 
-                                    startLocationCheckerAdapter();
+                            Log.e("onItemClick", mAdapter.joblistarray
+                                    .get(position).orderItem.getOrderID());
+                            Intent intent = new Intent(JobListActivity.this
+                                    .getApplicationContext(), JobDetailActivity.class);
+                            JobDetailActivity
+                                    .setCertsCallback(new jobBoardCertsListener() {
+
+                                        @Override
+                                        public void certCallBack(ArrayList<Cert> certs) {
+                                            load_certificates(certs);
+                                        }
+                                    });
+                            isJobselected = true;
+                            if (mAdapter.joblistarray != null
+                                    && mAdapter.joblistarray.size() > 0) {
+                                if (mAdapter.joblistarray.get(position).orderItem != null) {
+//                            TODO OrderID
+                                    intent.putExtra("OrderID", mAdapter.joblistarray
+                                            .get(position).orderItem.getOrderID());
+                                    intent.putExtra(
+                                            Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                            mAdapter.joblistarray.get(position).orderItem
+                                                    .getCount() + "");
+                                    String OrderID = mAdapter.joblistarray
+                                            .get(position).orderItem.getOrderID();
+                                    String surveyId = "";
+                                    if (OrderID.contains("-")) {
+                                        surveyId = (OrderID.replace("-", ""));
+                                        Survey survey = Surveys.getCurrentSurve(surveyId);
+                                        boolean b = survey.isAllocationReached();
+                                        if (b)//ALLOCATION REACHED
+                                        {
+                                            Toast.makeText(JobListActivity.this,
+                                                    getString(R.string.questionnaire_open_survey_alert)
+                                                    , Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                    }
+                                } else if (mAdapter.joblistarray.get(position).surveyItem != null) {
+//                            TODO SurveyID
+                                    intent.putExtra("SurveyID", mAdapter.joblistarray
+                                            .get(position).surveyItem.getSurveyID());
+
                                 }
-                            } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
-                                Log.e("Continue_survey_CAPI_JOBS", "true");
-                                SplashScreen.addLog(new BasicLog(
-                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
 
-                                if (Settings.Secure.getString(
-                                        JobListActivity.this.getContentResolver(),
-                                        Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
-                                    MockGPSALERT();
-                                    return;
-                                }
-
-                                BeginReview(false);
-                            }
+                            } else
+                                intent.putExtra(
+                                        Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
+                                        "1");
+                            intent.putExtra("OrderIndex", position);
+                            intent.putExtra("Index", position);
+                            // comunicator.JobList = null;
+                            startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                         }
                     });
                 }
@@ -6104,6 +6252,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
+            Log.e("LangTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(
                     JobListActivity.this,
                     getResources().getString(
@@ -6112,7 +6261,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(String result) {
-
+            Log.e("LangTask", "onPostExecute");
             if (DBHelper.getLanguages(false).size() == 0) {
                 Revamped_Loading_Dialog.hide_dialog();
                 Toast.makeText(
@@ -6133,6 +6282,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(Void... params) {
+            Log.e("LangTask", "doInBackground");
             checkConnectionPost();
             getLanguages();
             return "0";
@@ -6151,7 +6301,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
-
+            Log.e("JobbListTask", "onPreExecute");
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
             loginResponse = myPrefs.getString(Constants.POST_FIELD_LOGIN_RESPONSE, null);
 
@@ -6168,6 +6318,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("JobbListTask", "onPostExecute");
             // dialog.onPostExecute();
             if (result.equals("SessionExpire"))
                 return;
@@ -6220,7 +6371,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(Void... params) {
-
+            Log.e("JobbListTask", "doInBackground");
             if (!checkConnectionPost())
                 return "offline";
 
@@ -6484,9 +6635,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                 getResources().getString(R.string.press_back_again),
                 Toast.LENGTH_LONG).show();
         ExitFromJobList();
-        layout_job_list.setVisibility(View.GONE);
-        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
-        select_jobs = "";
+//        layout_job_list.setVisibility(View.GONE);
+//        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
     }
 
     public class isAliveTask extends AsyncTask<Void, Integer, String> {
@@ -6539,6 +6689,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
+            Log.e("QuestionnaireListTask", "onPreExecute");
             if (dialog != null) {
                 dialog.changeMessage(getString(R.string.questionnaire_downlaod_alert));
             } else {
@@ -6553,6 +6704,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             // check list here
             // validateJobs();
             // ///////////////////////////////////////
+            Log.e("QuestionnaireListTask", "onPostExecute");
             ShowDBJobs();
             Revamped_Loading_Dialog.hide_dialog();
             if (result.equals("offline")) {
@@ -6578,6 +6730,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(Void... params) {
+            Log.e("QuestionnaireListTask", "doInBackground");
             if (!checkConnectionPost())
                 return "offline";
 
@@ -6773,13 +6926,14 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
-
+            Log.e("DoLoginTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
                     "Logging in...");
         }
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("DoLoginTask", "onPostExecute");
             Revamped_Loading_Dialog.hide_dialog();
             if (Connector.setCookieManager(JobListActivity.this))
                 loadUrlInWebViewDialog(JobListActivity.this, this.url);
@@ -6789,6 +6943,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(Void... params) {
+            Log.e("DoLoginTask", "doInBackground");
             checkConnectionPost();
             if (Connector.cookies == null) {
                 return doLogin();
@@ -6811,12 +6966,13 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
-
+            Log.e("uploadingOrphanFiesTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(JobListActivity.this, null);
         }
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("uploadingOrphanFiesTask", "onPostExecute");
             Revamped_Loading_Dialog.hide_dialog();
             if (errDialog != null)
                 errDialog.dismiss();
@@ -6826,6 +6982,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(Void... params) {
+            Log.e("uploadingOrphanFiesTask", "doInBackground");
             checkConnectionPost();
             if (Connector.cookies == null) {
                 if (showLogin(doLogin()))
@@ -7194,7 +7351,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
-
+            Log.e("SubmitSurveyTask", "onPreExecute");
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
             if (progressBars != null && progressBars.getDialog() != null
                     && progressBars.getDialog().isShowing())
@@ -7205,6 +7362,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPostExecute(String result) {
             try {
+                Log.e("SubmitSurveyTask", "onPostExecute");
                 progressBars.dismissDialog();
             } catch (Exception ex) {
 
@@ -7253,6 +7411,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            Log.e("SubmitSurveyTask", "onProgressUpdate");
             if (jobmsg != null)
                 progressBars.setTprogressBarJobsText(jobmsg);
             else
@@ -7273,6 +7432,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected String doInBackground(Void... params) {
             checkConnectionPost();
+            Log.e("SubmitSurveyTask", "doInBackground");
             if (Connector.cookies == null) {
                 if (showLogin(doLogin()))
                     return "SessionExpire";
@@ -7805,6 +7965,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
+            Log.e("AlternateOrdersTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(
                     JobListActivity.this,
                     getResources().getString(
@@ -7813,6 +7974,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(ArrayList<AlternateJob> result) {
+            Log.e("AlternateOrdersTask", "onPostExecute");
             Revamped_Loading_Dialog.hide_dialog();
             showalternateJobs(
                     JobListActivity.this,
@@ -7824,6 +7986,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected ArrayList<AlternateJob> doInBackground(String... params) {
+            Log.e("AlternateOrdersTask", "doInBackground");
             checkConnectionPost();
             return getAlternateJobs(params[0]);
         }
@@ -7838,12 +8001,14 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
+            Log.e("AssignAlternateTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
                     getResources().getString(R.string.assigning_alternate_job));
         }
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("AssignAlternateTask", "onPostExecute");
             Revamped_Loading_Dialog.hide_dialog();
             if (result != null && result.toLowerCase().contains("<status>1")) {
                 this.dialog.dismiss();
@@ -7863,6 +8028,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(String... params) {
+            Log.e("AssignAlternateTask", "doInBackground");
             checkConnectionPost();
             String res = assignAlternateJobs(params[0], params[1]);
             if (res != null && res.toLowerCase().contains("<status>1")) {
@@ -8327,6 +8493,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             @Override
             protected void onPreExecute() {
+                Log.e("RefundTask", "onPreExecute");
                 if (dialogg == null) {
                     Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
                             getString(R.string.ufinsheddwnloding));
@@ -8394,7 +8561,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             @Override
             protected void onPostExecute(ArrayList<QuestionnaireData> result) {
                 // dialogg.onPostExecute();
-
+                Log.e("RefundTask", "onPostExecute");
                 // parse it here
                 InProgressAnswersData thisOrder = null;
                 ArrayList<InProgressAnswersData> datas = new ArrayList<InProgressAnswersData>();
@@ -8717,6 +8884,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             @Override
             protected ArrayList<QuestionnaireData> doInBackground(
                     Void... params) {
+                Log.e("RefundTask", "doInBackground");
                 checkConnectionPost();
                 String data = InProgressPost();
                 if (data.contains("<script>")) {
@@ -8918,7 +9086,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
-
+            Log.e("AssignAlternateDateTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
                     getResources().getString(R.string.assigning_alternate_job));
 
@@ -8926,6 +9094,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("AssignAlternateDateTask", "onPostExecute");
             Revamped_Loading_Dialog.hide_dialog();
             if (result == null) {
                 this.dialog.dismiss();
@@ -8942,6 +9111,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(String... params) {
+            Log.e("AssignAlternateDateTask", "doInBackground");
             checkConnectionPost();
             String res = assignNewDate(params[0], params[1]);
             if (res != null && res.toLowerCase().contains("<status>0")) {
@@ -9405,6 +9575,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPreExecute() {
+            Log.e("JobTask", "onPreExecute");
             Revamped_Loading_Dialog.show_dialog(JobListActivity.this, null);
         }
 
@@ -9418,6 +9589,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected String doInBackground(String... params) {
+            Log.e("JobTask", "doInBackground");
             if (Connector.cookies == null) {
                 if (showLoginAdapter(doLogin()))
                     return "SessionExpire";
@@ -9544,6 +9716,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         @Override
         protected void onPostExecute(String result) {
+            Log.e("JobTask", "onPostExecute");
             if (result == null && pendingCerts != null) {
                 ShowCertAlert(pendingCerts);
                 Revamped_Loading_Dialog.hide_dialog();
@@ -9586,6 +9759,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 if (CheckResponseAdapter(result,
                         getString(R.string.invalid_server_response_alert))) {
 //                    tvAccept.setText(getString(R.string.jd_begin_review_btn_text));
+                    Constants.accept_txt = "Begin_Survey";
                     if (mAdapter.joblistarray.get(jobListItemId).orderItem.getCount() < 2
                             || (groupedNumber != null
                             && groupedNumber.length() > 0 && serverGroupedNumber <= 1)) {
@@ -9766,6 +9940,51 @@ public class JobListActivity extends Activity implements OnClickListener,
                     BeginReview(true);
                 } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
                     BeginReview(true);
+                } else if (Constants.accept_txt == "Begin_Interview") {
+                    if (order.getOrderID().contains("-")) {
+                        if (order.getStatusName().equals("survey")) {
+                            Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
+                                    "-", ""));
+                            if (s != null && s.isAllocationReached()) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(JobListActivity.this);
+                                builder.setMessage(
+                                                getResources()
+                                                        .getString(
+                                                                R.string.questionnaire_open_survey_alert))
+                                        .setTitle(
+                                                getResources().getString(
+                                                        R.string._alert_title))
+                                        .setCancelable(false)
+                                        .setPositiveButton(
+                                                getResources().getString(
+                                                        R.string.button_ok),
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int id) {
+                                                        dialog.dismiss();
+//                                                            ((Activity) con).finish();
+                                                    }
+                                                });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+                            } else {
+                                SplashScreen.addLog(new BasicLog(
+                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                                startLocationCheckerAdapter();
+                            }
+
+                        } else {
+                            SplashScreen.addLog(new BasicLog(
+                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
+                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+
+                            startLocationCheckerAdapter();
+                        }
+                    }
                 }
             }
         });
@@ -9939,15 +10158,20 @@ public class JobListActivity extends Activity implements OnClickListener,
                 ManageTabs(2);
                 layout_job_list.setVisibility(View.VISIBLE);
                 layout_NewDashboardScreen.setVisibility(View.GONE);
+                ltabTwo.setVisibility(View.VISIBLE);
             }
         });
     }
 
     private void openDashBoard() {
-        layout_job_list.setVisibility(View.GONE);
-        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
-        select_jobs = "";
-        toolbarTitle.setText("Open Jobs");
+//        layout_job_list.setVisibility(View.GONE);
+//        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
+//        select_jobs = "";
+//        toolbarTitle.setText("Open Jobs");
+        Intent intent = new Intent(
+                JobListActivity.this,
+                NewDashboardScreenActivity.class);
+        startActivity(intent);
     }
 
 }
