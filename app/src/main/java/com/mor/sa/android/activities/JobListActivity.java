@@ -5685,34 +5685,34 @@ public class JobListActivity extends Activity implements OnClickListener,
         CheckerApp.globalFilterVar = fData;
         filterString = "";
 
-        if (!fData.jobtype.equals(getString(R.string.job_filter_default_dd_option))) {
+        if (!fData.jobtype.equals(getString(R.string.job_filter_default_choose_client))) {
             filterString += fData.jobtype;
         }
-        if (!fData.region.equals(getString(R.string.job_filter_default_dd_option))) {
+        if (!fData.region.equals(getString(R.string.job_filter_default_choose_regions))) {
             if (filterString.equals("")) {
                 filterString += fData.region;
             } else
                 filterString += ", " + fData.region;
         }
-        if (!fData.project.equals(getString(R.string.job_filter_default_dd_option))) {
+        if (!fData.project.equals(getString(R.string.job_filter_default_choose_project))) {
             if (filterString.equals("")) {
                 filterString += fData.project;
             } else
                 filterString += ", " + fData.project;
         }
-        if (!fData.city.equals(getString(R.string.job_filter_default_dd_option))) {
+        if (!fData.city.equals(getString(R.string.job_filter_choose_city_lbl))) {
             if (filterString.equals("")) {
                 filterString += fData.city;
             } else
                 filterString += ", " + fData.city;
         }
-        if (!fData.bcode.equals(getString(R.string.job_filter_default_dd_option))) {
+        if (!fData.bcode.equals(getString(R.string.job_filter_default_choose_branch))) {
             if (filterString.equals("")) {
                 filterString += fData.bcode;
             } else
                 filterString += ", " + fData.bcode;
         }
-        if (!fData.bprop.equals(getString(R.string.job_filter_default_dd_option))) {
+        if (!fData.bprop.equals(getString(R.string.job_filter_default_choose_branch_properties))) {
             if (filterString.equals("")) {
                 filterString += fData.bprop;
             } else
@@ -5754,14 +5754,14 @@ public class JobListActivity extends Activity implements OnClickListener,
     private ArrayList<orderListItem> getFilterArray(FilterData fData) {
 
         ArrayList<Order> ordrs = new ArrayList<Order>();
-        if (fData.jobtype.equals(getString(R.string.job_filter_default_dd_option))
-                && fData.city.equals(getString(R.string.job_filter_default_dd_option))
-                && fData.bcode.equals(getString(R.string.job_filter_default_dd_option))
+        if (fData.jobtype.equals(getString(R.string.job_filter_default_choose_client))
+                && fData.city.equals(getString(R.string.job_filter_choose_city_lbl))
+                && fData.bcode.equals(getString(R.string.job_filter_default_choose_branch))
                 && fData.project
-                .equals(getString(R.string.job_filter_default_dd_option))
+                .equals(getString(R.string.job_filter_default_choose_project))
                 && fData.region
-                .equals(getString(R.string.job_filter_default_dd_option))
-                && fData.bprop.equals(getString(R.string.job_filter_default_dd_option))
+                .equals(getString(R.string.job_filter_default_choose_regions))
+                && fData.bprop.equals(getString(R.string.job_filter_default_choose_branch_properties))
                 && fData.date1.equals("1/1/1900") && fData.date3.equals("1/1/1900")) {
             // joborders = Orders.getOrders();
 
@@ -5786,7 +5786,9 @@ public class JobListActivity extends Activity implements OnClickListener,
                 Order order = Orders.getOrders().get(ordercount);
                 if (Helper.IsValidOrder(order, fData.region, fData.project, fData.bprop, fData.bcode,
                         fData.jobtype, fData.city, fData.date1, fData.date3,
-                        getString(R.string.job_filter_default_dd_option))) {
+                        getString(R.string.job_filter_default_dd_option),
+                        getString(R.string.job_filter_default_choose_branch),
+                        getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties), getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project), getString(R.string.job_filter_default_choose_client))) {
                     ordrs.add(order);
                 }
             }

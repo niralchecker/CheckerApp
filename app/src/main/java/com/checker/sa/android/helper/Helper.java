@@ -715,7 +715,8 @@ public class Helper {
 
     public static boolean IsValidOrder(Order order, String region,
                                        String project, String bprop, String bcode, String jtype,
-                                       String city, String date1, String date3, String select) {
+                                       String city, String date1, String date3,
+                                       String select, String bcode_name, String city_name, String bprop_name, String region_name, String project_name, String jtype_name) {
         boolean isAdd = false;
         if (order.getOrderID().contains("-"))
             return true;
@@ -728,7 +729,7 @@ public class Helper {
             isAdd = false;
             return isAdd;
         }
-        if (bcode.equals(select))
+        if (bcode.equals(bcode_name))
             isAdd = true;
         else if (order.getBranchCode().equals(bcode))
             isAdd = true;
@@ -736,7 +737,7 @@ public class Helper {
             isAdd = false;
             return isAdd;
         }
-        if (bprop.equals(select))
+        if (bprop.equals(bprop_name))
             isAdd = true;
         else if (Orders.isBranchPropExists(order.getBranchLink(), bprop))
             isAdd = true;
@@ -744,7 +745,7 @@ public class Helper {
             isAdd = false;
             return isAdd;
         }
-        if (region.equals(select))
+        if (region.equals(region_name))
             isAdd = true;
         else if (order.getRegionName().equals(region))
             isAdd = true;
@@ -752,7 +753,7 @@ public class Helper {
             isAdd = false;
             return isAdd;
         }
-        if (project.equals(select))
+        if (project.equals(project_name))
             isAdd = true;
         else if (order.getProjectName() != null
                 && order.getProjectName().equals(project))
@@ -761,7 +762,7 @@ public class Helper {
             isAdd = false;
             return isAdd;
         }
-        if (city.equals(select))
+        if (city.equals(city_name))
             isAdd = true;
         else if (order.getCityName().equals(city))
             isAdd = true;
@@ -769,7 +770,7 @@ public class Helper {
             isAdd = false;
             return isAdd;
         }
-        if (jtype.equals(select))
+        if (jtype.equals(jtype_name))
             isAdd = true;
         else if (order.getClientName().equals(jtype))
             isAdd = true;
