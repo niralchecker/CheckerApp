@@ -2200,6 +2200,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         txttabTwo = (TextView) findViewById(R.id.txt_tab_two_balloon);
         txttabThree = (TextView) findViewById(R.id.txt_tab_three_balloon);
         txttabFour = (TextView) findViewById(R.id.txt_tab_four_balloon);
+        ImageView ivTopMenu = (ImageView) findViewById(R.id.iv_top_menu);
 
         txttabOne.setTextColor(Color.parseColor("#ffffff"));
         txttabTwo.setTextColor(Color.parseColor("#ffffff"));
@@ -2222,10 +2223,12 @@ public class JobListActivity extends Activity implements OnClickListener,
             ManageTabs(2);
             mFilter = "scheduled";
             ltabTwo.setVisibility(View.VISIBLE);
+            ivTopMenu.setVisibility(View.VISIBLE);
         } else {
             ManageTabs(1);
             mFilter = "assigned";
             ltabTwo.setVisibility(View.INVISIBLE);
+            ivTopMenu.setVisibility(View.INVISIBLE);
         }
 
         // getRQSLocation loc = new getRQSLocation(JobListActivity.this);
@@ -2513,7 +2516,6 @@ public class JobListActivity extends Activity implements OnClickListener,
 
 
         //new code
-        ImageView ivTopMenu = (ImageView) findViewById(R.id.iv_top_menu);
         ivTopMenu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
