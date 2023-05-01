@@ -1,16 +1,5 @@
 package com.checker.sa.android.dialog;
 
-import java.util.Calendar;
-import java.util.Vector;
-
-import com.checker.sa.android.data.FilterData;
-import com.checker.sa.android.data.Orders;
-import com.checker.sa.android.helper.Helper;
-import com.checker.sa.android.helper.UIHelper;
-import com.google.maps.android.MapActivity;
-import com.mor.sa.android.activities.JobListActivity;
-import com.mor.sa.android.activities.R;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,29 +8,45 @@ import android.graphics.Paint;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+
+import com.checker.sa.android.data.FilterData;
+import com.checker.sa.android.data.Order;
+import com.checker.sa.android.data.Orders;
+import com.checker.sa.android.data.orderListItem;
+import com.checker.sa.android.helper.Constants;
+import com.checker.sa.android.helper.Helper;
+import com.checker.sa.android.helper.UIHelper;
+import com.google.maps.android.MapActivity;
+import com.mor.sa.android.activities.JobListActivity;
+import com.mor.sa.android.activities.R;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Vector;
 
 public class JobFilterDialog extends Dialog implements
         android.view.View.OnClickListener {
 
     TextView calander_h, sdate_text, edate_text, s_date, e_date;
-    Spinner jobTypeSpinner, regionTypeSpinner, bregionspinner;
+    Spinner jobTypeSpinner, regionTypeSpinner, bregionspinner, statusSpinner;
     //	ImageView save_btn;
     AppCompatButton save_btn, btn_clear;
-    String jobtype, city, region, project;
+    String jobtype, city, region, project, status;
     private String branchcode;
     TextView tv;
     int tag = 0;// , d1, m1, y1, d2, m2, y2;
@@ -50,6 +55,8 @@ public class JobFilterDialog extends Dialog implements
             "10", "11", "12"};
 
     AppCompatImageView iv_calendar_start, iv_calendar_end;
+
+    CardView card_status, card_jobtypelist, card_regionlist, card_bcodelist, card_bproplist, card_bprojectslist,card_fromList;
 
     private void setInvertDisplay() {
         if (Helper.getTheme(superContext) == 0) {
@@ -176,12 +183,14 @@ public class JobFilterDialog extends Dialog implements
         btn_clear = (AppCompatButton) findViewById(R.id.btn_clear);
         iv_calendar_start = (AppCompatImageView) findViewById(R.id.iv_calendar_start);
         iv_calendar_end = (AppCompatImageView) findViewById(R.id.iv_calendar_end);
-        jobTypeSpinner = (Spinner) findViewById(R.id.jobtypelist);
 
+        statusSpinner = findViewById(R.id.spinner_status);
+        fillSpinner(statusSpinner, "status");
+        jobTypeSpinner = (Spinner) findViewById(R.id.jobtypelist);
         fillSpinner(jobTypeSpinner, "jobtype");
         regionTypeSpinner = (Spinner) findViewById(R.id.regionlist);
         fillSpinner(regionTypeSpinner, "city");
-        bregionspinner = (Spinner) findViewById(R.id.fromList);
+        bregionspinner = (Spinner) findViewById(R.id.bregionlist);
         fillSpinner(bregionspinner, "region");
         bcodelistSpinner = (Spinner) findViewById(R.id.bcodelist);
         fillSpinner(bcodelistSpinner, "bcode");
@@ -203,6 +212,33 @@ public class JobFilterDialog extends Dialog implements
         setFontSize(findViewById(R.id.Label_jobfilter_title));
         setFontSize(findViewById(R.id.calandertitle));
         setFontSize(save_btn);
+
+        card_status = findViewById(R.id.card_status);
+        card_jobtypelist = findViewById(R.id.card_jobtypelist);
+        card_regionlist = findViewById(R.id.card_regionlist);
+        card_bcodelist = findViewById(R.id.card_bcodelist);
+        card_bproplist = findViewById(R.id.card_bproplist);
+        card_bprojectslist = findViewById(R.id.card_bprojectslist);
+        card_fromList = findViewById(R.id.card_fromList);
+
+        if (Constants.select_jobs == "MY_JOBS") {
+            card_status.setVisibility(View.INVISIBLE);
+            card_jobtypelist.setVisibility(View.VISIBLE);
+            card_regionlist.setVisibility(View.VISIBLE);
+            card_bcodelist.setVisibility(View.VISIBLE);
+            card_bproplist.setVisibility(View.VISIBLE);
+            card_bprojectslist.setVisibility(View.VISIBLE);
+            card_fromList.setVisibility(View.VISIBLE);
+        } else {
+            card_status.setVisibility(View.VISIBLE);
+            card_jobtypelist.setVisibility(View.INVISIBLE);
+            card_regionlist.setVisibility(View.INVISIBLE);
+            card_bcodelist.setVisibility(View.INVISIBLE);
+            card_bproplist.setVisibility(View.INVISIBLE);
+            card_bprojectslist.setVisibility(View.INVISIBLE);
+            card_fromList.setVisibility(View.INVISIBLE);
+        }
+
         jobTypeSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
@@ -288,6 +324,22 @@ public class JobFilterDialog extends Dialog implements
                         // TODO Auto-generated method stub
                     }
                 });
+
+        statusSpinner
+                .setOnItemSelectedListener(new OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                               int arg2, long arg3) {
+                        // TODO Auto-generated method stub
+                        status = ((TextView) arg1).getText().toString();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
+                        // TODO Auto-generated method stub
+                    }
+                });
     }
 
     private void fillSpinner(Spinner spinner, String type) {
@@ -311,6 +363,8 @@ public class JobFilterDialog extends Dialog implements
             return getProjectsArraY();
         else if (str.equals("bprop"))//Branch Properties
             return getPropList();
+        else if (str.equals("status"))
+            return getStatus();
         else
             return getJobTypeArraY();//Client
     }
@@ -485,6 +539,35 @@ public class JobFilterDialog extends Dialog implements
         return items;
     }
 
+    private String[] getStatus() {
+        int count = Orders.getOrders().size();
+        Vector<String> vector = new Vector<String>();
+//        vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+        vector.add(joblist.getString(R.string.job_filter_choose_status));
+        boolean isExits = false;
+        for (int ordercount = 0; ordercount < count; ordercount++) {
+            isExits = false;
+            if (Constants.select_jobs == "CAPI_JOBS") {
+                if (Orders.getOrders().get(ordercount).getOrderID().contains("-")) {
+                    String c = Orders.getOrders().get(ordercount).getStatusName();
+                    for (int itemcount = 0; itemcount < vector.size(); itemcount++) {
+                        if (c != null && vector.get(itemcount).equals(c)) {
+                            isExits = true;
+                            break;
+                        }
+                    }
+                    if (!isExits)
+                        vector.add(c);
+                }
+            }
+        }
+        String[] items = new String[vector.size()];
+        vector.copyInto(items);
+        vector.removeAllElements();
+        vector = null;
+        return items;
+    }
+
     String getDate() {
         Calendar cl = Calendar.getInstance();
         int y = cl.get(Calendar.YEAR);
@@ -542,17 +625,15 @@ public class JobFilterDialog extends Dialog implements
                         || e_date
                         .getText()
                         .toString()
-                        .equals(joblist
-
-                                .getString(R.string.job_filter_select_date))) {
+                        .equals(joblist.getString(R.string.job_filter_select_date))) {
                     if (joblist instanceof JobListActivity) {
                         ((JobListActivity) joblist).FilterJobList(new FilterData(region, project,
                                 branchprop, branchcode, jobtype, city, "1/1/1900",
-                                "1/1/1900"));
+                                "1/1/1900", status));
                     } else if (joblist instanceof MapActivity) {
                         ((MapActivity) joblist).FilterJobList(new FilterData(region,
                                 project, branchprop, branchcode, jobtype, city,
-                                "1/1/1900", "1/1/1900"));
+                                "1/1/1900", "1/1/1900", status));
                     }
                 } else {
                     if ((s_date.getText().toString().equals(joblist
@@ -562,23 +643,23 @@ public class JobFilterDialog extends Dialog implements
                         if (joblist instanceof JobListActivity) {
                             ((JobListActivity) joblist).FilterJobList(new FilterData(region,
                                     project, branchprop, branchcode, jobtype, city,
-                                    "", ""));
+                                    "", "", status));
                         } else if (joblist instanceof MapActivity) {
                             ((MapActivity) joblist).FilterJobList(
                                     new FilterData(region, project, branchprop, branchcode,
-                                            jobtype, city, "", ""));
+                                            jobtype, city, "", "", status));
                         }
                     } else {
                         if (joblist instanceof JobListActivity) {
                             ((JobListActivity) joblist).FilterJobList(new FilterData(region,
                                     project, branchprop, branchcode, jobtype, city,
                                     s_date.getText().toString(), e_date.getText()
-                                    .toString()));
+                                    .toString(), status));
                         } else if (joblist instanceof MapActivity) {
                             ((MapActivity) joblist).FilterJobList(new FilterData(
                                     region, project, branchprop, branchcode,
                                     jobtype, city, s_date.getText().toString(),
-                                    e_date.getText().toString()));
+                                    e_date.getText().toString(), status));
                         }
 
                     }

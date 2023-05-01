@@ -614,6 +614,7 @@
 
     <!-- Job Filter Screen -->
     <string name="job_filter_title" translatable="false">Filter settings</string>
+`    <string name="job_filter_choose_status" translatable="false">Choose Status</string>
     <string name="job_filter_choose_job_type_lbl" translatable="false">Choose Client</string>
     <string name="job_filter_choose_city_lbl" translatable="false">Choose City</string>
     <string name="job_filter_date_range_lbl" translatable="false">Date Range</string>

@@ -142,7 +142,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 v.setVisibility(RelativeLayout.GONE);
                 String nulll = getString(R.string.job_filter_default_dd_option);
                 String dateNull = "1/1/1900";
-                FilterJobList(new FilterData(nulll, nulll, nulll, nulll, nulll, nulll, dateNull, dateNull));
+                FilterJobList(new FilterData(nulll,nulll, nulll, nulll, nulll, nulll, nulll, dateNull, dateNull));
                 v.setVisibility(RelativeLayout.GONE);
             }
         });

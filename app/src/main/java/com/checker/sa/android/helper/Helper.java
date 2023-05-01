@@ -716,10 +716,10 @@ public class Helper {
     public static boolean IsValidOrder(Order order, String region,
                                        String project, String bprop, String bcode, String jtype,
                                        String city, String date1, String date3,
-                                       String select, String bcode_name, String city_name, String bprop_name, String region_name, String project_name, String jtype_name) {
+                                       String status, String bcode_name, String city_name, String bprop_name, String region_name, String project_name, String jtype_name, String status_name) {
         boolean isAdd = false;
-        if (order.getOrderID().contains("-"))
-            return true;
+//        if (order.getOrderID().contains("-"))
+//            return true;
 
         if (date1.equals("1/1/1900") && date3.equals("1/1/1900"))
             isAdd = true;
@@ -773,6 +773,14 @@ public class Helper {
         if (jtype.equals(jtype_name))
             isAdd = true;
         else if (order.getClientName().equals(jtype))
+            isAdd = true;
+        else {
+            isAdd = false;
+            return isAdd;
+        }
+        if (status.equals(status_name))
+            isAdd = true;
+        else if (order.getStatusName().equals(status))
             isAdd = true;
         else {
             isAdd = false;

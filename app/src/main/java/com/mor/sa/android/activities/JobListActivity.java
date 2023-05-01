@@ -44,13 +44,11 @@ import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -69,7 +67,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -94,7 +91,6 @@ import com.checker.sa.android.data.BalloonData;
 import com.checker.sa.android.data.BasicLog;
 import com.checker.sa.android.data.BranchProperties;
 import com.checker.sa.android.data.Cert;
-import com.checker.sa.android.data.CustomFields;
 import com.checker.sa.android.data.Expiration;
 import com.checker.sa.android.data.FilterData;
 import com.checker.sa.android.data.InProgressAnswersData;
@@ -185,7 +181,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -2223,12 +2218,10 @@ public class JobListActivity extends Activity implements OnClickListener,
             ManageTabs(2);
             mFilter = "scheduled";
             ltabTwo.setVisibility(View.VISIBLE);
-            ivTopMenu.setVisibility(View.VISIBLE);
         } else {
             ManageTabs(1);
             mFilter = "assigned";
             ltabTwo.setVisibility(View.INVISIBLE);
-            ivTopMenu.setVisibility(View.INVISIBLE);
         }
 
         // getRQSLocation loc = new getRQSLocation(JobListActivity.this);
@@ -4854,6 +4847,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     btnErr.setVisibility(RelativeLayout.GONE);
                 }
                 joborders = new ArrayList<orderListItem>();
+                joborders.clear();
                 for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
 
                     joborders.add(new orderListItem(jobordersss.get(i), null));
@@ -4864,6 +4858,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                         .collect(Collectors.toList());
 //                Log.e("filtered", filtered + "  " + filtered.size());
 
+                jobs_CAPI.clear();
                 for (int i = 0; filtered != null && i < filtered.size(); i++) {
                     jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
                 }
@@ -5687,6 +5682,9 @@ public class JobListActivity extends Activity implements OnClickListener,
         CheckerApp.globalFilterVar = fData;
         filterString = "";
 
+        if (!fData.status.equals(getString(R.string.job_filter_choose_status))) {
+            filterString += fData.status;
+        }
         if (!fData.jobtype.equals(getString(R.string.job_filter_default_choose_client))) {
             filterString += fData.jobtype;
         }
@@ -5764,7 +5762,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                 && fData.region
                 .equals(getString(R.string.job_filter_default_choose_regions))
                 && fData.bprop.equals(getString(R.string.job_filter_default_choose_branch_properties))
-                && fData.date1.equals("1/1/1900") && fData.date3.equals("1/1/1900")) {
+                && fData.date1.equals("1/1/1900") && fData.date3.equals("1/1/1900") &&
+                fData.status.equals(getString(R.string.job_filter_choose_status))) {
             // joborders = Orders.getOrders();
 
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
@@ -5787,10 +5786,11 @@ public class JobListActivity extends Activity implements OnClickListener,
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
                 Order order = Orders.getOrders().get(ordercount);
                 if (Helper.IsValidOrder(order, fData.region, fData.project, fData.bprop, fData.bcode,
-                        fData.jobtype, fData.city, fData.date1, fData.date3,
-                        getString(R.string.job_filter_default_dd_option),
+                        fData.jobtype, fData.city, fData.date1, fData.date3, fData.status,
                         getString(R.string.job_filter_default_choose_branch),
-                        getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties), getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project), getString(R.string.job_filter_default_choose_client))) {
+                        getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties),
+                        getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project),
+                        getString(R.string.job_filter_default_choose_client), getString(R.string.job_filter_choose_status))) {
                     ordrs.add(order);
                 }
             }

@@ -4931,8 +4931,11 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
                 Order order = Orders.getOrders().get(ordercount);
                 if (Helper.IsValidOrder(order, fData.region, fData.project, fData.bprop, fData.bcode,
-                        fData.jobtype, fData.city, fData.date1, fData.date3,
-                        getString(R.string.job_filter_default_dd_option), getString(R.string.job_filter_default_choose_branch), getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties), getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project), getString(R.string.job_filter_default_choose_client))) {
+                        fData.jobtype, fData.city, fData.date1, fData.date3,fData.status,
+                        getString(R.string.job_filter_choose_status), getString(R.string.job_filter_default_choose_branch),
+                        getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties),
+                        getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project),
+                        getString(R.string.job_filter_default_choose_client))) {
                     ordrs.add(order);
                 }
             }
