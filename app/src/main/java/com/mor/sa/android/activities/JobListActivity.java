@@ -2202,16 +2202,16 @@ public class JobListActivity extends Activity implements OnClickListener,
         txttabThree.setTextColor(Color.parseColor("#ffffff"));
         txttabFour.setTextColor(Color.parseColor("#ffffff"));
 
-        tabSync.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
-                tabSync.getTextSize()));
-        tabOne.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
-                tabOne.getTextSize()));
-        tabTwo.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
-                tabTwo.getTextSize()));
-        tabThree.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
-                tabThree.getTextSize()));
-        tabFour.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
-                tabFour.getTextSize()));
+//        tabSync.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
+//                tabSync.getTextSize()));
+//        tabOne.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
+//                tabOne.getTextSize()));
+//        tabTwo.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
+//                tabTwo.getTextSize()));
+//        tabThree.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
+//                tabThree.getTextSize()));
+//        tabFour.setTextSize(UIHelper.getFontSizeTabs(JobListActivity.this,
+//                tabFour.getTextSize()));
 
         loadViews();
         if (select_jobs == "MY_JOBS") {

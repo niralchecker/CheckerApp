@@ -645,7 +645,7 @@
                         android:textColor="@color/tab_light_gray"
                         android:textOff="@string/job_list_tab_assigned"
                         android:textOn="@string/job_list_tab_assigned"
-                        android:textSize="10dp" />
+                        android:textSize="8sp" />
 
                     <!--                <ToggleButton-->
                     <!--                    android:id="@+id/tab_one_bottom"-->
@@ -738,7 +738,7 @@
                         android:textColor="@color/tab_text_color"
                         android:textOff="@string/job_list_tab_scheduled"
                         android:textOn="@string/job_list_tab_scheduled"
-                        android:textSize="10dp" />
+                        android:textSize="8sp" />
 
                     <!--                <ToggleButton-->
                     <!--                    android:id="@+id/tab_two_bottom"-->
@@ -925,7 +925,7 @@
                         android:textColor="@color/tab_text_color"
                         android:textOff="@string/job_list_tab_in_progress"
                         android:textOn="@string/job_list_tab_in_progress"
-                        android:textSize="10dp" />
+                        android:textSize="8sp" />
 
                     <!--                <ToggleButton-->
                     <!--                    android:id="@+id/tab_three_bottom"-->
@@ -1018,7 +1018,7 @@
                         android:textColor="@color/tab_text_color"
                         android:textOff="@string/job_list_tab_completed"
                         android:textOn="@string/job_list_tab_completed"
-                        android:textSize="10dp" />
+                        android:textSize="8sp" />
 
                     <!--                <ToggleButton-->
                     <!--                    android:id="@+id/tab_four_bottom"-->
