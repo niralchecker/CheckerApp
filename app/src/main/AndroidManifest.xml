@@ -194,7 +194,8 @@
             android:configChanges="locale|orientation" />
         <activity
             android:name=".JobListActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".ProxyActivity"
             android:configChanges="locale|orientation" />
