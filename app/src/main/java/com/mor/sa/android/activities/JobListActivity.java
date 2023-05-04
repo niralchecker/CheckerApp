@@ -1706,70 +1706,70 @@ public class JobListActivity extends Activity implements OnClickListener,
     protected void onResume() {
         super.onResume();
         Constants.setLocale(JobListActivity.this);
-        if (JobListActivity.isFromWatch) {
-            JobListActivity.isFromWatch = false;
-            finish();
-        }
-        comunicator.detailJob = JobListActivity.this;
-        tv_applied_no.setText(Integer.toString(Constants.applied_count));
+//        if (JobListActivity.isFromWatch) {
+//            JobListActivity.isFromWatch = false;
+//            finish();
+//        }
+//        comunicator.detailJob = JobListActivity.this;
+//        tv_applied_no.setText(Integer.toString(Constants.applied_count));
+////        if (CheckerApp.getQuestionResult() != null) {
+////            onQuestionResult(CheckerApp.getQuestionResult());
+////        }
+//        Bundle b = getIntent().getExtras();
+//
+////        if (b == null) {
+////            finish();
+////            return;
+////        }
+//
+////        if (b.containsKey(Constants.POST_FIELD_IS_ARCHIVE)) {
+////            finish();
+////            return;
+////        }
+//        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+////        modeSelect = myPrefs.getInt(Constants.SETTINGS_MODE_INDEX, 1);
+//        if (myPrefs.contains("ispaused")
+//                && myPrefs.getBoolean("ispaused", false)) {
+//
+//            OrderID = myPrefs.getString("order_id", "");
+//            if (OrderID.contains("-")) {
+//                Intent intent = new Intent(this.getApplicationContext(),
+//                        QuestionnaireActivity.class);
+//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+//                        myPrefs.getString("order_id", ""));
+//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+//                        myPrefs.getString("setid", ""));
+//                intent.putExtra("isPaused", true);
+//                startActivity(intent);
+//                Log.e("order_getSetID_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+//            } else {
+//                Intent intent = new Intent(this.getApplicationContext(),
+//                        QuestionnaireActivity.class);
+//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+//                        myPrefs.getString("order_id", ""));
+//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+//                        myPrefs.getString("setid", ""));
+//                intent.putExtra("isPaused", true);
+//                startActivity(intent);
+//                Log.e("order_getSetID_else_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
+//            }
+//
+//            Log.e("OrderID_onResume", OrderID);
+//            return;
+//        }
 //        if (CheckerApp.getQuestionResult() != null) {
+//
+//            b = getIntent().getExtras();
+////            OrderID = mAdapter.joblistarray
+////                    .get(jobListItemId).orderItem.getOrderID();
+//            OrderID = myPrefs.getString("order_id", "");
+//            if (b != null && OrderID == null || OrderID.length() == 0) {
+//
+//                OrderID = String.valueOf(selectJobOderId);
+////                OrderID = b.getString("OrderID");
+//            }
 //            onQuestionResult(CheckerApp.getQuestionResult());
 //        }
-        Bundle b = getIntent().getExtras();
-
-//        if (b == null) {
-//            finish();
-//            return;
-//        }
-
-//        if (b.containsKey(Constants.POST_FIELD_IS_ARCHIVE)) {
-//            finish();
-//            return;
-//        }
-        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-//        modeSelect = myPrefs.getInt(Constants.SETTINGS_MODE_INDEX, 1);
-        if (myPrefs.contains("ispaused")
-                && myPrefs.getBoolean("ispaused", false)) {
-
-            OrderID = myPrefs.getString("order_id", "");
-            if (OrderID.contains("-")) {
-                Intent intent = new Intent(this.getApplicationContext(),
-                        QuestionnaireActivity.class);
-                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                        myPrefs.getString("order_id", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
-                intent.putExtra("isPaused", true);
-                startActivity(intent);
-                Log.e("order_getSetID_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
-            } else {
-                Intent intent = new Intent(this.getApplicationContext(),
-                        QuestionnaireActivity.class);
-                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                        myPrefs.getString("order_id", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
-                intent.putExtra("isPaused", true);
-                startActivity(intent);
-                Log.e("order_getSetID_else_onResume", myPrefs.getString("order_id", "") + "," + Constants.POST_FIELD_QUES_ORDER_ID);
-            }
-
-            Log.e("OrderID_onResume", OrderID);
-            return;
-        }
-        if (CheckerApp.getQuestionResult() != null) {
-
-            b = getIntent().getExtras();
-//            OrderID = mAdapter.joblistarray
-//                    .get(jobListItemId).orderItem.getOrderID();
-            OrderID = myPrefs.getString("order_id", "");
-            if (b != null && OrderID == null || OrderID.length() == 0) {
-
-                OrderID = String.valueOf(selectJobOderId);
-//                OrderID = b.getString("OrderID");
-            }
-            onQuestionResult(CheckerApp.getQuestionResult());
-        }
     }
 
     public void onStartDevicePermissions() {
@@ -2542,33 +2542,33 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
         });
 
-        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-        if (myPrefs.contains("ispaused")
-                && myPrefs.getBoolean("ispaused", false)) {
-            OrderID = myPrefs.getString("order_id", "");
-            if (OrderID.contains("-")) {
-                Intent intent = new Intent(this.getApplicationContext(),
-                        QuestionnaireActivity.class);
-                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                        myPrefs.getString("order_id", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
-                comunicator.detailJob = null;
-                startActivity(intent);
-                Log.e("OrderID_onCreate", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
-            } else {
-                Intent intent = new Intent(this.getApplicationContext(),
-                        QuestionnaireActivity.class);
-                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
-                        myPrefs.getString("order_id", ""));
-                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
-                        myPrefs.getString("setid", ""));
-                comunicator.detailJob = null;
-                startActivity(intent);
-                Log.e("OrderID_onCreate_else", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
-            }
-            return;
-        }
+//        myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+//        if (myPrefs.contains("ispaused")
+//                && myPrefs.getBoolean("ispaused", false)) {
+//            OrderID = myPrefs.getString("order_id", "");
+//            if (OrderID.contains("-")) {
+//                Intent intent = new Intent(this.getApplicationContext(),
+//                        QuestionnaireActivity.class);
+//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+//                        myPrefs.getString("order_id", ""));
+//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+//                        myPrefs.getString("setid", ""));
+//                comunicator.detailJob = null;
+//                startActivity(intent);
+//                Log.e("OrderID_onCreate", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
+//            } else {
+//                Intent intent = new Intent(this.getApplicationContext(),
+//                        QuestionnaireActivity.class);
+//                intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
+//                        myPrefs.getString("order_id", ""));
+//                intent.putExtra(Constants.FIELD_ORDER_SET_ID,
+//                        myPrefs.getString("setid", ""));
+//                comunicator.detailJob = null;
+//                startActivity(intent);
+//                Log.e("OrderID_onCreate_else", OrderID + "," + Constants.POST_FIELD_QUES_ORDER_ID + "," + myPrefs.getString("order_id", ""));
+//            }
+//            return;
+//        }
 
         tv_applied_no = findViewById(R.id.tv_applied_no);
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
@@ -4750,11 +4750,74 @@ public class JobListActivity extends Activity implements OnClickListener,
                 isBranchPropErr = myPrefs.getBoolean(
                         Constants.ALREADY_BRANCHPROPERR, false);
 
+//                joborders = new ArrayList<orderListItem>();
+//                for (int i = 0; i < jobordersss.size(); i++) {
+//                    //TODO ****
+//                    joborders.add(new orderListItem(jobordersss.get(i), null));
+//                }
+
                 joborders = new ArrayList<orderListItem>();
-                for (int i = 0; i < jobordersss.size(); i++) {
-                    //TODO ****
+                joborders.clear();
+                for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
+
                     joborders.add(new orderListItem(jobordersss.get(i), null));
                 }
+
+                filtered = joborders.stream()
+                        .filter(string -> string.orderItem.getOrderID().contains("-"))
+                        .collect(Collectors.toList());
+//                Log.e("filtered", filtered + "  " + filtered.size());
+
+                jobs_CAPI.clear();
+                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+                }
+
+//                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
+//                Log.e("joborders_activity", String.valueOf(joborders.size()));
+//                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
+
+                // Get My jobs excluding CAPI....
+                List<orderListItem> list1 = filtered;
+                List<orderListItem> list2 = joborders;
+
+                List<orderListItem> union = new ArrayList<orderListItem>(list1);
+                union.addAll(list2);
+
+                List<orderListItem> intersection = new ArrayList<orderListItem>(list1);
+                intersection.retainAll(list2);
+                union.removeAll(intersection);
+                // Print the result
+                filtered_other_jobs = new ArrayList<orderListItem>();
+                for (orderListItem n : union) {
+                    filtered_other_jobs.add(new orderListItem(n.orderItem, null));
+                }
+                Log.e("union_size", String.valueOf(filtered_other_jobs.size()));
+
+                //Count jobs for dash board....
+                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned"))
+                        .collect(Collectors.toList());
+                my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
+
+                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
+                        .collect(Collectors.toList());
+                my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
+
+                List<orderListItem> filtered_status_assigned = filtered.stream()
+                        .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
+                        .collect(Collectors.toList());
+                capi_assigned_count = String.valueOf(filtered_status_assigned.size());
+
+                List<orderListItem> filtered_status_inProgress = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
+                        .collect(Collectors.toList());
+                capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
+                List<orderListItem> filtered_status_completed = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
+                        .collect(Collectors.toList());
+                capi_status_returned = String.valueOf(filtered_status_completed.size());
 
             }
 
