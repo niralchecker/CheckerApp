@@ -665,6 +665,11 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 // seting list here
                 showDbjobsPostPart();
                 // ManageTabs(1);
+                tv_CAPI_assigned.setText(capi_assigned_count);
+                tv_CAPI_inProgress.setText(capi_status_inProgress);
+                tv_CAPI_returned.setText(capi_status_returned);
+                tv_waiting_acceptance.setText(my_jobs_accept);
+                tv_waiting_implementation.setText(my_jobs_implement);
 
             }
 
@@ -769,10 +774,66 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 isBranchPropErr = myPrefs.getBoolean(
                         Constants.ALREADY_BRANCHPROPERR, false);
 
+//                joborders = new ArrayList<orderListItem>();
+//                for (int i = 0; i < jobordersss.size(); i++) {
+//                    joborders.add(new orderListItem(jobordersss.get(i), null));
+//                }
                 joborders = new ArrayList<orderListItem>();
-                for (int i = 0; i < jobordersss.size(); i++) {
+                for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
+
                     joborders.add(new orderListItem(jobordersss.get(i), null));
                 }
+
+                filtered = joborders.stream()
+                        .filter(string -> string.orderItem.getOrderID().contains("-"))
+                        .collect(Collectors.toList());
+//                Log.e("filtered", filtered + "  " + filtered.size());
+
+                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+                }
+
+                // Get My jobs excluding CAPI....
+                List<orderListItem> list1 = filtered;
+                List<orderListItem> list2 = joborders;
+
+                List<orderListItem> union = new ArrayList<orderListItem>(list1);
+                union.addAll(list2);
+
+                List<orderListItem> intersection = new ArrayList<orderListItem>(list1);
+                intersection.retainAll(list2);
+                union.removeAll(intersection);
+                // Print the result
+                filtered_other_jobs = new ArrayList<orderListItem>();
+                for (orderListItem n : union) {
+                    filtered_other_jobs.add(new orderListItem(n.orderItem, null));
+                }
+                Log.e("union_size", String.valueOf(filtered_other_jobs.size()));
+
+                //Count jobs for dash board....
+                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned"))
+                        .collect(Collectors.toList());
+                my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
+
+                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
+                        .collect(Collectors.toList());
+                my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
+
+                List<orderListItem> filtered_status_assigned = filtered.stream()
+                        .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
+                        .collect(Collectors.toList());
+                capi_assigned_count = String.valueOf(filtered_status_assigned.size());
+
+                List<orderListItem> filtered_status_inProgress = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
+                        .collect(Collectors.toList());
+                capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
+                List<orderListItem> filtered_status_completed = filtered.stream()
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
+                        .collect(Collectors.toList());
+                capi_status_returned = String.valueOf(filtered_status_completed.size());
 
             }
 
