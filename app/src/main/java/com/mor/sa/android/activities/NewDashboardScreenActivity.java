@@ -49,6 +49,7 @@ import androidx.cardview.widget.CardView;
 
 import com.checker.sa.android.adapter.CheckertificateAdapter;
 import com.checker.sa.android.adapter.JobItemAdapter;
+import com.checker.sa.android.adapter.sideMEnuAdapter;
 import com.checker.sa.android.data.AltLanguage;
 import com.checker.sa.android.data.Answers;
 import com.checker.sa.android.data.ArchiveData;
@@ -80,18 +81,23 @@ import com.checker.sa.android.data.parser.Parser;
 import com.checker.sa.android.data.validationSets;
 import com.checker.sa.android.db.DBAdapter;
 import com.checker.sa.android.db.DBHelper;
+import com.checker.sa.android.dialog.JobFilterDialog;
 import com.checker.sa.android.dialog.Revamped_Loading_Dialog;
 import com.checker.sa.android.helper.Constants;
 import com.checker.sa.android.helper.Helper;
 import com.checker.sa.android.helper.LanguageDialog;
+import com.checker.sa.android.helper.jobBoardCertsListener;
 import com.checker.sa.android.transport.Connector;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+import com.google.maps.android.JobBoardActivityFragment;
+import com.google.maps.android.MapActivity;
 
 import org.apache.http.NameValuePair;
 
@@ -159,6 +165,10 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
     ArrayList<orderListItem> jobs_CAPI = new ArrayList<orderListItem>();
     TextView tv_waiting_acceptance, tv_waiting_implementation, tv_CAPI_assigned, tv_CAPI_inProgress, tv_CAPI_returned, tv_checker_passed, tv_checker_toBePassed;
     String capi_assigned_count, capi_status_inProgress, capi_status_returned, my_jobs_accept, my_jobs_implement;
+    private View sidemenuicon1, menuView;
+    private boolean isMenuOpen = false;
+    private ListView menuListView;
+    private ArrayList<com.checker.sa.android.data.MenuItem> menuItems;
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -268,6 +278,226 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         tv_CAPI_returned.setText(capi_status_returned);
         tv_waiting_acceptance.setText(my_jobs_accept);
         tv_waiting_implementation.setText(my_jobs_implement);
+        sidemenuicon1 = (View) findViewById(R.id.sidemenuicon1);
+        menuView = findViewById(R.id.view_side_menu);
+        menuListView = (ListView) findViewById(R.id.view_side_menu_list_view);
+
+        menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // if (!Constants.isQAAllowed)
+                // position++;
+                if (Helper.getSystemURL() != null
+                        && !Helper.getSystemURL().toLowerCase()
+                        .contains(Helper.CONST_BE_THERE)
+                        && Constants.isHS()
+                        && onOptionsItemSelectedHS(position)) {
+                    menuView.setVisibility(RelativeLayout.GONE);
+                    isMenuOpen = false;
+                } else if (Helper.getSystemURL() != null
+                        && !Helper.getSystemURL().toLowerCase()
+                        .contains(Helper.CONST_BE_THERE)
+                        && onOptionsItemSelected(position)) {
+                    menuView.setVisibility(RelativeLayout.GONE);
+                    isMenuOpen = false;
+                } else if (Helper.getSystemURL() != null
+                        && Helper.getSystemURL().toLowerCase()
+                        .contains(Helper.CONST_BE_THERE)
+                        && Helper.isMisteroMenu
+                        && onOptionsItemSelectedMistero(position)) {
+                    menuView.setVisibility(RelativeLayout.GONE);
+                    isMenuOpen = false;
+                } else if (Helper.getSystemURL() != null
+                        && Helper.getSystemURL().toLowerCase()
+                        .contains(Helper.CONST_BE_THERE)
+                        && !Helper.isMisteroMenu
+                        && onOptionsItemSelectedHS(position)) {
+                    menuView.setVisibility(RelativeLayout.GONE);
+                    isMenuOpen = false;
+                }
+            }
+        });
+
+        findViewById(R.id.view_side_menu_top_green).setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
+
+        findViewById(R.id.view_side_menu_side_black).setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        menuView.setVisibility(RelativeLayout.GONE);
+                        isMenuOpen = false;
+                    }
+                });
+
+        findViewById(R.id.btnback).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                menuView.setVisibility(RelativeLayout.GONE);
+                isMenuOpen = false;
+            }
+        });
+
+        menuItems = new ArrayList<com.checker.sa.android.data.MenuItem>();
+
+//        synchMenuItems = new ArrayList<com.checker.sa.android.data.MenuItem>();
+//        synchMenuItems
+//                .add(new com.checker.sa.android.data.MenuItem(
+//                        getString(R.string.start_download),
+//                        getString(R.string.start_download),
+//                        getIcon("downoad_ico")));// 0
+//        synchMenuItems.add(new com.checker.sa.android.data.MenuItem(
+//                getString(R.string.start_upload),
+//                getString(R.string.start_upload), getIcon("upload_ico")));// 1
+        menuItems
+                .add(new com.checker.sa.android.data.MenuItem(
+                        getString(R.string.job_list_home),
+                        getString(R.string.job_list_home),
+                        getIcon("home")));// dash board
+        if (Constants.isQAAllowed)
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.questionnaire_send_bug),
+                    getString(R.string.questionnaire_send_bug),
+                    R.drawable.action_search)); // 0
+
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)
+                && Helper.isMisteroMenu) {
+        } else
+            menuItems
+                    .add(new com.checker.sa.android.data.MenuItem(
+                            getString(R.string.start_download),
+                            getString(R.string.start_download),
+                            getIcon("downoad_ico")));// 0
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)
+                && Helper.isMisteroMenu) {
+        } else
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.start_upload),
+                    getString(R.string.start_upload), getIcon("upload_ico")));// 1
+        if (Constants.isHS()
+                || (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu)) {
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.settings_job_board),
+                    getString(R.string.settings_job_board),
+                    getIcon("job_board")));// 2
+
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.settings_refund_report),
+                    getString(R.string.settings_refund_report),
+                    getIcon("refund")));// 3
+        }
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)
+                && Helper.isMisteroMenu) {
+        } else
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.start_download_alt),
+                    getString(R.string.start_download_alt),
+                    getIcon("downoad_alt")));// 4
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)
+                && Helper.isMisteroMenu) {
+        } else
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.settings_page_title),
+                    getString(R.string.settings_page_title), getIcon("gear")));// 5
+
+//        menuItems.add(new com.checker.sa.android.data.MenuItem(
+//                getString(R.string.job_list_menu_upload_complete_job),
+//                getString(R.string.job_list_menu_upload_complete_job),
+//                getIcon("filterjobs")));// 6
+
+        menuItems.add(new com.checker.sa.android.data.MenuItem(
+                getString(R.string.job_list_menu_update_list),
+                getString(R.string.job_list_menu_update_list),
+                getIcon("worldmap")));// 7
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)
+                && Helper.isMisteroMenu) {
+        } else
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.start_checkertificates),
+                    getString(R.string.start_checkertificates),
+                    R.drawable.checkerificate));// 8
+        // if (Helper.getSystemURL() != null
+        // && Helper.getSystemURL().toLowerCase()
+        // .contains(Helper.CONST_BE_THERE)
+        // && Helper.isMisteroMenu) {
+        // }
+        // else
+        // menuItems.add(new com.checker.sa.android.data.MenuItem(
+        // getString(R.string.start_upload_inprogress),
+        // getString(R.string.start_upload_inprogress),
+        // R.drawable.downoad_ico_progress));
+        // if (Helper.getSystemURL() != null
+        // && Helper.getSystemURL().toLowerCase()
+        // .contains(Helper.CONST_BE_THERE)
+        // && Helper.isMisteroMenu)
+        // menuItems.add(new com.checker.sa.android.data.MenuItem(
+        // getString(R.string.menu_shopper_info),
+        // getString(R.string.menu_shopper_info), getIcon("loader1")));// 8
+        if (Helper.getSystemURL() != null
+            // && Helper.isMisteroMenu
+        )
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.menu_edit_shopper_info),
+                    getString(R.string.menu_edit_shopper_info),
+                    getIcon("editshopper")));// 8
+        if (Helper.getSystemURL() != null
+            // && Helper.isMisteroMenu
+        )
+
+            menuItems
+                    .add(new com.checker.sa.android.data.MenuItem(
+                            getString(R.string.menu_review_history),
+                            getString(R.string.menu_review_history),
+                            getIcon("history")));// 10
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)
+            // && Helper.isMisteroMenu
+        )
+            menuItems.add(new com.checker.sa.android.data.MenuItem(
+                    getString(R.string.menu_contact),
+                    getString(R.string.menu_contact), getIcon("wbt_loader7")));// 10
+
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)
+                && Helper.isMisteroMenu) {
+        } else
+            menuItems
+                    .add(new com.checker.sa.android.data.MenuItem(
+                            getString(R.string.job_list_exit),
+                            getString(R.string.job_list_exit),
+                            getIcon("exit_joblist")));// 8
+
+        menuItems
+                .add(new com.checker.sa.android.data.MenuItem(
+                        getString(R.string.job_list_archive),
+                        getString(R.string.job_list_archive),
+                        getIcon("archive")));
+
+        menuListView.setAdapter(new sideMEnuAdapter(NewDashboardScreenActivity.this,
+                menuItems));
 
         cardView_CAPI.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,7 +535,407 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 }
             }
         });
+
+        sidemenuicon1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Refresh db here
+                // openOptionsMenu();
+                // open side menu here
+                if (isMenuOpen) {
+                    isMenuOpen = false;
+                    menuView.setVisibility(RelativeLayout.GONE);
+                } else {
+                    isMenuOpen = true;
+                    menuListView.setAdapter(new sideMEnuAdapter(NewDashboardScreenActivity.this,
+                            menuItems));
+                    menuView.setVisibility(RelativeLayout.VISIBLE);
+                }
+            }
+        });
     }
+
+    public boolean onOptionsItemSelectedHS(int count) {
+        switch (count) {
+            case 0: // Dashboard
+                openDashBoard();
+                break;
+            case 1:
+
+                startDownloadingJobs(false, false);
+                break;
+            case 2:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+                start_uploading(false);
+                break;
+            case 3:
+                // open job board
+                // MAPSSSS
+                // Getting status
+                Intent intent = null;
+                int status = GooglePlayServicesUtil
+                        .isGooglePlayServicesAvailable(getBaseContext());
+
+                if (status != ConnectionResult.SUCCESS) {
+                    customAlert(
+                            NewDashboardScreenActivity.this,
+                            getResources().getString(
+                                    R.string.google_services_not_avaliable));
+                } else {
+                    isJobselected = true;
+                    intent = new Intent(
+                            NewDashboardScreenActivity.this.getApplicationContext(),
+                            JobBoardActivityFragment.class);
+                    JobBoardActivityFragment
+                            .setJobBardCallback(new jobBoardCertsListener() {
+
+                                @Override
+                                public void certCallBack(ArrayList<Cert> certs) {
+                                    load_certificates(certs);
+                                }
+                            });
+                    intent.putExtra("orderid", "-1");
+                    // comunicator.JobList = this;
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                }
+
+                break;
+            case 4:
+                // open refund report
+                isJobselected = true;
+                intent = new Intent(this.getApplicationContext(),
+                        ShopperRefundReportActivity.class);
+                // comunicator.JobList = null;
+                startActivity(intent);
+                break;
+            case 5:
+                showLanguageDialog(
+                        getResources().getString(
+                                R.string.preffered_questionnaire_language), false);
+                break;
+
+            case 6:
+                isJobselected = true;
+                intent = new Intent(this.getApplicationContext(),
+                        NewSettingsActivity.class);
+                // comunicator.JobList = null;
+                startActivity(intent);
+                finish();
+                break;
+//            case 6:
+//                // FILTER jobs
+//                JobFilterDialog dialog = new JobFilterDialog(this);
+//                dialog.show();
+//                isJobselected = true;
+//                break;
+
+            case 7:
+                // MAPSSSS
+                // Getting status
+                status = GooglePlayServicesUtil
+                        .isGooglePlayServicesAvailable(getBaseContext());
+
+                if (status != ConnectionResult.SUCCESS) {
+                    customAlert(
+                            NewDashboardScreenActivity.this,
+                            getResources().getString(
+                                    R.string.google_services_not_avaliable));
+                } else {
+                    isJobselected = true;
+                    intent = new Intent(
+                            NewDashboardScreenActivity.this.getApplicationContext(),
+                            MapActivity.class);
+                    intent.putExtra("orderid", "-1");
+                    // comunicator.JobList = null;
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                }
+                break;
+            case 8:
+                load_certificates(null);
+                break;
+
+            case 9:// edit hopper
+                editShopperInfo();
+                break;
+
+            case 10:// reviews history
+                isJobselected = true;
+                intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(),
+                        CritHistoryReportActivity.class);
+                // comunicator.JobList = null;
+                startActivity(intent);
+
+                // historyOfReview();
+                break;
+            case 11:
+                ExitFromJobList();
+                break;
+            case 12:
+                openArciveScreen();
+                break;
+
+        }
+        return true;
+    }
+
+    public boolean onOptionsItemSelectedMistero(int count) {
+
+        // 0 sendbug//not right now
+
+        // 0 download
+        // 1 upload
+        // 2 job board
+        // 3 refund report
+        // 4 download alternate
+        // 5 settings
+        // 6 filter
+        // 7 map
+        // ////////////////
+        // 8 upload in progress
+        // 9 download in progress
+        switch (count) {
+
+            case 1:
+
+                // open job board
+                // MAPSSSS
+                // Getting status
+                Intent intent = null;
+                int status = GooglePlayServicesUtil
+                        .isGooglePlayServicesAvailable(getBaseContext());
+
+                if (status != ConnectionResult.SUCCESS) {
+                    customAlert(
+                            NewDashboardScreenActivity.this,
+                            getResources().getString(
+                                    R.string.google_services_not_avaliable));
+                } else {
+                    isJobselected = true;
+                    intent = new Intent(
+                            NewDashboardScreenActivity.this.getApplicationContext(),
+                            JobBoardActivityFragment.class);
+                    JobBoardActivityFragment
+                            .setJobBardCallback(new jobBoardCertsListener() {
+
+                                @Override
+                                public void certCallBack(ArrayList<Cert> certs) {
+                                    load_certificates(certs);
+                                }
+                            });
+                    intent.putExtra("orderid", "-1");
+                    comunicator.JobList = this;
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                }
+
+                break;
+            case 2:
+                isJobselected = true;
+                intent = new Intent(this.getApplicationContext(),
+                        ShopperRefundReportActivity.class);
+                // comunicator.JobList = null;
+                startActivity(intent);
+                break;
+            case 3:// shopper info
+                JobFilterDialog dialog = new JobFilterDialog(this);
+                dialog.show();
+                isJobselected = true;
+                // showShopperInfo();
+                break;
+
+            case 4:
+                // MAPSSSS
+                // Getting status
+                status = GooglePlayServicesUtil
+                        .isGooglePlayServicesAvailable(getBaseContext());
+
+                if (status != ConnectionResult.SUCCESS) {
+                    customAlert(
+                            NewDashboardScreenActivity.this,
+                            getResources().getString(
+                                    R.string.google_services_not_avaliable));
+                } else {
+                    isJobselected = true;
+                    comunicator.JobList = NewDashboardScreenActivity.this;
+                    intent = new Intent(
+                            NewDashboardScreenActivity.this.getApplicationContext(),
+                            MapActivity.class);
+                    intent.putExtra("orderid", "-1");
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                }
+                break;
+
+            // case 4:// shopper info
+            // showShopperInfo();
+            // break;
+
+            case 5:// edit hopper
+                editShopperInfo();
+                break;
+
+            case 6:// reviews history
+                isJobselected = true;
+                intent = new Intent(this.getApplicationContext(),
+                        CritHistoryReportActivity.class);
+                // comunicator.JobList = null;
+                startActivity(intent);
+
+                // historyOfReview();
+                break;
+            case 7:// contact using whatsapp
+
+                try {
+
+                    Intent sendIntent = new Intent(Intent.ACTION_SENDTO,
+                            Uri.parse("smsto:" + "" + Helper.helpline + "?body="
+                                    + ""));
+                    sendIntent.setPackage("com.whatsapp");
+                    startActivity(sendIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    customAlert(
+                            NewDashboardScreenActivity.this,
+                            getResources().getString(
+                                    R.string.whatsapp_not_available));
+                    // Intent sendIntent = new Intent(Intent.ACTION_DIAL);
+                    // sendIntent.setData(Uri.parse("tel:" + Helper.helpline));
+                    // startActivity(sendIntent);
+                    // Toast.makeText(NewDashboardScreenActivity.this,
+                    // "it may be you dont have whatsapp", Toast.LENGTH_LONG)
+                    // .show();
+                }
+
+                break;
+        }
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(int count) {
+
+        // 0 sendbug//not right now
+
+        // 0 download
+        // 1 upload
+        // 2 job board
+        // 3 refund report
+        // 4 download alternate
+        // 5 settings
+        // 6 filter
+        // 7 map
+        // ////////////////
+        // 8 upload in progress
+        // 9 download in progress
+        switch (count) {
+            case 1:
+
+                startDownloadingJobs(false, false);
+                break;
+            case 2:
+                start_uploading(false);
+                break;
+
+            case 3:
+                showLanguageDialog(
+                        getResources().getString(
+                                R.string.preffered_questionnaire_language), false);
+                break;
+
+            case 4:
+                isJobselected = true;
+                Intent intent = new Intent(this.getApplicationContext(),
+                        NewSettingsActivity.class);
+                comunicator.JobList = null;
+                startActivity(intent);
+                finish();
+                break;
+            case 5:
+                // FILTER jobs
+                JobFilterDialog dialog = new JobFilterDialog(this);
+                dialog.show();
+                isJobselected = true;
+                break;
+
+            case 6:
+                // MAPSSSS
+                // Getting status
+                int status = GooglePlayServicesUtil
+                        .isGooglePlayServicesAvailable(getBaseContext());
+
+                if (status != ConnectionResult.SUCCESS) {
+                    customAlert(
+                            NewDashboardScreenActivity.this,
+                            getResources().getString(
+                                    R.string.google_services_not_avaliable));
+                } else {
+                    isJobselected = true;
+                    intent = new Intent(
+                            NewDashboardScreenActivity.this.getApplicationContext(),
+                            MapActivity.class);
+                    intent.putExtra("orderid", "-1");
+                    comunicator.JobList = null;
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                }
+                break;
+
+        }
+        return true;
+    }
+
+    private void openDashBoard() {
+        Intent intent = new Intent(
+                this,
+                NewDashboardScreenActivity.class);
+        startActivity(intent);
+    }
+
+    private void ExitFromJobList() {
+        mAdapter = null;
+//        jobItemList.setAdapter(null);
+        isJobselected = true;
+        Intent intent = new Intent(this.getApplicationContext(),
+                NewLoginActivity.class);
+        intent.putExtra("FromJoblist", true);
+        // comunicator.JobList = null;
+        startActivity(intent);
+        finish();
+        if (validationSets.sets != null)
+            validationSets.sets.clear();
+
+    }
+
+    public boolean startDownloadingJobs(boolean isPullToRefreshLibrary,
+                                        boolean isOrderOnly) {
+//        btnErr.setVisibility(RelativeLayout.GONE);
+        SharedPreferences.Editor prefsEditor = myPrefs.edit();
+        prefsEditor.putLong(Constants.AUTOSYNC_CURRENT_TIME,
+                System.currentTimeMillis());
+        prefsEditor.commit();
+
+        executeJobList(isPullToRefreshLibrary, isOrderOnly);
+        return true;
+    }
+
+    private int getIcon(String iconName) {
+        int newResImgId = 0;
+        int ResImgId = this.getResources().getIdentifier(iconName, "drawable",
+                this.getPackageName());
+        if (Helper.getSystemURL() != null
+                && Helper.getSystemURL().toLowerCase()
+                .contains(Helper.CONST_BE_THERE)) {
+            String temp_iconName = Helper.imgprefix + iconName;
+            newResImgId = this.getResources().getIdentifier(temp_iconName,
+                    "drawable", this.getPackageName());
+            if (newResImgId == 0) {
+                newResImgId = this.getResources().getIdentifier(iconName,
+                        "drawable", this.getPackageName());
+            }
+            return newResImgId;
+        }
+        newResImgId = this.getResources().getIdentifier(iconName, "drawable",
+                this.getPackageName());
+        return ResImgId;
+    }
+
 
     private void initGoogleApiClient() {
         mApiClient = new GoogleApiClient.Builder(this).addApi(Wearable.API)
@@ -317,10 +947,10 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
 
     private void loadOfflineJobs(boolean login_check) {
         // SQLiteDatabase db = DBAdapter.openDataBase();
-        // Toast.makeText(JobListActivity.this, "Showing DB jobs",
+        // Toast.makeText(NewDashboardScreenActivity.this, "Showing DB jobs",
         // Toast.LENGTH_LONG).show();
         ShowDBJobs();
-        // Toast.makeText(JobListActivity.this, "DB jobs shown",
+        // Toast.makeText(NewDashboardScreenActivity.this, "DB jobs shown",
         // Toast.LENGTH_LONG)
         // .show();
         // validateJobs();
@@ -4766,7 +5396,8 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 if (CheckerApp.globalFilterVar != null) {
                     //updateFiler(null);
                     joborders = getFilterArray(CheckerApp.globalFilterVar);
-                } else updateFiler(null);
+                }
+//                else updateFiler(null);
 //                if (mAdapter == null) {
 //                    mAdapter = new JobItemAdapter(NewDashboardScreenActivity.this, joborders,
 //                            mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
@@ -4798,32 +5429,32 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
     }
 
 
-    private void updateFiler(String object) {
-        if (object == null)
-            CheckerApp.globalFilterVar = null;
-        final View v = findViewById(R.id.layout_filter);
-
-        TextView tx = (TextView) findViewById(R.id.txtfilter);
-        tx.setText(object);
-        ImageView btnCross = (ImageView) findViewById(R.id.crossbtn);
-        btnCross.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Log.e("btnCross", "true");
-                v.setVisibility(RelativeLayout.GONE);
-                CheckerApp.globalFilterVar = null;
-                ShowDBJobs();
-            }
-        });
-        if (object == null) {
-            v.setVisibility(RelativeLayout.GONE);
-        } else {
-            tx.setText(object);
-            v.setVisibility(RelativeLayout.VISIBLE);
-        }
-
-    }
+//    private void updateFiler(String object) {
+//        if (object == null)
+//            CheckerApp.globalFilterVar = null;
+//        final View v = findViewById(R.id.layout_filter);
+//
+//        TextView tx = (TextView) findViewById(R.id.txtfilter);
+//        tx.setText(object);
+//        ImageView btnCross = (ImageView) findViewById(R.id.crossbtn);
+//        btnCross.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                Log.e("btnCross", "true");
+//                v.setVisibility(RelativeLayout.GONE);
+//                CheckerApp.globalFilterVar = null;
+//                ShowDBJobs();
+//            }
+//        });
+//        if (object == null) {
+//            v.setVisibility(RelativeLayout.GONE);
+//        } else {
+//            tx.setText(object);
+//            v.setVisibility(RelativeLayout.VISIBLE);
+//        }
+//
+//    }
 
     private void ShowOrphanFiles() {
         LongOrphanOperation op = new LongOrphanOperation();
@@ -4992,7 +5623,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
                 Order order = Orders.getOrders().get(ordercount);
                 if (Helper.IsValidOrder(order, fData.region, fData.project, fData.bprop, fData.bcode,
-                        fData.jobtype, fData.city, fData.date1, fData.date3,fData.status,
+                        fData.jobtype, fData.city, fData.date1, fData.date3, fData.status,
                         getString(R.string.job_filter_choose_status), getString(R.string.job_filter_default_choose_branch),
                         getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties),
                         getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project),
