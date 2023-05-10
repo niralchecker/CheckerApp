@@ -4443,7 +4443,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             } catch (Exception ex) {
             }
 
-            if (joborders != null && joborders.size() >= 1) {
+            if (filtered_other_jobs != null && filtered_other_jobs.size() >= 1) {
                 Orders.setListOrders(jobordersss);
                 Orders.setBranchProps(branchProps);
                 Surveys.setSets(DBHelper.getSurveyyRecords());
@@ -4461,8 +4461,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                     ordrs.toArray(ordersArr);
                 }
                 Order order, innerorder;
-                if (joborders == null)
-                    joborders = new ArrayList<orderListItem>();
+                if (filtered_other_jobs == null)
+                    filtered_other_jobs = new ArrayList<orderListItem>();
                 // joborders.clear();
                 ArrayList<Order> delete = new ArrayList<Order>();
                 ArrayList<orderListItem> temporder1 = new ArrayList<orderListItem>();
@@ -4476,6 +4476,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                         temporder.get(index).setStatusName(status);
                 }
 
+                List<orderListItem> temFilter = null;
                 for (int index = 0; index < size; index++) {
                     order = temporder.get(index);
                     order.setJobCount(0);
@@ -4507,6 +4508,9 @@ public class JobListActivity extends Activity implements OnClickListener,
                     }
                     // order.setIndex(index);
                     temporder1.add(new orderListItem(order, delete));
+                    temFilter = temporder1.stream()
+                            .filter(string -> !string.orderItem.getOrderID().contains("-"))
+                            .collect(Collectors.toList());
                     for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
                         temporder.remove(delete.get(deleteindex));
                     }
@@ -4514,12 +4518,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                     // delete.clear();
                     delete = new ArrayList<Order>();
                 }
-                joborders = temporder1;
+                filtered_other_jobs = (ArrayList<orderListItem>) temFilter;
                 // delete.clear();
                 delete = null;
 
             }
-            return joborders;
+            return filtered_other_jobs;
         }
 
         @Override
@@ -5858,7 +5862,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
             }
         }
-        joborders.clear();
+        filtered_other_jobs.clear();
 
         Orders.replaceistOrders(ordrs);
         Order[] ordersArr = null;
@@ -5867,8 +5871,8 @@ public class JobListActivity extends Activity implements OnClickListener,
             ordrs.toArray(ordersArr);
         }
         Order order, innerorder;
-        if (joborders == null)
-            joborders = new ArrayList<orderListItem>();
+        if (filtered_other_jobs == null)
+            filtered_other_jobs = new ArrayList<orderListItem>();
         // joborders.clear();
         ArrayList<Order> delete = new ArrayList<Order>();
         ArrayList<orderListItem> temporder1 = new ArrayList<orderListItem>();
@@ -5881,7 +5885,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (!status.equals(""))
                 temporder.get(index).setStatusName(status);
         }
-
+        List<orderListItem> temFilter = null;
         for (int index = 0; index < size; index++) {
             order = temporder.get(index);
             order.setJobCount(0);
@@ -5911,6 +5915,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
             // order.setIndex(index);
             temporder1.add(new orderListItem(order, delete));
+            temFilter = temporder1.stream()
+                    .filter(string -> !string.orderItem.getOrderID().contains("-"))
+                    .collect(Collectors.toList());
             for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
                 temporder.remove(delete.get(deleteindex));
             }
@@ -5918,10 +5925,10 @@ public class JobListActivity extends Activity implements OnClickListener,
             // delete.clear();
             delete = new ArrayList<Order>();
         }
-        joborders = temporder1;
+        filtered_other_jobs = (ArrayList<orderListItem>) temFilter;
         // delete.clear();
         delete = null;
-        return joborders;
+        return filtered_other_jobs;
     }
 
     private String getStatusByOrderID(String orderid, Order[] ordersArr) {
@@ -5951,8 +5958,8 @@ public class JobListActivity extends Activity implements OnClickListener,
             ordrs.toArray(ordersArr);
         }
         Order order, innerorder;
-        if (joborders == null)
-            joborders = new ArrayList<orderListItem>();
+        if (filtered_other_jobs == null)
+            filtered_other_jobs = new ArrayList<orderListItem>();
         // joborders.clear();
         ArrayList<Order> delete = new ArrayList<Order>();
         ArrayList<orderListItem> temporder1 = new ArrayList<orderListItem>();
@@ -5966,6 +5973,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 temporder.get(index).setStatusName(status);
         }
 
+        List<orderListItem> temFilter = null;
         for (int index = 0; index < size; index++) {
             order = temporder.get(index);
             order.setJobCount(0);
@@ -5997,6 +6005,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
             // order.setIndex(index);
             temporder1.add(new orderListItem(order, delete));
+            temFilter = temporder1.stream()
+                    .filter(string -> !string.orderItem.getOrderID().contains("-"))
+                    .collect(Collectors.toList());
             for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
                 temporder.remove(delete.get(deleteindex));
             }
@@ -6004,7 +6015,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             // delete.clear();
             delete = new ArrayList<Order>();
         }
-        joborders = temporder1;
+        filtered_other_jobs = (ArrayList<orderListItem>) temFilter;
         // delete.clear();
         delete = null;
     }
