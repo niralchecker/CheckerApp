@@ -254,7 +254,7 @@
 
                     <Spinner
                         android:id="@+id/spinner_status"
-                        android:layout_width="240dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
@@ -280,9 +280,8 @@
 
                     <Spinner
                         android:id="@+id/jobtypelist"
-                        android:layout_width="240dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
                         android:entries="@array/job_filter_job_list"
@@ -373,7 +372,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_bproplist"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="5dp">

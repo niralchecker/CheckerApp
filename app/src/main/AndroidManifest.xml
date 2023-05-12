@@ -195,7 +195,7 @@
         <activity
             android:name=".JobListActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ProxyActivity"
             android:configChanges="locale|orientation" />
@@ -222,6 +222,16 @@
             android:configChanges="locale|orientation"
             android:screenOrientation="portrait" />
         <activity android:name=".webPreview" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.mor.sa.android.activities.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

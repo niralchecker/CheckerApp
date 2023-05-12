@@ -59,6 +59,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -84,6 +85,7 @@ import android.media.AudioTrack;
 import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.media.MediaScannerConnection;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -161,6 +163,7 @@ import android.widget.VideoView;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
 import com.checker.sa.android.adapter.menuAdapter;
 import com.checker.sa.android.adapter.selectedFilesAdapter;
@@ -3005,7 +3008,7 @@ public class QuestionnaireActivity extends Activity implements
                     + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
             File file = new File(path, current_paths);
             path_Camera = file.getPath();
-
+            Log.e("performCrop", path + " ### " + current_paths + " ### " + file);
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -3122,30 +3125,35 @@ public class QuestionnaireActivity extends Activity implements
 
                     if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_CROPPING,
                             false) && PreviewDemo.IsCrop == true) {
-                        Intent cropIntent = new Intent(
-                                "com.android.camera.action.CROP");
-                        File file = new File(data.getExtras().getString("jpg"));
-                        uri_Camera = Uri.fromFile(file);
-                        path_Camera = data.getExtras().getString("jpg");
-                        // indicate image type and Uri
-                        cropIntent.setDataAndType(Uri.fromFile(file), "image/*");
-                        cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri_Camera);
-                        // set crop properties
-                        cropIntent.putExtra("crop", "true");
-                        // indicate aspect of desired crop
-                        cropIntent.putExtra("aspectX", 1);
-                        cropIntent.putExtra("aspectY", 1);
-                        // indicate output X and Y
-                        cropIntent.putExtra("outputX", 256);
-                        cropIntent.putExtra("outputY", 256);
-                        // retrieve data on return
-                        cropIntent.putExtra("return-data", true);
-                        // start the activity - we handle returning in
-                        // onActivityResult
-                        if (isLastAttachment)
-                            startActivityForResult(cropIntent, PIC_CROP_LAST);
-                        else
-                            startActivityForResult(cropIntent, PIC_CROP);
+                        saveImage(getBitmapFromPath(data.getExtras().getString("jpg")));
+                        Uri uri = Uri.parse(data.getStringExtra("jpg"));
+                        Log.e("uri", String.valueOf(uri));
+
+//                        Intent cropIntent = new Intent(
+//                                "com.android.camera.action.CROP");
+//                        File file = new File(data.getExtras().getString("jpg"));
+//                        uri_Camera = Uri.fromFile(file);
+//                        path_Camera = data.getExtras().getString("jpg");
+//                        // indicate image type and Uri
+//                        cropIntent.setDataAndType(Uri.fromFile(file), "image/*");
+//                        cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri_Camera);
+//                        // set crop properties
+//                        cropIntent.putExtra("crop", "true");
+//                        // indicate aspect of desired crop
+//                        cropIntent.putExtra("aspectX", 1);
+//                        cropIntent.putExtra("aspectY", 1);
+//                        // indicate output X and Y
+//                        cropIntent.putExtra("outputX", 256);
+//                        cropIntent.putExtra("outputY", 256);
+//                        // retrieve data on return
+//                        cropIntent.putExtra("return-data", true);
+//                        // start the activity - we handle returning in
+//                        // onActivityResult
+//                        if (isLastAttachment)
+//                            startActivityForResult(cropIntent, PIC_CROP_LAST);
+//                        else {
+//                            startActivityForResult(cropIntent, PIC_CROP);
+//                        }
                     } else {
 
                         filePathDataID fId = new filePathDataID();
@@ -3348,30 +3356,123 @@ public class QuestionnaireActivity extends Activity implements
 
                 break;
             case PIC_CROP:
-
-                try{
+                try {
                     if (resultCode == Activity.RESULT_OK || data.getData() != null) {
-                        if (!isRestoring)
-                            croppingCase(data, false);
-                        else {
-                            isRestoreCropping = true;
-                            restoreIntentData = data;
+                        path_Camera = getRealPathFromURI(data.getData());
+                        File imageFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        // Convert the file path to a content URI using FileProvider
+                        uri_Camera = FileProvider.getUriForFile(this, "com.mor.sa.android.activities.fileprovider", imageFile);
+                        Log.e("imageFile", String.valueOf(imageFile));
+                        Log.e("croppedImagePath", String.valueOf(uri_Camera));
+
+                        try {
+                            if (!isRestoring) {
+                                String dataid = null;
+                                if (questionObject != null
+                                        && questionObject.getDataID() != null
+                                        && isLastAttachment == false)
+                                    dataid = questionObject.getDataID();
+                                else
+                                    isLastAttachment = true;
+                                if (dataid != null && dataid.contains("^")) {
+                                    dataid += "#@" + questionObject.getLoopInfo();
+                                }
+                                filePathDataID fId = new filePathDataID();
+                                fId.setDataID(dataid, false);
+                                fId.setFilePath(path_Camera);
+                                fId.setUPLOAD_FILe_ORDERID(order.getOrderID());
+                                fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
+                                fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchFullname());
+                                fId.setUPLOAD_FILe_DATE(sdf.format(new Date()));
+                                fId.setUPLOAD_FILe_Sample_size(helper.getSampleSize());
+
+                                fId.setUPLOAD_FILe_PRODUCTID(currentProductId);
+                                fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
+                                uploadList.add(fId);
+                                uploadFileList.add(uri_Camera);
+                                uploadFileListDataId.add(questionObject.getDataID());
+                                String[] items = new String[uploadFileList.size()];
+
+                                Toast.makeText(this.getApplicationContext(),
+                                        getString(R.string.questionnaire_file_attached_text),
+                                        Toast.LENGTH_LONG).show();
+                                if (isLastAttachment == true
+                                        && attach_btn_view != null
+                                        && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
+                                    ShowAttachedFiles();
+                                }
+                            } else {
+                                isRestoreCropping = true;
+                                restoreIntentData = data;
+                            }
+                        } catch (Exception e) {
                         }
                     }
-                }catch (Exception e){
+                } catch (NullPointerException e) {
+
                 }
 
                 break;
             case PIC_CROP_LAST:
+                try {
+                    if (resultCode == Activity.RESULT_OK || data.getData() != null) {
+//                    if (!isRestoring)
+//                        croppingCase(data, true);
+//                    else {
+//                        isRestoreCropping = true;
+//                        restoreIntentData = data;
+//                    }
+                        path_Camera = getRealPathFromURI(data.getData());
+                        File imageFileLast = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        // Convert the file path to a content URI using FileProvider
+                        uri_Camera = FileProvider.getUriForFile(this, "com.mor.sa.android.activities.fileprovider", imageFileLast);
 
-                if (resultCode == Activity.RESULT_OK || data.getData() != null) {
-                    if (!isRestoring)
-                        croppingCase(data, true);
-                    else {
-                        isRestoreCropping = true;
-                        restoreIntentData = data;
+                        Log.e("imageFileLast", String.valueOf(imageFileLast));
+                        Log.e("croppedImagePathLast", String.valueOf(uri_Camera));
+                        if (!isRestoring) {
+                            String dataid = null;
+                            if (questionObject != null
+                                    && questionObject.getDataID() != null
+                                    && isLastAttachment == false)
+                                dataid = questionObject.getDataID();
+                            else
+                                isLastAttachment = true;
+                            if (dataid != null && dataid.contains("^")) {
+                                dataid += "#@" + questionObject.getLoopInfo();
+                            }
+                            filePathDataID fId = new filePathDataID();
+                            fId.setDataID(dataid, true);
+                            fId.setFilePath(path_Camera);
+                            fId.setUPLOAD_FILe_ORDERID(order.getOrderID());
+                            fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
+                            fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchFullname());
+                            fId.setUPLOAD_FILe_DATE(sdf.format(new Date()));
+                            fId.setUPLOAD_FILe_Sample_size(helper.getSampleSize());
+
+                            fId.setUPLOAD_FILe_PRODUCTID(currentProductId);
+                            fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
+                            uploadList.add(fId);
+                            uploadFileList.add(uri_Camera);
+                            uploadFileListDataId.add(questionObject.getDataID());
+                            String[] items = new String[uploadFileList.size()];
+
+                            Toast.makeText(this.getApplicationContext(),
+                                    getString(R.string.questionnaire_file_attached_text),
+                                    Toast.LENGTH_LONG).show();
+                            if (isLastAttachment == true
+                                    && attach_btn_view != null
+                                    && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
+                                ShowAttachedFiles();
+                            }
+                        } else {
+                            isRestoreCropping = true;
+                            restoreIntentData = data;
+                        }
                     }
+                } catch (NullPointerException e) {
+
                 }
+
                 break;
 
             case CAMERA_PIC_REQUEST_LAST:
@@ -10838,7 +10939,7 @@ public class QuestionnaireActivity extends Activity implements
         return questionnaireLayout;
     }
 
-//    TODO getServerSideFiles
+    //    TODO getServerSideFiles
     private ArrayList<InProgressFileData> getServerSideFiles(
             ArrayList<InProgressFileData> server_attached_files2,
             boolean isLast, ArrayList<filePathDataID> uploadList2) {
@@ -16016,6 +16117,7 @@ public class QuestionnaireActivity extends Activity implements
                 + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
         File file = new File(path, current_paths);
         path_Camera = file.getPath();
+        Log.e("path****", path + " *** " + current_paths + " *** " + file);
 
         try {
             file.createNewFile();
@@ -22686,5 +22788,111 @@ public class QuestionnaireActivity extends Activity implements
                 return true;
             }
         };
+    }
+
+    private Bitmap getBitmapFromPath(String imagePath) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+
+        // Decode the image file into a bitmap
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+
+        // Rotate the bitmap if necessary
+        int orientation = getImageOrientation(imagePath);
+        if (orientation != 0) {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(orientation);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+        }
+        Log.e("Bitmap", String.valueOf(bitmap));
+
+        return bitmap;
+    }
+
+    private int getImageOrientation(String imagePath) {
+        int orientation = 0;
+
+        try {
+            ExifInterface exifInterface = new ExifInterface(imagePath);
+            int exifOrientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+            switch (exifOrientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    orientation = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    orientation = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    orientation = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return orientation;
+    }
+
+    private void saveImage(Bitmap bitmap) {
+        // Get the directory where the image file will be saved
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        // Create a unique file name for the image
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + ".jpg";
+
+        // Create the file
+        File imageFile = new File(storageDir, imageFileName);
+
+        try {
+            // Convert the bitmap to a JPEG file and save it to the file path
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+            // Notify the MediaScanner that a new file has been created
+            MediaScannerConnection.scanFile(this, new String[]{imageFile.getAbsolutePath()}, null, null);
+
+            openCropActivity(imageFile.getAbsolutePath());
+            // Show a message to the user
+            Toast.makeText(this, "Image saved: " + imageFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            // Show a message to the user
+            Log.e("getAbsolutePath", imageFile.getAbsolutePath());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void openCropActivity(String imagePath) {
+        File imageFile = new File(imagePath);
+        Uri imageUri = Uri.fromFile(imageFile);
+
+        // Create a temporary file to store the cropped image
+        File tempFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+        Uri tempUri = Uri.fromFile(tempFile);
+
+        Log.e("image_path", imagePath);
+        Log.e("imageFile", String.valueOf(imageFile));
+        Log.e("image_URI", String.valueOf(imageUri));
+
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(imageUri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 256);
+        intent.putExtra("outputY", 256);
+        intent.putExtra("scale", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // Save the cropped image to the original file path
+        intent.putExtra("return-data", false);
+//        startActivityForResult(intent, PIC_CROP);
+        if (isLastAttachment)
+            startActivityForResult(intent, PIC_CROP_LAST);
+        else {
+            startActivityForResult(intent, PIC_CROP);
+        }
     }
 }
