@@ -3359,7 +3359,12 @@ public class QuestionnaireActivity extends Activity implements
                 try {
                     if (resultCode == Activity.RESULT_OK || data.getData() != null) {
                         path_Camera = getRealPathFromURI(data.getData());
-                        File imageFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        File imageFile = null;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                            imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        } else {
+                            imageFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        }
                         // Convert the file path to a content URI using FileProvider
                         uri_Camera = FileProvider.getUriForFile(this, "com.mor.sa.android.activities.fileprovider", imageFile);
                         Log.e("imageFile", String.valueOf(imageFile));
@@ -3416,14 +3421,13 @@ public class QuestionnaireActivity extends Activity implements
             case PIC_CROP_LAST:
                 try {
                     if (resultCode == Activity.RESULT_OK || data.getData() != null) {
-//                    if (!isRestoring)
-//                        croppingCase(data, true);
-//                    else {
-//                        isRestoreCropping = true;
-//                        restoreIntentData = data;
-//                    }
                         path_Camera = getRealPathFromURI(data.getData());
-                        File imageFileLast = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        File imageFileLast;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                            imageFileLast = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        } else {
+                            imageFileLast = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        }
                         // Convert the file path to a content URI using FileProvider
                         uri_Camera = FileProvider.getUriForFile(this, "com.mor.sa.android.activities.fileprovider", imageFileLast);
 
@@ -22835,9 +22839,12 @@ public class QuestionnaireActivity extends Activity implements
     }
 
     private void saveImage(Bitmap bitmap) {
-        // Get the directory where the image file will be saved
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
+        File storageDir;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        } else {
+            storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        }
         // Create a unique file name for the image
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + ".jpg";
@@ -22869,9 +22876,13 @@ public class QuestionnaireActivity extends Activity implements
     private void openCropActivity(String imagePath) {
         File imageFile = new File(imagePath);
         Uri imageUri = Uri.fromFile(imageFile);
-
+        File tempFile = null;
         // Create a temporary file to store the cropped image
-        File tempFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+        } else {
+            tempFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+        }
         Uri tempUri = Uri.fromFile(tempFile);
 
         Log.e("image_path", imagePath);
