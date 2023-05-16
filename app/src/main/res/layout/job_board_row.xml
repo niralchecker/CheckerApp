@@ -580,7 +580,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Reject"
+                    android:text="@string/reject"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     app:fontFamily="@font/roboto_regular" />

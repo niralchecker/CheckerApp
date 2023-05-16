@@ -339,9 +339,14 @@
     <string translatable="false" name="joblist_all_jobs">הצג את כל העבודות</string>
 
     <!-- Job Filter Screen -->
+    <string name="job_filter_default_choose_branch_properties" translatable="false">בחר מאפייני סניף</string>
+    <string name="job_filter_default_choose_regions" translatable="false">בחר אזורים</string>
+    <string name="job_filter_default_choose_project" translatable="false">בחר פרויקט</string>
+    <string name="job_filter_default_choose_branch" translatable="false">בחר פרויקט</string>
     <string translatable="false" name="job_filter_title">חפש</string>
-    <string translatable="false" name="job_filter_choose_job_type_lbl">סוג עבודה</string>
     <string translatable="false" name="job_filter_choose_city_lbl">עיר</string>
+    <string translatable="false" name="job_filter_choose_job_type_lbl">סוג עבודה</string>
+    <string name="job_filter_default_choose_client" translatable="false">בחר לקוח</string>
     <string translatable="false" name="job_filter_date_range_lbl">תחום תאריכים</string>
     <string translatable="false" name="job_filter_start_date_lbl">תאריך התחלה</string>
     <string translatable="false" name="job_filter_end_date_lbl">תאריך סיום</string>
@@ -352,6 +357,7 @@
     <string translatable="false" name="filter_by_date">סנן לפי תאריך</string>
     <string translatable="false" name="default_theme">נושא ברירת מחדל</string>
     <string translatable="false" name="s_resolution_selector">הצג רזולוציות מצלמה:</string>
+<!--    <string name="date_start">תאריך התחלה</string>-->
 
     <string-array name="job_filter_job_list">
         <item> הכל</item>
@@ -417,15 +423,33 @@
     <string translatable="false" name="reachedMaxTries">"הגעת למספר ההחזר המרבי של ה- CheckerTificate"</string>
     <string translatable="false" name="alreadyBlocked">הסמכה חסומה.</string>
 
-    <!-- others -->
-    <!--
-         <string-array name="language_list">
-        <item>English</item>
-        <item>Spanish</item>
-		<item>Romanian</item>
-		<item>Hebrew</item>
-		<item>Hindi</item>
-    </string-array>
+    <!-- NEW ADDED -->
+
+    <string name="alert_sync_jobs_again" translatable="false">האפליקציה צריכה לסנכרן את המערכת שנשלחה #LOCAL# מספר המשרות והשרת מאושרת #SERVER# מספר המשרות!</string>
+    <string name="accept_job_fail_alert_SERVER" translatable="false">לא יכול לקבל עבודה במצב לא מקוון</string>
+    <string name="job_list_archive" translatable="false">משרות בארכיון</string>
+    <string name="job_list_home" translatable="false">בית</string>
+    <string name="answer_save_alert" translatable="false">שומר את התשובה על השאלון בתהליך...</string>
+    <string name="menu_condition" translatable="false">בודק מצב</string>
+    <string name="menu_preview" translatable="false">תצוגה מקדימה</string>
+    <string name="questionnaire_reply_to_company" translatable="false">שלח הודעה פנימית לחברה:</string>
+    <string name="questionnaire_send_bug" translatable="false">דווח על באג</string>
+    <string name="get_audio_menu_text" translatable="false">קבל קובץ שמע_אחרון</string>
+    <string name="get_audio_menu_text_2" translatable="false">קבל קובץ שמע</string>
+
+    <string name="file_size_text" translatable="false">גודל הקובץ גדול מ-10Mb, נסה שוב עם גודל קטן יותר.</string>
+
+    <!-- JobDetail Screen -->
+    <string name="jd_projects" translatable="false">פרויקטים</string>
+    <string name="jd_regions" translatable="false">אזורים</string>
+    <string name="jd_branchprops" translatable="false">נכסי סניף</string>
+
+
+    <!-- Questionnaire Screen -->
+    <string name="questionnaire_record_btn" translatable="false">תקליט</string>
+    <string name="questionnaire_record_stop_btn" translatable="false">תפסיק</string>
+    <string name="questionnaire_exitmenu" translatable="false">יְצִיאָה</string>
+
 
 
 
