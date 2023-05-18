@@ -273,7 +273,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         tv_checker_toBePassed = findViewById(R.id.tv_checker_toBePassed);
         cardView_CAPI = findViewById(R.id.cardView_CAPI);
         cardView_MyJobs = findViewById(R.id.cardView_MyJobs);
-        clOpenJobs= findViewById(R.id.clOpenJobs);
+        clOpenJobs = findViewById(R.id.clOpenJobs);
         clSurveyReport = findViewById(R.id.clSurveyReport);
         clRefundReport = findViewById(R.id.clRefundReport);
         cardView_checkertificate = findViewById(R.id.cardView_checkertificate);
@@ -323,18 +323,18 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
             @Override
             public void onClick(View v) {
                 isJobselected = true;
-                Intent  intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(),
+                Intent intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(),
                         CritHistoryReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
 
-                }
+            }
         });
         clRefundReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isJobselected = true;
-              Intent  intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(),
+                Intent intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(),
                         ShopperRefundReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
@@ -348,7 +348,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
             }
 
         });
-       
 
 
         menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -598,7 +597,8 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 if (myPrefs.getBoolean(Constants.SETTINGS_switchtracking, true)) {
                     SplashScreen.addServiceLog(new BasicLog(
                             myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting service!", ""));
+                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
+                            "Starting service!", ""));
                 } else {
                     // switchtracking.setChecked(false);
                 }
@@ -1286,7 +1286,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 Log.d("TAG", "ShowDBJobs--Assigned:" + filtered_status_my_job_accept.size());
 
                 List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled")||string.orderItem.getStatusName().equalsIgnoreCase("in Progress")||string.orderItem.getStatusName().equalsIgnoreCase("completed"))
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled") || string.orderItem.getStatusName().equalsIgnoreCase("in Progress") || string.orderItem.getStatusName().equalsIgnoreCase("completed"))
                         .collect(Collectors.toList());
                 my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
                 Log.d("TAG", "ShowDBJobs--scheduled:" + filtered_status_my_jobs_implement.size());
@@ -1300,7 +1300,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
 
 
                 List<orderListItem> filtered_status_inProgress = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress")||string.orderItem.getStatusName().equalsIgnoreCase("completed"))
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress") || string.orderItem.getStatusName().equalsIgnoreCase("completed"))
                         .collect(Collectors.toList());
                 capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
                 Log.d("TAG", "ShowDBJobs--Progress:" + filtered_status_inProgress.size());
@@ -1311,7 +1311,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
 //                        .collect(Collectors.toList());
 //                capi_status_returned = String.valueOf(filtered_status_completed.size());
 //                Log.d("TAG", "ShowDBJobs--completed:" + filtered_status_completed.size());
-
 
 
                 if (joborders != null) {
