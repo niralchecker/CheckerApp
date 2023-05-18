@@ -268,7 +268,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         tv_waiting_implementation = findViewById(R.id.tv_waiting_implementation);
         tv_CAPI_assigned = findViewById(R.id.tv_CAPI_assigned);
         tv_CAPI_inProgress = findViewById(R.id.tv_CAPI_inProgress);
-        tv_CAPI_inProgress = findViewById(R.id.tv_CAPI_inProgress);
         tv_CAPI_returned = findViewById(R.id.tv_CAPI_returned);
         tv_checker_passed = findViewById(R.id.tv_checker_passed);
         tv_checker_toBePassed = findViewById(R.id.tv_checker_toBePassed);
@@ -1287,7 +1286,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 Log.d("TAG", "ShowDBJobs--Assigned:" + filtered_status_my_job_accept.size());
 
                 List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled")||string.orderItem.getStatusName().equalsIgnoreCase("in Progress")||string.orderItem.getStatusName().equalsIgnoreCase("completed"))
                         .collect(Collectors.toList());
                 my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
                 Log.d("TAG", "ShowDBJobs--scheduled:" + filtered_status_my_jobs_implement.size());
@@ -1301,17 +1300,17 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
 
 
                 List<orderListItem> filtered_status_inProgress = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
+                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress")||string.orderItem.getStatusName().equalsIgnoreCase("completed"))
                         .collect(Collectors.toList());
                 capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
                 Log.d("TAG", "ShowDBJobs--Progress:" + filtered_status_inProgress.size());
 
 
-                List<orderListItem> filtered_status_completed = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
-                        .collect(Collectors.toList());
-                capi_status_returned = String.valueOf(filtered_status_completed.size());
-                Log.d("TAG", "ShowDBJobs--completed:" + filtered_status_completed.size());
+//                List<orderListItem> filtered_status_completed = filtered.stream()
+//                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
+//                        .collect(Collectors.toList());
+//                capi_status_returned = String.valueOf(filtered_status_completed.size());
+//                Log.d("TAG", "ShowDBJobs--completed:" + filtered_status_completed.size());
 
 
 
