@@ -174,7 +174,7 @@
                 android:paddingRight="5dp"
                 android:text="@string/s_item_column_0_line_168_file_137"
                 android:textColor="#000000"
-                android:textSize="13dp"
+                android:textSize="13sp"
                 android:textStyle="normal" />
 
             <TextView
@@ -580,7 +580,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="@string/reject"
+                    android:text="Reject"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     app:fontFamily="@font/roboto_regular" />

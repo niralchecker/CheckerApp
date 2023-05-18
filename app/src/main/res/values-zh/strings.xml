@@ -740,4 +740,23 @@
     <string name="retype_password" >Retype Password</string>
     <string name="register">Register</string>
     <string name="registration">Registration</string>
+    <string name="reject_btn">Reject</string>
+    <string name="apply">Apply</string>
+    <string name="start_job">Start Job</string>
+    <string name="status">Status</string>
+    <string name="survey_name">Survey Name</string>
+    <string name="branch_full_name">Branch Full Name</string>
+    <string name="quotas">Quotas</string>
+    <string name="reject">Reject</string>
+    <string name="allocation">Allocation</string>
+    <string name="bonus_payment">Bonus Payment</string>
+    <string name="criticism_payment">Criticism Payment</string>
+    <string name="non_refundable_service_payment">Non Refundable Service Payment</string>
+    <string name="make_purchase">Make Purchase</string>
+    <string name="end_time">End Time</string>
+    <string name="show_time">show time</string>
+    <string name="start_time">Start Time</string>
+    <string name="opening_hours">Opening hours</string>
+    <string name="branch_phone">Branch Phone</string>
+    <string name="city">City</string>
 </resources>

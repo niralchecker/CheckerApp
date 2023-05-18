@@ -963,11 +963,8 @@ public class JobItemAdapter extends BaseAdapter {
         if (set == null) {
             return null;
         }
-
         return set;
-
     }
-
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

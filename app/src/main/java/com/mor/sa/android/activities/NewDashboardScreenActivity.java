@@ -1,6 +1,7 @@
 package com.mor.sa.android.activities;
 
 import static com.checker.sa.android.helper.Constants.select_jobs;
+import static com.checker.sa.android.helper.Helper.customAlert;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -46,6 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.checker.sa.android.adapter.CheckertificateAdapter;
 import com.checker.sa.android.adapter.JobItemAdapter;
@@ -130,8 +132,8 @@ import java.util.stream.Collectors;
 
 public class NewDashboardScreenActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, MessageApi.MessageListener {
-
-    CardView cardView_CAPI, cardView_MyJobs;
+    ConstraintLayout clOpenJobs, clRefundReport, clSurveyReport;
+    CardView cardView_CAPI, cardView_MyJobs, cardView_checkertificate;
     SharedPreferences myPrefs;
     private ArrayList<Order> order;
     public ArrayList<orderListItem> joblistarray;
@@ -272,6 +274,10 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         tv_checker_toBePassed = findViewById(R.id.tv_checker_toBePassed);
         cardView_CAPI = findViewById(R.id.cardView_CAPI);
         cardView_MyJobs = findViewById(R.id.cardView_MyJobs);
+        clOpenJobs= findViewById(R.id.clOpenJobs);
+        clSurveyReport = findViewById(R.id.clSurveyReport);
+        clRefundReport = findViewById(R.id.clRefundReport);
+        cardView_checkertificate = findViewById(R.id.cardView_checkertificate);
 
         tv_CAPI_assigned.setText(capi_assigned_count);
         tv_CAPI_inProgress.setText(capi_status_inProgress);
@@ -281,6 +287,70 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         sidemenuicon1 = (View) findViewById(R.id.sidemenuicon1);
         menuView = findViewById(R.id.view_side_menu);
         menuListView = (ListView) findViewById(R.id.view_side_menu_list_view);
+
+
+        clOpenJobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                int status = GooglePlayServicesUtil
+                        .isGooglePlayServicesAvailable(getBaseContext());
+
+                if (status != ConnectionResult.SUCCESS) {
+                    customAlert(
+                            NewDashboardScreenActivity.this,
+                            getResources().getString(
+                                    R.string.google_services_not_avaliable));
+                } else {
+                    isJobselected = true;
+                    intent = new Intent(
+                            NewDashboardScreenActivity.this.getApplicationContext(),
+                            JobBoardActivityFragment.class);
+                    JobBoardActivityFragment
+                            .setJobBardCallback(new jobBoardCertsListener() {
+
+                                @Override
+                                public void certCallBack(ArrayList<Cert> certs) {
+                                    load_certificates(certs);
+                                }
+                            });
+                    intent.putExtra("orderid", "-1");
+                    // comunicator.JobList = this;
+                    startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
+                }
+            }
+        });
+        clSurveyReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isJobselected = true;
+                Intent  intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(),
+                        CritHistoryReportActivity.class);
+                // comunicator.JobList = null;
+                startActivity(intent);
+
+                }
+        });
+        clRefundReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isJobselected = true;
+              Intent  intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(),
+                        ShopperRefundReportActivity.class);
+                // comunicator.JobList = null;
+                startActivity(intent);
+            }
+
+        });
+        cardView_checkertificate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                load_certificates(null);
+            }
+
+        });
+       
+
 
         menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -1214,25 +1284,35 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                         .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned"))
                         .collect(Collectors.toList());
                 my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
+                Log.d("TAG", "ShowDBJobs--Assigned:" + filtered_status_my_job_accept.size());
 
                 List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
                         .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
                         .collect(Collectors.toList());
                 my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
+                Log.d("TAG", "ShowDBJobs--scheduled:" + filtered_status_my_jobs_implement.size());
+
 
                 List<orderListItem> filtered_status_assigned = filtered.stream()
                         .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
                         .collect(Collectors.toList());
                 capi_assigned_count = String.valueOf(filtered_status_assigned.size());
+                Log.d("TAG", "ShowDBJobs--Progress:" + filtered_status_assigned.size());
+
 
                 List<orderListItem> filtered_status_inProgress = filtered.stream()
                         .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
                         .collect(Collectors.toList());
                 capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
+                Log.d("TAG", "ShowDBJobs--Progress:" + filtered_status_inProgress.size());
+
+
                 List<orderListItem> filtered_status_completed = filtered.stream()
                         .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
                         .collect(Collectors.toList());
                 capi_status_returned = String.valueOf(filtered_status_completed.size());
+                Log.d("TAG", "ShowDBJobs--completed:" + filtered_status_completed.size());
+
 
 
                 if (joborders != null) {

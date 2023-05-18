@@ -597,19 +597,43 @@
     <string translatable="false" name="already_submit_review_alert">הסקר כבר נשלח</string>
     <string translatable="false" name="camera_menu_text">מצלמה</string>
     <string translatable="false" name="gallery_menu_text">גלריה</string>
-    <string name="field_surveyor_login">Field Surveyor Login</string>
-    <string name="find_horses_near_me">Find Horses near me</string>
-    <string name="microsoft">Microsoft</string>
-    <string name="google">Google</string>
-    <string name="facebook">Facebook</string>
-    <string name="twitter">Twitter</string>
-    <string name="full_name">Full Name</string>
-    <string name="forgot_your_password"><u>Forgot your password?</u></string>
-    <string name="login">Login</string>
-     <string name="don_t_have_an_account_yet_register">Don’t have an account yet? <font color="000000"><u>Register</u></font></string>
-    <string name="retype_password" >Retype Password</string>
-    <string name="register">Register</string>
-    <string name="registration">Registration</string>
+    <string name="field_surveyor_login">כניסת מודד שטח</string>
+    <string name="find_horses_near_me">מצא סוסים בקרבתי</string>
+    <string name="microsoft">מיקרוסופט</string>
+    <string name="google">גוגל</string>
+    <string name="facebook">פייסבוק</string>
+    <string name="twitter">טוויטר</string>
+    <string name="full_name">שם מלא</string>
+    <string name="forgot_your_password"><u>שכחת ססמה?</u></string>
+    <string name="login">התחברות</string>
+     <string name="don_t_have_an_account_yet_register">אין לך עדיין חשבון? <font color="000000"><u>Register</u></font></string>
+    <string name="retype_password" >כתוב את הסיסמא מחדש</string>
+    <string name="register">הירשם</string>
+    <string name="registration">הַרשָׁמָה</string>
+    <string name="reject_btn">לִדחוֹת</string>
+    <string name="apply">להגיש מועמדות</string>
+    <string name="start_job">התחל עבודה</string>
+    <string name="status">סטָטוּס</string>
+    <string name="survey_name">שם הסקר</string>
+    <string name="branch_full_name">שם מלא של הסניף</string>
+    <string name="quotas">מכסות</string>
+    <string name="reject">לִדחוֹת</string>
+    <string name="allocation">הַקצָאָה</string>
+    <string name="bonus_payment">תשלום בונוס</string>
+    <string name="criticism_payment">תשלום ביקורת</string>
+    <string name="non_refundable_service_payment">תשלום שירות ללא החזר</string>
+    <string name="make_purchase">בצע רכישה</string>
+    <string name="end_time">שעת סיום</string>
+    <string name="show_time">זמן להראות</string>
+    <string name="start_time">שעת התחלה</string>
+    <string name="opening_hours">שעות פתיחה</string>
+    <string name="branch_phone">טלפון סניף</string>
+    <string name="city">עִיר</string>
+    <string name="branch">ענף</string>
+    <string name="questionnaire">שְׁאֵלוֹן</string>
+    <string name="client_description">תיאור הלקוח</string>
+    <string name="applied_for_job">הגיש מועמדות לעבודה</string>
+    <string name="h_amp_m"><![CDATA[H&M]]></string>
     <!-- added by umer -->
 
 </resources>

@@ -236,9 +236,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdsurvey_quotas"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="15dp"
                 android:divider="@color/dark_blue"
                 android:dividerHeight="1dp"
+                android:paddingLeft="15dp"
                 android:paddingRight="5dp" />
 
             <TextView
@@ -260,9 +260,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdsurvey_allocations"
                 android:layout_alignParentLeft="true"
-                android:paddingLeft="5dp"
                 android:divider="@color/dark_blue"
                 android:dividerHeight="1dp"
+                android:paddingLeft="5dp"
                 android:paddingRight="5dp" />
         </RelativeLayout>
     </ScrollView>
@@ -420,7 +420,7 @@
                             android:id="@+id/jddatet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="left"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
@@ -440,6 +440,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -459,6 +461,7 @@
                             android:id="@+id/jdstaust"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
@@ -479,6 +482,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:layout_gravity="right"
+
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -499,8 +504,10 @@
                             android:id="@+id/jddescriptiont"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
+
                             android:paddingRight="5dp"
                             android:text="@string/jd_description"
                             android:textColor="@color/dark_blue"
@@ -518,6 +525,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -537,8 +546,10 @@
                             android:id="@+id/jdsetnamet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
+
                             android:paddingRight="5dp"
                             android:text="@string/jd_setname"
                             android:textColor="@color/dark_blue"
@@ -557,6 +568,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:layout_gravity="right"
+
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -575,9 +588,11 @@
                             android:id="@+id/jdclientt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+
                             android:text="@string/jd_clientname"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -594,6 +609,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -613,6 +630,7 @@
                             android:id="@+id/jdbranchname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
@@ -632,6 +650,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -651,9 +671,11 @@
                             android:id="@+id/jdbranchfnamet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+
                             android:text="@string/jd_branchfname"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -671,6 +693,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:layout_gravity="right"
+
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -689,9 +713,11 @@
                             android:id="@+id/jdcitynt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+
                             android:text="@string/jd_cityname"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -708,6 +734,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -730,6 +758,7 @@
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+                            android:layout_gravity="right"
                             android:text="@string/jd_address"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -746,6 +775,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -765,6 +795,7 @@
                             android:id="@+id/jdbranchpt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
@@ -784,6 +815,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -805,6 +838,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
+                            android:layout_gravity="right"
                             android:paddingRight="5dp"
                             android:text="@string/jd_openinghours"
                             android:textColor="@color/dark_blue"
@@ -823,6 +857,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:layout_gravity="right"
+
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -844,6 +880,7 @@
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+                            android:layout_gravity="right"
                             android:text="@string/jd_stime"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -861,6 +898,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+                            android:layout_gravity="right"
+
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -882,6 +921,7 @@
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+                            android:layout_gravity="right"
                             android:text="@string/jd_etime"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -898,6 +938,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -917,9 +959,11 @@
                             android:id="@+id/jdpurchasedes_t"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+
                             android:text="@string/jd_purchasedesc"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -938,6 +982,8 @@
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:textColor="#000000"
+                            android:layout_gravity="right"
+
                             android:textSize="14sp" />
                     </LinearLayout>
                 </TableRow>
@@ -958,6 +1004,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_weight="1"
                             android:paddingRight="5dp"
+                            android:layout_gravity="right"
                             android:text="@string/jd_can_purchase"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -976,6 +1023,8 @@
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:textColor="#000000"
+                            android:layout_gravity="right"
+
                             android:textSize="14sp" />
                     </LinearLayout>
                 </TableRow>
@@ -996,6 +1045,7 @@
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+                            android:layout_gravity="right"
                             android:text="@string/sNonRefundableServicePayment"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -1014,6 +1064,8 @@
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:textColor="#000000"
+                            android:layout_gravity="right"
+
                             android:textSize="14sp" />
                     </LinearLayout>
                 </TableRow>
@@ -1034,6 +1086,7 @@
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+                            android:layout_gravity="right"
                             android:text="@string/transportation_payment"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -1049,6 +1102,7 @@
                             android:id="@+id/sTransportationPayment_v"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:textColor="#000000"
@@ -1069,6 +1123,7 @@
                             android:id="@+id/sCriticismPayment_t"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
@@ -1088,6 +1143,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:layout_gravity="right"
+
                             android:layout_weight="1"
                             android:textColor="#000000"
                             android:textSize="14sp" />
@@ -1107,9 +1164,11 @@
                             android:id="@+id/sBonusPayment_t"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_weight="1"
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
+
                             android:text="@string/sBonusPayment"
                             android:textColor="@color/dark_blue"
                             android:textSize="14sp"
@@ -1125,8 +1184,10 @@
                             android:id="@+id/sBonusPayment_v"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
+
                             android:textColor="#000000"
                             android:textSize="14sp" />
                     </LinearLayout>

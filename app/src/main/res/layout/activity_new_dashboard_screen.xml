@@ -125,7 +125,7 @@
 
                             <TextView
                                 android:id="@+id/tv_waiting_acceptance"
-                                android:layout_width="wrap_content"
+                                android:layout_width="17dp"
                                 android:layout_height="wrap_content"
                                 android:text="7"
                                 android:textColor="#000000"
@@ -344,6 +344,7 @@
                         app:cardUseCompatPadding="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clOpenJobs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="15dp">
@@ -399,6 +400,7 @@
                         app:cardUseCompatPadding="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clSurveyReport"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="15dp">
@@ -444,6 +446,7 @@
                         app:cardUseCompatPadding="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/clRefundReport"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="15dp">

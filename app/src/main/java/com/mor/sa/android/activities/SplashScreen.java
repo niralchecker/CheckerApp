@@ -629,7 +629,7 @@ public class SplashScreen extends Activity {
                         } else {
                             // grantPermissions(3);
                             Log.e("######", "true");
-                            Alertdialogtoopensettings();
+//                           Alertdialogtoopensettings();
                         }
                     }
                 } else {
@@ -652,7 +652,7 @@ public class SplashScreen extends Activity {
                                 } else {
                                     // grantPermissions(3);
                                     Log.e("@@@@@@", "true");
-                                    Alertdialogtoopensettings();
+                               Alertdialogtoopensettings();
                                 }
                             }
                         }
