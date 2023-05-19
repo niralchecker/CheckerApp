@@ -6,5 +6,9 @@
     <style name="Theme.FileExplorer" parent="android:Theme.Holo"></style>
 
     <style name="Theme.FileExplorer.Light.BrownActionBar" parent="android:Theme.Holo.Light.DarkActionBar"></style>
+    <style name="ShapeAppearance.ImageView" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>

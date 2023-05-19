@@ -277,6 +277,11 @@ public class QuestionnaireActivity extends Activity implements
     String Visiblebranchname = "";
     String VisibleClientname = "";
     private int previousY;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CROP = 2;
+
+    private Uri photoUri;
+    private Uri croppedPhotoUri;
 
 
     @Override
@@ -3181,7 +3186,7 @@ public class QuestionnaireActivity extends Activity implements
                                 this.getApplicationContext(),
                                 getString(R.string.questionnaire_file_attached_text),
                                 Toast.LENGTH_LONG).show();
-                        if (isLastAttachment == true
+                        if (isLastAttachment
                                 && attach_btn_view != null
                                 && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
                             ShowAttachedFiles();
@@ -3231,7 +3236,7 @@ public class QuestionnaireActivity extends Activity implements
                             String dataid = null;
                             if (questionObject != null
                                     && questionObject.getDataID() != null
-                                    && isLastAttachment == false)
+                                    && !isLastAttachment)
                                 dataid = questionObject.getDataID();
                             else
                                 isLastAttachment = true;
@@ -3258,7 +3263,7 @@ public class QuestionnaireActivity extends Activity implements
                                 String dataid = null;
                                 if (questionObject != null
                                         && questionObject.getDataID() != null
-                                        && isLastAttachment == false)
+                                        && !isLastAttachment)
                                     dataid = questionObject.getDataID();
                                 else
                                     isLastAttachment = true;
@@ -3272,7 +3277,7 @@ public class QuestionnaireActivity extends Activity implements
                                     this.getApplicationContext(),
                                     getString(R.string.questionnaire_file_attached_text),
                                     Toast.LENGTH_LONG).show();
-                            if (isLastAttachment == true
+                            if (isLastAttachment
                                     && attach_btn_view != null
                                     && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
                                 ShowAttachedFiles();
@@ -3756,7 +3761,7 @@ public class QuestionnaireActivity extends Activity implements
                         uploadFileList.add(uri);
                         uploadFileListDataId.add(questionObject.getDataID());
                         String[] items = new String[uploadFileList.size()];
-                        if (isLastAttachment == true
+                        if (isLastAttachment
                                 && attach_btn_view != null
                                 && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
                             ShowAttachedFiles();
@@ -4123,6 +4128,7 @@ public class QuestionnaireActivity extends Activity implements
                 }
             }
 
+
             if (uri_Camera != null) {
                 myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
                 if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_CROPPING,
@@ -4133,7 +4139,7 @@ public class QuestionnaireActivity extends Activity implements
                     String dataid = null;
                     if (questionObject != null
                             && questionObject.getDataID() != null
-                            && isLastAttachment == false)
+                            && !isLastAttachment)
                         dataid = questionObject.getDataID();
                     else
                         isLastAttachment = true;
@@ -4163,7 +4169,6 @@ public class QuestionnaireActivity extends Activity implements
                     }
                 }
             } else {
-
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -4179,6 +4184,7 @@ public class QuestionnaireActivity extends Activity implements
             }
         }
     }
+
 
     public void ShowMoreCameraAlert(Context context, String title,
                                     final String message, String button_lbl, final String dataid) {
