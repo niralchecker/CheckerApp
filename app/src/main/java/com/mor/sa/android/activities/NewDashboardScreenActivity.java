@@ -286,7 +286,21 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         sidemenuicon1 = (View) findViewById(R.id.sidemenuicon1);
         menuView = findViewById(R.id.view_side_menu);
         menuListView = (ListView) findViewById(R.id.view_side_menu_list_view);
+        String userName = myPrefs.getString(
+                Constants.POST_FIELD_LOGIN_USERNAME, "");
 
+        TextView tv = (TextView) findViewById(R.id.txtsettingmenu);
+        String welcome = getString(R.string.login_heder);
+        tv.setText(welcome + " " + userName);
+        Log.e("TAG", "onCreate: "+userName);
+
+        tv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                showShopperInfo();
+            }
+        });
 
         clOpenJobs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -623,6 +637,18 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 }
             }
         });
+    }
+    private void showShopperInfo() {
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains("ajis"))
+            return;
+//        if (IsInternetConnectted()) {
+//            new JobListActivity.DoLoginTask(Constants.getViewShopperURL()).execute();
+//        } else {
+//            customAlert(
+//                    JobListActivity.this,
+//                    getResources().getString(
+//                            R.string.no_internet_connection_alret_message));
+//        }
     }
 
     public boolean onOptionsItemSelectedHS(int count) {
