@@ -887,7 +887,6 @@ public class QuestionnaireActivity extends Activity implements
                         //return getVideoView(rootFile.getAbsolutePath());
                     }
                 } else {
-
                     String imagePath = getHtmlImageView(listObjects.get(i).getPictureData()
                             , "img_" + listObjects.get(i).getDataID() + ".png", null); //"file://"+ base + "/test.jpg";
 
@@ -3005,15 +3004,41 @@ public class QuestionnaireActivity extends Activity implements
             String extra = "";
             if (questionObject != null && questionObject.getDataID() != null)
                 extra = questionObject.getDataID() + "_";
-            String path = Environment.getExternalStorageDirectory().getPath()
-                    + "/DCIM/Camera/";
+
+
+            String path = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+
+//                path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
+            } else {
+            path = Environment.getExternalStorageDirectory().getPath() + "/DCIM/Camera/";
+            }
+
+
             Calendar cal = Calendar.getInstance();
             String current_paths = "checker_" + extra +
                     +(System.currentTimeMillis() / 1000) + "_"
                     + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
             File file = new File(path, current_paths);
             path_Camera = file.getPath();
+
+
+//            File imageFile = new File(path);
+//            Uri imageUri = Uri.fromFile(imageFile);
+//            File tempFile = null;
+//            // Create a temporary file to store the cropped image
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//                tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+//            } else {
+//                tempFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+//            }
+//            Uri tempUri = Uri.fromFile(tempFile);
+
+
             Log.e("performCrop", path + " ### " + current_paths + " ### " + file);
+            Log.e(TAG, "performCrop: " + path);
+
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -16120,15 +16145,23 @@ public class QuestionnaireActivity extends Activity implements
         String extra = "";
         if (questionObject != null && questionObject.getDataID() != null)
             extra = questionObject.getDataID() + "_";
-        String path = Environment.getExternalStorageDirectory().getPath()
-                + "/DCIM/Camera/";
+
+        String path = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+
+//                path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
+        } else {
+            path = Environment.getExternalStorageDirectory().getPath() + "/DCIM/Camera/";
+        }
+
         Calendar cal = Calendar.getInstance();
         String current_paths = "checker_" + extra + (System.currentTimeMillis() / 1000)
                 + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
         File file = new File(path, current_paths);
         path_Camera = file.getPath();
         Log.e("path****", path + " *** " + current_paths + " *** " + file);
-
+        Log.e(TAG, "openDeviceCamera: "+path);
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -16144,6 +16177,7 @@ public class QuestionnaireActivity extends Activity implements
         // Intent cameraIntent = new Intent(
         // android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         // startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+
     }
 
     // @Override
