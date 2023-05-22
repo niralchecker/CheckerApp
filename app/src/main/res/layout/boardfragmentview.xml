@@ -197,27 +197,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:visibility="gone"
             android:src="@drawable/img_notification"
             app:layout_constraintBottom_toBottomOf="@+id/back"
             app:layout_constraintEnd_toStartOf="@id/cv_profile"
             app:layout_constraintTop_toTopOf="@+id/back" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/cv_profile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="5dp"
+            android:padding="3dp"
+            android:scaleType="centerCrop"
             app:cardCornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/back"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/back">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/demo_image" />
-
-        </androidx.cardview.widget.CardView>
+            app:shapeAppearance="@style/ShapeAppearance.ImageView"
+            app:srcCompat="@drawable/ic_person"
+            app:strokeColor="@android:color/darker_gray"
+            app:strokeWidth="3dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
