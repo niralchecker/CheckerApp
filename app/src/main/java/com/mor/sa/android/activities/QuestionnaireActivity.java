@@ -3004,18 +3004,8 @@ public class QuestionnaireActivity extends Activity implements
             String extra = "";
             if (questionObject != null && questionObject.getDataID() != null)
                 extra = questionObject.getDataID() + "_";
-
-
-            String path = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
-
-//                path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
-            } else {
-            path = Environment.getExternalStorageDirectory().getPath() + "/DCIM/Camera/";
-            }
-
-
+            String path = Environment.getExternalStorageDirectory().getPath()
+                    + "/DCIM/Camera/";
             Calendar cal = Calendar.getInstance();
             String current_paths = "checker_" + extra +
                     +(System.currentTimeMillis() / 1000) + "_"
@@ -16145,23 +16135,15 @@ public class QuestionnaireActivity extends Activity implements
         String extra = "";
         if (questionObject != null && questionObject.getDataID() != null)
             extra = questionObject.getDataID() + "_";
-
-        String path = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
-
-//                path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
-        } else {
-            path = Environment.getExternalStorageDirectory().getPath() + "/DCIM/Camera/";
-        }
-
+        String path = Environment.getExternalStorageDirectory().getPath()
+                + "/DCIM/Camera/";
         Calendar cal = Calendar.getInstance();
         String current_paths = "checker_" + extra + (System.currentTimeMillis() / 1000)
                 + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
         File file = new File(path, current_paths);
         path_Camera = file.getPath();
         Log.e("path****", path + " *** " + current_paths + " *** " + file);
-        Log.e(TAG, "openDeviceCamera: "+path);
+        Log.e(TAG, "openDeviceCamera: " + path);
         try {
             file.createNewFile();
         } catch (IOException e) {
