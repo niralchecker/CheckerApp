@@ -52,6 +52,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:screenOrientation="portrait"
+        android:preserveLegacyExternalStorage="true"
         android:theme="@android:style/Theme.NoTitleBar"
         android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden">
@@ -212,6 +213,7 @@
             android:name=".QuestionnaireActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".PreviewDemo"

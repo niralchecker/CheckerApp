@@ -3004,37 +3004,21 @@ public class QuestionnaireActivity extends Activity implements
             String extra = "";
             if (questionObject != null && questionObject.getDataID() != null)
                 extra = questionObject.getDataID() + "_";
-            String path = Environment.getExternalStorageDirectory().getPath()
-                    + "/DCIM/Camera/";
-            Calendar cal = Calendar.getInstance();
-            String current_paths = "checker_" + extra +
-                    +(System.currentTimeMillis() / 1000) + "_"
-                    + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
-            File file = new File(path, current_paths);
-            path_Camera = file.getPath();
-
-
-//            File imageFile = new File(path);
-//            Uri imageUri = Uri.fromFile(imageFile);
-//            File tempFile = null;
-//            // Create a temporary file to store the cropped image
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//                tempFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
-//            } else {
-//                tempFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
-//            }
-//            Uri tempUri = Uri.fromFile(tempFile);
-
-
-            Log.e("performCrop", path + " ### " + current_paths + " ### " + file);
-            Log.e(TAG, "performCrop: " + path);
-
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+            File storageDir;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            } else {
+                storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             }
-            uri_Camera = Uri.fromFile(file);
+
+            // Create a unique file name for the image
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            String imageFileName = "IMG_" + timeStamp + ".jpg";
+
+            // Create the file
+            File imageFile = new File(storageDir, imageFileName);
+            path_Camera = storageDir.getPath();
+            uri_Camera = Uri.fromFile(imageFile);
 
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
             // indicate image type and Uri
@@ -3148,32 +3132,6 @@ public class QuestionnaireActivity extends Activity implements
                         saveImage(getBitmapFromPath(data.getExtras().getString("jpg")));
                         Uri uri = Uri.parse(data.getStringExtra("jpg"));
                         Log.e("uri", String.valueOf(uri));
-
-//                        Intent cropIntent = new Intent(
-//                                "com.android.camera.action.CROP");
-//                        File file = new File(data.getExtras().getString("jpg"));
-//                        uri_Camera = Uri.fromFile(file);
-//                        path_Camera = data.getExtras().getString("jpg");
-//                        // indicate image type and Uri
-//                        cropIntent.setDataAndType(Uri.fromFile(file), "image/*");
-//                        cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri_Camera);
-//                        // set crop properties
-//                        cropIntent.putExtra("crop", "true");
-//                        // indicate aspect of desired crop
-//                        cropIntent.putExtra("aspectX", 1);
-//                        cropIntent.putExtra("aspectY", 1);
-//                        // indicate output X and Y
-//                        cropIntent.putExtra("outputX", 256);
-//                        cropIntent.putExtra("outputY", 256);
-//                        // retrieve data on return
-//                        cropIntent.putExtra("return-data", true);
-//                        // start the activity - we handle returning in
-//                        // onActivityResult
-//                        if (isLastAttachment)
-//                            startActivityForResult(cropIntent, PIC_CROP_LAST);
-//                        else {
-//                            startActivityForResult(cropIntent, PIC_CROP);
-//                        }
                     } else {
 
                         filePathDataID fId = new filePathDataID();
@@ -3380,13 +3338,26 @@ public class QuestionnaireActivity extends Activity implements
                     if (resultCode == Activity.RESULT_OK || data.getData() != null) {
                         path_Camera = getRealPathFromURI(data.getData());
                         File imageFile = null;
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                            imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_CROPPING,
+                                false) && PreviewDemo.IsCrop == true) {
+                            //Custom Camera
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                            } else {
+                                imageFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                            }
                         } else {
-                            imageFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
+                            //Default Camara
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                                imageFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                            } else {
+                                imageFile = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                            }
                         }
+
                         // Convert the file path to a content URI using FileProvider
                         uri_Camera = FileProvider.getUriForFile(this, "com.mor.sa.android.activities.fileprovider", imageFile);
+                        Log.e("path_Camera", path_Camera);
                         Log.e("imageFile", String.valueOf(imageFile));
                         Log.e("croppedImagePath", String.valueOf(uri_Camera));
 
@@ -3518,9 +3489,16 @@ public class QuestionnaireActivity extends Activity implements
 
                     myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-                    if (!isRestoring)
-                        cameraCase(data, false);
-                    else {
+                    Log.e("OnActivity", "TRUE");
+                    if (!isRestoring) {
+//                        cameraCase(data, false);
+                        if (data != null) {
+                            Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+                            Log.e("imageBitmap", String.valueOf(imageBitmap));
+//                            mImageView.setImageBitmap(imageBitmap);
+                        }
+                        Log.e("Data_null", "null");
+                    } else {
                         isRestoreCamera = true;
                         restoreIntentData = data;
                     }
@@ -6703,7 +6681,8 @@ public class QuestionnaireActivity extends Activity implements
         return randomizeList;
     }
 
-    private static ArrayList<Objects> addAllAgainstThisIndex(int index, ArrayList<Objects> listObjects) {
+    private static ArrayList<Objects> addAllAgainstThisIndex(int index, ArrayList<
+            Objects> listObjects) {
         ArrayList<Objects> tempList = new ArrayList<Objects>();
         for (int i = 0; i < listObjects.size(); i++) {
             int thisIndex = (int) Integer.parseInt(listObjects.get(i).getObjectOrder());
@@ -11850,7 +11829,8 @@ public class QuestionnaireActivity extends Activity implements
         return null;
     }
 
-    private static String getHtmlImageView(byte[] pictureData, String fileName, Bitmap theImage) {
+    private static String getHtmlImageView(byte[] pictureData, String fileName, Bitmap
+            theImage) {
         if (pictureData == null && theImage != null) {
             try {
                 String path = DBHelper.writeOrGetImagePathPreview(fileName, theImage);
@@ -12478,7 +12458,8 @@ public class QuestionnaireActivity extends Activity implements
         return hebrewLayout;
     }
 
-    private EditText getReplyEditTextView(boolean isPrev, SubmitQuestionnaireData serializeSubmitdata) {
+    private EditText getReplyEditTextView(boolean isPrev, SubmitQuestionnaireData
+            serializeSubmitdata) {
         replyMsgBox = new EditText(this.getApplicationContext());
         replyMsgBox.setTextColor(getResources().getColor(
                 android.R.color.black));
@@ -14680,7 +14661,8 @@ public class QuestionnaireActivity extends Activity implements
         return hideAdditionalInfo;
     }
 
-    public static boolean hideShowMiInCheckBox(ArrayList<Answers> listAnswers, LinearLayout checkboxgrp, Objects questionObject) {
+    public static boolean hideShowMiInCheckBox(ArrayList<Answers> listAnswers, LinearLayout
+            checkboxgrp, Objects questionObject) {
         boolean hideAdditionalInfo = true;
         for (int k = 0; k < listAnswers.size(); k++) {
             CheckBox cb = null;
@@ -16135,55 +16117,27 @@ public class QuestionnaireActivity extends Activity implements
         String extra = "";
         if (questionObject != null && questionObject.getDataID() != null)
             extra = questionObject.getDataID() + "_";
-        String path = Environment.getExternalStorageDirectory().getPath()
-                + "/DCIM/Camera/";
-        Calendar cal = Calendar.getInstance();
-        String current_paths = "checker_" + extra + (System.currentTimeMillis() / 1000)
-                + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
-        File file = new File(path, current_paths);
-        path_Camera = file.getPath();
-        Log.e("path****", path + " *** " + current_paths + " *** " + file);
-        Log.e(TAG, "openDeviceCamera: " + path);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createDefaultCameraImgFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.mor.sa.android.activities.fileprovider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, input);
+                Log.e("URI", String.valueOf(photoURI));
+            }
         }
-        uri_Camera = Uri.fromFile(file);
-        Intent intent = new Intent(
-                android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri_Camera);
-
-        // startActivityForResult(intent, CAMERA_PIC_REQUEST);
-        startActivityForResult(intent, input);
-        // Intent cameraIntent = new Intent(
-        // android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        // startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
 
     }
-
-    // @Override
-    // protected void onActivityResult(int requestCode, int resultCode, Intent
-    // data) {
-    // // TODO Auto-generated method stub
-    // switch(requestCode){
-    // case 0:
-    // if(resultCode==RESULT_OK){
-    // if(IsInternetConnectted()){
-    // try {
-    // uploadFileList.add(data.getData());
-    // // Toast.makeText(QuestionnaireActivity.this,
-    // getString(R.string.questionnaire_file_attached_text),
-    // // Toast.LENGTH_LONG);
-    // } catch (Exception e) {
-    // // TODO Auto-generated catch block
-    // e.printStackTrace();
-    // }
-    // }
-    // }
-    // break;
-    // }
-    // }
 
     private String getRealPathFromURINew(Uri contentUri) {
         String real_path = contentUri.getPath();
@@ -22723,9 +22677,9 @@ public class QuestionnaireActivity extends Activity implements
     private void start_camera(String dataid) {
 
         if (Helper.isDeviceCamera()) {
-            if (dataid != null)
-                openDeviceCamera(CAMERA_PIC_REQUEST);
-            else
+            if (dataid != null) {
+                takePhotoForQ();
+            } else
                 openDeviceCamera(CAMERA_PIC_REQUEST_LAST);
         } else {
 
@@ -22922,6 +22876,124 @@ public class QuestionnaireActivity extends Activity implements
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // Save the cropped image to the original file path
         intent.putExtra("return-data", false);
 //        startActivityForResult(intent, PIC_CROP);
+        if (isLastAttachment)
+            startActivityForResult(intent, PIC_CROP_LAST);
+        else {
+            startActivityForResult(intent, PIC_CROP);
+        }
+    }
+
+    public void takePhotoForQ() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createDefaultCameraImgFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.mor.sa.android.activities.fileprovider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, 1001);
+                Log.e("URI", String.valueOf(photoURI));
+            }
+        }
+    }
+
+    String currentPhotoPath;
+
+    private File createDefaultCameraImgFile() throws IOException {
+        // Create an image file name
+        File storageDir;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        } else {
+            storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        }
+
+        // Create a unique file name for the image
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "IMG_" + timeStamp + ".jpg";
+
+        // Create the file
+        File imageFile = new File(storageDir, imageFileName);
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = imageFile.getAbsolutePath();
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_CROPPING,
+                false)) {
+            Log.e("IF_******", "TRUE");
+            cropDefaultCamera(currentPhotoPath);
+        } else {
+            Log.e("ELSE_******", "TRUE");
+            path_Camera = imageFile.getPath();
+            uri_Camera = Uri.fromFile(imageFile);
+            String dataid = null;
+            if (questionObject != null
+                    && questionObject.getDataID() != null
+                    && !isLastAttachment)
+                dataid = questionObject.getDataID();
+            else
+                isLastAttachment = true;
+
+            filePathDataID fId = new filePathDataID();
+            if (dataid != null && dataid.contains("^")) {
+                dataid += "#@" + questionObject.getLoopInfo();
+            }
+            fId.setDataID(dataid, isLastAttachment);
+            fId.setFilePath(path_Camera);
+            fId.setUPLOAD_FILe_ORDERID(order.getOrderID());
+            fId.setUPLOAD_FILe_CLIENT_NAME(order.getClientName());
+            fId.setUPLOAD_FILe_BRANCH_NAME(order.getBranchFullname());
+            fId.setUPLOAD_FILe_DATE(sdf.format(new Date()));
+            fId.setUPLOAD_FILe_Sample_size(Helper.getSampleSize());
+
+            fId.setUPLOAD_FILe_PRODUCTID(currentProductId);
+            fId.setUPLOAD_FILe_LOCATIONID(currentLocationId);
+            uploadList.add(fId);
+            uploadFileList.add(uri_Camera);
+            uploadFileListDataId.add(questionObject.getDataID());
+            String[] items = new String[uploadFileList.size()];
+            if (isLastAttachment == true
+                    && attach_btn_view != null
+                    && attach_btn_view.getVisibility() == RelativeLayout.VISIBLE) {
+                ShowAttachedFiles();
+            }
+        }
+        // Show a message to the user
+//        Toast.makeText(this, "Image saved Camera: " + imageFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        return imageFile;
+    }
+
+    private void cropDefaultCamera(String imagePath) {
+        File imageFile = new File(imagePath);
+        Uri imageUri = Uri.fromFile(imageFile);
+        File tempFile = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            tempFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        } else {
+            tempFile = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        }
+
+        Log.e("tempFile", String.valueOf(tempFile));
+        Log.e("imageFile___", String.valueOf(imageFile));
+        Log.e("image_URI___", String.valueOf(imageUri));
+
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(imageUri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 256);
+        intent.putExtra("outputY", 256);
+        intent.putExtra("scale", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // Save the cropped image to the original file path
+        intent.putExtra("return-data", false);
         if (isLastAttachment)
             startActivityForResult(intent, PIC_CROP_LAST);
         else {
