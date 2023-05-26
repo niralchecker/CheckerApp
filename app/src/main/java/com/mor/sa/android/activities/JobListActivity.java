@@ -3538,12 +3538,8 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 //                Log.e("filtered", filtered + "  " + filtered.size());
                     jobs_CAPI.clear();
 //                    for (int i = 0; filtered != null && i < filtered.size(); i++) {
-//                        String mystring = filtered.get(i).orderItem.getOrderID();
-//                        String[] result = mystring.split("_");
-//////                    for (String s : result) {
-//////                        s = s.substring(s.indexOf("_") + 1);
-//////                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-//////                    }
+//                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+//                    }
 ////                    System.out.println(result[0])
 //                        boolean found = false;
 //                        for (orderListItem person1 : jobs_CAPI) {
@@ -3823,7 +3819,9 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
                 filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
                 jobs_CAPI.clear();
-
+//                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+//                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+//                }
                 Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
                 for (orderListItem item : joborders) {
                     int setId = Integer.parseInt(item.orderItem.getSetID());
@@ -3922,20 +3920,22 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 //                Log.e("filtered", filtered + "  " + filtered.size());
 
                 jobs_CAPI.clear();
-
+/*  for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+                    }*/
                 Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
                 for (orderListItem item : joborders) {
                     int setId = Integer.parseInt(item.orderItem.getSetID());
                     if (groupedItems.containsKey(setId)) {
                         groupedItems.get(setId).add(item);
-                        Log.d("TAG", "detID: "+item.orderItem.getSetID());
+                        Log.d("TAG", "detID: " + item.orderItem.getSetID());
 
                     } else {
                         List<orderListItem> items = new ArrayList<>();
                         items.add(item);
                         groupedItems.put(setId, items);
-                        Log.e("TAG", "doInBackground: "+groupedItems);
-                        Log.d("TAG", "doI: "+item.orderItem.getOrderID());
+                        Log.e("TAG", "doInBackground: " + groupedItems);
+                        Log.d("TAG", "doI: " + item.orderItem.getOrderID());
                         jobs_CAPI.add((new orderListItem(item.orderItem, null)));
                     }
                 }
@@ -7894,6 +7894,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
             extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_REFUSAL_REASON, reason));
             extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, groupedNumber));
+            Log.d("TAG", "RejectJob: "+groupedNumber);
 
             // dialog.onPostExecute();
             String result = Connector.postForm(Constants.getJobStartURL(), extraDataList);
