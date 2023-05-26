@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/backGroundDrawable"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -26,21 +27,21 @@
             android:layout_marginRight="10px"
             android:src="@drawable/jobs_map"
             android:tag="map_button"
-            android:tint="@color/dark_blue" />
+            app:tint="@color/dark_blue" />
 
         <ImageView
             android:id="@+id/jdcalendarbtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10px"
-            android:layout_marginTop="10px"
-            android:layout_marginRight="10px"
-            android:layout_toRightOf="@+id/jdmapbtn"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/jdmapbtn"
             android:src="@drawable/ic_calendar"
             android:tag="calendar_btn"
-            android:tint="@color/dark_blue"
-            android:visibility="visible" />
+            android:visibility="visible"
+            app:tint="@color/dark_blue" />
 
         <TextView
             android:id="@+id/jd_heder"
@@ -222,12 +223,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdbranchv"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_quotas"
                 android:textColor="#000000"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <ListView
@@ -235,16 +236,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdsurvey_quotas"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="15dp"
-                android:paddingRight="5dp" />
+                android:layout_alignParentStart="true"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp" />
 
             <TextView
                 android:id="@+id/jdsurvey_allocations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdsurvey_quotas_list"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_allocations"
@@ -257,7 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdsurvey_allocations"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:paddingLeft="5dp"
                 android:divider="@color/dark_blue"
                 android:dividerHeight="1dp"
@@ -285,13 +286,13 @@
                 android:id="@+id/jdsurveynight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_name"
                 android:textColor="#ffffff"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -299,10 +300,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdsurveynight"
-                android:paddingLeft="15dp"
-                android:paddingRight="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp"
                 android:textColor="#ffffff"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/jdbranch_night"
@@ -313,7 +314,7 @@
                 android:paddingRight="5dp"
                 android:text="@string/jd_branchfname"
                 android:textColor="#ffffff"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -321,22 +322,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdbranch_night"
-                android:paddingLeft="15dp"
-                android:paddingRight="5dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp"
                 android:textColor="#ffffff"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/jdsurvey_quotasnight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdbranchv_night"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/jd_survey_quotas"
                 android:textColor="#ffffff"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <ListView
@@ -344,7 +345,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/jdsurvey_quotasnight"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:cacheColorHint="#00000000"
                 android:divider="#FFFFFF"
                 android:dividerHeight="1px"
@@ -411,7 +412,6 @@
                         android:id="@+id/tblView"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-
                         android:layout_weight="1"
                         android:orientation="vertical">
 

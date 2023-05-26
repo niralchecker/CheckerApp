@@ -1724,8 +1724,7 @@ public class JobItemAdapter extends BaseAdapter {
 //                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
                     } else {
                         jobItemList.setVisibility(View.GONE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.downnnn));
+                        ivRight.setBackgroundDrawable(ct.getResources().getDrawable(R.drawable.downnnn));
                     }
                 }
             });
@@ -1741,8 +1740,12 @@ public class JobItemAdapter extends BaseAdapter {
             if (order.getOrderID().contains("-")) {
                 Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
                         "-", ""));
+
+                Log.d("TAG", "getView: Survey"+s);
                 if (s != null && s.getSurveyName() != null) {
-                    // tv.setText(order.getOrderID()+s.getSurveyName());
+//                     tv.setText(order.getOrderID()+s.getSurveyName());
+
+
                     tv.setText(s.getSurveyName());
                     tvSurveyName.setText(s.getSurveyName());
                     tvBranchFullName.setText(s.getBranchFullName());
@@ -1798,8 +1801,6 @@ public class JobItemAdapter extends BaseAdapter {
                     lvjdsurvey_allocations_list.setAdapter(adapter);
                     setListViewHeightBased(lvjdsurvey_allocations_list);
                 }
-
-
             } else if (order != null && order.getSetName() != null
                     && !order.getSetName().equals("")) {
 
@@ -1920,16 +1921,14 @@ public class JobItemAdapter extends BaseAdapter {
                     if (Constants.getFullBranchName()
                             && order.getBranchFullname() != null
                             && order.getBranchFullname().length() > 0) {
-                        branchtv.setText(order.getBranchFullname() + " "
-                                + order.getAddress());
+                        branchtv.setText(order.getBranchFullname() + " " + order.getAddress());
 
                     }
 
                     if (Constants.getFullBranchName()
                             && order.getBranchFullname() != null
                             && order.getBranchFullname().length() > 0)
-                        branchtv.setText(order.getBranchFullname() + " "
-                                + order.getAddress());
+                        branchtv.setText(order.getBranchFullname() + " " + order.getAddress());
 
                     // branchtv.setOnClickListener(new OnClickListener() {
                     //
@@ -2139,12 +2138,10 @@ public class JobItemAdapter extends BaseAdapter {
                 public void onClick(View arg0) {
                     if (jobItemList.getVisibility() == View.GONE) {
                         jobItemList.setVisibility(View.VISIBLE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.upppp));
+                        ivRight.setBackgroundDrawable(ct.getResources().getDrawable(R.drawable.upppp));
                     } else {
                         jobItemList.setVisibility(View.GONE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.downnnn));
+                        ivRight.setBackgroundDrawable(ct.getResources().getDrawable(R.drawable.downnnn));
                     }
                 }
             });

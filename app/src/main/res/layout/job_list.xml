@@ -228,7 +228,7 @@
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:orientation="horizontal"
         android:visibility="gone"
         android:weightSum="54">

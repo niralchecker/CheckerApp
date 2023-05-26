@@ -64,7 +64,7 @@
             app:layout_constraintTop_toTopOf="@+id/sidemenuicon1"
             app:srcCompat="@drawable/ic_person"
             app:shapeAppearance="@style/ShapeAppearance.ImageView"
-           />
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

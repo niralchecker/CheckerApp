@@ -174,6 +174,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -185,10 +186,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class JobListActivity extends Activity implements OnClickListener,
-        BranchTVListener, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, MessageApi.MessageListener,
-        OnGesturePerformedListener, DateTVListener {
+public class JobListActivity extends Activity implements OnClickListener, BranchTVListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, MessageApi.MessageListener, OnGesturePerformedListener, DateTVListener {
     private boolean isMenuOpen = false;
     private boolean isWifiOnly = false;
     private static final String START_ACTIVITY = "/start_activity";
@@ -305,15 +303,14 @@ public class JobListActivity extends Activity implements OnClickListener,
     String capi_assigned_count, capi_status_inProgress, capi_status_returned, my_jobs_accept, my_jobs_implement;
     CardView cardView_CAPI, cardView_MyJobs;
     ArrayList<orderListItem> jobs_CAPI = new ArrayList<orderListItem>();
+    ArrayList<orderListItem> newCAPI = new ArrayList<orderListItem>();
 
     public String getLocalIpAddress() {
         if (IsInternetConnectted()) {
             try {
-                for (Enumeration<NetworkInterface> en = NetworkInterface
-                        .getNetworkInterfaces(); en.hasMoreElements(); ) {
+                for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                     NetworkInterface intf = en.nextElement();
-                    for (Enumeration<InetAddress> enumIpAddr = intf
-                            .getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                         InetAddress inetAddress = enumIpAddr.nextElement();
                         if (!inetAddress.isLoopbackAddress()) {
                             return inetAddress.getHostAddress();
@@ -341,39 +338,31 @@ public class JobListActivity extends Activity implements OnClickListener,
         tabSync.setTextColor(Color.parseColor(txt_color_unselect));
         if (tabNumber != 1) {
 
-            imgtabOne.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_assigned_u")));
-            tabOne.setText(android.text.Html.fromHtml(getResources().getString(
-                    R.string.job_list_tab_assigned)));
+            imgtabOne.setImageDrawable(getResources().getDrawable(getIcon("img_assigned_u")));
+            tabOne.setText(android.text.Html.fromHtml(getResources().getString(R.string.job_list_tab_assigned)));
             tabOne.setTextColor(Color.parseColor(txt_color_unselect));
             tabOne.setChecked(false);
         }
         if (tabNumber != 2) {
 
-            imgtabTwo.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_scheduled_u")));
-            tabTwo.setText(android.text.Html.fromHtml(getResources().getString(
-                    R.string.job_list_tab_scheduled)));
+            imgtabTwo.setImageDrawable(getResources().getDrawable(getIcon("img_scheduled_u")));
+            tabTwo.setText(android.text.Html.fromHtml(getResources().getString(R.string.job_list_tab_scheduled)));
             tabTwo.setTextColor(Color.parseColor(txt_color_unselect));
             tabTwo.setChecked(false);
             ltabTwo.setBackgroundColor(Color.parseColor(color_unselect));
         }
         if (tabNumber != 3) {
 
-            imgtabThree.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_in_progress_u")));
-            tabThree.setText(android.text.Html.fromHtml(getResources()
-                    .getString(R.string.job_list_tab_in_progress)));
+            imgtabThree.setImageDrawable(getResources().getDrawable(getIcon("img_in_progress_u")));
+            tabThree.setText(android.text.Html.fromHtml(getResources().getString(R.string.job_list_tab_in_progress)));
             tabThree.setTextColor(Color.parseColor(txt_color_unselect));
             tabThree.setChecked(false);
             ltabThree.setBackgroundColor(Color.parseColor(color_unselect));
         }
         if (tabNumber != 4) {
 
-            imgtabFour.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_completed_u")));
-            tabFour.setText(android.text.Html.fromHtml(getResources()
-                    .getString(R.string.job_list_tab_completed)));
+            imgtabFour.setImageDrawable(getResources().getDrawable(getIcon("img_completed_u")));
+            tabFour.setText(android.text.Html.fromHtml(getResources().getString(R.string.job_list_tab_completed)));
             tabFour.setTextColor(Color.parseColor(txt_color_unselect));
             tabFour.setChecked(false);
             ltabFour.setBackgroundColor(Color.parseColor(color_unselect));
@@ -381,14 +370,11 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         if (tabNumber == 1) {
 
-            imgtabOne.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_assigned")));
+            imgtabOne.setImageDrawable(getResources().getDrawable(getIcon("img_assigned")));
 
-            SpannableString spanString = new SpannableString(getResources()
-                    .getString(R.string.job_list_tab_assigned));
+            SpannableString spanString = new SpannableString(getResources().getString(R.string.job_list_tab_assigned));
 
-            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
-                    spanString.length(), 0);
+            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
             tabOne.setTextColor(Color.parseColor(txt_color_select));
 
             tabOne.setText(spanString);
@@ -399,14 +385,11 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
         if (tabNumber == 2) {
 
-            imgtabTwo.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_scheduled")));
+            imgtabTwo.setImageDrawable(getResources().getDrawable(getIcon("img_scheduled")));
 
-            SpannableString spanString = new SpannableString(getResources()
-                    .getString(R.string.job_list_tab_scheduled));
+            SpannableString spanString = new SpannableString(getResources().getString(R.string.job_list_tab_scheduled));
 
-            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
-                    spanString.length(), 0);
+            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
 
             tabTwo.setTextColor(Color.parseColor(txt_color_select));
             tabTwo.setText(spanString);
@@ -415,13 +398,10 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         }
         if (tabNumber == 3) {
-            imgtabThree.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_in_progress")));
-            SpannableString spanString = new SpannableString(getResources()
-                    .getString(R.string.job_list_tab_in_progress));
+            imgtabThree.setImageDrawable(getResources().getDrawable(getIcon("img_in_progress")));
+            SpannableString spanString = new SpannableString(getResources().getString(R.string.job_list_tab_in_progress));
 
-            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
-                    spanString.length(), 0);
+            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
 
             tabThree.setText(spanString);
             tabThree.setTextColor(Color.parseColor(txt_color_select));
@@ -430,13 +410,10 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
         if (tabNumber == 4) {
 
-            imgtabFour.setImageDrawable(getResources().getDrawable(
-                    getIcon("img_completed")));
-            SpannableString spanString = new SpannableString(getResources()
-                    .getString(R.string.job_list_tab_completed));
+            imgtabFour.setImageDrawable(getResources().getDrawable(getIcon("img_completed")));
+            SpannableString spanString = new SpannableString(getResources().getString(R.string.job_list_tab_completed));
 
-            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0,
-                    spanString.length(), 0);
+            spanString.setSpan(new StyleSpan(Typeface.BOLD), 0, spanString.length(), 0);
 
             tabFour.setText(spanString);
             tabFour.setTextColor(Color.parseColor(txt_color_select));
@@ -461,27 +438,22 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (Helper.getTheme(JobListActivity.this) == 0) {
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.rvinjobscreen);
             if (layout != null)
-                layout.setBackgroundDrawable(getResources().getDrawable(
-                        R.drawable.navigation_bar_dark));
+                layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.navigation_bar_dark));
 
             ImageView imglayout = (ImageView) findViewById(R.id.bottombar);
             if (imglayout != null)
-                imglayout.setBackgroundDrawable(getResources().getDrawable(
-                        R.drawable.navigation_bar_dark));
+                imglayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.navigation_bar_dark));
 
             layout = (RelativeLayout) findViewById(R.id.screenBackGround);
             if (layout != null)
-                layout.setBackgroundDrawable(getResources().getDrawable(
-                        R.drawable.background_dark));
+                layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.background_dark));
 
             TextView tv = (TextView) findViewById(R.id.jobTitle);
-            if (tv != null)
-                tv.setTextColor(getResources().getColor(android.R.color.white));
+            if (tv != null) tv.setTextColor(getResources().getColor(android.R.color.white));
 
             ListView lv = (ListView) findViewById(R.id.joblist);
             if (lv != null) {
-                ColorDrawable sage = new ColorDrawable(this.getResources()
-                        .getColor(android.R.color.white));
+                ColorDrawable sage = new ColorDrawable(this.getResources().getColor(android.R.color.white));
                 lv.setDivider(sage);
             }
 
@@ -490,57 +462,33 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     void startLocationChecker() {
         Context context = JobListActivity.this;
-        LocationManager locationManager = (LocationManager) context
-                .getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-            String userName = myPrefs.getString(
-                    Constants.POST_FIELD_LOGIN_USERNAME, "");
+            String userName = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
 
         } else {
             // OPen GPS settings
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(
-                            getResources().getString(R.string.questionnaire_gps_alert))
-                    .setTitle(getResources().getString(R.string._alert_title))
-                    .setCancelable(false)
-                    .setPositiveButton(
-                            getResources()
-                                    .getString(
-                                            R.string.questionnaire_exit_delete_alert_yes),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    // comunicator.JobList = null;
-                                    startActivityForResult(
-                                            new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),
-                                            JOB_GPS_CODE);
+            builder.setMessage(getResources().getString(R.string.questionnaire_gps_alert)).setTitle(getResources().getString(R.string._alert_title)).setCancelable(false).setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    // comunicator.JobList = null;
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), JOB_GPS_CODE);
 
-                                    dialog.dismiss();
+                    dialog.dismiss();
 
-                                }
-                            })
-                    .setNegativeButton(
-                            getResources()
-                                    .getString(
-                                            R.string.questionnaire_exit_delete_alert_no),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    dialog.dismiss();
-                                    myPrefs = getSharedPreferences("pref",
-                                            MODE_PRIVATE);
+                }
+            }).setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                    myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-                                    String userName = myPrefs
-                                            .getString(
-                                                    Constants.POST_FIELD_LOGIN_USERNAME,
-                                                    "");
-                                }
-                            });
+                    String userName = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
+                }
+            });
             AlertDialog alert = builder.create();
             alert.show();
         }
@@ -612,12 +560,10 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     public static void loadUrlInWebViewDialog(final Activity context, String url) {
         Connector.setCookieManager(context);
-        final Dialog err_dialog = new Dialog(context,
-                android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        final Dialog err_dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         err_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         err_dialog.setContentView(R.layout.dialog_urls);
-        err_dialog.findViewById(R.id.textView1).setVisibility(
-                RelativeLayout.GONE);
+        err_dialog.findViewById(R.id.textView1).setVisibility(RelativeLayout.GONE);
 
         WebView wv = (WebView) err_dialog.findViewById(R.id.briefingView);
         wv.getSettings().setJavaScriptEnabled(true);
@@ -643,23 +589,16 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // TODO Auto-generated method stub
                 super.onPageStarted(view, url, favicon);
 
-                if (url != null
-                        && (url.toLowerCase().contains("c_main.php") || url
-                        .toLowerCase().contains("login.php"))) {
+                if (url != null && (url.toLowerCase().contains("c_main.php") || url.toLowerCase().contains("login.php"))) {
                     err_dialog.dismiss();
                     Revamped_Loading_Dialog.hide_dialog();
-                    Toast.makeText(
-                                    context,
-                                    context.getResources().getString(
-                                            R.string.task_completed), Toast.LENGTH_LONG)
-                            .show();
+                    Toast.makeText(context, context.getResources().getString(R.string.task_completed), Toast.LENGTH_LONG).show();
 
                 }
             }
 
             @Override
-            public void onReceivedError(WebView view, int errorCode,
-                                        String description, String failingUrl) {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 // TODO Auto-generated method stub
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 Revamped_Loading_Dialog.hide_dialog();
@@ -683,15 +622,13 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
         });
         err_dialog.show();
-        Revamped_Loading_Dialog.show_dialog(context, context.getResources()
-                .getString(R.string.jd_please_alert_msg));
+        Revamped_Loading_Dialog.show_dialog(context, context.getResources().getString(R.string.jd_please_alert_msg));
 
     }
 
     public void makeErrorDialog(Context context) {
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-        isBranchPropErr = myPrefs.getBoolean(Constants.ALREADY_BRANCHPROPERR,
-                false);
+        isBranchPropErr = myPrefs.getBoolean(Constants.ALREADY_BRANCHPROPERR, false);
 
         err_dialog = new Dialog(context);
         err_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -700,62 +637,25 @@ public class JobListActivity extends Activity implements OnClickListener,
         } else {
             err_dialog.setContentView(R.layout.dialog_err_icons);
         }
-        err_dialog.setTitle(context.getResources().getString(
-                R.string.job_list_err_dialog));
+        err_dialog.setTitle(context.getResources().getString(R.string.job_list_err_dialog));
 
         err_txtProduct = ((TextView) err_dialog.findViewById(R.id.txt_product));
         if (isBranchPropErr) {
-            err_txtProduct.setText((context.getResources()
-                    .getString(R.string.job_list_err_dialog_branch)));
+            err_txtProduct.setText((context.getResources().getString(R.string.job_list_err_dialog_branch)));
         } else {
-            err_txtProduct.setText((context.getResources()
-                    .getString(R.string.job_list_err_dialog)));
+            err_txtProduct.setText((context.getResources().getString(R.string.job_list_err_dialog)));
         }
         err_txtExtra = ((TextView) err_dialog.findViewById(R.id.txt_extra));
-        err_listPreview = ((ListView) err_dialog
-                .findViewById(R.id.list_preview));
+        err_listPreview = ((ListView) err_dialog.findViewById(R.id.list_preview));
         err_btnDismiss = ((Button) err_dialog.findViewById(R.id.btn_dismiss));
         err_btnDismiss = ((Button) err_dialog.findViewById(R.id.btn_dismiss));
 
-        err_txtExtra.setText(getResources().getString(
-                R.string.err_missing_images));
+        err_txtExtra.setText(getResources().getString(R.string.err_missing_images));
 
         List<String> listHeadings = new ArrayList<String>();
         List<String> listValues = new ArrayList<String>();
 
-        ArrayList<Order> jobordersss = DBHelper.getOrders(DBHelper.whereJobListNotArchived,
-                Constants.DB_TABLE_JOBLIST, new String[]{
-                        Constants.DB_TABLE_JOBLIST_ORDERID,
-                        Constants.DB_TABLE_JOBLIST_DATE,
-                        Constants.DB_TABLE_JOBLIST_SN,
-                        Constants.DB_TABLE_JOBLIST_DESC,
-                        Constants.DB_TABLE_JOBLIST_SETNAME,
-                        Constants.DB_TABLE_JOBLIST_SETLINK,
-                        Constants.DB_TABLE_JOBLIST_CN,
-                        Constants.DB_TABLE_JOBLIST_BFN,
-                        Constants.DB_TABLE_JOBLIST_BN,
-                        Constants.DB_TABLE_JOBLIST_CITYNAME,
-                        Constants.DB_TABLE_JOBLIST_ADDRESS,
-                        Constants.DB_TABLE_JOBLIST_BP,
-                        Constants.DB_TABLE_JOBLIST_OH,
-                        Constants.DB_TABLE_JOBLIST_TS,
-                        Constants.DB_TABLE_JOBLIST_TE,
-                        Constants.DB_TABLE_JOBLIST_SETID,
-                        Constants.DB_TABLE_JOBLIST_BL,
-                        Constants.DB_TABLE_JOBLIST_BLNG,
-                        Constants.DB_TABLE_JOBLIST_FN,
-                        Constants.DB_TABLE_JOBLIST_JC,
-                        Constants.DB_TABLE_JOBLIST_JI,
-                        Constants.DB_TABLE_JOBLIST_BLINK,
-                        Constants.DB_TABLE_JOBLIST_MID,
-                        Constants.DB_TABLE_CHECKER_CODE,
-                        Constants.DB_TABLE_CHECKER_LINK,
-                        Constants.DB_TABLE_BRANCH_CODE,
-                        Constants.DB_TABLE_SETCODE,
-                        Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                        Constants.DB_TABLE_PURCHASE,
-                        Constants.DB_TABLE_JOBLIST_BRIEFING,},
-                Constants.DB_TABLE_JOBLIST_JI);
+        ArrayList<Order> jobordersss = DBHelper.getOrders(DBHelper.whereJobListNotArchived, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING,}, Constants.DB_TABLE_JOBLIST_JI);
 
         String h = "";
         for (int j = 0; j < pngItems.size(); j++) {
@@ -763,8 +663,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             listValues.add(pngItems.get(j).MediaFile);
         }
 
-        ArrayAdapter adapter = new errIconAdapter(JobListActivity.this,
-                listValues, listHeadings);
+        ArrayAdapter adapter = new errIconAdapter(JobListActivity.this, listValues, listHeadings);
         err_listPreview.setAdapter(adapter);
         err_listPreview.setVisibility(RelativeLayout.VISIBLE);
 
@@ -780,61 +679,11 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    private ArrayList<SubmitQuestionnaireData> cleanUploaedJobsHere(
-            ArrayList<SubmitQuestionnaireData> sqd) {
+    private ArrayList<SubmitQuestionnaireData> cleanUploaedJobsHere(ArrayList<SubmitQuestionnaireData> sqd) {
 
-        String where = "StatusName<>" + "\"Scheduled\"" + " AND StatusName<>"
-                + "\"Assigned\"" + " AND StatusName<>" + "\"survey\""
-                + " AND StatusName<>" + "\"In progress\"" + " AND StatusName<>"
-                + "\"Completed\"";
+        String where = "StatusName<>" + "\"Scheduled\"" + " AND StatusName<>" + "\"Assigned\"" + " AND StatusName<>" + "\"survey\"" + " AND StatusName<>" + "\"In progress\"" + " AND StatusName<>" + "\"Completed\"";
 
-        ArrayList<Order> uploadedJobs = DBHelper
-                .getOrders(
-                        where,
-                        Constants.DB_TABLE_JOBLIST,
-                        new String[]{
-                                Constants.DB_TABLE_JOBLIST_ORDERID,
-                                Constants.DB_TABLE_JOBLIST_DATE,
-                                Constants.DB_TABLE_JOBLIST_SN,
-                                Constants.DB_TABLE_JOBLIST_DESC,
-                                Constants.DB_TABLE_JOBLIST_SETNAME,
-                                Constants.DB_TABLE_JOBLIST_SETLINK,
-                                Constants.DB_TABLE_JOBLIST_CN,
-                                Constants.DB_TABLE_JOBLIST_BFN,
-                                Constants.DB_TABLE_JOBLIST_BN,
-                                Constants.DB_TABLE_JOBLIST_CITYNAME,
-                                Constants.DB_TABLE_JOBLIST_ADDRESS,
-                                Constants.DB_TABLE_JOBLIST_BP,
-                                Constants.DB_TABLE_JOBLIST_OH,
-                                Constants.DB_TABLE_JOBLIST_TS,
-                                Constants.DB_TABLE_JOBLIST_TE,
-                                Constants.DB_TABLE_JOBLIST_SETID,
-                                Constants.DB_TABLE_JOBLIST_BL,
-                                Constants.DB_TABLE_JOBLIST_BLNG,
-                                Constants.DB_TABLE_JOBLIST_FN,
-                                Constants.DB_TABLE_JOBLIST_JC,
-                                Constants.DB_TABLE_JOBLIST_JI,
-                                Constants.DB_TABLE_JOBLIST_BLINK,
-                                Constants.DB_TABLE_JOBLIST_MID,
-                                Constants.DB_TABLE_CHECKER_CODE,
-                                Constants.DB_TABLE_CHECKER_LINK,
-                                Constants.DB_TABLE_BRANCH_CODE,
-                                Constants.DB_TABLE_SETCODE,
-                                Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                                Constants.DB_TABLE_PURCHASE,
-                                Constants.DB_TABLE_JOBLIST_BRIEFING,
-                                Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                                Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                                Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                                Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                                Constants.DB_TABLE_JOBLIST_sBonusPayment,
-                                Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-                                Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-                                Constants.DB_TABLE_JOBLIST_sProjectName,
-                                Constants.DB_TABLE_JOBLIST_sRegionName,
-                                Constants.DB_TABLE_JOBLIST_sdeletedjob,
-                                Constants.DB_TABLE_JOBLIST_sProjectID,},
-                        Constants.DB_TABLE_JOBLIST_JI);
+        ArrayList<Order> uploadedJobs = DBHelper.getOrders(where, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
 
         if (uploadedJobs != null && sqd == null) {
             // cleaning will be done here
@@ -852,8 +701,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                             boolean shouldDelete = matchWithCurrenTime(time);
                             if (shouldDelete == true) {
 
-                                String wheree = Constants.DB_TABLE_QUESTIONNAIRE_ORDERID
-                                        + "=" + "\"" + o.getOrderID() + "\"";
+                                String wheree = Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "=" + "\"" + o.getOrderID() + "\"";
                                 DBHelper.deleteJoblistRecords(wheree);
                                 DBHelper.deleteRecordbyOrdeid(wheree);
                             }
@@ -867,10 +715,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 if (o != null) {
                     for (int j = 0; j < sqd.size(); j++) {
                         SubmitQuestionnaireData sq = sqd.get(j);
-                        if (sq.getOrderid() != null
-                                && uploadedJobs.get(i).getOrderID() != null
-                                && sq.getOrderid().equals(
-                                uploadedJobs.get(i).getOrderID())) {
+                        if (sq.getOrderid() != null && uploadedJobs.get(i).getOrderID() != null && sq.getOrderid().equals(uploadedJobs.get(i).getOrderID())) {
                             sqd.remove(sq);
                         }
                     }
@@ -923,8 +768,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 openArciveScreen();
             }
         });
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }
 
@@ -944,8 +788,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 dialog.dismiss();
             }
         });
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }
 
@@ -964,8 +807,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
         });
 
-        Button dialogButtonCancel = (Button) dialog
-                .findViewById(R.id.btnCancel);
+        Button dialogButtonCancel = (Button) dialog.findViewById(R.id.btnCancel);
         // if button is clicked, close the custom dialog
         dialogButtonCancel.setOnClickListener(new OnClickListener() {
             @Override
@@ -973,8 +815,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 dialog.dismiss();
             }
         });
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }
 
@@ -982,8 +823,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     private static final String REST_API_KEY = "6s5hv6r8qcKdk3l9iJ1aUjDdGHWvc5IDMmUDBZj3";
     private static final String PUSH_URL = "https://api.parse.com/1/push";
 
-    private void sendPost(ArrayList<String> channels, String type, String data,
-                          String sound) throws Exception {
+    private void sendPost(ArrayList<String> channels, String type, String data, String sound) throws Exception {
         JSONObject jo = new JSONObject();
         jo.put("channels", new JSONArray(channels));
 
@@ -1024,20 +864,13 @@ public class JobListActivity extends Activity implements OnClickListener,
         final Dialog dialog = new Dialog(JobListActivity.this);
         dialog.setContentView(R.layout.custom_upload_progress);
         UploadingProgressBars bars = new UploadingProgressBars();
-        bars.setBluemiddle(dialog
-                .findViewById(R.id.middle));
-        bars.setTprogressBarImages((TextView) dialog
-                .findViewById(R.id.txt_progress_images));
-        bars.setTprogressBarJobs((TextView) dialog
-                .findViewById(R.id.txt_progress_jobs));
-        bars.setProgressBarImages((ProgressBar) dialog
-                .findViewById(R.id.progress_bar_images));
-        bars.setProgressBarJobs((ProgressBar) dialog
-                .findViewById(R.id.progress_bar_jobs));
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.getWindow().setLayout(LayoutParams.FILL_PARENT,
-                LayoutParams.WRAP_CONTENT);
+        bars.setBluemiddle(dialog.findViewById(R.id.middle));
+        bars.setTprogressBarImages((TextView) dialog.findViewById(R.id.txt_progress_images));
+        bars.setTprogressBarJobs((TextView) dialog.findViewById(R.id.txt_progress_jobs));
+        bars.setProgressBarImages((ProgressBar) dialog.findViewById(R.id.progress_bar_images));
+        bars.setProgressBarJobs((ProgressBar) dialog.findViewById(R.id.progress_bar_jobs));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 
         dialog.setCancelable(false);
         dialog.show();
@@ -1048,9 +881,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private void initGoogleApiClient() {
-        mApiClient = new GoogleApiClient.Builder(this).addApi(Wearable.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this).build();
+        mApiClient = new GoogleApiClient.Builder(this).addApi(Wearable.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
 
         mApiClient.connect();
     }
@@ -1101,27 +932,20 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // MAPSSSS
                 // Getting status
                 Intent intent = null;
-                int status = GooglePlayServicesUtil
-                        .isGooglePlayServicesAvailable(getBaseContext());
+                int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
                 if (status != ConnectionResult.SUCCESS) {
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.google_services_not_avaliable));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.google_services_not_avaliable));
                 } else {
                     isJobselected = true;
-                    intent = new Intent(
-                            JobListActivity.this.getApplicationContext(),
-                            JobBoardActivityFragment.class);
-                    JobBoardActivityFragment
-                            .setJobBardCallback(new jobBoardCertsListener() {
+                    intent = new Intent(JobListActivity.this.getApplicationContext(), JobBoardActivityFragment.class);
+                    JobBoardActivityFragment.setJobBardCallback(new jobBoardCertsListener() {
 
-                                @Override
-                                public void certCallBack(ArrayList<Cert> certs) {
-                                    load_certificates(certs);
-                                }
-                            });
+                        @Override
+                        public void certCallBack(ArrayList<Cert> certs) {
+                            load_certificates(certs);
+                        }
+                    });
                     intent.putExtra("orderid", "-1");
                     // comunicator.JobList = this;
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -1131,21 +955,17 @@ public class JobListActivity extends Activity implements OnClickListener,
             case 4:
                 // open refund report
                 isJobselected = true;
-                intent = new Intent(this.getApplicationContext(),
-                        ShopperRefundReportActivity.class);
+                intent = new Intent(this.getApplicationContext(), ShopperRefundReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 break;
             case 5:
-                showLanguageDialog(
-                        getResources().getString(
-                                R.string.preffered_questionnaire_language), false);
+                showLanguageDialog(getResources().getString(R.string.preffered_questionnaire_language), false);
                 break;
 
             case 6:
                 isJobselected = true;
-                intent = new Intent(this.getApplicationContext(),
-                        NewSettingsActivity.class);
+                intent = new Intent(this.getApplicationContext(), NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -1160,19 +980,13 @@ public class JobListActivity extends Activity implements OnClickListener,
             case 7:
                 // MAPSSSS
                 // Getting status
-                status = GooglePlayServicesUtil
-                        .isGooglePlayServicesAvailable(getBaseContext());
+                status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
                 if (status != ConnectionResult.SUCCESS) {
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.google_services_not_avaliable));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.google_services_not_avaliable));
                 } else {
                     isJobselected = true;
-                    intent = new Intent(
-                            JobListActivity.this.getApplicationContext(),
-                            MapActivity.class);
+                    intent = new Intent(JobListActivity.this.getApplicationContext(), MapActivity.class);
                     intent.putExtra("orderid", "-1");
                     // comunicator.JobList = null;
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -1188,8 +1002,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             case 10:// reviews history
                 isJobselected = true;
-                intent = new Intent(JobListActivity.this.getApplicationContext(),
-                        CritHistoryReportActivity.class);
+                intent = new Intent(JobListActivity.this.getApplicationContext(), CritHistoryReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
 
@@ -1207,8 +1020,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private void openArciveScreen() {
-        Intent intent = new Intent(JobListActivity.this.getApplicationContext(),
-                ArchiveActivity.class);
+        Intent intent = new Intent(JobListActivity.this.getApplicationContext(), ArchiveActivity.class);
         ArchiveActivity.toBeUploadedSQ = null;
         startActivityForResult(intent, JOB_ARCHIVE_ACTIVITY_CODE);
     }
@@ -1218,10 +1030,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (IsInternetConnectted()) {
             new DoLoginTask(Constants.getEditShopperURL()).execute();
         } else {
-            customAlert(
-                    JobListActivity.this,
-                    getResources().getString(
-                            R.string.no_internet_connection_alret_message));
+            customAlert(JobListActivity.this, getResources().getString(R.string.no_internet_connection_alret_message));
         }
     }
 
@@ -1235,10 +1044,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (IsInternetConnectted()) {
             new DoLoginTask(Constants.getViewShopperURL()).execute();
         } else {
-            customAlert(
-                    JobListActivity.this,
-                    getResources().getString(
-                            R.string.no_internet_connection_alret_message));
+            customAlert(JobListActivity.this, getResources().getString(R.string.no_internet_connection_alret_message));
         }
     }
 
@@ -1251,8 +1057,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             protected void onPreExecute() {
                 Log.e("load_certificates", "onPreExecute");
                 dialogg = new ProgressDialog(JobListActivity.this);
-                dialogg.setMessage(getResources().getString(
-                        R.string.checkertificatesmsg));
+                dialogg.setMessage(getResources().getString(R.string.checkertificatesmsg));
                 dialogg.setCancelable(false);
                 dialogg.show();
                 this.updateDate = null;
@@ -1264,34 +1069,24 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // <status>0</status>
                 // <auto_approve_flag>1</auto_approve_flag>
                 if (result != null && result.contains("<status>1</status>")) {
-                    Toast.makeText(JobListActivity.this,
-                            getResources().getString(R.string.nocertMsg),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(JobListActivity.this, getResources().getString(R.string.nocertMsg), Toast.LENGTH_LONG).show();
                 } else {
                     // no error parse here
                     ArrayList<Cert> listOfCerts = parseCertificateResult(result);
-                    if (shortList == null)
-                        showCertificatesDialog(listOfCerts);
+                    if (shortList == null) showCertificatesDialog(listOfCerts);
                     else if (shortList != null && listOfCerts != null) {
                         ArrayList<Cert> templistOfCerts = new ArrayList<Cert>();
                         for (int i = 0; i < listOfCerts.size(); i++) {
                             boolean isPresent = false;
                             for (int j = 0; j < shortList.size(); j++) {
-                                String certID = shortList.get(j)
-                                        .getCertificateID();
-                                if (listOfCerts.get(i) != null
-                                        && listOfCerts.get(i)
-                                        .getCertificateID() != null
-                                        && listOfCerts.get(i)
-                                        .getCertificateID()
-                                        .equals(certID)) {
+                                String certID = shortList.get(j).getCertificateID();
+                                if (listOfCerts.get(i) != null && listOfCerts.get(i).getCertificateID() != null && listOfCerts.get(i).getCertificateID().equals(certID)) {
                                     isPresent = true;
                                     break;
                                 }
 
                             }
-                            if (isPresent)
-                                templistOfCerts.add(listOfCerts.get(i));
+                            if (isPresent) templistOfCerts.add(listOfCerts.get(i));
                         }
 
                         showCertificatesDialog(templistOfCerts);
@@ -1326,13 +1121,10 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // extraDataList.add(Helper.getNameValuePair("OrderID",
                 // orderId));
 
-                String data = Connector.postForm(
-                        Constants.getCheckerTificates("9.7", shortList != null), extraDataList);
+                String data = Connector.postForm(Constants.getCheckerTificates("9.7", shortList != null), extraDataList);
                 if (data.contains("<script>")) {
                     doLogin();
-                    data = Connector
-                            .postForm(Constants.getCheckerTificates("9.7", shortList != null),
-                                    extraDataList);
+                    data = Connector.postForm(Constants.getCheckerTificates("9.7", shortList != null), extraDataList);
                 }
                 return data;
             }
@@ -1345,120 +1137,71 @@ public class JobListActivity extends Activity implements OnClickListener,
         final Dialog dialog = new Dialog(JobListActivity.this);
         dialog.setContentView(R.layout.dialog_checkertificates);
         ListView listJobs = (ListView) dialog.findViewById(R.id.lvjobs);
-        listJobs.setAdapter(new CheckertificateAdapter(JobListActivity.this,
-                listOfCerts));
+        listJobs.setAdapter(new CheckertificateAdapter(JobListActivity.this, listOfCerts));
 
         listJobs.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    final int position, long id) {
-                if (listOfCerts.get(position).getStatus() != null
-                        && (listOfCerts.get(position).getStatus().toLowerCase()
-                        .equals("blocked")
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                if (listOfCerts.get(position).getStatus() != null && (listOfCerts.get(position).getStatus().toLowerCase().equals("blocked")
 
-                        || listOfCerts.get(position).getStatus().toLowerCase()
-                        .contains("maximum"))) {
-                    Toast.makeText(JobListActivity.this,
-                            getResources().getString(R.string.alreadyBlocked),
-                            Toast.LENGTH_LONG).show();
+                        || listOfCerts.get(position).getStatus().toLowerCase().contains("maximum"))) {
+                    Toast.makeText(JobListActivity.this, getResources().getString(R.string.alreadyBlocked), Toast.LENGTH_LONG).show();
 
-                } else if (listOfCerts.get(position).getStatus() != null
-                        && listOfCerts.get(position).getStatus().toLowerCase()
-                        .equals("passed")) {
-                    Toast.makeText(JobListActivity.this,
-                            getResources().getString(R.string.alreadyPassed),
-                            Toast.LENGTH_LONG).show();
-                } else if (listOfCerts.get(position).getTimesTaken() != null
-                        && Integer.parseInt(listOfCerts.get(position)
-                        .getTimesTaken()) >= Integer
-                        .parseInt(listOfCerts.get(position)
-                                .getMaxRetake())) {
-                    Toast.makeText(JobListActivity.this,
-                            getResources().getString(R.string.reachedMaxTries),
-                            Toast.LENGTH_LONG).show();
+                } else if (listOfCerts.get(position).getStatus() != null && listOfCerts.get(position).getStatus().toLowerCase().equals("passed")) {
+                    Toast.makeText(JobListActivity.this, getResources().getString(R.string.alreadyPassed), Toast.LENGTH_LONG).show();
+                } else if (listOfCerts.get(position).getTimesTaken() != null && Integer.parseInt(listOfCerts.get(position).getTimesTaken()) >= Integer.parseInt(listOfCerts.get(position).getMaxRetake())) {
+                    Toast.makeText(JobListActivity.this, getResources().getString(R.string.reachedMaxTries), Toast.LENGTH_LONG).show();
                 } else {
-                    String msg = getResources().getString(
-                            R.string.strtcheckertificatesmsg);
-                    if (listOfCerts.get(position).getStatus() != null
-                            && listOfCerts.get(position).getStatus()
-                            .toLowerCase().contains("re-take"))
-                        msg = getResources().getString(
-                                R.string.retakecheckertificatesmsg);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                            JobListActivity.this);
-                    builder.setMessage(msg)
-                            .setTitle(
-                                    getResources().getString(
-                                            R.string._alert_title))
-                            .setCancelable(false)
-                            .setPositiveButton(
-                                    getResources()
-                                            .getString(
-                                                    R.string.questionnaire_exit_delete_alert_yes),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(
-                                                DialogInterface dialogg, int id) {
-                                            dialog.dismiss();
-                                            DownloadSetTask dSet = new DownloadSetTask(
-                                                    listOfCerts
-                                                            .get(position)
-                                                            .getDependencySetLink(),
-                                                    listOfCerts.get(position));
-                                            dSet.execute();
-                                            dialog.dismiss();
-                                        }
-                                    })
-                            .setNegativeButton(
-                                    getResources()
-                                            .getString(
-                                                    R.string.questionnaire_exit_delete_alert_no),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(
-                                                DialogInterface dialogg, int id) {
+                    String msg = getResources().getString(R.string.strtcheckertificatesmsg);
+                    if (listOfCerts.get(position).getStatus() != null && listOfCerts.get(position).getStatus().toLowerCase().contains("re-take"))
+                        msg = getResources().getString(R.string.retakecheckertificatesmsg);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(JobListActivity.this);
+                    builder.setMessage(msg).setTitle(getResources().getString(R.string._alert_title)).setCancelable(false).setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogg, int id) {
+                            dialog.dismiss();
+                            DownloadSetTask dSet = new DownloadSetTask(listOfCerts.get(position).getDependencySetLink(), listOfCerts.get(position));
+                            dSet.execute();
+                            dialog.dismiss();
+                        }
+                    }).setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogg, int id) {
 
-                                        }
-                                    });
+                        }
+                    });
                     AlertDialog alert = builder.create();
                     alert.show();
                 }
             }
         });
-        dialog.findViewById(R.id.checkertRefreshImg).setOnClickListener(
-                new OnClickListener() {
+        dialog.findViewById(R.id.checkertRefreshImg).setOnClickListener(new OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        load_certificates(null);
-                        dialog.dismiss();
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                load_certificates(null);
+                dialog.dismiss();
+            }
+        });
 
-        dialog.findViewById(R.id.btnOk).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        android.view.WindowManager.LayoutParams params = dialog.getWindow()
-                .getAttributes();
+        dialog.findViewById(R.id.btnOk).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        android.view.WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
         params.height = LayoutParams.FILL_PARENT;
 
-        dialog.getWindow().setAttributes(
-                (android.view.WindowManager.LayoutParams) params);
+        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
         dialog.show();
 
     }
 
     private Set DownloadThisSet(String currentSet) {
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-        String thisSet = Connector.postForm(
-                Constants.getQestionnaireOneByOneURL("11.10", currentSet, null),
-                extraDataList);
+        String thisSet = Connector.postForm(Constants.getQestionnaireOneByOneURL("11.10", currentSet, null), extraDataList);
         thisSet = removeGarbageFromTop(thisSet);
         if (thisSet != null && thisSet.contains("Blocks")) {
             thisSet = thisSet.replace("<1", "<d1");
@@ -1485,8 +1228,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             Parser thisParser = new Parser(Revamped_Loading_Dialog.getDialog());
             if (thisSet != null && thisSet.contains(""))
-                thisParser.parseXMLValues(thisSet,
-                        Constants.QUES_RESP_FIELD_PARAM, null, null, null);
+                thisParser.parseXMLValues(thisSet, Constants.QUES_RESP_FIELD_PARAM, null, null, null);
             return thisParser.set;
         }
         return null;
@@ -1523,27 +1265,20 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // MAPSSSS
                 // Getting status
                 Intent intent = null;
-                int status = GooglePlayServicesUtil
-                        .isGooglePlayServicesAvailable(getBaseContext());
+                int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
                 if (status != ConnectionResult.SUCCESS) {
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.google_services_not_avaliable));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.google_services_not_avaliable));
                 } else {
                     isJobselected = true;
-                    intent = new Intent(
-                            JobListActivity.this.getApplicationContext(),
-                            JobBoardActivityFragment.class);
-                    JobBoardActivityFragment
-                            .setJobBardCallback(new jobBoardCertsListener() {
+                    intent = new Intent(JobListActivity.this.getApplicationContext(), JobBoardActivityFragment.class);
+                    JobBoardActivityFragment.setJobBardCallback(new jobBoardCertsListener() {
 
-                                @Override
-                                public void certCallBack(ArrayList<Cert> certs) {
-                                    load_certificates(certs);
-                                }
-                            });
+                        @Override
+                        public void certCallBack(ArrayList<Cert> certs) {
+                            load_certificates(certs);
+                        }
+                    });
                     intent.putExtra("orderid", "-1");
                     comunicator.JobList = this;
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -1552,8 +1287,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 break;
             case 2:
                 isJobselected = true;
-                intent = new Intent(this.getApplicationContext(),
-                        ShopperRefundReportActivity.class);
+                intent = new Intent(this.getApplicationContext(), ShopperRefundReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 break;
@@ -1567,20 +1301,14 @@ public class JobListActivity extends Activity implements OnClickListener,
             case 4:
                 // MAPSSSS
                 // Getting status
-                status = GooglePlayServicesUtil
-                        .isGooglePlayServicesAvailable(getBaseContext());
+                status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
                 if (status != ConnectionResult.SUCCESS) {
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.google_services_not_avaliable));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.google_services_not_avaliable));
                 } else {
                     isJobselected = true;
                     comunicator.JobList = JobListActivity.this;
-                    intent = new Intent(
-                            JobListActivity.this.getApplicationContext(),
-                            MapActivity.class);
+                    intent = new Intent(JobListActivity.this.getApplicationContext(), MapActivity.class);
                     intent.putExtra("orderid", "-1");
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                 }
@@ -1596,8 +1324,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             case 6:// reviews history
                 isJobselected = true;
-                intent = new Intent(this.getApplicationContext(),
-                        CritHistoryReportActivity.class);
+                intent = new Intent(this.getApplicationContext(), CritHistoryReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
 
@@ -1607,17 +1334,12 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 try {
 
-                    Intent sendIntent = new Intent(Intent.ACTION_SENDTO,
-                            Uri.parse("smsto:" + "" + Helper.helpline + "?body="
-                                    + ""));
+                    Intent sendIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + "" + Helper.helpline + "?body=" + ""));
                     sendIntent.setPackage("com.whatsapp");
                     startActivity(sendIntent);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.whatsapp_not_available));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.whatsapp_not_available));
                     // Intent sendIntent = new Intent(Intent.ACTION_DIAL);
                     // sendIntent.setData(Uri.parse("tel:" + Helper.helpline));
                     // startActivity(sendIntent);
@@ -1656,15 +1378,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                 break;
 
             case 3:
-                showLanguageDialog(
-                        getResources().getString(
-                                R.string.preffered_questionnaire_language), false);
+                showLanguageDialog(getResources().getString(R.string.preffered_questionnaire_language), false);
                 break;
 
             case 4:
                 isJobselected = true;
-                Intent intent = new Intent(this.getApplicationContext(),
-                        NewSettingsActivity.class);
+                Intent intent = new Intent(this.getApplicationContext(), NewSettingsActivity.class);
                 comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -1679,19 +1398,13 @@ public class JobListActivity extends Activity implements OnClickListener,
             case 6:
                 // MAPSSSS
                 // Getting status
-                int status = GooglePlayServicesUtil
-                        .isGooglePlayServicesAvailable(getBaseContext());
+                int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
                 if (status != ConnectionResult.SUCCESS) {
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.google_services_not_avaliable));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.google_services_not_avaliable));
                 } else {
                     isJobselected = true;
-                    intent = new Intent(
-                            JobListActivity.this.getApplicationContext(),
-                            MapActivity.class);
+                    intent = new Intent(JobListActivity.this.getApplicationContext(), MapActivity.class);
                     intent.putExtra("orderid", "-1");
                     comunicator.JobList = null;
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -1853,8 +1566,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (Helper.isMisteroMenu) {
             setContentView(R.layout.job_list_mistero);
 
-        } else
-            setContentView(R.layout.job_list);
+        } else setContentView(R.layout.job_list);
 
 
         layout_NewDashboardScreen = findViewById(R.id.layout_NewDashboardScreen);
@@ -1866,22 +1578,16 @@ public class JobListActivity extends Activity implements OnClickListener,
         // myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         int language = myPrefs.getInt(Constants.SETTINGS_LANGUAGE_INDEX, 0);
 
-        Locale locale = new Locale(
-                Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(
-                        Constants.SETTINGS_LANGUAGE_INDEX, 0)]);
+        Locale locale = new Locale(Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(Constants.SETTINGS_LANGUAGE_INDEX, 0)]);
         Locale.setDefault(locale);
-        if (Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(
-                Constants.SETTINGS_LANGUAGE_INDEX, 0)] != null && Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(
-                Constants.SETTINGS_LANGUAGE_INDEX, 0)].equals("ja"))
+        if (Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(Constants.SETTINGS_LANGUAGE_INDEX, 0)] != null && Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(Constants.SETTINGS_LANGUAGE_INDEX, 0)].equals("ja"))
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
         // prefsEditor.putString(Constants.SETTINGS_SYSTEM_URL_KEY, Helper
         // .getSystemURL().replace("https://", "http://"));
         // prefsEditor.commit();
-        Helper.setSystemURL(myPrefs.getString(
-                Constants.SETTINGS_SYSTEM_URL_KEY, ""));
-        Helper.setAlternateSystemURL(myPrefs.getString(
-                Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
+        Helper.setSystemURL(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""));
+        Helper.setAlternateSystemURL(myPrefs.getString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
         if (Helper.getSystemURL() == null || Helper.getSystemURL().equals("")) {
 
             finish();
@@ -1889,9 +1595,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         View menulayout = findViewById(R.id.menulayout);
         menulayout.setVisibility(RelativeLayout.GONE);
-        if (Build.VERSION.SDK_INT <= 10
-                || (Build.VERSION.SDK_INT >= 14 && ViewConfiguration.get(this)
-                .hasPermanentMenuKey())) {
+        if (Build.VERSION.SDK_INT <= 10 || (Build.VERSION.SDK_INT >= 14 && ViewConfiguration.get(this).hasPermanentMenuKey())) {
             // menulayout.setVisibility(RelativeLayout.GONE);
         } else {
             // menulayout.setVisibility(RelativeLayout.VISIBLE);
@@ -1909,58 +1613,40 @@ public class JobListActivity extends Activity implements OnClickListener,
         menuListView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // if (!Constants.isQAAllowed)
                 // position++;
-                if (Helper.getSystemURL() != null
-                        && !Helper.getSystemURL().toLowerCase()
-                        .contains(Helper.CONST_BE_THERE)
-                        && Constants.isHS()
-                        && onOptionsItemSelectedHS(position)) {
+                if (Helper.getSystemURL() != null && !Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Constants.isHS() && onOptionsItemSelectedHS(position)) {
                     menuView.setVisibility(RelativeLayout.GONE);
                     isMenuOpen = false;
-                } else if (Helper.getSystemURL() != null
-                        && !Helper.getSystemURL().toLowerCase()
-                        .contains(Helper.CONST_BE_THERE)
-                        && onOptionsItemSelected(position)) {
+                } else if (Helper.getSystemURL() != null && !Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && onOptionsItemSelected(position)) {
                     menuView.setVisibility(RelativeLayout.GONE);
                     isMenuOpen = false;
-                } else if (Helper.getSystemURL() != null
-                        && Helper.getSystemURL().toLowerCase()
-                        .contains(Helper.CONST_BE_THERE)
-                        && Helper.isMisteroMenu
-                        && onOptionsItemSelectedMistero(position)) {
+                } else if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu && onOptionsItemSelectedMistero(position)) {
                     menuView.setVisibility(RelativeLayout.GONE);
                     isMenuOpen = false;
-                } else if (Helper.getSystemURL() != null
-                        && Helper.getSystemURL().toLowerCase()
-                        .contains(Helper.CONST_BE_THERE)
-                        && !Helper.isMisteroMenu
-                        && onOptionsItemSelectedHS(position)) {
+                } else if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && !Helper.isMisteroMenu && onOptionsItemSelectedHS(position)) {
                     menuView.setVisibility(RelativeLayout.GONE);
                     isMenuOpen = false;
                 }
             }
         });
 
-        findViewById(R.id.view_side_menu_top_green).setOnClickListener(
-                new OnClickListener() {
+        findViewById(R.id.view_side_menu_top_green).setOnClickListener(new OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
-        findViewById(R.id.view_side_menu_side_black).setOnClickListener(
-                new OnClickListener() {
+        findViewById(R.id.view_side_menu_side_black).setOnClickListener(new OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        menuView.setVisibility(RelativeLayout.GONE);
-                        isMenuOpen = false;
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                menuView.setVisibility(RelativeLayout.GONE);
+                isMenuOpen = false;
+            }
+        });
 
         findViewById(R.id.btnback).setOnClickListener(new OnClickListener() {
 
@@ -1974,93 +1660,39 @@ public class JobListActivity extends Activity implements OnClickListener,
         menuItems = new ArrayList<com.checker.sa.android.data.MenuItem>();
 
         synchMenuItems = new ArrayList<com.checker.sa.android.data.MenuItem>();
-        synchMenuItems
-                .add(new com.checker.sa.android.data.MenuItem(
-                        getString(R.string.start_download),
-                        getString(R.string.start_download),
-                        getIcon("downoad_ico")));// 0
-        synchMenuItems.add(new com.checker.sa.android.data.MenuItem(
-                getString(R.string.start_upload),
-                getString(R.string.start_upload), getIcon("upload_ico")));// 1
-        menuItems
-                .add(new com.checker.sa.android.data.MenuItem(
-                        getString(R.string.job_list_home),
-                        getString(R.string.job_list_home),
-                        getIcon("home")));// dash board
+        synchMenuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.start_download), getString(R.string.start_download), getIcon("downoad_ico")));// 0
+        synchMenuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.start_upload), getString(R.string.start_upload), getIcon("upload_ico")));// 1
+        menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.job_list_home), getString(R.string.job_list_home), getIcon("home")));// dash board
         if (Constants.isQAAllowed)
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.questionnaire_send_bug),
-                    getString(R.string.questionnaire_send_bug),
-                    R.drawable.action_search)); // 0
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.questionnaire_send_bug), getString(R.string.questionnaire_send_bug), R.drawable.action_search)); // 0
 
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)
-                && Helper.isMisteroMenu) {
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu) {
         } else
-            menuItems
-                    .add(new com.checker.sa.android.data.MenuItem(
-                            getString(R.string.start_download),
-                            getString(R.string.start_download),
-                            getIcon("downoad_ico")));// 0
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)
-                && Helper.isMisteroMenu) {
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.start_download), getString(R.string.start_download), getIcon("downoad_ico")));// 0
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu) {
         } else
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.start_upload),
-                    getString(R.string.start_upload), getIcon("upload_ico")));// 1
-        if (Constants.isHS()
-                || (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu)) {
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.settings_job_board),
-                    getString(R.string.settings_job_board),
-                    getIcon("job_board")));// 2
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.start_upload), getString(R.string.start_upload), getIcon("upload_ico")));// 1
+        if (Constants.isHS() || (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu)) {
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.settings_job_board), getString(R.string.settings_job_board), getIcon("job_board")));// 2
 
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.settings_refund_report),
-                    getString(R.string.settings_refund_report),
-                    getIcon("refund")));// 3
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.settings_refund_report), getString(R.string.settings_refund_report), getIcon("refund")));// 3
         }
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)
-                && Helper.isMisteroMenu) {
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu) {
         } else
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.start_download_alt),
-                    getString(R.string.start_download_alt),
-                    getIcon("downoad_alt")));// 4
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)
-                && Helper.isMisteroMenu) {
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.start_download_alt), getString(R.string.start_download_alt), getIcon("downoad_alt")));// 4
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu) {
         } else
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.settings_page_title),
-                    getString(R.string.settings_page_title), getIcon("gear")));// 5
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.settings_page_title), getString(R.string.settings_page_title), getIcon("gear")));// 5
 
 //        menuItems.add(new com.checker.sa.android.data.MenuItem(
 //                getString(R.string.job_list_menu_upload_complete_job),
 //                getString(R.string.job_list_menu_upload_complete_job),
 //                getIcon("filterjobs")));// 6
 
-        menuItems.add(new com.checker.sa.android.data.MenuItem(
-                getString(R.string.job_list_menu_update_list),
-                getString(R.string.job_list_menu_update_list),
-                getIcon("worldmap")));// 7
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)
-                && Helper.isMisteroMenu) {
+        menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.job_list_menu_update_list), getString(R.string.job_list_menu_update_list), getIcon("worldmap")));// 7
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu) {
         } else
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.start_checkertificates),
-                    getString(R.string.start_checkertificates),
-                    R.drawable.checkerificate));// 8
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.start_checkertificates), getString(R.string.start_checkertificates), R.drawable.checkerificate));// 8
         // if (Helper.getSystemURL() != null
         // && Helper.getSystemURL().toLowerCase()
         // .contains(Helper.CONST_BE_THERE)
@@ -2081,47 +1713,24 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (Helper.getSystemURL() != null
             // && Helper.isMisteroMenu
         )
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.menu_edit_shopper_info),
-                    getString(R.string.menu_edit_shopper_info),
-                    getIcon("editshopper")));// 8
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.menu_edit_shopper_info), getString(R.string.menu_edit_shopper_info), getIcon("editshopper")));// 8
         if (Helper.getSystemURL() != null
             // && Helper.isMisteroMenu
         )
 
-            menuItems
-                    .add(new com.checker.sa.android.data.MenuItem(
-                            getString(R.string.menu_review_history),
-                            getString(R.string.menu_review_history),
-                            getIcon("history")));// 10
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.menu_review_history), getString(R.string.menu_review_history), getIcon("history")));// 10
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE)
             // && Helper.isMisteroMenu
         )
-            menuItems.add(new com.checker.sa.android.data.MenuItem(
-                    getString(R.string.menu_contact),
-                    getString(R.string.menu_contact), getIcon("wbt_loader7")));// 10
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.menu_contact), getString(R.string.menu_contact), getIcon("wbt_loader7")));// 10
 
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)
-                && Helper.isMisteroMenu) {
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE) && Helper.isMisteroMenu) {
         } else
-            menuItems
-                    .add(new com.checker.sa.android.data.MenuItem(
-                            getString(R.string.job_list_exit),
-                            getString(R.string.job_list_exit),
-                            getIcon("exit_joblist")));// 8
+            menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.job_list_exit), getString(R.string.job_list_exit), getIcon("exit_joblist")));// 8
 
-        menuItems
-                .add(new com.checker.sa.android.data.MenuItem(
-                        getString(R.string.job_list_archive),
-                        getString(R.string.job_list_archive),
-                        getIcon("archive")));
+        menuItems.add(new com.checker.sa.android.data.MenuItem(getString(R.string.job_list_archive), getString(R.string.job_list_archive), getIcon("archive")));
 
-        menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this,
-                menuItems));
+        menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this, menuItems));
 
         initGoogleApiClient();
         NewLoginActivity.dataid = null;
@@ -2238,8 +1847,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     menuView.setVisibility(RelativeLayout.GONE);
                 } else {
                     isMenuOpen = true;
-                    menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this,
-                            menuItems));
+                    menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this, menuItems));
                     menuView.setVisibility(RelativeLayout.VISIBLE);
                 }
             }
@@ -2284,8 +1892,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     menuView.setVisibility(RelativeLayout.GONE);
                 } else {
                     isMenuOpen = true;
-                    menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this,
-                            synchMenuItems));
+                    menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this, synchMenuItems));
                     menuView.setVisibility(RelativeLayout.VISIBLE);
                 }
             }
@@ -2300,8 +1907,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     menuView.setVisibility(RelativeLayout.GONE);
                 } else {
                     isMenuOpen = true;
-                    menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this,
-                            synchMenuItems));
+                    menuListView.setAdapter(new sideMEnuAdapter(JobListActivity.this, synchMenuItems));
                     menuView.setVisibility(RelativeLayout.VISIBLE);
                 }
             }
@@ -2363,9 +1969,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-            db.createDataBase(Helper.getSystemURLfromDB(),
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                    null);
+            db.createDataBase(Helper.getSystemURLfromDB(), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -2389,10 +1993,8 @@ public class JobListActivity extends Activity implements OnClickListener,
         mapBtn.setOnClickListener(this);
         jobItemList.setOnItemClickListener(new OnItemClickListener() {
             public Boolean hideShowRight(String type, ImageView imgRight) {
-                if (type.equals("Assigned"))
-                    return false;
-                else if (type.equals("Scheduled"))
-                    return false;
+                if (type.equals("Assigned")) return false;
+                else if (type.equals("Scheduled")) return false;
                 else if (type.equals("survey"))// ct.getString(R.string.jd_begin_button_status_inprogress)))
                     return false;
                 else {
@@ -2404,55 +2006,32 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             //arg2 = position , arg3 = id
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                if (mAdapter.joblistarray.get(arg2).listOrders != null
-                        && mAdapter.joblistarray.get(arg2).listOrders.size() > 1) {
-                    if (mAdapter.joblistarray != null
-                            && mAdapter.joblistarray.get(arg2).orderItem != null
-                            && mAdapter.joblistarray.get(arg2).orderItem
-                            .getStatusName() != null
-                            && hideShowRight(
-                            mAdapter.joblistarray.get(arg2).orderItem
-                                    .getStatusName(), null)) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                if (mAdapter.joblistarray.get(arg2).listOrders != null && mAdapter.joblistarray.get(arg2).listOrders.size() > 1) {
+                    if (mAdapter.joblistarray != null && mAdapter.joblistarray.get(arg2).orderItem != null && mAdapter.joblistarray.get(arg2).orderItem.getStatusName() != null && hideShowRight(mAdapter.joblistarray.get(arg2).orderItem.getStatusName(), null)) {
                         return;
                     }
                 }
-                if (mAdapter.joblistarray != null
-                        && mAdapter.joblistarray.get(arg2).orderItem != null
-                        && mAdapter.joblistarray.get(arg2).orderItem
-                        .getStatusName() != null
-                        && mAdapter.joblistarray.get(arg2).orderItem
-                        .getStatusName().equals("wrong")) {
+                if (mAdapter.joblistarray != null && mAdapter.joblistarray.get(arg2).orderItem != null && mAdapter.joblistarray.get(arg2).orderItem.getStatusName() != null && mAdapter.joblistarray.get(arg2).orderItem.getStatusName().equals("wrong")) {
                     showRAlert(JobListActivity.this);
                 } else {
 //                    TODO JobDetailActivity
+                    Log.e("onItemClick", mAdapter.joblistarray.get(arg2).orderItem.getOrderID());
+                    Intent intent = new Intent(JobListActivity.this.getApplicationContext(), JobDetailActivity.class);
+                    JobDetailActivity.setCertsCallback(new jobBoardCertsListener() {
 
-                    Log.e("onItemClick", mAdapter.joblistarray
-                            .get(arg2).orderItem.getOrderID());
-                    Intent intent = new Intent(JobListActivity.this
-                            .getApplicationContext(), JobDetailActivity.class);
-                    JobDetailActivity
-                            .setCertsCallback(new jobBoardCertsListener() {
-
-                                @Override
-                                public void certCallBack(ArrayList<Cert> certs) {
-                                    load_certificates(certs);
-                                }
-                            });
+                        @Override
+                        public void certCallBack(ArrayList<Cert> certs) {
+                            load_certificates(certs);
+                        }
+                    });
                     isJobselected = true;
-                    if (mAdapter.joblistarray != null
-                            && mAdapter.joblistarray.size() > 0) {
+                    if (mAdapter.joblistarray != null && mAdapter.joblistarray.size() > 0) {
                         if (mAdapter.joblistarray.get(arg2).orderItem != null) {
 //                            TODO OrderID
-                            intent.putExtra("OrderID", mAdapter.joblistarray
-                                    .get(arg2).orderItem.getOrderID());
-                            intent.putExtra(
-                                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                    mAdapter.joblistarray.get(arg2).orderItem
-                                            .getCount() + "");
-                            String OrderID = mAdapter.joblistarray
-                                    .get(arg2).orderItem.getOrderID();
+                            intent.putExtra("OrderID", mAdapter.joblistarray.get(arg2).orderItem.getOrderID());
+                            intent.putExtra(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, mAdapter.joblistarray.get(arg2).orderItem.getCount() + "");
+                            String OrderID = mAdapter.joblistarray.get(arg2).orderItem.getOrderID();
                             String surveyId = "";
                             if (OrderID.contains("-")) {
                                 surveyId = (OrderID.replace("-", ""));
@@ -2460,23 +2039,17 @@ public class JobListActivity extends Activity implements OnClickListener,
                                 boolean b = survey.isAllocationReached();
                                 if (b)//ALLOCATION REACHED
                                 {
-                                    Toast.makeText(JobListActivity.this,
-                                            getString(R.string.questionnaire_open_survey_alert)
-                                            , Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(JobListActivity.this, getString(R.string.questionnaire_open_survey_alert), Toast.LENGTH_SHORT).show();
                                     return;
                                 }
                             }
                         } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
 //                            TODO SurveyID
-                            intent.putExtra("SurveyID", mAdapter.joblistarray
-                                    .get(arg2).surveyItem.getSurveyID());
+                            intent.putExtra("SurveyID", mAdapter.joblistarray.get(arg2).surveyItem.getSurveyID());
 
                         }
 
-                    } else
-                        intent.putExtra(
-                                Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                "1");
+                    } else intent.putExtra(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, "1");
                     intent.putExtra("OrderIndex", arg2);
                     intent.putExtra("Index", arg2);
                     // comunicator.JobList = null;
@@ -2489,8 +2062,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         loadOfflineJobs(login_check);
         AutoSync();
 
-        String userName = myPrefs.getString(
-                Constants.POST_FIELD_LOGIN_USERNAME, "");
+        String userName = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
 
         TextView tv = (TextView) findViewById(R.id.txtsettingmenu);
         String welcome = getString(R.string.login_heder);
@@ -2535,9 +2107,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         iv_map_list.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(
-                        JobListActivity.this.getApplicationContext(),
-                        ShowJobInMapViewActivity.class);
+                Intent intent = new Intent(JobListActivity.this.getApplicationContext(), ShowJobInMapViewActivity.class);
                 startActivity(intent);
             }
         });
@@ -2603,11 +2173,9 @@ public class JobListActivity extends Activity implements OnClickListener,
         // 2013-05-27
 
         date = date.trim();
-        String month = date.substring(date.indexOf("-") + 1,
-                date.lastIndexOf("-"));
+        String month = date.substring(date.indexOf("-") + 1, date.lastIndexOf("-"));
         int m = Integer.parseInt(month);
-        if (m == 0)
-            return 0;
+        if (m == 0) return 0;
         return m - 1;
 
     }
@@ -2626,8 +2194,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         date = date.trim();
         String month = date.substring(date.lastIndexOf("-") + 1);
         int m = Integer.parseInt(month);
-        if (m == 0)
-            return 0;
+        if (m == 0) return 0;
         return m;
 
     }
@@ -2636,121 +2203,102 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     public void showCalendar(final Order arg2) {
 
-        DialogInterface.OnClickListener dialogClickListener =
-                new DialogInterface.OnClickListener() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 
-                    // @Override
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case DialogInterface.BUTTON_POSITIVE:
-                                String OrderID = null;
-                                Order order = arg2;
-                                Date d = null;
-                                String str = "";
-                                try {
-                                    SimpleDateFormat sdf = new SimpleDateFormat(
-                                            "yyyy-MM-dd", Locale.ENGLISH);
-                                    issue = "2466";
-                                    if (order != null && order.getDate() != null)
-                                        d = sdf.parse(order.getDate());
-                                    DateFormat dateFormat = android.text.format.DateFormat
-                                            .getDateFormat(getApplicationContext());
-                                    str = dateFormat.format(d);
-                                    // date_v.setText(str);
-                                    issue = "2473";
-                                    Intent intentCalendar = new Intent(Intent.ACTION_EDIT);
-                                    intentCalendar.setType("vnd.android.cursor.item/event");
-                                    Calendar c = Calendar.getInstance();
-                                    issue = "unable to extract year from date:" + order.getDate();
-                                    int year = getYear(order.getDate());
-                                    issue = "unable to extract month from date:" + order.getDate();
-                                    int month = getMonth(order.getDate());
-                                    issue = "unable to extract day from date:" + order.getDate();
-                                    int day = getDay(order.getDate());
-                                    issue = "unable to extract hour from start time:" + order.getTimeStart();
-                                    int hourStart = getHour(order.getTimeStart());
-                                    issue = "unable to extract min from start time:" + order.getTimeStart();
-                                    int minuteStart = getMinute(order.getTimeStart());
-                                    issue = "unable to extract hour from end time:" + order.getTimeStart();
-                                    int hourEnd = getHour(order.getTimeEnd());
-                                    issue = "unable to extract min from end time:" + order.getTimeStart();
-                                    int minuteEnd = getMinute(order.getTimeEnd());
-                                    issue = "crashed";
-                                    // year, month, day, hourOfDay, minute
-                                    c.set(year, month, day, hourStart, minuteStart);
-                                    long millis = c.getTimeInMillis();
-                                    intentCalendar.putExtra("beginTime", millis);
-                                    intentCalendar.putExtra("rrule", "FREQ=YEARLY");
-                                    issue = "2496";
-                                    c.set(year, month, day, hourEnd, minuteEnd);
-                                    millis = c.getTimeInMillis();
-                                    issue = "2499";
-                                    intentCalendar.putExtra("endTime", millis);
-                                    intentCalendar.putExtra("eventLocation",
-                                            order.getCityName());
-                                    issue = "2503";
-                                    intentCalendar.putExtra(
-                                            "description",
-                                            "Client name: " + order.getClientName() + ",\n"
-                                                    + "Branch Full name: "
-                                                    + order.getBranchFullname() + ",\n"
-                                                    + "Description: "
-                                                    + order.getDescription());
-                                    issue = "2511";
-                                    intentCalendar.putExtra("title", "Questionnaire: "
-                                            + order.getSetName());
-                                    // comunicator.JobList = null;
-                                    startActivity(intentCalendar);
+            // @Override
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        String OrderID = null;
+                        Order order = arg2;
+                        Date d = null;
+                        String str = "";
+                        try {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                            issue = "2466";
+                            if (order != null && order.getDate() != null)
+                                d = sdf.parse(order.getDate());
+                            DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
+                            str = dateFormat.format(d);
+                            // date_v.setText(str);
+                            issue = "2473";
+                            Intent intentCalendar = new Intent(Intent.ACTION_EDIT);
+                            intentCalendar.setType("vnd.android.cursor.item/event");
+                            Calendar c = Calendar.getInstance();
+                            issue = "unable to extract year from date:" + order.getDate();
+                            int year = getYear(order.getDate());
+                            issue = "unable to extract month from date:" + order.getDate();
+                            int month = getMonth(order.getDate());
+                            issue = "unable to extract day from date:" + order.getDate();
+                            int day = getDay(order.getDate());
+                            issue = "unable to extract hour from start time:" + order.getTimeStart();
+                            int hourStart = getHour(order.getTimeStart());
+                            issue = "unable to extract min from start time:" + order.getTimeStart();
+                            int minuteStart = getMinute(order.getTimeStart());
+                            issue = "unable to extract hour from end time:" + order.getTimeStart();
+                            int hourEnd = getHour(order.getTimeEnd());
+                            issue = "unable to extract min from end time:" + order.getTimeStart();
+                            int minuteEnd = getMinute(order.getTimeEnd());
+                            issue = "crashed";
+                            // year, month, day, hourOfDay, minute
+                            c.set(year, month, day, hourStart, minuteStart);
+                            long millis = c.getTimeInMillis();
+                            intentCalendar.putExtra("beginTime", millis);
+                            intentCalendar.putExtra("rrule", "FREQ=YEARLY");
+                            issue = "2496";
+                            c.set(year, month, day, hourEnd, minuteEnd);
+                            millis = c.getTimeInMillis();
+                            issue = "2499";
+                            intentCalendar.putExtra("endTime", millis);
+                            intentCalendar.putExtra("eventLocation", order.getCityName());
+                            issue = "2503";
+                            intentCalendar.putExtra("description", "Client name: " + order.getClientName() + ",\n" + "Branch Full name: " + order.getBranchFullname() + ",\n" + "Description: " + order.getDescription());
+                            issue = "2511";
+                            intentCalendar.putExtra("title", "Questionnaire: " + order.getSetName());
+                            // comunicator.JobList = null;
+                            startActivity(intentCalendar);
 
-                                } catch (ParseException e) {
-                                    // TODO Auto-generated catch block
-                                    customAlert(JobListActivity.this, issue + "|||Stack:" + e.getMessage() + "|||");
-                                    Toast.makeText(JobListActivity.this, "parse exception" + order.getDate(), Toast.LENGTH_LONG).show();
-                                    e.printStackTrace();
-                                } catch (Exception e) {
-                                    customAlert(JobListActivity.this, issue + "|||Stack:" + e.getMessage() + "|||");
-                                    Toast.makeText(JobListActivity.this, "simple exception" + order.getDate(), Toast.LENGTH_LONG).show();
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                                }
-
-                                break;
-
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                // No button clicked
-                                break;
+                        } catch (ParseException e) {
+                            // TODO Auto-generated catch block
+                            customAlert(JobListActivity.this, issue + "|||Stack:" + e.getMessage() + "|||");
+                            Toast.makeText(JobListActivity.this, "parse exception" + order.getDate(), Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        } catch (Exception e) {
+                            customAlert(JobListActivity.this, issue + "|||Stack:" + e.getMessage() + "|||");
+                            Toast.makeText(JobListActivity.this, "simple exception" + order.getDate(), Toast.LENGTH_LONG).show();
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
                         }
-                    }
-                };
+
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        // No button clicked
+                        break;
+                }
+            }
+        };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setTitle(getResources().getString(R.string._alert_title));
         TextView textView = new TextView(JobListActivity.this);
-        textView.setTextSize(UIHelper.getFontSize(JobListActivity.this,
-                textView.getTextSize()));
+        textView.setTextSize(UIHelper.getFontSize(JobListActivity.this, textView.getTextSize()));
         textView.setText(getString(R.string.list_enable_calendar));
         builder.setView(textView);
-        builder.setPositiveButton(
-                        getString(R.string.questionnaire_exit_delete_alert_yes),
-                        dialogClickListener)
-                .setNegativeButton(
-                        getString(R.string.questionnaire_exit_delete_alert_no),
-                        dialogClickListener).show();
+        builder.setPositiveButton(getString(R.string.questionnaire_exit_delete_alert_yes), dialogClickListener).setNegativeButton(getString(R.string.questionnaire_exit_delete_alert_no), dialogClickListener).show();
 
     }
 
     private void AutoSync() {
         if (Helper.isMisteroMenu) {
-            ArrayList<SubmitQuestionnaireData> sqdList = getNumberofQuestionnaire(
-                    false, false);
+            ArrayList<SubmitQuestionnaireData> sqdList = getNumberofQuestionnaire(false, false);
             if (sqdList != null && sqdList.size() > 0) {
                 customAlertUploadPendingJobs(JobListActivity.this);
             }
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss",
-                Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss", Locale.ENGLISH);
         date = Calendar.getInstance();
         if (timer == null) {
             // timer = new Timer();
@@ -2767,9 +2315,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             date.set(Calendar.AM_PM, 0);
 
             if (System.currentTimeMillis() > date.getTime().getTime()) {
-                Date d1 = new Date(date.get(Calendar.YEAR),
-                        date.get(Calendar.MONTH),
-                        date.get(Calendar.DAY_OF_MONTH) + 1, 6, 0);
+                Date d1 = new Date(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH) + 1, 6, 0);
                 // downloadjoblistTimer.scheduleAtFixedRate(
                 // new DownloadJobAndQuestionnaireTask(), d1,
                 // MILISECONND_24_HOURS);
@@ -2798,25 +2344,20 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // Helper helper = new Helper();
                 // helper.deleteFilesInFolder();
                 // long tp = lastJobAndQuestionnaireDownloaded;
-                long temp = System.currentTimeMillis()
-                        - myPrefs.getLong(Constants.AUTOSYNC_CURRENT_TIME, 0);
+                long temp = System.currentTimeMillis() - myPrefs.getLong(Constants.AUTOSYNC_CURRENT_TIME, 0);
                 if (temp > MILISECONND_24_HOURS) {
                     if (Connector.cookies == null) {
-                        if (showLogin(doLogin()))
-                            return;
+                        if (showLogin(doLogin())) return;
                         getJoblistData();
                         String result = QuestionnaireListPost();
                         if (result.contains("<script>")) {
                             doLogin();
                             result = QuestionnaireListPost();
                         }
-                        if (result.contains("timeout"))
-                            return;
-                        if (result.contains("error="))
-                            return;
+                        if (result.contains("timeout")) return;
+                        if (result.contains("error=")) return;
                         parser = new Parser();
-                        parser.parseXMLValues(result,
-                                Constants.QUES_RESP_FIELD_PARAM);
+                        parser.parseXMLValues(result, Constants.QUES_RESP_FIELD_PARAM);
                     }
                 }
             }
@@ -2840,8 +2381,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             {
                 new BackGroundThread().start();
 
-                changeSyncText(getResources().getString(
-                        R.string.job_list_tab_syncing));
+                changeSyncText(getResources().getString(R.string.job_list_tab_syncing));
 
             }
         }
@@ -2852,8 +2392,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         public void run() {
             if (IsInternetConnectted()) {
                 if (Connector.cookies == null) {
-                    if (showLogin(doLogin()))
-                        return;
+                    if (showLogin(doLogin())) return;
                 }
 
                 SubmitSurvey();
@@ -2870,21 +2409,13 @@ public class JobListActivity extends Activity implements OnClickListener,
                 doLogin();
                 result = JobListPost();
             }
-            if (result.contains("timeout"))
-                return;
-            if (result.contains("error="))
-                return;
-            SplashScreen.addLog(new BasicLog(Constants.getJobListURL("11.90"),
-                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                    "DOWNLOADING jobs" + result, "DOWNLOADING"));
+            if (result.contains("timeout")) return;
+            if (result.contains("error=")) return;
+            SplashScreen.addLog(new BasicLog(Constants.getJobListURL("11.90"), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "DOWNLOADING jobs" + result, "DOWNLOADING"));
 
-            new Parser().parseXMLValues(result,
-                    Constants.JOB_LIST_RESP_FIELD_PARAM);
+            new Parser().parseXMLValues(result, Constants.JOB_LIST_RESP_FIELD_PARAM);
         } catch (Exception ex) {
-            Toast.makeText(JobListActivity.this,
-                    getResources().getString(R.string.errorParsingOrder),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(JobListActivity.this, getResources().getString(R.string.errorParsingOrder), Toast.LENGTH_LONG).show();
         }
         // new saveSetThread().start();
     }
@@ -2895,13 +2426,11 @@ public class JobListActivity extends Activity implements OnClickListener,
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
         String app_ver = "";
         try {
-            app_ver = this.getPackageManager().getPackageInfo(
-                    this.getPackageName(), 0).versionName;
+            app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
-        return Connector.postForm(Constants.getJobListURL(app_ver),
-                extraDataList);
+        return Connector.postForm(Constants.getJobListURL(app_ver), extraDataList);
     }
 
     private String QuestionnaireListPost() {
@@ -2909,8 +2438,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         String allSetData = "";
         String app_ver = "";
         try {
-            app_ver = this.getPackageManager().getPackageInfo(
-                    this.getPackageName(), 0).versionName;
+            app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
@@ -2922,9 +2450,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 String currentSet = Sets.getSetIds().get(0);
                 String commaSeperatedOrderIds = Orders.getListOfOldORderIds(currentSet);
                 List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-                String thisSet = Connector.postForm(Constants
-                                .getQestionnaireOneByOneURL(app_ver, currentSet, commaSeperatedOrderIds),
-                        extraDataList);
+                String thisSet = Connector.postForm(Constants.getQestionnaireOneByOneURL(app_ver, currentSet, commaSeperatedOrderIds), extraDataList);
                 thisSet = removeGarbageFromTop(thisSet);
                 if (thisSet != null && thisSet.contains("Blocks")) {
                     thisSet = thisSet.replace("<1", "<d1");
@@ -2949,23 +2475,13 @@ public class JobListActivity extends Activity implements OnClickListener,
                 saveThisSet(thisSet, currentSet, "");
                 if (thisSet != null && getSetActualLength(thisSet) > 0) {
 
-                    Parser thisParser = new Parser(
-                            Revamped_Loading_Dialog.getDialog());
+                    Parser thisParser = new Parser(Revamped_Loading_Dialog.getDialog());
                     if (thisSet != null && thisSet.contains(""))
-                        thisParser.parseXMLValues(thisSet,
-                                Constants.QUES_RESP_FIELD_PARAM, null, null,
-                                null);
+                        thisParser.parseXMLValues(thisSet, Constants.QUES_RESP_FIELD_PARAM, null, null, null);
                     Set thissSet = thisParser.set;
-                    if (thissSet != null
-                            && thissSet.getAllowCheckerToSetLang() != null
-                            && thissSet.getAllowCheckerToSetLang().equals("1")) {
+                    if (thissSet != null && thissSet.getAllowCheckerToSetLang() != null && thissSet.getAllowCheckerToSetLang().equals("1")) {
                         for (int i = 0; i < allLanguages.size(); i++) {
-                            thisSet = Connector.postForm(Constants
-                                            .getQestionnaireOneByOneURL(app_ver,
-                                                    currentSet, allLanguages.get(i)
-                                                            .getAltLangID(),
-                                                    Orders.getListOfOldORderIds(currentSet)),
-                                    extraDataList);
+                            thisSet = Connector.postForm(Constants.getQestionnaireOneByOneURL(app_ver, currentSet, allLanguages.get(i).getAltLangID(), Orders.getListOfOldORderIds(currentSet)), extraDataList);
                             thisSet = removeGarbageFromTop(thisSet);
                             if (thisSet != null && thisSet.contains("Blocks")) {
                                 thisSet = thisSet.replace("<1", "<d1");
@@ -2988,17 +2504,11 @@ public class JobListActivity extends Activity implements OnClickListener,
                                 thisSet = thisSet.replace("</9", "</d9");
                             }
 
-                            saveThisSet(thisSet, currentSet, "-"
-                                    + allLanguages.get(i).getAltLangID());
+                            saveThisSet(thisSet, currentSet, "-" + allLanguages.get(i).getAltLangID());
 
-                            thisParser = new Parser(
-                                    Revamped_Loading_Dialog.getDialog());
-                            thisParser.parseXMLValues(thisSet,
-                                    Constants.QUES_RESP_FIELD_PARAM, thissSet,
-                                    allLanguages.get(i).getAltLangID(),
-                                    allLanguages.get(i).getAltLangName());
+                            thisParser = new Parser(Revamped_Loading_Dialog.getDialog());
+                            thisParser.parseXMLValues(thisSet, Constants.QUES_RESP_FIELD_PARAM, thissSet, allLanguages.get(i).getAltLangID(), allLanguages.get(i).getAltLangName());
                         }
-
                     }
                 } else {
                     Sets.getSetIds().remove(0);
@@ -3007,11 +2517,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             return allSetData + "\r\n</sets>";
         } else {
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-            String thisSet = Connector.postForm(
-                    Constants.getQestionnaireURL(app_ver), extraDataList);
+            String thisSet = Connector.postForm(Constants.getQestionnaireURL(app_ver), extraDataList);
             if (thisSet != null) {
-                new Parser(Revamped_Loading_Dialog.getDialog()).parseXMLValues(
-                        thisSet, Constants.QUES_RESP_FIELD_PARAM);
+                new Parser(Revamped_Loading_Dialog.getDialog()).parseXMLValues(thisSet, Constants.QUES_RESP_FIELD_PARAM);
             }
             return thisSet;
         }
@@ -3027,8 +2535,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
             File file = new File(path + "/file_" + id + langid + ".xml");
             file.createNewFile();
-            FileWriter writer = new FileWriter(path + "/file_" + id + langid
-                    + ".xml");
+            FileWriter writer = new FileWriter(path + "/file_" + id + langid + ".xml");
 
             writer.write(thisSet);
             writer.close();
@@ -3059,8 +2566,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
         String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
         try {
-            app_ver = this.getPackageManager().getPackageInfo(
-                    this.getPackageName(), 0).versionName;
+            app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
@@ -3094,11 +2600,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             for (int i = 0; i < sqd.size(); i++) {
                 SubmitQuestionnaireData sq = sqd.get(i);
 
-                String setId = DBHelper.getShelfSetIdItemsForJobList(
-                        Constants.DB_TABLE_POS,
-                        new String[]{Constants.DB_TABLE_POS_SetId},
-                        Constants.DB_TABLE_POS_OrderId + "=" + "\""
-                                + sq.getOrderid() + "\"");
+                String setId = DBHelper.getShelfSetIdItemsForJobList(Constants.DB_TABLE_POS, new String[]{Constants.DB_TABLE_POS_SetId}, Constants.DB_TABLE_POS_OrderId + "=" + "\"" + sq.getOrderid() + "\"");
                 POS_Shelf pos_shelf_item = null;
                 Set set = null;
                 if (setId != null) {
@@ -3106,67 +2608,33 @@ public class JobListActivity extends Activity implements OnClickListener,
                     if (set != null) {
                         pos_shelf_item = new POS_Shelf(JobListActivity.this);
                         pos_shelf_item.listProducts = set.getListProducts();
-                        pos_shelf_item.listProductLocations = set
-                                .getListProductLocations();
-                        pos_shelf_item.listProductProperties = set
-                                .getListProductProperties();
+                        pos_shelf_item.listProductLocations = set.getListProductLocations();
+                        pos_shelf_item.listProductProperties = set.getListProductProperties();
                         if (pos_shelf_item.price_item == null)
                             pos_shelf_item.price_item = new Price();
                         if (pos_shelf_item.quantity_item == null)
                             pos_shelf_item.quantity_item = new Quantity();
                         if (pos_shelf_item.expiration_item == null)
                             pos_shelf_item.expiration_item = new Expiration();
-                        if (pos_shelf_item.note_item == null)
-                            pos_shelf_item.note_item = new Note();
+                        if (pos_shelf_item.note_item == null) pos_shelf_item.note_item = new Note();
                         if (pos_shelf_item.picture_item == null)
                             pos_shelf_item.picture_item = new Picture();
-                        pos_shelf_item = DBHelper.getShelfItems(
-                                Constants.DB_TABLE_POS, new String[]{
-                                        Constants.DB_TABLE_POS_LocationId,
-                                        Constants.DB_TABLE_POS_OrderId,
-                                        Constants.DB_TABLE_POS_Price,
-                                        Constants.DB_TABLE_POS_ProductId,
-                                        Constants.DB_TABLE_POS_PropertyId,
-                                        Constants.DB_TABLE_POS_Quantity,
-                                        Constants.DB_TABLE_POS_SetId,
-                                        Constants.DB_TABLE_POS_Notee,
-                                        Constants.DB_TABLE_POS_date},
-                                Constants.DB_TABLE_POS_OrderId + "=" + "\""
-                                        + sq.getOrderid() + "\"",
-                                pos_shelf_item, false);
+                        pos_shelf_item = DBHelper.getShelfItems(Constants.DB_TABLE_POS, new String[]{Constants.DB_TABLE_POS_LocationId, Constants.DB_TABLE_POS_OrderId, Constants.DB_TABLE_POS_Price, Constants.DB_TABLE_POS_ProductId, Constants.DB_TABLE_POS_PropertyId, Constants.DB_TABLE_POS_Quantity, Constants.DB_TABLE_POS_SetId, Constants.DB_TABLE_POS_Notee, Constants.DB_TABLE_POS_date}, Constants.DB_TABLE_POS_OrderId + "=" + "\"" + sq.getOrderid() + "\"", pos_shelf_item, false);
                     }
 
                 }
 
-                List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(
-                        false, sq, pos_shelf_item);
+                List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(false, sq, pos_shelf_item);
 
-                uploadList = DBHelper.getQuestionnaireUploadFilesInDB(
-                        Constants.UPLOAD_FILE_TABLE,
-                        new String[]{Constants.UPLOAD_FILe_MEDIAFILE,
-                                Constants.UPLOAD_FILe_DATAID,
-                                Constants.UPLOAD_FILe_ORDERID,
-                                Constants.UPLOAD_FILe_BRANCH_NAME,
-                                Constants.UPLOAD_FILe_CLIENT_NAME,
-                                Constants.UPLOAD_FILe_DATE,
-                                Constants.UPLOAD_FILe_SET_NAME,
-                                Constants.UPLOAD_FILe_SAMPLE_SIZE,
-                                Constants.UPLOAD_FILe_PRODUCTID,
-                                Constants.UPLOAD_FILe_LOCATIONID,},
-                        Constants.DB_TABLE_SUBMITSURVEY_OID + "=" + "\""
-                                + sq.getOrderid() + "\"",
-                        Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
+                uploadList = DBHelper.getQuestionnaireUploadFilesInDB(Constants.UPLOAD_FILE_TABLE, new String[]{Constants.UPLOAD_FILe_MEDIAFILE, Constants.UPLOAD_FILe_DATAID, Constants.UPLOAD_FILe_ORDERID, Constants.UPLOAD_FILe_BRANCH_NAME, Constants.UPLOAD_FILe_CLIENT_NAME, Constants.UPLOAD_FILe_DATE, Constants.UPLOAD_FILe_SET_NAME, Constants.UPLOAD_FILe_SAMPLE_SIZE, Constants.UPLOAD_FILe_PRODUCTID, Constants.UPLOAD_FILe_LOCATIONID,}, Constants.DB_TABLE_SUBMITSURVEY_OID + "=" + "\"" + sq.getOrderid() + "\"", Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
                 renameCamFiles(uploadList, sq.getUnix());
 
-                String result = Connector.postForm(
-                        Constants.getSubmitSurveyURL(), nvp);
+                String result = Connector.postForm(Constants.getSubmitSurveyURL(), nvp);
                 for (int j = 0; isquotafull == false && j < uploadList.size(); j++) {
                     String path = uploadList.get(j).getFilePath();
                     if (uploadList.get(j).getFilePath().startsWith("content")) {
-                        path = getRealPathFromURI(Uri.parse(uploadList.get(j)
-                                .getFilePath()));
-                    } else if (uploadList.get(j).getFilePath()
-                            .startsWith("file:///")) {
+                        path = getRealPathFromURI(Uri.parse(uploadList.get(j).getFilePath()));
+                    } else if (uploadList.get(j).getFilePath().startsWith("file:///")) {
                         path = path.replace("file:///", "/");
                     }
                     String did = uploadList.get(j).getDataID();
@@ -3176,13 +2644,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
                     String forceSmping = null;
                     if (set == null) {
-                        String setlink = DBHelper
-                                .getSetIdFromOrder(
-                                        Constants.DB_TABLE_JOBLIST,
-                                        new String[]{Constants.DB_TABLE_JOBLIST_SETID},
-                                        Constants.DB_TABLE_JOBLIST_ORDERID
-                                                + "=" + "\"" + sq.getOrderid()
-                                                + "\"");
+                        String setlink = DBHelper.getSetIdFromOrder(Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_SETID}, Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sq.getOrderid() + "\"");
                         try {
                             set = (Set) DBHelper.convertFromBytes(setlink);
                         } catch (Exception e) {
@@ -3191,25 +2653,14 @@ public class JobListActivity extends Activity implements OnClickListener,
                             set = null;
                         }
                     }
-                    if (set != null)
-                        forceSmping = set.getForceImageStamp();
-                    String res = Connector.saveFiletoServer(
-                            (forceSmping != null && forceSmping.equals("1")),
-                            path, Constants.getAttachmentURL(),
-                            sq.getOrderid(), did, sq.getUnix(),
-                            uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
+                    if (set != null) forceSmping = set.getForceImageStamp();
+                    String res = Connector.saveFiletoServer((forceSmping != null && forceSmping.equals("1")), path, Constants.getAttachmentURL(), sq.getOrderid(), did, sq.getUnix(), uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
                     if (CheckResponse(res)) {
                         try {
-                            DBHelper.deleteFile(sqd.get(i).getOrderid(),
-                                    uploadList.get(j).getFilePath());
-                            String where = Constants.UPLOAD_FILe_ORDERID + "="
-                                    + "\"" + sqd.get(i).getOrderid()
-                                    + "\" AND "
-                                    + Constants.UPLOAD_FILe_MEDIAFILE + "=\""
-                                    + uploadList.get(j).getFilePath() + "\"";
+                            DBHelper.deleteFile(sqd.get(i).getOrderid(), uploadList.get(j).getFilePath());
+                            String where = Constants.UPLOAD_FILe_ORDERID + "=" + "\"" + sqd.get(i).getOrderid() + "\" AND " + Constants.UPLOAD_FILe_MEDIAFILE + "=\"" + uploadList.get(j).getFilePath() + "\"";
                             DBAdapter.openDataBase();
-                            DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE,
-                                    where, null);
+                            DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE, where, null);
                             DBAdapter.closeDataBase();
 
                             if (path.contains(Constants.UPLOAD_PATH)) {
@@ -3222,27 +2673,17 @@ public class JobListActivity extends Activity implements OnClickListener,
                         }
 
                     } else {
-                        SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(),
-                                myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                                "Attachments Uploading:NOTSUCCESS" + path + " ORDER" + sq.getOrderid() + "RESPONSE=" + res, "ORPHAN"));
+                        SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Attachments Uploading:NOTSUCCESS" + path + " ORDER" + sq.getOrderid() + "RESPONSE=" + res, "ORPHAN"));
 
                         if (CheckResponseForStorageQuota(res)) {
-                            ((Activity) JobListActivity.this)
-                                    .runOnUiThread(new Runnable() {
+                            ((Activity) JobListActivity.this).runOnUiThread(new Runnable() {
 
-                                        @Override
-                                        public void run() {
+                                @Override
+                                public void run() {
 
-                                            ShowAlert(
-                                                    JobListActivity.this,
-                                                    "",
-                                                    getResources()
-                                                            .getString(
-                                                                    R.string.qoutafullMsg),
-                                                    "Ok");
-                                        }
-                                    });
+                                    ShowAlert(JobListActivity.this, "", getResources().getString(R.string.qoutafullMsg), "Ok");
+                                }
+                            });
                             isquotafull = true;
                             // imgmsg="Storage Quota Full!";
                             break;
@@ -3252,28 +2693,17 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 if (CheckResponse(result)) {
                     try {
-                        String where = Constants.DB_TABLE_JOBLIST_ORDERID + "="
-                                + "\"" + sqd.get(i).getOrderid() + "\"";
+                        String where = Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sqd.get(i).getOrderid() + "\"";
                         Calendar myCalendar = Calendar.getInstance();
-                        DBHelper.updateOrders(
-                                Constants.DB_TABLE_ORDERS,
-                                new String[]{
-                                        Constants.DB_TABLE_ORDERS_ORDERID,
-                                        Constants.DB_TABLE_ORDERS_STATUS,
-                                        Constants.DB_TABLE_ORDERS_START_TIME,},
-                                sqd.get(i).getOrderid(),
-                                "uploaded on "
-                                        + sdf.format(myCalendar.getTime()), "", null);
+                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, sqd.get(i).getOrderid(), "uploaded on " + sdf.format(myCalendar.getTime()), "", null);
                     } catch (Exception ex) {
                         String str = "";
                         str += "";
                     }
                 } else {
                     try {
-                        String where = Constants.DB_TABLE_JOBLIST_ORDERID + "="
-                                + "\"" + sqd.get(i).getOrderid() + "\"";
-                        DBHelper.incrementTriesAgainstOrderId(where, sqd.get(i)
-                                .getTries());
+                        String where = Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sqd.get(i).getOrderid() + "\"";
+                        DBHelper.incrementTriesAgainstOrderId(where, sqd.get(i).getTries());
 
                     } catch (Exception ex) {
                         String str = "";
@@ -3297,55 +2727,24 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private boolean CheckResponse(String result) {
-        if (!Helper.IsValidResponse(result,
-                Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
+        if (!Helper.IsValidResponse(result, Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
             return false;
         }
-        result = result.substring(
-                result.indexOf(Constants.JOB_DETAIL_RESP_FIELD_PARAM),
-                result.indexOf("</status>"));
+        result = result.substring(result.indexOf(Constants.JOB_DETAIL_RESP_FIELD_PARAM), result.indexOf("</status>"));
         if (!(result.endsWith("0"))) {
             return false;
-        } else
-            return true;
+        } else return true;
     }
 
-    private ArrayList<SubmitQuestionnaireData> getNumberofQuestionnaire(
-            boolean inProgress, boolean isCerts) {
+    private ArrayList<SubmitQuestionnaireData> getNumberofQuestionnaire(boolean inProgress, boolean isCerts) {
         ArrayList<SubmitQuestionnaireData> questionnaireData = new ArrayList<SubmitQuestionnaireData>();
-        questionnaireData = DBHelper
-                .getSubmitQuestionnaireList(
-                        Constants.DB_TABLE_SUBMITSURVEY,
-                        new String[]{
-                                Constants.DB_TABLE_SUBMITSURVEY_OID,
-                                Constants.DB_TABLE_SUBMITSURVEY_FT,
-                                Constants.DB_TABLE_SUBMITSURVEY_SLT,
-                                Constants.DB_TABLE_SUBMITSURVEY_SLNG,
-                                Constants.DB_TABLE_SUBMITSURVEY_ELT,
-                                Constants.DB_TABLE_SUBMITSURVEY_ELNG,
-                                Constants.DB_TABLE_SUBMITSURVEY_REPORTED_START_TIME,
-                                Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME,
-                                Constants.DB_TABLE_SUBMITSURVEY_UNEMPTY_QUES_COUNT,
-                                Constants.DB_TABLE_SUBMITSURVEY_SID,
-                                Constants.POST_FIELD_QUES_UNIX,
-                                Constants.DB_TABLE_SUBMITSURVEY_purchase_details,
-                                Constants.DB_TABLE_SUBMITSURVEY_purchase_payment,
-                                Constants.DB_TABLE_SUBMITSURVEY_purchase_description,
-                                Constants.DB_TABLE_SUBMITSURVEY_service_invoice_number,
-                                Constants.DB_TABLE_SUBMITSURVEY_service_payment,
-                                Constants.DB_TABLE_SUBMITSURVEY_service_description,
-                                Constants.DB_TABLE_SUBMITSURVEY_transportation_payment,
-                                Constants.DB_TABLE_SUBMITSURVEY_transportation_description,
-                                Constants.DB_TABLE_SUBMITSURVEY_RS},
-                        null, Constants.DB_TABLE_SUBMITSURVEY_OID);
+        questionnaireData = DBHelper.getSubmitQuestionnaireList(Constants.DB_TABLE_SUBMITSURVEY, new String[]{Constants.DB_TABLE_SUBMITSURVEY_OID, Constants.DB_TABLE_SUBMITSURVEY_FT, Constants.DB_TABLE_SUBMITSURVEY_SLT, Constants.DB_TABLE_SUBMITSURVEY_SLNG, Constants.DB_TABLE_SUBMITSURVEY_ELT, Constants.DB_TABLE_SUBMITSURVEY_ELNG, Constants.DB_TABLE_SUBMITSURVEY_REPORTED_START_TIME, Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME, Constants.DB_TABLE_SUBMITSURVEY_UNEMPTY_QUES_COUNT, Constants.DB_TABLE_SUBMITSURVEY_SID, Constants.POST_FIELD_QUES_UNIX, Constants.DB_TABLE_SUBMITSURVEY_purchase_details, Constants.DB_TABLE_SUBMITSURVEY_purchase_payment, Constants.DB_TABLE_SUBMITSURVEY_purchase_description, Constants.DB_TABLE_SUBMITSURVEY_service_invoice_number, Constants.DB_TABLE_SUBMITSURVEY_service_payment, Constants.DB_TABLE_SUBMITSURVEY_service_description, Constants.DB_TABLE_SUBMITSURVEY_transportation_payment, Constants.DB_TABLE_SUBMITSURVEY_transportation_description, Constants.DB_TABLE_SUBMITSURVEY_RS}, null, Constants.DB_TABLE_SUBMITSURVEY_OID);
 
         questionnaireData = cleanUploaedJobsHere(questionnaireData);
-        if (isCerts && questionnaireData != null
-                && questionnaireData.size() > 0) {
+        if (isCerts && questionnaireData != null && questionnaireData.size() > 0) {
             ArrayList<SubmitQuestionnaireData> certs = new ArrayList<SubmitQuestionnaireData>();
             for (int i = 0; i < questionnaireData.size(); i++) {
-                if (questionnaireData.get(i).getOrderid() != null
-                        && questionnaireData.get(i).getOrderid().contains("CC")) {
+                if (questionnaireData.get(i).getOrderid() != null && questionnaireData.get(i).getOrderid().contains("CC")) {
                     certs.add(questionnaireData.get(i));
                 }
             }
@@ -3357,23 +2756,8 @@ public class JobListActivity extends Activity implements OnClickListener,
     private ArrayList<QuestionnaireData> getQuestionnaireData(String orderID) {
         // SQLiteDatabase db = DBAdapter.openDataBase();
         ArrayList<QuestionnaireData> questionnaireData = new ArrayList<QuestionnaireData>();
-        DBAdapter.LogCommunication("checkerDBLog.txt",
-                "joblist-getQuestionnaireList=");
-        questionnaireData = DBHelper.getQuestionnaireList(
-                Constants.DB_TABLE_QUESTIONNAIRE, new String[]{
-                        Constants.DB_TABLE_QUESTIONNAIRE_DATAID,
-                        Constants.DB_TABLE_QUESTIONNAIRE_QTEXT,
-                        Constants.DB_TABLE_QUESTIONNAIRE_ORDERID,
-                        Constants.DB_TABLE_QUESTIONNAIRE_QTL,
-                        Constants.DB_TABLE_QUESTIONNAIRE_OT,
-                        Constants.DB_TABLE_ANSWERS_BRANCHID,
-                        Constants.DB_TABLE_ANSWERS_WORKERID,
-                        Constants.DB_TABLE_QUESTIONNAIRE_FT,
-                        Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME,
-                        Constants.DB_TABLE_QUESTIONNAIRE_LoopInfo,},
-                Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "=" + "\"" + orderID
-                        + "\"", Constants.DB_TABLE_QUESTIONNAIRE_DATAID,
-                questionnaireData);
+        DBAdapter.LogCommunication("checkerDBLog.txt", "joblist-getQuestionnaireList=");
+        questionnaireData = DBHelper.getQuestionnaireList(Constants.DB_TABLE_QUESTIONNAIRE, new String[]{Constants.DB_TABLE_QUESTIONNAIRE_DATAID, Constants.DB_TABLE_QUESTIONNAIRE_QTEXT, Constants.DB_TABLE_QUESTIONNAIRE_ORDERID, Constants.DB_TABLE_QUESTIONNAIRE_QTL, Constants.DB_TABLE_QUESTIONNAIRE_OT, Constants.DB_TABLE_ANSWERS_BRANCHID, Constants.DB_TABLE_ANSWERS_WORKERID, Constants.DB_TABLE_QUESTIONNAIRE_FT, Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME, Constants.DB_TABLE_QUESTIONNAIRE_LoopInfo,}, Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "=" + "\"" + orderID + "\"", Constants.DB_TABLE_QUESTIONNAIRE_DATAID, questionnaireData);
         // DBAdapter.closeDataBase(db);
         return questionnaireData;
     }
@@ -3390,11 +2774,9 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (dataID2.contains("_")) {
 
             String dataId = getDataIdFromDataId(dataID2);
-            String groupId = getGroupIdFromDataId(dataID2.replace(dataId + "_",
-                    ""));
+            String groupId = getGroupIdFromDataId(dataID2.replace(dataId + "_", ""));
             if (dataID2.contains("-")) {
-                String titleId = getTitleFromDataId(dataID2.replace(dataId
-                        + "_" + groupId + "-", ""));
+                String titleId = getTitleFromDataId(dataID2.replace(dataId + "_" + groupId + "-", ""));
                 return groupId + "-" + titleId + "-" + dataId;
             }
             return groupId + "-" + "0" + "-" + dataId;
@@ -3431,16 +2813,13 @@ public class JobListActivity extends Activity implements OnClickListener,
         return data_id;
     }
 
-    private String getCorrectDataIdForLoop(String thisDataId,
-                                           SubmitQuestionnaireData sqd) {
-        ArrayList<QuestionnaireData> questionnaireData = getQuestionnaireData(sqd
-                .getOrderid());
+    private String getCorrectDataIdForLoop(String thisDataId, SubmitQuestionnaireData sqd) {
+        ArrayList<QuestionnaireData> questionnaireData = getQuestionnaireData(sqd.getOrderid());
         if (questionnaireData == null) {
             questionnaireData = new ArrayList<QuestionnaireData>();
         }
 
-        if (questionnaireData.size() == 0)
-            return thisDataId;
+        if (questionnaireData.size() == 0) return thisDataId;
         for (int i = 0; i < questionnaireData.size(); i++) {
 
             QuestionnaireData qd = questionnaireData.get(i);
@@ -3499,8 +2878,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 String lastDataid = "";
                 for (String line : lines) {
                     line = line.trim();
-                    if (extraDataList == null)
-                        extraDataList = new ArrayList<NameValuePair>();
+                    if (extraDataList == null) extraDataList = new ArrayList<NameValuePair>();
 
                     if (line.contains("[") && line.contains("]") && line.contains("=>")) {
                         String lineParts[] = line.split("=>");
@@ -3523,10 +2901,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                             if (firstPart.startsWith("obj") && secondPart.contains("Array")) {
                                 lastDataid = firstPart;
                             } else
-                                extraDataList.add(Helper.getNameValuePair(
-                                        firstPart, secondPart));
-                        } else
-                            extraDataList.add(Helper.getNameValuePair(firstPart, ""));
+                                extraDataList.add(Helper.getNameValuePair(firstPart, secondPart));
+                        } else extraDataList.add(Helper.getNameValuePair(firstPart, ""));
                     }
                 }
             } catch (Exception e) {
@@ -3538,40 +2914,26 @@ public class JobListActivity extends Activity implements OnClickListener,
         return extraDataList;
     }
 
-    private List<NameValuePair> PrepareQuestionnaireNameValuePair(
-            boolean isProgress, SubmitQuestionnaireData sqd,
-            POS_Shelf pos_shelf_item) {
-        ArrayList<QuestionnaireData> questionnaireData = getQuestionnaireData(sqd
-                .getOrderid());
+    private List<NameValuePair> PrepareQuestionnaireNameValuePair(boolean isProgress, SubmitQuestionnaireData sqd, POS_Shelf pos_shelf_item) {
+        ArrayList<QuestionnaireData> questionnaireData = getQuestionnaireData(sqd.getOrderid());
 
         if (questionnaireData == null) {
             questionnaireData = new ArrayList<QuestionnaireData>();
         }
 
-        if (questionnaireData.size() == 0)
-            return null;
+        if (questionnaireData.size() == 0) return null;
 
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
         String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
         try {
-            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(
-                    JobListActivity.this.getPackageName(), 0).versionName;
+            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
 
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_VALUE_QUES_APP_VERSION, app_ver));
-        String reqString = Build.MANUFACTURER
-                + " "
-                + Build.MODEL
-                + " "
-                + Build.VERSION.RELEASE
-                + " "
-                + Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT]
-                .getName() + " RAM=" + getTotalRAM() + "Mbs";
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_DEVICE_INFO, reqString));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_VALUE_QUES_APP_VERSION, app_ver));
+        String reqString = Build.MANUFACTURER + " " + Build.MODEL + " " + Build.VERSION.RELEASE + " " + Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName() + " RAM=" + getTotalRAM() + "Mbs";
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_DEVICE_INFO, reqString));
         if (!sqd.getOrderid().contains("-")) {
             if (sqd.getOrderid().contains("CC")) {
 
@@ -3581,61 +2943,34 @@ public class JobListActivity extends Activity implements OnClickListener,
                     cert = cert.substring(0, cert.indexOf("SS"));
                 }
 
-                extraDataList.add(Helper.getNameValuePair(
-                        Constants.POST_FIELD_CERT_ID, cert));
-                extraDataList.add(Helper.getNameValuePair(
-                        Constants.POST_FIELD_QUES_ORDER_ID, "-222"));
-                extraDataList.add(Helper.getNameValuePair(
-                        Constants.POST_FIELD_SETID, sqd.getSetid()));
+                extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_CERT_ID, cert));
+                extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_ORDER_ID, "-222"));
+                extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_SETID, sqd.getSetid()));
             } else
-                extraDataList.add(Helper.getNameValuePair(
-                        Constants.POST_FIELD_QUES_ORDER_ID, sqd.getOrderid()));
+                extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_ORDER_ID, sqd.getOrderid()));
         }
 
         if (sqd.getSetVersionID() != null && !sqd.getSetVersionID().equals("")) {
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_SETVERSIONID, sqd.getSetVersionID()));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_SETVERSIONID, sqd.getSetVersionID()));
         }
 
         if (sqd.getRs() != null && !sqd.getRs().equals("")) {
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_QUES_RS, sqd.getRs()));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_RS, sqd.getRs()));
         }
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_QUES_CRITFREETEXT, sqd.getFt()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_QUES_CRITSTARTLAT, sqd.getSlt()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_QUES_CRITSTARTLONG, sqd.getSlng()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_QUES_CRITENDLAT, sqd.getElt()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_VALUE_QUES_CRITENDLONG, sqd.getElng()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_CRITFREETEXT, sqd.getFt()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_CRITSTARTLAT, sqd.getSlt()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_CRITSTARTLONG, sqd.getSlng()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_CRITENDLAT, sqd.getElt()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_VALUE_QUES_CRITENDLONG, sqd.getElng()));
 
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_purchase_PurchaseInvoiceNumber,
-                sqd.getDB_TABLE_SUBMITSURVEY_purchase_details()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_purchase_PurchasePayment,
-                sqd.getDB_TABLE_SUBMITSURVEY_purchase_payment()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_purchase_PurchaseDescription,
-                sqd.getDB_TABLE_SUBMITSURVEY_purchase_description()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_purchase_ServiceInvoiceNumber,
-                sqd.getDB_TABLE_SUBMITSURVEY_service_invoice_number()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_purchase_ServicePayment,
-                sqd.getDB_TABLE_SUBMITSURVEY_service_payment()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_purchase_ServiceDescription,
-                sqd.getDB_TABLE_SUBMITSURVEY_service_description()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_transportation_TransportationPayment,
-                sqd.getDB_TABLE_SUBMITSURVEY_transportation_payment()));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_transportation_Description,
-                sqd.getDB_TABLE_SUBMITSURVEY_transportation_description()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_purchase_PurchaseInvoiceNumber, sqd.getDB_TABLE_SUBMITSURVEY_purchase_details()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_purchase_PurchasePayment, sqd.getDB_TABLE_SUBMITSURVEY_purchase_payment()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_purchase_PurchaseDescription, sqd.getDB_TABLE_SUBMITSURVEY_purchase_description()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_purchase_ServiceInvoiceNumber, sqd.getDB_TABLE_SUBMITSURVEY_service_invoice_number()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_purchase_ServicePayment, sqd.getDB_TABLE_SUBMITSURVEY_service_payment()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_purchase_ServiceDescription, sqd.getDB_TABLE_SUBMITSURVEY_service_description()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_transportation_TransportationPayment, sqd.getDB_TABLE_SUBMITSURVEY_transportation_payment()));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_transportation_Description, sqd.getDB_TABLE_SUBMITSURVEY_transportation_description()));
 
         String time = sqd.getFtime();
         sdf = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss", Locale.ENGLISH);
@@ -3648,19 +2983,15 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (time != null && time.contains(" 24:")) {
             time = time.replace(" 24:", " 00:");
         }
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_VALUE_QUES_REPORTED_FINISH_TIME, time));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_VALUE_QUES_REPORTED_FINISH_TIME, time));
         {
             String unix = sqd.getUnix();
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_QUES_UNIX, unix));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_QUES_UNIX, unix));
         }
         time = sqd.getStime();
-        if (time == null || time.equals(""))
-            time = sdf.format(new java.util.Date());
+        if (time == null || time.equals("")) time = sdf.format(new java.util.Date());
 
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_VALUE_QUES_REPORTED_START_TIME, time));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_VALUE_QUES_REPORTED_START_TIME, time));
         int previousCount = 0;
         String previousLoopName = "";
         String previousLoopData = "";
@@ -3681,8 +3012,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 String listItemId = "";
 
                 String splitData[] = qd.getDataID().split("\\^");
-                if (splitData.length > 0
-                        && splitData[splitData.length - 1].contains("=")) {
+                if (splitData.length > 0 && splitData[splitData.length - 1].contains("=")) {
                     splitData = splitData[splitData.length - 1].split("=");
                     loopdata = splitData[1];
                 }
@@ -3709,8 +3039,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     // Loop started
                     int ii = 0;
                     ii++;
-                } else if (thisloopPrefix != null
-                        && thisloopPrefix.contains("[items]")) {
+                } else if (thisloopPrefix != null && thisloopPrefix.contains("[items]")) {
                     int lio = thisloopPrefix.lastIndexOf("[" + "items" + "]");
                     String sub = thisloopPrefix.substring(lio);
                     thisloopPrefix = thisloopPrefix.replace(sub, "");
@@ -3723,15 +3052,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                     int ii = 0;
                     ii++;
 
-                    if (thisloopPrefix != null
-                            && thisloopPrefix.contains("[loops]")) {
-                        int lio = thisloopPrefix.lastIndexOf("[" + "loops"
-                                + "]");
+                    if (thisloopPrefix != null && thisloopPrefix.contains("[loops]")) {
+                        int lio = thisloopPrefix.lastIndexOf("[" + "loops" + "]");
                         String sub = thisloopPrefix.substring(lio);
                         thisloopPrefix = thisloopPrefix.replace(sub, "");
                     }
-                    if (powerCount == 1)
-                        thisloopPrefix = null;
+                    if (powerCount == 1) thisloopPrefix = null;
 
                 }
                 previousCount = powerCount;
@@ -3746,29 +3072,22 @@ public class JobListActivity extends Activity implements OnClickListener,
                     // Constants.POST_FIELD_LOOPS_ITEMS + "[]", ""));
                     //
                     if (thisloopPrefix == null)
-                        thisloopPrefix = Constants.POST_FIELD_LOOPS_STARTED
-                                + "[" + loopname + "]";
+                        thisloopPrefix = Constants.POST_FIELD_LOOPS_STARTED + "[" + loopname + "]";
                     else
-                        thisloopPrefix += "["
-                                + Constants.POST_FIELD_LOOPS_STARTED + "]"
-                                + "[" + loopname + "]";
+                        thisloopPrefix += "[" + Constants.POST_FIELD_LOOPS_STARTED + "]" + "[" + loopname + "]";
 
                     previousLoopName = loopname;
                 }
-                if (thisloopPrefix == null)
-                    thisloopPrefix = "";
-                loopKey = thisloopPrefix = thisloopPrefix + "[items]" + "["
-                        + listItemId + "]";
+                if (thisloopPrefix == null) thisloopPrefix = "";
+                loopKey = thisloopPrefix = thisloopPrefix + "[items]" + "[" + listItemId + "]";
                 loopKey = getMePrefix(qd.getLoopinfo());
                 if (loopdata != null) {
                     // New loop Index started
                     // extraDataList.add(Helper.getNameValuePair("[" +
                     // listItemId
                     // + "]", ""));
-                    if (loopdata != null && loopdata.equals("NA"))
-                        loopdata = "";
-                    extraDataList.add(Helper.getNameValuePair(loopKey + "["
-                            + Constants.POST_FIELD_LOOPS_NAME + "]", loopdata));
+                    if (loopdata != null && loopdata.equals("NA")) loopdata = "";
+                    extraDataList.add(Helper.getNameValuePair(loopKey + "[" + Constants.POST_FIELD_LOOPS_NAME + "]", loopdata));
                     //
                     // extraDataList.add(Helper.getNameValuePair(loopKey + "["
                     // + Constants.POST_FIELD_LOOPS_RESPONSES + "]", ""));
@@ -3784,81 +3103,46 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             String newDataId = convertDataIdForNameValuePair(qd.getDataID());
 
-            if (qd.getObjectType() != null
-                    && (qd.getObjectType().equals("9") || qd.getObjectType()
-                    .equals("10"))) {
+            if (qd.getObjectType() != null && (qd.getObjectType().equals("9") || qd.getObjectType().equals("10"))) {
                 if (qd.getObjectType().equals("10")) {
                     if (loopKey != null)
-                        extraDataList = getBranchSelection(loopKey + "["
-                                        + Constants.POST_FIELD_LOOPS_RESPONSES + "][",
-                                "]", extraDataList, qd, newDataId);
-                    else
-                        extraDataList = getBranchSelection("", "",
-                                extraDataList, qd, newDataId);
+                        extraDataList = getBranchSelection(loopKey + "[" + Constants.POST_FIELD_LOOPS_RESPONSES + "][", "]", extraDataList, qd, newDataId);
+                    else extraDataList = getBranchSelection("", "", extraDataList, qd, newDataId);
                 } else {
                     if (loopKey != null)
-                        extraDataList = getWorkerSelection(loopKey + "["
-                                        + Constants.POST_FIELD_LOOPS_RESPONSES + "][",
-                                "]", extraDataList, qd, newDataId);
-                    else
-                        extraDataList = getWorkerSelection("", "",
-                                extraDataList, qd, newDataId);
+                        extraDataList = getWorkerSelection(loopKey + "[" + Constants.POST_FIELD_LOOPS_RESPONSES + "][", "]", extraDataList, qd, newDataId);
+                    else extraDataList = getWorkerSelection("", "", extraDataList, qd, newDataId);
                 }
             } else if (qd.getQuestionTypeLink() != null) {
-                if (qd.getQuestionTypeLink().equals("7")
-                        || qd.getQuestionTypeLink().equals("3")) {
+                if (qd.getQuestionTypeLink().equals("7") || qd.getQuestionTypeLink().equals("3")) {
                     if (loopKey != null)
-                        extraDataList = getSingleChoiceText(loopKey + "["
-                                        + Constants.POST_FIELD_LOOPS_RESPONSES + "][",
-                                "]", extraDataList, qd, newDataId);
-                    else
-                        extraDataList = getSingleChoiceText("", "",
-                                extraDataList, qd, newDataId);
-                } else if (qd.getQuestionTypeLink().equals("8")
-                        || qd.getQuestionTypeLink().equals("9")
-                        || qd.getQuestionTypeLink().equals("12")
-                        || qd.getQuestionTypeLink().equals("11")) {
+                        extraDataList = getSingleChoiceText(loopKey + "[" + Constants.POST_FIELD_LOOPS_RESPONSES + "][", "]", extraDataList, qd, newDataId);
+                    else extraDataList = getSingleChoiceText("", "", extraDataList, qd, newDataId);
+                } else if (qd.getQuestionTypeLink().equals("8") || qd.getQuestionTypeLink().equals("9") || qd.getQuestionTypeLink().equals("12") || qd.getQuestionTypeLink().equals("11")) {
                     if (loopKey != null)
-                        extraDataList = getMultiChoiceText(loopKey + "["
-                                        + Constants.POST_FIELD_LOOPS_RESPONSES + "][",
-                                "]", extraDataList, qd, newDataId);
-                    else
-                        extraDataList = getMultiChoiceText("", "",
-                                extraDataList, qd, newDataId);
+                        extraDataList = getMultiChoiceText(loopKey + "[" + Constants.POST_FIELD_LOOPS_RESPONSES + "][", "]", extraDataList, qd, newDataId);
+                    else extraDataList = getMultiChoiceText("", "", extraDataList, qd, newDataId);
                 } else if (qd.getQuestionTypeLink().equals("4")) {
                     if (loopKey != null)
-                        extraDataList = getTextBoxAnswer(loopKey + "["
-                                        + Constants.POST_FIELD_LOOPS_RESPONSES + "][",
-                                "]", extraDataList, qd, newDataId);
-                    else
-                        extraDataList = getTextBoxAnswer("", "", extraDataList,
-                                qd, newDataId);
+                        extraDataList = getTextBoxAnswer(loopKey + "[" + Constants.POST_FIELD_LOOPS_RESPONSES + "][", "]", extraDataList, qd, newDataId);
+                    else extraDataList = getTextBoxAnswer("", "", extraDataList, qd, newDataId);
                 }
             }
         }
         if (pos_shelf_item != null) {
 
-            extraDataList = pos_shelf_item
-                    .PrepareProductValuePair(extraDataList);
+            extraDataList = pos_shelf_item.PrepareProductValuePair(extraDataList);
 
         }
         // else if (sqd.getTotalIntSent() <= 0
         // && !sqd.getOrderid().contains("-"))
         // return null;
         if (sqd.getOrderid() != null && sqd.getOrderid().contains("-"))
-            extraDataList = Helper.convertQuotasToNameValuePairs(extraDataList,
-                    sqd.getQuotas(), sqd.getOrderid().replace("-", ""), false,
-                    false);
+            extraDataList = Helper.convertQuotasToNameValuePairs(extraDataList, sqd.getQuotas(), sqd.getOrderid().replace("-", ""), false, false);
 
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_UNEMPTY_QUES_COUNT,
-                validateTotalSent(sqd.getTotalSent(), extraDataList,
-                        pos_shelf_item != null)));
-        if (isProgress)
-            return extraDataList;
-        if (validateTotalSent(sqd.getTotalSent(), extraDataList,
-                pos_shelf_item != null).equals("0")
-                && (sqd.getFtime() == null || sqd.getFtime().length() <= 0))
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_UNEMPTY_QUES_COUNT, validateTotalSent(sqd.getTotalSent(), extraDataList, pos_shelf_item != null)));
+        if (isProgress) return extraDataList;
+        if (validateTotalSent(sqd.getTotalSent(), extraDataList, pos_shelf_item != null).equals("0") && (sqd.getFtime() == null || sqd.getFtime().length() <= 0))
             return null;
 
         return extraDataList;
@@ -3871,31 +3155,24 @@ public class JobListActivity extends Activity implements OnClickListener,
             String[] thisLoopInfos = loopinfos[i].split("=");
             if (prefix == null) {
                 prefix = "loops";
-            } else
-                prefix += "[loops]";
+            } else prefix += "[loops]";
             if (thisLoopInfos.length > 2) {
-                prefix += "[" + thisLoopInfos[0] + "][items]["
-                        + thisLoopInfos[1] + "]";
+                prefix += "[" + thisLoopInfos[0] + "][items][" + thisLoopInfos[1] + "]";
             }
         }
         return prefix;
     }
 
-    private String validateTotalSent(String totalSent,
-                                     List<NameValuePair> extraDataList, boolean isPOS) {
+    private String validateTotalSent(String totalSent, List<NameValuePair> extraDataList, boolean isPOS) {
         String token = "";
         int increment = 0;
         for (int i = 0; i < extraDataList.size(); i++) {
-            if (extraDataList.get(i).getName().contains("obj")
-                    && extraDataList.get(i).getName().contains("questionText")) {
+            if (extraDataList.get(i).getName().contains("obj") && extraDataList.get(i).getName().contains("questionText")) {
                 if (!token.equals(extraDataList.get(i).getName())) {
                     increment++;
                     token = extraDataList.get(i).getName();
                 }
-            } else if (extraDataList.get(i).getName().toLowerCase()
-                    .startsWith("worker")
-                    || extraDataList.get(i).getName().toLowerCase()
-                    .startsWith("branch")) {
+            } else if (extraDataList.get(i).getName().toLowerCase().startsWith("worker") || extraDataList.get(i).getName().toLowerCase().startsWith("branch")) {
                 increment++;
             }
         }
@@ -3905,118 +3182,72 @@ public class JobListActivity extends Activity implements OnClickListener,
         return increment + "";
     }
 
-    private List<NameValuePair> getBranchSelection(String prefix,
-                                                   String postfix, List<NameValuePair> extraDataList,
-                                                   QuestionnaireData qd, String newDataId) {
+    private List<NameValuePair> getBranchSelection(String prefix, String postfix, List<NameValuePair> extraDataList, QuestionnaireData qd, String newDataId) {
         if (qd.getBranchID() == null || qd.getBranchID().contains("-1")) {
         } else {
-            extraDataList.add(Helper.getNameValuePair(prefix + "BranchID"
-                    + postfix, qd.getBranchID()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "BranchID" + postfix, qd.getBranchID()));
 
         }
         return extraDataList;
     }
 
-    private List<NameValuePair> getWorkerSelection(String prefix,
-                                                   String postfix, List<NameValuePair> extraDataList,
-                                                   QuestionnaireData qd, String newDataId) {
-        if (qd == null || qd.getWorkerID() == null
-                || qd.getWorkerID().contains("-1")) {
+    private List<NameValuePair> getWorkerSelection(String prefix, String postfix, List<NameValuePair> extraDataList, QuestionnaireData qd, String newDataId) {
+        if (qd == null || qd.getWorkerID() == null || qd.getWorkerID().contains("-1")) {
         } else {
-            extraDataList.add(Helper.getNameValuePair(prefix + "WorkerID"
-                    + postfix, qd.getWorkerID()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "WorkerID" + postfix, qd.getWorkerID()));
 
         }
         return extraDataList;
     }
 
-    private List<NameValuePair> getSingleChoiceText(String prefix,
-                                                    String postfix, List<NameValuePair> extraDataList,
-                                                    QuestionnaireData qd, String newDataId) {
+    private List<NameValuePair> getSingleChoiceText(String prefix, String postfix, List<NameValuePair> extraDataList, QuestionnaireData qd, String newDataId) {
         if (qd.getAnswersList().size() > 0) {
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                    + newDataId + postfix, qd.getAnswersList().get(0)
-                    .getAnswerID()));
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                    + newDataId + "-answerText1" + postfix, qd.getAnswersList()
-                    .get(0).getAnswer()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + postfix, qd.getAnswersList().get(0).getAnswerID()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-answerText1" + postfix, qd.getAnswersList().get(0).getAnswer()));
             if (qd.getFreetext() != null && !qd.getFreetext().equals("")) {
                 if (qd.getMiType() != null && qd.getMiType().equals("8"))// SS
-                    extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                                    + newDataId + "-mi" + postfix,
-                            "00:00:" + qd.getFreetext()));
+                    extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, "00:00:" + qd.getFreetext()));
                 else
-                    extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                            + newDataId + "-mi" + postfix, qd.getFreetext()));
+                    extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, qd.getFreetext()));
             } else {
-                if (qd.getMiType() != null && qd.getMiType().equals("8")
-                        && qd.getAnswerText() != null
-                        && qd.getAnswerText() != "")// SS
-                    extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                                    + newDataId + "-mi" + postfix,
-                            "00:00:" + qd.getAnswerText()));
+                if (qd.getMiType() != null && qd.getMiType().equals("8") && qd.getAnswerText() != null && qd.getAnswerText() != "")// SS
+                    extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, "00:00:" + qd.getAnswerText()));
                 else
-                    extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                            + newDataId + "-mi" + postfix, qd.getAnswerText()));
+                    extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, qd.getAnswerText()));
             }
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                            + newDataId + "-questionText" + postfix,
-                    qd.getQuestionText()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-questionText" + postfix, qd.getQuestionText()));
         } else if (qd.getAnswerText() != null && !qd.getAnswerText().equals("")) {
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                    + newDataId + postfix, ""));
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                    + newDataId + "-answerText1" + postfix, ""));
-            if (qd.getMiType() != null && qd.getMiType().equals("8")
-                    && qd.getAnswerText() != null && qd.getAnswerText() != "")// SS
-                extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                                + newDataId + "-mi" + postfix,
-                        "00:00:" + qd.getAnswerText()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + postfix, ""));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-answerText1" + postfix, ""));
+            if (qd.getMiType() != null && qd.getMiType().equals("8") && qd.getAnswerText() != null && qd.getAnswerText() != "")// SS
+                extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, "00:00:" + qd.getAnswerText()));
             else
-                extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                        + newDataId + "-mi" + postfix, qd.getAnswerText()));
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                            + newDataId + "-questionText" + postfix,
-                    qd.getQuestionText()));
+                extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, qd.getAnswerText()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-questionText" + postfix, qd.getQuestionText()));
         } else if (qd.getFreetext() != null && !qd.getFreetext().equals("")) {
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                    + newDataId + postfix, ""));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + postfix, ""));
             // extraDataList.add(Helper.getNameValuePair("obj" + newDataId
             // + "-answerText1", ""));
-            if (qd.getMiType() != null && qd.getMiType().equals("8")
-                    && qd.getFreetext() != null && qd.getFreetext() != "")// SS
-                extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                                + newDataId + "-mi" + postfix,
-                        "00:00:" + qd.getFreetext()));
+            if (qd.getMiType() != null && qd.getMiType().equals("8") && qd.getFreetext() != null && qd.getFreetext() != "")// SS
+                extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, "00:00:" + qd.getFreetext()));
             else
-                extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                        + newDataId + "-mi" + postfix, qd.getFreetext()));
-            extraDataList
-                    .add(Helper.getNameValuePair("obj" + newDataId + prefix
-                            + "-questionText" + postfix, qd.getQuestionText()));
+                extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, qd.getFreetext()));
+            extraDataList.add(Helper.getNameValuePair("obj" + newDataId + prefix + "-questionText" + postfix, qd.getQuestionText()));
         }
         return extraDataList;
     }
 
-    private List<NameValuePair> getMultiChoiceText(String prefix,
-                                                   String postfix, List<NameValuePair> extraDataList,
-                                                   QuestionnaireData qd, String newDataId) {
-        if ((qd.getAnswerText() == null || qd.getAnswerText().equals(""))
-                && (qd.getFreetext() == null || qd.getFreetext().equals(""))
-                && ((qd.getAnswersList() == null) || qd.getAnswersList().size() == 0)) {
+    private List<NameValuePair> getMultiChoiceText(String prefix, String postfix, List<NameValuePair> extraDataList, QuestionnaireData qd, String newDataId) {
+        if ((qd.getAnswerText() == null || qd.getAnswerText().equals("")) && (qd.getFreetext() == null || qd.getFreetext().equals("")) && ((qd.getAnswersList() == null) || qd.getAnswersList().size() == 0)) {
             // empty question
             return extraDataList;
         }
-        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId
-                + "-questionText" + postfix, qd.getQuestionText()));
+        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-questionText" + postfix, qd.getQuestionText()));
         if (qd.getAnswersList().size() > 0) {
             for (int i = 0; i < qd.getAnswersList().size(); i++) {
                 Answers answer = qd.getAnswersList().get(i);
-                extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                        + newDataId + postfix + "[]", answer.getAnswerID()));
-                extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                                + newDataId + "-answerText" + (i + 1) + postfix,
-                        answer.getAnswer()));
+                extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + postfix + "[]", answer.getAnswerID()));
+                extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-answerText" + (i + 1) + postfix, answer.getAnswer()));
             }
         }
         // if (qd.getFreetext() != null
@@ -4031,27 +3262,19 @@ public class JobListActivity extends Activity implements OnClickListener,
             // ""));
             // extraDataList.add(Helper.getNameValuePair("obj" + newDataId
             // + "-answerText1", ""));
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                    + newDataId + "-mi" + postfix, qd.getFreetext()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, qd.getFreetext()));
         } else
-            extraDataList.add(Helper.getNameValuePair(prefix + "obj"
-                    + newDataId + "-mi" + postfix, qd.getAnswerText()));
+            extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, qd.getAnswerText()));
         return extraDataList;
     }
 
-    private List<NameValuePair> getTextBoxAnswer(String prefix, String postfix,
-                                                 List<NameValuePair> extraDataList, QuestionnaireData qd,
-                                                 String newDataId) {
+    private List<NameValuePair> getTextBoxAnswer(String prefix, String postfix, List<NameValuePair> extraDataList, QuestionnaireData qd, String newDataId) {
         if (qd.getAnswerText() == null || qd.getAnswerText().trim().equals(""))
             return extraDataList;
-        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId
-                + "-answerText1" + postfix, ""));
-        if (qd.getAnswerText() != null)
-            qd.setAnswerText(qd.getAnswerText().trim());
-        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId
-                + "-mi" + postfix, qd.getAnswerText()));
-        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId
-                + "-questionText" + postfix, qd.getQuestionText()));
+        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-answerText1" + postfix, ""));
+        if (qd.getAnswerText() != null) qd.setAnswerText(qd.getAnswerText().trim());
+        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-mi" + postfix, qd.getAnswerText()));
+        extraDataList.add(Helper.getNameValuePair(prefix + "obj" + newDataId + "-questionText" + postfix, qd.getQuestionText()));
         return extraDataList;
     }
 
@@ -4063,10 +3286,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             langTaskHandler.execute();
 
         } catch (Exception ex) {
-            ShowAlert(JobListActivity.this,
-                    JobListActivity.this.getString(R.string.alert_working),
-                    JobListActivity.this.getString(R.string.alert_working_msg),
-                    JobListActivity.this.getString(R.string.button_ok));
+            ShowAlert(JobListActivity.this, JobListActivity.this.getString(R.string.alert_working), JobListActivity.this.getString(R.string.alert_working_msg), JobListActivity.this.getString(R.string.button_ok));
         }
     }
 
@@ -4077,11 +3297,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         } catch (Exception ex) {
             try {
-                ShowAlert(JobListActivity.this,
-                        JobListActivity.this.getString(R.string.alert_working),
-                        JobListActivity.this
-                                .getString(R.string.alert_working_msg),
-                        JobListActivity.this.getString(R.string.button_ok));
+                ShowAlert(JobListActivity.this, JobListActivity.this.getString(R.string.alert_working), JobListActivity.this.getString(R.string.alert_working_msg), JobListActivity.this.getString(R.string.button_ok));
 
             } catch (Exception e) {
             }
@@ -4092,8 +3308,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         try {
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = myPrefs.edit();
-            prefsEditor.putBoolean(
-                    Constants.IS_DOWNLOADED_FOR_NEW_DOWNLOAD_PATH, true);
+            prefsEditor.putBoolean(Constants.IS_DOWNLOADED_FOR_NEW_DOWNLOAD_PATH, true);
             prefsEditor.commit();
             showListTaskHandler = new ShowDBListTask(dialog);
             showListTaskHandler.execute();
@@ -4121,30 +3336,20 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (login_check) {
             if (IsInternetConnectted()) {
                 int size = DBHelper.getLanguages(false).size();
-                if (size == 0)
-                    executeLangList();
-                else
-                    executeJobList(false, false);
+                if (size == 0) executeLangList();
+                else executeJobList(false, false);
             }
-        } else if (joborders == null
-                || joborders.size() == 0
-                || (getIntent() != null && getIntent().getExtras() != null && getIntent()
-                .getExtras().getBoolean(
-                        Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY))) {
+        } else if (joborders == null || joborders.size() == 0 || (getIntent() != null && getIntent().getExtras() != null && getIntent().getExtras().getBoolean(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY))) {
             if (IsInternetConnectted()) {
                 int size = DBHelper.getLanguages(false).size();
-                if (size == 0)
-                    executeLangList();
-                else
-                    executeJobList(false, false);
+                if (size == 0) executeLangList();
+                else executeJobList(false, false);
             }
         }
     }
 
-    private ArrayList<pngItem> validateIcons(ArrayList<pngItem> icons,
-                                             ArrayList<Order> jobordersss) {
-        if (icons == null)
-            return new ArrayList<pngItem>();
+    private ArrayList<pngItem> validateIcons(ArrayList<pngItem> icons, ArrayList<Order> jobordersss) {
+        if (icons == null) return new ArrayList<pngItem>();
 
         ArrayList<pngItem> tmp_icons = new ArrayList<pngItem>();
         for (int i = 0; i < icons.size(); i++) {
@@ -4156,8 +3361,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // icons.remove(i);
             } else {
                 myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-                boolean isDownloadedYet = myPrefs.getBoolean(
-                        Constants.IS_DOWNLOADED_FOR_NEW_DOWNLOAD_PATH, false);
+                boolean isDownloadedYet = myPrefs.getBoolean(Constants.IS_DOWNLOADED_FOR_NEW_DOWNLOAD_PATH, false);
                 Bitmap bmp = helper.readFile(icon.MediaFile, isDownloadedYet);
                 if (bmp != null) {
 
@@ -4185,27 +3389,14 @@ public class JobListActivity extends Activity implements OnClickListener,
     private String filterString;
     private boolean isSyncMenu;
 
-    private class LongOrphanOperation extends
-            AsyncTask<String, Void, ArrayList<filePathDataID>> {
+    private class LongOrphanOperation extends AsyncTask<String, Void, ArrayList<filePathDataID>> {
 
         @Override
         protected ArrayList<filePathDataID> doInBackground(String... params) {
             Log.e("LongOrphanOperation", "doInBackground");
             checkConnectionPost();
             ArrayList<filePathDataID> uploadList = new ArrayList<filePathDataID>();
-            uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(
-                    Constants.UPLOAD_FILE_TABLE, new String[]{
-                            Constants.UPLOAD_FILe_MEDIAFILE,
-                            Constants.UPLOAD_FILe_DATAID,
-                            Constants.UPLOAD_FILe_ORDERID,
-                            Constants.UPLOAD_FILe_BRANCH_NAME,
-                            Constants.UPLOAD_FILe_CLIENT_NAME,
-                            Constants.UPLOAD_FILe_DATE,
-                            Constants.UPLOAD_FILe_SET_NAME,
-                            Constants.UPLOAD_FILe_SAMPLE_SIZE,
-                            Constants.UPLOAD_FILe_PRODUCTID,
-                            Constants.UPLOAD_FILe_LOCATIONID,}, null,
-                    Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
+            uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(Constants.UPLOAD_FILE_TABLE, new String[]{Constants.UPLOAD_FILe_MEDIAFILE, Constants.UPLOAD_FILe_DATAID, Constants.UPLOAD_FILe_ORDERID, Constants.UPLOAD_FILe_BRANCH_NAME, Constants.UPLOAD_FILe_CLIENT_NAME, Constants.UPLOAD_FILe_DATE, Constants.UPLOAD_FILe_SET_NAME, Constants.UPLOAD_FILe_SAMPLE_SIZE, Constants.UPLOAD_FILe_PRODUCTID, Constants.UPLOAD_FILe_LOCATIONID,}, null, Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
             if (uploadList != null) {
                 // ArrayList<SubmitQuestionnaireData> orders =
                 // getNumberofQuestionnaire(
@@ -4214,14 +3405,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 for (int i = 0; jobordersss != null && i < uploadList.size(); i++) {
                     boolean isStillInSystem = false;
                     for (int j = 0; j < jobordersss.size(); j++) {
-                        if (uploadList.get(i).getUPLOAD_FILe_ORDERID() != null
-                                && jobordersss.get(j).getOrderID() != null
-                                && jobordersss.get(j).getStatusName() != null && !jobordersss.get(j).getStatusName().toLowerCase().contains("archive")
-                                && !jobordersss.get(j).getAsArchive()
-                                && uploadList
-                                .get(i)
-                                .getUPLOAD_FILe_ORDERID()
-                                .equals(jobordersss.get(j).getOrderID())) {
+                        if (uploadList.get(i).getUPLOAD_FILe_ORDERID() != null && jobordersss.get(j).getOrderID() != null && jobordersss.get(j).getStatusName() != null && !jobordersss.get(j).getStatusName().toLowerCase().contains("archive") && !jobordersss.get(j).getAsArchive() && uploadList.get(i).getUPLOAD_FILe_ORDERID().equals(jobordersss.get(j).getOrderID())) {
                             isStillInSystem = true;
                             break;
                         }
@@ -4272,8 +3456,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (set != null) {
                 ArrayList<Set> sets = new ArrayList<Set>();
                 sets.add(set);
-                DBHelper.AddSetss(sets, Revamped_Loading_Dialog.getDialog(),
-                        new ArrayList<ListClass>());
+                DBHelper.AddSetss(sets, Revamped_Loading_Dialog.getDialog(), new ArrayList<ListClass>());
 
 
             }
@@ -4286,8 +3469,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (set != null) {
 
                 String orderid = DBHelper.AddCertificateOrder(cert);
-                showListTaskHandler = new ShowDBListTask(
-                        Revamped_Loading_Dialog.getDialog(), orderid);
+                showListTaskHandler = new ShowDBListTask(Revamped_Loading_Dialog.getDialog(), orderid);
                 showListTaskHandler.execute();
 
             } else {
@@ -4298,9 +3480,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             Log.e("DownloadSetTask", "onPreExecute");
-            Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                    getResources()
-                            .getString(R.string.downloadingCheckrtificate));
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getResources().getString(R.string.downloadingCheckrtificate));
         }
     }
 
@@ -4316,62 +3496,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             Log.e("LongOperation", "doInBackground");
             try {
 
-                jobordersss = DBHelper
-                        .getOrders(
-                                DBHelper.whereJobListNotArchived,
-                                Constants.DB_TABLE_JOBLIST,
-                                new String[]{
-                                        Constants.DB_TABLE_JOBLIST_ORDERID,
-                                        Constants.DB_TABLE_JOBLIST_DATE,
-                                        Constants.DB_TABLE_JOBLIST_SN,
-                                        Constants.DB_TABLE_JOBLIST_DESC,
-                                        Constants.DB_TABLE_JOBLIST_SETNAME,
-                                        Constants.DB_TABLE_JOBLIST_SETLINK,
-                                        Constants.DB_TABLE_JOBLIST_CN,
-                                        Constants.DB_TABLE_JOBLIST_BFN,
-                                        Constants.DB_TABLE_JOBLIST_BN,
-                                        Constants.DB_TABLE_JOBLIST_CITYNAME,
-                                        Constants.DB_TABLE_JOBLIST_ADDRESS,
-                                        Constants.DB_TABLE_JOBLIST_BP,
-                                        Constants.DB_TABLE_JOBLIST_OH,
-                                        Constants.DB_TABLE_JOBLIST_TS,
-                                        Constants.DB_TABLE_JOBLIST_TE,
-                                        Constants.DB_TABLE_JOBLIST_SETID,
-                                        Constants.DB_TABLE_JOBLIST_BL,
-                                        Constants.DB_TABLE_JOBLIST_BLNG,
-                                        Constants.DB_TABLE_JOBLIST_FN,
-                                        Constants.DB_TABLE_JOBLIST_JC,
-                                        Constants.DB_TABLE_JOBLIST_JI,
-                                        Constants.DB_TABLE_JOBLIST_BLINK,
-                                        Constants.DB_TABLE_JOBLIST_MID,
-                                        Constants.DB_TABLE_CHECKER_CODE,
-                                        Constants.DB_TABLE_CHECKER_LINK,
-                                        Constants.DB_TABLE_BRANCH_CODE,
-                                        Constants.DB_TABLE_SETCODE,
-                                        Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                                        Constants.DB_TABLE_PURCHASE,
-                                        Constants.DB_TABLE_JOBLIST_BRIEFING,
-                                        Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                                        Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                                        Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                                        Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                                        Constants.DB_TABLE_JOBLIST_sBonusPayment,
-                                        Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-                                        Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-                                        Constants.DB_TABLE_JOBLIST_sProjectName,
-                                        Constants.DB_TABLE_JOBLIST_sRegionName,
-                                        Constants.DB_TABLE_JOBLIST_sdeletedjob,
-                                        Constants.DB_TABLE_JOBLIST_sProjectID,},
-                                Constants.DB_TABLE_JOBLIST_JI);
+                jobordersss = DBHelper.getOrders(DBHelper.whereJobListNotArchived, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
 
-                branchProps = DBHelper.getBranchPropds(
-                        Constants.DB_TABLE_BRANCH_PROPS, new String[]{
-                                Constants.DB_TABLE_BRANCH_PROPS_ValueID,
-                                Constants.DB_TABLE_BRANCH_PROPS_PropID,
-                                Constants.DB_TABLE_BRANCH_PROPS_PropertyName,
-                                Constants.DB_TABLE_BRANCH_PROPS_Content,
-                                Constants.DB_TABLE_BRANCH_PROPS_BranchID,},
-                        Constants.DB_TABLE_BRANCH_PROPS_PropID);
+                branchProps = DBHelper.getBranchPropds(Constants.DB_TABLE_BRANCH_PROPS, new String[]{Constants.DB_TABLE_BRANCH_PROPS_ValueID, Constants.DB_TABLE_BRANCH_PROPS_PropID, Constants.DB_TABLE_BRANCH_PROPS_PropertyName, Constants.DB_TABLE_BRANCH_PROPS_Content, Constants.DB_TABLE_BRANCH_PROPS_BranchID,}, Constants.DB_TABLE_BRANCH_PROPS_PropID);
 
                 if (jobordersss != null) {
                     try {
@@ -4380,8 +3507,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                         pngItems = new ArrayList<pngItem>();
                     }
                     myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-                    isBranchPropErr = myPrefs.getBoolean(
-                            Constants.ALREADY_BRANCHPROPERR, false);
+                    isBranchPropErr = myPrefs.getBoolean(Constants.ALREADY_BRANCHPROPERR, false);
 
 
                 }
@@ -4404,22 +3530,49 @@ public class JobListActivity extends Activity implements OnClickListener,
                     }
                     joborders = new ArrayList<orderListItem>();
                     for (int i = 0; i < jobordersss.size(); i++) {
-
                         //TODO ****
                         joborders.add(new orderListItem(jobordersss.get(i), null));
                     }
 
-
-                    filtered = joborders.stream()
-                            .filter(string -> string.orderItem.getOrderID().contains("-"))
-                            .collect(Collectors.toList());
+                    filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
 //                Log.e("filtered", filtered + "  " + filtered.size());
-
                     jobs_CAPI.clear();
-                    for (int i = 0; filtered != null && i < filtered.size(); i++) {
-                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-                    }
+//                    for (int i = 0; filtered != null && i < filtered.size(); i++) {
+//                        String mystring = filtered.get(i).orderItem.getOrderID();
+//                        String[] result = mystring.split("_");
+//////                    for (String s : result) {
+//////                        s = s.substring(s.indexOf("_") + 1);
+//////                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+//////                    }
+////                    System.out.println(result[0])
+//                        boolean found = false;
+//                        for (orderListItem person1 : jobs_CAPI) {
+//                            if (Objects.equals(result[0], person1.orderItem.getOrderID().split("_")[0])) {
+//                                found = true;
+//                            }
+//                        }
+//                        if (!found) {
+//                            jobs_CAPI.add((new orderListItem(filtered.get(i).orderItem, null)));
+//                        }
+//                        Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
+//                    }
+                    // Grouping by SetID using HashMap
+                    Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
+                    for (orderListItem item : joborders) {
+                        int setId = Integer.parseInt(item.orderItem.getSetID());
+                        if (groupedItems.containsKey(setId)) {
+                            groupedItems.get(setId).add(item);
+                            Log.d("TAG", "detID: "+item.orderItem.getSetID());
 
+                        } else {
+                            List<orderListItem> items = new ArrayList<>();
+                            items.add(item);
+                            groupedItems.put(setId, items);
+                            Log.e("TAG", "doInBackground: "+groupedItems);
+                            Log.d("TAG", "doI: "+item.orderItem.getOrderID());
+                            jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+                        }
+                    }
                     // Get My jobs excluding CAPI....
                     List<orderListItem> list1 = filtered;
                     List<orderListItem> list2 = joborders;
@@ -4447,12 +3600,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 Orders.setListOrders(jobordersss);
                 Orders.setBranchProps(branchProps);
                 Surveys.setSets(DBHelper.getSurveyyRecords());
-                ArrayList<Order> ordrs = DBHelper.getOrders(DBHelper.whereOrderNotArchived,
-                        Constants.DB_TABLE_ORDERS, new String[]{
-                                Constants.DB_TABLE_ORDERS_ORDERID,
-                                Constants.DB_TABLE_ORDERS_STATUS,
-                                Constants.DB_TABLE_ORDERS_START_TIME,},
-                        Constants.DB_TABLE_ORDERS_ORDERID);
+                ArrayList<Order> ordrs = DBHelper.getOrders(DBHelper.whereOrderNotArchived, Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, Constants.DB_TABLE_ORDERS_ORDERID);
 
                 Orders.replaceistOrders(ordrs);
                 Order[] ordersArr = null;
@@ -4487,18 +3635,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     for (int innerindex = 0; innerindex < size; innerindex++) {
                         innerorder = temporder.get(innerindex);
                         try {
-                            if ((Constants.getDateFilter() || order.getBranchLink()
-                                    .equals(innerorder.getBranchLink()))
-                                    && (Constants.getDateFilter() || order.getMassID()
-                                    .equals(innerorder.getMassID()))
-                                    && (order.getDate().equals(innerorder.getDate()))
-                                    && (Constants.getDateFilter() || order
-                                    .getBranchName().equals(
-                                            innerorder.getBranchName()))
-                                    && (Constants.getDateFilter() || order.getSetLink()
-                                    .equals(innerorder.getSetLink()))
-                                    && (order.getStatusName().equals(innerorder
-                                    .getStatusName()))) {
+                            if ((Constants.getDateFilter() || order.getBranchLink().equals(innerorder.getBranchLink())) && (Constants.getDateFilter() || order.getMassID().equals(innerorder.getMassID())) && (order.getDate().equals(innerorder.getDate())) && (Constants.getDateFilter() || order.getBranchName().equals(innerorder.getBranchName())) && (Constants.getDateFilter() || order.getSetLink().equals(innerorder.getSetLink())) && (order.getStatusName().equals(innerorder.getStatusName()))) {
                                 delete.add(innerorder);
                                 order.setCount();
                             }
@@ -4508,9 +3645,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     }
                     // order.setIndex(index);
                     temporder1.add(new orderListItem(order, delete));
-                    temFilter = temporder1.stream()
-                            .filter(string -> !string.orderItem.getOrderID().contains("-"))
-                            .collect(Collectors.toList());
+                    temFilter = temporder1.stream().filter(string -> !string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
                     for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
                         temporder.remove(delete.get(deleteindex));
                     }
@@ -4529,10 +3664,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPostExecute(ArrayList<orderListItem> joborders) {
             Log.e("LongOperation", "onPostExecute");
-            SplashScreen.addLog(new BasicLog(
-                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                    "POST_STARTED", "LONG_OPERATION"));
+            SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "POST_STARTED", "LONG_OPERATION"));
             try {
                 if (joborders != null && joborders.size() >= 1) {
                     JobListActivity.joborders = joborders;
@@ -4541,15 +3673,9 @@ public class JobListActivity extends Activity implements OnClickListener,
                         ShowOrphanFiles();
                     }
                 }
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "POST_END", "LONG_OPERATION"));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "POST_END", "LONG_OPERATION"));
             } catch (Exception ex) {
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        ex.getMessage(), "LONG_OPERATION"));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), ex.getMessage(), "LONG_OPERATION"));
             }
             Revamped_Loading_Dialog.hide_dialog();
         }
@@ -4558,25 +3684,15 @@ public class JobListActivity extends Activity implements OnClickListener,
         protected void onPreExecute() {
             try {
                 Log.e("LongOperation", "onPreExecute");
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "PRE_STARTED", "LONG_OPERATION"));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "PRE_STARTED", "LONG_OPERATION"));
                 con = JobListActivity.this;
 
-                Revamped_Loading_Dialog.show_dialog(JobListActivity.this, con
-                        .getResources().getString(R.string.alert_switching));
+                Revamped_Loading_Dialog.show_dialog(JobListActivity.this, con.getResources().getString(R.string.alert_switching));
             } catch (Exception ex) {
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "PRE_CRASHED" + ex.getMessage(), "LONG_OPERATION"));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "PRE_CRASHED" + ex.getMessage(), "LONG_OPERATION"));
 
             }
-            SplashScreen.addLog(new BasicLog(
-                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                    "PRE_END", "LONG_OPERATION"));
+            SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "PRE_END", "LONG_OPERATION"));
 
 
         }
@@ -4601,8 +3717,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         } catch (Exception ex) {
         }
-        Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                getResources().getString(R.string.alert_switching));
+        Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getResources().getString(R.string.alert_switching));
     }
 
     ArrayList<BranchProperties> branchProps = null;
@@ -4611,8 +3726,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         private String certorderid;
 
-        public ShowDBListTask(Revamped_Loading_Dialog dialog2,
-                              String certorderid) {
+        public ShowDBListTask(Revamped_Loading_Dialog dialog2, String certorderid) {
             this.certorderid = certorderid;
         }
 
@@ -4633,8 +3747,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 } catch (Exception ex) {
                 }
                 tv_applied_no.setText(Integer.toString(Constants.applied_count));
-                Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                        getResources().getString(R.string.alert_switching));
+                Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getResources().getString(R.string.alert_switching));
             }
         }
 
@@ -4652,13 +3765,10 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // ManageTabs(1);
             }
 
-            if (pngItems != null && pngItems.size() > 0
-                    || isBranchPropErr == true) {
-                if (btnErr != null)
-                    btnErr.setVisibility(RelativeLayout.VISIBLE);
+            if (pngItems != null && pngItems.size() > 0 || isBranchPropErr == true) {
+                if (btnErr != null) btnErr.setVisibility(RelativeLayout.VISIBLE);
             } else {
-                if (btnErr != null)
-                    btnErr.setVisibility(RelativeLayout.GONE);
+                if (btnErr != null) btnErr.setVisibility(RelativeLayout.GONE);
             }
 
             Revamped_Loading_Dialog.hide_dialog();
@@ -4667,9 +3777,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 //            TODO JobDetailActivity
             if (certorderid != null) {
 
-                Intent intent = new Intent(
-                        JobListActivity.this.getApplicationContext(),
-                        JobDetailActivity.class);
+                Intent intent = new Intent(JobListActivity.this.getApplicationContext(), JobDetailActivity.class);
                 isJobselected = true;
                 intent.putExtra("OrderID", certorderid);
                 callJobDetail(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -4687,62 +3795,9 @@ public class JobListActivity extends Activity implements OnClickListener,
                 saveOfflineData();
                 DBHelper.AddSurveys(surveys, true);
             }
-            jobordersss = DBHelper
-                    .getOrders(
-                            null,
-                            Constants.DB_TABLE_JOBLIST,
-                            new String[]{
-                                    Constants.DB_TABLE_JOBLIST_ORDERID,
-                                    Constants.DB_TABLE_JOBLIST_DATE,
-                                    Constants.DB_TABLE_JOBLIST_SN,
-                                    Constants.DB_TABLE_JOBLIST_DESC,
-                                    Constants.DB_TABLE_JOBLIST_SETNAME,
-                                    Constants.DB_TABLE_JOBLIST_SETLINK,
-                                    Constants.DB_TABLE_JOBLIST_CN,
-                                    Constants.DB_TABLE_JOBLIST_BFN,
-                                    Constants.DB_TABLE_JOBLIST_BN,
-                                    Constants.DB_TABLE_JOBLIST_CITYNAME,
-                                    Constants.DB_TABLE_JOBLIST_ADDRESS,
-                                    Constants.DB_TABLE_JOBLIST_BP,
-                                    Constants.DB_TABLE_JOBLIST_OH,
-                                    Constants.DB_TABLE_JOBLIST_TS,
-                                    Constants.DB_TABLE_JOBLIST_TE,
-                                    Constants.DB_TABLE_JOBLIST_SETID,
-                                    Constants.DB_TABLE_JOBLIST_BL,
-                                    Constants.DB_TABLE_JOBLIST_BLNG,
-                                    Constants.DB_TABLE_JOBLIST_FN,
-                                    Constants.DB_TABLE_JOBLIST_JC,
-                                    Constants.DB_TABLE_JOBLIST_JI,
-                                    Constants.DB_TABLE_JOBLIST_BLINK,
-                                    Constants.DB_TABLE_JOBLIST_MID,
-                                    Constants.DB_TABLE_CHECKER_CODE,
-                                    Constants.DB_TABLE_CHECKER_LINK,
-                                    Constants.DB_TABLE_BRANCH_CODE,
-                                    Constants.DB_TABLE_SETCODE,
-                                    Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                                    Constants.DB_TABLE_PURCHASE,
-                                    Constants.DB_TABLE_JOBLIST_BRIEFING,
-                                    Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                                    Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                                    Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                                    Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                                    Constants.DB_TABLE_JOBLIST_sBonusPayment,
-                                    Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-                                    Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-                                    Constants.DB_TABLE_JOBLIST_sProjectName,
-                                    Constants.DB_TABLE_JOBLIST_sRegionName,
-                                    Constants.DB_TABLE_JOBLIST_sdeletedjob,
-                                    Constants.DB_TABLE_JOBLIST_sProjectID,},
-                            Constants.DB_TABLE_JOBLIST_JI);
+            jobordersss = DBHelper.getOrders(null, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
 
-            branchProps = DBHelper.getBranchPropds(
-                    Constants.DB_TABLE_BRANCH_PROPS, new String[]{
-                            Constants.DB_TABLE_BRANCH_PROPS_ValueID,
-                            Constants.DB_TABLE_BRANCH_PROPS_PropID,
-                            Constants.DB_TABLE_BRANCH_PROPS_PropertyName,
-                            Constants.DB_TABLE_BRANCH_PROPS_Content,
-                            Constants.DB_TABLE_BRANCH_PROPS_BranchID,},
-                    Constants.DB_TABLE_BRANCH_PROPS_PropID);
+            branchProps = DBHelper.getBranchPropds(Constants.DB_TABLE_BRANCH_PROPS, new String[]{Constants.DB_TABLE_BRANCH_PROPS_ValueID, Constants.DB_TABLE_BRANCH_PROPS_PropID, Constants.DB_TABLE_BRANCH_PROPS_PropertyName, Constants.DB_TABLE_BRANCH_PROPS_Content, Constants.DB_TABLE_BRANCH_PROPS_BranchID,}, Constants.DB_TABLE_BRANCH_PROPS_PropID);
 
             if (jobordersss != null) {
                 try {
@@ -4751,8 +3806,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     pngItems = new ArrayList<pngItem>();
                 }
                 myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-                isBranchPropErr = myPrefs.getBoolean(
-                        Constants.ALREADY_BRANCHPROPERR, false);
+                isBranchPropErr = myPrefs.getBoolean(Constants.ALREADY_BRANCHPROPERR, false);
 
 //                joborders = new ArrayList<orderListItem>();
 //                for (int i = 0; i < jobordersss.size(); i++) {
@@ -4767,16 +3821,25 @@ public class JobListActivity extends Activity implements OnClickListener,
                     joborders.add(new orderListItem(jobordersss.get(i), null));
                 }
 
-                filtered = joborders.stream()
-                        .filter(string -> string.orderItem.getOrderID().contains("-"))
-                        .collect(Collectors.toList());
-//                Log.e("filtered", filtered + "  " + filtered.size());
-
+                filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
                 jobs_CAPI.clear();
-                for (int i = 0; filtered != null && i < filtered.size(); i++) {
-                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-                }
 
+                Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
+                for (orderListItem item : joborders) {
+                    int setId = Integer.parseInt(item.orderItem.getSetID());
+                    if (groupedItems.containsKey(setId)) {
+                        groupedItems.get(setId).add(item);
+                        Log.d("TAG", "detID: "+item.orderItem.getSetID());
+
+                    } else {
+                        List<orderListItem> items = new ArrayList<>();
+                        items.add(item);
+                        groupedItems.put(setId, items);
+                        Log.e("TAG", "doInBackground: "+groupedItems);
+                        Log.d("TAG", "doI: "+item.orderItem.getOrderID());
+                        jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+                    }
+                }
 //                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
 //                Log.e("joborders_activity", String.valueOf(joborders.size()));
 //                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
@@ -4799,28 +3862,18 @@ public class JobListActivity extends Activity implements OnClickListener,
                 Log.e("union_size", String.valueOf(filtered_other_jobs.size()));
 
                 //Count jobs for dash board....
-                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned")).collect(Collectors.toList());
                 my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
 
-                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled")).collect(Collectors.toList());
                 my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
 
-                List<orderListItem> filtered_status_assigned = filtered.stream()
-                        .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_assigned = filtered.stream().filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey"))).collect(Collectors.toList());
                 capi_assigned_count = String.valueOf(filtered_status_assigned.size());
 
-                List<orderListItem> filtered_status_inProgress = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_inProgress = filtered.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress")).collect(Collectors.toList());
                 capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
-                List<orderListItem> filtered_status_completed = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_completed = filtered.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed")).collect(Collectors.toList());
                 capi_status_returned = String.valueOf(filtered_status_completed.size());
 
             }
@@ -4832,8 +3885,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     private void ShowDBJobs() {
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-        if (myPrefs
-                .getBoolean(Constants.SETTINGS_ENABLE_ALTERNATE_ORDER, false)) {
+        if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_ALTERNATE_ORDER, false)) {
             Constants.setEnableAlternateOrder(true);
         } else {
             Constants.setEnableAlternateOrder(false);
@@ -4841,62 +3893,9 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         try {
 
-            jobordersss = DBHelper
-                    .getOrders(
-                            DBHelper.whereJobListNotArchived,
-                            Constants.DB_TABLE_JOBLIST,
-                            new String[]{
-                                    Constants.DB_TABLE_JOBLIST_ORDERID,
-                                    Constants.DB_TABLE_JOBLIST_DATE,
-                                    Constants.DB_TABLE_JOBLIST_SN,
-                                    Constants.DB_TABLE_JOBLIST_DESC,
-                                    Constants.DB_TABLE_JOBLIST_SETNAME,
-                                    Constants.DB_TABLE_JOBLIST_SETLINK,
-                                    Constants.DB_TABLE_JOBLIST_CN,
-                                    Constants.DB_TABLE_JOBLIST_BFN,
-                                    Constants.DB_TABLE_JOBLIST_BN,
-                                    Constants.DB_TABLE_JOBLIST_CITYNAME,
-                                    Constants.DB_TABLE_JOBLIST_ADDRESS,
-                                    Constants.DB_TABLE_JOBLIST_BP,
-                                    Constants.DB_TABLE_JOBLIST_OH,
-                                    Constants.DB_TABLE_JOBLIST_TS,
-                                    Constants.DB_TABLE_JOBLIST_TE,
-                                    Constants.DB_TABLE_JOBLIST_SETID,
-                                    Constants.DB_TABLE_JOBLIST_BL,
-                                    Constants.DB_TABLE_JOBLIST_BLNG,
-                                    Constants.DB_TABLE_JOBLIST_FN,
-                                    Constants.DB_TABLE_JOBLIST_JC,
-                                    Constants.DB_TABLE_JOBLIST_JI,
-                                    Constants.DB_TABLE_JOBLIST_BLINK,
-                                    Constants.DB_TABLE_JOBLIST_MID,
-                                    Constants.DB_TABLE_CHECKER_CODE,
-                                    Constants.DB_TABLE_CHECKER_LINK,
-                                    Constants.DB_TABLE_BRANCH_CODE,
-                                    Constants.DB_TABLE_SETCODE,
-                                    Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                                    Constants.DB_TABLE_PURCHASE,
-                                    Constants.DB_TABLE_JOBLIST_BRIEFING,
-                                    Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                                    Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                                    Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                                    Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                                    Constants.DB_TABLE_JOBLIST_sBonusPayment,
-                                    Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-                                    Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-                                    Constants.DB_TABLE_JOBLIST_sProjectName,
-                                    Constants.DB_TABLE_JOBLIST_sRegionName,
-                                    Constants.DB_TABLE_JOBLIST_sdeletedjob,
-                                    Constants.DB_TABLE_JOBLIST_sProjectID,},
-                            Constants.DB_TABLE_JOBLIST_JI);
+            jobordersss = DBHelper.getOrders(DBHelper.whereJobListNotArchived, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
 
-            ArrayList<BranchProperties> branchProps = DBHelper.getBranchPropds(
-                    Constants.DB_TABLE_BRANCH_PROPS, new String[]{
-                            Constants.DB_TABLE_BRANCH_PROPS_ValueID,
-                            Constants.DB_TABLE_BRANCH_PROPS_PropID,
-                            Constants.DB_TABLE_BRANCH_PROPS_PropertyName,
-                            Constants.DB_TABLE_BRANCH_PROPS_Content,
-                            Constants.DB_TABLE_BRANCH_PROPS_BranchID,},
-                    Constants.DB_TABLE_BRANCH_PROPS_PropID);
+            ArrayList<BranchProperties> branchProps = DBHelper.getBranchPropds(Constants.DB_TABLE_BRANCH_PROPS, new String[]{Constants.DB_TABLE_BRANCH_PROPS_ValueID, Constants.DB_TABLE_BRANCH_PROPS_PropID, Constants.DB_TABLE_BRANCH_PROPS_PropertyName, Constants.DB_TABLE_BRANCH_PROPS_Content, Constants.DB_TABLE_BRANCH_PROPS_BranchID,}, Constants.DB_TABLE_BRANCH_PROPS_PropID);
 
             {
                 try {
@@ -4905,8 +3904,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     pngItems = new ArrayList<pngItem>();
                 }
                 myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-                isBranchPropErr = myPrefs.getBoolean(
-                        Constants.ALREADY_BRANCHPROPERR, false);
+                isBranchPropErr = myPrefs.getBoolean(Constants.ALREADY_BRANCHPROPERR, false);
 
                 if (pngItems.size() > 0 || isBranchPropErr == true) {
                     btnErr.setVisibility(RelativeLayout.VISIBLE);
@@ -4920,15 +3918,56 @@ public class JobListActivity extends Activity implements OnClickListener,
                     joborders.add(new orderListItem(jobordersss.get(i), null));
                 }
 
-                filtered = joborders.stream()
-                        .filter(string -> string.orderItem.getOrderID().contains("-"))
-                        .collect(Collectors.toList());
+                filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
 //                Log.e("filtered", filtered + "  " + filtered.size());
 
                 jobs_CAPI.clear();
-                for (int i = 0; filtered != null && i < filtered.size(); i++) {
-                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+
+                Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
+                for (orderListItem item : joborders) {
+                    int setId = Integer.parseInt(item.orderItem.getSetID());
+                    if (groupedItems.containsKey(setId)) {
+                        groupedItems.get(setId).add(item);
+                        Log.d("TAG", "detID: "+item.orderItem.getSetID());
+
+                    } else {
+                        List<orderListItem> items = new ArrayList<>();
+                        items.add(item);
+                        groupedItems.put(setId, items);
+                        Log.e("TAG", "doInBackground: "+groupedItems);
+                        Log.d("TAG", "doI: "+item.orderItem.getOrderID());
+                        jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+                    }
                 }
+
+//                    if (!jobs_CAPI.isEmpty()) {
+//                        for (int j = 0; j < jobs_CAPI.size(); j++) {
+//                            String mystring1 = jobs_CAPI.get(i).orderItem.getOrderID();
+//                            String[] result1 = mystring1.split("_");
+//                            Log.e("JOddddddd111" , result1.toString());
+//                            Log.e("JOddddddd" ,result.toString());
+//
+//                            if (result != result1) {
+//                                jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+//                            }
+//                        }
+//                    } else {
+//                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+//                }
+
+//                  String s2 = result[0];
+
+
+//                  for (int j = i + 1; j < s2.length(); j++) {
+////                        if(Objects.equals(result[i], result[j]))
+////                            System.out.println(result[j]);
+////                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+////                    }
+
+//                    Log.e("########", filtered.get(i).orderItem.getOrderID());
+
+
+//            }
 
 //                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
 //                Log.e("joborders_activity", String.valueOf(joborders.size()));
@@ -4952,28 +3991,18 @@ public class JobListActivity extends Activity implements OnClickListener,
                 Log.e("union_size", String.valueOf(filtered_other_jobs.size()));
 
                 //Count jobs for dash board....
-                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_my_job_accept = filtered_other_jobs.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("assigned")).collect(Collectors.toList());
                 my_jobs_accept = String.valueOf(filtered_status_my_job_accept.size());
 
-                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_my_jobs_implement = filtered_other_jobs.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("scheduled")).collect(Collectors.toList());
                 my_jobs_implement = String.valueOf(filtered_status_my_jobs_implement.size());
 
-                List<orderListItem> filtered_status_assigned = filtered.stream()
-                        .filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey")))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_assigned = filtered.stream().filter(string -> (string.orderItem.getStatusName().equalsIgnoreCase("assigned") || string.orderItem.getStatusName().equalsIgnoreCase("survey"))).collect(Collectors.toList());
                 capi_assigned_count = String.valueOf(filtered_status_assigned.size());
 
-                List<orderListItem> filtered_status_inProgress = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_inProgress = filtered.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("in Progress")).collect(Collectors.toList());
                 capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
-                List<orderListItem> filtered_status_completed = filtered.stream()
-                        .filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed"))
-                        .collect(Collectors.toList());
+                List<orderListItem> filtered_status_completed = filtered.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed")).collect(Collectors.toList());
                 capi_status_returned = String.valueOf(filtered_status_completed.size());
 
                 if (joborders != null) {
@@ -4987,11 +4016,11 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
             }
 
-        } catch (Exception ex) {
+        } catch (
+                Exception ex) {
             int i = 0;
             i++;
-            Toast.makeText(JobListActivity.this, "DB jobs Crashed here",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(JobListActivity.this, "DB jobs Crashed here", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -4999,66 +4028,13 @@ public class JobListActivity extends Activity implements OnClickListener,
     public String ShowDBJobss(String input) {
         try {
 
-            ArrayList<Order> jobordersss = DBHelper
-                    .getOrders(
-                            DBHelper.whereJobListNotArchived,
-                            Constants.DB_TABLE_JOBLIST,
-                            new String[]{
-                                    Constants.DB_TABLE_JOBLIST_ORDERID,
-                                    Constants.DB_TABLE_JOBLIST_DATE,
-                                    Constants.DB_TABLE_JOBLIST_SN,
-                                    Constants.DB_TABLE_JOBLIST_DESC,
-                                    Constants.DB_TABLE_JOBLIST_SETNAME,
-                                    Constants.DB_TABLE_JOBLIST_SETLINK,
-                                    Constants.DB_TABLE_JOBLIST_CN,
-                                    Constants.DB_TABLE_JOBLIST_BFN,
-                                    Constants.DB_TABLE_JOBLIST_BN,
-                                    Constants.DB_TABLE_JOBLIST_CITYNAME,
-                                    Constants.DB_TABLE_JOBLIST_ADDRESS,
-                                    Constants.DB_TABLE_JOBLIST_BP,
-                                    Constants.DB_TABLE_JOBLIST_OH,
-                                    Constants.DB_TABLE_JOBLIST_TS,
-                                    Constants.DB_TABLE_JOBLIST_TE,
-                                    Constants.DB_TABLE_JOBLIST_SETID,
-                                    Constants.DB_TABLE_JOBLIST_BL,
-                                    Constants.DB_TABLE_JOBLIST_BLNG,
-                                    Constants.DB_TABLE_JOBLIST_FN,
-                                    Constants.DB_TABLE_JOBLIST_JC,
-                                    Constants.DB_TABLE_JOBLIST_JI,
-                                    Constants.DB_TABLE_JOBLIST_BLINK,
-                                    Constants.DB_TABLE_JOBLIST_MID,
-                                    Constants.DB_TABLE_CHECKER_CODE,
-                                    Constants.DB_TABLE_CHECKER_LINK,
-                                    Constants.DB_TABLE_BRANCH_CODE,
-                                    Constants.DB_TABLE_SETCODE,
-                                    Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                                    Constants.DB_TABLE_PURCHASE,
-                                    Constants.DB_TABLE_JOBLIST_BRIEFING,
-                                    Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                                    Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                                    Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                                    Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                                    Constants.DB_TABLE_JOBLIST_sBonusPayment,
-                                    Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-                                    Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-                                    Constants.DB_TABLE_JOBLIST_sProjectName,
-                                    Constants.DB_TABLE_JOBLIST_sRegionName,
-                                    Constants.DB_TABLE_JOBLIST_sdeletedjob,
-                                    Constants.DB_TABLE_JOBLIST_sProjectID,},
-                            Constants.DB_TABLE_JOBLIST_JI);
+            ArrayList<Order> jobordersss = DBHelper.getOrders(DBHelper.whereJobListNotArchived, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
 
             // int valueid = c.getColumnIndex(columns[0]);
             // int propid = c.getColumnIndex(columns[1]);
             // int propname = c.getColumnIndex(columns[2]);
             // int content = c.getColumnIndex(columns[3]);
-            ArrayList<BranchProperties> branchProps = DBHelper.getBranchPropds(
-                    Constants.DB_TABLE_BRANCH_PROPS, new String[]{
-                            Constants.DB_TABLE_BRANCH_PROPS_ValueID,
-                            Constants.DB_TABLE_BRANCH_PROPS_PropID,
-                            Constants.DB_TABLE_BRANCH_PROPS_PropertyName,
-                            Constants.DB_TABLE_BRANCH_PROPS_Content,
-                            Constants.DB_TABLE_BRANCH_PROPS_BranchID,},
-                    Constants.DB_TABLE_BRANCH_PROPS_PropID);
+            ArrayList<BranchProperties> branchProps = DBHelper.getBranchPropds(Constants.DB_TABLE_BRANCH_PROPS, new String[]{Constants.DB_TABLE_BRANCH_PROPS_ValueID, Constants.DB_TABLE_BRANCH_PROPS_PropID, Constants.DB_TABLE_BRANCH_PROPS_PropertyName, Constants.DB_TABLE_BRANCH_PROPS_Content, Constants.DB_TABLE_BRANCH_PROPS_BranchID,}, Constants.DB_TABLE_BRANCH_PROPS_PropID);
 
             if (jobordersss != null) {
                 try {
@@ -5067,8 +4043,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     pngItems = new ArrayList<pngItem>();
                 }
                 myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-                isBranchPropErr = myPrefs.getBoolean(
-                        Constants.ALREADY_BRANCHPROPERR, false);
+                isBranchPropErr = myPrefs.getBoolean(Constants.ALREADY_BRANCHPROPERR, false);
 
                 if (pngItems.size() > 0 || isBranchPropErr == true) {
                     btnErr.setVisibility(RelativeLayout.VISIBLE);
@@ -5100,15 +4075,11 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private void showDbjobsPostPart() {
-        if (CheckerApp.globalFilterVar != null)
-            FilterJobList(CheckerApp.globalFilterVar);
+        if (CheckerApp.globalFilterVar != null) FilterJobList(CheckerApp.globalFilterVar);
         else {
             try {
                 if (select_jobs == "MY_JOBS") {
-                    mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs,
-                            mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-                            bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
-                            txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
+                    mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             Log.e("position_activity", String.valueOf(position));
@@ -5118,21 +4089,12 @@ public class JobListActivity extends Activity implements OnClickListener,
 //                        mAdapter.joblistarray.get(jobListItemId).orderItem.  getOrderID()
                             jobListItemId = position;
 
-                            if (mAdapter.joblistarray.get(position).orderItem != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
-                                Toast.makeText(JobListActivity.this,
-                                        "You are not allowed to reject jobs.",
-                                        Toast.LENGTH_LONG).show();
+                            if (mAdapter.joblistarray.get(position).orderItem != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
+                                Toast.makeText(JobListActivity.this, "You are not allowed to reject jobs.", Toast.LENGTH_LONG).show();
                             }
-                            if (mAdapter.joblistarray.get(position).orderItem != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1")
-                                    && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
+                            if (mAdapter.joblistarray.get(position).orderItem != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1") && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
 
-                                Toast.makeText(JobListActivity.this,
-                                        "You are not allowed to reject this job.",
-                                        Toast.LENGTH_LONG).show();
+                                Toast.makeText(JobListActivity.this, "You are not allowed to reject this job.", Toast.LENGTH_LONG).show();
                             }
                             Constants.screen_type_dialog = 1;
                             RefusalReasonDialog dialog = new RefusalReasonDialog(JobListActivity.this);
@@ -5176,31 +4138,22 @@ public class JobListActivity extends Activity implements OnClickListener,
 //                                BeginReview(false);
 //                            }
 
-                            Log.e("onItemClick", mAdapter.joblistarray
-                                    .get(position).orderItem.getOrderID());
-                            Intent intent = new Intent(JobListActivity.this
-                                    .getApplicationContext(), JobDetailActivity.class);
-                            JobDetailActivity
-                                    .setCertsCallback(new jobBoardCertsListener() {
+                            Log.e("onItemClick", mAdapter.joblistarray.get(position).orderItem.getOrderID());
+                            Intent intent = new Intent(JobListActivity.this.getApplicationContext(), JobDetailActivity.class);
+                            JobDetailActivity.setCertsCallback(new jobBoardCertsListener() {
 
-                                        @Override
-                                        public void certCallBack(ArrayList<Cert> certs) {
-                                            load_certificates(certs);
-                                        }
-                                    });
+                                @Override
+                                public void certCallBack(ArrayList<Cert> certs) {
+                                    load_certificates(certs);
+                                }
+                            });
                             isJobselected = true;
-                            if (mAdapter.joblistarray != null
-                                    && mAdapter.joblistarray.size() > 0) {
+                            if (mAdapter.joblistarray != null && mAdapter.joblistarray.size() > 0) {
                                 if (mAdapter.joblistarray.get(position).orderItem != null) {
 //                            TODO OrderID
-                                    intent.putExtra("OrderID", mAdapter.joblistarray
-                                            .get(position).orderItem.getOrderID());
-                                    intent.putExtra(
-                                            Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                            mAdapter.joblistarray.get(position).orderItem
-                                                    .getCount() + "");
-                                    String OrderID = mAdapter.joblistarray
-                                            .get(position).orderItem.getOrderID();
+                                    intent.putExtra("OrderID", mAdapter.joblistarray.get(position).orderItem.getOrderID());
+                                    intent.putExtra(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, mAdapter.joblistarray.get(position).orderItem.getCount() + "");
+                                    String OrderID = mAdapter.joblistarray.get(position).orderItem.getOrderID();
                                     String surveyId = "";
                                     if (OrderID.contains("-")) {
                                         surveyId = (OrderID.replace("-", ""));
@@ -5208,23 +4161,18 @@ public class JobListActivity extends Activity implements OnClickListener,
                                         boolean b = survey.isAllocationReached();
                                         if (b)//ALLOCATION REACHED
                                         {
-                                            Toast.makeText(JobListActivity.this,
-                                                    getString(R.string.questionnaire_open_survey_alert)
-                                                    , Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(JobListActivity.this, getString(R.string.questionnaire_open_survey_alert), Toast.LENGTH_SHORT).show();
                                             return;
                                         }
                                     }
                                 } else if (mAdapter.joblistarray.get(position).surveyItem != null) {
 //                            TODO SurveyID
-                                    intent.putExtra("SurveyID", mAdapter.joblistarray
-                                            .get(position).surveyItem.getSurveyID());
+                                    intent.putExtra("SurveyID", mAdapter.joblistarray.get(position).surveyItem.getSurveyID());
 
                                 }
 
                             } else
-                                intent.putExtra(
-                                        Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                        "1");
+                                intent.putExtra(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, "1");
                             intent.putExtra("OrderIndex", position);
                             intent.putExtra("Index", position);
                             // comunicator.JobList = null;
@@ -5236,35 +4184,26 @@ public class JobListActivity extends Activity implements OnClickListener,
                 } else {
                     Log.e("CAPI_JOBS", "true");
                     //TODO "CAPI_JOBS"
-                    mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-                            bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree,
-                            txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
+                    mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             Log.e("position_activity_CAPI_JOBS", String.valueOf(position));
 
                             jobListItemId = position;
 
-                            if (mAdapter.joblistarray.get(position).orderItem != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
-                                Toast.makeText(JobListActivity.this,
-                                        "You are not allowed to reject jobs.",
-                                        Toast.LENGTH_LONG).show();
+                            if (mAdapter.joblistarray.get(position).orderItem != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("2")) {
+                                Toast.makeText(JobListActivity.this, "You are not allowed to reject jobs.", Toast.LENGTH_LONG).show();
                             }
-                            if (mAdapter.joblistarray.get(position).orderItem != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null
-                                    && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1")
-                                    && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
+                            if (mAdapter.joblistarray.get(position).orderItem != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs() != null && mAdapter.joblistarray.get(position).orderItem.getAllowShoppersToRejectJobs().equals("1") && !mAdapter.joblistarray.get(position).orderItem.getStatusName().equals("Assigned")) {
 
-                                Toast.makeText(JobListActivity.this,
-                                        "You are not allowed to reject this job.",
-                                        Toast.LENGTH_LONG).show();
+                                Toast.makeText(JobListActivity.this, "You are not allowed to reject this job.", Toast.LENGTH_LONG).show();
                             }
                             Constants.screen_type_dialog = 1;
                             RefusalReasonDialog dialog = new RefusalReasonDialog(JobListActivity.this);
                             dialog.show();
                         }
+
+
                     }, new JobItemAdapter.onJobStartClickLister() {
                         @Override
                         public void onJobStartClick(int position, String status) {
@@ -5300,31 +4239,22 @@ public class JobListActivity extends Activity implements OnClickListener,
 //                                BeginReview(false);
 //                            }
 
-                            Log.e("onItemClick", mAdapter.joblistarray
-                                    .get(position).orderItem.getOrderID());
-                            Intent intent = new Intent(JobListActivity.this
-                                    .getApplicationContext(), JobDetailActivity.class);
-                            JobDetailActivity
-                                    .setCertsCallback(new jobBoardCertsListener() {
+                            Log.e("onItemClick", mAdapter.joblistarray.get(position).orderItem.getOrderID());
+                            Intent intent = new Intent(JobListActivity.this.getApplicationContext(), JobDetailActivity.class);
+                            JobDetailActivity.setCertsCallback(new jobBoardCertsListener() {
 
-                                        @Override
-                                        public void certCallBack(ArrayList<Cert> certs) {
-                                            load_certificates(certs);
-                                        }
-                                    });
+                                @Override
+                                public void certCallBack(ArrayList<Cert> certs) {
+                                    load_certificates(certs);
+                                }
+                            });
                             isJobselected = true;
-                            if (mAdapter.joblistarray != null
-                                    && mAdapter.joblistarray.size() > 0) {
+                            if (mAdapter.joblistarray != null && mAdapter.joblistarray.size() > 0) {
                                 if (mAdapter.joblistarray.get(position).orderItem != null) {
 //                            TODO OrderID
-                                    intent.putExtra("OrderID", mAdapter.joblistarray
-                                            .get(position).orderItem.getOrderID());
-                                    intent.putExtra(
-                                            Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                            mAdapter.joblistarray.get(position).orderItem
-                                                    .getCount() + "");
-                                    String OrderID = mAdapter.joblistarray
-                                            .get(position).orderItem.getOrderID();
+                                    intent.putExtra("OrderID", mAdapter.joblistarray.get(position).orderItem.getOrderID());
+                                    intent.putExtra(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, mAdapter.joblistarray.get(position).orderItem.getCount() + "");
+                                    String OrderID = mAdapter.joblistarray.get(position).orderItem.getOrderID();
                                     String surveyId = "";
                                     if (OrderID.contains("-")) {
                                         surveyId = (OrderID.replace("-", ""));
@@ -5332,23 +4262,18 @@ public class JobListActivity extends Activity implements OnClickListener,
                                         boolean b = survey.isAllocationReached();
                                         if (b)//ALLOCATION REACHED
                                         {
-                                            Toast.makeText(JobListActivity.this,
-                                                    getString(R.string.questionnaire_open_survey_alert)
-                                                    , Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(JobListActivity.this, getString(R.string.questionnaire_open_survey_alert), Toast.LENGTH_SHORT).show();
                                             return;
                                         }
                                     }
                                 } else if (mAdapter.joblistarray.get(position).surveyItem != null) {
 //                            TODO SurveyID
-                                    intent.putExtra("SurveyID", mAdapter.joblistarray
-                                            .get(position).surveyItem.getSurveyID());
+                                    intent.putExtra("SurveyID", mAdapter.joblistarray.get(position).surveyItem.getSurveyID());
 
                                 }
 
                             } else
-                                intent.putExtra(
-                                        Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                                        "1");
+                                intent.putExtra(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, "1");
                             intent.putExtra("OrderIndex", position);
                             intent.putExtra("Index", position);
                             // comunicator.JobList = null;
@@ -5375,26 +4300,20 @@ public class JobListActivity extends Activity implements OnClickListener,
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo i = conMgr.getActiveNetworkInfo();
         conMgr = null;
-        if (i == null)
-            return false;
-        if (!i.isConnected())
-            return false;
-        if (!i.isAvailable())
-            return false;
+        if (i == null) return false;
+        if (!i.isConnected()) return false;
+        if (!i.isAvailable()) return false;
 
         return true;
     }
 
     private void setHttps() {
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
-        prefsEditor.putString(Constants.SETTINGS_SYSTEM_URL_KEY, Helper
-                .getSystemURL().replace("http://", "https://"));
+        prefsEditor.putString(Constants.SETTINGS_SYSTEM_URL_KEY, Helper.getSystemURL().replace("http://", "https://"));
         prefsEditor.commit();
 
-        Helper.setSystemURL(myPrefs.getString(
-                Constants.SETTINGS_SYSTEM_URL_KEY, ""));
-        Helper.setAlternateSystemURL(myPrefs.getString(
-                Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
+        Helper.setSystemURL(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""));
+        Helper.setAlternateSystemURL(myPrefs.getString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
 
     }
 
@@ -5402,15 +4321,13 @@ public class JobListActivity extends Activity implements OnClickListener,
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
         prefsEditor.putString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, newEurURL);
         prefsEditor.commit();
-        Helper.setAlternateSystemURL(myPrefs.getString(
-                Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
+        Helper.setAlternateSystemURL(myPrefs.getString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
 
     }
 
     private boolean checkConnectionPost() {
 
-        String newUrlForEUClients =
-                Constants.CompareWithNewUrlList(getResources().getStringArray(R.array.eusystems));
+        String newUrlForEUClients = Constants.CompareWithNewUrlList(getResources().getStringArray(R.array.eusystems));
 
         if (newUrlForEUClients != null) {
             String chkurl = Constants.getcheckConnectionURL(newUrlForEUClients);
@@ -5442,12 +4359,9 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (isSyncMenu) {
             // menu.add(0, Constants.MENUID_UPDALOAD_IMGS, 0,
             // "Force Send camera images");
-            menu.add(0, Constants.MENUID_UPDALOAD_JOBS, 0,
-                    JobListActivity.this.getString(R.string.start_upload));
-            menu.add(0, Constants.MENUID_DOWNLOAD_JOBS, 0,
-                    JobListActivity.this.getString(R.string.start_download));
-            menu.add(0, Constants.MENUID_DOWNLOAD_JOBS_ALT, 0,
-                    JobListActivity.this.getString(R.string.start_download_alt));
+            menu.add(0, Constants.MENUID_UPDALOAD_JOBS, 0, JobListActivity.this.getString(R.string.start_upload));
+            menu.add(0, Constants.MENUID_DOWNLOAD_JOBS, 0, JobListActivity.this.getString(R.string.start_download));
+            menu.add(0, Constants.MENUID_DOWNLOAD_JOBS_ALT, 0, JobListActivity.this.getString(R.string.start_download_alt));
             isSyncMenu = false;
         } else {
 
@@ -5485,25 +4399,17 @@ public class JobListActivity extends Activity implements OnClickListener,
         builder.setCancelable(false);
         builder.setTitle(getResources().getString(R.string._alert_title));
         TextView textView = new TextView(context);
-        textView.setTextSize(UIHelper.getFontSize(JobListActivity.this,
-                textView.getTextSize()));
+        textView.setTextSize(UIHelper.getFontSize(JobListActivity.this, textView.getTextSize()));
         textView.setText(getString(R.string.save_questionnaire_records_for_offline));
         builder.setView(textView);
-        builder.setPositiveButton(
-                        getString(R.string.questionnaire_exit_delete_alert_yes),
-                        dialogClickListener)
-                .setNegativeButton(
-                        getString(R.string.questionnaire_exit_delete_alert_no),
-                        dialogClickListener).show();
+        builder.setPositiveButton(getString(R.string.questionnaire_exit_delete_alert_yes), dialogClickListener).setNegativeButton(getString(R.string.questionnaire_exit_delete_alert_no), dialogClickListener).show();
 
     }
 
-    public boolean startDownloadingJobs(boolean isPullToRefreshLibrary,
-                                        boolean isOrderOnly) {
+    public boolean startDownloadingJobs(boolean isPullToRefreshLibrary, boolean isOrderOnly) {
         btnErr.setVisibility(RelativeLayout.GONE);
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
-        prefsEditor.putLong(Constants.AUTOSYNC_CURRENT_TIME,
-                System.currentTimeMillis());
+        prefsEditor.putLong(Constants.AUTOSYNC_CURRENT_TIME, System.currentTimeMillis());
         prefsEditor.commit();
 
         executeJobList(isPullToRefreshLibrary, isOrderOnly);
@@ -5516,8 +4422,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         switch (item.getItemId()) {
             case Constants.MENUID_UPDALOAD_IMGS:
-                uploadingOrphanFiesTask uploadFileTask = new uploadingOrphanFiesTask(
-                        null, true);
+                uploadingOrphanFiesTask uploadFileTask = new uploadingOrphanFiesTask(null, true);
                 uploadFileTask.execute();
                 break;
 
@@ -5530,9 +4435,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 startDownloadingJobs(false, false);
                 break;
             case Constants.MENUID_DOWNLOAD_JOBS_ALT:
-                showLanguageDialog(
-                        getResources().getString(
-                                R.string.preffered_questionnaire_language), false);
+                showLanguageDialog(getResources().getString(R.string.preffered_questionnaire_language), false);
                 break;
             case Constants.MENUID_UPDALOAD_COMPLETE_JOBS:
                 // FILTER jobs
@@ -5558,19 +4461,13 @@ public class JobListActivity extends Activity implements OnClickListener,
             case Constants.MENUID_DOWNLOAD_UPDATED_JOBS:
                 // MAPSSSS
                 // Getting status
-                int status = GooglePlayServicesUtil
-                        .isGooglePlayServicesAvailable(getBaseContext());
+                int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
                 if (status != ConnectionResult.SUCCESS) {
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.google_services_not_avaliable));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.google_services_not_avaliable));
                 } else {
                     isJobselected = true;
-                    Intent intent = new Intent(
-                            JobListActivity.this.getApplicationContext(),
-                            MapActivity.class);
+                    Intent intent = new Intent(JobListActivity.this.getApplicationContext(), MapActivity.class);
                     intent.putExtra("orderid", "-1");
                     // comunicator.JobList = null;
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -5583,8 +4480,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             case Constants.MENUID_DOWNLOAD_SETTINGS:
                 isJobselected = true;
-                Intent intent = new Intent(this.getApplicationContext(),
-                        NewSettingsActivity.class);
+                Intent intent = new Intent(this.getApplicationContext(), NewSettingsActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
                 finish();
@@ -5594,8 +4490,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     public boolean isWifiStatus() {
-        final ConnectivityManager connMgr = (ConnectivityManager)
-                this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final ConnectivityManager connMgr = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         if (wifi.isConnectedOrConnecting()) {
@@ -5609,11 +4504,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
 
         if (Helper.syncing == true) {
-            Toast.makeText(
-                    JobListActivity.this,
-                    getResources().getString(
-                            R.string.synch_is_already_in_progress),
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobListActivity.this, getResources().getString(R.string.synch_is_already_in_progress), Toast.LENGTH_SHORT).show();
         }
         Helper.syncing = true;
 
@@ -5627,10 +4518,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     // wifi is enabled
                 } else {
                     ShowDBJobs();
-                    customAlert(
-                            JobListActivity.this,
-                            getResources().getString(
-                                    R.string.wifi_not_enabled));
+                    customAlert(JobListActivity.this, getResources().getString(R.string.wifi_not_enabled));
                     return;
 
                 }
@@ -5644,18 +4532,14 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         } else {
             ShowDBJobs();
-            customAlert(
-                    JobListActivity.this,
-                    getResources().getString(
-                            R.string.no_internet_connection_alret_message));
+            customAlert(JobListActivity.this, getResources().getString(R.string.no_internet_connection_alret_message));
 
         }
 
     }
 
     public void showLanguageDialog(String string, final boolean isFirstTime) {
-        final LanguageDialog langDialog = new LanguageDialog(
-                JobListActivity.this, string);
+        final LanguageDialog langDialog = new LanguageDialog(JobListActivity.this, string);
         final ArrayList<AltLanguage> allLangs = DBHelper.getLanguages(false);
         langDialog.setBtnListener(new DialogInterface.OnClickListener() {
 
@@ -5680,14 +4564,11 @@ public class JobListActivity extends Activity implements OnClickListener,
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                if (isFirstTime)
-                    executeJobList(false, false);
+                if (isFirstTime) executeJobList(false, false);
             }
         });
-        if (allLangs != null && allLangs.size() > 0)
-            langDialog.performClick(allLangs);
-        else
-            executeLangList();
+        if (allLangs != null && allLangs.size() > 0) langDialog.performClick(allLangs);
+        else executeLangList();
 
     }
 
@@ -5695,20 +4576,17 @@ public class JobListActivity extends Activity implements OnClickListener,
         mAdapter = null;
         jobItemList.setAdapter(null);
         isJobselected = true;
-        Intent intent = new Intent(this.getApplicationContext(),
-                NewLoginActivity.class);
+        Intent intent = new Intent(this.getApplicationContext(), NewLoginActivity.class);
         intent.putExtra("FromJoblist", true);
         // comunicator.JobList = null;
         startActivity(intent);
         finish();
-        if (validationSets.sets != null)
-            validationSets.sets.clear();
+        if (validationSets.sets != null) validationSets.sets.clear();
 
     }
 
     private void saveOfflineData() {
-        String where = "StatusName=" + "\"Scheduled\"" + " OR StatusName="
-                + "\"Assigned\"";
+        String where = "StatusName=" + "\"Scheduled\"" + " OR StatusName=" + "\"Assigned\"";
         DBHelper.deleteJoblistRecords(where);
 
         DBHelper.deleteProps();
@@ -5735,9 +4613,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 break;
             case R.id.mapbtn:
                 isJobselected = true;
-                Intent intent = new Intent(
-                        JobListActivity.this.getApplicationContext(),
-                        Context.class);
+                Intent intent = new Intent(JobListActivity.this.getApplicationContext(), Context.class);
                 intent.putExtra("OrderIndex", -1);
                 // comunicator.JobList = null;
                 startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -5758,53 +4634,41 @@ public class JobListActivity extends Activity implements OnClickListener,
         if (!fData.region.equals(getString(R.string.job_filter_default_choose_regions))) {
             if (filterString.equals("")) {
                 filterString += fData.region;
-            } else
-                filterString += ", " + fData.region;
+            } else filterString += ", " + fData.region;
         }
         if (!fData.project.equals(getString(R.string.job_filter_default_choose_project))) {
             if (filterString.equals("")) {
                 filterString += fData.project;
-            } else
-                filterString += ", " + fData.project;
+            } else filterString += ", " + fData.project;
         }
         if (!fData.city.equals(getString(R.string.job_filter_choose_city_lbl))) {
             if (filterString.equals("")) {
                 filterString += fData.city;
-            } else
-                filterString += ", " + fData.city;
+            } else filterString += ", " + fData.city;
         }
         if (!fData.bcode.equals(getString(R.string.job_filter_default_choose_branch))) {
             if (filterString.equals("")) {
                 filterString += fData.bcode;
-            } else
-                filterString += ", " + fData.bcode;
+            } else filterString += ", " + fData.bcode;
         }
         if (!fData.bprop.equals(getString(R.string.job_filter_default_choose_branch_properties))) {
             if (filterString.equals("")) {
                 filterString += fData.bprop;
-            } else
-                filterString += ", " + fData.bprop;
+            } else filterString += ", " + fData.bprop;
         }
         if (!fData.date1.equals("1/1/1900") && !fData.date3.equals("1/1/1900")) {
             if (filterString.equals("")) {
                 filterString += fData.date1 + "-" + fData.date3;
-            } else
-                filterString += ", " + fData.date1 + "-" + fData.date3;
+            } else filterString += ", " + fData.date1 + "-" + fData.date3;
         }
 
 
         if (select_jobs == "MY_JOBS") {
             filtered_other_jobs = getFilterArray(fData);
-            mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs, mFilter,
-                    bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
-                    txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
-                    ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
+            mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
         } else {
             jobs_CAPI = getFilterArray(fData);
-            mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter,
-                    bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour,
-                    txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour,
-                    ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
+            mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
         }
 
 
@@ -5821,16 +4685,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     private ArrayList<orderListItem> getFilterArray(FilterData fData) {
 
         ArrayList<Order> ordrs = new ArrayList<Order>();
-        if (fData.jobtype.equals(getString(R.string.job_filter_default_choose_client))
-                && fData.city.equals(getString(R.string.job_filter_choose_city_lbl))
-                && fData.bcode.equals(getString(R.string.job_filter_default_choose_branch))
-                && fData.project
-                .equals(getString(R.string.job_filter_default_choose_project))
-                && fData.region
-                .equals(getString(R.string.job_filter_default_choose_regions))
-                && fData.bprop.equals(getString(R.string.job_filter_default_choose_branch_properties))
-                && fData.date1.equals("1/1/1900") && fData.date3.equals("1/1/1900") &&
-                fData.status.equals(getString(R.string.job_filter_choose_status))) {
+        if (fData.jobtype.equals(getString(R.string.job_filter_default_choose_client)) && fData.city.equals(getString(R.string.job_filter_choose_city_lbl)) && fData.bcode.equals(getString(R.string.job_filter_default_choose_branch)) && fData.project.equals(getString(R.string.job_filter_default_choose_project)) && fData.region.equals(getString(R.string.job_filter_default_choose_regions)) && fData.bprop.equals(getString(R.string.job_filter_default_choose_branch_properties)) && fData.date1.equals("1/1/1900") && fData.date3.equals("1/1/1900") && fData.status.equals(getString(R.string.job_filter_choose_status))) {
             // joborders = Orders.getOrders();
 
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
@@ -5852,12 +4707,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         } else {
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
                 Order order = Orders.getOrders().get(ordercount);
-                if (Helper.IsValidOrder(order, fData.region, fData.project, fData.bprop, fData.bcode,
-                        fData.jobtype, fData.city, fData.date1, fData.date3, fData.status,
-                        getString(R.string.job_filter_default_choose_branch),
-                        getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties),
-                        getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project),
-                        getString(R.string.job_filter_default_choose_client), getString(R.string.job_filter_choose_status))) {
+                if (Helper.IsValidOrder(order, fData.region, fData.project, fData.bprop, fData.bcode, fData.jobtype, fData.city, fData.date1, fData.date3, fData.status, getString(R.string.job_filter_default_choose_branch), getString(R.string.job_filter_choose_city_lbl), getString(R.string.job_filter_default_choose_branch_properties), getString(R.string.job_filter_default_choose_regions), getString(R.string.job_filter_default_choose_project), getString(R.string.job_filter_default_choose_client), getString(R.string.job_filter_choose_status))) {
                     ordrs.add(order);
                 }
             }
@@ -5871,8 +4721,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             ordrs.toArray(ordersArr);
         }
         Order order, innerorder;
-        if (filtered_other_jobs == null)
-            filtered_other_jobs = new ArrayList<orderListItem>();
+        if (filtered_other_jobs == null) filtered_other_jobs = new ArrayList<orderListItem>();
         // joborders.clear();
         ArrayList<Order> delete = new ArrayList<Order>();
         ArrayList<orderListItem> temporder1 = new ArrayList<orderListItem>();
@@ -5882,8 +4731,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         for (int index = 0; index < size; index++) {
             order = temporder.get(index);
             String status = getStatusByOrderID(order.getOrderID(), ordersArr);
-            if (!status.equals(""))
-                temporder.get(index).setStatusName(status);
+            if (!status.equals("")) temporder.get(index).setStatusName(status);
         }
         List<orderListItem> temFilter = null;
         for (int index = 0; index < size; index++) {
@@ -5896,16 +4744,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             for (int innerindex = 0; innerindex < size; innerindex++) {
                 innerorder = temporder.get(innerindex);
                 try {
-                    if ((Constants.getDateFilter() || order.getBranchLink()
-                            .equals(innerorder.getBranchLink()))
-                            && (Constants.getDateFilter() || order.getMassID()
-                            .equals(innerorder.getMassID()))
-                            && (order.getDate().equals(innerorder.getDate()))
-                            && (Constants.getDateFilter() || order.getSetLink()
-                            .equals(innerorder.getSetLink()))
-                            && (Constants.getDateFilter() || order
-                            .getStatusName().equals(
-                                    innerorder.getStatusName()))) {
+                    if ((Constants.getDateFilter() || order.getBranchLink().equals(innerorder.getBranchLink())) && (Constants.getDateFilter() || order.getMassID().equals(innerorder.getMassID())) && (order.getDate().equals(innerorder.getDate())) && (Constants.getDateFilter() || order.getSetLink().equals(innerorder.getSetLink())) && (Constants.getDateFilter() || order.getStatusName().equals(innerorder.getStatusName()))) {
                         delete.add(innerorder);
                         order.setCount();
                     }
@@ -5915,9 +4754,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
             // order.setIndex(index);
             temporder1.add(new orderListItem(order, delete));
-            temFilter = temporder1.stream()
-                    .filter(string -> !string.orderItem.getOrderID().contains("-"))
-                    .collect(Collectors.toList());
+            temFilter = temporder1.stream().filter(string -> !string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
             for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
                 temporder.remove(delete.get(deleteindex));
             }
@@ -5932,8 +4769,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private String getStatusByOrderID(String orderid, Order[] ordersArr) {
-        if (ordersArr == null)
-            return "";
+        if (ordersArr == null) return "";
         for (int Ocount = 0; Ocount < ordersArr.length; Ocount++) {
             if (orderid.equals(ordersArr[Ocount].getOrderID()))
                 return ordersArr[Ocount].getStatusName();
@@ -5944,12 +4780,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     @SuppressWarnings("unchecked")
     private void setOrderList() {
 
-        ArrayList<Order> ordrs = DBHelper.getOrders(DBHelper.whereOrderNotArchived,
-                Constants.DB_TABLE_ORDERS, new String[]{
-                        Constants.DB_TABLE_ORDERS_ORDERID,
-                        Constants.DB_TABLE_ORDERS_STATUS,
-                        Constants.DB_TABLE_ORDERS_START_TIME,},
-                Constants.DB_TABLE_ORDERS_ORDERID);
+        ArrayList<Order> ordrs = DBHelper.getOrders(DBHelper.whereOrderNotArchived, Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, Constants.DB_TABLE_ORDERS_ORDERID);
 
         Orders.replaceistOrders(ordrs);
         Order[] ordersArr = null;
@@ -5958,8 +4789,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             ordrs.toArray(ordersArr);
         }
         Order order, innerorder;
-        if (filtered_other_jobs == null)
-            filtered_other_jobs = new ArrayList<orderListItem>();
+        if (filtered_other_jobs == null) filtered_other_jobs = new ArrayList<orderListItem>();
         // joborders.clear();
         ArrayList<Order> delete = new ArrayList<Order>();
         ArrayList<orderListItem> temporder1 = new ArrayList<orderListItem>();
@@ -5984,18 +4814,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             for (int innerindex = 0; innerindex < size; innerindex++) {
                 innerorder = temporder.get(innerindex);
                 try {
-                    if ((Constants.getDateFilter() || order.getBranchLink()
-                            .equals(innerorder.getBranchLink()))
-                            && (Constants.getDateFilter() || order.getMassID()
-                            .equals(innerorder.getMassID()))
-                            && (order.getDate().equals(innerorder.getDate()))
-                            && (Constants.getDateFilter() || order
-                            .getBranchName().equals(
-                                    innerorder.getBranchName()))
-                            && (Constants.getDateFilter() || order.getSetLink()
-                            .equals(innerorder.getSetLink()))
-                            && (order.getStatusName().equals(innerorder
-                            .getStatusName()))) {
+                    if ((Constants.getDateFilter() || order.getBranchLink().equals(innerorder.getBranchLink())) && (Constants.getDateFilter() || order.getMassID().equals(innerorder.getMassID())) && (order.getDate().equals(innerorder.getDate())) && (Constants.getDateFilter() || order.getBranchName().equals(innerorder.getBranchName())) && (Constants.getDateFilter() || order.getSetLink().equals(innerorder.getSetLink())) && (order.getStatusName().equals(innerorder.getStatusName()))) {
                         delete.add(innerorder);
                         order.setCount();
                     }
@@ -6005,9 +4824,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
             // order.setIndex(index);
             temporder1.add(new orderListItem(order, delete));
-            temFilter = temporder1.stream()
-                    .filter(string -> !string.orderItem.getOrderID().contains("-"))
-                    .collect(Collectors.toList());
+            temFilter = temporder1.stream().filter(string -> !string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
             for (int deleteindex = 1; deleteindex < delete.size(); deleteindex++) {
                 temporder.remove(delete.get(deleteindex));
             }
@@ -6031,8 +4848,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             ordrs.toArray(ordersArr);
         }
         Survey order, innerorder;
-        if (joborders == null)
-            joborders = new ArrayList<orderListItem>();
+        if (joborders == null) joborders = new ArrayList<orderListItem>();
         // joborders.clear();
         ArrayList<Survey> delete = new ArrayList<Survey>();
         ArrayList<orderListItem> temporder1 = new ArrayList<orderListItem>();
@@ -6083,19 +4899,10 @@ public class JobListActivity extends Activity implements OnClickListener,
         } catch (Exception ex) {
 
         }
-        SplashScreen.addLog(new BasicLog(
-                myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                "Job moved to " + tab + " tab" + orderid, orderid));
+        SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Job moved to " + tab + " tab" + orderid, orderid));
 
-        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
-                new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
-                        Constants.DB_TABLE_ORDERS_STATUS,
-                        Constants.DB_TABLE_ORDERS_START_TIME,},
-                orderid, tab,
-                start_time, did);
-        String where = Constants.DB_TABLE_ORDERS_ORDERID + "="
-                + "\"" + orderid + "\"";
+        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, orderid, tab, start_time, did);
+        String where = Constants.DB_TABLE_ORDERS_ORDERID + "=" + "\"" + orderid + "\"";
         DBHelper.deleteCompletedRecords(where);
     }
 
@@ -6127,57 +4934,35 @@ public class JobListActivity extends Activity implements OnClickListener,
                 if (data != null) {
                     // stopLocationChecker();
                     Bundle b = data.getExtras();
-                    if (b != null
-                            && b.getBoolean(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY)) {
+                    if (b != null && b.getBoolean(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY)) {
 
                         // new SubmitSurveyTask().execute();
                         executeJobList(false, false);
                         // ShowDBJobs();
                         return;
-                    } else if (b
-                            .getBoolean(Constants.JOB_DETAIL_IS_INVALID_LOGIN_FIELD_KEY)) {
-                        Intent intent = new Intent(this.getApplicationContext(),
-                                NewLoginActivity.class);
+                    } else if (b.getBoolean(Constants.JOB_DETAIL_IS_INVALID_LOGIN_FIELD_KEY)) {
+                        Intent intent = new Intent(this.getApplicationContext(), NewLoginActivity.class);
                         // comunicator.JobList = null;
                         startActivity(intent);
                         finish();
                         return;
                     }
-                    orderid = b.get(Constants.DB_TABLE_QUESTIONNAIRE_ORDERID)
-                            .toString();
+                    orderid = b.get(Constants.DB_TABLE_QUESTIONNAIRE_ORDERID).toString();
 
                     if (data.getExtras().getInt(Constants.QUESTIONNAIRE_STAUS) == 1) {
-                        SplashScreen.addLog(new BasicLog(
-                                myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                                "Job moved to Completed tab" + orderid, orderid));
+                        SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Job moved to Completed tab" + orderid, orderid));
 
-                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
-                                new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
-                                        Constants.DB_TABLE_ORDERS_STATUS,
-                                        Constants.DB_TABLE_ORDERS_START_TIME,},
-                                orderid, "Completed", "", null);
+                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, orderid, "Completed", "", null);
                         if (orderid != null && orderid.contains("CC")) {
                             upload_comp_jobs = true;
                         }
-                        if (upload_comp_jobs == true || Helper.isMisteroMenu
-                                || Constants.isUploadingEnabled()) {
+                        if (upload_comp_jobs == true || Helper.isMisteroMenu || Constants.isUploadingEnabled()) {
                             start_uploading(false);
                             dontrun = true;
-                        } else
-                            ShowDBJobs();
-                    } else if (data.getExtras().getInt(
-                            Constants.QUESTIONNAIRE_STAUS) == 2
-                            && !orderid.contains("CC")) {
-                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
-                                new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
-                                        Constants.DB_TABLE_ORDERS_STATUS,
-                                        Constants.DB_TABLE_ORDERS_START_TIME,},
-                                orderid, "Scheduled", "", null);
-                    } else if (data.getExtras().getInt(
-                            Constants.QUESTIONNAIRE_STAUS) == 142
-                            || data.getExtras().getInt(
-                            Constants.QUESTIONNAIRE_STAUS) == 42) {
+                        } else ShowDBJobs();
+                    } else if (data.getExtras().getInt(Constants.QUESTIONNAIRE_STAUS) == 2 && !orderid.contains("CC")) {
+                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, orderid, "Scheduled", "", null);
+                    } else if (data.getExtras().getInt(Constants.QUESTIONNAIRE_STAUS) == 142 || data.getExtras().getInt(Constants.QUESTIONNAIRE_STAUS) == 42) {
                         // if (IsInternetConnectted()) {
                         // start_uploading(false);
                         // upload_comp_jobs = true;
@@ -6199,40 +4984,23 @@ public class JobListActivity extends Activity implements OnClickListener,
                 } else updateFiler(null);
                 if (mAdapter == null) {
                     if (select_jobs.equals("MY_JOBS")) {
-                        mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs,
-                                mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
-                                bimgtabThree, bimgtabFour, txttabSync, txttabOne,
-                                txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
-                                ltabThree, ltabFour, null, null);
+                        mAdapter = new JobItemAdapter(JobListActivity.this, filtered_other_jobs, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
                     } else {
-                        mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI,
-                                mFilter, bimgtabSync, bimgtabOne, bimgtabTwo,
-                                bimgtabThree, bimgtabFour, txttabSync, txttabOne,
-                                txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo,
-                                ltabThree, ltabFour, null, null);
+                        mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, null, null);
                     }
 
                     mAdapter.setBranchCallback(this);
                 } else {
                     if (select_jobs == "MY_JOBS") {
-                        mAdapter.mainSetter(JobListActivity.this, filtered_other_jobs, mFilter,
-                                bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-                                bimgtabFour, txttabSync, txttabOne, txttabTwo,
-                                txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
-                                ltabFour);
+                        mAdapter.mainSetter(JobListActivity.this, filtered_other_jobs, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour);
                     } else {
-                        mAdapter.mainSetter(JobListActivity.this, jobs_CAPI, mFilter,
-                                bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree,
-                                bimgtabFour, txttabSync, txttabOne, txttabTwo,
-                                txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree,
-                                ltabFour);
+                        mAdapter.mainSetter(JobListActivity.this, jobs_CAPI, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour);
                     }
 
                 }
 
 
-                if (jobItemList.getAdapter() == null)
-                    jobItemList.setAdapter(mAdapter);
+                if (jobItemList.getAdapter() == null) jobItemList.setAdapter(mAdapter);
                 else {
                     mAdapter.notifyDataSetChanged();
                 }
@@ -6261,8 +5029,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private void updateFiler(String object) {
-        if (object == null)
-            CheckerApp.globalFilterVar = null;
+        if (object == null) CheckerApp.globalFilterVar = null;
         final View v = findViewById(R.id.layout_filter);
 
         TextView tx = (TextView) findViewById(R.id.txtfilter);
@@ -6321,10 +5088,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             Log.e("LangTask", "onPreExecute");
-            Revamped_Loading_Dialog.show_dialog(
-                    JobListActivity.this,
-                    getResources().getString(
-                            R.string.downloading_system_languages));
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getResources().getString(R.string.downloading_system_languages));
         }
 
         @Override
@@ -6332,17 +5096,10 @@ public class JobListActivity extends Activity implements OnClickListener,
             Log.e("LangTask", "onPostExecute");
             if (DBHelper.getLanguages(false).size() == 0) {
                 Revamped_Loading_Dialog.hide_dialog();
-                Toast.makeText(
-                        JobListActivity.this,
-                        getResources().getString(
-                                R.string.no_alternative_or_server_side),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(JobListActivity.this, getResources().getString(R.string.no_alternative_or_server_side), Toast.LENGTH_LONG).show();
                 executeJobList(false, false);
             } else {
-                showLanguageDialog(
-                        getResources().getString(
-                                R.string.preffered_questionnaire_language),
-                        true);
+                showLanguageDialog(getResources().getString(R.string.preffered_questionnaire_language), true);
                 Revamped_Loading_Dialog.hide_dialog();
             }
 
@@ -6373,8 +5130,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
             loginResponse = myPrefs.getString(Constants.POST_FIELD_LOGIN_RESPONSE, null);
 
-            Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                    getString(R.string.job_download_alert));
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getString(R.string.job_download_alert));
             dialog = Revamped_Loading_Dialog.getDialog();
 
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
@@ -6388,48 +5144,29 @@ public class JobListActivity extends Activity implements OnClickListener,
         protected void onPostExecute(String result) {
             Log.e("JobbListTask", "onPostExecute");
             // dialog.onPostExecute();
-            if (result.equals("SessionExpire"))
-                return;
+            if (result.equals("SessionExpire")) return;
             if (result.equals("offline")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string._alert_title),
-                        getString(R.string.offline_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string._alert_title), getString(R.string.offline_alert), getString(R.string.alert_btn_lbl_ok));
                 Revamped_Loading_Dialog.hide_dialog();
                 return;
             }
             if (result.equals("timeout")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string.error_alert_title),
-                        getString(R.string.timeout_response_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.timeout_response_alert), getString(R.string.alert_btn_lbl_ok));
                 Revamped_Loading_Dialog.hide_dialog();
             } else if (result.equals("invalid")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string.error_alert_title),
-                        getString(R.string.invalid_server_response_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.invalid_server_response_alert), getString(R.string.alert_btn_lbl_ok));
                 Revamped_Loading_Dialog.hide_dialog();
                 return;
             }
 
             if (result.equals("offline")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string._alert_title),
-                        getString(R.string.offline_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string._alert_title), getString(R.string.offline_alert), getString(R.string.alert_btn_lbl_ok));
                 return;
             }
             if (result.equals("timeout")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string.error_alert_title),
-                        getString(R.string.timeout_response_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.timeout_response_alert), getString(R.string.alert_btn_lbl_ok));
             } else if (result.equals("error=")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string.error_alert_title),
-                        getString(R.string.invalid_server_response_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.invalid_server_response_alert), getString(R.string.alert_btn_lbl_ok));
 
             }
             sendMessage(STOP_DOWNLOAD, null);
@@ -6440,104 +5177,81 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected String doInBackground(Void... params) {
             Log.e("JobbListTask", "doInBackground");
-            if (!checkConnectionPost())
-                return "offline";
+            if (!checkConnectionPost()) return "offline";
 
             //if (Connector.cookies == null)
             {
-                if (showLogin(doLogin()))
-                    return "invalid";
+                if (showLogin(doLogin())) return "invalid";
             }
             if (!this.onlyOrder) {
-                dialog.changeMessage(getResources().getString(
-                        R.string.update_system_languages));
+                dialog.changeMessage(getResources().getString(R.string.update_system_languages));
 
                 getLanguages();
             }
             Parser parser = new Parser(dialog);
             {
-                dialog.changeMessage(getResources().getString(
-                        R.string.aadownloading_Assigned_jobs));
+                dialog.changeMessage(getResources().getString(R.string.aadownloading_Assigned_jobs));
                 String result = JobListPost();
-                if (result != null && result.indexOf("<orders>") == -1
-                        && result.contains("<script>")) {
+                if (result != null && result.indexOf("<orders>") == -1 && result.contains("<script>")) {
                     doLogin();
                     result = JobListPost();
                     // fieldResult = FieldListPost();
                 }
-                if (result == null || result.contains("timeout"))
-                    return "timeout";
-                if (result.contains("error="))
-                    return "invalid";
+                if (result == null || result.contains("timeout")) return "timeout";
+                if (result.contains("error=")) return "invalid";
                 if (result != null) {
                     Orders.setListOfOldORderIds();
                     Orders.clearProps();
                     branchProps = Orders.getBranchProps();
                 }
-                SplashScreen.addLog(new BasicLog(Constants.getJobListURL("11.90"),
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "DOWNLOADING jobs" + result, "DOWNLOADING"));
-                int ret_code = parser.parseXMLValues(result,
-                        Constants.JOB_LIST_RESP_FIELD_PARAM);
+                SplashScreen.addLog(new BasicLog(Constants.getJobListURL("11.90"), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "DOWNLOADING jobs" + result, "DOWNLOADING"));
+                int ret_code = parser.parseXMLValues(result, Constants.JOB_LIST_RESP_FIELD_PARAM);
 
                 if (ret_code == -123) {
                     isBranchPropErr = true;
                     SharedPreferences.Editor prefsEditor = myPrefs.edit();
-                    prefsEditor.putBoolean(Constants.ALREADY_BRANCHPROPERR,
-                            isBranchPropErr);
+                    prefsEditor.putBoolean(Constants.ALREADY_BRANCHPROPERR, isBranchPropErr);
 
                     prefsEditor.commit();
                 } else {
                     isBranchPropErr = false;
                     SharedPreferences.Editor prefsEditor = myPrefs.edit();
-                    prefsEditor.putBoolean(Constants.ALREADY_BRANCHPROPERR,
-                            isBranchPropErr);
+                    prefsEditor.putBoolean(Constants.ALREADY_BRANCHPROPERR, isBranchPropErr);
 
                     prefsEditor.commit();
                 }
                 Log.e("RESUbLTTTTTTTTTT", result);
-                if (this.onlyOrder && Sets.verifySetIds() == 0)
-                    return result;
+                if (this.onlyOrder && Sets.verifySetIds() == 0) return result;
             }
 
-            dialog.changeMessage(getResources().getString(
-                    R.string.aadownloading_Assigned_surveys));
+            dialog.changeMessage(getResources().getString(R.string.aadownloading_Assigned_surveys));
             String fieldResult = FieldListPost();
 
             Helper helper = new Helper();
             helper.deleteFilesInFolder();
             // helper.deleteSetsInFolder();
 
-            dialog.changeMessage(getResources().getString(
-                    R.string.aaparsing_assigned_jobs));
+            dialog.changeMessage(getResources().getString(R.string.aaparsing_assigned_jobs));
 
-            dialog.changeMessage(getResources().getString(
-                    R.string.aaparsing_assigned_surveys));
+            dialog.changeMessage(getResources().getString(R.string.aaparsing_assigned_surveys));
             if (fieldResult != null && fieldResult.contains("<data>"))
-                new Parser(dialog).parseXMLValues(fieldResult,
-                        Constants.SURVEY_LIST_RESP_FIELD_PARAM);
+                new Parser(dialog).parseXMLValues(fieldResult, Constants.SURVEY_LIST_RESP_FIELD_PARAM);
             else
-                new Parser(dialog).parseXMLValues(fieldResult,
-                        Constants.SURVEY_LIST_RESP_FIELD_PARAM_OLD);
+                new Parser(dialog).parseXMLValues(fieldResult, Constants.SURVEY_LIST_RESP_FIELD_PARAM_OLD);
             if (dialog != null) {
-                dialog.changeMessage(getResources().getString(
-                        R.string.aasaving_assigned_jobs_surveys_job));
+                dialog.changeMessage(getResources().getString(R.string.aasaving_assigned_jobs_surveys_job));
             }
 
-            if (!checkConnectionPost())
-                return "offline";
+            if (!checkConnectionPost()) return "offline";
 
             if (Connector.cookies == null) {
-                if (showLogin(doLogin()))
-                    return "SessionExpire";
+                if (showLogin(doLogin())) return "SessionExpire";
             }
 
             if (dialog != null) {
                 dialog.changeMessage(getString(R.string.questionnaire_downlaod_alert));
             } else {
-                Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                        getString(R.string.questionnaire_downlaod_alert));
+                Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getString(R.string.questionnaire_downlaod_alert));
                 dialog = Revamped_Loading_Dialog.getDialog();
             }
 
@@ -6547,12 +5261,9 @@ public class JobListActivity extends Activity implements OnClickListener,
                 doLogin();
                 result = QuestionnaireListPost();
             }
-            if (result == null)
-                return "timeout";
-            if (result.contains("timeout"))
-                return "timeout";
-            if (result.contains("error="))
-                return "error=";
+            if (result == null) return "timeout";
+            if (result.contains("timeout")) return "timeout";
+            if (result.contains("error=")) return "error=";
 
             // downloadVideo(
             // "VIDEO LINK",
@@ -6563,8 +5274,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
 
         private boolean saveSetDatatoLocalDB() {
-            if (Sets.getSets() == null || Sets.getSets().isEmpty())
-                return false;
+            if (Sets.getSets() == null || Sets.getSets().isEmpty()) return false;
             // for(int i=0;i<Sets.getSets().size();i++)
             // {
             // Set set = Sets.getSets().get(i);
@@ -6573,11 +5283,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             // }
             try {
                 if (dialog != null)
-                    dialog.changeMessage(dialog.getContext().getResources()
-                            .getString(R.string.aaparsing_complete));
+                    dialog.changeMessage(dialog.getContext().getResources().getString(R.string.aaparsing_complete));
                 DBHelper.deleteRecords(null);
-                Parser.allCorrectSets = DBHelper.AddSetss(Sets.getSets(),
-                        Revamped_Loading_Dialog.getDialog(), Lists.getAllLists());
+                Parser.allCorrectSets = DBHelper.AddSetss(Sets.getSets(), Revamped_Loading_Dialog.getDialog(), Lists.getAllLists());
             } catch (Exception e) {
             }
 
@@ -6590,9 +5298,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
             String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
             try {
-                app_ver = JobListActivity.this.getPackageManager()
-                        .getPackageInfo(JobListActivity.this.getPackageName(),
-                                0).versionName;
+                app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
             } catch (NameNotFoundException e) {
 
             }
@@ -6604,34 +5310,27 @@ public class JobListActivity extends Activity implements OnClickListener,
             // Initialize the login data to POST
             String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
             try {
-                app_ver = JobListActivity.this.getPackageManager()
-                        .getPackageInfo(JobListActivity.this.getPackageName(),
-                                0).versionName;
+                app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
             } catch (NameNotFoundException e) {
 
             }
 
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-            return Connector.postForm(Constants.getJobListURL(app_ver),
-                    extraDataList);
+            return Connector.postForm(Constants.getJobListURL(app_ver), extraDataList);
         }
 
     }
 
     public boolean showLogin(String result) {
-        if (result.contains("error="))
-            return false;
-        String result1 = new Parser().getValue(result,
-                Constants.LOGIN_RESP_FIELD_PARAM);
+        if (result.contains("error=")) return false;
+        String result1 = new Parser().getValue(result, Constants.LOGIN_RESP_FIELD_PARAM);
         if (result1.equals("0")) {
 
-            SharedPreferences myPrefs = getSharedPreferences("pref",
-                    MODE_PRIVATE);
+            SharedPreferences myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = myPrefs.edit();
             prefsEditor.putBoolean(Constants.ALREADY_LOGIN_STATUS, false);
             prefsEditor.commit();
-            Intent intent = new Intent(this.getApplicationContext(),
-                    NewLoginActivity.class);
+            Intent intent = new Intent(this.getApplicationContext(), NewLoginActivity.class);
             // comunicator.JobList = null;
             startActivity(intent);
             finish();
@@ -6639,8 +5338,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
 
-        prefsEditor.putString(Constants.POST_FIELD_LOGIN_RESPONSE,
-                result);
+        prefsEditor.putString(Constants.POST_FIELD_LOGIN_RESPONSE, result);
         prefsEditor.commit();
 
         return false;
@@ -6651,14 +5349,12 @@ public class JobListActivity extends Activity implements OnClickListener,
         // Initialize the login data to POST
         String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
         try {
-            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(
-                    JobListActivity.this.getPackageName(), 0).versionName;
+            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-        return Connector.postForm(Constants.getLangListURL(app_ver),
-                extraDataList);
+        return Connector.postForm(Constants.getLangListURL(app_ver), extraDataList);
     }
 
     public void getLanguages() {
@@ -6667,16 +5363,14 @@ public class JobListActivity extends Activity implements OnClickListener,
             doLogin();
             resultLang = LangListPost();
         }
-        if (resultLang != null && resultLang.indexOf("<lang_list>") > 0
-                && resultLang.indexOf("</lang_list>") > 0) {
+        if (resultLang != null && resultLang.indexOf("<lang_list>") > 0 && resultLang.indexOf("</lang_list>") > 0) {
             resultLang = resultLang.replace("<lang_list>", "<lang_lists>");
             int lastIndexOfLang = resultLang.lastIndexOf("</lang_list>");
             resultLang = resultLang.substring(0, lastIndexOfLang - 1);
             resultLang += "</lang_lists>";
 
         }
-        new Parser(dialog).parseXMLValues(resultLang,
-                Constants.DB_TABLE_language);
+        new Parser(dialog).parseXMLValues(resultLang, Constants.DB_TABLE_language);
 
     }
 
@@ -6693,15 +5387,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             return;
         }
         if (Helper.syncing == true) {
-            Toast.makeText(
-                    JobListActivity.this,
-                    getResources().getString(
-                            R.string.synch_is_already_in_progress),
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobListActivity.this, getResources().getString(R.string.synch_is_already_in_progress), Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(JobListActivity.this,
-                getResources().getString(R.string.press_back_again),
-                Toast.LENGTH_LONG).show();
+        Toast.makeText(JobListActivity.this, getResources().getString(R.string.press_back_again), Toast.LENGTH_LONG).show();
         ExitFromJobList();
 //        layout_job_list.setVisibility(View.GONE);
 //        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
@@ -6761,8 +5449,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (dialog != null) {
                 dialog.changeMessage(getString(R.string.questionnaire_downlaod_alert));
             } else {
-                Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                        getString(R.string.questionnaire_downlaod_alert));
+                Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getString(R.string.questionnaire_downlaod_alert));
                 dialog = Revamped_Loading_Dialog.getDialog();
             }
         }
@@ -6776,22 +5463,13 @@ public class JobListActivity extends Activity implements OnClickListener,
             ShowDBJobs();
             Revamped_Loading_Dialog.hide_dialog();
             if (result.equals("offline")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string._alert_title),
-                        getString(R.string.offline_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string._alert_title), getString(R.string.offline_alert), getString(R.string.alert_btn_lbl_ok));
                 return;
             }
             if (result.equals("timeout")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string.error_alert_title),
-                        getString(R.string.timeout_response_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.timeout_response_alert), getString(R.string.alert_btn_lbl_ok));
             } else if (result.equals("error=")) {
-                ShowAlert(JobListActivity.this,
-                        getString(R.string.error_alert_title),
-                        getString(R.string.invalid_server_response_alert),
-                        getString(R.string.alert_btn_lbl_ok));
+                ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.invalid_server_response_alert), getString(R.string.alert_btn_lbl_ok));
 
             }
         }
@@ -6799,12 +5477,10 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected String doInBackground(Void... params) {
             Log.e("QuestionnaireListTask", "doInBackground");
-            if (!checkConnectionPost())
-                return "offline";
+            if (!checkConnectionPost()) return "offline";
 
             if (Connector.cookies == null) {
-                if (showLogin(doLogin()))
-                    return "SessionExpire";
+                if (showLogin(doLogin())) return "SessionExpire";
             }
             Helper helper = new Helper();
             helper.deleteFilesInFolder();
@@ -6815,12 +5491,9 @@ public class JobListActivity extends Activity implements OnClickListener,
                 doLogin();
                 result = QuestionnaireListPost();
             }
-            if (result.contains("timeout"))
-                return "timeout";
-            if (result.contains("error="))
-                return "error=";
-            new Parser(dialog).parseXMLValues(result,
-                    Constants.QUES_RESP_FIELD_PARAM);
+            if (result.contains("timeout")) return "timeout";
+            if (result.contains("error=")) return "error=";
+            new Parser(dialog).parseXMLValues(result, Constants.QUES_RESP_FIELD_PARAM);
 
             return result;
         }
@@ -6829,31 +5502,18 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     public String doLogin() {
         SharedPreferences myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-        return loginPost(
-                myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                myPrefs.getString(Constants.POST_FIELD_LOGIN_PASSWORD, ""),
-                Constants.POST_VALUE_LOGIN_DO_LOGIN, true);
+        return loginPost(myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_PASSWORD, ""), Constants.POST_VALUE_LOGIN_DO_LOGIN, true);
     }
 
-    private String loginPost(final String username, final String password,
-                             String dologin, boolean detail) {
+    private String loginPost(final String username, final String password, String dologin, boolean detail) {
         // Initialize the login data to POST
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_LOGIN_USERNAME, username));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_LOGIN_PASSWORD, password));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_LOGIN_DO_LOGIN, dologin));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_LOGIN_NO_REDIR,
-                Constants.POST_VALUE_LOGIN_NO_REDIR));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_LOGIN_IS_APP,
-                Constants.POST_VALUE_LOGIN_IS_APP));
-        extraDataList.add(Helper.getNameValuePair(
-                Constants.POST_FIELD_LOGIN_SHOPPER_DETAIL,
-                Constants.POST_VALUE_LOGIN_IS_APP));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_USERNAME, username));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_PASSWORD, password));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_DO_LOGIN, dologin));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_NO_REDIR, Constants.POST_VALUE_LOGIN_NO_REDIR));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_IS_APP, Constants.POST_VALUE_LOGIN_IS_APP));
+        extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_SHOPPER_DETAIL, Constants.POST_VALUE_LOGIN_IS_APP));
         Connector.setContext(JobListActivity.this);
         return Connector.postForm(Constants.getLoginURL(), extraDataList);
     }
@@ -6861,11 +5521,9 @@ public class JobListActivity extends Activity implements OnClickListener,
     private void setFontSize(View v) {
         try {
             TextView textView = (TextView) v;
-            textView.setTextSize(UIHelper.getFontSize(JobListActivity.this,
-                    textView.getTextSize()));
+            textView.setTextSize(UIHelper.getFontSize(JobListActivity.this, textView.getTextSize()));
             if (Helper.getTheme(JobListActivity.this) == 0) {
-                textView.setTextColor(getResources().getColor(
-                        android.R.color.white));
+                textView.setTextColor(getResources().getColor(android.R.color.white));
             }
         } catch (Exception ex) {
 
@@ -6873,8 +5531,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         try {
             Button btnView = (Button) v;
-            btnView.setTextSize(UIHelper.getFontSize(JobListActivity.this,
-                    btnView.getTextSize()));
+            btnView.setTextSize(UIHelper.getFontSize(JobListActivity.this, btnView.getTextSize()));
             btnView.setTextColor(getResources().getColor(android.R.color.black));
 
         } catch (Exception ex) {
@@ -6883,8 +5540,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    public void ShowAlert(Context context, String title, final String message,
-                          String button_lbl) {
+    public void ShowAlert(Context context, String title, final String message, String button_lbl) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(title);
         TextView textView = new TextView(context);
@@ -6892,88 +5548,58 @@ public class JobListActivity extends Activity implements OnClickListener,
         setFontSize(textView);
         textView.setText(message);
         alert.setView(textView);
-        alert.setPositiveButton(button_lbl,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+        alert.setPositiveButton(button_lbl, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
         alert.show();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Toast.makeText(JobListActivity.this,
-                    getResources().getString(R.string.press_back_again),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(JobListActivity.this, getResources().getString(R.string.press_back_again), Toast.LENGTH_LONG).show();
             ExitFromJobList();
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
-    private ArrayList<SubmitQuestionnaireData> validateAllSQ(
-            ArrayList<SubmitQuestionnaireData> sqd) {
+    private ArrayList<SubmitQuestionnaireData> validateAllSQ(ArrayList<SubmitQuestionnaireData> sqd) {
 
         ArrayList<SubmitQuestionnaireData> newList = new ArrayList<SubmitQuestionnaireData>();
         for (int i = 0; i < sqd.size(); i++) {
             // if (sqd.get(i).getTriesInt() > 5)
             // continue;
             SubmitQuestionnaireData sq = sqd.get(i);
-            String status = DBHelper.getOrderStatus(
-                    Constants.DB_TABLE_JOBLIST,
-                    new String[]{Constants.DB_TABLE_JOBLIST_SN,},
-                    Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\""
-                            + sq.getOrderid() + "\"");
+            String status = DBHelper.getOrderStatus(Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_SN,}, Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sq.getOrderid() + "\"");
             if (status == null || !status.toLowerCase().equals("completed")) {
                 continue;
             }
-            String setId = DBHelper.getShelfSetIdItemsForJobList(
-                    Constants.DB_TABLE_POS,
-                    new String[]{Constants.DB_TABLE_POS_SetId},
-                    Constants.DB_TABLE_POS_OrderId + "=" + "\""
-                            + sq.getOrderid() + "\"");
+            String setId = DBHelper.getShelfSetIdItemsForJobList(Constants.DB_TABLE_POS, new String[]{Constants.DB_TABLE_POS_SetId}, Constants.DB_TABLE_POS_OrderId + "=" + "\"" + sq.getOrderid() + "\"");
             POS_Shelf pos_shelf_item = null;
             if (setId != null) {
                 Set set = validationSets.getSetAvailable(setId);
                 if (set != null) {
                     pos_shelf_item = new POS_Shelf(JobListActivity.this);
                     pos_shelf_item.listProducts = set.getListProducts();
-                    pos_shelf_item.listProductLocations = set
-                            .getListProductLocations();
-                    pos_shelf_item.listProductProperties = set
-                            .getListProductProperties();
-                    if (pos_shelf_item.price_item == null)
-                        pos_shelf_item.price_item = new Price();
+                    pos_shelf_item.listProductLocations = set.getListProductLocations();
+                    pos_shelf_item.listProductProperties = set.getListProductProperties();
+                    if (pos_shelf_item.price_item == null) pos_shelf_item.price_item = new Price();
                     if (pos_shelf_item.quantity_item == null)
                         pos_shelf_item.quantity_item = new Quantity();
                     if (pos_shelf_item.expiration_item == null)
                         pos_shelf_item.expiration_item = new Expiration();
-                    if (pos_shelf_item.note_item == null)
-                        pos_shelf_item.note_item = new Note();
+                    if (pos_shelf_item.note_item == null) pos_shelf_item.note_item = new Note();
                     if (pos_shelf_item.picture_item == null)
                         pos_shelf_item.picture_item = new Picture();
-                    pos_shelf_item = DBHelper.getShelfItems(
-                            Constants.DB_TABLE_POS,
-                            new String[]{Constants.DB_TABLE_POS_LocationId,
-                                    Constants.DB_TABLE_POS_OrderId,
-                                    Constants.DB_TABLE_POS_Price,
-                                    Constants.DB_TABLE_POS_ProductId,
-                                    Constants.DB_TABLE_POS_PropertyId,
-                                    Constants.DB_TABLE_POS_Quantity,
-                                    Constants.DB_TABLE_POS_SetId,
-                                    Constants.DB_TABLE_POS_Notee,
-                                    Constants.DB_TABLE_POS_date},
-                            Constants.DB_TABLE_POS_OrderId + "=" + "\""
-                                    + sq.getOrderid() + "\"", pos_shelf_item,
-                            false);
+                    pos_shelf_item = DBHelper.getShelfItems(Constants.DB_TABLE_POS, new String[]{Constants.DB_TABLE_POS_LocationId, Constants.DB_TABLE_POS_OrderId, Constants.DB_TABLE_POS_Price, Constants.DB_TABLE_POS_ProductId, Constants.DB_TABLE_POS_PropertyId, Constants.DB_TABLE_POS_Quantity, Constants.DB_TABLE_POS_SetId, Constants.DB_TABLE_POS_Notee, Constants.DB_TABLE_POS_date}, Constants.DB_TABLE_POS_OrderId + "=" + "\"" + sq.getOrderid() + "\"", pos_shelf_item, false);
                 }
 
             }
-            List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(false,
-                    sq, pos_shelf_item);
+            List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(false, sq, pos_shelf_item);
 
             if (nvp != null) {
 
@@ -6995,8 +5621,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             Log.e("DoLoginTask", "onPreExecute");
-            Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                    "Logging in...");
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, "Logging in...");
         }
 
         @Override
@@ -7005,8 +5630,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             Revamped_Loading_Dialog.hide_dialog();
             if (Connector.setCookieManager(JobListActivity.this))
                 loadUrlInWebViewDialog(JobListActivity.this, this.url);
-            else
-                return;
+            else return;
         }
 
         @Override
@@ -7021,8 +5645,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
     }
 
-    public class uploadingOrphanFiesTask extends
-            AsyncTask<Void, Integer, String> {
+    public class uploadingOrphanFiesTask extends AsyncTask<Void, Integer, String> {
         Revamped_Loading_Dialog dialog;
         private Dialog errDialog;
         private boolean isForced;
@@ -7042,10 +5665,8 @@ public class JobListActivity extends Activity implements OnClickListener,
         protected void onPostExecute(String result) {
             Log.e("uploadingOrphanFiesTask", "onPostExecute");
             Revamped_Loading_Dialog.hide_dialog();
-            if (errDialog != null)
-                errDialog.dismiss();
-            else
-                return;
+            if (errDialog != null) errDialog.dismiss();
+            else return;
         }
 
         @Override
@@ -7053,13 +5674,10 @@ public class JobListActivity extends Activity implements OnClickListener,
             Log.e("uploadingOrphanFiesTask", "doInBackground");
             checkConnectionPost();
             if (Connector.cookies == null) {
-                if (showLogin(doLogin()))
-                    return "SessionExpire";
+                if (showLogin(doLogin())) return "SessionExpire";
             }
-            if (isForced)
-                sendForceImages(Revamped_Loading_Dialog.getDialog());
-            else
-                sendOrphanImages(Revamped_Loading_Dialog.getDialog());
+            if (isForced) sendForceImages(Revamped_Loading_Dialog.getDialog());
+            else sendOrphanImages(Revamped_Loading_Dialog.getDialog());
             return "";
         }
 
@@ -7072,9 +5690,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    private ArrayList<filePathDataID> getFolderFiles(
-            ArrayList<filePathDataID> uploadList,
-            Revamped_Loading_Dialog dialog2) {
+    private ArrayList<filePathDataID> getFolderFiles(ArrayList<filePathDataID> uploadList, Revamped_Loading_Dialog dialog2) {
         ;
         filePathDataID file = new filePathDataID();
         String path = CheckerApp.localFilesDir//Environment.getExternalStorageDirectory()
@@ -7087,16 +5703,11 @@ public class JobListActivity extends Activity implements OnClickListener,
             Log.d("Files", "FileName:" + files[i].getName());
             if (files[i].getName().contains("UNIX")) {
                 dialog2.changeMessage("Uploading: " + files[i].getName());
-                String UNIX = getStringFromName(files[i].getName(), "CAM_UNIX",
-                        "O");
+                String UNIX = getStringFromName(files[i].getName(), "CAM_UNIX", "O");
                 String OID = getStringFromName(files[i].getName(), "O", "_D");
                 String DID = getStringFromName(files[i].getName(), "D", "_T");
-                if (DID.equals("LAST"))
-                    DID = null;
-                String res = Connector.saveFiletoServer(myPrefs.getBoolean(
-                                Constants.SETTINGS_ENABLE_TIME_STAMP, false), files[i]
-                                .getPath(), Constants.getAttachmentURL(), OID, DID,
-                        UNIX, "0", "", "");
+                if (DID.equals("LAST")) DID = null;
+                String res = Connector.saveFiletoServer(myPrefs.getBoolean(Constants.SETTINGS_ENABLE_TIME_STAMP, false), files[i].getPath(), Constants.getAttachmentURL(), OID, DID, UNIX, "0", "", "");
                 if (CheckResponse(res)) {
                     File f = new File(files[i].getPath());
                     try {
@@ -7105,19 +5716,14 @@ public class JobListActivity extends Activity implements OnClickListener,
                     }
                 } else {
                     if (CheckResponseForStorageQuota(res)) {
-                        ((Activity) JobListActivity.this)
-                                .runOnUiThread(new Runnable() {
+                        ((Activity) JobListActivity.this).runOnUiThread(new Runnable() {
 
-                                    @Override
-                                    public void run() {
+                            @Override
+                            public void run() {
 
-                                        ShowAlert(
-                                                JobListActivity.this,
-                                                "",
-                                                "ERROR uploading files, System storage quota is full please contact administrator to upload pending attachments.",
-                                                "Ok");
-                                    }
-                                });
+                                ShowAlert(JobListActivity.this, "", "ERROR uploading files, System storage quota is full please contact administrator to upload pending attachments.", "Ok");
+                            }
+                        });
                         break;
                     }
                 }
@@ -7126,8 +5732,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         return null;
     }
 
-    private String getStringFromName(String name, String start_tag,
-                                     String end_tag) {
+    private String getStringFromName(String name, String start_tag, String end_tag) {
 
         if (name.contains(start_tag) && name.contains(end_tag)) {
             int startindex = name.indexOf(start_tag) + start_tag.length();
@@ -7143,36 +5748,20 @@ public class JobListActivity extends Activity implements OnClickListener,
     private void sendOrphanImages(Revamped_Loading_Dialog dialog) {
         ArrayList<filePathDataID> uploadList = new ArrayList<filePathDataID>();
         uiList = new ArrayList<filePathDataID>();
-        uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(
-                Constants.UPLOAD_FILE_TABLE, new String[]{
-                        Constants.UPLOAD_FILe_MEDIAFILE,
-                        Constants.UPLOAD_FILe_DATAID,
-                        Constants.UPLOAD_FILe_ORDERID,
-                        Constants.UPLOAD_FILe_BRANCH_NAME,
-                        Constants.UPLOAD_FILe_CLIENT_NAME,
-                        Constants.UPLOAD_FILe_DATE,
-                        Constants.UPLOAD_FILe_SET_NAME,
-                        Constants.UPLOAD_FILe_SAMPLE_SIZE,
-                        Constants.UPLOAD_FILe_PRODUCTID,
-                        Constants.UPLOAD_FILe_LOCATIONID,}, null,
-                Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
+        uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(Constants.UPLOAD_FILE_TABLE, new String[]{Constants.UPLOAD_FILe_MEDIAFILE, Constants.UPLOAD_FILe_DATAID, Constants.UPLOAD_FILe_ORDERID, Constants.UPLOAD_FILe_BRANCH_NAME, Constants.UPLOAD_FILe_CLIENT_NAME, Constants.UPLOAD_FILe_DATE, Constants.UPLOAD_FILe_SET_NAME, Constants.UPLOAD_FILe_SAMPLE_SIZE, Constants.UPLOAD_FILe_PRODUCTID, Constants.UPLOAD_FILe_LOCATIONID,}, null, Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
 
         uiList.addAll(uploadList);
         for (int j = 0; j < uploadList.size(); j++) {
             try {
 
-                String message = getResources().getString(
-                        R.string.aauploading_file);
-                message = message
-                        .replace("##", uploadList.get(j).getFilePath());
+                String message = getResources().getString(R.string.aauploading_file);
+                message = message.replace("##", uploadList.get(j).getFilePath());
                 dialog.changeMessage(message);
                 // uploadFileList.add(Uri.parse(uploadList.get(j)));
                 String path = uploadList.get(j).getFilePath();
                 if (uploadList.get(j).getFilePath().startsWith("content")) {
-                    path = getRealPathFromURI(Uri.parse(uploadList.get(j)
-                            .getFilePath()));
-                } else if (uploadList.get(j).getFilePath()
-                        .startsWith("file:///")) {
+                    path = getRealPathFromURI(Uri.parse(uploadList.get(j).getFilePath()));
+                } else if (uploadList.get(j).getFilePath().startsWith("file:///")) {
                     path = path.replace("file:///", "/");
                 }
 
@@ -7186,26 +5775,11 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
                 myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-                String res = Connector.saveFiletoServer(myPrefs.getBoolean(
-                                Constants.SETTINGS_ENABLE_TIME_STAMP, false), path,
-                        Constants.getAttachmentURL(), uploadList.get(j)
-                                .getUPLOAD_FILe_ORDERID(), did,
-                        uploadList.get(j).getUPLOAD_FILe_DATE(), uploadList
-                                .get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
+                String res = Connector.saveFiletoServer(myPrefs.getBoolean(Constants.SETTINGS_ENABLE_TIME_STAMP, false), path, Constants.getAttachmentURL(), uploadList.get(j).getUPLOAD_FILe_ORDERID(), did, uploadList.get(j).getUPLOAD_FILe_DATE(), uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
                 if (CheckResponse(res)) {
 
-                    if (path.contains("CAM_O"
-                            + uploadList.get(j).getUPLOAD_FILe_ORDERID())) {
-                        String newPAth = path.replace(
-                                "CAM_O"
-                                        + uploadList.get(j)
-                                        .getUPLOAD_FILe_ORDERID(),
-                                "CAM_UNIX"
-                                        + uploadList.get(j)
-                                        .getUPLOAD_FILe_DATE()
-                                        + "O"
-                                        + uploadList.get(j)
-                                        .getUPLOAD_FILe_ORDERID());
+                    if (path.contains("CAM_O" + uploadList.get(j).getUPLOAD_FILe_ORDERID())) {
+                        String newPAth = path.replace("CAM_O" + uploadList.get(j).getUPLOAD_FILe_ORDERID(), "CAM_UNIX" + uploadList.get(j).getUPLOAD_FILe_DATE() + "O" + uploadList.get(j).getUPLOAD_FILe_ORDERID());
                         File f = new File(newPAth);
                         try {
                             f.delete();
@@ -7217,16 +5791,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                     // Toast.LENGTH_SHORT).show();
                     dialog.changeMessage(message + " Successful!");
                     try {
-                        String where = Constants.UPLOAD_FILe_MEDIAFILE + "="
-                                + "\"" + uploadList.get(j).getFilePath() + "\"";
+                        String where = Constants.UPLOAD_FILe_MEDIAFILE + "=" + "\"" + uploadList.get(j).getFilePath() + "\"";
                         DBAdapter.openDataBase();
-                        DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE, where,
-                                null);
+                        DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE, where, null);
                         DBAdapter.closeDataBase();
 
-                        DBHelper.deleteFile(uploadList.get(j)
-                                .getUPLOAD_FILe_ORDERID(), uploadList.get(j)
-                                .getFilePath());
+                        DBHelper.deleteFile(uploadList.get(j).getUPLOAD_FILe_ORDERID(), uploadList.get(j).getFilePath());
                         if (path.contains(Constants.UPLOAD_PATH)) {
                             File file = new File(path);
                             file.delete();
@@ -7239,19 +5809,14 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 } else {
                     if (CheckResponseForStorageQuota(res)) {
-                        ((Activity) JobListActivity.this)
-                                .runOnUiThread(new Runnable() {
+                        ((Activity) JobListActivity.this).runOnUiThread(new Runnable() {
 
-                                    @Override
-                                    public void run() {
+                            @Override
+                            public void run() {
 
-                                        ShowAlert(
-                                                JobListActivity.this,
-                                                "",
-                                                "ERROR uploading files, System storage quota is full please contact administrator to upload pending attachments.",
-                                                "Ok");
-                                    }
-                                });
+                                ShowAlert(JobListActivity.this, "", "ERROR uploading files, System storage quota is full please contact administrator to upload pending attachments.", "Ok");
+                            }
+                        });
                         break;
                     }
                     dialog.changeMessage(message + " Not Successful!");
@@ -7274,21 +5839,17 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private boolean CheckResponseForStorageQuota(String result) {
-        if (!Helper.IsValidResponse(result,
-                Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
+        if (!Helper.IsValidResponse(result, Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
             return false;
         }
         if (result.contains("<2>")) {
             return true;
-        } else
-            return false;
+        } else return false;
     }
 
-    private void showOrphanImages(ArrayList<filePathDataID> uploadList,
-                                  Context context) {
+    private void showOrphanImages(ArrayList<filePathDataID> uploadList, Context context) {
 
-        if (uploadList.size() > 0)
-            layoutAttachErr.setVisibility(RelativeLayout.VISIBLE);
+        if (uploadList.size() > 0) layoutAttachErr.setVisibility(RelativeLayout.VISIBLE);
         else {
             // Toast.makeText(JobListActivity.this, "NO FILES LEFT!",
             // Toast.LENGTH_LONG).show();
@@ -7329,8 +5890,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 // getString(R.string.alert_btn_lbl_ok));
                 // return;
                 // }
-                uploadingOrphanFiesTask uploadFileTask = new uploadingOrphanFiesTask(
-                        dialog, false);
+                uploadingOrphanFiesTask uploadFileTask = new uploadingOrphanFiesTask(dialog, false);
                 uploadFileTask.execute();
             }
         });
@@ -7348,8 +5908,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
         });
 
-        ArrayAdapter<filePathDataID> adapter = new orphansPreviewAdapter(
-                context, uploadList, false, layoutAttachErr, dialogAttach);
+        ArrayAdapter<filePathDataID> adapter = new orphansPreviewAdapter(context, uploadList, false, layoutAttachErr, dialogAttach);
 
         thisList.setAdapter(adapter);
         layoutAttachErr.setOnClickListener(new OnClickListener() {
@@ -7358,19 +5917,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             public void onClick(View v) {
 
                 ArrayList<filePathDataID> uploadList = new ArrayList<filePathDataID>();
-                uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(
-                        Constants.UPLOAD_FILE_TABLE, new String[]{
-                                Constants.UPLOAD_FILe_MEDIAFILE,
-                                Constants.UPLOAD_FILe_DATAID,
-                                Constants.UPLOAD_FILe_ORDERID,
-                                Constants.UPLOAD_FILe_BRANCH_NAME,
-                                Constants.UPLOAD_FILe_CLIENT_NAME,
-                                Constants.UPLOAD_FILe_DATE,
-                                Constants.UPLOAD_FILe_SET_NAME,
-                                Constants.UPLOAD_FILe_SAMPLE_SIZE,
-                                Constants.UPLOAD_FILe_PRODUCTID,
-                                Constants.UPLOAD_FILe_LOCATIONID,}, null,
-                        Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
+                uploadList = DBHelper.getOrphanQuestionnaireUploadFiles(Constants.UPLOAD_FILE_TABLE, new String[]{Constants.UPLOAD_FILe_MEDIAFILE, Constants.UPLOAD_FILe_DATAID, Constants.UPLOAD_FILe_ORDERID, Constants.UPLOAD_FILe_BRANCH_NAME, Constants.UPLOAD_FILe_CLIENT_NAME, Constants.UPLOAD_FILe_DATE, Constants.UPLOAD_FILe_SET_NAME, Constants.UPLOAD_FILe_SAMPLE_SIZE, Constants.UPLOAD_FILe_PRODUCTID, Constants.UPLOAD_FILe_LOCATIONID,}, null, Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
                 if (uploadList.size() > 0) {
                     layoutAttachErr.setVisibility(RelativeLayout.VISIBLE);
                     showOrphanImages(uploadList, JobListActivity.this);
@@ -7421,8 +5968,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         protected void onPreExecute() {
             Log.e("SubmitSurveyTask", "onPreExecute");
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-            if (progressBars != null && progressBars.getDialog() != null
-                    && progressBars.getDialog().isShowing())
+            if (progressBars != null && progressBars.getDialog() != null && progressBars.getDialog().isShowing())
                 progressBars.getDialog().dismiss();
             progressBars = customProgressAlert(JobListActivity.this);
         }
@@ -7449,19 +5995,13 @@ public class JobListActivity extends Activity implements OnClickListener,
                     shortList.add(c);
                     load_certificates(shortList);
                     if (result.contains("Passed")) {
-                        Toast.makeText(getApplicationContext(),
-                                        "CheckerTificate Passed", Toast.LENGTH_LONG)
-                                .show();
+                        Toast.makeText(getApplicationContext(), "CheckerTificate Passed", Toast.LENGTH_LONG).show();
                     } else if (result.contains("Blocked")) {
-                        Toast.makeText(getApplicationContext(),
-                                        "CheckerTificate is Blocked", Toast.LENGTH_LONG)
-                                .show();
+                        Toast.makeText(getApplicationContext(), "CheckerTificate is Blocked", Toast.LENGTH_LONG).show();
                     } else {
                         //delete it here
                         QuestionnaireActivity.deleteJobRecords(JobListActivity.this.certOrdeId);
-                        Toast.makeText(getApplicationContext(),
-                                        "CheckerTificate not passed", Toast.LENGTH_LONG)
-                                .show();
+                        Toast.makeText(getApplicationContext(), "CheckerTificate not passed", Toast.LENGTH_LONG).show();
                     }
 
                     JobListActivity.this.cert = null;
@@ -7480,14 +6020,10 @@ public class JobListActivity extends Activity implements OnClickListener,
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
             Log.e("SubmitSurveyTask", "onProgressUpdate");
-            if (jobmsg != null)
-                progressBars.setTprogressBarJobsText(jobmsg);
-            else
-                progressBars.setTprogressBarJobsText("");
-            if (imgmsg != null)
-                progressBars.setTprogressBarImagesText(imgmsg);
-            else
-                progressBars.setTprogressBarImagesText("");
+            if (jobmsg != null) progressBars.setTprogressBarJobsText(jobmsg);
+            else progressBars.setTprogressBarJobsText("");
+            if (imgmsg != null) progressBars.setTprogressBarImagesText(imgmsg);
+            else progressBars.setTprogressBarImagesText("");
 
             progressBars.setprogressBarJobsMax(jobProgressTotal);
             progressBars.setprogressBarJobsProgress(jobProgress + 1);
@@ -7502,8 +6038,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             checkConnectionPost();
             Log.e("SubmitSurveyTask", "doInBackground");
             if (Connector.cookies == null) {
-                if (showLogin(doLogin()))
-                    return "SessionExpire";
+                if (showLogin(doLogin())) return "SessionExpire";
             }
             String result = SubmitSurvey(isProgress, isOnlyCertificate);
             if (result.contains("<script>")) {
@@ -7518,13 +6053,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             String out = "";
             if (joborders != null) {
                 for (int i = 0; i < joborders.size(); i++) {
-                    if (joborders.get(i).orderItem != null
-                            && joborders.get(i).orderItem.getSetName() != null
-                            && joborders.get(i).orderItem.getOrderID().equals(
-                            orderId)) {
+                    if (joborders.get(i).orderItem != null && joborders.get(i).orderItem.getSetName() != null && joborders.get(i).orderItem.getOrderID().equals(orderId)) {
                         out = joborders.get(i).orderItem.getSetName();
-                        if (orderId.contains("-"))
-                            out = joborders.get(i).orderItem.getBranchName();
+                        if (orderId.contains("-")) out = joborders.get(i).orderItem.getBranchName();
                         break;
                     }
                 }
@@ -7560,15 +6091,12 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (archivedSQ != null) {
                 return SubmitArchiveJob(archivedSQ);
             }
-            if (!inProgress)
-                sqd = getNumberofQuestionnaire(inProgress, isCertificate);
-            else
-                sqd = mAdapter.getInProgressJobs();
+            if (!inProgress) sqd = getNumberofQuestionnaire(inProgress, isCertificate);
+            else sqd = mAdapter.getInProgressJobs();
             if (sqd == null || sqd.size() < 1) {
                 return "";
             }
-            if (!inProgress)
-                sqd = validateAllSQ(sqd);
+            if (!inProgress) sqd = validateAllSQ(sqd);
             ArrayList<filePathDataID> uploadList = new ArrayList<filePathDataID>();
             jobProgressTotal = sqd.size();
             jobProgress = 0;
@@ -7592,25 +6120,18 @@ public class JobListActivity extends Activity implements OnClickListener,
             byte[] data = Base64.decode(input, Base64.DEFAULT);
             String text = new String(data, "UTF-8");
 
-            List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(
-                    text);
+            List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(text);
             if (nvp == null || nvp.size() == 0) {
                 return null;
             }
             String result = null;
-            result = Connector
-                    .postForm(Constants.getSubmitSurveyURL(), nvp);
+            result = Connector.postForm(Constants.getSubmitSurveyURL(), nvp);
 
             if (!CheckResponse(result)) {
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "PARSEDJOB NOT SUCCESS Order Uploaded: Reply from server:" + result, "PARSED"));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "PARSEDJOB NOT SUCCESS Order Uploaded: Reply from server:" + result, "PARSED"));
 
-            } else SplashScreen.addLog(new BasicLog(
-                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                    "PARSEDJOB SUCCESS Order Uploaded: Reply from server:" + result, "PARSED"));
+            } else
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "PARSEDJOB SUCCESS Order Uploaded: Reply from server:" + result, "PARSED"));
 
             return "";
         }
@@ -7619,23 +6140,14 @@ public class JobListActivity extends Activity implements OnClickListener,
             imgProgressTotal = 0;
             imageProgress = 0;
 
-            String setId = DBHelper.getShelfSetIdItemsForJobList(
-                    Constants.DB_TABLE_POS,
-                    new String[]{Constants.DB_TABLE_POS_SetId},
-                    Constants.DB_TABLE_POS_OrderId + "=" + "\""
-                            + sq.getOrderid() + "\"");
+            String setId = DBHelper.getShelfSetIdItemsForJobList(Constants.DB_TABLE_POS, new String[]{Constants.DB_TABLE_POS_SetId}, Constants.DB_TABLE_POS_OrderId + "=" + "\"" + sq.getOrderid() + "\"");
             Set set = null;
             if (sq.getOrderid() != null) {
-                String setlink = DBHelper.getSetIdFromOrder(
-                        Constants.DB_TABLE_JOBLIST,
-                        new String[]{Constants.DB_TABLE_JOBLIST_SETID},
-                        Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\""
-                                + sq.getOrderid() + "\"");
+                String setlink = DBHelper.getSetIdFromOrder(Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_SETID}, Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sq.getOrderid() + "\"");
                 sq.setSetid(setlink);
                 try {
                     // set = (Set) DBHelper.convertFromBytes(setId);
-                    set = (Set) DBHelper.convertFromBytesWithOrder(setlink,
-                            sq.getOrderid());
+                    set = (Set) DBHelper.convertFromBytesWithOrder(setlink, sq.getOrderid());
                     sq.setSetVersionID(set.getSetVersionID());
 
                 } catch (Exception e) {
@@ -7652,8 +6164,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     setName = getSetsRecords(sq.getOrderid());
 
                 }
-                String message = getResources().getString(
-                        R.string.aauploading_job);
+                String message = getResources().getString(R.string.aauploading_job);
                 message = message.replace("##", setName);
                 jobmsg = (message + ", " + (i + 1) + "/" + size);
                 publishProgress(null);
@@ -7663,8 +6174,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 if (set == null) {
                     try {
-                        set = (Set) DBHelper.convertFromBytesWithOrder(setId,
-                                sq.getOrderid());
+                        set = (Set) DBHelper.convertFromBytesWithOrder(setId, sq.getOrderid());
                     } catch (Exception e) {
                         e.printStackTrace();
                         set = null;
@@ -7674,115 +6184,58 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                     pos_shelf_item = new POS_Shelf(JobListActivity.this);
                     pos_shelf_item.listProducts = set.getListProducts();
-                    pos_shelf_item.listProductLocations = set
-                            .getListProductLocations();
-                    pos_shelf_item.listProductProperties = set
-                            .getListProductProperties();
-                    if (pos_shelf_item.price_item == null)
-                        pos_shelf_item.price_item = new Price();
+                    pos_shelf_item.listProductLocations = set.getListProductLocations();
+                    pos_shelf_item.listProductProperties = set.getListProductProperties();
+                    if (pos_shelf_item.price_item == null) pos_shelf_item.price_item = new Price();
                     if (pos_shelf_item.quantity_item == null)
                         pos_shelf_item.quantity_item = new Quantity();
                     if (pos_shelf_item.expiration_item == null)
                         pos_shelf_item.expiration_item = new Expiration();
-                    if (pos_shelf_item.note_item == null)
-                        pos_shelf_item.note_item = new Note();
+                    if (pos_shelf_item.note_item == null) pos_shelf_item.note_item = new Note();
                     if (pos_shelf_item.picture_item == null)
                         pos_shelf_item.picture_item = new Picture();
-                    pos_shelf_item = DBHelper.getShelfItems(
-                            Constants.DB_TABLE_POS, new String[]{
-                                    Constants.DB_TABLE_POS_LocationId,
-                                    Constants.DB_TABLE_POS_OrderId,
-                                    Constants.DB_TABLE_POS_Price,
-                                    Constants.DB_TABLE_POS_ProductId,
-                                    Constants.DB_TABLE_POS_PropertyId,
-                                    Constants.DB_TABLE_POS_Quantity,
-                                    Constants.DB_TABLE_POS_SetId,
-                                    Constants.DB_TABLE_POS_Notee,
-                                    Constants.DB_TABLE_POS_date},
-                            Constants.DB_TABLE_POS_OrderId + "=" + "\""
-                                    + sq.getOrderid() + "\"",
-                            pos_shelf_item, false);
+                    pos_shelf_item = DBHelper.getShelfItems(Constants.DB_TABLE_POS, new String[]{Constants.DB_TABLE_POS_LocationId, Constants.DB_TABLE_POS_OrderId, Constants.DB_TABLE_POS_Price, Constants.DB_TABLE_POS_ProductId, Constants.DB_TABLE_POS_PropertyId, Constants.DB_TABLE_POS_Quantity, Constants.DB_TABLE_POS_SetId, Constants.DB_TABLE_POS_Notee, Constants.DB_TABLE_POS_date}, Constants.DB_TABLE_POS_OrderId + "=" + "\"" + sq.getOrderid() + "\"", pos_shelf_item, false);
                 }
             }
-            List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(
-                    isProgress, sq, pos_shelf_item);
+            List<NameValuePair> nvp = PrepareQuestionnaireNameValuePair(isProgress, sq, pos_shelf_item);
             if (nvp == null) {
                 return null;
             }
             String nvplog = nvp.toString();
             nvplog = "";
             String result = null;
-            result = Connector
-                    .postForm(Constants.getSubmitSurveyURL(), nvp);
+            result = Connector.postForm(Constants.getSubmitSurveyURL(), nvp);
 
             if (!CheckResponse(result)) {
 
-                SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(),
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "NOT SUCCESS Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result + "nvp=" + nvplog, sq.getOrderid()));
+                SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "NOT SUCCESS Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result + "nvp=" + nvplog, sq.getOrderid()));
 
                 if (result != null && result.toLowerCase().contains("not all questions"))
-                    result = Connector
-                            .postForm(Constants.getSubmitSurveyURL(), nvp);
+                    result = Connector.postForm(Constants.getSubmitSurveyURL(), nvp);
                 if (!CheckResponse(result)) {
 //no suyccess even after re-try
-                    SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(),
-                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                            "NOT SUCCESS AFTER RETRY Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result + "nvp=" + nvplog, sq.getOrderid()));
-                    if (sq.getOrderid() != null
-                            && sq.getOrderid().contains("CC")) {
-                        DBHelper.updateOrders(
-                                Constants.DB_TABLE_ORDERS,
-                                new String[]{
-                                        Constants.DB_TABLE_ORDERS_ORDERID,
-                                        Constants.DB_TABLE_ORDERS_STATUS,
-                                        Constants.DB_TABLE_ORDERS_START_TIME,},
-                                sq.getOrderid(), "In progress", "", null);
+                    SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "NOT SUCCESS AFTER RETRY Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result + "nvp=" + nvplog, sq.getOrderid()));
+                    if (sq.getOrderid() != null && sq.getOrderid().contains("CC")) {
+                        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, sq.getOrderid(), "In progress", "", null);
                     }
                     return result;
                 } else {
-                    SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(),
-                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                            "SUCCESS AFTER RETRY Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result, sq.getOrderid()));
+                    SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "SUCCESS AFTER RETRY Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result, sq.getOrderid()));
                 }
             } else {
-                SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(),
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "SUCCESS Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result, sq.getOrderid()));
+                SplashScreen.addLog(new BasicLog(Constants.getSubmitSurveyURL(), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "SUCCESS Order Uploaded:" + sq.getOrderid() + " Reply from server:" + result, sq.getOrderid()));
 
             }
 
-            uploadList = DBHelper.getQuestionnaireUploadFiles(
-                    Constants.UPLOAD_FILE_TABLE, new String[]{
-                            Constants.UPLOAD_FILe_MEDIAFILE,
-                            Constants.UPLOAD_FILe_DATAID,
-                            Constants.UPLOAD_FILe_ORDERID,
-                            Constants.UPLOAD_FILe_BRANCH_NAME,
-                            Constants.UPLOAD_FILe_CLIENT_NAME,
-                            Constants.UPLOAD_FILe_DATE,
-                            Constants.UPLOAD_FILe_SET_NAME,
-                            Constants.UPLOAD_FILe_SAMPLE_SIZE,},
-                    sq.getOrderid(), Constants.DB_TABLE_SUBMITSURVEY_OID,
-                    uploadList);
+            uploadList = DBHelper.getQuestionnaireUploadFiles(Constants.UPLOAD_FILE_TABLE, new String[]{Constants.UPLOAD_FILe_MEDIAFILE, Constants.UPLOAD_FILe_DATAID, Constants.UPLOAD_FILe_ORDERID, Constants.UPLOAD_FILe_BRANCH_NAME, Constants.UPLOAD_FILe_CLIENT_NAME, Constants.UPLOAD_FILe_DATE, Constants.UPLOAD_FILe_SET_NAME, Constants.UPLOAD_FILe_SAMPLE_SIZE,}, sq.getOrderid(), Constants.DB_TABLE_SUBMITSURVEY_OID, uploadList);
             renameCamFiles(uploadList, sq.getUnix());
 
             imgProgressTotal = uploadList.size();
 
-            SplashScreen.addLog(new BasicLog(
-                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                    "Attachments Uploading:" + sq.getOrderid() + " Total attachments" + imgProgressTotal, sq.getOrderid()));
+            SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Attachments Uploading:" + sq.getOrderid() + " Total attachments" + imgProgressTotal, sq.getOrderid()));
 // uploadFileList.clear();
             if (set == null) {
-                String setlink = DBHelper.getSetIdFromOrder(
-                        Constants.DB_TABLE_JOBLIST,
-                        new String[]{Constants.DB_TABLE_JOBLIST_SETID},
-                        Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\""
-                                + sq.getOrderid() + "\"");
+                String setlink = DBHelper.getSetIdFromOrder(Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_SETID}, Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sq.getOrderid() + "\"");
                 try {
                     set = (Set) DBHelper.convertFromBytes(setlink);
                 } catch (Exception e) {
@@ -7794,10 +6247,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                 imageProgress = j;
                 String path = uploadList.get(j).getFilePath();
                 if (uploadList.get(j).getFilePath().startsWith("content")) {
-                    path = getRealPathFromURI(Uri.parse(uploadList.get(j)
-                            .getFilePath()));
-                } else if (uploadList.get(j).getFilePath()
-                        .startsWith("file:///")) {
+                    path = getRealPathFromURI(Uri.parse(uploadList.get(j).getFilePath()));
+                } else if (uploadList.get(j).getFilePath().startsWith("file:///")) {
                     path = path.replace("file:///", "/");
                 }
 
@@ -7816,28 +6267,12 @@ public class JobListActivity extends Activity implements OnClickListener,
 
                 myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
                 String forceSmping = null;
-                if (set != null)
-                    forceSmping = set.getForceImageStamp();
-                String res = Connector.saveFiletoServer(
-                        (forceSmping != null && forceSmping.equals("1")),
-                        path, Constants.getAttachmentURL(),
-                        sq.getOrderid(), did, sq.getUnix(),
-                        uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
+                if (set != null) forceSmping = set.getForceImageStamp();
+                String res = Connector.saveFiletoServer((forceSmping != null && forceSmping.equals("1")), path, Constants.getAttachmentURL(), sq.getOrderid(), did, sq.getUnix(), uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
                 if (CheckResponse(res)) {
-                    SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(),
-                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                            "Attachments Uploading:SUCCESS" + path + " ORDER" + sq.getOrderid() + " Total attachments" + imgProgressTotal, sq.getOrderid()));
-                    if (path.contains("CAM_O"
-                            + uploadList.get(j).getUPLOAD_FILe_ORDERID())) {
-                        String newPAth = path.replace("CAM_O"
-                                        + uploadList.get(j)
-                                        .getUPLOAD_FILe_ORDERID(),
-                                "CAM_UNIX"
-                                        + sq.getUnix()
-                                        + "O"
-                                        + uploadList.get(j)
-                                        .getUPLOAD_FILe_ORDERID());
+                    SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Attachments Uploading:SUCCESS" + path + " ORDER" + sq.getOrderid() + " Total attachments" + imgProgressTotal, sq.getOrderid()));
+                    if (path.contains("CAM_O" + uploadList.get(j).getUPLOAD_FILe_ORDERID())) {
+                        String newPAth = path.replace("CAM_O" + uploadList.get(j).getUPLOAD_FILe_ORDERID(), "CAM_UNIX" + sq.getUnix() + "O" + uploadList.get(j).getUPLOAD_FILe_ORDERID());
                         File f = new File(newPAth);
                         try {
                             // f.delete();
@@ -7846,15 +6281,11 @@ public class JobListActivity extends Activity implements OnClickListener,
                         }
                     }
                     try {
-                        String where = Constants.UPLOAD_FILe_MEDIAFILE
-                                + "=" + "\""
-                                + uploadList.get(j).getFilePath() + "\"";
+                        String where = Constants.UPLOAD_FILe_MEDIAFILE + "=" + "\"" + uploadList.get(j).getFilePath() + "\"";
                         DBAdapter.openDataBase();
-                        DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE,
-                                where, null);
+                        DBAdapter.db.delete(Constants.UPLOAD_FILE_TABLE, where, null);
                         DBAdapter.closeDataBase();
-                        DBHelper.deleteFile(sqd.get(i).getOrderid(),
-                                uploadList.get(j).getFilePath());
+                        DBHelper.deleteFile(sqd.get(i).getOrderid(), uploadList.get(j).getFilePath());
                         if (path.contains(Constants.UPLOAD_PATH)) {
                             File file = new File(path);
 //                                file.delete();
@@ -7868,34 +6299,22 @@ public class JobListActivity extends Activity implements OnClickListener,
                     try {
                         if (res.contains("<script>")) {
                             doLogin();
-                            res = Connector.saveFiletoServer(
-                                    (forceSmping != null && forceSmping.equals("1")),
-                                    path, Constants.getAttachmentURL(),
-                                    sq.getOrderid(), did, sq.getUnix(),
-                                    uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
+                            res = Connector.saveFiletoServer((forceSmping != null && forceSmping.equals("1")), path, Constants.getAttachmentURL(), sq.getOrderid(), did, sq.getUnix(), uploadList.get(j).getUPLOAD_FILe_Sample_size(), uploadList.get(j).getUPLOAD_FILe_PRODUCTID(), uploadList.get(j).getUPLOAD_FILe_LOCATIONID());
                         }
                     } catch (Exception e) {
                         Log.e("exception", e.toString());
                     }
-                    SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(),
-                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                            "Attachments Uploading:NOTSUCCESS" + path + " ORDER" + sq.getOrderid() + " Total attachments" + imgProgressTotal + "RESPONSE=" + res, sq.getOrderid()));
+                    SplashScreen.addLog(new BasicLog(Constants.getAttachmentURL(), myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Attachments Uploading:NOTSUCCESS" + path + " ORDER" + sq.getOrderid() + " Total attachments" + imgProgressTotal + "RESPONSE=" + res, sq.getOrderid()));
 
                     if (CheckResponseForStorageQuota(res)) {
-                        ((Activity) JobListActivity.this)
-                                .runOnUiThread(new Runnable() {
+                        ((Activity) JobListActivity.this).runOnUiThread(new Runnable() {
 
-                                    @Override
-                                    public void run() {
+                            @Override
+                            public void run() {
 
-                                        ShowAlert(
-                                                JobListActivity.this,
-                                                "",
-                                                "ERROR uploading files, System storage quota is full please contact administrator to upload pending attachments..",
-                                                "Ok");
-                                    }
-                                });
+                                ShowAlert(JobListActivity.this, "", "ERROR uploading files, System storage quota is full please contact administrator to upload pending attachments..", "Ok");
+                            }
+                        });
                         isquotafull = true;
                         imgmsg = "Storage Quota Full!";
                         break;
@@ -7907,28 +6326,20 @@ public class JobListActivity extends Activity implements OnClickListener,
             publishProgress(null);
             if (CheckResponse(result)) {
 
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                        "uploading done now deleting job: " + sq.getOrderid(), sq.getOrderid()));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "uploading done now deleting job: " + sq.getOrderid(), sq.getOrderid()));
                 if (isProgress) {
                 } else {
                     try {
                         try {
-                            DBHelper.deleteTimeStamp(
-                                    sdf.format(new Date()), sq
-                                            .getOrderid());
+                            DBHelper.deleteTimeStamp(sdf.format(new Date()), sq.getOrderid());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        String where = Constants.DB_TABLE_JOBLIST_ORDERID
-                                + "=" + "\"" + sq.getOrderid()
-                                + "\"";
+                        String where = Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sq.getOrderid() + "\"";
                         Calendar myCalendar = Calendar.getInstance();
                         String url = myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, "");
                         String user = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
-                        ArchiveData archiveData =
-                                new ArchiveData(sq, url, user, sq.getOrderid(), nvp, uploadList);
+                        ArchiveData archiveData = new ArchiveData(sq, url, user, sq.getOrderid(), nvp, uploadList);
                         try {
                             DBHelper.convertArchiveToBytes(archiveData, "archived_user_" + user + "order_" + sq.getOrderid() + ".txt");
                         } catch (Exception ex) {
@@ -7967,16 +6378,13 @@ public class JobListActivity extends Activity implements OnClickListener,
                         setName = getSetsRecords(sq.getOrderid());
 
                     }
-                    String message = getResources().getString(
-                            R.string.aauploading_job);
+                    String message = getResources().getString(R.string.aauploading_job);
                     message = message.replace("##", setName);
                     jobmsg = (message + " had error from server side ");
                 }
                 try {
-                    String where = Constants.DB_TABLE_JOBLIST_ORDERID + "="
-                            + "\"" + sq.getOrderid() + "\"";
-                    DBHelper.incrementTriesAgainstOrderId(where, sq
-                            .getTries());
+                    String where = Constants.DB_TABLE_JOBLIST_ORDERID + "=" + "\"" + sq.getOrderid() + "\"";
+                    DBHelper.incrementTriesAgainstOrderId(where, sq.getTries());
 
                 } catch (Exception ex) {
                     String str = "";
@@ -8012,8 +6420,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    public class AlternateOrdersTask extends
-            AsyncTask<String, Integer, ArrayList<AlternateJob>> {
+    public class AlternateOrdersTask extends AsyncTask<String, Integer, ArrayList<AlternateJob>> {
         String OrderId;
         String status;
         private String date;
@@ -8034,22 +6441,14 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             Log.e("AlternateOrdersTask", "onPreExecute");
-            Revamped_Loading_Dialog.show_dialog(
-                    JobListActivity.this,
-                    getResources().getString(
-                            R.string.downloading_alternative_jobs));
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getResources().getString(R.string.downloading_alternative_jobs));
         }
 
         @Override
         protected void onPostExecute(ArrayList<AlternateJob> result) {
             Log.e("AlternateOrdersTask", "onPostExecute");
             Revamped_Loading_Dialog.hide_dialog();
-            showalternateJobs(
-                    JobListActivity.this,
-                    result,
-                    this.OrderId,
-                    (this.status != null && this.status.toLowerCase().equals(
-                            "scheduled")));
+            showalternateJobs(JobListActivity.this, result, this.OrderId, (this.status != null && this.status.toLowerCase().equals("scheduled")));
         }
 
         @Override
@@ -8070,8 +6469,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             Log.e("AssignAlternateTask", "onPreExecute");
-            Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                    getResources().getString(R.string.assigning_alternate_job));
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getResources().getString(R.string.assigning_alternate_job));
         }
 
         @Override
@@ -8080,17 +6478,10 @@ public class JobListActivity extends Activity implements OnClickListener,
             Revamped_Loading_Dialog.hide_dialog();
             if (result != null && result.toLowerCase().contains("<status>1")) {
                 this.dialog.dismiss();
-                Toast.makeText(
-                        JobListActivity.this,
-                        getResources().getString(
-                                R.string.order_assigned_refreshing_job_list), Toast.LENGTH_LONG).show();
+                Toast.makeText(JobListActivity.this, getResources().getString(R.string.order_assigned_refreshing_job_list), Toast.LENGTH_LONG).show();
                 startDownloadingJobs(false, true);
             } else {
-                Toast.makeText(
-                                JobListActivity.this,
-                                getResources().getString(
-                                        R.string.unable_to_assign_this_order), Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(JobListActivity.this, getResources().getString(R.string.unable_to_assign_this_order), Toast.LENGTH_LONG).show();
             }
         }
 
@@ -8105,11 +6496,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     String result = AcceptJob(params[1]);
                 }
             } else {
-                Toast.makeText(
-                                JobListActivity.this,
-                                getResources().getString(
-                                        R.string.unable_to_assign_this_order), Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(JobListActivity.this, getResources().getString(R.string.unable_to_assign_this_order), Toast.LENGTH_LONG).show();
             }
 
             return res;
@@ -8118,17 +6505,12 @@ public class JobListActivity extends Activity implements OnClickListener,
 
         private String AcceptJob(String orderid) {
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_VALUE_JOB_DETAIL_ACCEPT,
-                    Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_VALUE_JOB_DETAIL_ACCEPT, Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
             // if (order == null)
             // setOrder();
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_JOB_DETAIL_ORDER_ID, orderid));
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, "1"));
-            String result = Connector.postForm(Constants.getJobStartURL(),
-                    extraDataList);
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_ORDER_ID, orderid));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, "1"));
+            String result = Connector.postForm(Constants.getJobStartURL(), extraDataList);
             return result;
         }
     }
@@ -8164,11 +6546,9 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     private ArrayList<AlternateJob> parseAlternateJobs(String resultLang) {
         this.alternateResult = resultLang;
-        if (resultLang != null
-                && resultLang.toLowerCase().contains("<status>1")) {
+        if (resultLang != null && resultLang.toLowerCase().contains("<status>1")) {
             ArrayList<AlternateJob> theseJobs = new ArrayList<AlternateJob>();
-            int start = resultLang
-                    .indexOf("<alternative_orders type=\"array\">\r\n") + 36;
+            int start = resultLang.indexOf("<alternative_orders type=\"array\">\r\n") + 36;
             int end = resultLang.lastIndexOf("\r\n</alternative_orders") - 1;
             String data = resultLang.substring(start, end);
             String[] alljobs = data.split("\r\n");
@@ -8188,8 +6568,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             data += "";
             return theseJobs;
 
-        } else
-            return null;
+        } else return null;
     }
 
     private String getAlternateJobsFromAPI(String orderid) {
@@ -8197,16 +6576,13 @@ public class JobListActivity extends Activity implements OnClickListener,
         // Initialize the login data to POST
         String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
         try {
-            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(
-                    JobListActivity.this.getPackageName(), 0).versionName;
+            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
 
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-        return Connector.postForm(
-                Constants.getAlternateJobsURL(app_ver, "0", orderid),
-                extraDataList);
+        return Connector.postForm(Constants.getAlternateJobsURL(app_ver, "0", orderid), extraDataList);
     }
 
     private String assignNewJob(String OldOrderid, String NewOrderid) {
@@ -8214,15 +6590,13 @@ public class JobListActivity extends Activity implements OnClickListener,
         // Initialize the login data to POST
         String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
         try {
-            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(
-                    JobListActivity.this.getPackageName(), 0).versionName;
+            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
 
         List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-        return Connector.postForm(Constants.assignAlternateJobsURL(app_ver,
-                "1", OldOrderid, NewOrderid), extraDataList);
+        return Connector.postForm(Constants.assignAlternateJobsURL(app_ver, "1", OldOrderid, NewOrderid), extraDataList);
     }
 
     private String assignNewDate(String OldOrderid, String date) {
@@ -8230,8 +6604,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         try {
             Date dateTemp = simpleDateFormat.parse(date);
-            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(
-                    "yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
             // date = simpleDateFormat1.format(dateTemp);
             // date =
             // simpleDateFormat1.parse(date2);
@@ -8242,8 +6615,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         // Initialize the login data to POST
         String app_ver = Constants.POST_VALUE_QUES_APP_ACTUAL_VERSION;
         try {
-            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(
-                    JobListActivity.this.getPackageName(), 0).versionName;
+            app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
 
         }
@@ -8251,8 +6623,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         extraDataList.add(Helper.getNameValuePair("OrderID", OldOrderid));
         extraDataList.add(Helper.getNameValuePair("change_date", "1"));
         extraDataList.add(Helper.getNameValuePair("selected_date", date));
-        return Connector.postForm(Constants.assignAlternateDateJobsURL(app_ver,
-                "1", OldOrderid, date), extraDataList);
+        return Connector.postForm(Constants.assignAlternateDateJobsURL(app_ver, "1", OldOrderid, date), extraDataList);
 
     }
 
@@ -8263,89 +6634,58 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    public void showalternateJobs(Context context,
-                                  final ArrayList<AlternateJob> result, final String oldorderid,
-                                  final boolean isScheuled) {
+    public void showalternateJobs(Context context, final ArrayList<AlternateJob> result, final String oldorderid, final boolean isScheuled) {
         final Dialog dialog = new Dialog(JobListActivity.this);
         dialog.setContentView(R.layout.dialog_alternate_branch);
 
         // set the custom dialog components - text, image and button
         TextView text = (TextView) dialog.findViewById(R.id.textView1);
         if (result == null) {
-            text.setText(getResources().getString(
-                    R.string.unable_to_find_alternative_job));
+            text.setText(getResources().getString(R.string.unable_to_find_alternative_job));
             // text.setText(this.alternateResult);
         }
 
         ListView listJobs = (ListView) dialog.findViewById(R.id.lvjobs);
-        listJobs.setAdapter(new AlternateJobsAdapter(JobListActivity.this,
-                result));
+        listJobs.setAdapter(new AlternateJobsAdapter(JobListActivity.this, result));
 
         listJobs.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    final int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        JobListActivity.this);
-                builder.setMessage(
-                                getResources().getString(
-                                        R.string.do_you_Want_relace_order))
-                        .setTitle(
-                                getResources().getString(R.string._alert_title))
-                        .setCancelable(false)
-                        .setPositiveButton(
-                                getResources()
-                                        .getString(
-                                                R.string.questionnaire_exit_delete_alert_yes),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(
-                                            DialogInterface dialogg, int id) {
-                                        AssignAlternateTask atask = new AssignAlternateTask(
-                                                dialog);
-                                        if (isScheuled)
-                                            atask.execute(oldorderid,
-                                                    result.get(position)
-                                                            .getOrderID(), "");
-                                        else
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(JobListActivity.this);
+                builder.setMessage(getResources().getString(R.string.do_you_Want_relace_order)).setTitle(getResources().getString(R.string._alert_title)).setCancelable(false).setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogg, int id) {
+                        AssignAlternateTask atask = new AssignAlternateTask(dialog);
+                        if (isScheuled)
+                            atask.execute(oldorderid, result.get(position).getOrderID(), "");
+                        else
 
-                                            atask.execute(oldorderid, result
-                                                    .get(position).getOrderID());
-                                        dialog.dismiss();
+                            atask.execute(oldorderid, result.get(position).getOrderID());
+                        dialog.dismiss();
 
-                                    }
-                                })
-                        .setNegativeButton(
-                                getResources()
-                                        .getString(
-                                                R.string.questionnaire_exit_delete_alert_no),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(
-                                            DialogInterface dialogg, int id) {
+                    }
+                }).setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogg, int id) {
 
-                                    }
-                                });
+                    }
+                });
                 AlertDialog alert = builder.create();
                 alert.show();
             }
         });
 
-        dialog.findViewById(R.id.btnOk).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-        dialog.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        android.view.WindowManager.LayoutParams params = dialog.getWindow()
-                .getAttributes();
+        dialog.findViewById(R.id.btnOk).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        android.view.WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
         params.height = LayoutParams.FILL_PARENT;
 
-        dialog.getWindow().setAttributes(
-                (android.view.WindowManager.LayoutParams) params);
+        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
         dialog.show();
     }
 
@@ -8360,8 +6700,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     }
 
                 } catch (Exception ex) {
-                    Toast.makeText(JobListActivity.this,
-                            ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(JobListActivity.this, ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -8385,15 +6724,12 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    public void sendBalloonData(final int assigned_tab,
-                                final int scheduled_tab, final int in_progress_tab,
-                                final int completed_tab, final ArrayList<orderListItem> joblistarray) {
+    public void sendBalloonData(final int assigned_tab, final int scheduled_tab, final int in_progress_tab, final int completed_tab, final ArrayList<orderListItem> joblistarray) {
         new Thread(new Runnable() {
 
             @Override
             public void run() {
-                NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi
-                        .getConnectedNodes(mApiClient).await();
+                NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mApiClient).await();
                 for (Node node : nodes.getNodes()) {
 
                     BalloonData bdata = new BalloonData();
@@ -8403,11 +6739,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                     bdata.setCompleted(completed_tab);
                     bdata.setJoblistarray(joblistarray);
 
-                    byte[] baloonbytes = SerializationUtils
-                            .serialize((BalloonData) bdata);
-                    MessageApi.SendMessageResult result = Wearable.MessageApi
-                            .sendMessage(mApiClient, node.getId(),
-                                    "BALLOON_DATA", baloonbytes).await();
+                    byte[] baloonbytes = SerializationUtils.serialize((BalloonData) bdata);
+                    MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(mApiClient, node.getId(), "BALLOON_DATA", baloonbytes).await();
 
                     if (result.getStatus().isSuccess()) {
                         int i = 0;
@@ -8434,14 +6767,11 @@ public class JobListActivity extends Activity implements OnClickListener,
             @Override
             public void run() {
                 if (QuestionnaireActivity.QUESTION_LAST.equals(path)) {
-                    NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi
-                            .getConnectedNodes(mApiClient).await();
+                    NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mApiClient).await();
                     for (Node node : nodes.getNodes()) {
                         if (text == null) {
                             try {
-                                MessageApi.SendMessageResult result = Wearable.MessageApi
-                                        .sendMessage(mApiClient, node.getId(),
-                                                path, null).await();
+                                MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(mApiClient, node.getId(), path, null).await();
 
                                 if (result.getStatus().isSuccess()) {
                                     int i = 0;
@@ -8457,14 +6787,11 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
 
                 if (STOP_DOWNLOAD.equals(path) || STOP_UPLOAD.equals(path)) {
-                    NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi
-                            .getConnectedNodes(mApiClient).await();
+                    NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mApiClient).await();
                     for (Node node : nodes.getNodes()) {
                         if (text == null) {
                             try {
-                                MessageApi.SendMessageResult result = Wearable.MessageApi
-                                        .sendMessage(mApiClient, node.getId(),
-                                                path, null).await();
+                                MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(mApiClient, node.getId(), path, null).await();
 
                             } catch (Exception ex) {
                             }
@@ -8527,8 +6854,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     }
 
-    public void getInProgressJobs(Revamped_Loading_Dialog dialogg,
-                                  final ArrayList<String> arrayList) {
+    public void getInProgressJobs(Revamped_Loading_Dialog dialogg, final ArrayList<String> arrayList) {
         String wheree = null;
         if (arrayList != null) {
             wheree = "";
@@ -8550,8 +6876,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             int i = 0;
             i++;
         }
-        class RefundTask extends
-                AsyncTask<Void, Integer, ArrayList<QuestionnaireData>> {
+        class RefundTask extends AsyncTask<Void, Integer, ArrayList<QuestionnaireData>> {
             private String updateDate;
             private Revamped_Loading_Dialog dialogg;
 
@@ -8563,11 +6888,9 @@ public class JobListActivity extends Activity implements OnClickListener,
             protected void onPreExecute() {
                 Log.e("RefundTask", "onPreExecute");
                 if (dialogg == null) {
-                    Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                            getString(R.string.ufinsheddwnloding));
+                    Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getString(R.string.ufinsheddwnloding));
                     dialogg = Revamped_Loading_Dialog.getDialog();
-                } else
-                    dialogg.changeMessage(getString(R.string.ufinsheddwnloding));
+                } else dialogg.changeMessage(getString(R.string.ufinsheddwnloding));
                 this.updateDate = null;
                 parser = new Parser();
             }
@@ -8577,8 +6900,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 Date dServerTime;
                 Date dAppTime = null;
                 String serverPattern = "yyyy-MM-dd HH:mm:ss";
-                SimpleDateFormat inputFormat = new SimpleDateFormat(
-                        serverPattern);
+                SimpleDateFormat inputFormat = new SimpleDateFormat(serverPattern);
                 String appPattern = "yyyy-MM-dd kk:mm:ss";
                 SimpleDateFormat outputFormat = new SimpleDateFormat(appPattern);
 
@@ -8593,10 +6915,8 @@ public class JobListActivity extends Activity implements OnClickListener,
                             ex.printStackTrace();
                         }
                     }
-                    if (dServerTime.compareTo(dAppTime) >= 1)
-                        return true;// server time is latest
-                    else
-                        return false;// app time is latest
+                    if (dServerTime.compareTo(dAppTime) >= 1) return true;// server time is latest
+                    else return false;// app time is latest
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -8605,14 +6925,11 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             }
 
-            public String parseDateToddMMyyyy(String time, String inputPattern,
-                                              String outputPattern) {
+            public String parseDateToddMMyyyy(String time, String inputPattern, String outputPattern) {
                 // inputPattern = "yyyy-MM-dd HH:mm:ss";
                 // outputPattern = "dd-MMM-yyyy h:mm a";
-                SimpleDateFormat inputFormat = new SimpleDateFormat(
-                        inputPattern);
-                SimpleDateFormat outputFormat = new SimpleDateFormat(
-                        outputPattern);
+                SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+                SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
                 Date date = null;
                 String str = time;
@@ -8634,146 +6951,80 @@ public class JobListActivity extends Activity implements OnClickListener,
                 InProgressAnswersData thisOrder = null;
                 ArrayList<InProgressAnswersData> datas = new ArrayList<InProgressAnswersData>();
                 for (int i = 0; result != null && i < result.size(); i++) {
-                    if (thisOrder == null
-                            || (result.get(i).getOrderID() != null && !result
-                            .get(i).getOrderID()
-                            .equals(thisOrder.getFileOrderID()))) {
-                        if (thisOrder != null)
-                            datas.add(thisOrder);
+                    if (thisOrder == null || (result.get(i).getOrderID() != null && !result.get(i).getOrderID().equals(thisOrder.getFileOrderID()))) {
+                        if (thisOrder != null) datas.add(thisOrder);
 
-                        thisOrder = new InProgressAnswersData(result.get(i)
-                                .getDataID(), result.get(i).getOrderID(),
-                                result.get(i).getSetName(), result.get(i)
-                                .getClientName(), result.get(i)
-                                .getBranch());
+                        thisOrder = new InProgressAnswersData(result.get(i).getDataID(), result.get(i).getOrderID(), result.get(i).getSetName(), result.get(i).getClientName(), result.get(i).getBranch());
                     }
                     thisOrder.setItem(result.get(i));
                 }
-                if (thisOrder != null)
-                    datas.add(thisOrder);
-                if (datas.size() > 0)
-                    saveThisInProgressJob(datas, 0);
-                else
-                    executeShowListTask(dialogg);
+                if (thisOrder != null) datas.add(thisOrder);
+                if (datas.size() > 0) saveThisInProgressJob(datas, 0);
+                else executeShowListTask(dialogg);
             }
 
-            private void saveThisInProgressJob(
-                    final ArrayList<InProgressAnswersData> datas, final int i) {
+            private void saveThisInProgressJob(final ArrayList<InProgressAnswersData> datas, final int i) {
                 String orderid = "";
                 String startTime = null;
                 boolean isCompletedJob = false;
-                ArrayList<Order> ordrs = DBHelper.getOrders(DBHelper.whereOrderNotArchived,
-                        Constants.DB_TABLE_ORDERS, new String[]{
-                                Constants.DB_TABLE_ORDERS_ORDERID,
-                                Constants.DB_TABLE_ORDERS_STATUS,
-                                Constants.DB_TABLE_ORDERS_START_TIME,},
-                        Constants.DB_TABLE_ORDERS_ORDERID);
+                ArrayList<Order> ordrs = DBHelper.getOrders(DBHelper.whereOrderNotArchived, Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, Constants.DB_TABLE_ORDERS_ORDERID);
                 for (int j = 0; ordrs != null && j < ordrs.size(); j++) {
-                    if (ordrs.get(j).getOrderID() != null
-                            && ordrs.get(j).getOrderID()
-                            .equals(datas.get(i).getFileOrderID())
-                            && ordrs.get(j).getStatusName() != null
-                            && ordrs.get(j).getStatusName()
-                            .contains("ompleted")) {
+                    if (ordrs.get(j).getOrderID() != null && ordrs.get(j).getOrderID().equals(datas.get(i).getFileOrderID()) && ordrs.get(j).getStatusName() != null && ordrs.get(j).getStatusName().contains("ompleted")) {
                         isCompletedJob = true;
                     }
                 }
 
                 try {
                     orderid = datas.get(i).getFileOrderID();
-                    startTime = DBHelper.getTimeStamp(datas.get(i)
-                            .getFileOrderID());
+                    startTime = DBHelper.getTimeStamp(datas.get(i).getFileOrderID());
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                if (!isCompletedJob
-                        && startTime != null
-                        && startTime.length() > 0
-                        && datas.get(i).getItems() != null
-                        && datas.get(i).getItems().size() > 0
-                        && datas.get(i).getItems().get(0).getStartTime() != null
-                        && datas.get(i).getItems().get(0).getStartTime()
-                        .length() > 0) {
-                    boolean isServerTimeLatest = checkTime(datas.get(i)
-                            .getItems().get(0).getStartTime(), startTime);
+                if (!isCompletedJob && startTime != null && startTime.length() > 0 && datas.get(i).getItems() != null && datas.get(i).getItems().size() > 0 && datas.get(i).getItems().get(0).getStartTime() != null && datas.get(i).getItems().get(0).getStartTime().length() > 0) {
+                    boolean isServerTimeLatest = checkTime(datas.get(i).getItems().get(0).getStartTime(), startTime);
                     //isServerTimeLatest=true;
                     if (isServerTimeLatest)// server latest update
                     {
                         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
+                            public void onClick(DialogInterface dialog, int which) {
                                 switch (which) {
                                     case DialogInterface.BUTTON_POSITIVE:
                                         // Yes button clicked
                                         saveThisItem(datas.get(i));
                                         try {
-                                            SimpleDateFormat sdf = new SimpleDateFormat(
-                                                    "yyyy-MM-dd  kk:mm:ss",
-                                                    Locale.ENGLISH);
-                                            DBHelper.updateTimeStamp(sdf
-                                                            .format(new Date()),
-                                                    datas.get(i).getFileOrderID());
+                                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  kk:mm:ss", Locale.ENGLISH);
+                                            DBHelper.updateTimeStamp(sdf.format(new Date()), datas.get(i).getFileOrderID());
                                         } catch (IOException e) {
                                             // TODO Auto-generated catch block
                                             e.printStackTrace();
                                         }
 
-                                        if (i + 1 == datas.size()
-                                                || datas.size() == 0)
+                                        if (i + 1 == datas.size() || datas.size() == 0)
                                             executeShowListTask(dialogg);
-                                        else
-                                            saveThisInProgressJob(datas, i + 1);
+                                        else saveThisInProgressJob(datas, i + 1);
                                         break;
 
                                     case DialogInterface.BUTTON_NEGATIVE:
                                         // No button clicked
-                                        if (i + 1 == datas.size()
-                                                || datas.size() == 0)
+                                        if (i + 1 == datas.size() || datas.size() == 0)
                                             executeShowListTask(dialogg);
-                                        else
-                                            saveThisInProgressJob(datas, i + 1);
+                                        else saveThisInProgressJob(datas, i + 1);
                                         break;
                                 }
                             }
                         };
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(
-                                JobListActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(JobListActivity.this);
                         builder.setCancelable(false);
-                        builder.setMessage(
-                                        "WARNING: "
-                                                + getResources().getString(
-                                                R.string.replace_inprog_job)
-                                                + datas.get(i).getClientName()
-                                                + " ,"
-                                                + datas.get(i).getSetName()
-                                                + " ,"
-                                                + datas.get(i).getBranch()
-                                                + " (OrderId:"
-                                                + datas.get(i).getFileOrderID()
-                                                + ") "
-                                                + getResources().getString(
-                                                R.string.remainin_msg))
-                                .setPositiveButton(
-                                        getString(R.string.s_item_column_0_line_344_file_210),
-                                        dialogClickListener)
-                                .setNegativeButton(
-                                        getString(R.string.s_item_column_0_line_346_file_210),
-                                        dialogClickListener)
-                                .setCancelable(false).show();
+                        builder.setMessage("WARNING: " + getResources().getString(R.string.replace_inprog_job) + datas.get(i).getClientName() + " ," + datas.get(i).getSetName() + " ," + datas.get(i).getBranch() + " (OrderId:" + datas.get(i).getFileOrderID() + ") " + getResources().getString(R.string.remainin_msg)).setPositiveButton(getString(R.string.s_item_column_0_line_344_file_210), dialogClickListener).setNegativeButton(getString(R.string.s_item_column_0_line_346_file_210), dialogClickListener).setCancelable(false).show();
                     } else // app time latest
                     {
-                        Toast.makeText(
-                                JobListActivity.this,
-                                getResources().getString(
-                                        R.string.alreadyExistingJob),
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(JobListActivity.this, getResources().getString(R.string.alreadyExistingJob), Toast.LENGTH_LONG).show();
                         if (i + 1 == datas.size() || datas.size() == 0)
                             executeShowListTask(dialogg);
-                        else
-                            saveThisInProgressJob(datas, i + 1);
+                        else saveThisInProgressJob(datas, i + 1);
                     }
                 } else if (!isCompletedJob) // no job in prohgress save from
                 // server
@@ -8781,23 +7032,14 @@ public class JobListActivity extends Activity implements OnClickListener,
                     // Toast.makeText(
                     // JobListActivity.this,"fresh job",
                     // Toast.LENGTH_SHORT).show();
-                    DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
-                            new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
-                                    Constants.DB_TABLE_ORDERS_STATUS,
-                                    Constants.DB_TABLE_ORDERS_START_TIME,},
-                            orderid, "In progress", datas.get(i).getItems()
-                                    .get(0).getStartTime(), null);
+                    DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, orderid, "In progress", datas.get(i).getItems().get(0).getStartTime(), null);
 
                     saveThisFreshItem(datas.get(i));
-                    if (i + 1 == datas.size() || datas.size() == 0)
-                        executeShowListTask(dialogg);
-                    else
-                        saveThisInProgressJob(datas, i + 1);
+                    if (i + 1 == datas.size() || datas.size() == 0) executeShowListTask(dialogg);
+                    else saveThisInProgressJob(datas, i + 1);
                 } else {
-                    if (i + 1 == datas.size() || datas.size() == 0)
-                        executeShowListTask(dialogg);
-                    else
-                        saveThisInProgressJob(datas, i + 1);
+                    if (i + 1 == datas.size() || datas.size() == 0) executeShowListTask(dialogg);
+                    else saveThisInProgressJob(datas, i + 1);
                 }
 
             }
@@ -8811,53 +7053,32 @@ public class JobListActivity extends Activity implements OnClickListener,
                     String mitype = result.getMiType();
                     String time = result.getMi();
 
-                    if (mitype != null && mitype.equals("3") && time != null
-                            && !time.equals("")) // 2017-10-19 to 19-10-2017
+                    if (mitype != null && mitype.equals("3") && time != null && !time.equals("")) // 2017-10-19 to 19-10-2017
                     {
-                        time = parseDateToddMMyyyy(time, "yyyy-MM-dd",
-                                "dd-MM-yyyy");
+                        time = parseDateToddMMyyyy(time, "yyyy-MM-dd", "dd-MM-yyyy");
                     }
-                    if (mitype != null && mitype.equals("4") && time != null
-                            && !time.equals(""))// HH:MM:SS
+                    if (mitype != null && mitype.equals("4") && time != null && !time.equals(""))// HH:MM:SS
                     {
                         // no change required
                     }
-                    if (mitype != null && mitype.equals("6") && time != null
-                            && !time.equals(""))// HH:MM 16:35:00 to 16:35
+                    if (mitype != null && mitype.equals("6") && time != null && !time.equals(""))// HH:MM 16:35:00 to 16:35
                     {
                         time = parseDateToddMMyyyy(time, "HH:mm:ss", "HH:mm");
                     }
-                    if (mitype != null && mitype.equals("7") && time != null
-                            && !time.equals(""))// MM:SS 00:35:54 to 35:54
+                    if (mitype != null && mitype.equals("7") && time != null && !time.equals(""))// MM:SS 00:35:54 to 35:54
                     {
                         time = parseDateToddMMyyyy(time, "HH:mm:ss", "mm:ss");
                     }
-                    if (mitype != null && mitype.equals("8") && time != null
-                            && !time.equals(""))// SS 00:54 to 54
+                    if (mitype != null && mitype.equals("8") && time != null && !time.equals(""))// SS 00:54 to 54
                     {
                         time = parseDateToddMMyyyy(time, "HH:mm:ss", "ss");
                     }
 
                     result.setMi(time);
-                    DBHelper.updateThisQuestionnaire(
-                            Constants.DB_TABLE_QUESTIONNAIRE,
-                            new String[]{
-                                    Constants.DB_TABLE_QUESTIONNAIRE_DATAID,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_QTEXT,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_QVALUE,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_QTL,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_OT,
-                                    Constants.DB_TABLE_ANSWERS_BRANCHID,
-                                    Constants.DB_TABLE_ANSWERS_WORKERID,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_ORDERID,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_FT,
-                                    Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_LoopInfo},
-                            result, null, result.getSetID());
+                    DBHelper.updateThisQuestionnaire(Constants.DB_TABLE_QUESTIONNAIRE, new String[]{Constants.DB_TABLE_QUESTIONNAIRE_DATAID, Constants.DB_TABLE_QUESTIONNAIRE_QTEXT, Constants.DB_TABLE_QUESTIONNAIRE_QVALUE, Constants.DB_TABLE_QUESTIONNAIRE_QTL, Constants.DB_TABLE_QUESTIONNAIRE_OT, Constants.DB_TABLE_ANSWERS_BRANCHID, Constants.DB_TABLE_ANSWERS_WORKERID, Constants.DB_TABLE_QUESTIONNAIRE_ORDERID, Constants.DB_TABLE_QUESTIONNAIRE_FT, Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME, Constants.DB_TABLE_QUESTIONNAIRE_LoopInfo}, result, null, result.getSetID());
 
                     try {
-                        DBHelper.convertToBytes(parser.attached_files,
-                                "inprogress_data");
+                        DBHelper.convertToBytes(parser.attached_files, "inprogress_data");
 
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
@@ -8869,11 +7090,9 @@ public class JobListActivity extends Activity implements OnClickListener,
 
             private void saveThisItem(InProgressAnswersData answers) {
 
-                String where = Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "="
-                        + "\"" + answers.getFileOrderID() + "\"";
+                String where = Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "=" + "\"" + answers.getFileOrderID() + "\"";
                 DBAdapter.openDataBase();
-                DBAdapter.db.delete(Constants.DB_TABLE_QUESTIONNAIRE, where,
-                        null);
+                DBAdapter.db.delete(Constants.DB_TABLE_QUESTIONNAIRE, where, null);
                 DBAdapter.openDataBase();
                 DBAdapter.db.delete(Constants.DB_TABLE_ANSWERS, where, null);
                 DBAdapter.openDataBase();
@@ -8883,8 +7102,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                 DBAdapter.openDataBase();
                 DBAdapter.db.delete(Constants.DB_TABLE_ORDERS, where, null);
                 DBAdapter.openDataBase();
-                DBAdapter.db.delete(Constants.DB_TABLE_SUBMITSURVEY, where,
-                        null);
+                DBAdapter.db.delete(Constants.DB_TABLE_SUBMITSURVEY, where, null);
 
                 ArrayList<QuestionnaireData> results = answers.getItems();
 
@@ -8893,53 +7111,32 @@ public class JobListActivity extends Activity implements OnClickListener,
                     String mitype = result.getMiType();
                     String time = result.getMi();
 
-                    if (mitype != null && mitype.equals("3") && time != null
-                            && !time.equals("")) // 2017-10-19 to 19-10-2017
+                    if (mitype != null && mitype.equals("3") && time != null && !time.equals("")) // 2017-10-19 to 19-10-2017
                     {
-                        time = parseDateToddMMyyyy(time, "yyyy-MM-dd",
-                                "dd-MM-yyyy");
+                        time = parseDateToddMMyyyy(time, "yyyy-MM-dd", "dd-MM-yyyy");
                     }
-                    if (mitype != null && mitype.equals("4") && time != null
-                            && !time.equals(""))// HH:MM:SS
+                    if (mitype != null && mitype.equals("4") && time != null && !time.equals(""))// HH:MM:SS
                     {
                         // no change required
                     }
-                    if (mitype != null && mitype.equals("6") && time != null
-                            && !time.equals(""))// HH:MM 16:35:00 to 16:35
+                    if (mitype != null && mitype.equals("6") && time != null && !time.equals(""))// HH:MM 16:35:00 to 16:35
                     {
                         time = parseDateToddMMyyyy(time, "HH:mm:ss", "HH:mm");
                     }
-                    if (mitype != null && mitype.equals("7") && time != null
-                            && !time.equals(""))// MM:SS 00:35:54 to 35:54
+                    if (mitype != null && mitype.equals("7") && time != null && !time.equals(""))// MM:SS 00:35:54 to 35:54
                     {
                         time = parseDateToddMMyyyy(time, "HH:mm:ss", "mm:ss");
                     }
-                    if (mitype != null && mitype.equals("8") && time != null
-                            && !time.equals(""))// SS 00:54 to 54
+                    if (mitype != null && mitype.equals("8") && time != null && !time.equals(""))// SS 00:54 to 54
                     {
                         time = parseDateToddMMyyyy(time, "HH:mm:ss", "ss");
                     }
 
                     result.setMi(time);
-                    DBHelper.updateThisQuestionnaire(
-                            Constants.DB_TABLE_QUESTIONNAIRE,
-                            new String[]{
-                                    Constants.DB_TABLE_QUESTIONNAIRE_DATAID,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_QTEXT,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_QVALUE,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_QTL,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_OT,
-                                    Constants.DB_TABLE_ANSWERS_BRANCHID,
-                                    Constants.DB_TABLE_ANSWERS_WORKERID,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_ORDERID,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_FT,
-                                    Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME,
-                                    Constants.DB_TABLE_QUESTIONNAIRE_LoopInfo},
-                            result, null, result.getSetID());
+                    DBHelper.updateThisQuestionnaire(Constants.DB_TABLE_QUESTIONNAIRE, new String[]{Constants.DB_TABLE_QUESTIONNAIRE_DATAID, Constants.DB_TABLE_QUESTIONNAIRE_QTEXT, Constants.DB_TABLE_QUESTIONNAIRE_QVALUE, Constants.DB_TABLE_QUESTIONNAIRE_QTL, Constants.DB_TABLE_QUESTIONNAIRE_OT, Constants.DB_TABLE_ANSWERS_BRANCHID, Constants.DB_TABLE_ANSWERS_WORKERID, Constants.DB_TABLE_QUESTIONNAIRE_ORDERID, Constants.DB_TABLE_QUESTIONNAIRE_FT, Constants.DB_TABLE_SUBMITSURVEY_REPORTED_FINISH_TIME, Constants.DB_TABLE_QUESTIONNAIRE_LoopInfo}, result, null, result.getSetID());
 
                     try {
-                        DBHelper.convertToBytes(parser.attached_files,
-                                "inprogress_data");
+                        DBHelper.convertToBytes(parser.attached_files, "inprogress_data");
 
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
@@ -8950,8 +7147,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
 
             @Override
-            protected ArrayList<QuestionnaireData> doInBackground(
-                    Void... params) {
+            protected ArrayList<QuestionnaireData> doInBackground(Void... params) {
                 Log.e("RefundTask", "doInBackground");
                 checkConnectionPost();
                 String data = InProgressPost();
@@ -8985,26 +7181,18 @@ public class JobListActivity extends Activity implements OnClickListener,
                     data = data.replace("</>", "</empty_tag>");
 
                     if (data != null) {
-                        Parser thisParser = new Parser(
-                                Revamped_Loading_Dialog.getDialog());
-                        thisParser.parseXMLValues(data,
-                                Constants.QUES_RESP_FIELD_PARAM, true);
-                        if (thisParser.inProgressSets != null
-                                && thisParser.inProgressSets.size() > 0) {
-                            Iterator it = thisParser.inProgressSets.entrySet()
-                                    .iterator();
+                        Parser thisParser = new Parser(Revamped_Loading_Dialog.getDialog());
+                        thisParser.parseXMLValues(data, Constants.QUES_RESP_FIELD_PARAM, true);
+                        if (thisParser.inProgressSets != null && thisParser.inProgressSets.size() > 0) {
+                            Iterator it = thisParser.inProgressSets.entrySet().iterator();
                             while (it.hasNext()) {
                                 Map.Entry pair = (Map.Entry) it.next();
-                                Set set = thisParser.inProgressSets.get(pair
-                                        .getKey());
-                                if (set.getWasSentBack() != null
-                                        && set.getWasSentBack().equals("1")) {
-                                    DBHelper.updateOrderOnServerStatus(pair
-                                            .getKey().toString());
+                                Set set = thisParser.inProgressSets.get(pair.getKey());
+                                if (set.getWasSentBack() != null && set.getWasSentBack().equals("1")) {
+                                    DBHelper.updateOrderOnServerStatus(pair.getKey().toString());
                                 }
                                 try {
-                                    DBHelper.convertToBytes(set, set.getSetID(),
-                                            pair.getKey().toString(), true);
+                                    DBHelper.convertToBytes(set, set.getSetID(), pair.getKey().toString(), true);
                                 } catch (IOException e) {
                                     // TODO Auto-generated catch block
                                     e.printStackTrace();
@@ -9015,12 +7203,10 @@ public class JobListActivity extends Activity implements OnClickListener,
                         }
                         // separate set code
 
-                        parser.parseXMLValues(data,
-                                Constants.INPROGRESS_RESP_FIELD_PARAM);
+                        parser.parseXMLValues(data, Constants.INPROGRESS_RESP_FIELD_PARAM);
                     }
                 }
-                if (parser.inProgressData != null)
-                    return parser.inProgressData;
+                if (parser.inProgressData != null) return parser.inProgressData;
                 else return new ArrayList<QuestionnaireData>();
             }
 
@@ -9028,14 +7214,11 @@ public class JobListActivity extends Activity implements OnClickListener,
                 List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
                 String app_ver = "";
                 try {
-                    app_ver = JobListActivity.this.getPackageManager()
-                            .getPackageInfo(
-                                    JobListActivity.this.getPackageName(), 0).versionName;
+                    app_ver = JobListActivity.this.getPackageManager().getPackageInfo(JobListActivity.this.getPackageName(), 0).versionName;
                 } catch (NameNotFoundException e) {
 
                 }
-                return Connector.postForm(
-                        Constants.getInProgressJobsURL(app_ver), extraDataList);
+                return Connector.postForm(Constants.getInProgressJobsURL(app_ver), extraDataList);
             }
         }
         RefundTask refundtaskobj = new RefundTask(dialogg);
@@ -9043,25 +7226,15 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     public String getOrderStartTime(String orderID) {
-        String time = DBHelper.getOrderStartTime(Constants.DB_TABLE_ORDERS,
-                new String[]{Constants.DB_TABLE_ORDERS_START_TIME,},
-                Constants.DB_TABLE_ORDERS_ORDERID + "=" + "\"" + orderID
-                        + "\" and " + Constants.DB_TABLE_ORDERS_STATUS
-                        + " = \"In progress\"");
+        String time = DBHelper.getOrderStartTime(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_START_TIME,}, Constants.DB_TABLE_ORDERS_ORDERID + "=" + "\"" + orderID + "\" and " + Constants.DB_TABLE_ORDERS_STATUS + " = \"In progress\"");
         return "2017-10-11  06:25:25";// "yyyy-MM-dd  kk:mm:ss"
     }
 
-    private void renameCamFiles(ArrayList<filePathDataID> uploadList,
-                                String unix) {
+    private void renameCamFiles(ArrayList<filePathDataID> uploadList, String unix) {
         for (int j = 0; j < uploadList.size(); j++) {
             String path = uploadList.get(j).getFilePath();
-            if (!path.contains("UNIX")
-                    && path.contains("CAM_O"
-                    + uploadList.get(j).getUPLOAD_FILe_ORDERID())) {
-                String newPAth = path.replace("CAM_O"
-                                + uploadList.get(j).getUPLOAD_FILe_ORDERID(),
-                        "CAM_UNIX" + unix + "O"
-                                + uploadList.get(j).getUPLOAD_FILe_ORDERID());
+            if (!path.contains("UNIX") && path.contains("CAM_O" + uploadList.get(j).getUPLOAD_FILe_ORDERID())) {
+                String newPAth = path.replace("CAM_O" + uploadList.get(j).getUPLOAD_FILe_ORDERID(), "CAM_UNIX" + unix + "O" + uploadList.get(j).getUPLOAD_FILe_ORDERID());
                 File from = new File(path);
                 File to = new File(newPAth);
                 if (from.exists() && !to.exists()) {
@@ -9081,8 +7254,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position > 0) {
                     ArrayAdapter adapter = (ArrayAdapter) spinner.getAdapter();
                     String selectedDate = (String) adapter.getItem(position);
@@ -9108,44 +7280,35 @@ public class JobListActivity extends Activity implements OnClickListener,
         RelativeLayout topbar;
         topbar = (RelativeLayout) dialog.findViewById(R.id.topbar);
         final Spinner spinner = (Spinner) findViewById(R.id.altdates);
-        dialog.findViewById(R.id.xbutton).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            dialog.dismiss();
-                        } catch (Exception ex) {
+        dialog.findViewById(R.id.xbutton).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    dialog.dismiss();
+                } catch (Exception ex) {
 
-                        }
+                }
 
-                    }
-                });
-        dialog.findViewById(R.id.btnApply).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (v.getTag() == null)
-                            Toast.makeText(
-                                    JobListActivity.this,
-                                    getResources().getString(
-                                            R.string.selectDate),
-                                    Toast.LENGTH_LONG).show();
-                        applyAlternateDate(orderid, dialog,
-                                ((String) v.getTag()));
-                    }
-                });
+            }
+        });
+        dialog.findViewById(R.id.btnApply).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v.getTag() == null)
+                    Toast.makeText(JobListActivity.this, getResources().getString(R.string.selectDate), Toast.LENGTH_LONG).show();
+                applyAlternateDate(orderid, dialog, ((String) v.getTag()));
+            }
+        });
         dialog.show();
         return dialog;
     }
 
-    protected void applyAlternateDate(String orderid, Dialog dialog2,
-                                      String date) {
+    protected void applyAlternateDate(String orderid, Dialog dialog2, String date) {
         AssignAlternateDateTask dt = new AssignAlternateDateTask(dialog2);
         dt.execute(orderid, date);
     }
 
-    public class AssignAlternateDateTask extends
-            AsyncTask<String, Integer, String> {
+    public class AssignAlternateDateTask extends AsyncTask<String, Integer, String> {
         private Dialog dialog;
 
         public AssignAlternateDateTask(Dialog dialog) {
@@ -9155,8 +7318,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         @Override
         protected void onPreExecute() {
             Log.e("AssignAlternateDateTask", "onPreExecute");
-            Revamped_Loading_Dialog.show_dialog(JobListActivity.this,
-                    getResources().getString(R.string.assigning_alternate_job));
+            Revamped_Loading_Dialog.show_dialog(JobListActivity.this, getResources().getString(R.string.assigning_alternate_job));
 
         }
 
@@ -9166,11 +7328,7 @@ public class JobListActivity extends Activity implements OnClickListener,
             Revamped_Loading_Dialog.hide_dialog();
             if (result == null) {
                 this.dialog.dismiss();
-                Toast.makeText(
-                        JobListActivity.this,
-                        getResources().getString(
-                                R.string.order_assigned_refreshing_job_list),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(JobListActivity.this, getResources().getString(R.string.order_assigned_refreshing_job_list), Toast.LENGTH_LONG).show();
                 startDownloadingJobs(false, true);
             } else {
                 Toast.makeText(JobListActivity.this, result, Toast.LENGTH_LONG).show();
@@ -9185,10 +7343,8 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (res != null && res.toLowerCase().contains("<status>0")) {
                 return null;
             } else {
-                if (res != null && res.toLowerCase().contains("<reply>")
-                        && res.toLowerCase().contains("</reply>")) {
-                    String reply = res.substring(res.indexOf("<reply>") + 7,
-                            res.indexOf("</reply>"));
+                if (res != null && res.toLowerCase().contains("<reply>") && res.toLowerCase().contains("</reply>")) {
+                    String reply = res.substring(res.indexOf("<reply>") + 7, res.indexOf("</reply>"));
                     try {
                         reply = URLDecoder.decode(reply, "utf-8");
                     } catch (UnsupportedEncodingException e) {
@@ -9204,22 +7360,16 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     private int getIcon(String iconName) {
         int newResImgId = 0;
-        int ResImgId = this.getResources().getIdentifier(iconName, "drawable",
-                this.getPackageName());
-        if (Helper.getSystemURL() != null
-                && Helper.getSystemURL().toLowerCase()
-                .contains(Helper.CONST_BE_THERE)) {
+        int ResImgId = this.getResources().getIdentifier(iconName, "drawable", this.getPackageName());
+        if (Helper.getSystemURL() != null && Helper.getSystemURL().toLowerCase().contains(Helper.CONST_BE_THERE)) {
             String temp_iconName = Helper.imgprefix + iconName;
-            newResImgId = this.getResources().getIdentifier(temp_iconName,
-                    "drawable", this.getPackageName());
+            newResImgId = this.getResources().getIdentifier(temp_iconName, "drawable", this.getPackageName());
             if (newResImgId == 0) {
-                newResImgId = this.getResources().getIdentifier(iconName,
-                        "drawable", this.getPackageName());
+                newResImgId = this.getResources().getIdentifier(iconName, "drawable", this.getPackageName());
             }
             return newResImgId;
         }
-        newResImgId = this.getResources().getIdentifier(iconName, "drawable",
-                this.getPackageName());
+        newResImgId = this.getResources().getIdentifier(iconName, "drawable", this.getPackageName());
         return ResImgId;
     }
 
@@ -9243,11 +7393,8 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     @SuppressWarnings("MissingPermission")
     private void startLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new
-                            String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    LOCATION_PERMISSION_REQUEST_CODE);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
         } else {
             LocationRequest locationRequest = new LocationRequest();
             locationRequest.setInterval(2000);
@@ -9260,8 +7407,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     @SuppressWarnings("MissingPermission")
     private void getAddress() {
         if (!Geocoder.isPresent()) {
-            Toast.makeText(JobListActivity.this, "Can't find current address, ",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobListActivity.this, "Can't find current address, ", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(this, GetAddressIntentService.class);
@@ -9271,8 +7417,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull
-    int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -9321,10 +7466,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 //        double lon2 = EndP.longitude;
         double dLat = Math.toRadians(EndP_latitude - StartP_latitude);
         double dLon = Math.toRadians(EndP_longitude - StartP_longitude);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-                + Math.cos(Math.toRadians(StartP_latitude))
-                * Math.cos(Math.toRadians(EndP_latitude)) * Math.sin(dLon / 2)
-                * Math.sin(dLon / 2);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(Math.toRadians(StartP_latitude)) * Math.cos(Math.toRadians(EndP_latitude)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
         double c = 2 * Math.asin(Math.sqrt(a));
         double valueResult = Radius * c;
         double km = valueResult / 1;
@@ -9332,8 +7474,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         int kmInDec = Integer.valueOf(newFormat.format(km));
         double meter = valueResult % 1000;
         int meterInDec = Integer.valueOf(newFormat.format(meter));
-        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
-                + " Meter   " + meterInDec);
+        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec + " Meter   " + meterInDec);
 
         return Integer.valueOf(newFormat.format(km));
     }
@@ -9369,26 +7510,18 @@ public class JobListActivity extends Activity implements OnClickListener,
             }
         }
 
-        if (!Helper.IsValidResponse(result,
-                Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
-            ShowAlertButton(this,
-                    getString(R.string.error_alert_title), failMessage,
-                    getString(R.string.alert_btn_lbl_ok));
+        if (!Helper.IsValidResponse(result, Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
+            ShowAlertButton(this, getString(R.string.error_alert_title), failMessage, getString(R.string.alert_btn_lbl_ok));
             return false;
         }
 
-        if (result != null
-                && result.toLowerCase().contains("order+is+not+assiged")) {
+        if (result != null && result.toLowerCase().contains("order+is+not+assiged")) {
             msgId = R.string.error_order_not_assigned;
             return true;
         }
-        result = result.substring(
-                result.indexOf(Constants.JOB_DETAIL_RESP_FIELD_PARAM),
-                result.indexOf("</status>"));
+        result = result.substring(result.indexOf(Constants.JOB_DETAIL_RESP_FIELD_PARAM), result.indexOf("</status>"));
         if (!(result.endsWith("1"))) {
-            ShowAlertButton(this,
-                    getString(R.string.error_alert_title), failMessage,
-                    getString(R.string.alert_btn_lbl_ok));
+            ShowAlertButton(this, getString(R.string.error_alert_title), failMessage, getString(R.string.alert_btn_lbl_ok));
             return false;
         }
         return true;
@@ -9397,10 +7530,7 @@ public class JobListActivity extends Activity implements OnClickListener,
     public void rejectJob(String str) {
 
         if (IsInternetConnecttedAdapter() >= 0) {
-            ShowAlertButton(this,
-                    getString(R.string.jd_parsing_alert_title),
-                    getString(R.string.reject_job_fail_alert),
-                    getString(R.string.alert_btn_lbl_ok));
+            ShowAlertButton(this, getString(R.string.jd_parsing_alert_title), getString(R.string.reject_job_fail_alert), getString(R.string.alert_btn_lbl_ok));
             return;
         }
         new JobTask().execute("", str);
@@ -9414,26 +7544,21 @@ public class JobListActivity extends Activity implements OnClickListener,
 //        OrderID = mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID();
 
         if (mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID().contains("-")) {
-            Intent intent = new Intent(getApplicationContext(),
-                    QuestionnaireActivity.class);
+            Intent intent = new Intent(getApplicationContext(), QuestionnaireActivity.class);
             intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
             intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getSetID());
-            if (isFromWatch)
-                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+            if (isFromWatch) startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
             else
 //                startActivity(intent);
                 startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
             Log.e("OrderID_BeginReview", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
             Log.e("OrderID_BeginReview_jobStartItemId", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + "," + Constants.POST_FIELD_QUES_ORDER_ID);
         } else {
-            Intent intent = new Intent(getApplicationContext(),
-                    QuestionnaireActivity.class);
-            if (mAdapter.joblistarray.get(jobListItemId).orderItem == null)
-                setOrder();
+            Intent intent = new Intent(getApplicationContext(), QuestionnaireActivity.class);
+            if (mAdapter.joblistarray.get(jobListItemId).orderItem == null) setOrder();
             intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
             intent.putExtra(Constants.FIELD_ORDER_SET_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getSetID());
-            if (isFromWatch)
-                startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
+            if (isFromWatch) startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
             else
 //                startActivity(intent);
                 startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -9442,8 +7567,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
     }
 
-    public void ShowAlertButton(Context context, String title, final String message,
-                                String button_lbl) {
+    public void ShowAlertButton(Context context, String title, final String message, String button_lbl) {
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(title);
         TextView textView = new TextView(context);
@@ -9452,21 +7576,15 @@ public class JobListActivity extends Activity implements OnClickListener,
         alert.setView(textView);
 
         // alert.setMessage(message);
-        alert.setPositiveButton(button_lbl,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        Revamped_Loading_Dialog.hide_dialog();
-                        if (message
-                                .equals(getString(R.string.reject_job_sucess_alert))
-                                || message
-                                .equals(getString(R.string.error_order_not_assigned))
-                                || message
-                                .equals(getString(R.string.alert_sync_jobs_again)))
-                            showJobList();
-                    }
-                });
+        alert.setPositiveButton(button_lbl, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Revamped_Loading_Dialog.hide_dialog();
+                if (message.equals(getString(R.string.reject_job_sucess_alert)) || message.equals(getString(R.string.error_order_not_assigned)) || message.equals(getString(R.string.alert_sync_jobs_again)))
+                    showJobList();
+            }
+        });
         alert.show();
     }
 
@@ -9482,35 +7600,21 @@ public class JobListActivity extends Activity implements OnClickListener,
     public void MockGPSALERT() {
         // OPen GPS settings
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(
-                        getResources().getString(R.string.questionnaire_mock_gps_alert))
-                .setTitle(getResources().getString(R.string._alert_title))
-                .setCancelable(false)
-                .setPositiveButton(
-                        getResources().getString(
-                                R.string.questionnaire_exit_delete_alert_yes),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
+        builder.setMessage(getResources().getString(R.string.questionnaire_mock_gps_alert)).setTitle(getResources().getString(R.string._alert_title)).setCancelable(false).setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
 
-                                startActivityForResult(
-                                        new Intent(
-                                                android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS),
-                                        JOB_GPS_CODE);
+                startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), JOB_GPS_CODE);
 
-                                dialog.dismiss();
+                dialog.dismiss();
 
-                            }
-                        })
-                .setNegativeButton(
-                        getResources().getString(
-                                R.string.questionnaire_exit_delete_alert_no),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                BeginReview(false);
-                            }
-                        });
+            }
+        }).setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                BeginReview(false);
+            }
+        });
         AlertDialog alert = builder.create();
         alert.show();
 
@@ -9518,26 +7622,21 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     public void startLocationCheckerAdapter() {
         Context context = JobListActivity.this;
-        LocationManager locationManager = (LocationManager) context
-                .getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-            if (Settings.Secure.getString(context.getContentResolver(),
-                    Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+            if (Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
                 MockGPSALERT();
                 return;
             }
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-            String userName = myPrefs.getString(
-                    Constants.POST_FIELD_LOGIN_USERNAME, "");
+            String userName = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
 
             for (int i = 0; i < joborders.size(); i++) {
-                if (joborders.get(i).orderItem.getOrderID()
-                        .equals(mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID())) {
-                    joborders.get(i).orderItem
-                            .setStatusName("Scheduled");
+                if (joborders.get(i).orderItem.getOrderID().equals(mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID())) {
+                    joborders.get(i).orderItem.setStatusName("Scheduled");
                 }
             }
 
@@ -9547,47 +7646,25 @@ public class JobListActivity extends Activity implements OnClickListener,
             // OPen GPS settings
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(
-                            getResources().getString(R.string.questionnaire_gps_alert))
-                    .setTitle(getResources().getString(R.string._alert_title))
-                    .setCancelable(false)
-                    .setPositiveButton(
-                            getResources()
-                                    .getString(
-                                            R.string.questionnaire_exit_delete_alert_yes),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    startActivityForResult(
-                                            new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),
-                                            JOB_GPS_CODE);
+            builder.setMessage(getResources().getString(R.string.questionnaire_gps_alert)).setTitle(getResources().getString(R.string._alert_title)).setCancelable(false).setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), JOB_GPS_CODE);
 
-                                    dialog.dismiss();
+                    dialog.dismiss();
 
-                                }
-                            })
-                    .setNegativeButton(
-                            getResources()
-                                    .getString(
-                                            R.string.questionnaire_exit_delete_alert_no),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    // startLocationChecker();
-                                    dialog.dismiss();
-                                    myPrefs = getSharedPreferences("pref",
-                                            MODE_PRIVATE);
+                }
+            }).setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    // startLocationChecker();
+                    dialog.dismiss();
+                    myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-                                    String userName = myPrefs
-                                            .getString(
-                                                    Constants.POST_FIELD_LOGIN_USERNAME,
-                                                    "");
-                                    BeginReview(false);
-                                }
-                            });
+                    String userName = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
+                    BeginReview(false);
+                }
+            });
             AlertDialog alert = builder.create();
             alert.show();
         }
@@ -9595,18 +7672,14 @@ public class JobListActivity extends Activity implements OnClickListener,
     }
 
     private boolean showLoginAdapter(String result) {
-        String result1 = new Parser().getValue(result,
-                Constants.LOGIN_RESP_FIELD_PARAM);
-        if (result1 == null)
-            return false;
+        String result1 = new Parser().getValue(result, Constants.LOGIN_RESP_FIELD_PARAM);
+        if (result1 == null) return false;
         if (result1.equals("0")) {
-            SharedPreferences myPrefs = getSharedPreferences("pref",
-                    MODE_PRIVATE);
+            SharedPreferences myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = myPrefs.edit();
             prefsEditor.putBoolean(Constants.ALREADY_LOGIN_STATUS, false);
             prefsEditor.commit();
-            Intent intent = new Intent(this.getApplicationContext(),
-                    LoginActivity.class);
+            Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
             return true;
@@ -9616,13 +7689,8 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     public void saveOfflineQuestionaire() {
         // SQLiteDatabase db = DBAdapter.openDataBase();
-        if (mAdapter.joblistarray.get(jobListItemId).orderItem == null)
-            setOrder();
-        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{
-                        Constants.DB_TABLE_ORDERS_ORDERID,
-                        Constants.DB_TABLE_ORDERS_STATUS,
-                        Constants.DB_TABLE_ORDERS_START_TIME,}, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID(),
-                "Scheduled", "", null); // getString(R.string.jd_begin_button_status_scheduled),
+        if (mAdapter.joblistarray.get(jobListItemId).orderItem == null) setOrder();
+        DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID(), "Scheduled", "", null); // getString(R.string.jd_begin_button_status_scheduled),
         // db);
         // DBAdapter.closeDataBase(db);
         for (int oid = 0; oid < joborders.size(); oid++) {
@@ -9659,24 +7727,19 @@ public class JobListActivity extends Activity implements OnClickListener,
         protected String doInBackground(String... params) {
             Log.e("JobTask", "doInBackground");
             if (Connector.cookies == null) {
-                if (showLoginAdapter(doLogin()))
-                    return "SessionExpire";
+                if (showLoginAdapter(doLogin())) return "SessionExpire";
             }
 
             Log.e("Job_doInBackground", mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID());
 
             String result = "";
             if (params[0].equals(getString(R.string.jd_accept_btn_text))) {
-                if (set != null && set.getCertificates() != null
-                        && set.getCertificates().size() > 0) {
+                if (set != null && set.getCertificates() != null && set.getCertificates().size() > 0) {
                     List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-                    String data = Connector.postForm(
-                            Constants.getCheckerTificates("9.7", true), extraDataList);
+                    String data = Connector.postForm(Constants.getCheckerTificates("9.7", true), extraDataList);
                     if (data.contains("<script>")) {
                         doLogin();
-                        data = Connector
-                                .postForm(Constants.getCheckerTificates("9.7", true),
-                                        extraDataList);
+                        data = Connector.postForm(Constants.getCheckerTificates("9.7", true), extraDataList);
                     }
                     if (data != null && data.contains("<status>1</status>")) {
                         return null;
@@ -9691,23 +7754,14 @@ public class JobListActivity extends Activity implements OnClickListener,
                             for (int i = 0; i < listOfCerts.size(); i++) {
                                 boolean isPresent = false;
                                 for (int j = 0; j < shortList.size(); j++) {
-                                    String certID = shortList.get(j)
-                                            .getCertificateID();
-                                    if (listOfCerts.get(i) != null
-                                            && listOfCerts.get(i)
-                                            .getCertificateID() != null
-                                            && listOfCerts.get(i)
-                                            .getCertificateID()
-                                            .equals(certID)
-                                            && !listOfCerts.get(i).getStatus().toLowerCase()
-                                            .equals("passed")) {
+                                    String certID = shortList.get(j).getCertificateID();
+                                    if (listOfCerts.get(i) != null && listOfCerts.get(i).getCertificateID() != null && listOfCerts.get(i).getCertificateID().equals(certID) && !listOfCerts.get(i).getStatus().toLowerCase().equals("passed")) {
                                         isPresent = true;
                                         break;
                                     }
 
                                 }
-                                if (isPresent)
-                                    templistOfCerts.add(listOfCerts.get(i));
+                                if (isPresent) templistOfCerts.add(listOfCerts.get(i));
                             }
                             if (templistOfCerts != null && templistOfCerts.size() > 0) {
                                 JobListActivity.this.pendingCerts = templistOfCerts;
@@ -9732,39 +7786,25 @@ public class JobListActivity extends Activity implements OnClickListener,
         }
 
         public String doLogin() {
-            SharedPreferences myPrefs = getSharedPreferences("pref",
-                    MODE_PRIVATE);
-            return loginPost(
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""),
-                    myPrefs.getString(Constants.POST_FIELD_LOGIN_PASSWORD, ""),
-                    Constants.POST_VALUE_LOGIN_DO_LOGIN);
+            SharedPreferences myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
+            return loginPost(myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_PASSWORD, ""), Constants.POST_VALUE_LOGIN_DO_LOGIN);
         }
 
-        private String loginPost(final String username, final String password,
-                                 String dologin) {
+        private String loginPost(final String username, final String password, String dologin) {
             // Initialize the login data to POST
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_LOGIN_USERNAME, username));
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_LOGIN_PASSWORD, password));
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_LOGIN_DO_LOGIN, dologin));
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_LOGIN_NO_REDIR,
-                    Constants.POST_VALUE_LOGIN_NO_REDIR));
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_LOGIN_IS_APP,
-                    Constants.POST_VALUE_LOGIN_IS_APP));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_USERNAME, username));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_PASSWORD, password));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_DO_LOGIN, dologin));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_NO_REDIR, Constants.POST_VALUE_LOGIN_NO_REDIR));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_LOGIN_IS_APP, Constants.POST_VALUE_LOGIN_IS_APP));
             return Connector.postForm(Constants.getLoginURL(), extraDataList);
         }
 
         private void On_ExitanddeleteButton_Click(String orderID) {
-            String where = Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "="
-                    + "\"" + orderID + "\"";
+            String where = Constants.DB_TABLE_QUESTIONNAIRE_ORDERID + "=" + "\"" + orderID + "\"";
             DBAdapter.openDataBase();
-            DBAdapter.LogCommunication("checkerDBLog.txt",
-                    "jobdetail-deleteThisQuestionnaire=" + where);
+            DBAdapter.LogCommunication("checkerDBLog.txt", "jobdetail-deleteThisQuestionnaire=" + where);
             DBAdapter.db.delete(Constants.DB_TABLE_QUESTIONNAIRE, where, null);
             DBAdapter.openDataBase();
             DBAdapter.db.delete(Constants.DB_TABLE_ANSWERS, where, null);
@@ -9795,24 +7835,15 @@ public class JobListActivity extends Activity implements OnClickListener,
                 return;
             }
             if (result != null && result.endsWith("r")) {
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Rejecting Order!" + mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + " Reply from server= " + result, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Rejecting Order!" + mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + " Reply from server= " + result, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
 
                 result = result.substring(0, result.length() - 1);
                 // dialog.onPostExecute();
                 if (CheckResponseAdapter(result, getString(R.string.reject_job_fail_alert))) {
-                    ShowAlertButton(JobListActivity.this,
-                            getString(R.string.jd_parsing_alert_title),
-                            getString(msgId),
-                            getString(R.string.alert_btn_lbl_ok));
+                    ShowAlertButton(JobListActivity.this, getString(R.string.jd_parsing_alert_title), getString(msgId), getString(R.string.alert_btn_lbl_ok));
 
                     // On_ExitanddeleteButton_Click(order.getOrderID());
-                    DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
-                            new String[]{Constants.DB_TABLE_ORDERS_ORDERID,
-                                    Constants.DB_TABLE_ORDERS_STATUS,
-                                    Constants.DB_TABLE_ORDERS_START_TIME,},
-                            mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID(), "Scheduled", "", null);
+                    DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID(), "Scheduled", "", null);
                 } else {
                     if (refreshJoblist == true) {
                         // showSyncAlert();
@@ -9820,17 +7851,12 @@ public class JobListActivity extends Activity implements OnClickListener,
                 }
                 Revamped_Loading_Dialog.hide_dialog();
             } else {
-                SplashScreen.addLog(new BasicLog(
-                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Accepting Order!" + mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + " Reply from server= " + result, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Accepting Order!" + mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() + " Reply from server= " + result, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
 
-                if (CheckResponseAdapter(result,
-                        getString(R.string.invalid_server_response_alert))) {
+                if (CheckResponseAdapter(result, getString(R.string.invalid_server_response_alert))) {
 //                    tvAccept.setText(getString(R.string.jd_begin_review_btn_text));
                     Constants.accept_txt = "Begin_Survey";
-                    if (mAdapter.joblistarray.get(jobListItemId).orderItem.getCount() < 2
-                            || (groupedNumber != null
-                            && groupedNumber.length() > 0 && serverGroupedNumber <= 1)) {
+                    if (mAdapter.joblistarray.get(jobListItemId).orderItem.getCount() < 2 || (groupedNumber != null && groupedNumber.length() > 0 && serverGroupedNumber <= 1)) {
                         saveOfflineQuestionaire();
                         Revamped_Loading_Dialog.hide_dialog();
                         return;
@@ -9839,28 +7865,10 @@ public class JobListActivity extends Activity implements OnClickListener,
                         // SQLiteDatabase db = DBAdapter.openDataBase();
                         for (int i = 0; i < Orders.getOrders().size(); i++) {
                             Order innerorder = Orders.getOrders().get(i);
-                            if ((mAdapter.joblistarray.get(jobListItemId).orderItem.getBranchLink().equals(innerorder
-                                    .getBranchLink()))
-                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getMassID().equals(innerorder
-                                    .getMassID()))
-                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getDate().equals(innerorder
-                                    .getDate()))
-                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getSetLink().equals(innerorder
-                                    .getSetLink()))
-                                    && (mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals(innerorder
-                                    .getStatusName()))) {
-                                if (!mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID().equals(
-                                        innerorder.getOrderID())) {
-                                    Orders.getOrders().get(i)
-                                            .setStatusName("Scheduled");
-                                    DBHelper.updateOrders(
-                                            Constants.DB_TABLE_ORDERS,
-                                            new String[]{
-                                                    Constants.DB_TABLE_ORDERS_ORDERID,
-                                                    Constants.DB_TABLE_ORDERS_STATUS,
-                                                    Constants.DB_TABLE_ORDERS_START_TIME,},
-                                            innerorder.getOrderID(),
-                                            "Scheduled", "", null);
+                            if ((mAdapter.joblistarray.get(jobListItemId).orderItem.getBranchLink().equals(innerorder.getBranchLink())) && (mAdapter.joblistarray.get(jobListItemId).orderItem.getMassID().equals(innerorder.getMassID())) && (mAdapter.joblistarray.get(jobListItemId).orderItem.getDate().equals(innerorder.getDate())) && (mAdapter.joblistarray.get(jobListItemId).orderItem.getSetLink().equals(innerorder.getSetLink())) && (mAdapter.joblistarray.get(jobListItemId).orderItem.getStatusName().equals(innerorder.getStatusName()))) {
+                                if (!mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID().equals(innerorder.getOrderID())) {
+                                    Orders.getOrders().get(i).setStatusName("Scheduled");
+                                    DBHelper.updateOrders(Constants.DB_TABLE_ORDERS, new String[]{Constants.DB_TABLE_ORDERS_ORDERID, Constants.DB_TABLE_ORDERS_STATUS, Constants.DB_TABLE_ORDERS_START_TIME,}, innerorder.getOrderID(), "Scheduled", "", null);
                                 }
                             }
                         }
@@ -9881,89 +7889,66 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (mAdapter.joblistarray.get(jobListItemId).orderItem == null || mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() == null)
                 return null;
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_VALUE_JOB_DETAIL_REJECT,
-                    Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_JOB_DETAIL_ORDER_ID,
-                    mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_VALUE_JOB_DETAIL_REJECT, Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
 
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_JOB_DETAIL_REFUSAL_REASON, reason));
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                    groupedNumber));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_REFUSAL_REASON, reason));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, groupedNumber));
 
             // dialog.onPostExecute();
-            String result = Connector.postForm(Constants.getJobStartURL(),
-                    extraDataList);
+            String result = Connector.postForm(Constants.getJobStartURL(), extraDataList);
             return result + "r";
         }
 
         private String AcceptJob() {
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
             String result = null;
-            extraDataList.add(Helper.getNameValuePair(
-                    Constants.POST_VALUE_JOB_DETAIL_ACCEPT,
-                    Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
+            extraDataList.add(Helper.getNameValuePair(Constants.POST_VALUE_JOB_DETAIL_ACCEPT, Constants.POST_VALUE_JOB_DETAIL_PARAM_VALUE));
             if (mAdapter.joblistarray.get(jobListItemId).orderItem == null || mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() == null)
                 setOrder();
             if (mAdapter.joblistarray.get(jobListItemId).orderItem != null && mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID() != null) {
-                extraDataList.add(Helper.getNameValuePair(
-                        Constants.POST_FIELD_JOB_DETAIL_ORDER_ID,
-                        mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
-                extraDataList.add(Helper.getNameValuePair(
-                        Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER,
-                        groupedNumber));
-                result = Connector.postForm(Constants.getJobStartURL(),
-                        extraDataList);
+                extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_ORDER_ID, mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID()));
+                extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, groupedNumber));
+                result = Connector.postForm(Constants.getJobStartURL(), extraDataList);
             }
             return result;
         }
+
     }
 
     public void ShowCertAlert(ArrayList<Cert> pendingCerts) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(
-                JobListActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(JobListActivity.this);
         builder.setCancelable(false);
-        builder.setMessage(
-                        getResources().getString(R.string.attached_certificate_msg))
-                .setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (JobListActivity.certCallBack != null)
-                            JobListActivity.certCallBack
-                                    .certCallBack(JobListActivity.this.pendingCerts);
-                        finish();
-                    }
-                })
-                .setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        builder.setMessage(getResources().getString(R.string.attached_certificate_msg)).setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (JobListActivity.certCallBack != null)
+                    JobListActivity.certCallBack.certCallBack(JobListActivity.this.pendingCerts);
+                finish();
+            }
+        }).setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                })
-                .setCancelable(false).show();
+            }
+        }).setCancelable(false).show();
     }
 
     public void setOrder() {
         Bundle b = getIntent().getExtras();
 
-        if (b == null)
-            return;
+        if (b == null) return;
 
 //        String OrderID = b.getString("OrderID");
 //        String SurveyID = b.getString("SurveyID");
         String OrderID = mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID();
         String SurveyID = mAdapter.joblistarray.get(jobListItemId).surveyItem.getSurveyID();
 
-        if (SurveyID != null && !SurveyID.equals("")
-                && Surveys.getSets() != null) {
+        if (SurveyID != null && !SurveyID.equals("") && Surveys.getSets() != null) {
             for (int i = 0; i < Surveys.getSets().size(); i++) {
                 survey = Surveys.getSets().get(i);
                 order = null;
-                if (survey.getSurveyID().equals(SurveyID))
-                    break;
+                if (survey.getSurveyID().equals(SurveyID)) break;
             }
             // order = Orders.getOrders().get(index);
 //            if (survey != null)
@@ -9972,16 +7957,14 @@ public class JobListActivity extends Activity implements OnClickListener,
         } else {
             for (int i = 0; i < Orders.getOrders().size(); i++) {
                 order = Orders.getOrders().get(i);
-                if (order != null && order.getOrderID().equals(OrderID))
-                    break;
+                if (order != null && order.getOrderID().equals(OrderID)) break;
             }
             // order = Orders.getOrders().get(index);
             if (order != null) {
 //                isSurvey = OrderID.contains("-");
 //                setValueFieldText(isSurvey);
 
-                if (order.getBriefingContent() != null
-                        && !order.getBriefingContent().equals("")) {
+                if (order.getBriefingContent() != null && !order.getBriefingContent().equals("")) {
                     isBriefing = true;
                 }
 
@@ -9993,8 +7976,7 @@ public class JobListActivity extends Activity implements OnClickListener,
         ConnectivityManager conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo i = conMgr.getActiveNetworkInfo();
         conMgr = null;
-        if (i == null)
-            return 0;
+        if (i == null) return 0;
         return -1;
     }
 
@@ -10011,44 +7993,26 @@ public class JobListActivity extends Activity implements OnClickListener,
                 } else if (Constants.accept_txt == "Begin_Interview") {
                     if (order.getOrderID().contains("-")) {
                         if (order.getStatusName().equals("survey")) {
-                            Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
-                                    "-", ""));
+                            Survey s = Surveys.getCurrentSurve(order.getOrderID().replace("-", ""));
                             if (s != null && s.isAllocationReached()) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(JobListActivity.this);
-                                builder.setMessage(
-                                                getResources()
-                                                        .getString(
-                                                                R.string.questionnaire_open_survey_alert))
-                                        .setTitle(
-                                                getResources().getString(
-                                                        R.string._alert_title))
-                                        .setCancelable(false)
-                                        .setPositiveButton(
-                                                getResources().getString(
-                                                        R.string.button_ok),
-                                                new DialogInterface.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(
-                                                            DialogInterface dialog,
-                                                            int id) {
-                                                        dialog.dismiss();
+                                builder.setMessage(getResources().getString(R.string.questionnaire_open_survey_alert)).setTitle(getResources().getString(R.string._alert_title)).setCancelable(false).setPositiveButton(getResources().getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.dismiss();
 //                                                            ((Activity) con).finish();
-                                                    }
-                                                });
+                                    }
+                                });
                                 AlertDialog alert = builder.create();
                                 alert.show();
                             } else {
-                                SplashScreen.addLog(new BasicLog(
-                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+                                SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
 
                                 startLocationCheckerAdapter();
                             }
 
                         } else {
-                            SplashScreen.addLog(new BasicLog(
-                                    myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
-                                    myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
+                            SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting survey!" + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
 
                             startLocationCheckerAdapter();
                         }
@@ -10066,58 +8030,11 @@ public class JobListActivity extends Activity implements OnClickListener,
             if (OrderID != null) {
                 if (OrderID.contains("-")) {
                     if (data.getExtras().getString(Constants.BRANCH_NAME) != null) {
-                        String thisBranch = data.getExtras().getString(
-                                Constants.BRANCH_NAME);
+                        String thisBranch = data.getExtras().getString(Constants.BRANCH_NAME);
                         DBHelper.updateSurveySelectedBranch(thisBranch, OrderID);
                     }
                     if (data.getExtras().getInt(Constants.QUESTIONNAIRE_STAUS) == 142) {
-                        ArrayList<Order> jobordersss = DBHelper
-                                .getOrders(
-                                        null,
-                                        Constants.DB_TABLE_JOBLIST,
-                                        new String[]{
-                                                Constants.DB_TABLE_JOBLIST_ORDERID,
-                                                Constants.DB_TABLE_JOBLIST_DATE,
-                                                Constants.DB_TABLE_JOBLIST_SN,
-                                                Constants.DB_TABLE_JOBLIST_DESC,
-                                                Constants.DB_TABLE_JOBLIST_SETNAME,
-                                                Constants.DB_TABLE_JOBLIST_SETLINK,
-                                                Constants.DB_TABLE_JOBLIST_CN,
-                                                Constants.DB_TABLE_JOBLIST_BFN,
-                                                Constants.DB_TABLE_JOBLIST_BN,
-                                                Constants.DB_TABLE_JOBLIST_CITYNAME,
-                                                Constants.DB_TABLE_JOBLIST_ADDRESS,
-                                                Constants.DB_TABLE_JOBLIST_BP,
-                                                Constants.DB_TABLE_JOBLIST_OH,
-                                                Constants.DB_TABLE_JOBLIST_TS,
-                                                Constants.DB_TABLE_JOBLIST_TE,
-                                                Constants.DB_TABLE_JOBLIST_SETID,
-                                                Constants.DB_TABLE_JOBLIST_BL,
-                                                Constants.DB_TABLE_JOBLIST_BLNG,
-                                                Constants.DB_TABLE_JOBLIST_FN,
-                                                Constants.DB_TABLE_JOBLIST_JC,
-                                                Constants.DB_TABLE_JOBLIST_JI,
-                                                Constants.DB_TABLE_JOBLIST_BLINK,
-                                                Constants.DB_TABLE_JOBLIST_MID,
-                                                Constants.DB_TABLE_CHECKER_CODE,
-                                                Constants.DB_TABLE_CHECKER_LINK,
-                                                Constants.DB_TABLE_BRANCH_CODE,
-                                                Constants.DB_TABLE_SETCODE,
-                                                Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                                                Constants.DB_TABLE_PURCHASE,
-                                                Constants.DB_TABLE_JOBLIST_BRIEFING,
-                                                Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                                                Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                                                Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                                                Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                                                Constants.DB_TABLE_JOBLIST_sBonusPayment,
-                                                Constants.DB_TABLE_JOBLIST_AllowShopperToReject,
-                                                Constants.DB_TABLE_JOBLIST_sinprogressonserver,
-                                                Constants.DB_TABLE_JOBLIST_sProjectName,
-                                                Constants.DB_TABLE_JOBLIST_sRegionName,
-                                                Constants.DB_TABLE_JOBLIST_sdeletedjob,
-                                                Constants.DB_TABLE_JOBLIST_sProjectID,},
-                                        Constants.DB_TABLE_JOBLIST_JI);
+                        ArrayList<Order> jobordersss = DBHelper.getOrders(null, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
                         if (jobordersss != null) {
                         }
 
@@ -10134,8 +8051,7 @@ public class JobListActivity extends Activity implements OnClickListener,
                     if (OrderID.contains("-")) {
                         getthisOrderFromListView(OrderID);
 //                    setSurveyData(OrderID.replace("-", ""));
-                    } else
-                        finish();
+                    } else finish();
                     if (OrderID != null) {
 
                         return;
@@ -10151,36 +8067,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 
     private void getthisOrderFromListView(String orderID2) {
         try {
-            jobOrder = DBHelper.getOrder(Constants.DB_TABLE_JOBLIST, new String[]{
-                            Constants.DB_TABLE_JOBLIST_ORDERID,
-                            Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN,
-                            Constants.DB_TABLE_JOBLIST_DESC,
-                            Constants.DB_TABLE_JOBLIST_SETNAME,
-                            Constants.DB_TABLE_JOBLIST_SETLINK,
-                            Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN,
-                            Constants.DB_TABLE_JOBLIST_BN,
-                            Constants.DB_TABLE_JOBLIST_CITYNAME,
-                            Constants.DB_TABLE_JOBLIST_ADDRESS,
-                            Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH,
-                            Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE,
-                            Constants.DB_TABLE_JOBLIST_SETID,
-                            Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG,
-                            Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC,
-                            Constants.DB_TABLE_JOBLIST_JI,
-                            Constants.DB_TABLE_JOBLIST_BLINK,
-                            Constants.DB_TABLE_JOBLIST_MID,
-                            Constants.DB_TABLE_CHECKER_CODE,
-                            Constants.DB_TABLE_CHECKER_LINK,
-                            Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE,
-                            Constants.DB_TABLE_PURCHASE_DESCRIPTION,
-                            Constants.DB_TABLE_PURCHASE,
-                            Constants.DB_TABLE_JOBLIST_BRIEFING,
-                            Constants.DB_TABLE_JOBLIST_sPurchaseLimit,
-                            Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment,
-                            Constants.DB_TABLE_JOBLIST_sTransportationPayment,
-                            Constants.DB_TABLE_JOBLIST_sCriticismPayment,
-                            Constants.DB_TABLE_JOBLIST_sBonusPayment,},
-                    Constants.DB_TABLE_JOBLIST_ORDERID + "='" + OrderID + "'");
+            jobOrder = DBHelper.getOrder(Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment,}, Constants.DB_TABLE_JOBLIST_ORDERID + "='" + OrderID + "'");
 
             if (jobOrder != null) {
             }
@@ -10236,9 +8123,7 @@ public class JobListActivity extends Activity implements OnClickListener,
 //        layout_NewDashboardScreen.setVisibility(View.VISIBLE);
 //        select_jobs = "";
 //        toolbarTitle.setText("Open Jobs");
-        Intent intent = new Intent(
-                JobListActivity.this,
-                NewDashboardScreenActivity.class);
+        Intent intent = new Intent(JobListActivity.this, NewDashboardScreenActivity.class);
         startActivity(intent);
     }
 

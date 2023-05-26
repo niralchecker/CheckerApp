@@ -1,5 +1,7 @@
 package com.mor.sa.android.activities;
 
+import static com.mor.sa.android.activities.R.*;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -147,13 +149,13 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 // mEditText.setText( "" );
 
                 if (aceeptbtn.getText().toString()
-                        .equals(getString(R.string.jd_begin_review_btn_text))) {
+                        .equals(getString(string.jd_begin_review_btn_text))) {
                     BeginReview(true);
 
                 } else if (aceeptbtn
                         .getText()
                         .toString()
-                        .equals(getString(R.string.jd_continue_review_btn_text))) {
+                        .equals(getString(string.jd_continue_review_btn_text))) {
 
                     BeginReview(true);
                 }
@@ -312,16 +314,16 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             }
         }
         final Dialog dialog = new Dialog(JobDetailActivity.this);
-        dialog.setContentView(R.layout.dialog_alternate_branch);
+        dialog.setContentView(layout.dialog_alternate_branch);
 
         // set the custom dialog components - text, image and button
-        TextView text = (TextView) dialog.findViewById(R.id.textView1);
+        TextView text = (TextView) dialog.findViewById(id.textView1);
         text.setText("");
         if (result == null || result.size() == 0)
             text.setText(getResources().getString(
-                    R.string.unable_to_find_alternative_job));
+                    string.unable_to_find_alternative_job));
         final ArrayList<AltLanguage> languages = result;
-        ListView listJobs = (ListView) dialog.findViewById(R.id.lvjobs);
+        ListView listJobs = (ListView) dialog.findViewById(id.lvjobs);
         listJobs.setAdapter(new AlternateLanguageAdapter(
                 JobDetailActivity.this, result, selectedIndex));
 
@@ -362,7 +364,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             }
         });
 
-        dialog.findViewById(R.id.btnOk).setOnClickListener(
+        dialog.findViewById(id.btnOk).setOnClickListener(
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -449,20 +451,20 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             return;
         }
         if (Constants.getLoginURL() != null && Constants.getLoginURL().toLowerCase().contains("ajis"))
-            setContentView(R.layout.job_detail_ajis);
-        else setContentView(R.layout.job_detail_hi);
-        TextView textView = (TextView) findViewById(R.id.jd_heder);
+            setContentView(layout.job_detail_ajis);
+        else setContentView(layout.job_detail_hi);
+        TextView textView = (TextView) findViewById(id.jd_heder);
         textView.setTextSize(UIHelper.getFontSize(JobDetailActivity.this,
                 textView.getTextSize()));
 
-        alBtn = (ImageView) findViewById(R.id.jd_alt_btn);
-        rejectbtnImg = (ImageView) findViewById(R.id.rejectbtn);
+        alBtn = (ImageView) findViewById(id.jd_alt_btn);
+        rejectbtnImg = (ImageView) findViewById(id.rejectbtn);
         initGoogleApiClient();
         final ArrayList<AltLanguage> languages = DBHelper.getLanguages(true);
 
         QuestionnaireActivity.langid = null;
         QuestionnaireActivity.langs = null;
-        spinner = (Spinner) findViewById(R.id.languagelist);
+        spinner = (Spinner) findViewById(id.languagelist);
         if (languages != null && languages.size() > 0) {
             String[] langs = new String[languages.size() + 2];
             langs[0] = "Select an alternative language";
@@ -556,7 +558,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         }
         spinner.setVisibility(RelativeLayout.GONE);
 
-        tv_header = (TextView) findViewById(R.id.jd_heder);
+        tv_header = (TextView) findViewById(id.jd_heder);
 
         initialiseValueFieldText();
         setOrder();
@@ -620,46 +622,46 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 BeginReview(false);
             }
         }
-        acceptbtnImg = (ImageView) findViewById(R.id.acceptbtn);
-        separator1 = (View) findViewById(R.id.separator1);
-        separator2 = (View) findViewById(R.id.separator2);
-        separator3 = (View) findViewById(R.id.separator3);
-        separator4 = (View) findViewById(R.id.separator4);
-        separator5 = (View) findViewById(R.id.separator5);
-        separator6 = (View) findViewById(R.id.separator6);
-        separator7 = (View) findViewById(R.id.separator7);
-        separator8 = (View) findViewById(R.id.separator8);
-        separator9 = (View) findViewById(R.id.separator9);
-        separator10 = (View) findViewById(R.id.separator10);
-        separator11 = (View) findViewById(R.id.separator11);
-        separator12 = (View) findViewById(R.id.separator12);
-        separator13 = (View) findViewById(R.id.separator13);
-        separator14 = (View) findViewById(R.id.separator14);
-        separator15 = (View) findViewById(R.id.separator15);
-        separator16 = (View) findViewById(R.id.separator16);
-        separator17 = (View) findViewById(R.id.separator17);
-        separator18 = (View) findViewById(R.id.separator18);
-        separator19 = (View) findViewById(R.id.separator19);
+        acceptbtnImg = (ImageView) findViewById(id.acceptbtn);
+        separator1 = (View) findViewById(id.separator1);
+        separator2 = (View) findViewById(id.separator2);
+        separator3 = (View) findViewById(id.separator3);
+        separator4 = (View) findViewById(id.separator4);
+        separator5 = (View) findViewById(id.separator5);
+        separator6 = (View) findViewById(id.separator6);
+        separator7 = (View) findViewById(id.separator7);
+        separator8 = (View) findViewById(id.separator8);
+        separator9 = (View) findViewById(id.separator9);
+        separator10 = (View) findViewById(id.separator10);
+        separator11 = (View) findViewById(id.separator11);
+        separator12 = (View) findViewById(id.separator12);
+        separator13 = (View) findViewById(id.separator13);
+        separator14 = (View) findViewById(id.separator14);
+        separator15 = (View) findViewById(id.separator15);
+        separator16 = (View) findViewById(id.separator16);
+        separator17 = (View) findViewById(id.separator17);
+        separator18 = (View) findViewById(id.separator18);
+        separator19 = (View) findViewById(id.separator19);
 
-        sBonusPayment_t = (TextView) findViewById(R.id.sBonusPayment_t);
-        sCriticismPayment_t = (TextView) findViewById(R.id.sCriticismPayment_t);
-        sTransportationPayment_t = (TextView) findViewById(R.id.sTransportationPayment_t);
-        sNonRefundableServicePayment_t = (TextView) findViewById(R.id.sNonRefundableServicePayment_t);
-        jdcanpurchase_t = (TextView) findViewById(R.id.jdcanpurchase_t);
-        jdpurchasedes_t = (TextView) findViewById(R.id.jdpurchasedes_t);
-        jdtimeet = (TextView) findViewById(R.id.jdtimeet);
-        jdtimest = (TextView) findViewById(R.id.jdtimest);
-        jdopeninght = (TextView) findViewById(R.id.jdopeninght);
-        jdbranchpt = (TextView) findViewById(R.id.jdbranchpt);
-        jdaddt = (TextView) findViewById(R.id.jdaddt);
-        jdcitynt = (TextView) findViewById(R.id.jdcitynt);
-        jdbranchfnamet = (TextView) findViewById(R.id.jdbranchfnamet);
-        jdbranchname = (TextView) findViewById(R.id.jdbranchname);
-        jdclientt = (TextView) findViewById(R.id.jdclientt);
-        jdsetnamet = (TextView) findViewById(R.id.jdsetnamet);
-        jddescriptiont = (TextView) findViewById(R.id.jddescriptiont);
-        jdstaust = (TextView) findViewById(R.id.jdstaust);
-        jddatet = (TextView) findViewById(R.id.jddatet);
+        sBonusPayment_t = (TextView) findViewById(id.sBonusPayment_t);
+        sCriticismPayment_t = (TextView) findViewById(id.sCriticismPayment_t);
+        sTransportationPayment_t = (TextView) findViewById(id.sTransportationPayment_t);
+        sNonRefundableServicePayment_t = (TextView) findViewById(id.sNonRefundableServicePayment_t);
+        jdcanpurchase_t = (TextView) findViewById(id.jdcanpurchase_t);
+        jdpurchasedes_t = (TextView) findViewById(id.jdpurchasedes_t);
+        jdtimeet = (TextView) findViewById(id.jdtimeet);
+        jdtimest = (TextView) findViewById(id.jdtimest);
+        jdopeninght = (TextView) findViewById(id.jdopeninght);
+        jdbranchpt = (TextView) findViewById(id.jdbranchpt);
+        jdaddt = (TextView) findViewById(id.jdaddt);
+        jdcitynt = (TextView) findViewById(id.jdcitynt);
+        jdbranchfnamet = (TextView) findViewById(id.jdbranchfnamet);
+        jdbranchname = (TextView) findViewById(id.jdbranchname);
+        jdclientt = (TextView) findViewById(id.jdclientt);
+        jdsetnamet = (TextView) findViewById(id.jdsetnamet);
+        jddescriptiont = (TextView) findViewById(id.jddescriptiont);
+        jdstaust = (TextView) findViewById(id.jdstaust);
+        jddatet = (TextView) findViewById(id.jddatet);
 
         loadViews();
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
@@ -776,17 +778,17 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
     private void setInvertDisplay() {
         if (Helper.getTheme(JobDetailActivity.this) == 0) {
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.jdbottomrv);
+            RelativeLayout layout = (RelativeLayout) findViewById(id.jdbottomrv);
             layout.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.navigation_bar_dark));
+                    drawable.navigation_bar_dark));
 
-            layout = (RelativeLayout) findViewById(R.id.rvjobdetailscreen);
+            layout = (RelativeLayout) findViewById(id.rvjobdetailscreen);
             layout.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.navigation_bar_dark));
+                    drawable.navigation_bar_dark));
 
-            layout = (RelativeLayout) findViewById(R.id.backGroundDrawable);
+            layout = (RelativeLayout) findViewById(id.backGroundDrawable);
             layout.setBackgroundDrawable(getResources().getDrawable(
-                    R.drawable.background_dark));
+                    drawable.background_dark));
         }
     }
 
@@ -840,29 +842,29 @@ public class JobDetailActivity extends Activity implements OnClickListener,
     }
 
     private void setSurveyData(String surveyId) {
-        ScrollView layout = (ScrollView) findViewById(R.id.jdmiddle);
-        TextView tvjdsurvey_name = (TextView) findViewById(R.id.jdsurvey_name);
-        TextView tvjdbranchv = (TextView) findViewById(R.id.jdbranchv);
-        TextView tvjdbrancht = (TextView) findViewById(R.id.jdbranch);
+        ScrollView layout = (ScrollView) findViewById(id.jdmiddle);
+        TextView tvjdsurvey_name = (TextView) findViewById(id.jdsurvey_name);
+        TextView tvjdbranchv = (TextView) findViewById(id.jdbranchv);
+        TextView tvjdbrancht = (TextView) findViewById(id.jdbranch);
 
-        ListView lvjdsurvey_quotas_list = (ListView) findViewById(R.id.jdsurvey_quotas_list);
-        ListView lvjdsurvey_allocations_list = (ListView) findViewById(R.id.jdsurvey_allocations_list);
+        ListView lvjdsurvey_quotas_list = (ListView) findViewById(id.jdsurvey_quotas_list);
+        ListView lvjdsurvey_allocations_list = (ListView) findViewById(id.jdsurvey_allocations_list);
         survey = Surveys.getCurrentSurve(surveyId);
 
         if (Helper.getTheme(JobDetailActivity.this) == 0) {
             layout.setVisibility(RelativeLayout.GONE);
             lvjdsurvey_quotas_list.setVisibility(RelativeLayout.GONE);
             lvjdsurvey_allocations_list.setVisibility(RelativeLayout.GONE);
-            lvjdsurvey_quotas_list = (ListView) findViewById(R.id.jdsurvey_quotas_list_night);
-            lvjdsurvey_allocations_list = (ListView) findViewById(R.id.jdsurvey_allocations_list_night);
+            lvjdsurvey_quotas_list = (ListView) findViewById(id.jdsurvey_quotas_list_night);
+            lvjdsurvey_allocations_list = (ListView) findViewById(id.jdsurvey_allocations_list_night);
             lvjdsurvey_quotas_list.setVisibility(RelativeLayout.VISIBLE);
             lvjdsurvey_allocations_list.setVisibility(RelativeLayout.VISIBLE);
             tvjdsurvey_name.setVisibility(RelativeLayout.GONE);
-            tvjdsurvey_name.setTextColor(android.R.color.white);
-            tvjdsurvey_name = (TextView) findViewById(R.id.jdsurvey_name_night);
-            TextView tvjdbranchvn = (TextView) findViewById(R.id.jdbranchv_night);
+            tvjdsurvey_name.setTextColor(color.white);
+            tvjdsurvey_name = (TextView) findViewById(id.jdsurvey_name_night);
+            TextView tvjdbranchvn = (TextView) findViewById(id.jdbranchv_night);
             // tvjdbranchvn.setTextColor(android.R.color.white);
-            TextView tvjdbranchtn = (TextView) findViewById(R.id.jdbranch_night);
+            TextView tvjdbranchtn = (TextView) findViewById(id.jdbranch_night);
             // tvjdbranchtn.setTextColor(android.R.color.white);
             if (survey != null && survey.getBranchFullName() != null
                     && !survey.getBranchFullName().equals("")) {
@@ -870,7 +872,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 tvjdbranchtn.setVisibility(RelativeLayout.VISIBLE);
                 tvjdbranchvn.setVisibility(RelativeLayout.VISIBLE);
                 tvjdbranchtn.setText(getResources().getString(
-                        R.string.jd_branchfname));
+                        string.jd_branchfname));
             } else {
                 tvjdbranchtn.setVisibility(RelativeLayout.GONE);
                 tvjdbranchvn.setVisibility(RelativeLayout.GONE);
@@ -880,29 +882,23 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 tvjdbranchvn.setText(jobOrder.getBranchLat());
                 tvjdbranchtn.setVisibility(RelativeLayout.VISIBLE);
                 tvjdbranchvn.setVisibility(RelativeLayout.VISIBLE);
-
                 tvjdbranchtn.setText(getResources().getString(
-                        R.string.jd_branchname));
+                        string.jd_branchname));
             }
-
             tvjdsurvey_name.setVisibility(RelativeLayout.VISIBLE);
-            layout = (ScrollView) findViewById(R.id.jdmiddle_night);
+            layout = (ScrollView) findViewById(id.jdmiddle_night);
             layout.setVisibility(RelativeLayout.VISIBLE);
-
         }
-
         dataView.setVisibility(RelativeLayout.GONE);
         calendarBtn.setVisibility(RelativeLayout.GONE);
         mapbtn.setVisibility(RelativeLayout.GONE);
         layout.setVisibility(RelativeLayout.VISIBLE);
-        rejectbtn.setText(getResources().getString(R.string.button_back));
+        rejectbtn.setText(getResources().getString(string.button_back));
         if ((order != null && order.getStatusName() != null && order.getStatusName().toLowerCase().contains("archive")) || (order != null && order.getAsArchive())) {
-            rejectbtn
-                    .setText(getResources().getString(R.string.button_back_archive));
-
+            rejectbtn.setText(getResources().getString(string.button_back_archive));
         }
 
-        rejectbtnImg.setImageResource(R.drawable.btn_back);
+        rejectbtnImg.setImageResource(drawable.btn_back);
         Helper.changeImageViewSrc(rejectbtnImg, getApplicationContext());
 
         if (survey == null) {
@@ -925,7 +921,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             tvjdbrancht.setVisibility(RelativeLayout.VISIBLE);
             tvjdbranchv.setVisibility(RelativeLayout.VISIBLE);
             tvjdbrancht.setText(getResources().getString(
-                    R.string.jd_branchfname));
+                    string.jd_branchfname));
         } else {
             tvjdbrancht.setVisibility(RelativeLayout.GONE);
             tvjdbranchv.setVisibility(RelativeLayout.GONE);
@@ -937,7 +933,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             tvjdbranchv.setVisibility(RelativeLayout.VISIBLE);
 
             tvjdbrancht.setText(getResources()
-                    .getString(R.string.jd_branchname));
+                    .getString(string.jd_branchname));
         }
 
         tvjdsurvey_name.setText(survey.getSurveyName());
@@ -965,59 +961,56 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
     /****** Start *******/
     private void initialiseValueFieldText() {
-        setFontSize(findViewById(R.id.jdsurvey));
-        setFontSize(findViewById(R.id.jdbranchpt));
-        setFontSize(findViewById(R.id.jdbranchpv));
-        setFontSize(findViewById(R.id.jdbranchv));
-        setFontSize(findViewById(R.id.jdbranch));
-        setFontSize(findViewById(R.id.jdsurvey_quotas));
+        setFontSize(findViewById(id.jdsurvey));
+        setFontSize(findViewById(id.jdbranchpt));
+        setFontSize(findViewById(id.jdbranchpv));
+        setFontSize(findViewById(id.jdbranchv));
+        setFontSize(findViewById(id.jdbranch));
+        setFontSize(findViewById(id.jdsurvey_quotas));
         // setFontSize(findViewById(R.id.jdsurvey_name));
-        setFontSize(findViewById(R.id.jdsurvey_allocations));
+        setFontSize(findViewById(id.jdsurvey_allocations));
+        setFontSize(findViewById(id.jd_heder));
+        setFontSize(findViewById(id.jdaddt));
+        setFontSize(findViewById(id.jdaddv));
+        setFontSize(findViewById(id.jdbottomrv));
+        setFontSize(findViewById(id.jdbranch_name_val));
+        setFontSize(findViewById(id.jdbranchfnamet));
+        setFontSize(findViewById(id.jdbranchname));
+        setFontSize(findViewById(id.jdbranchpt));
+        setFontSize(findViewById(id.jdbranchpv));
+        setFontSize(findViewById(id.jdcitynt));
+        setFontSize(findViewById(id.jdcitynv));
+        setFontSize(findViewById(id.jdclientt));
+        setFontSize(findViewById(id.jddatet));
+        setFontSize(findViewById(id.jddatev));
+        setFontSize(findViewById(id.jddescriptiont));
+        setFontSize(findViewById(id.jdbranch_name_val));
+        setFontSize(findViewById(id.jdopeninght));
+        setFontSize(findViewById(id.jdsetnamet));
+        setFontSize(findViewById(id.jdstaust));
+        setFontSize(findViewById(id.jdtimeet));
+        setFontSize(findViewById(id.jdtimest));
+        setFontSize(findViewById(id.jdpurchasedes_t));
+        setFontSize(findViewById(id.jdpurchasedes_v));
+        setFontSize(findViewById(id.jdcanpurchase_t));
+        setFontSize(findViewById(id.jdcanpurchase_v));
+        setFontSize(findViewById(id.sBonusPayment_t));
+        setFontSize(findViewById(id.sBonusPayment_v));
+        setFontSize(findViewById(id.sCriticismPayment_t));
+        setFontSize(findViewById(id.sCriticismPayment_v));
+        setFontSize(findViewById(id.sNonRefundableServicePayment_t));
+        setFontSize(findViewById(id.sNonRefundableServicePayment_v));
+        setFontSize(findViewById(id.sTransportationPayment_t));
+        setFontSize(findViewById(id.sTransportationPayment_v));
+        findViewById(id.reject_layout).setOnClickListener(this);
+        findViewById(id.accept_layout).setOnClickListener(this);
+        findViewById(id.accepttxt).setOnClickListener(this);
+        findViewById(id.rejecttxt).setOnClickListener(this);
+        findViewById(id.rejectbtn).setOnClickListener(this);
+        findViewById(id.acceptbtn).setOnClickListener(this);
 
-        setFontSize(findViewById(R.id.jd_heder));
-
-        setFontSize(findViewById(R.id.jdaddt));
-        setFontSize(findViewById(R.id.jdaddv));
-        setFontSize(findViewById(R.id.jdbottomrv));
-        setFontSize(findViewById(R.id.jdbranch_name_val));
-        setFontSize(findViewById(R.id.jdbranchfnamet));
-        setFontSize(findViewById(R.id.jdbranchname));
-        setFontSize(findViewById(R.id.jdbranchpt));
-        setFontSize(findViewById(R.id.jdbranchpv));
-        setFontSize(findViewById(R.id.jdcitynt));
-        setFontSize(findViewById(R.id.jdcitynv));
-        setFontSize(findViewById(R.id.jdclientt));
-        setFontSize(findViewById(R.id.jddatet));
-        setFontSize(findViewById(R.id.jddatev));
-        setFontSize(findViewById(R.id.jddescriptiont));
-        setFontSize(findViewById(R.id.jdbranch_name_val));
-        setFontSize(findViewById(R.id.jdopeninght));
-        setFontSize(findViewById(R.id.jdsetnamet));
-        setFontSize(findViewById(R.id.jdstaust));
-        setFontSize(findViewById(R.id.jdtimeet));
-        setFontSize(findViewById(R.id.jdtimest));
-        setFontSize(findViewById(R.id.jdpurchasedes_t));
-        setFontSize(findViewById(R.id.jdpurchasedes_v));
-        setFontSize(findViewById(R.id.jdcanpurchase_t));
-        setFontSize(findViewById(R.id.jdcanpurchase_v));
-        setFontSize(findViewById(R.id.sBonusPayment_t));
-        setFontSize(findViewById(R.id.sBonusPayment_v));
-        setFontSize(findViewById(R.id.sCriticismPayment_t));
-        setFontSize(findViewById(R.id.sCriticismPayment_v));
-        setFontSize(findViewById(R.id.sNonRefundableServicePayment_t));
-        setFontSize(findViewById(R.id.sNonRefundableServicePayment_v));
-        setFontSize(findViewById(R.id.sTransportationPayment_t));
-        setFontSize(findViewById(R.id.sTransportationPayment_v));
-
-        findViewById(R.id.reject_layout).setOnClickListener(this);
-        findViewById(R.id.accept_layout).setOnClickListener(this);
-        findViewById(R.id.accepttxt).setOnClickListener(this);
-        findViewById(R.id.rejecttxt).setOnClickListener(this);
-        findViewById(R.id.rejectbtn).setOnClickListener(this);
-        findViewById(R.id.acceptbtn).setOnClickListener(this);
-
-        aceeptbtn = (TextView) findViewById(R.id.accepttxt);
-        rejectbtn = (TextView) findViewById(R.id.rejecttxt);
+        aceeptbtn = (TextView) findViewById(id.accepttxt);
+        rejectbtn = (TextView) findViewById(id.rejecttxt);
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         // if (Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(
         // Constants.SETTINGS_LANGUAGE_INDEX, 0)].equals("fr")) {
@@ -1027,8 +1020,8 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         // setFontSize(rejectbtn);
         // }
         // alBtn.setVisibility(RelativeLayout.GONE);
-        mapbtn = (ImageView) findViewById(R.id.jdmapbtn);
-        calendarBtn = (ImageView) findViewById(R.id.jdcalendarbtn);
+        mapbtn = (ImageView) findViewById(id.jdmapbtn);
+        calendarBtn = (ImageView) findViewById(id.jdcalendarbtn);
         calendarBtn.setVisibility(RelativeLayout.GONE);
         // setFontSize(mapbtn);
         if (calendarBtn != null)
@@ -1041,44 +1034,44 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             alBtn.setOnClickListener(this);
         if (mapbtn != null)
             mapbtn.setOnClickListener(this);
-        date_v = (TextView) findViewById(R.id.jddatev);
+        date_v = (TextView) findViewById(id.jddatev);
         setFontSize(date_v);
-        status_v = (TextView) findViewById(R.id.jdstausv);
+        status_v = (TextView) findViewById(id.jdstausv);
         setFontSize(status_v);
-        description_v = (TextView) findViewById(R.id.jddescriptionv);
+        description_v = (TextView) findViewById(id.jddescriptionv);
         setFontSize(description_v);
-        setname_v = (TextView) findViewById(R.id.jdsetnamev);
+        setname_v = (TextView) findViewById(id.jdsetnamev);
         setFontSize(setname_v);
-        cname_v = (TextView) findViewById(R.id.jdclientv);
+        cname_v = (TextView) findViewById(id.jdclientv);
         setFontSize(cname_v);
-        bname = (TextView) findViewById(R.id.jdbranch_name_val);
+        bname = (TextView) findViewById(id.jdbranch_name_val);
         setFontSize(bname);
-        bname_v = (TextView) findViewById(R.id.jdbranchfnamev);
+        bname_v = (TextView) findViewById(id.jdbranchfnamev);
         setFontSize(bname_v);
-        cityname_v = (TextView) findViewById(R.id.jdcitynv);
+        cityname_v = (TextView) findViewById(id.jdcitynv);
         setFontSize(cityname_v);
-        address_v = (TextView) findViewById(R.id.jdaddv);
+        address_v = (TextView) findViewById(id.jdaddv);
         setFontSize(address_v);
-        branchphone_v = (TextView) findViewById(R.id.jdbranchpv);
+        branchphone_v = (TextView) findViewById(id.jdbranchpv);
         setFontSize(branchphone_v);
-        openhours_v = (TextView) findViewById(R.id.jdopeninghv);
+        openhours_v = (TextView) findViewById(id.jdopeninghv);
         setFontSize(openhours_v);
-        times_v = (TextView) findViewById(R.id.jdtimesv);
+        times_v = (TextView) findViewById(id.jdtimesv);
         setFontSize(times_v);
-        timee_v = (TextView) findViewById(R.id.jdtimeev);
+        timee_v = (TextView) findViewById(id.jdtimeev);
         setFontSize(timee_v);
-        tv_purchase_desc = (TextView) findViewById(R.id.jdpurchasedes_v);
+        tv_purchase_desc = (TextView) findViewById(id.jdpurchasedes_v);
         setFontSize(timee_v);
-        tv_make_purchase = (TextView) findViewById(R.id.jdcanpurchase_v);
+        tv_make_purchase = (TextView) findViewById(id.jdcanpurchase_v);
         setFontSize(timee_v);
-        tvsNonRefundableServicePayment = (TextView) findViewById(R.id.sNonRefundableServicePayment_v);
-        tvsTransportationPayment = (TextView) findViewById(R.id.sTransportationPayment_v);
-        tvsCriticismPayment = (TextView) findViewById(R.id.sCriticismPayment_v);
-        tvsBonusPayment = (TextView) findViewById(R.id.sBonusPayment_v);
+        tvsNonRefundableServicePayment = (TextView) findViewById(id.sNonRefundableServicePayment_v);
+        tvsTransportationPayment = (TextView) findViewById(id.sTransportationPayment_v);
+        tvsCriticismPayment = (TextView) findViewById(id.sCriticismPayment_v);
+        tvsBonusPayment = (TextView) findViewById(id.sBonusPayment_v);
 
-        tv = (TextView) findViewById(R.id.darktview);
-        webview = (WebView) findViewById(R.id.briefingView);
-        dataView = (ScrollView) findViewById(R.id.dataView);
+        tv = (TextView) findViewById(id.darktview);
+        webview = (WebView) findViewById(id.briefingView);
+        dataView = (ScrollView) findViewById(id.dataView);
         hideBriefing();
         // if (Helper.getTheme(JobDetailActivity.this) == 1)
         // tv.setVisibility(View.VISIBLE);
@@ -1128,27 +1121,17 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 .getsPurchase().equals("1"))) {
             tv_make_purchase = getTextFromHtmlFormate(
                     JobDetailActivity.this
-                            .getString(R.string.questionnaire_exit_delete_alert_yes),
+                            .getString(string.questionnaire_exit_delete_alert_yes),
                     tv_make_purchase);
         } else {
-            tv_make_purchase = getTextFromHtmlFormate(
-                    JobDetailActivity.this
-                            .getString(R.string.questionnaire_exit_delete_alert_no),
-                    tv_make_purchase);
+            tv_make_purchase = getTextFromHtmlFormate(JobDetailActivity.this
+                            .getString(string.questionnaire_exit_delete_alert_no), tv_make_purchase);
         }
-
-        tv_purchase_desc = getTextFromHtmlFormate(
-                order.getsPurchaseDescription(), tv_purchase_desc);
-
-        tvsNonRefundableServicePayment = getTextFromHtmlFormate(
-                order.getsNonRefundableServicePayment(),
-                tvsNonRefundableServicePayment);
-        tvsTransportationPayment = getTextFromHtmlFormate(
-                order.getsTransportationPayment(), tvsTransportationPayment);
-        tvsCriticismPayment = getTextFromHtmlFormate(
-                order.getsCriticismPayment(), tvsCriticismPayment);
-        tvsBonusPayment = getTextFromHtmlFormate(order.getsBonusPayment(),
-                tvsBonusPayment);
+        tv_purchase_desc = getTextFromHtmlFormate(order.getsPurchaseDescription(), tv_purchase_desc);
+        tvsNonRefundableServicePayment = getTextFromHtmlFormate(order.getsNonRefundableServicePayment(), tvsNonRefundableServicePayment);
+        tvsTransportationPayment = getTextFromHtmlFormate(order.getsTransportationPayment(), tvsTransportationPayment);
+        tvsCriticismPayment = getTextFromHtmlFormate(order.getsCriticismPayment(), tvsCriticismPayment);
+        tvsBonusPayment = getTextFromHtmlFormate(order.getsBonusPayment(), tvsBonusPayment);
 
         // getTextFromHtmlFormate
         // status_v.setText(order.getStatusName());
@@ -1170,7 +1153,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             customFields = DBHelper.getCustomFields(order.getOrderID());
         }
         if (customFields != null) {
-            TableLayout listCustomFields = (TableLayout) findViewById(R.id.tblView);
+            TableLayout listCustomFields = (TableLayout) findViewById(id.tblView);
             int childcount = listCustomFields.getChildCount();
             for (int i = 0; i < customFields.size(); i++) {
                 View thisView = getCustomFiledView(i, null, null);
@@ -1191,19 +1174,19 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
         LayoutInflater inflater = (LayoutInflater) JobDetailActivity.this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.custom_field_custom_row,
+        View rowView = inflater.inflate(layout.custom_field_custom_row,
                 parent, false);
 
         if (language == 3)
-            rowView = inflater.inflate(R.layout.custom_field_custom_row_hi,
+            rowView = inflater.inflate(layout.custom_field_custom_row_hi,
                     parent, false);
-        TextView tvLeft = (TextView) rowView.findViewById(R.id.tvleft);
+        TextView tvLeft = (TextView) rowView.findViewById(id.tvleft);
         Helper.changeTxtViewColor(tvLeft);
         tvLeft.setTextSize(UIHelper.getFontSize(JobDetailActivity.this,
                 tvLeft.getTextSize()));
-        View separator = (View) rowView.findViewById(R.id.separator);
+        View separator = (View) rowView.findViewById(id.separator);
         Helper.changeViewColor(separator);
-        TextView tvRight = (TextView) rowView.findViewById(R.id.tvright);
+        TextView tvRight = (TextView) rowView.findViewById(id.tvright);
         tvRight.setTextSize(UIHelper.getFontSize(JobDetailActivity.this,
                 tvRight.getTextSize()));
 
@@ -1238,24 +1221,24 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
     private void setButtonText(String statusname, Boolean isSurvey) {
         if (isSurvey)
-            aceeptbtn.setText(getString(R.string.jd_begin_btn_text));
+            aceeptbtn.setText(getString(string.jd_begin_btn_text));
         else if (statusname.equals("Assigned"))
-            aceeptbtn.setText(getString(R.string.jd_accept_btn_text));
+            aceeptbtn.setText(getString(string.jd_accept_btn_text));
         else if (statusname.equals("Scheduled") || statusname.equals("cert"))
-            aceeptbtn.setText(getString(R.string.jd_begin_review_btn_text));
+            aceeptbtn.setText(getString(string.jd_begin_review_btn_text));
         else if (statusname.equals("in progress") || statusname.equals("In progress") || statusname.toLowerCase().equals("archived"))// (getString(R.string.jd_begin_button_status_inprogress)))
-            aceeptbtn.setText(getString(R.string.jd_continue_review_btn_text));
+            aceeptbtn.setText(getString(string.jd_continue_review_btn_text));
         else if (statusname.equals("Completed"))// (getString(R.string.jd_begin_button_status_completed)))
         {
             // rejectbtn.setText(getString(R.string.jd_synch_button_text));
-            aceeptbtn.setText(getString(R.string.jd_continue_review_btn_text));
+            aceeptbtn.setText(getString(string.jd_continue_review_btn_text));
         }
 
 
         if ((order != null && order.getStatusName() != null && order.getStatusName().toLowerCase().contains("archive")) || (order != null && order.getAsArchive())) {
             rejectbtn
-                    .setText(getResources().getString(R.string.button_back_archive));
-            rejectbtnImg.setImageResource(R.drawable.btn_back);
+                    .setText(getResources().getString(string.button_back_archive));
+            rejectbtnImg.setImageResource(drawable.btn_back);
 
         }
 
@@ -1277,7 +1260,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         menu.clear();
         if (Constants.isQAAllowed)
             menu.add(0, Constants.MENUID_BUG, 0,
-                    getString(R.string.questionnaire_send_bug));
+                    getString(string.questionnaire_send_bug));
         return true;
     }
 
@@ -1312,12 +1295,12 @@ public class JobDetailActivity extends Activity implements OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.accepttxt:
-            case R.id.accept_layout:
-            case R.id.acceptbtn:
+            case id.accepttxt:
+            case id.accept_layout:
+            case id.acceptbtn:
 
                 if (aceeptbtn.getText().toString()
-                        .equals(getString(R.string.jd_begin_btn_text))) {
+                        .equals(getString(string.jd_begin_btn_text))) {
                     if (isSurvey) {
                         if (statusname.equals("survey")) {
 
@@ -1327,14 +1310,14 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                                 builder.setMessage(
                                                 getResources()
                                                         .getString(
-                                                                R.string.questionnaire_open_survey_alert))
+                                                                string.questionnaire_open_survey_alert))
                                         .setTitle(
                                                 getResources().getString(
-                                                        R.string._alert_title))
+                                                        string._alert_title))
                                         .setCancelable(false)
                                         .setPositiveButton(
                                                 getResources().getString(
-                                                        R.string.button_ok),
+                                                        string.button_ok),
                                                 new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(
@@ -1364,7 +1347,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     }
                 }
                 if (aceeptbtn.getText().toString()
-                        .equals(getString(R.string.jd_accept_btn_text))) {
+                        .equals(getString(string.jd_accept_btn_text))) {
                     // if(!Helper.isParsed()){
                     // ShowAlert(JobDetailActivity.this,
                     // getString(R.string.jd_parsing_alert_title),
@@ -1384,16 +1367,16 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     int ins = IsInternetConnectted();
                     if (ins >= 0) {
                         ShowAlert(JobDetailActivity.this,
-                                getString(R.string.jd_parsing_alert_title),
-                                getString(R.string.accept_job_fail_alert),
-                                getString(R.string.alert_btn_lbl_ok));
+                                getString(string.jd_parsing_alert_title),
+                                getString(string.accept_job_fail_alert),
+                                getString(string.alert_btn_lbl_ok));
                         return;
                     }
-                    new JobTask().execute(getString(R.string.jd_accept_btn_text),
+                    new JobTask().execute(getString(string.jd_accept_btn_text),
                             "");
                     // aceeptbtn.setBackgroundResource(R.drawable.acceptbtn_n);
                 } else if (aceeptbtn.getText().toString()
-                        .equals(getString(R.string.jd_begin_review_btn_text))) {
+                        .equals(getString(string.jd_begin_review_btn_text))) {
                     if (this.isBriefing == true) {
                         isBriefing = false;
                         showBriefing();
@@ -1406,7 +1389,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     }
 
                 } else if (aceeptbtn.getText().toString()
-                        .equals(getString(R.string.jd_continue_review_btn_text))) {
+                        .equals(getString(string.jd_continue_review_btn_text))) {
                     SplashScreen.addLog(new BasicLog(
                             myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
                             myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + order.getOrderID() + " = " + order.getSetName() + "status:" + order.getStatusName(), order.getOrderID()));
@@ -1421,15 +1404,15 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     BeginReview(false);
                 }
                 break;
-            case R.id.rejecttxt:
-            case R.id.reject_layout:
-            case R.id.rejectbtn:
+            case id.rejecttxt:
+            case id.reject_layout:
+            case id.rejectbtn:
 
                 if (rejectbtn.getText().toString()
-                        .equals(getString(R.string.button_back_archive))) {
+                        .equals(getString(string.button_back_archive))) {
                     finish();
                 } else if (rejectbtn.getText().toString()
-                        .equals(getString(R.string.jd_reject_btn_text))) {
+                        .equals(getString(string.jd_reject_btn_text))) {
                     if (order != null
                             && order.getAllowShoppersToRejectJobs() != null
                             && order.getAllowShoppersToRejectJobs().equals("2")) {
@@ -1452,7 +1435,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     RefusalReasonDialog dialog = new RefusalReasonDialog(this);
                     dialog.show();
                 } else if (aceeptbtn.getText().toString()
-                        .equals(getString(R.string.jd_begin_btn_text))) {
+                        .equals(getString(string.jd_begin_btn_text))) {
                     finish();
                 } else {
                     if (OrderID.contains("CC")) {
@@ -1464,7 +1447,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 }
                 break;
 
-            case R.id.jdmapbtn:
+            case id.jdmapbtn:
 
                 // count++;
                 // sendMessage(WEAR_MESSAGE_PATH, "map button clicked =" + count);
@@ -1474,11 +1457,11 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 intent.putExtra("orderid", OrderID);
                 startActivityForResult(intent, MAP_ACTIVITY_CODE);
                 break;
-            case R.id.jd_alt_btn:
+            case id.jd_alt_btn:
                 showLanguageDialog();
                 break;
 
-            case R.id.jdcalendarbtn:
+            case id.jdcalendarbtn:
 
                 Date d = null;
                 String str = "";
@@ -1567,10 +1550,10 @@ public class JobDetailActivity extends Activity implements OnClickListener,
     }
 
     private void hideBriefing() {
-        tv_header.setText(getResources().getString(R.string.jd_heder_text));
+        tv_header.setText(getResources().getString(string.jd_heder_text));
         rejectbtn
-                .setText(getResources().getString(R.string.jd_reject_btn_text));
-        rejectbtnImg.setImageResource(R.drawable.btn_decline);
+                .setText(getResources().getString(string.jd_reject_btn_text));
+        rejectbtnImg.setImageResource(drawable.btn_decline);
         dataView.setVisibility(RelativeLayout.VISIBLE);
         calendarBtn.setVisibility(RelativeLayout.GONE);
         mapbtn.setVisibility(RelativeLayout.VISIBLE);
@@ -1580,12 +1563,12 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
     private void showBriefing() {
         int modeSelect = myPrefs.getInt(Constants.SETTINGS_LANGUAGE_INDEX, 1);
-        tv_header.setText(getResources().getString(R.string.txt_briefing));
-        rejectbtn.setText(getResources().getString(R.string.pos_backk));
+        tv_header.setText(getResources().getString(string.txt_briefing));
+        rejectbtn.setText(getResources().getString(string.pos_backk));
         if (modeSelect == 3)
-            rejectbtnImg.setImageResource(R.drawable.btn_begin);
+            rejectbtnImg.setImageResource(drawable.btn_begin);
         else
-            rejectbtnImg.setImageResource(R.drawable.btn_back);
+            rejectbtnImg.setImageResource(drawable.btn_back);
         //rejectbtnImg.setImageResource(R.drawable.btn_back);
         Helper.changeImageViewSrc(rejectbtnImg, getApplicationContext());
         calendarBtn.setVisibility(RelativeLayout.GONE);
@@ -1682,9 +1665,9 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         LayoutInflater inflater = getLayoutInflater();
         View customToastroot = null;
 
-        customToastroot = inflater.inflate(R.layout.custom_toast_green, null);
+        customToastroot = inflater.inflate(layout.custom_toast_green, null);
 
-        ((TextView) customToastroot.findViewById(R.id.textView1))
+        ((TextView) customToastroot.findViewById(id.textView1))
                 .setText(string);
 
         Toast customtoast = new Toast(context);
@@ -1697,7 +1680,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
     private boolean CheckResponse(String result, String failMessage) {
 
-        msgId = R.string.reject_job_sucess_alert;
+        msgId = string.reject_job_sucess_alert;
         // <GroupedNumber>1</GroupedNumber>
         if (result != null && result.toLowerCase().contains("<groupednumber>")) {
             String parsed = result.toLowerCase();
@@ -1725,8 +1708,8 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         if (!Helper.IsValidResponse(result,
                 Constants.JOB_DETAIL_RESP_FIELD_PARAM)) {
             ShowAlert(JobDetailActivity.this,
-                    getString(R.string.error_alert_title), failMessage,
-                    getString(R.string.alert_btn_lbl_ok));
+                    getString(string.error_alert_title), failMessage,
+                    getString(string.alert_btn_lbl_ok));
             return false;
         }
         // result = new Parser().getValue(result,
@@ -1758,7 +1741,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         // </table></div></reply>
         if (result != null
                 && result.toLowerCase().contains("order+is+not+assiged")) {
-            msgId = R.string.error_order_not_assigned;
+            msgId = string.error_order_not_assigned;
             return true;
         }
         result = result.substring(
@@ -1767,8 +1750,8 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         if (!(result.endsWith("1"))) {
 
             ShowAlert(JobDetailActivity.this,
-                    getString(R.string.error_alert_title), failMessage,
-                    getString(R.string.alert_btn_lbl_ok));
+                    getString(string.error_alert_title), failMessage,
+                    getString(string.alert_btn_lbl_ok));
             return false;
         }
         return true;
@@ -1797,9 +1780,9 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
         if (IsInternetConnectted() >= 0) {
             ShowAlert(JobDetailActivity.this,
-                    getString(R.string.jd_parsing_alert_title),
-                    getString(R.string.reject_job_fail_alert),
-                    getString(R.string.alert_btn_lbl_ok));
+                    getString(string.jd_parsing_alert_title),
+                    getString(string.reject_job_fail_alert),
+                    getString(string.alert_btn_lbl_ok));
             return;
         }
         new JobTask().execute("", str);
@@ -1860,11 +1843,11 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                         dialog.dismiss();
                         Revamped_Loading_Dialog.hide_dialog();
                         if (message
-                                .equals(getString(R.string.reject_job_sucess_alert))
+                                .equals(getString(string.reject_job_sucess_alert))
                                 || message
-                                .equals(getString(R.string.error_order_not_assigned))
+                                .equals(getString(string.error_order_not_assigned))
                                 || message
-                                .equals(getString(R.string.alert_sync_jobs_again)))
+                                .equals(getString(string.alert_sync_jobs_again)))
                             showJobList();
                     }
                 });
@@ -1889,13 +1872,13 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(
                             getResources().getString(
-                                    R.string.questionnaire_gps_off_alert))
-                    .setTitle(getResources().getString(R.string._alert_title))
+                                    string.questionnaire_gps_off_alert))
+                    .setTitle(getResources().getString(string._alert_title))
                     .setCancelable(false)
                     .setPositiveButton(
                             getResources()
                                     .getString(
-                                            R.string.questionnaire_exit_delete_alert_yes),
+                                            string.questionnaire_exit_delete_alert_yes),
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog,
@@ -1913,7 +1896,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     .setNegativeButton(
                             getResources()
                                     .getString(
-                                            R.string.questionnaire_exit_delete_alert_no),
+                                            string.questionnaire_exit_delete_alert_no),
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog,
@@ -1931,12 +1914,12 @@ public class JobDetailActivity extends Activity implements OnClickListener,
         // OPen GPS settings
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(
-                        getResources().getString(R.string.questionnaire_mock_gps_alert))
-                .setTitle(getResources().getString(R.string._alert_title))
+                        getResources().getString(string.questionnaire_mock_gps_alert))
+                .setTitle(getResources().getString(string._alert_title))
                 .setCancelable(false)
                 .setPositiveButton(
                         getResources().getString(
-                                R.string.questionnaire_exit_delete_alert_yes),
+                                string.questionnaire_exit_delete_alert_yes),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
@@ -1952,7 +1935,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                         })
                 .setNegativeButton(
                         getResources().getString(
-                                R.string.questionnaire_exit_delete_alert_no),
+                                string.questionnaire_exit_delete_alert_no),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
@@ -2008,13 +1991,13 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(
-                            getResources().getString(R.string.questionnaire_gps_alert))
-                    .setTitle(getResources().getString(R.string._alert_title))
+                            getResources().getString(string.questionnaire_gps_alert))
+                    .setTitle(getResources().getString(string._alert_title))
                     .setCancelable(false)
                     .setPositiveButton(
                             getResources()
                                     .getString(
-                                            R.string.questionnaire_exit_delete_alert_yes),
+                                            string.questionnaire_exit_delete_alert_yes),
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog,
@@ -2042,7 +2025,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     .setNegativeButton(
                             getResources()
                                     .getString(
-                                            R.string.questionnaire_exit_delete_alert_no),
+                                            string.questionnaire_exit_delete_alert_no),
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog,
@@ -2268,7 +2251,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     return "SessionExpire";
             }
             String result = "";
-            if (params[0].equals(getString(R.string.jd_accept_btn_text))) {
+            if (params[0].equals(getString(string.jd_accept_btn_text))) {
                 if (set != null && set.getCertificates() != null
                         && set.getCertificates().size() > 0) {
                     List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
@@ -2404,11 +2387,11 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 result = result.substring(0, result.length() - 1);
                 // dialog.onPostExecute();
                 if (CheckResponse(result,
-                        getString(R.string.reject_job_fail_alert))) {
+                        getString(string.reject_job_fail_alert))) {
                     ShowAlert(JobDetailActivity.this,
-                            getString(R.string.jd_parsing_alert_title),
+                            getString(string.jd_parsing_alert_title),
                             getString(msgId),
-                            getString(R.string.alert_btn_lbl_ok));
+                            getString(string.alert_btn_lbl_ok));
 
                     // On_ExitanddeleteButton_Click(order.getOrderID());
                     DBHelper.updateOrders(Constants.DB_TABLE_ORDERS,
@@ -2428,9 +2411,9 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                         myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Accepting Order!" + order.getOrderID() + " Reply from server= " + result, order.getOrderID()));
 
                 if (CheckResponse(result,
-                        getString(R.string.invalid_server_response_alert))) {
+                        getString(string.invalid_server_response_alert))) {
                     aceeptbtn
-                            .setText(getString(R.string.jd_begin_review_btn_text));
+                            .setText(getString(string.jd_begin_review_btn_text));
                     if (order.getCount() < 2
                             || (groupedNumber != null
                             && groupedNumber.length() > 0 && serverGroupedNumber <= 1)) {
@@ -2528,12 +2511,12 @@ public class JobDetailActivity extends Activity implements OnClickListener,
 
         ShowAlert(
                 JobDetailActivity.this,
-                getString(R.string.jd_parsing_alert_title),
-                getString(R.string.alert_sync_jobs_again).replace("#LOCAL#",
+                getString(string.jd_parsing_alert_title),
+                getString(string.alert_sync_jobs_again).replace("#LOCAL#",
                         groupedNumber).replace("#SERVER#",
                         serverGroupedNumber + ""),
-                getString(R.string.alert_btn_lbl_ok),
-                getString(R.string.alert_btn_lbl_ok));
+                getString(string.alert_btn_lbl_ok),
+                getString(string.alert_btn_lbl_ok));
     }
 
     private void ShowAlert(Context context, String title, String message,
@@ -2564,8 +2547,8 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                 JobDetailActivity.this);
         builder.setCancelable(false);
         builder.setMessage(
-                        getResources().getString(R.string.attached_certificate_msg))
-                .setPositiveButton(getResources().getString(R.string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
+                        getResources().getString(string.attached_certificate_msg))
+                .setPositiveButton(getResources().getString(string.questionnaire_exit_delete_alert_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (JobDetailActivity.certCallBack != null)
@@ -2574,7 +2557,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                         finish();
                     }
                 })
-                .setNegativeButton(getResources().getString(R.string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(string.questionnaire_exit_delete_alert_no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

@@ -30,7 +30,6 @@ public class orderListItem  implements Serializable{
 				}
 			}
 		}
-
 		orderItem = order;
 		listOrders = listarray;
 		surveyItem = null;
