@@ -2058,7 +2058,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             btnView.setTextSize(UIHelper.getFontSize(ShowJobInMapViewActivity.this,
                     btnView.getTextSize()));
             btnView.setTextColor(getResources().getColor(android.R.color.black));
-
         } catch (Exception ex) {
 
         }

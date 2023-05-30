@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -137,7 +138,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
     ScrollView dataView;
     WebView webview;
     private boolean isBriefing;
-    String OrderID;
+    String OrderID,SetID;
     private String groupedNumber;
     private boolean refreshJoblist;
     private int serverGroupedNumber;
@@ -1807,6 +1808,8 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     QuestionnaireActivity.class);
             intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID, OrderID);
             intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
+
+            Log.e("TAG", "BeginReview: "+OrderID);
             if (isFromWatch)
                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
             else
@@ -1819,6 +1822,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
             intent.putExtra(Constants.POST_FIELD_QUES_ORDER_ID,
                     order.getOrderID());
             intent.putExtra(Constants.FIELD_ORDER_SET_ID, order.getSetID());
+            Log.e("TAG", "BeginReview: "+order.getSetID());
             if (isFromWatch)
                 startActivityForResult(intent, QUESTIONNAIRE_ACTIVITY_CODE);
             else

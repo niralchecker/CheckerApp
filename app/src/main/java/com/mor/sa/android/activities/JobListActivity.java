@@ -438,7 +438,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         if (Helper.getTheme(JobListActivity.this) == 0) {
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.rvinjobscreen);
             if (layout != null)
-                layout.setBackgroundDrawable(getResources().getDrawable(R.drawable.navigation_bar_dark));
+                layout.setBackground(ContextCompat.getDrawable(this, R.drawable.navigation_bar_dark));
 
             ImageView imglayout = (ImageView) findViewById(R.id.bottombar);
             if (imglayout != null)
@@ -723,7 +723,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             }
         }
         return sqd;
-
     }
 
     private boolean matchWithCurrenTime(String time) {
@@ -3508,8 +3507,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                     }
                     myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
                     isBranchPropErr = myPrefs.getBoolean(Constants.ALREADY_BRANCHPROPERR, false);
-
-
                 }
             } catch (Exception ex) {
                 int i = 0;
@@ -3535,40 +3532,50 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                     }
 
                     filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
-//                Log.e("filtered", filtered + "  " + filtered.size());
                     jobs_CAPI.clear();
 //                    for (int i = 0; filtered != null && i < filtered.size(); i++) {
 //                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-//                    }
-////                    System.out.println(result[0])
-//                        boolean found = false;
-//                        for (orderListItem person1 : jobs_CAPI) {
-//                            if (Objects.equals(result[0], person1.orderItem.getOrderID().split("_")[0])) {
-//                                found = true;
-//                            }
-//                        }
-//                        if (!found) {
-//                            jobs_CAPI.add((new orderListItem(filtered.get(i).orderItem, null)));
-//                        }
-//                        Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
-//                    }
-                    // Grouping by SetID using HashMap
+////                        Log.d("TAG", "doIn:" +orderItem.getOrderID().contains("-")).collect(Collectors.toList());
+//                 }
+
                     Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
                     for (orderListItem item : joborders) {
                         int setId = Integer.parseInt(item.orderItem.getSetID());
+//                    int setId = item.getSetId();
                         if (groupedItems.containsKey(setId)) {
                             groupedItems.get(setId).add(item);
-                            Log.d("TAG", "detID: "+item.orderItem.getSetID());
-
+                            Log.e("TAG", "ShowDBJobs Order1 : "+item.orderItem.getOrderID() );
+                            Log.e("TAG", "ShowDBJobs Set1: "+item.orderItem.getSetID() );
+                            if (!item.orderItem.getOrderID().isEmpty() ||item.orderItem.getOrderID().equals(setId)) {
+                                Log.e("TAG", "ShowDBJobs Order1222 : "+item.orderItem.getOrderID() );
+                                Log.e("TAG", "ShowDBJobs Set1222: "+item.orderItem.getSetID() );
+                            }
                         } else {
                             List<orderListItem> items = new ArrayList<>();
                             items.add(item);
                             groupedItems.put(setId, items);
-                            Log.e("TAG", "doInBackground: "+groupedItems);
-                            Log.d("TAG", "doI: "+item.orderItem.getOrderID());
                             jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+                            Log.e("TAG", "ShowDBJobs Order2: "+item.orderItem.getOrderID() );
+                            Log.e("TAG", "ShowDBJobs Set2:"+item.orderItem.getSetID() );
                         }
+//                    Log.e("TAG", "ShowDBJobs: Order"+item.orderItem.getOrderID() );
+//                    Log.e("TAG", "ShowDBJobs: Set"+item.orderItem.getSetID() );
+
+
                     }
+//                    // Accessing the grouped items
+//                    for (Map.Entry<Integer, List<orderListItem>> entry : groupedItems.entrySet()) {
+//                        int setId = entry.getKey();
+//                        List<orderListItem> items = entry.getValue();
+//
+//                        System.out.println("Set ID: " + setId);
+//                        for (orderListItem item : items) {
+//                            System.out.println("Item ID: " + item.orderItem.getSetID() + ", Name: " + item.orderItem.getOrderID());
+//                            jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+//                        }
+//                        System.out.println("------------------------");
+//                    }
+
                     // Get My jobs excluding CAPI....
                     List<orderListItem> list1 = filtered;
                     List<orderListItem> list2 = joborders;
@@ -3587,8 +3594,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                     }
                     Log.e("joborders_activity", String.valueOf(joborders.size()));
                 }
-
-
             } catch (Exception ex) {
             }
 
@@ -3825,18 +3830,25 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
                 for (orderListItem item : joborders) {
                     int setId = Integer.parseInt(item.orderItem.getSetID());
+//                    int setId = item.getSetId();
                     if (groupedItems.containsKey(setId)) {
                         groupedItems.get(setId).add(item);
-                        Log.d("TAG", "detID: "+item.orderItem.getSetID());
-
+                        Log.e("TAG", "ShowDBJobs Order1 : "+item.orderItem.getOrderID() );
+                        Log.e("TAG", "ShowDBJobs Set1: "+item.orderItem.getSetID() );
+                        if (!item.orderItem.getOrderID().isEmpty() ||item.orderItem.getOrderID().equals(setId)) {
+                            Log.e("TAG", "ShowDBJobs Order1222 : "+item.orderItem.getOrderID() );
+                            Log.e("TAG", "ShowDBJobs Set1222: "+item.orderItem.getSetID() );
+                        }
                     } else {
                         List<orderListItem> items = new ArrayList<>();
                         items.add(item);
                         groupedItems.put(setId, items);
-                        Log.e("TAG", "doInBackground: "+groupedItems);
-                        Log.d("TAG", "doI: "+item.orderItem.getOrderID());
                         jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+                        Log.e("TAG", "ShowDBJobs Order2: "+item.orderItem.getOrderID() );
+                        Log.e("TAG", "ShowDBJobs Set2:"+item.orderItem.getSetID() );
                     }
+//                    Log.e("TAG", "ShowDBJobs: Order"+item.orderItem.getOrderID() );
+//                    Log.e("TAG", "ShowDBJobs: Set"+item.orderItem.getSetID() );
                 }
 //                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
 //                Log.e("joborders_activity", String.valueOf(joborders.size()));
@@ -3920,55 +3932,31 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 //                Log.e("filtered", filtered + "  " + filtered.size());
 
                 jobs_CAPI.clear();
-/*  for (int i = 0; filtered != null && i < filtered.size(); i++) {
-                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-                    }*/
+//                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+//                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+//                }
+//
+                // Grouping by SetID using HashMap
                 Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
                 for (orderListItem item : joborders) {
                     int setId = Integer.parseInt(item.orderItem.getSetID());
                     if (groupedItems.containsKey(setId)) {
                         groupedItems.get(setId).add(item);
-                        Log.d("TAG", "detID: " + item.orderItem.getSetID());
-
+                        Log.e("TAG", "ShowDBJobs Order1 : "+item.orderItem.getOrderID() );
+                        Log.e("TAG", "ShowDBJobs Set1: "+item.orderItem.getSetID() );
                     } else {
                         List<orderListItem> items = new ArrayList<>();
                         items.add(item);
                         groupedItems.put(setId, items);
-                        Log.e("TAG", "doInBackground: " + groupedItems);
-                        Log.d("TAG", "doI: " + item.orderItem.getOrderID());
                         jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+                        Log.e("TAG", "ShowDBJobs Order2: "+item.orderItem.getOrderID() );
+                        Log.e("TAG", "ShowDBJobs Set2:"+item.orderItem.getSetID() );
                     }
+//                    Log.e("TAG", "ShowDBJobs: Order"+item.orderItem.getOrderID() );
+//                    Log.e("TAG", "ShowDBJobs: Set"+item.orderItem.getSetID() );
+
+
                 }
-
-//                    if (!jobs_CAPI.isEmpty()) {
-//                        for (int j = 0; j < jobs_CAPI.size(); j++) {
-//                            String mystring1 = jobs_CAPI.get(i).orderItem.getOrderID();
-//                            String[] result1 = mystring1.split("_");
-//                            Log.e("JOddddddd111" , result1.toString());
-//                            Log.e("JOddddddd" ,result.toString());
-//
-//                            if (result != result1) {
-//                                jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-//                            }
-//                        }
-//                    } else {
-//                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-//                }
-
-//                  String s2 = result[0];
-
-
-//                  for (int j = i + 1; j < s2.length(); j++) {
-////                        if(Objects.equals(result[i], result[j]))
-////                            System.out.println(result[j]);
-////                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-////                    }
-
-//                    Log.e("########", filtered.get(i).orderItem.getOrderID());
-
-
-//            }
-
 //                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
 //                Log.e("joborders_activity", String.valueOf(joborders.size()));
 //                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
@@ -7297,8 +7285,10 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 if (v.getTag() == null)
                     Toast.makeText(JobListActivity.this, getResources().getString(R.string.selectDate), Toast.LENGTH_LONG).show();
                 applyAlternateDate(orderid, dialog, ((String) v.getTag()));
+
             }
         });
+        Log.d("TAG", "onClick: "+selectJobOderId);
         dialog.show();
         return dialog;
     }
