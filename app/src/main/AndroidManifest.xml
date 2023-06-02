@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mor.sa.android.activities"
     android:versionCode="679"
     android:versionName="12.79">
 

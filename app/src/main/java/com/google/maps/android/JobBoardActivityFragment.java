@@ -1997,9 +1997,11 @@ public class JobBoardActivityFragment extends FragmentActivity {
         extraDataList.add(Helper
                 .getNameValuePair("ApplicationComment", comment));
         extraDataList.add(Helper.getNameValuePair("OrderID", orderId));
-
+        Log.e("TAG", "ApplyJob: "+ comment);
+        Log.e("TAG", "ApplyJob: "+ orderId);
         // String url = Helper.getSystemURL()
         // + "/c_pda-apply-order.php?json=1&ver=" + ver;
+        Log.e("TAG", "ApplyJob: "+ extraDataList );
         return Connector.postForm(Constants.getBoardApplyURL("9.7"),
                 extraDataList);
     }
@@ -2679,14 +2681,9 @@ public class JobBoardActivityFragment extends FragmentActivity {
 
                             } catch (ParseException ex) {
                             }
-                            Toast.makeText(
-                                            getApplicationContext(),
-                                            txtComment.getText().toString() + " " + "("
-                                                    + date + ")", Toast.LENGTH_LONG)
-                                    .show();
-                            apply(txtComment.getText().toString() + " " + "("
-                                            + date + ")", thiItem.getOrderID(), dialog,
-                                    arg0, thiItem, false);
+                            Toast.makeText(getApplicationContext(), txtComment.getText().toString() + " " + "(" + date + ")", Toast.LENGTH_LONG).show();
+                            apply(txtComment.getText().toString() + " " + "(" + date + ")", thiItem.getOrderID(), dialog, arg0, thiItem, false);
+
                         } else {
                             apply(txtComment.getText().toString(),
                                     thiItem.getOrderID(), dialog, arg0,

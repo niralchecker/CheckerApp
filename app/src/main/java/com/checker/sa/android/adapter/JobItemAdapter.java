@@ -1240,7 +1240,6 @@ public class JobItemAdapter extends BaseAdapter {
             ivCalendar = (ImageView) row.findViewById(R.id.iv_calendar);
             LinearLayout llAccept = (LinearLayout) row.findViewById(R.id.ll_accept);
             clBottom = (LinearLayout) row.findViewById(R.id.cl_bottom);
-
             TextView tvSurveyName = (TextView) row.findViewById(R.id.tv_survey_name);
             TextView tvBranchFullName = (TextView) row.findViewById(R.id.tv_branch_full_name);
             TextView tvClientDesc = (TextView) row.findViewById(R.id.tv_client_desc);
@@ -1447,7 +1446,6 @@ public class JobItemAdapter extends BaseAdapter {
             tvStartJob.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_begin_review_btn_text))) {
                         Constants.accept_txt = "Begin_Survey";
                         mJobStartListener.onJobStartClick(position, Constants.accept_txt);
@@ -1702,7 +1700,6 @@ public class JobItemAdapter extends BaseAdapter {
                 tvTime.setVisibility(View.GONE);
                 tvDec.setVisibility(View.GONE);
             } else {
-                // if (!Constants.getDateFilter())
                 imgpopup.setVisibility(RelativeLayout.GONE);
                 ivRight.setVisibility(View.GONE);
                 clBottom.setVisibility(View.VISIBLE);
@@ -1711,15 +1708,12 @@ public class JobItemAdapter extends BaseAdapter {
                 tvTime.setVisibility(View.VISIBLE);
                 tvDec.setVisibility(View.VISIBLE);
             }
-
             ivRight.setOnClickListener(new OnClickListener() {
-
                 @Override
                 public void onClick(View arg0) {
                     if (jobItemList.getVisibility() == View.GONE) {
                         jobItemList.setVisibility(View.VISIBLE);
-                        ivRight.setBackgroundDrawable(ct.getResources()
-                                .getDrawable(R.drawable.upppp));
+                        ivRight.setBackgroundDrawable(ct.getResources().getDrawable(R.drawable.upppp));
 //                        if (lastpopuplayout != null)
 //                            lastpopuplayout.setVisibility(RelativeLayout.GONE);
                     } else {
@@ -1738,14 +1732,10 @@ public class JobItemAdapter extends BaseAdapter {
 
             //Assigned tab data
             if (order.getOrderID().contains("-")) {
-                Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
-                        "-", ""));
-
+                Survey s = Surveys.getCurrentSurve(order.getOrderID().replace("-", ""));
                 Log.d("TAG", "getView: Survey"+s);
                 if (s != null && s.getSurveyName() != null) {
 //                     tv.setText(order.getOrderID()+s.getSurveyName());
-
-
                     tv.setText(s.getSurveyName());
                     tvSurveyName.setText(s.getSurveyName());
                     tvBranchFullName.setText(s.getBranchFullName());
@@ -1754,7 +1744,6 @@ public class JobItemAdapter extends BaseAdapter {
                     if (!Constants.getDateFilter())
                         ivRight.setVisibility(RelativeLayout.GONE);
                     // iv.setBackgroundResource(getResource("wrong"));
-
                     // Spanned sp = Html.fromHtml(s.getSurveyName());
                     tv.setText("Could not retrieve Survey...");
                     return row;
@@ -1763,7 +1752,6 @@ public class JobItemAdapter extends BaseAdapter {
                 branchtv.setVisibility(View.GONE);
                 counttv.setVisibility(View.GONE);
                 view1.setVisibility(View.GONE);
-
                 try {
                     if (order.getBranchLong() != null && order.getBranchLat() != null) {
                         double location_latitude = Double.parseDouble(order.getBranchLat());
@@ -1780,24 +1768,16 @@ public class JobItemAdapter extends BaseAdapter {
 
                 }
 
-
                 if (s != null && s.getArrayQuotas() != null) {
                     String str[] = s.getArrayQuotas();
-
-                    ArrayAdapter adapter = new ArrayAdapter(ct,
-                            UIHelper.getListLayoutSize(ct), str);
+                    ArrayAdapter adapter = new ArrayAdapter(ct, UIHelper.getListLayoutSize(ct), str);
                     lvjdsurvey_quotas_list.setAdapter(adapter);
-
                     setListViewHeightBased(lvjdsurvey_quotas_list);
                 }
 
-
                 if (s != null && s.getArrayAllocations() != null) {
-
                     String str[] = s.getArrayAllocations();
-
-                    ArrayAdapter adapter = new ArrayAdapter(ct,
-                            UIHelper.getListLayoutSize(ct), str);
+                    ArrayAdapter adapter = new ArrayAdapter(ct, UIHelper.getListLayoutSize(ct), str);
                     lvjdsurvey_allocations_list.setAdapter(adapter);
                     setListViewHeightBased(lvjdsurvey_allocations_list);
                 }
@@ -1849,16 +1829,10 @@ public class JobItemAdapter extends BaseAdapter {
 
                 }
 
-
-                if ((order != null && order.getsPurchase() != null && order
-                        .getsPurchase().equals("1"))) {
-                    tvMakePurchase = getTextFromHtmlFormate(
-                            con.getString(R.string.questionnaire_exit_delete_alert_yes),
-                            tvMakePurchase);
+                if ((order != null && order.getsPurchase() != null && order.getsPurchase().equals("1"))) {
+                    tvMakePurchase = getTextFromHtmlFormate(con.getString(R.string.questionnaire_exit_delete_alert_yes), tvMakePurchase);
                 } else {
-                    tvMakePurchase = getTextFromHtmlFormate(
-                            con.getString(R.string.questionnaire_exit_delete_alert_no),
-                            tvMakePurchase);
+                    tvMakePurchase = getTextFromHtmlFormate(con.getString(R.string.questionnaire_exit_delete_alert_no), tvMakePurchase);
                 }
 
             } else {
@@ -1898,8 +1872,7 @@ public class JobItemAdapter extends BaseAdapter {
                         str,
                         !(order != null
                                 && this.joblistarray.get(position).listOrders != null
-                                && this.joblistarray.get(position).listOrders
-                                .size() > 1
+                                && this.joblistarray.get(position).listOrders.size() > 1
                                 && !tabFilter.equals("assigned")
                                 && !tabFilter.equals("scheduled") && !hideSurvey(
                                 order.getStatusName(), ivRight)), order);
@@ -1922,7 +1895,6 @@ public class JobItemAdapter extends BaseAdapter {
                             && order.getBranchFullname() != null
                             && order.getBranchFullname().length() > 0) {
                         branchtv.setText(order.getBranchFullname() + " " + order.getAddress());
-
                     }
 
                     if (Constants.getFullBranchName()
@@ -1944,7 +1916,6 @@ public class JobItemAdapter extends BaseAdapter {
 //                    Spanned sp = Html.fromHtml(getDate(order.getDate()) + ", "
 //                            + order.getBranchName());
                     Spanned sp = Html.fromHtml(getDate(order.getDate()));
-
 
                     if (Constants.getFullBranchName()
                             && order.getBranchFullname() != null
@@ -1969,8 +1940,7 @@ public class JobItemAdapter extends BaseAdapter {
                     if (Constants.getFullBranchName()
                             && order.getBranchFullname() != null
                             && order.getBranchFullname().length() > 0) {
-                        branchtv.setText(order.getBranchFullname() + " "
-                                + order.getAddress());
+                        branchtv.setText(order.getBranchFullname() + " " + order.getAddress());
                         branchtv.setVisibility(RelativeLayout.VISIBLE);
 
                     } else {
@@ -1991,15 +1961,12 @@ public class JobItemAdapter extends BaseAdapter {
                     // }
                     // });
                 }
-
             } else {
                 if (Constants.getFullBranchName()
                         && order.getBranchFullname() != null
                         && order.getBranchFullname().length() > 0) {
-                    branchtv.setText(order.getBranchFullname() + " "
-                            + order.getAddress());
+                    branchtv.setText(order.getBranchFullname() + " " + order.getAddress());
                     branchtv.setVisibility(RelativeLayout.VISIBLE);
-
                 } else {
                     branchtv.setText(order.getBranchName());
                     branchtv.setVisibility(RelativeLayout.VISIBLE);
@@ -2049,7 +2016,6 @@ public class JobItemAdapter extends BaseAdapter {
                 row.findViewById(R.id.vreturned).setVisibility(
                         RelativeLayout.GONE);
                 row.setOnClickListener(new OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
 //                        if (jobItemList.getVisibility() == View.GONE) {
@@ -2073,7 +2039,6 @@ public class JobItemAdapter extends BaseAdapter {
                         if (joblistarray.get(position).listSurveys != null
                                 && joblistarray.get(position).listSurveys
                                 .get(arg2) != null) {
-                            // showRAlert(JobListActivity.this);
                         } else {
                             Intent intent = new Intent(ct
                                     .getApplicationContext(),
@@ -2086,18 +2051,10 @@ public class JobItemAdapter extends BaseAdapter {
                                 Survey s = Surveys.getCurrentSurve(o_rder
                                         .getOrderID().replace("-", ""));
                                 if (s != null && s.getSurveyName() != null) {
-
                                 } else {
-
-                                    Toast.makeText(
-                                            con,
-                                            con.getResources()
-                                                    .getString(
-                                                            R.string.could_not_retrieve),
-                                            Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(con, con.getResources().getString(R.string.could_not_retrieve), Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-
                                 // intent.putExtra("briefing",joblistarray.get(position).listOrders.
                                 // );
                                 intent.putExtra("SurveyID", joblistarray
@@ -2108,8 +2065,7 @@ public class JobItemAdapter extends BaseAdapter {
                             intent.putExtra("OrderIndex", arg2);
                             intent.putExtra("Index", arg2);
                             Constants.setLocale(act);
-                            act.startActivityForResult(intent,
-                                    JOB_DETAIL_ACTIVITY_CODE);
+                            act.startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                         }
                     }
                 });
@@ -2169,6 +2125,9 @@ public class JobItemAdapter extends BaseAdapter {
                         + survey.getTargetQuota());
                 datetv.setText(sp.toString());
             }
+
+
+
 
             // else {
             // Spanned sp = Html.fromHtml(getDate(order.getDate()));
@@ -2280,7 +2239,6 @@ public class JobItemAdapter extends BaseAdapter {
             tv.setText(sp, BufferType.SPANNABLE);
         return tv;
     }
-
 
     //new code.....
 //    public void start_job() {

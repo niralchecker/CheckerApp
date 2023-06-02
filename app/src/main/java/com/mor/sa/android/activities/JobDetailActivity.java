@@ -2484,8 +2484,7 @@ public class JobDetailActivity extends Activity implements OnClickListener,
                     groupedNumber));
 
             // dialog.onPostExecute();
-            String result = Connector.postForm(Constants.getJobStartURL(),
-                    extraDataList);
+            String result = Connector.postForm(Constants.getJobStartURL(), extraDataList);
             return result + "r";
         }
 

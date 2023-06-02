@@ -97,6 +97,8 @@ public class Constants {
         String url = Helper.getSystemURL()
                 + "/c_pda-ordered-crits.php?app=1&ver=11.52";
         // 10.47 abve for in progress api
+
+        Log.e("TAG", "getJobListURL  Jobbbbbb: "+url );
         return url;
     }
 
@@ -104,6 +106,7 @@ public class Constants {
         // http://checker.co.il/testing/c_pda-job-board.php?ver=9.0&json=1&date_start=2016-12-26&date_end=2016-12-29&lat1=28.644800&long1=77.216721&lat2=31.771959&long2=78.217018
         String url = Helper.getSystemURL()
                 + "/c_pda-unfinished-reviews.php?app=1&ver=" + ver;
+        Log.e("TAG", "getInProgressJobsURL: "+url );
         return url;
     }//https://eu.checker-soft.com/testing/c_pda-unfinished-reviews.php?app=1&ver=12.93
 
@@ -142,6 +145,8 @@ public class Constants {
         // http://checker.co.il/testing/c_pda-job-board.php?ver=9.0&json=1&date_start=2016-12-26&date_end=2016-12-29&lat1=28.644800&long1=77.216721&lat2=31.771959&long2=78.217018
         String url = Helper.getSystemURL()
                 + "/c_pda-apply-order.php?json=1&ver=" + ver;
+
+        Log.e("TAG", "getBoardApplyURL: "+url );
         return url;
     }
 
@@ -193,11 +198,14 @@ public class Constants {
 
     public static String getcheckConnectionURL(String nurl) {
         String url = nurl + "/c_pda-check-connection.html";
+        Log.e("TAG", "getcheckConnectionURL: " +url);
         return url;
     }
 
     public static String getcheckConnectionURL() {
         String url = Helper.getSystemURL() + "/c_pda-check-connection.html";
+        Log.e("TAG", "getcheckConnectionURL: "+url );
+
         return url;
     }
 
@@ -210,6 +218,7 @@ public class Constants {
     public static String getQestionnaireURL(String ver) {
         String str = Helper.getSystemURL()
                 + "/c_pda-ordered-sets.php?app=1&ver=6.51";
+        Log.e("TAG", "getQestionnaireURL: "+str );
         return str;
     }
 
@@ -238,11 +247,14 @@ public class Constants {
     }
 
     public static String getLocationURL() {
+        Log.e("TAG", "getLocationURL: "+getLocationURL() );
         return Helper.getSystemURL() + "/c_pda-receive-geo.php";
     }
 
     public static String getJobStartURL() {
         String url = Helper.getSystemURL() + "/c_pda-change-order.php";
+
+        Log.e("TAG", "getJobStartURL: " +url);
         // url =
         // "https://dl.dropboxusercontent.com/u/13666396/checkerresponse.txt";
         return url;

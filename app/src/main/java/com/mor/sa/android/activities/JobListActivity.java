@@ -252,16 +252,13 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
     private TextView txttabTwo;
     private TextView txttabThree;
     private TextView txttabFour;
-
     private View Side_menu_top_green;
-
     private JobItemAdapter mAdapter;
     private ImageView btnErr;
     private String color_unselect = "#FFFFFF";
     private String txt_color_unselect = "#999999";
     private String color_select = "#94BzA09";
     private String txt_color_select = "#007BFF";
-
 
     // New Code
     private TextView toolbarTitle;
@@ -271,16 +268,13 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
     private TextView currentAddTv;
     private Location currentLocation;
     private LocationCallback locationCallback;
-
     Order order;
     Survey survey;
     String OrderID;
     private final int QUESTIONNAIRE_ACTIVITY_CODE = 1;
 
-
     // Reject Accept Code
     private static final String START_JOB = "/start_job";
-
     private Set set;
     private ArrayList<Cert> pendingCerts = null;
     private boolean refreshJoblist;
@@ -325,7 +319,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         }
         return null;
     }
-
     private void ManageTabs(int tabNumber) {
         ltabSync.setBackgroundColor(Color.parseColor(color_unselect));
         layoutWorking.setVisibility(RelativeLayout.VISIBLE);
@@ -432,7 +425,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         } catch (Exception ex) {
         }
     }
-
 
     private void setInvertDisplay() {
         if (Helper.getTheme(JobListActivity.this) == 0) {
@@ -583,7 +575,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             public void onPageFinished(WebView view, String url) {
                 Revamped_Loading_Dialog.hide_dialog();
             }
-
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 // TODO Auto-generated method stub
@@ -3488,7 +3479,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         public Context con;
         ArrayList<BranchProperties> branchProps;
         ArrayList<Order> jobordersss = null;
-
         @Override
         protected ArrayList<orderListItem> doInBackground(String... params) {
             //String ret = ShowDBJobss("task");
@@ -3533,45 +3523,36 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
                     filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
                     jobs_CAPI.clear();
-//                    for (int i = 0; filtered != null && i < filtered.size(); i++) {
-//                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-////                        Log.d("TAG", "doIn:" +orderItem.getOrderID().contains("-")).collect(Collectors.toList());
-//                 }
-
-                    Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
-                    for (orderListItem item : joborders) {
-                        int setId = Integer.parseInt(item.orderItem.getSetID());
-//                    int setId = item.getSetId();
-                        if (groupedItems.containsKey(setId)) {
-                            groupedItems.get(setId).add(item);
-                            Log.e("TAG", "ShowDBJobs Order1 : "+item.orderItem.getOrderID() );
-                            Log.e("TAG", "ShowDBJobs Set1: "+item.orderItem.getSetID() );
-                            if (!item.orderItem.getOrderID().isEmpty() ||item.orderItem.getOrderID().equals(setId)) {
-                                Log.e("TAG", "ShowDBJobs Order1222 : "+item.orderItem.getOrderID() );
-                                Log.e("TAG", "ShowDBJobs Set1222: "+item.orderItem.getSetID() );
-                            }
-                        } else {
-                            List<orderListItem> items = new ArrayList<>();
-                            items.add(item);
-                            groupedItems.put(setId, items);
-                            jobs_CAPI.add((new orderListItem(item.orderItem, null)));
-                            Log.e("TAG", "ShowDBJobs Order2: "+item.orderItem.getOrderID() );
-                            Log.e("TAG", "ShowDBJobs Set2:"+item.orderItem.getSetID() );
-                        }
-//                    Log.e("TAG", "ShowDBJobs: Order"+item.orderItem.getOrderID() );
-//                    Log.e("TAG", "ShowDBJobs: Set"+item.orderItem.getSetID() );
-
-
-                    }
+                    for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                        jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
+//                        Log.d("TAG", "doIn:" +orderItem.getOrderID().contains("-")).collect(Collectors.toList());
+                 }
+//                    //TODO Grouping by SetID using HashMap
+//
+//                    Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
+//                    for (orderListItem item : joborders) {
+//                        int setId = Integer.parseInt(item.orderItem.getSetID());
+//                        if (groupedItems.containsKey(setId)) {
+//                            if (item.orderItem.getOrderID().contains("-")) {
+//                                groupedItems.get(setId).add(item);
+//                            }
+//                        } else {
+//                            List<orderListItem> items = new ArrayList<>();
+//                            items.add(item);
+//                            groupedItems.put(setId, items);
+//                            jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+//                        }
+//                    }
 //                    // Accessing the grouped items
 //                    for (Map.Entry<Integer, List<orderListItem>> entry : groupedItems.entrySet()) {
 //                        int setId = entry.getKey();
 //                        List<orderListItem> items = entry.getValue();
-//
 //                        System.out.println("Set ID: " + setId);
+////                        jobs_CAPI.add((new orderListItem(items.get(0).orderItem, null)));
 //                        for (orderListItem item : items) {
-//                            System.out.println("Item ID: " + item.orderItem.getSetID() + ", Name: " + item.orderItem.getOrderID());
-//                            jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+//                            if (items.contains("-"))
+//                                jobs_CAPI.add((new orderListItem(item.orderItem, null)));
+//                            System.out.println("Item ID: " + item.orderItem.getStatusName() + ", Name: " + item.orderItem.getOrderID());
 //                        }
 //                        System.out.println("------------------------");
 //                    }
@@ -3655,13 +3636,10 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                     delete = new ArrayList<Order>();
                 }
                 filtered_other_jobs = (ArrayList<orderListItem>) temFilter;
-                // delete.clear();
                 delete = null;
-
             }
             return filtered_other_jobs;
         }
-
         @Override
         protected void onPostExecute(ArrayList<orderListItem> joborders) {
             Log.e("LongOperation", "onPostExecute");
@@ -3691,11 +3669,8 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 Revamped_Loading_Dialog.show_dialog(JobListActivity.this, con.getResources().getString(R.string.alert_switching));
             } catch (Exception ex) {
                 SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "PRE_CRASHED" + ex.getMessage(), "LONG_OPERATION"));
-
             }
             SplashScreen.addLog(new BasicLog(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""), myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "PRE_END", "LONG_OPERATION"));
-
-
         }
 
         @Override
@@ -3777,12 +3752,10 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
 //            TODO JobDetailActivity
             if (certorderid != null) {
-
                 Intent intent = new Intent(JobListActivity.this.getApplicationContext(), JobDetailActivity.class);
                 isJobselected = true;
                 intent.putExtra("OrderID", certorderid);
                 callJobDetail(intent, JOB_DETAIL_ACTIVITY_CODE);
-
             }
 
         }
@@ -3824,36 +3797,10 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
                 filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
                 jobs_CAPI.clear();
-//                for (int i = 0; filtered != null && i < filtered.size(); i++) {
-//                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-//                }
-                Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
-                for (orderListItem item : joborders) {
-                    int setId = Integer.parseInt(item.orderItem.getSetID());
-//                    int setId = item.getSetId();
-                    if (groupedItems.containsKey(setId)) {
-                        groupedItems.get(setId).add(item);
-                        Log.e("TAG", "ShowDBJobs Order1 : "+item.orderItem.getOrderID() );
-                        Log.e("TAG", "ShowDBJobs Set1: "+item.orderItem.getSetID() );
-                        if (!item.orderItem.getOrderID().isEmpty() ||item.orderItem.getOrderID().equals(setId)) {
-                            Log.e("TAG", "ShowDBJobs Order1222 : "+item.orderItem.getOrderID() );
-                            Log.e("TAG", "ShowDBJobs Set1222: "+item.orderItem.getSetID() );
-                        }
-                    } else {
-                        List<orderListItem> items = new ArrayList<>();
-                        items.add(item);
-                        groupedItems.put(setId, items);
-                        jobs_CAPI.add((new orderListItem(item.orderItem, null)));
-                        Log.e("TAG", "ShowDBJobs Order2: "+item.orderItem.getOrderID() );
-                        Log.e("TAG", "ShowDBJobs Set2:"+item.orderItem.getSetID() );
-                    }
-//                    Log.e("TAG", "ShowDBJobs: Order"+item.orderItem.getOrderID() );
-//                    Log.e("TAG", "ShowDBJobs: Set"+item.orderItem.getSetID() );
+                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
                 }
-//                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
-//                Log.e("joborders_activity", String.valueOf(joborders.size()));
-//                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
-
+//
                 // Get My jobs excluding CAPI....
                 List<orderListItem> list1 = filtered;
                 List<orderListItem> list2 = joborders;
@@ -3885,12 +3832,9 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 capi_status_inProgress = String.valueOf(filtered_status_inProgress.size());
                 List<orderListItem> filtered_status_completed = filtered.stream().filter(string -> string.orderItem.getStatusName().equalsIgnoreCase("completed")).collect(Collectors.toList());
                 capi_status_returned = String.valueOf(filtered_status_completed.size());
-
             }
-
             return "";
         }
-
     }
 
     private void ShowDBJobs() {
@@ -3902,11 +3846,9 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         }
 
         try {
-
             jobordersss = DBHelper.getOrders(DBHelper.whereJobListNotArchived, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
 
             ArrayList<BranchProperties> branchProps = DBHelper.getBranchPropds(Constants.DB_TABLE_BRANCH_PROPS, new String[]{Constants.DB_TABLE_BRANCH_PROPS_ValueID, Constants.DB_TABLE_BRANCH_PROPS_PropID, Constants.DB_TABLE_BRANCH_PROPS_PropertyName, Constants.DB_TABLE_BRANCH_PROPS_Content, Constants.DB_TABLE_BRANCH_PROPS_BranchID,}, Constants.DB_TABLE_BRANCH_PROPS_PropID);
-
             {
                 try {
                     pngItems = validateIcons(DBHelper.getIcons(), jobordersss);
@@ -3924,42 +3866,14 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 joborders = new ArrayList<orderListItem>();
                 joborders.clear();
                 for (int i = 0; jobordersss != null && i < jobordersss.size(); i++) {
-
                     joborders.add(new orderListItem(jobordersss.get(i), null));
                 }
 
                 filtered = joborders.stream().filter(string -> string.orderItem.getOrderID().contains("-")).collect(Collectors.toList());
-//                Log.e("filtered", filtered + "  " + filtered.size());
-
                 jobs_CAPI.clear();
-//                for (int i = 0; filtered != null && i < filtered.size(); i++) {
-//                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
-//                }
-//
-                // Grouping by SetID using HashMap
-                Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
-                for (orderListItem item : joborders) {
-                    int setId = Integer.parseInt(item.orderItem.getSetID());
-                    if (groupedItems.containsKey(setId)) {
-                        groupedItems.get(setId).add(item);
-                        Log.e("TAG", "ShowDBJobs Order1 : "+item.orderItem.getOrderID() );
-                        Log.e("TAG", "ShowDBJobs Set1: "+item.orderItem.getSetID() );
-                    } else {
-                        List<orderListItem> items = new ArrayList<>();
-                        items.add(item);
-                        groupedItems.put(setId, items);
-                        jobs_CAPI.add((new orderListItem(item.orderItem, null)));
-                        Log.e("TAG", "ShowDBJobs Order2: "+item.orderItem.getOrderID() );
-                        Log.e("TAG", "ShowDBJobs Set2:"+item.orderItem.getSetID() );
-                    }
-//                    Log.e("TAG", "ShowDBJobs: Order"+item.orderItem.getOrderID() );
-//                    Log.e("TAG", "ShowDBJobs: Set"+item.orderItem.getSetID() );
-
-
+                for (int i = 0; filtered != null && i < filtered.size(); i++) {
+                    jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
                 }
-//                Log.e("jobs_CAPI", String.valueOf(jobs_CAPI.size()));
-//                Log.e("joborders_activity", String.valueOf(joborders.size()));
-//                Log.e("jobordersss***_activity", String.valueOf(jobordersss.size()));
 
                 // Get My jobs excluding CAPI....
                 List<orderListItem> list1 = filtered;
@@ -4107,7 +4021,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 //                                    SplashScreen.addLog(new BasicLog(
 //                                            myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
 //                                            myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
-//
 //                                    startLocationCheckerAdapter();
 //                                }
 //                            } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
@@ -4115,17 +4028,14 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 //                                SplashScreen.addLog(new BasicLog(
 //                                        myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""),
 //                                        myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, ""), "Starting Order!" + mAdapter.joblistarray.get(position).orderItem.getOrderID() + " = " + mAdapter.joblistarray.get(position).orderItem.getSetName() + "status:" + mAdapter.joblistarray.get(position).orderItem.getStatusName(), mAdapter.joblistarray.get(position).orderItem.getOrderID()));
-//
 //                                if (Settings.Secure.getString(
 //                                        JobListActivity.this.getContentResolver(),
 //                                        Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
 //                                    MockGPSALERT();
 //                                    return;
 //                                }
-//
 //                                BeginReview(false);
 //                            }
-
                             Log.e("onItemClick", mAdapter.joblistarray.get(position).orderItem.getOrderID());
                             Intent intent = new Intent(JobListActivity.this.getApplicationContext(), JobDetailActivity.class);
                             JobDetailActivity.setCertsCallback(new jobBoardCertsListener() {
@@ -4302,7 +4212,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
         Helper.setSystemURL(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""));
         Helper.setAlternateSystemURL(myPrefs.getString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
-
     }
 
     public static void setAlternateURL(String newEurURL, SharedPreferences myPrefs) {
@@ -4310,7 +4219,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         prefsEditor.putString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, newEurURL);
         prefsEditor.commit();
         Helper.setAlternateSystemURL(myPrefs.getString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
-
     }
 
     private boolean checkConnectionPost() {
@@ -4497,8 +4405,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         Helper.syncing = true;
 
         isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
-
-
         if (IsInternetConnectted()) {
             if (isWifiOnly) {
 
@@ -5302,11 +5208,9 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             } catch (NameNotFoundException e) {
 
             }
-
             List<NameValuePair> extraDataList = new ArrayList<NameValuePair>();
             return Connector.postForm(Constants.getJobListURL(app_ver), extraDataList);
         }
-
     }
 
     public boolean showLogin(String result) {
@@ -5458,7 +5362,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.timeout_response_alert), getString(R.string.alert_btn_lbl_ok));
             } else if (result.equals("error=")) {
                 ShowAlert(JobListActivity.this, getString(R.string.error_alert_title), getString(R.string.invalid_server_response_alert), getString(R.string.alert_btn_lbl_ok));
-
             }
         }
 
@@ -5668,7 +5571,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             else sendOrphanImages(Revamped_Loading_Dialog.getDialog());
             return "";
         }
-
     }
 
     private void sendForceImages(Revamped_Loading_Dialog dialog) {
@@ -5801,7 +5703,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
                             @Override
                             public void run() {
-
                                 ShowAlert(JobListActivity.this, "", "ERROR uploading files, System storage quota is full please contact administrator to upload pending attachments.", "Ok");
                             }
                         });
@@ -5817,7 +5718,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         }
 
         ((Activity) JobListActivity.this).runOnUiThread(new Runnable() {
-
             @Override
             public void run() {
                 showOrphanImages(uiList, JobListActivity.this);
@@ -6003,7 +5903,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             }
         }
 
-
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
@@ -6015,7 +5914,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
             progressBars.setprogressBarJobsMax(jobProgressTotal);
             progressBars.setprogressBarJobsProgress(jobProgress + 1);
-
             progressBars.setprogressBarImagesMax(imgProgressTotal);
             progressBars.setprogressBarImagesProgress(imageProgress + 1);
 
@@ -6381,9 +6279,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             }
             return result;
         }
-
     }
-
 
     public String getRealPathFromURI(Uri contentUri) {
         try {
@@ -7131,7 +7027,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                         e.printStackTrace();
                     }
                 }
-
             }
 
             @Override
@@ -7288,7 +7183,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
             }
         });
-        Log.d("TAG", "onClick: "+selectJobOderId);
+        Log.d("TAG", "onClick: " + selectJobOderId);
         dialog.show();
         return dialog;
     }
@@ -7582,7 +7477,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         Intent intent = new Intent();
         intent.putExtra(Constants.JOB_DETAIL_IS_REJECT_FIELD_KEY, true);
         setResult(RESULT_OK, intent);
-
         jobListTaskHandler = new JobbListTask(false, false);
         jobListTaskHandler.execute();
     }
@@ -7706,11 +7600,9 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         }
 
         private ArrayList<Cert> parseCertificateResult(String result) {
-
             Parser parser = new Parser();
             parser.parseXMLValues(result, Constants.CERTS_FIELD_PARAM);
             return parser.listCerts;
-
         }
 
         @Override
@@ -7760,12 +7652,9 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                         }
                     }
                 }
-
                 doLogin();
-
                 result = AcceptJob();
 //				if (result.contains("<script>")) {
-//
 //					result = AcceptJob();
 //				}
                 return result;
@@ -7871,7 +7760,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                         // showSyncAlert();
                     }
                 }
-
             }
         }
 
@@ -7884,7 +7772,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
             extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_REFUSAL_REASON, reason));
             extraDataList.add(Helper.getNameValuePair(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, groupedNumber));
-            Log.d("TAG", "RejectJob: "+groupedNumber);
+            Log.d("TAG", "RejectJob: " + groupedNumber);
 
             // dialog.onPostExecute();
             String result = Connector.postForm(Constants.getJobStartURL(), extraDataList);
@@ -7904,7 +7792,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             }
             return result;
         }
-
     }
 
     public void ShowCertAlert(ArrayList<Cert> pendingCerts) {
@@ -7927,9 +7814,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 
     public void setOrder() {
         Bundle b = getIntent().getExtras();
-
         if (b == null) return;
-
 //        String OrderID = b.getString("OrderID");
 //        String SurveyID = b.getString("SurveyID");
         String OrderID = mAdapter.joblistarray.get(jobListItemId).orderItem.getOrderID();
@@ -7976,7 +7861,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             @Override
             public void run() {
                 // mEditText.setText( "" );
-
                 if (Objects.equals(Constants.accept_txt, "Begin_Survey")) {
                     BeginReview(true);
                 } else if (Objects.equals(Constants.accept_txt, "Continue_survey")) {
@@ -8028,7 +7912,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                         ArrayList<Order> jobordersss = DBHelper.getOrders(null, Constants.DB_TABLE_JOBLIST, new String[]{Constants.DB_TABLE_JOBLIST_ORDERID, Constants.DB_TABLE_JOBLIST_DATE, Constants.DB_TABLE_JOBLIST_SN, Constants.DB_TABLE_JOBLIST_DESC, Constants.DB_TABLE_JOBLIST_SETNAME, Constants.DB_TABLE_JOBLIST_SETLINK, Constants.DB_TABLE_JOBLIST_CN, Constants.DB_TABLE_JOBLIST_BFN, Constants.DB_TABLE_JOBLIST_BN, Constants.DB_TABLE_JOBLIST_CITYNAME, Constants.DB_TABLE_JOBLIST_ADDRESS, Constants.DB_TABLE_JOBLIST_BP, Constants.DB_TABLE_JOBLIST_OH, Constants.DB_TABLE_JOBLIST_TS, Constants.DB_TABLE_JOBLIST_TE, Constants.DB_TABLE_JOBLIST_SETID, Constants.DB_TABLE_JOBLIST_BL, Constants.DB_TABLE_JOBLIST_BLNG, Constants.DB_TABLE_JOBLIST_FN, Constants.DB_TABLE_JOBLIST_JC, Constants.DB_TABLE_JOBLIST_JI, Constants.DB_TABLE_JOBLIST_BLINK, Constants.DB_TABLE_JOBLIST_MID, Constants.DB_TABLE_CHECKER_CODE, Constants.DB_TABLE_CHECKER_LINK, Constants.DB_TABLE_BRANCH_CODE, Constants.DB_TABLE_SETCODE, Constants.DB_TABLE_PURCHASE_DESCRIPTION, Constants.DB_TABLE_PURCHASE, Constants.DB_TABLE_JOBLIST_BRIEFING, Constants.DB_TABLE_JOBLIST_sPurchaseLimit, Constants.DB_TABLE_JOBLIST_sNonRefundableServicePayment, Constants.DB_TABLE_JOBLIST_sTransportationPayment, Constants.DB_TABLE_JOBLIST_sCriticismPayment, Constants.DB_TABLE_JOBLIST_sBonusPayment, Constants.DB_TABLE_JOBLIST_AllowShopperToReject, Constants.DB_TABLE_JOBLIST_sinprogressonserver, Constants.DB_TABLE_JOBLIST_sProjectName, Constants.DB_TABLE_JOBLIST_sRegionName, Constants.DB_TABLE_JOBLIST_sdeletedjob, Constants.DB_TABLE_JOBLIST_sProjectID,}, Constants.DB_TABLE_JOBLIST_JI);
                         if (jobordersss != null) {
                         }
-
                     }
 
                     // else finish();
@@ -8044,14 +7927,11 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
 //                    setSurveyData(OrderID.replace("-", ""));
                     } else finish();
                     if (OrderID != null) {
-
                         return;
                     }
-
                 }
             }
         }
-
     }
 
     Order jobOrder = null;

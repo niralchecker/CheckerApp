@@ -687,11 +687,6 @@
                         android:orientation="vertical"
                         android:visibility="visible">
 
-                        <!--                        <LinearLayout-->
-                        <!--                            android:layout_width="match_parent"-->
-                        <!--                            android:layout_height="wrap_content"-->
-                        <!--                            android:orientation="vertical">-->
-
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -739,7 +734,6 @@
                             android:textSize="18sp"
                             app:fontFamily="@font/roboto_regular"
                             tools:text="survey name" />
-                        <!--                        </LinearLayout>-->
 
                         <View
                             android:layout_width="match_parent"
