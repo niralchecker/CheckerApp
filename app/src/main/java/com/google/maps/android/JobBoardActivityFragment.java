@@ -623,7 +623,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
             }
         };
         pickerView.setListener(new DateSelectionListener() {
-
             @Override
             public void onDateSelected(Calendar selectedDate,
                                        Calendar enddCalendar) {
@@ -1471,7 +1470,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                         true);
                 Revamped_Loading_Dialog.hide_dialog();
             }
-
         }
 
         @Override
@@ -6032,8 +6030,13 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         ArrayList<NameValuePair> locations = new ArrayList<NameValuePair>();
         ArrayList<NameValuePair> branches = new ArrayList<NameValuePair>();
         ArrayList<NameValuePair> props = new ArrayList<NameValuePair>();
-        // clients = insertNewItem("Not Selected", clients, "0");
-        // locations = insertNewItem("Not Selected", locations, "0");
+
+//        NameValuePair first = clients.get(0);
+//        clients = insertNewItem("Client", clients, "0");
+//        locations = insertNewItem("City", locations, "0");
+//        branches = insertNewItem("Branches", branches, "0");
+//      props = insertNewItem("Proprieties", props, "0");
+
         for (int i = 0; i < result.size(); i++) {
 
             for (int j = 0; result.get(i).getBranchProps() != null
@@ -6078,12 +6081,19 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
+//                        multipleClientSpinner.setSelection(0);
+//                        if (parent == null) {
+//                            tv_clients.setVisibility(View.VISIBLE);
+//                        }
+//                        tv_clients.setVisibility(View.GONE);
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
+//
+//                        tv_clients.setVisibility(View.VISIBLE);
                     }
                 }, multipleClientSpinner);
+
         propsFilter = (RelativeLayout) findViewById(R.id.propsFilter);
         multiplePropsSpinner = getMultipleDropdown(toStringArray(props),
                 propsFilter, new OnItemSelectedListener() {
@@ -6091,6 +6101,9 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
+
+
+//                            multiplePropsSpinner.setSelection(0);
 
                     }
 
@@ -6108,7 +6121,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-
+//                        multipleBranchCodeSpinner.setSelection(0);
                     }
 
                     @Override
@@ -6122,9 +6135,8 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 branchFilter, new OnItemSelectedListener() {
 
                     @Override
-                    public void onItemSelected(AdapterView<?> parent,
-                                               View view, int position, long id) {
-
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                        multipleBranchSpinner.setSelection(0);
                     }
 
                     @Override
@@ -6157,10 +6169,10 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
             @Override
             public void onClick(View v) {
                 filterBtn.setImageDrawable(getResources().getDrawable(R.drawable.img_filter_off));
-                multipleBranchSpinner.setSelection(-1);
-                multipleClientSpinner.setSelection(-1);
-                multipleBranchCodeSpinner.setSelection(-1);
-                multiplePropsSpinner.setSelection(-1);
+                multipleBranchSpinner.setSelection(0);
+                multipleClientSpinner.setSelection(0);
+                multipleBranchCodeSpinner.setSelection(0);
+                multiplePropsSpinner.setSelection(0);
                 pickerView.unSetDates();
                 nextSevenDays.performClick();
                 refresh_submit(true);
@@ -6183,7 +6195,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 showhide_filter();
             }
         });
-
     }
 
     protected void filterItems(List<String> selectedBranches,

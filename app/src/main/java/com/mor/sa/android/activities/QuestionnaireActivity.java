@@ -15967,13 +15967,21 @@ public class QuestionnaireActivity extends Activity implements
     public final static int PICK_PHOTO_CODE = 1046;
 
     private void pickPhotoFromGallery() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                intent.setType("image/* video/*");
+                startActivityForResult(intent, PICK_PHOTO_CODE);
+            }
 
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        //
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            intent.setType("image/* video/*");
-            startActivityForResult(intent, PICK_PHOTO_CODE);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            //
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                intent.setType("image/* video/*");
+                startActivityForResult(intent, PICK_PHOTO_CODE);
+            }
         }
 
     }
@@ -22896,6 +22904,7 @@ public class QuestionnaireActivity extends Activity implements
     }
 
     private void openCropActivity(String imagePath) {
+
         File imageFile = new File(imagePath);
         Uri imageUri = Uri.fromFile(imageFile);
         File tempFile = null;
@@ -22905,6 +22914,7 @@ public class QuestionnaireActivity extends Activity implements
         } else {
             tempFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
         }
+
         Uri tempUri = Uri.fromFile(tempFile);
 
         Log.e("image_path", imagePath);
@@ -22920,12 +22930,12 @@ public class QuestionnaireActivity extends Activity implements
         intent.putExtra("outputY", 256);
         intent.putExtra("scale", true);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // Save the cropped image to the original file path
-        intent.putExtra("return-data", false);
-//        startActivityForResult(intent, PIC_CROP);
+        intent.putExtra("return-data", true);
         if (isLastAttachment)
             startActivityForResult(intent, PIC_CROP_LAST);
         else {
             startActivityForResult(intent, PIC_CROP);
         }
     }
+
 }

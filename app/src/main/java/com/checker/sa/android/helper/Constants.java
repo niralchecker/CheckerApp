@@ -999,6 +999,7 @@ public class Constants {
         String str = Helper.getSystemURL()
                 + "/c_pda-get-order-dates.php?ver=7.90&app=1&json=1"
                 + "&OrderID=" + orderId;
+        Log.e("getAlternateDatesUrl",str);
         return str;
     }
 

@@ -277,11 +277,11 @@
                     android:layout_height="wrap_content"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="5dp">
+
                     <Spinner
                         android:id="@+id/jobtypelist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
                         android:drawSelectorOnTop="true"
                         android:entries="@array/job_filter_job_list"
                         android:paddingLeft="5dp" />
