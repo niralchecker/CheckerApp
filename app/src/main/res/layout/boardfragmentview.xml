@@ -132,13 +132,14 @@
     <!--        android:layout_height="match_parent"-->
     <!--        android:layout_below="@+id/countrybox">-->
 
+    <!--    </FrameLayout>-->
+
+
     <fragment
         android:id="@+id/mapView"
         class="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <!--    </FrameLayout>-->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_top"
@@ -888,12 +889,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_alignParentStart="true"
-                    android:paddingStart="10dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/rounded_edittext">
+                    android:background="@drawable/rounded_edittext"
+                    android:paddingStart="10dp">
 
                     <TextView
                         android:id="@+id/tv_clients"
@@ -914,6 +915,32 @@
                         android:src="@drawable/ic_down_arrow_blue" />
 
                 </RelativeLayout>
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/ClientFilter"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:cardBackgroundColor="@color/white"-->
+<!--                    app:cardCornerRadius="5dp">-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/tv_clients"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:drawSelectorOnTop="true"-->
+<!--                        android:backgroundTint="@color/white"-->
+<!--                        android:entries="@array/job_filter_job_list"-->
+<!--                        android:paddingLeft="5dp" />-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/iv_drop_arrow"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_gravity="center_vertical|end"-->
+<!--                        android:padding="12dp"-->
+<!--                        android:scaleType="center"-->
+<!--                        android:src="@drawable/ic_down_arrow_blue" />-->
+
+<!--                </androidx.cardview.widget.CardView>-->
 
                 <RelativeLayout
                     android:id="@+id/branchFilter"
@@ -924,7 +951,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:paddingStart="10dp"
-
                     android:layout_marginRight="10dp"
                     android:background="@drawable/rounded_edittext">
 

@@ -3144,7 +3144,7 @@ public class QuestionnaireActivity extends Activity implements
                         isLastAttachment = true;
 
                     if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_CROPPING,
-                            false) && PreviewDemo.IsCrop == true) {
+                            false) && PreviewDemo.IsCrop) {
                         saveImage(getBitmapFromPath(data.getExtras().getString("jpg")));
                         Uri uri = Uri.parse(data.getStringExtra("jpg"));
                         Log.e("uri", String.valueOf(uri));
@@ -15967,7 +15967,7 @@ public class QuestionnaireActivity extends Activity implements
     public final static int PICK_PHOTO_CODE = 1046;
 
     private void pickPhotoFromGallery() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             Intent intent = new Intent(Intent.ACTION_PICK);
             if (intent.resolveActivity(getPackageManager()) != null) {
                 intent.setType("image/* video/*");
@@ -22831,14 +22831,16 @@ public class QuestionnaireActivity extends Activity implements
         // Decode the image file into a bitmap
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
 
-        // Rotate the bitmap if necessary
-        int orientation = getImageOrientation(imagePath);
-        if (orientation != 0) {
-            Matrix matrix = new Matrix();
-            matrix.postRotate(orientation);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        }
+//        // Rotate the bitmap if necessary
+      int orientation = getImageOrientation(imagePath);
+      if (orientation != 0) {
+           Matrix matrix = new Matrix();
+          matrix.postRotate(orientation);
+           bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+      }
         Log.e("Bitmap", String.valueOf(bitmap));
+        Log.e(TAG, "getBitmapFromPath: "+bitmap.getHeight()  );
+        Log.e(TAG, "getBitmapFromPath: "+bitmap.getWidth()  );
 
         return bitmap;
     }
@@ -22870,7 +22872,7 @@ public class QuestionnaireActivity extends Activity implements
 
     private void saveImage(Bitmap bitmap) {
         File storageDir;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         } else {
             storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -22914,14 +22916,13 @@ public class QuestionnaireActivity extends Activity implements
         } else {
             tempFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "cropped_image.jpg");
         }
-
         Uri tempUri = Uri.fromFile(tempFile);
 
         Log.e("image_path", imagePath);
         Log.e("imageFile", String.valueOf(imageFile));
         Log.e("image_URI", String.valueOf(imageUri));
 
-        Intent intent = new Intent("com.android.camera.action.CROP");
+      Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(imageUri, "image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
@@ -22937,5 +22938,4 @@ public class QuestionnaireActivity extends Activity implements
             startActivityForResult(intent, PIC_CROP);
         }
     }
-
 }

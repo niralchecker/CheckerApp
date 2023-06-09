@@ -185,6 +185,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentActivity;
@@ -196,7 +197,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     private static final int JOB_DETAIL_ACTIVITY_CODE = 321;
     private GoogleMap googleMap;
     private HashMap<Marker, Job> markersHash;
-    private String orderid;
+    private String orderid,client,city,branch,prop;
     private String name_of_file;
     CalendarPickerView pickerView;
     private String gStartDate = "2016-12-26";
@@ -5923,6 +5924,11 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     protected void showhide_filter() {
         if (filterLayout.getVisibility() == RelativeLayout.GONE) {
             filterLayout.setVisibility(RelativeLayout.VISIBLE);
+            multipleBranchSpinner.setSelection(0);
+          multipleClientSpinner.setSelection(0);
+            multipleBranchCodeSpinner.setSelection(0);
+            multiplePropsSpinner.setSelection(0);
+
         } else {
             filterLayout.setVisibility(RelativeLayout.GONE);
         }
@@ -6032,10 +6038,11 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         ArrayList<NameValuePair> props = new ArrayList<NameValuePair>();
 
 //        NameValuePair first = clients.get(0);
-//        clients = insertNewItem("Client", clients, "0");
-//        locations = insertNewItem("City", locations, "0");
-//        branches = insertNewItem("Branches", branches, "0");
-//      props = insertNewItem("Proprieties", props, "0");
+  clients = insertNewItem("Client", clients, "0");
+        locations = insertNewItem("City", locations, "0");
+        branches = insertNewItem("Branches", branches, "0");
+      props = insertNewItem("Proprieties", props, "0");
+
 
         for (int i = 0; i < result.size(); i++) {
 
@@ -6073,19 +6080,17 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         }
 
         ClientFilter = (RelativeLayout) findViewById(R.id.ClientFilter);
-//                if (ClientFilter == null && multipleClientSpinner== null) {
-//            tv_clients.setVisibility(View.VISIBLE);
-//        }else tv_clients.setVisibility(View.GONE);
         multipleClientSpinner = getMultipleDropdown(toStringArray(clients),
                 ClientFilter, new OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-//                        multipleClientSpinner.setSelection(0);
+                  multipleClientSpinner.setSelection(0);
 //                        if (parent == null) {
 //                            tv_clients.setVisibility(View.VISIBLE);
 //                        }
-//                        tv_clients.setVisibility(View.GONE);
+
+
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
@@ -6101,10 +6106,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-
-
-//                            multiplePropsSpinner.setSelection(0);
-
+                            multiplePropsSpinner.setSelection(0);
                     }
 
                     @Override
@@ -6121,7 +6123,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-//                        multipleBranchCodeSpinner.setSelection(0);
+                       multipleBranchCodeSpinner.setSelection(0);
                     }
 
                     @Override
@@ -6136,7 +6138,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
 
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                        multipleBranchSpinner.setSelection(0);
+                        multipleBranchSpinner.setSelection(0);
                     }
 
                     @Override
@@ -6169,6 +6171,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
             @Override
             public void onClick(View v) {
                 filterBtn.setImageDrawable(getResources().getDrawable(R.drawable.img_filter_off));
+
                 multipleBranchSpinner.setSelection(0);
                 multipleClientSpinner.setSelection(0);
                 multipleBranchCodeSpinner.setSelection(0);
