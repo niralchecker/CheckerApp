@@ -289,7 +289,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     //TODO Menu
     private String cert;
     private String certOrdeId;
-    Revamped_Loading_Dialog dialog1;
+   Revamped_Loading_Dialog dialog1;
     ArrayList<SubmitQuestionnaireData> sqd;
     SimpleDateFormat sdf;// = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -320,7 +320,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     private boolean isMenuOpen = false;
     private ListView menuListView;
     private ArrayList<com.checker.sa.android.data.MenuItem> menuItems;
-
+//TODO MENU
     public static void setJobBardCallback(jobBoardCertsListener dateCallback) {
         JobBoardActivityFragment.jobboardListener = dateCallback;
     }
@@ -437,8 +437,12 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         tv_clients = findViewById(R.id.tv_clients);
         tv_applied_no = findViewById(R.id.tv_applied_no);
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
+
+
+
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
-        isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
+//        TODO MENU
+       isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
 
         tv_select_all.setOnClickListener(new OnClickListener() {
             @Override
@@ -787,8 +791,8 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     refreshDate = true;
                 gEndDate = dateFormat.format(cal.getTime());
                 // refresh_submit(false);
-//                Log.e("gStartDate_nextSevenDays_checkBox", gStartDate);
-//                Log.e("gEndDate_nextSevenDays_checkBox", gEndDate);
+                Log.e("gStartDate_nextSevenDays_checkBox", gStartDate);
+                Log.e("gEndDate_nextSevenDays_checkBox", gEndDate);
             }
         });
         // custom
@@ -1297,6 +1301,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         menuListView.setAdapter(new sideMEnuAdapter(JobBoardActivityFragment.this,
                 menuItems));
 
+
     }
 
     //TODO Menu
@@ -1651,7 +1656,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     public void backToArchiveAlert(Context context, String textString) {
 
         final Dialog dialog = new Dialog(JobBoardActivityFragment.this);
-        dialog1.setContentView(R.layout.custom_red_alert);
+        dialog.setContentView(R.layout.custom_red_alert);
 
         // set the custom dialog components - text, image and button
         TextView text = (TextView) dialog.findViewById(R.id.textView1);
@@ -1666,9 +1671,9 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 openArciveScreen();
             }
         });
-        dialog1.getWindow().setBackgroundDrawable(
+        dialog.getWindow().setBackgroundDrawable(
                 new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog1.show();
+        dialog.show();
     }
 
     public UploadingProgressBars customProgressAlert(Context context) {
@@ -4599,7 +4604,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
 
             Revamped_Loading_Dialog.show_dialog(JobBoardActivityFragment.this,
                     getString(R.string.job_download_alert));
-            dialog1 = Revamped_Loading_Dialog.getDialog();
+            dialog = Revamped_Loading_Dialog.getDialog();
 
             myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
             String ip = getLocalIpAddress();
@@ -5087,7 +5092,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     }
 
     public class DoLoginTask extends AsyncTask<Void, Integer, String> {
-        Revamped_Loading_Dialog dialog;
+        Revamped_Loading_Dialog dialog1;
         private String url;
 
         public DoLoginTask(String url) {
@@ -5632,7 +5637,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         }
     }
 
-
+//TODO MENU COMPLATE CODE
     private boolean checkpermissionforlocation() {
 //		int hasaccessc = 0;
 //		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -7900,10 +7905,10 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         DatePickerDialog dp = new DatePickerDialog(JobBoardActivityFragment.this, setDate, y, m, d);
         dp.show();
     }
-
+//TODO MENU
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        sendMessage(START_ACTIVITY, "hiii");
+//        sendMessage(START_ACTIVITY, "hiii");
     }
 
     @Override
