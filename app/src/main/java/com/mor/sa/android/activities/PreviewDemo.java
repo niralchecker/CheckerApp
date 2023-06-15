@@ -208,7 +208,7 @@ public class PreviewDemo extends Activity {
 							file = new File(
 									CheckerApp.localFilesDir//Environment.getExternalStorageDirectory()
 											+ "/checkerimgss", newPAth);
-
+							Log.e("TAG", "doInBackground: "+ newPAth );
 							try {
 								FileOutputStream fileOutputStream = new FileOutputStream(
 										file);
@@ -565,6 +565,7 @@ public class PreviewDemo extends Activity {
 				sizePicture = sizes.get(selectedIndex);
 				resolutions.setText("W=" + sizePicture.width + " H="
 						+ sizePicture.height);
+
 				parameters
 						.setPictureSize(sizePicture.width, sizePicture.height);
 				camera.setParameters(parameters);

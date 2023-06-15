@@ -194,10 +194,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class JobBoardActivityFragment extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
+
+
     private static final int JOB_DETAIL_ACTIVITY_CODE = 321;
     private GoogleMap googleMap;
     private HashMap<Marker, Job> markersHash;
-    private String orderid,client,city,branch,prop;
+    private String orderid, client, city, branch, prop;
     private String name_of_file;
     CalendarPickerView pickerView;
     private String gStartDate = "2016-12-26";
@@ -289,7 +291,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     //TODO Menu
     private String cert;
     private String certOrdeId;
-   Revamped_Loading_Dialog dialog1;
+    Revamped_Loading_Dialog dialog1;
     ArrayList<SubmitQuestionnaireData> sqd;
     SimpleDateFormat sdf;// = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -320,7 +322,8 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     private boolean isMenuOpen = false;
     private ListView menuListView;
     private ArrayList<com.checker.sa.android.data.MenuItem> menuItems;
-//TODO MENU
+
+    //TODO MENU
     public static void setJobBardCallback(jobBoardCertsListener dateCallback) {
         JobBoardActivityFragment.jobboardListener = dateCallback;
     }
@@ -439,10 +442,9 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
 
 
-
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 //        TODO MENU
-       isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
+        isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
 
         tv_select_all.setOnClickListener(new OnClickListener() {
             @Override
@@ -5637,7 +5639,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         }
     }
 
-//TODO MENU COMPLATE CODE
+    //TODO MENU COMPLATE CODE
     private boolean checkpermissionforlocation() {
 //		int hasaccessc = 0;
 //		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -5930,7 +5932,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         if (filterLayout.getVisibility() == RelativeLayout.GONE) {
             filterLayout.setVisibility(RelativeLayout.VISIBLE);
             multipleBranchSpinner.setSelection(0);
-          multipleClientSpinner.setSelection(0);
+            multipleClientSpinner.setSelection(0);
             multipleBranchCodeSpinner.setSelection(0);
             multiplePropsSpinner.setSelection(0);
 
@@ -6043,10 +6045,10 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         ArrayList<NameValuePair> props = new ArrayList<NameValuePair>();
 
 //        NameValuePair first = clients.get(0);
-  clients = insertNewItem("Client", clients, "0");
+        clients = insertNewItem("Client", clients, "0");
         locations = insertNewItem("City", locations, "0");
         branches = insertNewItem("Branches", branches, "0");
-      props = insertNewItem("Proprieties", props, "0");
+        props = insertNewItem("Proprieties", props, "0");
 
 
         for (int i = 0; i < result.size(); i++) {
@@ -6090,13 +6092,14 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-                  multipleClientSpinner.setSelection(0);
+                        multipleClientSpinner.setSelection(0);
 //                        if (parent == null) {
 //                            tv_clients.setVisibility(View.VISIBLE);
 //                        }
 
 
                     }
+
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 //
@@ -6111,7 +6114,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-                            multiplePropsSpinner.setSelection(0);
+                        multiplePropsSpinner.setSelection(0);
                     }
 
                     @Override
@@ -6128,7 +6131,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                                                View view, int position, long id) {
-                       multipleBranchCodeSpinner.setSelection(0);
+                        multipleBranchCodeSpinner.setSelection(0);
                     }
 
                     @Override
@@ -6585,11 +6588,12 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        ((JobListActivity) comunicator.JobList)
-                                                .executeJobList(false, false);
+                                        if (Constants.activity == "JobListActivity") {
+                                            ((JobListActivity) comunicator.JobList).executeJobList(false, false);
+                                        } else
+                                            ((NewDashboardScreenActivity) comunicator.JobList).executeJobList(false, false);
                                     }
                                 }, 2000);
-
                             }
                             finish();
                             try {
@@ -7905,7 +7909,8 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         DatePickerDialog dp = new DatePickerDialog(JobBoardActivityFragment.this, setDate, y, m, d);
         dp.show();
     }
-//TODO MENU
+
+    //TODO MENU
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 //        sendMessage(START_ACTIVITY, "hiii");

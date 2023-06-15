@@ -1,5 +1,6 @@
 package com.mor.sa.android.activities;
 
+import static com.checker.sa.android.helper.Constants.activity;
 import static com.checker.sa.android.helper.Constants.select_jobs;
 
 import android.Manifest;
@@ -319,6 +320,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         }
         return null;
     }
+
     private void ManageTabs(int tabNumber) {
         ltabSync.setBackgroundColor(Color.parseColor(color_unselect));
         layoutWorking.setVisibility(RelativeLayout.VISIBLE);
@@ -575,6 +577,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             public void onPageFinished(WebView view, String url) {
                 Revamped_Loading_Dialog.hide_dialog();
             }
+
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 // TODO Auto-generated method stub
@@ -921,6 +924,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 // open job board
                 // MAPSSSS
                 // Getting status
+
                 Intent intent = null;
                 int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
@@ -1552,13 +1556,12 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         //throw new RuntimeException("Boom!");
         //  onStartDevicePermissions();
         //Constants.setLocale(JobListActivity.this);
+        activity = "JobListActivity";
+
 
         if (Helper.isMisteroMenu) {
             setContentView(R.layout.job_list_mistero);
-
         } else setContentView(R.layout.job_list);
-
-
         layout_NewDashboardScreen = findViewById(R.id.layout_NewDashboardScreen);
         layout_job_list = findViewById(R.id.layout_job_list);
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
@@ -1579,7 +1582,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         Helper.setSystemURL(myPrefs.getString(Constants.SETTINGS_SYSTEM_URL_KEY, ""));
         Helper.setAlternateSystemURL(myPrefs.getString(Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
         if (Helper.getSystemURL() == null || Helper.getSystemURL().equals("")) {
-
             finish();
         }
 
@@ -1623,14 +1625,12 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         });
 
         findViewById(R.id.view_side_menu_top_green).setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
             }
         });
 
         findViewById(R.id.view_side_menu_side_black).setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 menuView.setVisibility(RelativeLayout.GONE);
@@ -1639,7 +1639,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         });
 
         findViewById(R.id.btnback).setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 menuView.setVisibility(RelativeLayout.GONE);
@@ -3479,6 +3478,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         public Context con;
         ArrayList<BranchProperties> branchProps;
         ArrayList<Order> jobordersss = null;
+
         @Override
         protected ArrayList<orderListItem> doInBackground(String... params) {
             //String ret = ShowDBJobss("task");
@@ -3526,7 +3526,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                     for (int i = 0; filtered != null && i < filtered.size(); i++) {
                         jobs_CAPI.add(new orderListItem(filtered.get(i).orderItem, null));
 //                        Log.d("TAG", "doIn:" +orderItem.getOrderID().contains("-")).collect(Collectors.toList());
-                 }
+                    }
 //                    //TODO Grouping by SetID using HashMap
 //
 //                    Map<Integer, List<orderListItem>> groupedItems = new HashMap<>();
@@ -3640,6 +3640,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             }
             return filtered_other_jobs;
         }
+
         @Override
         protected void onPostExecute(ArrayList<orderListItem> joborders) {
             Log.e("LongOperation", "onPostExecute");
@@ -7970,6 +7971,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             @Override
             public void onClick(View v) {
                 select_jobs = "CAPI_JOBS";
+
                 ManageTabs(1);
                 layout_job_list.setVisibility(View.VISIBLE);
                 layout_NewDashboardScreen.setVisibility(View.GONE);

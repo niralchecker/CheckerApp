@@ -1,5 +1,6 @@
 package com.mor.sa.android.activities;
 
+import static com.checker.sa.android.helper.Constants.activity;
 import static com.checker.sa.android.helper.Constants.select_jobs;
 import static com.checker.sa.android.helper.Helper.customAlert;
 
@@ -305,6 +306,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         clOpenJobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                activity = "NewDashboardScreenActivity";
                 Intent intent = null;
                 int status = GooglePlayServicesUtil
                         .isGooglePlayServicesAvailable(getBaseContext());
@@ -679,9 +681,8 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                                     R.string.google_services_not_avaliable));
                 } else {
                     isJobselected = true;
-                    intent = new Intent(
-                            NewDashboardScreenActivity.this.getApplicationContext(),
-                            JobBoardActivityFragment.class);
+                    activity = "NewDashboardScreenActivity";
+                    intent = new Intent(NewDashboardScreenActivity.this.getApplicationContext(), JobBoardActivityFragment.class);
                     JobBoardActivityFragment
                             .setJobBardCallback(new jobBoardCertsListener() {
 
