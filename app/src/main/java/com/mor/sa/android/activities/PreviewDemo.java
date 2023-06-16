@@ -504,7 +504,7 @@ public class PreviewDemo extends Activity {
                 Camera.Size size = getOptimalPreviewSize(
                         parameters.getSupportedPreviewSizes(), width, height);
 
-                if (size != null) {0
+                if (size != null) {
                     parameters.setPreviewSize(size.width, size.height);
 
                 }
