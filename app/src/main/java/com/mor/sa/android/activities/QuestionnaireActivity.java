@@ -3149,6 +3149,7 @@ public class QuestionnaireActivity extends Activity implements
                         Uri uri = Uri.parse(data.getStringExtra("jpg"));
                         Log.e("uri", String.valueOf(uri));
 
+
 //                        Intent cropIntent = new Intent(
 //                                "com.android.camera.action.CROP");
 //                        File file = new File(data.getExtras().getString("jpg"));
@@ -22872,7 +22873,7 @@ public class QuestionnaireActivity extends Activity implements
 
     private void saveImage(Bitmap bitmap) {
         File storageDir;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         } else {
             storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -22896,7 +22897,7 @@ public class QuestionnaireActivity extends Activity implements
 
             openCropActivity(imageFile.getAbsolutePath());
             // Show a message to the user
-            Toast.makeText(this, "Image saved: " + imageFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Image saved: " + imageFile.getAbsolutePath(), Toast.LENGTH_SHORT).show();
             // Show a message to the user
             Log.e("getAbsolutePath", imageFile.getAbsolutePath());
 

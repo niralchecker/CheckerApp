@@ -6588,10 +6588,11 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        if (Constants.activity == "JobListActivity") {
-                                            ((JobListActivity) comunicator.JobList).executeJobList(false, false);
-                                        } else
+                                        if (Constants.activity == "NewDashboardScreenActivity") {
                                             ((NewDashboardScreenActivity) comunicator.JobList).executeJobList(false, false);
+                                        } else
+                                            ((JobListActivity) comunicator.JobList).executeJobList(false, false);
+
                                     }
                                 }, 2000);
                             }

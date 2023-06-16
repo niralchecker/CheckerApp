@@ -184,7 +184,7 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_dashboard_screen);
-
+//        activity = "NewDashboardScreenActivity";
         initGoogleApiClient();
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
@@ -343,7 +343,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                         CritHistoryReportActivity.class);
                 // comunicator.JobList = null;
                 startActivity(intent);
-
             }
         });
         clRefundReport.setOnClickListener(new View.OnClickListener() {
@@ -5833,5 +5832,12 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activity = "NewDashboardScreenActivity";
+
     }
 }
