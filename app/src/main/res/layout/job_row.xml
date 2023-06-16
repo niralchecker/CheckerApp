@@ -196,7 +196,7 @@
                 android:layout_below="@id/view1"
                 android:layout_toRightOf="@id/tvcount"
                 android:text="Status"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/tv_reject_show"

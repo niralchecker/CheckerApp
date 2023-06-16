@@ -418,10 +418,8 @@ public class JobItemAdapter extends BaseAdapter {
                             .size();
                 } else
                     filterFourCount++;
-
             }
         }
-
         if (this.txtOne != null && filterOneCount > 0) {
             this.txtOne.setVisibility(RelativeLayout.VISIBLE);
             this.tabOne.setVisibility(RelativeLayout.VISIBLE);
@@ -1443,19 +1441,22 @@ public class JobItemAdapter extends BaseAdapter {
                     ct.getResources().getString(
                             R.string.preffered_questionnaire_language), false));
 
-            tvStartJob.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_begin_review_btn_text))) {
-                        Constants.accept_txt = "Begin_Survey";
-                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
-                    } else if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_continue_review_btn_text))) {
-                        Constants.accept_txt = "Continue_survey";
-                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
-                    } else if (tvStatusShow.getText().toString()
-                            .equals(con.getString(R.string.jd_begin_btn_text))) {
-                        Constants.accept_txt = "Begin_Interview";
-                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+//            tvStartJob.setOnClickListener(new OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_begin_review_btn_text))) {
+//                        Constants.accept_txt = "Begin_Survey";
+//                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+//                    } else if (tvStatusShow.getText().toString().equals(ct.getString(R.string.jd_continue_review_btn_text))) {
+//                        Constants.accept_txt = "Continue_survey";
+//                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+//                    } else if (tvStatusShow.getText().toString()
+//                            .equals(con.getString(R.string.jd_begin_btn_text))) {
+//                        Constants.accept_txt = "Begin_Interview";
+//                        mJobStartListener.onJobStartClick(position, Constants.accept_txt);
+//
+//                    }
+
 //                        if (order.getOrderID().contains("-")) {
 //                            if (order.getStatusName().equals("survey")) {
 //                                Survey s = Surveys.getCurrentSurve(order.getOrderID().replace(
@@ -1500,7 +1501,7 @@ public class JobItemAdapter extends BaseAdapter {
 //                                ((JobListActivity) con).startLocationCheckerAdapter();
 //                            }
 //                        }
-                    }
+//                    }
 
 
 //                    if (order.getOrderID().contains("-")) {
@@ -1609,8 +1610,8 @@ public class JobItemAdapter extends BaseAdapter {
 //                    } else {
 ////                        Toast.makeText(con, "Other tab", Toast.LENGTH_SHORT).show();
 //                    }
-                }
-            });
+//                }
+//            });
 
 
             String status = order.getStatusName().toLowerCase();

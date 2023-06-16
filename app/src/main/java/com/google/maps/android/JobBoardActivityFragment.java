@@ -6580,9 +6580,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                                 intent.setClass(JobBoardActivityFragment.this,
                                         JobListActivity.class);
                                 startActivity(intent);
-                            } else {
-                                // setResult(RESULT_OK, intent);
-
                             }
                             if (comunicator.JobList != null) {
                                 new Handler().postDelayed(new Runnable() {

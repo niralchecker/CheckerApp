@@ -684,7 +684,7 @@ public class PreviewDemo extends Activity {
                     parameter.setZoom(--currnetZoom);
                 }
             } else
-                Toast.makeText(PreviewDemo.this, "Zoom Not Avaliable",
+                Toast.makeText(PreviewDemo.this, "Zoom Not Available",
                         Toast.LENGTH_LONG).show();
 
             camera.setParameters(parameter);
@@ -842,7 +842,7 @@ public class PreviewDemo extends Activity {
             mCamera.enableShutterSound(false);
         }
         // rear-facing camera
-        int rotation = getDeviceCurrentOrientation(context);
+       int rotation = getDeviceCurrentOrientation(context);
 
         int degrees = 0;
         switch (rotation) {
@@ -859,8 +859,6 @@ public class PreviewDemo extends Activity {
                 degrees = 270;
                 break;
         }
-
-
         int result;
         if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
             result = (info.orientation + degrees) % 360;
@@ -955,8 +953,7 @@ public class PreviewDemo extends Activity {
             // no-op -- wait until surfaceChanged()
         }
 
-        public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                                   int height) {
+        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             initPreview(width, height);
             startPreview();
         }
@@ -966,9 +963,7 @@ public class PreviewDemo extends Activity {
         }
     };
 
-    public static Bitmap rotateImageIfRequired(Bitmap img, Context context,
-                                               Uri selectedImage) throws IOException {
-
+    public static Bitmap rotateImageIfRequired(Bitmap img, Context context, Uri selectedImage) throws IOException {
         if (selectedImage.getScheme().equals("content")) {
             String[] projection = {MediaStore.Images.ImageColumns.ORIENTATION};
             Cursor c = context.getContentResolver().query(selectedImage,
@@ -995,9 +990,7 @@ public class PreviewDemo extends Activity {
                     return img;
             }
         }
-
     }
-
 
     private static Bitmap rotateImage(Bitmap img, int degree) {
         Matrix matrix = new Matrix();
@@ -1007,15 +1000,11 @@ public class PreviewDemo extends Activity {
         return rotatedImg;
     }
 
-    public static byte[] rotateImageIfRequired(Context context, Uri uri,
-                                               byte[] fileBytes) {
+    public static byte[] rotateImageIfRequired(Context context, Uri uri, byte[] fileBytes) {
         byte[] data = null;
-        Bitmap bitmap = BitmapFactory.decodeByteArray(fileBytes, 0,
-                fileBytes.length);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(fileBytes, 0, fileBytes.length);
         ByteArrayOutputStream outputStream = null;
-
         try {
-
             bitmap = rotateImageIfRequired(bitmap, context, uri);
             outputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
