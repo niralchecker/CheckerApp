@@ -1032,9 +1032,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         // screen
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        mapfragment = new
-
-                SupportMapFragment();
+        mapfragment = new SupportMapFragment();
         transaction.add(R.id.mapView, mapfragment);
         transaction.commit();
 
@@ -1065,9 +1063,15 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
             }
         });
 
-        //        TODO Menu
+        // TODO Menu
         menuView = findViewById(R.id.view_side_menu);
-        menuListView = (ListView) findViewById(R.id.view_side_menu_list_view);
+        menuListView = findViewById(R.id.view_side_menu_list_view);
+        String userName = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
+
+        TextView tv =  findViewById(R.id.txtsettingmenu);
+        String welcome = getString(R.string.login_heder);
+        tv.setText(welcome + " " + userName);
+
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1085,7 +1089,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                             menuItems));
                     menuView.setVisibility(RelativeLayout.VISIBLE);
                 }
-
             }
         });
         menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -1397,8 +1400,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 } else {
                     isJobselected = true;
                     intent = new Intent(
-                            JobBoardActivityFragment.this.getApplicationContext(),
-                            MapActivity.class);
+                            JobBoardActivityFragment.this.getApplicationContext(), MapActivity.class);
                     intent.putExtra("orderid", "-1");
                     comunicator.JobList = null;
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
@@ -5032,11 +5034,9 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                         .toLowerCase().contains("login.php"))) {
                     err_dialog.dismiss();
                     Revamped_Loading_Dialog.hide_dialog();
-                    Toast.makeText(
-                                    context,
+                    Toast.makeText(context,
                                     context.getResources().getString(
-                                            R.string.task_completed), Toast.LENGTH_LONG)
-                            .show();
+                                            R.string.task_completed), Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -6589,7 +6589,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                                             ((NewDashboardScreenActivity) comunicator.JobList).executeJobList(false, false);
                                         } else
                                             ((JobListActivity) comunicator.JobList).executeJobList(false, false);
-
                                     }
                                 }, 2000);
                             }
@@ -6669,7 +6668,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         } catch (NameNotFoundException e) {
 
         }
-
         // http://checker.co.il/testing/c_pda-job-board.php?ver=9.0&json=1&date_start=2016-12-26&date_end=2016-12-29&lat1=28.644800&long1=77.216721&lat2=31.771959&long2=78.217018
         name_of_file = Constants.getBoardListFile("9.7", gStartDate, gEndDate,
                 lat1 + "", lng1 + "", lat2 + "", lng2 + "");
@@ -6875,8 +6873,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 MarkerOptions markerOptions = new MarkerOptions();
 
                 double latitude = Double.valueOf(orders.get(i).getBranchLat());
-                double longitude = Double
-                        .valueOf(orders.get(i).getBranchLong());
+                double longitude = Double.valueOf(orders.get(i).getBranchLong());
                 LatLng latlng = new LatLng(latitude, longitude);
                 // Setting the position for the marker
                 markerOptions.position(latlng);
@@ -7041,10 +7038,8 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 && adapter.values.size() > 0) {
             for (int i = 0; i < adapter.values.size(); i++) {
                 if (adapter.values.get(i) != null) {
-                    double latitude = Double.valueOf(adapter.values.get(i)
-                            .getBranchLat());
-                    double longitude = Double.valueOf(adapter.values.get(i)
-                            .getBranchLong());
+                    double latitude = Double.valueOf(adapter.values.get(i).getBranchLat());
+                    double longitude = Double.valueOf(adapter.values.get(i).getBranchLong());
                     if (latitude >= lat1 && latitude <= lat2
                             && longitude >= lng1 && longitude <= lng2) {
                         listPins.add(adapter.values.get(i));
@@ -7322,7 +7317,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                         } catch (Exception ex) {
 
                         }
-
                     }
                 });
         dialog.findViewById(R.id.btn_cancel).setOnClickListener(
@@ -7394,9 +7388,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                         remove(txtComment.getText().toString() + " ",
                                 thiItem.getOrderID(), dialog, arg0, thiItem, false);
                     }
-
                     refresh_submit(true);
-
                 }
             }
         });
@@ -7493,8 +7485,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                             orders[i + 1] = jsonobjs.getJSONObject(
                                     "alloweddays").getString("day" + i);
                         }
-
-
                     }
                 } catch (Exception ex) {
 
@@ -7558,7 +7548,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     finish();
             }
         }
-
     }
 
     LocationListener locationlistenerN = null;
@@ -7805,7 +7794,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 addPersonMarker(currentLocation);
             }
         }
-
     }
 
     public boolean IsInternetConnectted() {
@@ -7861,17 +7849,14 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
             btnApplyAll.setText(text);
             btnRemoveAll.setText(text1);
         }
-        btnApplyAll.setText(btnApplyAll.getText().toString() + "("
-                + listOfCheckBoxes.size() + ")");
+        assert btnApplyAll != null;
+        btnApplyAll.setText(btnApplyAll.getText().toString() + "(" + listOfCheckBoxes.size() + ")");
 
-        btnRemoveAll.setText(btnRemoveAll.getText().toString() + "("
-                + listOfCheckBoxes.size() + ")");
+        btnRemoveAll.setText(btnRemoveAll.getText().toString() + "(" + listOfCheckBoxes.size() + ")");
     }
 
     int tag = 0;// , d1, m1, y1, d2, m2, y2;
-    String[] monthVal = {"01", "02", "03", "04", "05", "06", "07", "08", "09",
-            "10", "11", "12"};
-
+    String[] monthVal = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 
     private DatePickerDialog.OnDateSetListener setDate = new DatePickerDialog.OnDateSetListener() {
 
@@ -7894,8 +7879,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     };
 
     private String getCurrentDate(int day, int month, int year) {
-        String str = String.valueOf(day) + "-" + monthVal[month] + "-"
-                + String.valueOf(year);
+        String str = day + "-" + monthVal[month] + "-" + year;
         return str;
     }
 

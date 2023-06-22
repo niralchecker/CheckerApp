@@ -464,7 +464,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_filter">
 
                     <ImageView
-                        android:id="@+id/crossbtn"
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_alignParentLeft="true"

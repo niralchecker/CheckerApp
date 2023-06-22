@@ -713,9 +713,7 @@ public class Helper {
         return url.trim();
     }
 
-    public static boolean IsValidOrder(Order order, String region,
-                                       String project, String bprop, String bcode, String jtype,
-                                       String city, String date1, String date3,
+    public static boolean IsValidOrder(Order order, String region, String project, String bprop, String bcode, String jtype, String city, String date1, String date3,
                                        String status, String bcode_name, String city_name, String bprop_name, String region_name, String project_name, String jtype_name, String status_name) {
         boolean isAdd = false;
 //        if (order.getOrderID().contains("-"))

@@ -1,10 +1,13 @@
 package com.checker.sa.android.dialog;
 
+import static com.checker.sa.android.helper.Constants.activity;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -18,26 +21,34 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
 
+import com.checker.sa.android.data.BranchProperties;
 import com.checker.sa.android.data.FilterData;
 import com.checker.sa.android.data.Order;
 import com.checker.sa.android.data.Orders;
+import com.checker.sa.android.data.Surveys;
 import com.checker.sa.android.data.orderListItem;
+import com.checker.sa.android.data.pngItem;
+import com.checker.sa.android.db.DBHelper;
 import com.checker.sa.android.helper.Constants;
 import com.checker.sa.android.helper.Helper;
 import com.checker.sa.android.helper.UIHelper;
 import com.google.maps.android.MapActivity;
+import com.mor.sa.android.activities.CheckerApp;
 import com.mor.sa.android.activities.JobListActivity;
 import com.mor.sa.android.activities.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class JobFilterDialog extends Dialog implements
         android.view.View.OnClickListener {
@@ -427,26 +438,28 @@ public class JobFilterDialog extends Dialog implements
         return items;
     }
 
-    private String[] getRegionArraY() {
+
+    private String[]  getRegionArraY() {
         int count = Orders.getOrders().size();
         Vector<String> vector = new Vector<String>();
-//        vector.add(joblist.getString(R.string.job_filter_default_dd_option));
         vector.add(joblist.getString(R.string.job_filter_default_choose_regions));
-        boolean isExits = false;
-        for (int ordercount = 0; ordercount < count; ordercount++) {
-            isExits = false;
-            if (Orders.getOrders().get(ordercount).getOrderID().contains("-"))
+        boolean isExists = false;
+        for (int orderCount = 0; orderCount < count; orderCount++) {
+            isExists = false;
+            if (Orders.getOrders().get(orderCount).getOrderID().contains("-"))
                 continue;
 
-            String client = Orders.getOrders().get(ordercount).getRegionName();
-            for (int itemcount = 0; itemcount < vector.size(); itemcount++) {
-                if (client != null && vector.get(itemcount).equals(client)) {
-                    isExits = true;
-                    break;
+            String client = Orders.getOrders().get(orderCount).getRegionName();
+            if (client != null && !client.isEmpty()) { // Check if branch code is not empty
+                for (int itemCount = 0; itemCount < vector.size(); itemCount++) {
+                    if (vector.get(itemCount).equals(client)) {
+                        isExists = true;
+                        break;
+                    }
                 }
+                if (!isExists)
+                    vector.add(client);
             }
-            if (!isExits && client != null)
-                vector.add(client);
         }
         String[] items = new String[vector.size()];
         vector.copyInto(items);
@@ -454,6 +467,35 @@ public class JobFilterDialog extends Dialog implements
         vector = null;
         return items;
     }
+
+
+//    private String[] getRegionArraY() {
+//        int count = Orders.getOrders().size();
+//        Vector<String> vector = new Vector<String>();
+////        vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+//        vector.add(joblist.getString(R.string.job_filter_default_choose_regions));
+//        boolean isExits = false;
+//        for (int ordercount = 0; ordercount < count; ordercount++) {
+//            isExits = false;
+//            if (Orders.getOrders().get(ordercount).getOrderID().contains("-"))
+//                continue;
+//
+//            String client = Orders.getOrders().get(ordercount).getRegionName();
+//            for (int itemcount = 0; itemcount < vector.size(); itemcount++) {
+//                if (client != null && vector.get(itemcount).equals(client)) {
+//                    isExits = true;
+//                    break;
+//                }
+//            }
+//            if (!isExits && client != null)
+//                vector.add(client);
+//        }
+//        String[] items = new String[vector.size()];
+//        vector.copyInto(items);
+//        vector.removeAllElements();
+//        vector = null;
+//        return items;
+//    }
 
     private String[] getProjectsArraY() {
         int count = Orders.getOrders().size();
@@ -483,26 +525,54 @@ public class JobFilterDialog extends Dialog implements
         return items;
     }
 
+//    private String[] getbranchCodeArraY() {
+//        int count = Orders.getOrders().size();
+//        Vector<String> vector = new Vector<String>();
+//        vector.add(joblist.getString(R.string.job_filter_default_choose_branch));
+//        boolean isExits = false;
+//        for (int ordercount = 0; ordercount < count; ordercount++) {
+//            isExits = false;
+//            if (Orders.getOrders().get(ordercount).getOrderID().contains("-"))
+//                continue;
+//
+//            String client = Orders.getOrders().get(ordercount).getBranchCode();
+//            for (int itemcount = 0; itemcount < vector.size(); itemcount++) {
+//                if (client != null && vector.get(itemcount).equals(client)) {
+//                    isExits = true;
+//                    break;
+//                }
+//            }
+//            if (!isExits)
+//                vector.add(client);
+//        }
+//        String[] items = new String[vector.size()];
+//        vector.copyInto(items);
+//        vector.removeAllElements();
+//        vector = null;
+//        return items;
+//    }
+
     private String[] getbranchCodeArraY() {
         int count = Orders.getOrders().size();
         Vector<String> vector = new Vector<String>();
-//        vector.add(joblist.getString(R.string.job_filter_default_dd_option));
         vector.add(joblist.getString(R.string.job_filter_default_choose_branch));
-        boolean isExits = false;
-        for (int ordercount = 0; ordercount < count; ordercount++) {
-            isExits = false;
-            if (Orders.getOrders().get(ordercount).getOrderID().contains("-"))
+        boolean isExists = false;
+        for (int orderCount = 0; orderCount < count; orderCount++) {
+            isExists = false;
+            if (Orders.getOrders().get(orderCount).getOrderID().contains("-"))
                 continue;
 
-            String client = Orders.getOrders().get(ordercount).getBranchCode();
-            for (int itemcount = 0; itemcount < vector.size(); itemcount++) {
-                if (client != null && vector.get(itemcount).equals(client)) {
-                    isExits = true;
-                    break;
+            String client = Orders.getOrders().get(orderCount).getBranchCode();
+            if (client != null && !client.isEmpty()) { // Check if branch code is not empty
+                for (int itemCount = 0; itemCount < vector.size(); itemCount++) {
+                    if (vector.get(itemCount).equals(client)) {
+                        isExists = true;
+                        break;
+                    }
                 }
+                if (!isExists)
+                    vector.add(client);
             }
-            if (!isExits)
-                vector.add(client);
         }
         String[] items = new String[vector.size()];
         vector.copyInto(items);
@@ -511,10 +581,12 @@ public class JobFilterDialog extends Dialog implements
         return items;
     }
 
+
+
+
     private String[] getJobTypeArraY() {
         int count = Orders.getOrders().size();
-        Vector<String> vector = new Vector<String>();
-//        vector.add(joblist.getString(R.string.job_filter_default_dd_option));
+        Vector<String> vector = new Vector<>();
         vector.add(joblist.getString(R.string.job_filter_default_choose_client));
         boolean isExits = false;
         for (int ordercount = 0; ordercount < count; ordercount++) {
@@ -661,7 +733,6 @@ public class JobFilterDialog extends Dialog implements
                                     jobtype, city, s_date.getText().toString(),
                                     e_date.getText().toString(), status));
                         }
-
                     }
                 }
                 this.dismiss();
@@ -673,8 +744,8 @@ public class JobFilterDialog extends Dialog implements
     }
 
     private String getCurrentDate(int day, int month, int year) {
-        String str = String.valueOf(day) + "/" + monthVal[month] + "/"
-                + String.valueOf(year);
+        String str = day + "/" + monthVal[month] + "/" + year;
         return str;
     }
+
 }

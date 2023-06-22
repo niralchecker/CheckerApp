@@ -36,7 +36,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -126,7 +125,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
-import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -188,7 +186,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         initGoogleApiClient();
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         isWifiOnly = myPrefs.getBoolean(Constants.SETTINGS_WIFI_ONLY, false);
-        // myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 
         Locale locale = new Locale(
                 Constants.SETTINGS_LOCALE_VAL_ARR[myPrefs.getInt(
@@ -207,10 +204,8 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         Helper.setAlternateSystemURL(myPrefs.getString(
                 Constants.SETTINGS_ALTERNATE_SYSTEM_URL_KEY, null));
         if (Helper.getSystemURL() == null || Helper.getSystemURL().equals("")) {
-
             finish();
         }
-
 //        NewLoginActivity.dataid = null;
 //        NewLoginActivity.thisOrder = null;
 //        NewLoginActivity.thisSet = null;
@@ -278,7 +273,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         clSurveyReport = findViewById(R.id.clSurveyReport);
         clRefundReport = findViewById(R.id.clRefundReport);
         cardView_checkertificate = findViewById(R.id.cardView_checkertificate);
-
         tv_CAPI_assigned.setText(capi_assigned_count);
         tv_CAPI_inProgress.setText(capi_status_inProgress);
         tv_CAPI_returned.setText(capi_status_returned);
@@ -287,16 +281,14 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
         sidemenuicon1 = (View) findViewById(R.id.sidemenuicon1);
         menuView = findViewById(R.id.view_side_menu);
         menuListView = (ListView) findViewById(R.id.view_side_menu_list_view);
-        String userName = myPrefs.getString(
-                Constants.POST_FIELD_LOGIN_USERNAME, "");
+        String userName = myPrefs.getString(Constants.POST_FIELD_LOGIN_USERNAME, "");
 
         TextView tv = (TextView) findViewById(R.id.txtsettingmenu);
         String welcome = getString(R.string.login_heder);
         tv.setText(welcome + " " + userName);
-        Log.e("TAG", "onCreate: "+userName);
+        Log.e("TAG", "onCreate: " + userName);
 
         tv.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
                 showShopperInfo();
@@ -354,16 +346,13 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                 // comunicator.JobList = null;
                 startActivity(intent);
             }
-
         });
         cardView_checkertificate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 load_certificates(null);
             }
-
         });
-
 
         menuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -694,7 +683,6 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
                     // comunicator.JobList = this;
                     startActivityForResult(intent, JOB_DETAIL_ACTIVITY_CODE);
                 }
-
                 break;
             case 4:
                 // open refund report
@@ -5817,19 +5805,16 @@ public class NewDashboardScreenActivity extends AppCompatActivity implements Goo
 
     }
 
-
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
-
                 } catch (Exception ex) {
                     Toast.makeText(NewDashboardScreenActivity.this,
-                            ex.getLocalizedMessage(), 100).show();
+                            ex.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }

@@ -24,8 +24,8 @@
                 android:id="@+id/backBtn_"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:paddingLeft="1dp"
+                android:layout_alignParentStart="true"
+                android:paddingStart="1dp"
                 android:src="@drawable/back_green"
                 android:tint="@color/dark_blue" />
         </RelativeLayout>
@@ -50,7 +50,7 @@
                 android:layout_height="25dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="2dp"
+                android:layout_marginEnd="2dp"
                 android:background="@color/dark_blue" />
 
             <TextView
@@ -58,8 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/mapOrListBtn"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/mapOrListBtn"
                 android:text="@string/s_item_column_0_line_59_file_52"
                 android:textColor="@color/dark_blue"
                 android:textSize="24sp"
@@ -70,8 +70,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@+id/mapOrListBtn"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/mapOrListBtn"
                 android:text="@string/s_item_column_0_line_71_file_52"
                 android:textColor="@color/dark_blue"
                 android:textSize="18sp" />
@@ -233,7 +233,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/search_bg"
-        android:drawableLeft="@drawable/ic_search"
+        android:drawableStart="@drawable/ic_search"
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/countries"
@@ -337,7 +337,7 @@
         android:id="@+id/LocationBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/location" />
 
@@ -387,13 +387,13 @@
             android:id="@+id/chkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:textColor="#FFFFFF"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="normal"
             android:visibility="gone" />
 
@@ -401,7 +401,7 @@
             android:id="@+id/btnRemoveAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
             android:background="@color/white"
@@ -515,7 +515,7 @@
                     android:paddingRight="5dp"
                     android:text="@string/s_item_column_0_line_214_file_52"
                     android:textColor="#000000"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="normal" />
             </RelativeLayout>
 
@@ -530,7 +530,7 @@
                     android:id="@+id/DateFilterBtns"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="18dp">
 
                     <RelativeLayout
@@ -552,7 +552,7 @@
                             android:layout_toEndOf="@id/checkbox_today"
                             android:text="@string/s_item_column_0_line_246_file_52"
                             android:textColor="#000000"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
 
                         <View
                             android:id="@+id/todayBottom"
@@ -583,7 +583,7 @@
                             android:layout_toEndOf="@id/checkbox_next_day"
                             android:text="@string/s_item_column_0_line_270_file_52"
                             android:textColor="#000000"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
 
                         <View
                             android:id="@+id/nextSevenBottom"
@@ -717,7 +717,7 @@
                         android:id="@+id/custom"
                         android:layout_width="100dp"
                         android:layout_height="30dp"
-                        android:layout_toRightOf="@+id/nextSevenDays"
+                        android:layout_toEndOf="@+id/nextSevenDays"
                         android:background="#565656"
                         android:visibility="gone">
 
@@ -728,7 +728,7 @@
                             android:layout_centerInParent="true"
                             android:text="@string/s_item_column_0_line_295_file_52"
                             android:textColor="#000000"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
 
                         <View
                             android:id="@+id/customBottom"
@@ -770,7 +770,7 @@
                         android:paddingRight="5dp"
                         android:text="@string/s_item_column_0_line_337_file_52"
                         android:textColor="#007BFF"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="normal" />
 
                     <View
@@ -794,7 +794,7 @@
                         android:paddingRight="5dp"
                         android:text="@string/s_item_column_0_line_361_file_52"
                         android:textColor="#000000"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="normal" />
 
                     <View
@@ -819,7 +819,7 @@
                         android:paddingRight="5dp"
                         android:text="@string/s_item_column_0_line_362_file_52"
                         android:textColor="#000000"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="normal" />
 
                     <View
@@ -844,7 +844,7 @@
                         android:paddingRight="5dp"
                         android:text="@string/s_item_column_0_line_363_file_52"
                         android:textColor="#000000"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="normal" />
 
                     <View
@@ -969,7 +969,7 @@
                     android:layout_height="40dp"
                     android:layout_below="@id/branchFilter"
                     android:paddingStart="10dp"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
@@ -990,7 +990,7 @@
                     android:layout_height="40dp"
                     android:paddingStart="10dp"
                     android:layout_below="@id/branchCodeFilter"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
@@ -1011,8 +1011,8 @@
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_alignBottom="@+id/branchFilter"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="30dp"
                     android:src="@drawable/kink"
                     android:visibility="gone" />
 
@@ -1033,7 +1033,7 @@
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/BranchFilterV"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -1048,7 +1048,7 @@
                 android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:layout_below="@+id/BranchFilterV"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -1063,7 +1063,7 @@
         android:id="@+id/view_side_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:orientation="horizontal"
         android:visibility="gone"
         android:weightSum="100">
@@ -1093,9 +1093,9 @@
                     android:id="@+id/btnback"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/back_white" />
 
                 <TextView
@@ -1107,7 +1107,7 @@
                     android:layout_marginBottom="25dp"
                     android:text="Jobs Settings"
                     android:textColor="#ffffff"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <ListView
