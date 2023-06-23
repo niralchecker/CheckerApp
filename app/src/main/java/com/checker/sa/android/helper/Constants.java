@@ -166,6 +166,7 @@ public class Constants {
     public static String getLangListURL(String ver) {
         String url = Helper.getSystemURL()
                 + "/c_pda-lang-list.php?app=1&ver=7.90";
+        Log.e("TAG", "getLangListURL: "+url );
         return url;
     }
 
@@ -243,6 +244,7 @@ public class Constants {
     }
 
     public static String getSubmitSurveyURL() {
+        Log.e("TAG", "getSubmitSurveyURL: " +getSubmitSurveyURL() );
         return Helper.getSystemURL() + "/c_pda-receive-criticism.php";
     }
 

@@ -16144,30 +16144,57 @@ public class QuestionnaireActivity extends Activity implements
         String extra = "";
         if (questionObject != null && questionObject.getDataID() != null)
             extra = questionObject.getDataID() + "_";
-        String path = Environment.getExternalStorageDirectory().getPath()
-                + "/DCIM/Camera/";
-        Calendar cal = Calendar.getInstance();
-        String current_paths = "checker_" + extra + (System.currentTimeMillis() / 1000)
-                + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
-        File file = new File(path, current_paths);
-        path_Camera = file.getPath();
-        Log.e("path****", path + " *** " + current_paths + " *** " + file);
-        Log.e(TAG, "openDeviceCamera: " + path);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath()+ "/DCIM/Camera/";
+            Calendar cal = Calendar.getInstance();
+            String current_paths = "checker_" + extra + (System.currentTimeMillis() / 1000) + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
+            File file = new File(path, current_paths);
+            path_Camera = file.getPath();
+            Log.e("path****", path + " *** " + current_paths + " *** " + file);
+            Log.e(TAG, "openDeviceCamera: " + path);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            uri_Camera = Uri.fromFile(file);
+        } else{
+
+            String path = Environment.getExternalStorageDirectory().getPath() + "/DCIM/Camera/";
+            Calendar cal = Calendar.getInstance();
+            String current_paths = "checker_" + extra + (System.currentTimeMillis() / 1000) + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
+            File file = new File(path, current_paths);
+            path_Camera = file.getPath();
+            Log.e("path****", path + " *** " + current_paths + " *** " + file);
+            Log.e(TAG, "openDeviceCamera: " + path);
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            uri_Camera = Uri.fromFile(file);
+
         }
-        uri_Camera = Uri.fromFile(file);
+
+
+
+//        Calendar cal = Calendar.getInstance();
+//        String current_paths = "checker_" + extra + (System.currentTimeMillis() / 1000) + "_" + (System.currentTimeMillis() / (1000 * 60)) + ".jpg";
+//        File file = new File(path, current_paths);
+//        path_Camera = file.getPath();
+//        Log.e("path****", path + " *** " + current_paths + " *** " + file);
+//        Log.e(TAG, "openDeviceCamera: " + path);
+//        try {
+//            file.createNewFile();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        uri_Camera = Uri.fromFile(file);
         Intent intent = new Intent(
                 android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri_Camera);
-
-        // startActivityForResult(intent, CAMERA_PIC_REQUEST);
         startActivityForResult(intent, input);
-        // Intent cameraIntent = new Intent(
-        // android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        // startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
+
 
     }
 

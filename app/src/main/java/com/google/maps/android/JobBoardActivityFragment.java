@@ -418,8 +418,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
             }
         }
     }
-
-
     private AutoCompleteTextView actv;
     private RelativeLayout imgarrow;
     private LinearLayoutCompat ll_show_jobs_counts, ll_select_clear;

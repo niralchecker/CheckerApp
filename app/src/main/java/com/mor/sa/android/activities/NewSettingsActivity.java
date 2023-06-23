@@ -20,8 +20,10 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -192,8 +194,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
 
                 this, UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect),
                 branch_sorting_list);
-        badapter.setDropDownViewResource(UIHelper.getSpinnerLayoutSize(
-                NewSettingsActivity.this, modeSelect));
+        badapter.setDropDownViewResource(UIHelper.getSpinnerLayoutSize(NewSettingsActivity.this, modeSelect));
         branch_spinner.setAdapter(badapter);
         if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_SORTING,
                 Helper.ENABLESORTINGBYDEFAULT)) {
@@ -212,8 +213,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
                 else
                     arg22 = false;
                 SharedPreferences.Editor prefsEditor = myPrefs.edit();
-                prefsEditor
-                        .putBoolean(Constants.SETTINGS_ENABLE_SORTING, arg22);
+                prefsEditor.putBoolean(Constants.SETTINGS_ENABLE_SORTING, arg22);
                 prefsEditor.commit();
                 // ACRA.getErrorReporter().putCustomData("System Language",
                 // languages[arg2].toString());
@@ -230,7 +230,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
                 this, UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect),
                 languages);
 
-        adapter.setDropDownViewResource(UIHelper.getSpinnerLayoutSize(
+        adapter.setDropDownViewResource(UIHelper.getSpinnerLayout(
                 NewSettingsActivity.this, modeSelect));
         spinner.setAdapter(adapter);
 
@@ -239,7 +239,6 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
 
         String[] themesList = getResources()
                 .getStringArray(R.array.themes_list);
-
         String[] themes = new String[1];
         if (themesList.length > 1) {
             themes[0] = themesList[0];
@@ -252,9 +251,9 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
         // themeList.add("VOC theme");
         ArrayAdapter themeadapter = new ArrayAdapter(
                 this,
-                UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect),
+                UIHelper.getSpinnerLayoutSize(NewSettingsActivity.this, modeSelect),
                 themeList);
-        themeadapter.setDropDownViewResource(UIHelper.getSpinnerLayoutSize(
+        themeadapter.setDropDownViewResource(UIHelper.getSpinnerLayout(
                 NewSettingsActivity.this, modeSelect));
         theme.setAdapter(themeadapter);
 
@@ -394,7 +393,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
 
         if (myPrefs.getBoolean(Constants.SETTINGS_SHOW_ANOTHER_PHOTO,
                 Helper.ENABLEMULTIPLEPICTUREDEFAULT)) {
-            setToggle(switchAnotherPhoto, false);
+            setToggle(switchAnotherPhoto, true);
         } else {
             setToggle(switchAnotherPhoto, false);
         }
@@ -416,6 +415,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
                 prefsEditor.commit();
             }
         });
+
 
 
         /** switchCropping **/

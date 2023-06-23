@@ -1,6 +1,7 @@
 package com.checker.sa.android.dialog;
 
 import static com.checker.sa.android.helper.Constants.activity;
+import static com.checker.sa.android.helper.Constants.select_jobs;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -60,6 +61,7 @@ public class JobFilterDialog extends Dialog implements
     String jobtype, city, region, project, status;
     private String branchcode;
     TextView tv;
+    private Context con;
     int tag = 0;// , d1, m1, y1, d2, m2, y2;
     Activity joblist;
     String[] monthVal = {"01", "02", "03", "04", "05", "06", "07", "08", "09",
@@ -67,7 +69,7 @@ public class JobFilterDialog extends Dialog implements
 
     AppCompatImageView iv_calendar_start, iv_calendar_end;
 
-    CardView card_status, card_jobtypelist, card_regionlist, card_bcodelist, card_bproplist, card_bprojectslist,card_fromList;
+    CardView card_status, card_jobtypelist, card_regionlist, card_bcodelist, card_bproplist, card_bprojectslist, card_fromList;
 
     private void setInvertDisplay() {
         if (Helper.getTheme(superContext) == 0) {
@@ -439,7 +441,7 @@ public class JobFilterDialog extends Dialog implements
     }
 
 
-    private String[]  getRegionArraY() {
+    private String[] getRegionArraY() {
         int count = Orders.getOrders().size();
         Vector<String> vector = new Vector<String>();
         vector.add(joblist.getString(R.string.job_filter_default_choose_regions));
@@ -580,8 +582,6 @@ public class JobFilterDialog extends Dialog implements
         vector = null;
         return items;
     }
-
-
 
 
     private String[] getJobTypeArraY() {
@@ -739,6 +739,9 @@ public class JobFilterDialog extends Dialog implements
                 break;
             case R.id.btn_clear:
                 this.dismiss();
+                    v.setVisibility(RelativeLayout.GONE);
+                    CheckerApp.globalFilterVar = null;
+                    ((JobListActivity) con).ShowDBJobs();
                 break;
         }
     }

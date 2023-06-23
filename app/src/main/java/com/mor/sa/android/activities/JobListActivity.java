@@ -2035,9 +2035,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                         } else if (mAdapter.joblistarray.get(arg2).surveyItem != null) {
 //                            TODO SurveyID
                             intent.putExtra("SurveyID", mAdapter.joblistarray.get(arg2).surveyItem.getSurveyID());
-
                         }
-
                     } else intent.putExtra(Constants.POST_FIELD_JOB_DETAIL_GROUPED_NUMBER, "1");
                     intent.putExtra("OrderIndex", arg2);
                     intent.putExtra("Index", arg2);
@@ -2092,7 +2090,12 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         startLocationUpdates();
 
 
-        ImageView iv_map_list = (ImageView) findViewById(R.id.iv_map_list);
+        ImageView iv_map_list = findViewById(R.id.iv_map_list);
+        if (select_jobs == "CAPI_JOBS") {
+            iv_map_list.setVisibility(View.GONE);
+        } else {
+            iv_map_list.setVisibility(View.VISIBLE);
+        }
         iv_map_list.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -3838,7 +3841,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         }
     }
 
-    private void ShowDBJobs() {
+    public void ShowDBJobs() {
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
         if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_ALTERNATE_ORDER, false)) {
             Constants.setEnableAlternateOrder(true);
@@ -4083,10 +4086,12 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 } else {
                     Log.e("CAPI_JOBS", "true");
                     //TODO "CAPI_JOBS"
+
                     mAdapter = new JobItemAdapter(JobListActivity.this, jobs_CAPI, mFilter, bimgtabSync, bimgtabOne, bimgtabTwo, bimgtabThree, bimgtabFour, txttabSync, txttabOne, txttabTwo, txttabThree, txttabFour, ltabOne, ltabTwo, ltabThree, ltabFour, new JobItemAdapter.onJobItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             Log.e("position_activity_CAPI_JOBS", String.valueOf(position));
+
 
                             jobListItemId = position;
 
@@ -4167,6 +4172,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                                     }
                                 } else if (mAdapter.joblistarray.get(position).surveyItem != null) {
 //                            TODO SurveyID
+
                                     intent.putExtra("SurveyID", mAdapter.joblistarray.get(position).surveyItem.getSurveyID());
 
                                 }
@@ -4923,7 +4929,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
         }
     }
 
-    private void updateFiler(String object) {
+    public void updateFiler(String object) {
         if (object == null) CheckerApp.globalFilterVar = null;
         final View v = findViewById(R.id.layout_filter);
 
@@ -5151,7 +5157,7 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             }
 
             String result = QuestionnaireListPost();
-            // Log.e("RESULTTTTTTTTTT", result);
+            Log.e("RESULTTTTTTTTTT", result);
             if (result == null || result.contains("<script>")) {
                 doLogin();
                 result = QuestionnaireListPost();
@@ -7971,7 +7977,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             @Override
             public void onClick(View v) {
                 select_jobs = "CAPI_JOBS";
-
                 ManageTabs(1);
                 layout_job_list.setVisibility(View.VISIBLE);
                 layout_NewDashboardScreen.setVisibility(View.GONE);

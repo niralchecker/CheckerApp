@@ -407,8 +407,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
     private void setMapView(List<orderListItem> orders) {
         for (int i = 0; i < orders.size(); i++) {
             try {
-
-
                 double latitude = Double.parseDouble(orders.get(i).orderItem.getBranchLat());
                 double longitude = Double.parseDouble(orders.get(i).orderItem.getBranchLong());
                 LatLng latlng = new LatLng(latitude, longitude);
@@ -430,8 +428,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 if ((orderid == null || orderid.equals("-1"))
                         || orders.get(i).orderItem.getOrderID().equals(orderid)) {
                     // Animating to the touched position
-                    mMap.animateCamera(CameraUpdateFactory
-                            .newLatLng(latlng));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latlng));
 
                     // Placing a marker on the touched position
                     Marker thismarker = mMap.addMarker(markerOptions);
@@ -537,7 +534,6 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 tvBranch.setVisibility(View.GONE);
             }
 
-
             tvCount.setVisibility(View.GONE);
             view1.setVisibility(View.GONE);
 
@@ -561,8 +557,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
             if (s != null && s.getArrayQuotas() != null) {
                 String str[] = s.getArrayQuotas();
 
-                ArrayAdapter adapter = new ArrayAdapter(con,
-                        UIHelper.getListLayoutSize(con), str);
+                ArrayAdapter adapter = new ArrayAdapter(con, UIHelper.getListLayoutSize(con), str);
                 lvjdsurvey_quotas_list.setAdapter(adapter);
 
                 setListViewHeightBased(lvjdsurvey_quotas_list);
@@ -3439,7 +3434,7 @@ public class ShowJobInMapViewActivity extends FragmentActivity implements OnMapR
                 i++;
             }
 
-            Log.e("jobordersss_map", String.valueOf(jobordersss.size()));
+//            Log.e("jobordersss_map", String.valueOf(jobordersss.size()));
 
 //            ArrayList<orderListItem> joborders = null;
 
