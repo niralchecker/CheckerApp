@@ -451,36 +451,6 @@
     <string name="questionnaire_exitmenu" translatable="false">יְצִיאָה</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    -->
-
     <string-array name="language_val">
         <item>en</item>
         <item>sp</item>

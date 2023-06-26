@@ -520,13 +520,11 @@ public class PreviewDemo extends Activity {
                         camera.setDisplayOrientation(90);
                         parameters.setRotation(90);
                     }
-
                 } else {
                     // This is an undocumented although widely known feature
                     parameters.set("orientation", "landscape");
                     // For Android 2.2 and above
                     camera.setDisplayOrientation(0);
-                    // Uncomment for Android 2.0 and above
                     parameters.setRotation(0);
                 }
                 sizes = parameters.getSupportedPictureSizes();
@@ -553,7 +551,6 @@ public class PreviewDemo extends Activity {
                         sizes.remove(sizes.size() - 1);
                         sizes.remove(sizes.size() - 1);
                     }
-
                 }
 
                 cameraConfigured = true;
@@ -566,8 +563,7 @@ public class PreviewDemo extends Activity {
                 if (selectedIndex >= sizes.size())
                     selectedIndex = sizes.size() - 1;
                 sizePicture = sizes.get(selectedIndex);
-                resolutions.setText("W=" + sizePicture.width + " H="
-                        + sizePicture.height);
+                resolutions.setText("W=" + sizePicture.width + " H=" + sizePicture.height);
 
                 parameters
                         .setPictureSize(sizePicture.width, sizePicture.height);
@@ -575,7 +571,6 @@ public class PreviewDemo extends Activity {
                 resolutionsList.setItemChecked(selectedIndex, true);
                 resolutionsList
                         .setOnItemClickListener(new OnItemClickListener() {
-
                             @Override
                             public void onItemClick(AdapterView<?> parent,
                                                     View view, final int position, long id) {
@@ -744,10 +739,8 @@ public class PreviewDemo extends Activity {
             }
         });
         crop.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 PreviewDemo.IsCrop = true;
                 refresh_submit(data);
                 dialog.setVisibility(RelativeLayout.GONE);
@@ -758,7 +751,6 @@ public class PreviewDemo extends Activity {
 
     private void focusOnTouch(MotionEvent event) {
         if (camera != null) {
-
             Camera.Parameters parameters = camera.getParameters();
             if (parameters.getMaxNumMeteringAreas() > 0) {
                 // Log.i(TAG, "fancy !");

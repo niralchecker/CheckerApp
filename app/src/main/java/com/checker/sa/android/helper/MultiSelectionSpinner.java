@@ -16,6 +16,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -343,8 +344,8 @@ public class MultiSelectionSpinner extends Spinner implements
 			}
 		});
 		dialog.getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-		dialog.getWindow().setBackgroundDrawable(
-				new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		dialog.getWindow().setTitle(""+getFirstVisiblePosition());
 		dialog.show();
 	}
 
@@ -544,6 +545,7 @@ public class MultiSelectionSpinner extends Spinner implements
 			mSelection[i] = false;
 		}
 		if (index == -1) {
+
 
 		} else {
 			if (mSelection != null && index >= 0 && index < mSelection.length) {

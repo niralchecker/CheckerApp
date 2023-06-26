@@ -61,11 +61,9 @@ public class JobFilterDialog extends Dialog implements
     String jobtype, city, region, project, status;
     private String branchcode;
     TextView tv;
-    private Context con;
     int tag = 0;// , d1, m1, y1, d2, m2, y2;
     Activity joblist;
-    String[] monthVal = {"01", "02", "03", "04", "05", "06", "07", "08", "09",
-            "10", "11", "12"};
+    String[] monthVal = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 
     AppCompatImageView iv_calendar_start, iv_calendar_end;
 
@@ -741,7 +739,8 @@ public class JobFilterDialog extends Dialog implements
                 this.dismiss();
                     v.setVisibility(RelativeLayout.GONE);
                     CheckerApp.globalFilterVar = null;
-                    ((JobListActivity) con).ShowDBJobs();
+                    ((JobListActivity) joblist).ShowDBJobs();
+
                 break;
         }
     }

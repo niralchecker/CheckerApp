@@ -194,7 +194,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
 
                 this, UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect),
                 branch_sorting_list);
-        badapter.setDropDownViewResource(UIHelper.getSpinnerLayoutSize(NewSettingsActivity.this, modeSelect));
+        badapter.setDropDownViewResource(UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect));
         branch_spinner.setAdapter(badapter);
         if (myPrefs.getBoolean(Constants.SETTINGS_ENABLE_SORTING,
                 Helper.ENABLESORTINGBYDEFAULT)) {
@@ -251,7 +251,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
         // themeList.add("VOC theme");
         ArrayAdapter themeadapter = new ArrayAdapter(
                 this,
-                UIHelper.getSpinnerLayoutSize(NewSettingsActivity.this, modeSelect),
+                UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect),
                 themeList);
         themeadapter.setDropDownViewResource(UIHelper.getSpinnerLayout(
                 NewSettingsActivity.this, modeSelect));
@@ -269,7 +269,7 @@ public class NewSettingsActivity extends AppCompatActivity implements View.OnCli
                 this,
                 UIHelper.getSpinnerLayout(NewSettingsActivity.this, modeSelect),
                 resizeList);
-        resizeAdapter.setDropDownViewResource(UIHelper.getSpinnerLayoutSize(
+        resizeAdapter.setDropDownViewResource(UIHelper.getSpinnerLayout(
                 NewSettingsActivity.this, modeSelect));
         resizing_list.setAdapter(resizeAdapter);
 

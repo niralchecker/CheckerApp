@@ -964,12 +964,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
                 startActivity(intent);
                 finish();
                 break;
-//            case 6:
-//                // FILTER jobs
-//                JobFilterDialog dialog = new JobFilterDialog(this);
-//                dialog.show();
-//                isJobselected = true;
-//                break;
 
             case 7:
                 // MAPSSSS
@@ -4489,7 +4483,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
     private void saveOfflineData() {
         String where = "StatusName=" + "\"Scheduled\"" + " OR StatusName=" + "\"Assigned\"";
         DBHelper.deleteJoblistRecords(where);
-
         DBHelper.deleteProps();
         DBHelper.saveProps(Orders.getBranchProps());
         branchProps = Orders.getBranchProps();
@@ -4592,7 +4585,6 @@ public class JobListActivity extends Activity implements OnClickListener, Branch
             for (int ordercount = 0; ordercount < Orders.getOrders().size(); ordercount++) {
                 Order order = Orders.getOrders().get(ordercount);
                 {
-
                     ordrs.add(order);
                 }
             }

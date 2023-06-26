@@ -258,6 +258,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     private boolean show_hide_filter = true;
     private Location thisPersonLocaation = null;
     private RelativeLayout branchFilter;
+
     private MultiSelectionSpinner multipleClientSpinner;
     private MultiSelectionSpinner multipleBranchSpinner;
     private MultiSelectionSpinner multipleBranchCodeSpinner;
@@ -438,7 +439,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         tv_clients = findViewById(R.id.tv_clients);
         tv_applied_no = findViewById(R.id.tv_applied_no);
         tv_applied_no.setText(Integer.toString(Constants.applied_count));
-
 
         myPrefs = getSharedPreferences("pref", MODE_PRIVATE);
 //        TODO MENU
@@ -6094,8 +6094,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
 //                        if (parent == null) {
 //                            tv_clients.setVisibility(View.VISIBLE);
 //                        }
-
-
                     }
 
                     @Override
@@ -6205,6 +6203,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
             }
         });
     }
+
 
     protected void filterItems(List<String> selectedBranches,
                                List<String> selectedClients, List<String> selectedBranchReal,
@@ -7144,37 +7143,7 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
         if (thiItem == null && type == -1) {
             layout_apply_msg.setVisibility(View.VISIBLE);
             cardView.setVisibility(View.GONE);
-//            topbar.setBackgroundColor(Color.parseColor("#f18931"));
-//            dialog.findViewById(R.id.layout_1).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_2).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_3).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_4).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_5).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_6).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_7).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_8).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_9).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_10).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_11).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_12).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_13).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.layout_14).setVisibility(
-//                    RelativeLayout.GONE);
-//            dialog.findViewById(R.id.altlayout).setVisibility(
-//                    RelativeLayout.GONE);
+
         } else if (thiItem == null && type == -2) {
             layout_apply_msg.setVisibility(View.VISIBLE);
             cardView.setVisibility(View.GONE);
@@ -7414,7 +7383,6 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                 }
             });
         }
-
         dialog.show();
     }
 
@@ -7658,12 +7626,9 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                if (locationManager
-                        .isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                     locationManager.removeUpdates(this);
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER, 0, 0,
-                            locationlistenerGPS);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationlistenerGPS);
                 }
             }
 
@@ -7681,12 +7646,9 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                if (locationManager
-                        .isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                     locationManager.removeUpdates(this);
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER, 0, 0,
-                            locationlistenerGPS);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationlistenerGPS);
                 }
             }
         };
@@ -7905,4 +7867,5 @@ public class JobBoardActivityFragment extends FragmentActivity implements Google
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
 }
