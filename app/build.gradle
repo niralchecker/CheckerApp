@@ -76,8 +76,8 @@ dependencies {
     //implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'org.apache.httpcomponents:httpclient:4.5'
-    implementation 'com.google.android.material:material:1.4.+'
-
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.work:work-runtime:2.8.1'
     //    //circleImageview
 //    implementation 'de.hdodenhof:circleimageview:3.1.0'
 //
